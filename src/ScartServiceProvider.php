@@ -15,11 +15,13 @@ use SCart\Core\Front\Models\ShopPage;
 use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Commands\Backup;
 use SCart\Core\Commands\MakePlugin;
+use SCart\Core\Commands\Infomation;
 class ScartServiceProvider extends ServiceProvider
 {
     protected $commands = [
         Backup::class,
         MakePlugin::class,
+        Infomation::class,
     ];
 
     /**
