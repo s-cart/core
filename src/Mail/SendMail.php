@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Mail;
+namespace SCart\Core\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

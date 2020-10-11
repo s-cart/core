@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

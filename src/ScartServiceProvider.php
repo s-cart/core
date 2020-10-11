@@ -1,20 +1,20 @@
 <?php
 
-namespace S-Cart\Core;
+namespace SCart\Core;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use S-Cart\Core\Front\Models\ShopProduct;
-use S-Cart\Core\Front\Models\ShopCategory;
-use S-Cart\Core\Front\Models\ShopBanner;
-use S-Cart\Core\Front\Models\ShopBrand;
-use S-Cart\Core\Front\Models\ShopSupplier;
-use S-Cart\Core\Front\Models\ShopNews;
-use S-Cart\Core\Front\Models\ShopPage;
-use S-Cart\Core\Front\Models\ShopStore;
-use S-Cart\Core\Commands\Backup;
-use S-Cart\Core\Commands\MakePlugin;
+use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopCategory;
+use SCart\Core\Front\Models\ShopBanner;
+use SCart\Core\Front\Models\ShopBrand;
+use SCart\Core\Front\Models\ShopSupplier;
+use SCart\Core\Front\Models\ShopNews;
+use SCart\Core\Front\Models\ShopPage;
+use SCart\Core\Front\Models\ShopStore;
+use SCart\Core\Commands\Backup;
+use SCart\Core\Commands\MakePlugin;
 class ScartServiceProvider extends ServiceProvider
 {
     protected $commands = [
@@ -31,9 +31,6 @@ class ScartServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/Config/s-cart.php', 's-cart');
         $this->mergeConfigFrom(__DIR__.'/Config/lfm.php', 'lfm');
-
-        // $this->loadTranslationsFrom(__DIR__.'/lang', 'laravel-filemanager');
-
         $this->loadViewsFrom(__DIR__.'/Admin/Views', 's-cart');
 
         $this->registerPublishing();
@@ -89,7 +86,7 @@ class ScartServiceProvider extends ServiceProvider
         if (file_exists(__DIR__.'/Library/Const.php')) {
             require_once (__DIR__.'/Library/Const.php');
         }
-        $this->app->bind('cart', '\S-Cart\Core\Library\ShoppingCart\Cart');
+        $this->app->bind('cart', '\SCart\Core\Library\ShoppingCart\Cart');
         
         $this->registerRouteMiddleware();
 
@@ -246,18 +243,10 @@ class ScartServiceProvider extends ServiceProvider
     protected function registerPublishing()
     {
         if ($this->app->runningInConsole()) {
-
-        // $this->publishes([
-        //     __DIR__.'/../public' => public_path('vendor/laravel-filemanager'),
-        // ], 'lfm_public');
-
         $this->publishes([
             __DIR__.'/Admin/Views'  => base_path('resources/views/admin'),
         ], 's-cart-view');
 
-        // $this->publishes([
-        //     __DIR__.'/Handlers/LfmConfigHandler.php' => base_path('app/Handlers/LfmConfigHandler.php'),
-        // ], 'lfm_handler');
         }
     }
 }

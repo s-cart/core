@@ -1,9 +1,9 @@
 <?php
 
-namespace S-Cart\Core\Front\Middleware;
+namespace SCart\Core\Front\Middleware;
 
 use Closure;
-use S-Cart\Core\Front\Models\ShopStore;
+use SCart\Core\Front\Models\ShopStore;
 
 class CheckDomain
 {

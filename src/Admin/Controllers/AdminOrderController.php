@@ -1,18 +1,18 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
-use S-Cart\Core\Admin\Admin;
+use SCart\Core\Admin\Admin;
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopAttributeGroup;
-use S-Cart\Core\Front\Models\ShopCountry;
-use S-Cart\Core\Front\Models\ShopCurrency;
-use S-Cart\Core\Front\Models\ShopOrderDetail;
-use S-Cart\Core\Front\Models\ShopOrderStatus;
-use S-Cart\Core\Front\Models\ShopPaymentStatus;
-use S-Cart\Core\Front\Models\ShopShippingStatus;
-use S-Cart\Core\Admin\Models\AdminCustomer;
-use S-Cart\Core\Admin\Models\AdminOrder;
-use S-Cart\Core\Admin\Models\AdminProduct;
+use SCart\Core\Front\Models\ShopAttributeGroup;
+use SCart\Core\Front\Models\ShopCountry;
+use SCart\Core\Front\Models\ShopCurrency;
+use SCart\Core\Front\Models\ShopOrderDetail;
+use SCart\Core\Front\Models\ShopOrderStatus;
+use SCart\Core\Front\Models\ShopPaymentStatus;
+use SCart\Core\Front\Models\ShopShippingStatus;
+use SCart\Core\Admin\Models\AdminCustomer;
+use SCart\Core\Admin\Models\AdminOrder;
+use SCart\Core\Admin\Models\AdminProduct;
 use Validator;
 
 class AdminOrderController extends RootAdminController

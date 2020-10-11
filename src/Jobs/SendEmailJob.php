@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Jobs;
+namespace SCart\Core\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

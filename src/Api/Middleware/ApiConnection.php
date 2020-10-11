@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Api\Middleware;
+namespace SCart\Core\Api\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class ApiConnection
         if(!$apiconnection || !$apikey) {
             return  response()->json(['error' => 1, 'msg' => 'apiconnection or apikey not found']);
         }
-        $check = \S-Cart\Core\Front\Models\ShopApiConnection::check($apiconnection, $apikey);
+        $check = \SCart\Core\Front\Models\ShopApiConnection::check($apiconnection, $apikey);
         if($check) {
             $check->update(['last_active' => date('Y-m-d H:i:s')]);
             return $next($request);

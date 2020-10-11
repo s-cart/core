@@ -2,7 +2,7 @@
 /**
  * This file export data
  */
-namespace S-Cart\Core\Library\ProcessData;
+namespace SCart\Core\Library\ProcessData;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;

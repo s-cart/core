@@ -1,16 +1,16 @@
 <?php
-namespace S-Cart\Core\Front\Controllers;
+namespace SCart\Core\Front\Controllers;
 
 use App\Http\Controllers\RootFrontController;
-use S-Cart\Core\Front\Models\ShopBrand;
-use S-Cart\Core\Front\Models\ShopBanner;
-use S-Cart\Core\Front\Models\ShopCategory;
-use S-Cart\Core\Front\Models\ShopProduct;
-use S-Cart\Core\Front\Models\ShopSupplier;
-use S-Cart\Core\Front\Models\ShopEmailTemplate;
-use S-Cart\Core\Front\Models\ShopNews;
-use S-Cart\Core\Front\Models\ShopPage;
-use S-Cart\Core\Front\Models\ShopSubscribe;
+use SCart\Core\Front\Models\ShopBrand;
+use SCart\Core\Front\Models\ShopBanner;
+use SCart\Core\Front\Models\ShopCategory;
+use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopSupplier;
+use SCart\Core\Front\Models\ShopEmailTemplate;
+use SCart\Core\Front\Models\ShopNews;
+use SCart\Core\Front\Models\ShopPage;
+use SCart\Core\Front\Models\ShopSubscribe;
 use Illuminate\Http\Request;
 
 class ShopFront extends RootFrontController
@@ -585,7 +585,7 @@ class ShopFront extends RootFrontController
 
         if(sc_captcha_method() && in_array('contact', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
-            $validate['captcha_field'] = ['required', 'string', new \S-Cart\Core\Rules\CaptchaRule];
+            $validate['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
         $validator = \Illuminate\Support\Facades\Validator::make($data, $validate, $message);
         if ($validator->fails()) {

@@ -1,10 +1,10 @@
 <?php
 #S-Cart/Core/Front/Models/ShopPage.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cache;
-use S-Cart\Core\Front\Models\ModelTrait;
+use SCart\Core\Front\Models\ModelTrait;
 class ShopPage extends Model
 {
     use ModelTrait;

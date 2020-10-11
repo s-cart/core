@@ -49,7 +49,7 @@ if (!function_exists('sc_get_plugin_captcha_installed')) {
      */
     function sc_get_plugin_captcha_installed($onlyActive = true)
     {
-        $listPluginInstalled =  \S-Cart\Core\Admin\Models\AdminConfig::getPluginCaptchaCode($onlyActive);
+        $listPluginInstalled =  \SCart\Core\Admin\Models\AdminConfig::getPluginCaptchaCode($onlyActive);
         $arrPlugin = [];
         if($listPluginInstalled) {
             foreach ($listPluginInstalled as $key => $plugin) {

@@ -1,10 +1,10 @@
 <?php
 
-namespace S-Cart\Core\Admin\Controllers\Auth;
+namespace SCart\Core\Admin\Controllers\Auth;
 
-use S-Cart\Core\Admin\Admin;
-use S-Cart\Core\Admin\Models\AdminPermission;
-use S-Cart\Core\Admin\Models\AdminRole;
+use SCart\Core\Admin\Admin;
+use SCart\Core\Admin\Models\AdminPermission;
+use SCart\Core\Admin\Models\AdminRole;
 use App\Http\Controllers\RootAdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Api\Middleware;
+namespace SCart\Core\Api\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

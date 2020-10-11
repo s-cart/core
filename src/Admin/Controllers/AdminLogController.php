@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
-use S-Cart\Core\Admin\Models\AdminLog;
-use S-Cart\Core\Admin\Models\AdminUser;
+use SCart\Core\Admin\Models\AdminLog;
+use SCart\Core\Admin\Models\AdminUser;
 use App\Http\Controllers\RootAdminController;
 
 class AdminLogController extends RootAdminController

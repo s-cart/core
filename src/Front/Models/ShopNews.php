@@ -1,11 +1,11 @@
 <?php
 #S-Cart/Core/Front/Models/ShopNews.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
-use S-Cart\Core\Front\Models\ShopNewsDescription;
+use SCart\Core\Front\Models\ShopNewsDescription;
 use Illuminate\Database\Eloquent\Model;
 use Cache;
-use S-Cart\Core\Front\Models\ModelTrait;
+use SCart\Core\Front\Models\ModelTrait;
 class ShopNews extends Model
 {
     use ModelTrait;

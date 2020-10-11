@@ -1,11 +1,11 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopCountry;
-use S-Cart\Core\Front\Models\ShopLanguage;
-use S-Cart\Core\Admin\Models\AdminCustomer;
-use S-Cart\Core\Front\Controllers\Auth\AuthTrait;
+use SCart\Core\Front\Models\ShopCountry;
+use SCart\Core\Front\Models\ShopLanguage;
+use SCart\Core\Admin\Models\AdminCustomer;
+use SCart\Core\Front\Controllers\Auth\AuthTrait;
 use Validator;
 
 class AdminCustomerController extends RootAdminController

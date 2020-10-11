@@ -2,7 +2,7 @@
 /**
  * @author Lanh Le <lanhktc@gmail.com>
  */
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 use Cart;
 use Illuminate\Database\Eloquent\Model;
@@ -207,7 +207,7 @@ class ShopCurrency extends Model
     /**
      * Sum value of cart
      *
-     * @param   [\S-Cart\Core\Library\ShoppingCart\CartItem] $details  [$details description]
+     * @param   [\SCart\Core\Library\ShoppingCart\CartItem] $details  [$details description]
      * @param   float  $rate     [$rate description]
      *
      * @return  [array]

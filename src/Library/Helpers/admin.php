@@ -8,6 +8,6 @@ if (!function_exists('sc_admin_can_config')) {
      */
     function sc_admin_can_config()
     {
-        return \S-Cart\Core\Admin\Admin::user()->checkPermissionconfig();
+        return \SCart\Core\Admin\Admin::user()->checkPermissionconfig();
     }
 }

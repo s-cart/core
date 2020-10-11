@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopPaymentStatus;
+use SCart\Core\Front\Models\ShopPaymentStatus;
 use Validator;
 
 class AdminPaymentStatusController extends RootAdminController

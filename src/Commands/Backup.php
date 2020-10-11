@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Commands;
+namespace SCart\Core\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;

@@ -2,7 +2,7 @@
 /**
  * This file load data from csv, xls, xlsx
  */
-namespace S-Cart\Core\Library\ProcessData;
+namespace SCart\Core\Library\ProcessData;
 
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;

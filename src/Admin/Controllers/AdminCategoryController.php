@@ -1,10 +1,10 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopLanguage;
+use SCart\Core\Front\Models\ShopLanguage;
 use Validator;
-use S-Cart\Core\Admin\Models\AdminCategory;
+use SCart\Core\Admin\Models\AdminCategory;
 class AdminCategoryController extends RootAdminController
 {
     public $languages;

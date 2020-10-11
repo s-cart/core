@@ -1,9 +1,9 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use Validator;
-use S-Cart\Core\Admin\Models\AdminBanner;
+use SCart\Core\Admin\Models\AdminBanner;
 class AdminBannerController extends RootAdminController
 {
     protected $arrTarget;

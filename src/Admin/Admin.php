@@ -1,8 +1,8 @@
 <?php
 
-namespace S-Cart\Core\Admin;
+namespace SCart\Core\Admin;
 
-use S-Cart\Core\Admin\Models\AdminMenu;
+use SCart\Core\Admin\Models\AdminMenu;
 use Illuminate\Support\Facades\Auth;
 
 /**

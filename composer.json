@@ -1,6 +1,6 @@
 {
   "name": "s-cart/core",
-  "description": "S-Cart ecommerce",
+  "description": "Free Laravel e-commerce for business",
   "keywords": ["laravel ecommerce", "s-cart", "scart ecommerce"],
   "homepage": "https://s-cart.org",
   "license": "MIT",
@@ -20,7 +20,7 @@
   },
   "autoload": {
       "psr-4": {
-         "S-Cart\\Core\\": "src/"
+         "SCart\\Core\\": "src/"
       }
   },
   "extra": {
@@ -28,14 +28,14 @@
           "dont-discover": [
           ],
           "providers": [
-            "S-Cart\\Core\\ScartServiceProvider",
+            "SCart\\Core\\ScartServiceProvider",
             "UniSharp\\LaravelFilemanager\\LaravelFilemanagerServiceProvider"
           ],
           "aliases": {
-            "Export" : "S-Cart\\Core\\Library\\ProcessData\\Export",
-            "ProcessData" : "S-Cart\\Core\\Library\\ProcessData\\Boot",
-            "Cart" : "S-Cart\\Core\\Library\\ShoppingCart\\Facades\\Cart",
-            "Admin" : "S-Cart\\Core\\Admin\\Admin"
+            "Export" : "SCart\\Core\\Library\\ProcessData\\Export",
+            "ProcessData" : "SCart\\Core\\Library\\ProcessData\\Boot",
+            "Cart" : "SCart\\Core\\Library\\ShoppingCart\\Facades\\Cart",
+            "Admin" : "SCart\\Core\\Admin\\Admin"
           }
       }
   }

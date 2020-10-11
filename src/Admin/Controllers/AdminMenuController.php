@@ -1,7 +1,7 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
-use S-Cart\Core\Admin\Models\AdminMenu;
+use SCart\Core\Admin\Models\AdminMenu;
 use App\Http\Controllers\RootAdminController;
 use Validator;
 

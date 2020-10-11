@@ -1,9 +1,9 @@
 <?php
 
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
-use S-Cart\Core\Front\Models\ShopOrder;
-use S-Cart\Core\Front\Models\ShopOrderTotal;
+use SCart\Core\Front\Models\ShopOrder;
+use SCart\Core\Front\Models\ShopOrderTotal;
 use Cache;
 
 class AdminOrder extends ShopOrder

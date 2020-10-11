@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Library\ShoppingCart;
+namespace SCart\Core\Library\ShoppingCart;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
@@ -171,7 +171,7 @@ class CartItem implements Arrayable, Jsonable
      * Associate the cart item with the given model.
      *
      * @param mixed $model
-     * @return \S-Cart\Core\Library\ShoppingCart\CartItem
+     * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
     public function associate($model)
     {
@@ -213,7 +213,7 @@ class CartItem implements Arrayable, Jsonable
      * Create a new instance from the given array.
      *
      * @param array $attributes
-     * @return \S-Cart\Core\Library\ShoppingCart\CartItem
+     * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
     public static function fromArray(array $attributes)
     {
@@ -229,7 +229,7 @@ class CartItem implements Arrayable, Jsonable
      * @param string     $name
      * @param float      $price
      * @param array      $options
-     * @return \S-Cart\Core\Library\ShoppingCart\CartItem
+     * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
     public static function fromAttributes($id, $name, $price, array $options = [], $tax = 0)
     {

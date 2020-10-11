@@ -1,6 +1,6 @@
 <?php
-use S-Cart\Core\Mail\SendMail;
-use S-Cart\Core\Jobs\SendEmailJob;
+use SCart\Core\Mail\SendMail;
+use SCart\Core\Jobs\SendEmailJob;
 use Illuminate\Support\Facades\Mail;
 
 /**

@@ -1,10 +1,10 @@
 <?php
 
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
-use S-Cart\Core\Front\Models\ShopNews;
+use SCart\Core\Front\Models\ShopNews;
 use Cache;
-use S-Cart\Core\Front\Models\ShopNewsDescription;
+use SCart\Core\Front\Models\ShopNewsDescription;
 
 class AdminNews extends ShopNews
 {

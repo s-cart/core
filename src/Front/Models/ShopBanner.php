@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use S-Cart\Core\Front\Models\ModelTrait;
+use SCart\Core\Front\Models\ModelTrait;
 class ShopBanner extends Model
 {
     use ModelTrait;

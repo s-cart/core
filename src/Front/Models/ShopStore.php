@@ -1,6 +1,6 @@
 <?php
 #S-Cart/Core/Front/Models/ShopStore.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 use App\Admin\Models\AdminConfig;
 use Illuminate\Database\Eloquent\Model;

@@ -1,8 +1,8 @@
 <?php
 
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
-use S-Cart\Core\Admin\Admin;
+use SCart\Core\Admin\Admin;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\Request;

@@ -1,8 +1,8 @@
 <?php
 
-namespace S-Cart\Core\Admin;
+namespace SCart\Core\Admin;
 
-use S-Cart\Core\Admin\Admin;
+use SCart\Core\Admin\Admin;
 
 class Permission
 {

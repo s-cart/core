@@ -1,7 +1,7 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers\Auth;
+namespace SCart\Core\Admin\Controllers\Auth;
 
-use S-Cart\Core\Admin\Models\AdminPermission;
+use SCart\Core\Admin\Models\AdminPermission;
 use App\Http\Controllers\RootAdminController;
 use Illuminate\Support\Str;
 use Validator;

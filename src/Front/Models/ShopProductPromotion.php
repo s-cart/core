@@ -1,9 +1,9 @@
 <?php
 #S-Cart/Core/Front/Models/ShopProductPromotion.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use S-Cart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopProduct;
 class ShopProductPromotion extends Model
 {
     public $table = SC_DB_PREFIX.'shop_product_promotion';

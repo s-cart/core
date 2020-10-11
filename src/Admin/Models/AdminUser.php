@@ -1,12 +1,12 @@
 <?php
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
-use S-Cart\Core\Front\Models\ShopStore;
+use SCart\Core\Front\Models\ShopStore;
 
 class AdminUser extends Model implements AuthenticatableContract
 {

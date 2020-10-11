@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Library\ShoppingCart;
+namespace SCart\Core\Library\ShoppingCart;
 
 use Illuminate\Support\Collection;
 

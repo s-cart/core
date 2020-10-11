@@ -1,6 +1,6 @@
 <?php
 #S-Cart/Core/Front/Models/ShopLayoutPosition.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

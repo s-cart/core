@@ -1,6 +1,6 @@
 <?php
 #S-Cart/Core/Front/Models/ShopStoreBlockContent.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

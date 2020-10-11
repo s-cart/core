@@ -1,15 +1,15 @@
 <?php
 
-namespace S-Cart\Core\Front\Controllers\Auth;
+namespace SCart\Core\Front\Controllers\Auth;
 
 use App\Http\Controllers\RootFrontController;
-use S-Cart\Core\Front\Models\ShopEmailTemplate;
-use S-Cart\Core\Front\Models\ShopCustomer;
-use S-Cart\Core\Front\Models\ShopCountry;
+use SCart\Core\Front\Models\ShopEmailTemplate;
+use SCart\Core\Front\Models\ShopCustomer;
+use SCart\Core\Front\Models\ShopCountry;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use S-Cart\Core\Front\Controllers\Auth\AuthTrait;
+use SCart\Core\Front\Controllers\Auth\AuthTrait;
 class RegisterController extends RootFrontController
 {
     /*
@@ -59,7 +59,7 @@ class RegisterController extends RootFrontController
         $dataMapping = $this->mappingValidator($data);
         if(sc_captcha_method() && in_array('register', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
-            $dataMapping['validate']['captcha_field'] = ['required', 'string', new \S-Cart\Core\Rules\CaptchaRule];
+            $dataMapping['validate']['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
         return Validator::make($data, $dataMapping['validate'], $dataMapping['messages']);
     }
@@ -68,7 +68,7 @@ class RegisterController extends RootFrontController
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \S-Cart\Core\Front\Models\ShopCustomer
+     * @return \SCart\Core\Front\Models\ShopCustomer
      */
     protected function create(array $data)
     {

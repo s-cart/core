@@ -1,9 +1,9 @@
 <?php
 
-namespace S-Cart\Core\Admin\Middleware;
+namespace SCart\Core\Admin\Middleware;
 
-use S-Cart\Core\Admin\Admin;
-use S-Cart\Core\Admin\Permission;
+use SCart\Core\Admin\Admin;
+use SCart\Core\Admin\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 

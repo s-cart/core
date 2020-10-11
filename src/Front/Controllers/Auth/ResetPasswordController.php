@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Front\Controllers\Auth;
+namespace SCart\Core\Front\Controllers\Auth;
 
 use App\Http\Controllers\RootFrontController;
 use Auth;

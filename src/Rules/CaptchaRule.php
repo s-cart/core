@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Rules;
+namespace SCart\Core\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 

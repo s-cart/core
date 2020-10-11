@@ -1,11 +1,11 @@
 @php
-    $totalOrder = \S-Cart\Core\Admin\Models\AdminOrder::count();
-    $styleStatus = \S-Cart\Core\Admin\Models\AdminOrder::$mapStyleStatus;
+    $totalOrder = \SCart\Core\Admin\Models\AdminOrder::count();
+    $styleStatus = \SCart\Core\Admin\Models\AdminOrder::$mapStyleStatus;
 @endphp
 @if ($totalOrder)
 @php
-    $arrStatus = \S-Cart\Core\Front\Models\ShopOrderStatus::pluck('name','id')->all();
-    $groupOrder = (new \S-Cart\Core\Front\Models\ShopOrder)->all()->groupBy('status');
+    $arrStatus = \SCart\Core\Front\Models\ShopOrderStatus::pluck('name','id')->all();
+    $groupOrder = (new \SCart\Core\Front\Models\ShopOrder)->all()->groupBy('status');
 @endphp
     <li id="summary">
     <ul>

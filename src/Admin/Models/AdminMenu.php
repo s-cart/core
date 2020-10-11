@@ -1,5 +1,5 @@
 <?php
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;

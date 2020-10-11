@@ -1,9 +1,9 @@
 <?php
 #S-Cart/Core/Front/Models/ShopProductGroup.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use S-Cart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopProduct;
 
 class ShopProductGroup extends Model
 {

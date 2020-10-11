@@ -1,10 +1,10 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopAttributeGroup;
-use S-Cart\Core\Front\Models\ShopLanguage;
-use S-Cart\Core\Admin\Models\AdminProduct;
+use SCart\Core\Front\Models\ShopAttributeGroup;
+use SCart\Core\Front\Models\ShopLanguage;
+use SCart\Core\Admin\Models\AdminProduct;
 
 class AdminReportController extends RootAdminController
 {

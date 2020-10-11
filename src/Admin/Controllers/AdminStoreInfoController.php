@@ -1,10 +1,10 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Admin\Models\AdminStore;
-use S-Cart\Core\Front\Models\ShopLanguage;
-use S-Cart\Core\Front\Models\ShopCurrency;
+use SCart\Core\Admin\Models\AdminStore;
+use SCart\Core\Front\Models\ShopLanguage;
+use SCart\Core\Front\Models\ShopCurrency;
 
 class AdminStoreInfoController extends RootAdminController
 {

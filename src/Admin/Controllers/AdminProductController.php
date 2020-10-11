@@ -1,20 +1,20 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopAttributeGroup;
-use S-Cart\Core\Front\Models\ShopBrand;
-use S-Cart\Core\Front\Models\ShopTax;
-use S-Cart\Core\Front\Models\ShopLanguage;
-use S-Cart\Core\Front\Models\ShopWeight;
-use S-Cart\Core\Front\Models\ShopLength;
-use S-Cart\Core\Front\Models\ShopProductAttribute;
-use S-Cart\Core\Front\Models\ShopProductBuild;
-use S-Cart\Core\Front\Models\ShopProductGroup;
-use S-Cart\Core\Front\Models\ShopProductImage;
-use S-Cart\Core\Front\Models\ShopSupplier;
-use S-Cart\Core\Admin\Models\AdminProduct;
-use S-Cart\Core\Admin\Models\AdminCategory;
+use SCart\Core\Front\Models\ShopAttributeGroup;
+use SCart\Core\Front\Models\ShopBrand;
+use SCart\Core\Front\Models\ShopTax;
+use SCart\Core\Front\Models\ShopLanguage;
+use SCart\Core\Front\Models\ShopWeight;
+use SCart\Core\Front\Models\ShopLength;
+use SCart\Core\Front\Models\ShopProductAttribute;
+use SCart\Core\Front\Models\ShopProductBuild;
+use SCart\Core\Front\Models\ShopProductGroup;
+use SCart\Core\Front\Models\ShopProductImage;
+use SCart\Core\Front\Models\ShopSupplier;
+use SCart\Core\Admin\Models\AdminProduct;
+use SCart\Core\Admin\Models\AdminCategory;
 use Illuminate\Support\Facades\Validator;
 
 class AdminProductController extends RootAdminController

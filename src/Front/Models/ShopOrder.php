@@ -1,14 +1,14 @@
 <?php
 #S-Cart/Core/Front/Models/ShopOrder.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
-use S-Cart\Core\Front\Models\ShopOrderDetail;
-use S-Cart\Core\Front\Models\ShopOrderHistory;
-use S-Cart\Core\Front\Models\ShopOrderTotal;
-use S-Cart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopOrderDetail;
+use SCart\Core\Front\Models\ShopOrderHistory;
+use SCart\Core\Front\Models\ShopOrderTotal;
+use SCart\Core\Front\Models\ShopProduct;
 use DB;
 use Illuminate\Database\Eloquent\Model;
-use S-Cart\Core\Front\Models\ModelTrait;
+use SCart\Core\Front\Models\ModelTrait;
 
 class ShopOrder extends Model
 {
@@ -32,7 +32,7 @@ class ShopOrder extends Model
 
     public function customer()
     {
-        return $this->belongsTo('S-Cart\Core\Front\Models\ShopCustomer', 'customer_id', 'id');
+        return $this->belongsTo('SCart\Core\Front\Models\ShopCustomer', 'customer_id', 'id');
     }
     public function orderStatus()
     {

@@ -1,9 +1,9 @@
 <?php
 
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
-use S-Cart\Core\Front\Models\ShopEmailTemplate;
-use S-Cart\Core\Front\Models\ShopCustomerAddress;
+use SCart\Core\Front\Models\ShopEmailTemplate;
+use SCart\Core\Front\Models\ShopCustomerAddress;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Auth;

@@ -6,7 +6,7 @@ Route::group(
     [
         'prefix' => SC_ADMIN_PREFIX,
         'middleware' => SC_ADMIN_MIDDLEWARE,
-        'namespace' => 'S-Cart\Core\Admin\Controllers'
+        'namespace' => 'SCart\Core\Admin\Controllers'
     ], 
     function () {
     foreach (glob(__DIR__ . '/Routes/*.php') as $filename) {

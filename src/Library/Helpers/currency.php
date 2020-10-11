@@ -3,7 +3,7 @@
  * File function process currency
  * @author Naruto <lanhktc@gmail.com>
  */
-use S-Cart\Core\Front\Models\ShopCurrency;
+use SCart\Core\Front\Models\ShopCurrency;
 
 if (!function_exists('sc_currency_render')) {
     /**

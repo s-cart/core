@@ -1,9 +1,9 @@
 <?php
 
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
-use S-Cart\Core\Front\Models\ShopProduct;
-use S-Cart\Core\Front\Models\ShopProductDescription;
+use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopProductDescription;
 
 class AdminProduct extends ShopProduct
 {

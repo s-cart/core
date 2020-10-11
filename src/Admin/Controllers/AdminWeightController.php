@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopWeight;
+use SCart\Core\Front\Models\ShopWeight;
 use Validator;
 
 class AdminWeightController extends RootAdminController

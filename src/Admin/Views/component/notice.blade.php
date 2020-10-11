@@ -1,5 +1,5 @@
 @php
-  $newOrders = \S-Cart\Core\Front\Models\ShopOrder::where('status',1)->orderBy('id','desc');
+  $newOrders = \SCart\Core\Front\Models\ShopOrder::where('status',1)->orderBy('id','desc');
   $totalNewOrders = $newOrders->count();
   $orders = $newOrders->limit(10)->get();
 @endphp

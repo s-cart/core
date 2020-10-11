@@ -1,11 +1,11 @@
 <?php
 
-use S-Cart\Core\Admin\Models\AdminConfig;
-use S-Cart\Core\Front\Models\ShopStore;
-use S-Cart\Core\Front\Models\ShopStoreBlockContent;
-use S-Cart\Core\Front\Models\ShopLanguage;
-use S-Cart\Core\Front\Models\ShopLink;
-use S-Cart\Core\Front\Models\ShopStoreCss;
+use SCart\Core\Admin\Models\AdminConfig;
+use SCart\Core\Front\Models\ShopStore;
+use SCart\Core\Front\Models\ShopStoreBlockContent;
+use SCart\Core\Front\Models\ShopLanguage;
+use SCart\Core\Front\Models\ShopLink;
+use SCart\Core\Front\Models\ShopStoreCss;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 /*

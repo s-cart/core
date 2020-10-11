@@ -245,7 +245,7 @@
                     </tr>
                   @foreach ($order->history->sortKeysDesc()->all() as $history)
                     <tr>
-                      <td>{{ \S-Cart\Core\Admin\Models\AdminUser::find($history['admin_id'])->name??'' }}</td>
+                      <td>{{ \SCart\Core\Admin\Models\AdminUser::find($history['admin_id'])->name??'' }}</td>
                       <td><div class="history">{!! $history['content'] !!}</div></td>
                       <td>{{ $history['add_date'] }}</td>
                     </tr>

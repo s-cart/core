@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Admin\Models\AdminLink;
+use SCart\Core\Admin\Models\AdminLink;
 use Validator;
 
 class AdminStoreLinkController extends RootAdminController

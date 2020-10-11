@@ -1,9 +1,9 @@
 <?php
 #S-Cart/Core/Front/Models/ShopOrderTotal.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
-use S-Cart\Core\Front\Models\ShopOrder;
-use S-Cart\Core\Front\Models\ShopCurrency;
+use SCart\Core\Front\Models\ShopOrder;
+use SCart\Core\Front\Models\ShopCurrency;
 use Cart;
 use Illuminate\Database\Eloquent\Model;
 

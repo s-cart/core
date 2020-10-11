@@ -1,10 +1,10 @@
 <?php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
-use S-Cart\Core\Front\Models\ShopCategoryDescription;
-use S-Cart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopCategoryDescription;
+use SCart\Core\Front\Models\ShopProduct;
 use Illuminate\Database\Eloquent\Model;
-use S-Cart\Core\Front\Models\ModelTrait;
+use SCart\Core\Front\Models\ModelTrait;
 
 class ShopCategory extends Model
 {

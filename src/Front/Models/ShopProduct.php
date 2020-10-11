@@ -1,17 +1,17 @@
 <?php
 #S-Cart/Core/Front/Models/ShopProduct.php
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
-use S-Cart\Core\Front\Models\ShopAttributeGroup;
-use S-Cart\Core\Front\Models\ShopCategory;
-use S-Cart\Core\Front\Models\ShopProductCategory;
-use S-Cart\Core\Front\Models\ShopProductDescription;
-use S-Cart\Core\Front\Models\ShopProductGroup;
-use S-Cart\Core\Front\Models\ShopProductPromotion;
-use S-Cart\Core\Front\Models\ShopTax;
-use S-Cart\Core\Front\Models\ShopStore;
+use SCart\Core\Front\Models\ShopAttributeGroup;
+use SCart\Core\Front\Models\ShopCategory;
+use SCart\Core\Front\Models\ShopProductCategory;
+use SCart\Core\Front\Models\ShopProductDescription;
+use SCart\Core\Front\Models\ShopProductGroup;
+use SCart\Core\Front\Models\ShopProductPromotion;
+use SCart\Core\Front\Models\ShopTax;
+use SCart\Core\Front\Models\ShopStore;
 use Illuminate\Database\Eloquent\Model;
-use S-Cart\Core\Front\Models\ModelTrait;
+use SCart\Core\Front\Models\ModelTrait;
 class ShopProduct extends Model
 {
     use ModelTrait;

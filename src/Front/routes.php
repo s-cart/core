@@ -15,7 +15,7 @@ Route::group(
 
 $suffix = sc_config('SUFFIX_URL')??'';
 Route::middleware(SC_FRONT_MIDDLEWARE)
-    ->namespace('S-Cart\Core\Front\Controllers')
+    ->namespace('SCart\Core\Front\Controllers')
     ->group(function () use($suffix){
         foreach (glob(__DIR__ . '/Routes/*.php') as $filename) {
             require_once $filename;
@@ -26,7 +26,7 @@ Route::middleware(SC_FRONT_MIDDLEWARE)
 Route::group(
     [
         'middleware' => SC_FRONT_MIDDLEWARE,
-        'namespace' => 'S-Cart\Core\Front\Controllers',
+        'namespace' => 'SCart\Core\Front\Controllers',
     ], 
     function () {
     

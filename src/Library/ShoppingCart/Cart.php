@@ -1,9 +1,9 @@
 <?php
 
-namespace S-Cart\Core\Library\ShoppingCart;
+namespace SCart\Core\Library\ShoppingCart;
 
-use S-Cart\Core\Library\ShoppingCart\Exceptions\CartAlreadyStoredException;
-use S-Cart\Core\Library\ShoppingCart\Exceptions\UnknownModelException;
+use SCart\Core\Library\ShoppingCart\Exceptions\CartAlreadyStoredException;
+use SCart\Core\Library\ShoppingCart\Exceptions\UnknownModelException;
 use Closure;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\DatabaseManager;
@@ -53,7 +53,7 @@ class Cart
      * Set the current cart instance.
      *
      * @param string|null $instance
-     * @return \S-Cart\Core\Library\ShoppingCart\Cart
+     * @return \SCart\Core\Library\ShoppingCart\Cart
      */
     public function instance($instance = null)
     {
@@ -82,7 +82,7 @@ class Cart
      * @param int|float $qty
      * @param float     $price
      * @param array     $options
-     * @return \S-Cart\Core\Library\ShoppingCart\CartItem
+     * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
     public function add($id, $name = null, $qty = null, $price = null, array $options = [], $tax = 0)
     {
@@ -108,7 +108,7 @@ class Cart
      *
      * @param string $rowId
      * @param mixed  $qty
-     * @return \S-Cart\Core\Library\ShoppingCart\CartItem
+     * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
     public function update($rowId, $qty)
     {
@@ -171,7 +171,7 @@ class Cart
      * Get a cart item from the cart by its rowId.
      *
      * @param string $rowId
-     * @return \S-Cart\Core\Library\ShoppingCart\CartItem
+     * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
     public function get($rowId)
     {
@@ -388,7 +388,7 @@ class Cart
      * @param int|float $qty
      * @param float     $price
      * @param array     $options
-     * @return \S-Cart\Core\Library\ShoppingCart\CartItem
+     * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
     private function createCartItem($id, $name, $qty, $price, array $options, $tax = 0)
     {
@@ -456,7 +456,7 @@ class Cart
         $arrCart['items'] = [];
         if ($cart->count()) {
             foreach ($cart->content() as $key => $item) {
-                $product = \S-Cart\Core\Front\Models\ShopProduct::find($item->id);
+                $product = \SCart\Core\Front\Models\ShopProduct::find($item->id);
                 $arrCart['items'][] = [
                     'id' => $item->id,
                     'qty' => $item->qty,

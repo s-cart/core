@@ -7,7 +7,7 @@ Route::group(
     [
         'middleware' => SC_API_MIDDLEWARE,
         'prefix' => 'api',
-        'namespace' => '\S-Cart\Core\Api\Controllers',
+        'namespace' => '\SCart\Core\Api\Controllers',
     ]
     , function () {
     Route::group(['prefix' => 'auth'], function () {

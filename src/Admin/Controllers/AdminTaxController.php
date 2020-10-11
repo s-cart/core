@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopTax;
+use SCart\Core\Front\Models\ShopTax;
 use Validator;
 
 class AdminTaxController extends RootAdminController

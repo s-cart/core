@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Front\Models;
+namespace SCart\Core\Front\Models;
 
 /**
  * Trait Model.

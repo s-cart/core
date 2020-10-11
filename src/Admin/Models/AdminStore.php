@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
-use S-Cart\Core\Front\Models\ShopStore;
-use S-Cart\Core\Front\Models\ShopStoreDescription;
+use SCart\Core\Front\Models\ShopStore;
+use SCart\Core\Front\Models\ShopStoreDescription;
 
 class AdminStore extends ShopStore
 {

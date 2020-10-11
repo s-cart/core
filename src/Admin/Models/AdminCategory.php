@@ -1,10 +1,10 @@
 <?php
 
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
-use S-Cart\Core\Front\Models\ShopCategory;
+use SCart\Core\Front\Models\ShopCategory;
 use Cache;
-use S-Cart\Core\Front\Models\ShopCategoryDescription;
+use SCart\Core\Front\Models\ShopCategoryDescription;
 
 class AdminCategory extends ShopCategory
 {

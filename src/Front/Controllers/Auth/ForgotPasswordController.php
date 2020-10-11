@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Front\Controllers\Auth;
+namespace SCart\Core\Front\Controllers\Auth;
 
 use App\Http\Controllers\RootFrontController;
 use Auth;
@@ -45,7 +45,7 @@ class ForgotPasswordController extends RootFrontController
         $dataMapping['email'] = 'required|string|email';
         if(sc_captcha_method() && in_array('forgot', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
-            $dataMapping['captcha_field'] = ['required', 'string', new \S-Cart\Core\Rules\CaptchaRule];
+            $dataMapping['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
         $validator = \Illuminate\Support\Facades\Validator::make($data, $dataMapping);
         if ($validator->fails()) {

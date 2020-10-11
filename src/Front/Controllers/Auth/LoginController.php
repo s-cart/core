@@ -1,9 +1,9 @@
 <?php
 
-namespace S-Cart\Core\Front\Controllers\Auth;
+namespace SCart\Core\Front\Controllers\Auth;
 
 use App\Http\Controllers\RootFrontController;
-use S-Cart\Core\Front\Models\ShopCountry;
+use SCart\Core\Front\Models\ShopCountry;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;

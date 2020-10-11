@@ -1,6 +1,6 @@
 <?php
 
-namespace S-Cart\Core\Admin\Middleware;
+namespace SCart\Core\Admin\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

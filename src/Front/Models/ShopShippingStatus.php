@@ -1,6 +1,6 @@
 <?php
-#S-Cart\Core\Front\Models\ShopShippingStatus.php
-namespace S-Cart\Core\Front\Models;
+#SCart\Core\Front\Models\ShopShippingStatus.php
+namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

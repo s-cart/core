@@ -1,15 +1,15 @@
 <?php
 
-namespace S-Cart\Core\Api\Controllers;
+namespace SCart\Core\Api\Controllers;
 
 use App\Http\Controllers\RootFrontController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use S-Cart\Core\Front\Models\ShopCustomer;
+use SCart\Core\Front\Models\ShopCustomer;
 use Illuminate\Support\Facades\Validator;
-use S-Cart\Core\Front\Models\ShopEmailTemplate;
-use S-Cart\Core\Front\Controllers\Auth\AuthTrait;
+use SCart\Core\Front\Models\ShopEmailTemplate;
+use SCart\Core\Front\Controllers\Auth\AuthTrait;
 class AuthController extends RootFrontController
 {
     use AuthTrait;

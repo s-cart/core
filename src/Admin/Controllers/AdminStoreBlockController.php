@@ -1,10 +1,10 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Admin\Models\AdminStoreBlockContent;
-use S-Cart\Core\Front\Models\ShopLayoutPage;
-use S-Cart\Core\Front\Models\ShopLayoutPosition;
+use SCart\Core\Admin\Models\AdminStoreBlockContent;
+use SCart\Core\Front\Models\ShopLayoutPage;
+use SCart\Core\Front\Models\ShopLayoutPosition;
 use Validator;
 
 class AdminStoreBlockController extends RootAdminController

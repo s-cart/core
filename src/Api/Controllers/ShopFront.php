@@ -1,11 +1,11 @@
 <?php
-namespace S-Cart\Core\Api\Controllers;
+namespace SCart\Core\Api\Controllers;
 
 use App\Http\Controllers\RootFrontController;
-use S-Cart\Core\Front\Models\ShopBrand;
-use S-Cart\Core\Front\Models\ShopCategory;
-use S-Cart\Core\Front\Models\ShopProduct;
-use S-Cart\Core\Front\Models\ShopSupplier;
+use SCart\Core\Front\Models\ShopBrand;
+use SCart\Core\Front\Models\ShopCategory;
+use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopSupplier;
 
 class ShopFront extends RootFrontController
 {

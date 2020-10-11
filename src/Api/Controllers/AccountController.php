@@ -1,10 +1,10 @@
 <?php
 
-namespace S-Cart\Core\Api\Controllers;
+namespace SCart\Core\Api\Controllers;
 
 use App\Http\Controllers\RootFrontController;
 use Illuminate\Http\Request;
-use S-Cart\Core\Front\Models\ShopOrder;
+use SCart\Core\Front\Models\ShopOrder;
 
 class AccountController extends RootFrontController
 {

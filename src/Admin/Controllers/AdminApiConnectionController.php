@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Front\Models\ShopApiConnection;
+use SCart\Core\Front\Models\ShopApiConnection;
 use Validator;
 
 class AdminApiConnectionController extends RootAdminController

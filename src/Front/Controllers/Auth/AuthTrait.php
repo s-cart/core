@@ -1,8 +1,8 @@
 <?php
 
-namespace S-Cart\Core\Front\Controllers\Auth;
-use S-Cart\Core\Front\Models\ShopCustomer;
-use S-Cart\Core\Front\Models\ShopCountry;
+namespace SCart\Core\Front\Controllers\Auth;
+use SCart\Core\Front\Models\ShopCustomer;
+use SCart\Core\Front\Models\ShopCountry;
 
 /**
  * Trait Auth controller.

@@ -1,8 +1,8 @@
 <?php
 
-namespace S-Cart\Core\Admin\Models;
+namespace SCart\Core\Admin\Models;
 
-use S-Cart\Core\Front\Models\ShopEmailTemplate;
+use SCart\Core\Front\Models\ShopEmailTemplate;
 
 class AdminEmailTemplate extends ShopEmailTemplate
 {

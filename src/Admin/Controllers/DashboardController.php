@@ -1,12 +1,12 @@
 <?php
 
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Admin\Models\AdminNews;
-use S-Cart\Core\Admin\Models\AdminProduct;
-use S-Cart\Core\Admin\Models\AdminCustomer;
-use S-Cart\Core\Admin\Models\AdminOrder;
+use SCart\Core\Admin\Models\AdminNews;
+use SCart\Core\Admin\Models\AdminProduct;
+use SCart\Core\Admin\Models\AdminCustomer;
+use SCart\Core\Admin\Models\AdminOrder;
 use Illuminate\Http\Request;
 
 class DashboardController extends RootAdminController

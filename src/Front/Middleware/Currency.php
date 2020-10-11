@@ -1,8 +1,8 @@
 <?php
 
-namespace S-Cart\Core\Front\Middleware;
+namespace SCart\Core\Front\Middleware;
 
-use S-Cart\Core\Front\Models\ShopCurrency;
+use SCart\Core\Front\Models\ShopCurrency;
 use Closure;
 use Session;
 

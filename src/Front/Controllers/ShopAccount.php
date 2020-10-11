@@ -1,18 +1,18 @@
 <?php
-namespace S-Cart\Core\Front\Controllers;
+namespace SCart\Core\Front\Controllers;
 
 use App\Http\Controllers\RootFrontController;
-use S-Cart\Core\Front\Models\ShopCountry;
-use S-Cart\Core\Front\Models\ShopOrder;
-use S-Cart\Core\Front\Models\ShopOrderStatus;
-use S-Cart\Core\Front\Models\ShopShippingStatus;
-use S-Cart\Core\Front\Models\ShopCustomer;
-use S-Cart\Core\Front\Models\ShopAttributeGroup;
-use S-Cart\Core\Front\Models\ShopCustomerAddress;
+use SCart\Core\Front\Models\ShopCountry;
+use SCart\Core\Front\Models\ShopOrder;
+use SCart\Core\Front\Models\ShopOrderStatus;
+use SCart\Core\Front\Models\ShopShippingStatus;
+use SCart\Core\Front\Models\ShopCustomer;
+use SCart\Core\Front\Models\ShopAttributeGroup;
+use SCart\Core\Front\Models\ShopCustomerAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use S-Cart\Core\Front\Controllers\Auth\AuthTrait;
+use SCart\Core\Front\Controllers\Auth\AuthTrait;
 
 class ShopAccount extends RootFrontController
 {

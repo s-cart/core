@@ -1,8 +1,8 @@
 <?php
-namespace S-Cart\Core\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use S-Cart\Core\Admin\Models\AdminConfig;
+use SCart\Core\Admin\Models\AdminConfig;
 class AdminCacheConfigController extends RootAdminController
 {
     public function __construct()

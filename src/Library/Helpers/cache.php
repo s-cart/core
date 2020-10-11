@@ -1,6 +1,6 @@
 <?php
 
-use S-Cart\Core\Front\Models\ShopLanguage;
+use SCart\Core\Front\Models\ShopLanguage;
 use \Illuminate\Support\Facades\Cache;
 
 if (!function_exists('sc_clear_cache')) {
