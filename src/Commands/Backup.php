@@ -13,7 +13,7 @@ class Backup extends Command
      *
      * @var string
      */
-    protected $signature = 'BackupDatabase';
+    protected $signature = 'sc:backup';
 
     /**
      * The console command description.
@@ -47,8 +47,9 @@ class Backup extends Command
             echo json_encode(['error' => 0, 'msg' => 'Backup success!']);
         } catch (Throwable $exception) {
             if (file_exists($fileBackup)) {
-                unlink($fileBackup);
+                @unlink($fileBackup);
             }
+            sc_report($exception->getMessage());
             echo json_encode(['error' => 1, 'msg' => $exception->getMessage()]);
         }
     }

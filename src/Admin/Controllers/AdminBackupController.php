@@ -54,16 +54,15 @@ class AdminBackupController extends RootAdminController
             try {
                 unlink($pathFull);
                 $return = ['error' => 0, 'msg' => trans('backup.remove_success')];
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 $return = ['error' => 1, 'msg' => $e->getMessage()];
             }
         } else if ($action === 'restore') {
             try {
-                // DB::transaction(function () use ($pathFull) {
                 DB::connection(SC_CONNECTION)->unprepared(file_get_contents($pathFull));
                 $return = ['error' => 0, 'msg' => trans('backup.restore_success')];
-                // });
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                sc_report($e->getMessage());
                 $return = ['error' => 1, 'msg' => $e->getMessage()];
             }
         }
@@ -73,7 +72,7 @@ class AdminBackupController extends RootAdminController
 
     public function generateBackup()
     {
-        $return = shell_exec("php " . base_path() . "/artisan BackupDatabase");
+        $return = shell_exec("php " . base_path() . "/artisan sc:backup");
         return $return;
     }
 

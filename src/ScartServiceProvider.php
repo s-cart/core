@@ -30,8 +30,8 @@ class ScartServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->mergeConfigFrom(__DIR__.'/Config/s-cart.php', 's-cart');
-        $this->mergeConfigFrom(__DIR__.'/Config/lfm.php', 'lfm');
         $this->loadViewsFrom(__DIR__.'/Admin/Views', 's-cart');
+        $this->mergeConfigFrom(__DIR__.'/Config/lfm.php', 'lfm');
 
         $this->registerPublishing();
         
@@ -243,10 +243,10 @@ class ScartServiceProvider extends ServiceProvider
     protected function registerPublishing()
     {
         if ($this->app->runningInConsole()) {
-        $this->publishes([
-            __DIR__.'/Admin/Views'  => base_path('resources/views/admin'),
-        ], 's-cart-view');
-
+        $this->publishes([__DIR__.'/Admin/Views'  => base_path('resources/views/admin')], 'sc:view');
+        $this->publishes([__DIR__.'/Databases' => database_path()], 'sc:database');
+        $this->publishes([__DIR__.'/Config' => config_path()], 'sc:config');
+        $this->publishes([__DIR__.'/Lang' => resource_path('lang')], 'sc:lang');
         }
     }
 }
