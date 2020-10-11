@@ -1,0 +1,143 @@
+<?php
+
+namespace S-Cart\Core\Admin\Controllers;
+
+use App\Http\Controllers\RootAdminController;
+use S-Cart\Core\Admin\Models\AdminNews;
+use S-Cart\Core\Admin\Models\AdminProduct;
+use S-Cart\Core\Admin\Models\AdminCustomer;
+use S-Cart\Core\Admin\Models\AdminOrder;
+use Illuminate\Http\Request;
+
+class DashboardController extends RootAdminController
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
+    public function index(Request $request)
+    {
+        //Check user allow view dasdboard
+        if(!\Admin::user()->checkUrlAllowAccess(route('admin.home')))
+        {
+            $data['title'] = trans('admin.dashboard');
+            return view($this->templatePathAdmin.'default', $data);
+        }
+
+        $data                   = [];
+        $data['title']          = trans('admin.dashboard');
+        $data['totalOrder']     = AdminOrder::getTotalOrderStore();
+        $data['topOrder']       = AdminOrder::getTopOrderStore();
+        $data['totalProduct']   = AdminProduct::getTotalProductStore();
+        $data['topCustomer']    = AdminCustomer::getTopCustomerStore();
+        $data['totalCustomer']  = AdminCustomer::getTotalCustomerStore();
+        $data['totalNews']      = AdminNews::getTotalNewsStore();
+        $data['mapStyleStatus'] = AdminOrder::$mapStyleStatus;
+
+        //Country statistics
+        $dataCountries = AdminOrder::getCountryInYear();
+        $arrCountryMap   = [];
+        $ctTotal = 0;
+        $ctTop = 0;
+        foreach ($dataCountries as $key => $country) {
+            $ctTotal +=$country->count;
+            if($key <= 3) {
+                $ctTop +=$country->count;
+                $countryName = $country->country ?? $key ;
+                if($key == 0) {
+                    $arrCountryMap[] =  [
+                        'name' => $countryName,
+                        'y' => $country->count,
+                        'sliced' => true,
+                        'selected' => true,
+                    ];
+                } else {
+                    $arrCountryMap[] =  [$countryName, $country->count];
+                }
+            }
+        }
+        $arrCountryMap[] = ['Other', ($ctTotal - $ctTop)];
+        $data['dataPie'] = json_encode($arrCountryMap);
+        //End country statistics
+
+
+        //Order in 30 days
+        $totalsInMonth = AdminOrder::getSumOrderTotalInMonth()->keyBy('md')->toArray();
+        $rangDays = new \DatePeriod(
+            new \DateTime('-1 month'),
+            new \DateInterval('P1D'),
+            new \DateTime('+1 day')
+        );
+        $orderInMonth  = [];
+        $amountInMonth  = [];
+        foreach ($rangDays as $i => $day) {
+            $date = $day->format('m-d');
+            $orderInMonth[$date] = $totalsInMonth[$date]['total_order'] ?? '';
+            $amountInMonth[$date] = ($totalsInMonth[$date]['total_amount'] ?? 0);
+        }
+        $data['orderInMonth'] = $orderInMonth;
+        $data['amountInMonth'] = $amountInMonth;
+
+        //End order in 30 days
+        
+        //Order in 12 months
+        $totalsMonth = AdminOrder::getSumOrderTotalInYear()
+            ->pluck('total_amount', 'ym')->toArray();
+        $dataInYear = [];
+        for ($i = 12; $i >= 0; $i--) {
+            $date = date("Y-m", strtotime(date('Y-m-01') . " -$i months"));
+            $dataInYear[$date] = $totalsMonth[$date] ?? 0;
+        }
+        $data['dataInYear'] = $dataInYear;
+        //End order in 12 months
+
+        return view($this->templatePathAdmin.'dashboard', $data);
+    }
+
+    /**
+     * Page not found
+     *
+     * @return  [type]  [return description]
+     */
+    public function dataNotFound()
+    {
+        $data = [
+            'title' => trans('admin.data_not_found'),
+            'icon' => '',
+            'url' => session('url'),
+        ];
+        return view($this->templatePathAdmin.'data_not_found', $data);
+    }
+
+
+    /**
+     * Page deny
+     *
+     * @return  [type]  [return description]
+     */
+    public function deny()
+    {
+        $data = [
+            'title' => trans('admin.deny'),
+            'icon' => '',
+            'method' => session('method'),
+            'url' => session('url'),
+        ];
+        return view($this->templatePathAdmin.'deny', $data);
+    }
+
+    /**
+     * [denySingle description]
+     *
+     * @return  [type]  [return description]
+     */
+    public function denySingle()
+    {
+        $data = [
+            'method' => session('method'),
+            'url' => session('url'),
+        ];
+        return view($this->templatePathAdmin.'deny_single', $data);
+    }
+}

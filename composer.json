@@ -1,0 +1,42 @@
+{
+  "name": "s-cart/core",
+  "description": "S-Cart ecommerce",
+  "keywords": ["laravel ecommerce", "s-cart", "scart ecommerce"],
+  "homepage": "https://s-cart.org",
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Lanh Le",
+          "email": "lanhktc@gmail.com"
+      }
+  ],
+  "require": {
+      "php": "^7.2.5",
+      "laravel/framework": "^7.0",
+      "unisharp/laravel-filemanager": "^2.0",
+      "spatie/laravel-pjax": "^2.0",
+      "phpoffice/phpspreadsheet": "^1.8",
+      "spatie/laravel-json-api-paginate": "^1.7"
+  },
+  "autoload": {
+      "psr-4": {
+         "S-Cart\\Core\\": "src/"
+      }
+  },
+  "extra": {
+      "laravel": {
+          "dont-discover": [
+          ],
+          "providers": [
+            "S-Cart\\Core\\ScartServiceProvider",
+            "UniSharp\\LaravelFilemanager\\LaravelFilemanagerServiceProvider"
+          ],
+          "aliases": {
+            "Export" : "S-Cart\\Core\\Library\\ProcessData\\Export",
+            "ProcessData" : "S-Cart\\Core\\Library\\ProcessData\\Boot",
+            "Cart" : "S-Cart\\Core\\Library\\ShoppingCart\\Facades\\Cart",
+            "Admin" : "S-Cart\\Core\\Admin\\Admin"
+          }
+      }
+  }
+}
