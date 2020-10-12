@@ -31,10 +31,9 @@ class ScartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__.'/Config/s-cart.php', 's-cart');
         $this->mergeConfigFrom(__DIR__.'/Config/admin.php', 'admin');
-        $this->loadViewsFrom(__DIR__.'/Admin/Views', 's-cart');
         $this->mergeConfigFrom(__DIR__.'/Config/lfm.php', 'lfm');
+        $this->loadViewsFrom(__DIR__.'/Admin/Views', 's-cart');
 
         $this->registerPublishing();
         
