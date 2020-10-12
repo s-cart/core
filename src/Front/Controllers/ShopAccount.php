@@ -31,6 +31,8 @@ class ShopAccount extends RootFrontController
     public function index()
     {
         $user = auth()->user();
+
+        sc_check_view($this->templatePath . '.account.index');
         return view($this->templatePath . '.account.index')
             ->with(
                 [
@@ -49,6 +51,7 @@ class ShopAccount extends RootFrontController
     public function changePassword()
     {
         $user = auth()->user();
+        sc_check_view($this->templatePath . '.account.change_password');
         return view($this->templatePath . '.account.change_password')
         ->with(
             [
@@ -119,6 +122,7 @@ class ShopAccount extends RootFrontController
     public function changeInfomation()
     {
         $user = Auth::user();
+        sc_check_view($this->templatePath . '.account.change_infomation');
         return view($this->templatePath . '.account.change_infomation')
             ->with(
                 [
@@ -165,6 +169,7 @@ class ShopAccount extends RootFrontController
     public function orderList()
     {
         $statusOrder = ShopOrderStatus::getIdAll();
+        sc_check_view($this->templatePath . '.account.order_list');
         return view($this->templatePath . '.account.order_list')
             ->with(
                 [
@@ -191,6 +196,7 @@ class ShopAccount extends RootFrontController
         } else {
             $title = trans('account.order_detail_notfound');
         }
+        sc_check_view($this->templatePath . '.account.order_detail');
         return view($this->templatePath . '.account.order_detail')
         ->with(
             [
@@ -213,6 +219,7 @@ class ShopAccount extends RootFrontController
      */
     public function addressList()
     {
+        sc_check_view($this->templatePath . '.account.address_list');
         return view($this->templatePath . '.account.address_list')
             ->with(
                 [
@@ -239,6 +246,7 @@ class ShopAccount extends RootFrontController
         } else {
             $title = trans('account.address_detail_notfound');
         }
+        sc_check_view($this->templatePath . '.account.update_address');
         return view($this->templatePath . '.account.update_address')
         ->with(
             [

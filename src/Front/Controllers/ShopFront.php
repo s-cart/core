@@ -25,7 +25,9 @@ class ShopFront extends RootFrontController
      */
     public function index()
     {
-        return view($this->templatePath . '.screen.shop_home',
+        sc_check_view($this->templatePath . '.screen.shop_home');
+        return view(
+            $this->templatePath . '.screen.shop_home',
             array(
                 'title' => sc_store('title'),
                 'keyword' => sc_store('keyword'),
@@ -63,7 +65,9 @@ class ShopFront extends RootFrontController
             ->setSort([$sortBy, $sortOrder])
             ->getData();
 
-        return view($this->templatePath . '.screen.shop_product_list',
+        sc_check_view($this->templatePath . '.screen.shop_product_list');
+        return view(
+            $this->templatePath . '.screen.shop_product_list',
             array(
                 'title' => trans('front.shop'),
                 'keyword' => sc_store('keyword'),
@@ -103,7 +107,9 @@ class ShopFront extends RootFrontController
             ->setLimit(sc_config('item_list'))
             ->getData();
 
-        return view($this->templatePath . '.screen.shop_item_list',
+        sc_check_view($this->templatePath . '.screen.shop_item_list');
+        return view(
+            $this->templatePath . '.screen.shop_item_list',
             array(
                 'title' => trans('front.categories'),
                 'itemsList' => $itemsList,
@@ -200,8 +206,10 @@ class ShopFront extends RootFrontController
             ->setPaginate()
             ->setSort([$sortBy, $sortOrder])
             ->getData();
-        
-        return view($this->templatePath . '.screen.shop_product_list',
+
+        sc_check_view($this->templatePath . '.screen.shop_product_list');
+        return view(
+            $this->templatePath . '.screen.shop_product_list',
             array(
                 'title' => trans('front.all_product'),
                 'keyword' => '',
@@ -243,6 +251,7 @@ class ShopFront extends RootFrontController
                 ->setRandom()
                 ->getData();
 
+            sc_check_view($this->templatePath . '.screen.shop_product_detail');
             return view($this->templatePath . '.screen.shop_product_detail',
                 array(
                     'title' => $product->name,
@@ -322,7 +331,10 @@ class ShopFront extends RootFrontController
             ->setPaginate()
             ->setLimit(sc_config('item_list'))
             ->getData();
-        return view($this->templatePath . '.screen.shop_item_list',
+
+        sc_check_view($this->templatePath . '.screen.shop_item_list');
+        return view(
+            $this->templatePath . '.screen.shop_item_list',
             array(
                 'title' => trans('front.brands'),
                 'itemsList' => $itemsList,
@@ -366,7 +378,9 @@ class ShopFront extends RootFrontController
             ->setSort([$sortBy, $sortOrder])
             ->getData();
 
-            return view($this->templatePath . '.screen.shop_product_list',
+            sc_check_view($this->templatePath . '.screen.shop_product_list');
+            return view(
+                $this->templatePath . '.screen.shop_product_list',
                 array(
                     'title' => $brand->name,
                     'description' => $brand->description,
@@ -409,7 +423,9 @@ class ShopFront extends RootFrontController
             ->setLimit(sc_config('item_list'))
             ->getData();
 
-        return view($this->templatePath . '.screen.shop_item_list',
+        sc_check_view($this->templatePath . '.screen.shop_item_list');
+        return view(
+            $this->templatePath . '.screen.shop_item_list',
             array(
                 'title' => trans('front.suppliers'),
                 'itemsList' => $itemsList,
@@ -453,6 +469,7 @@ class ShopFront extends RootFrontController
             ->setSort([$sortBy, $sortOrder])
             ->getData();
 
+            sc_check_view($this->templatePath . '.screen.shop_product_list');
             return view($this->templatePath . '.screen.shop_product_list',
                 array(
                     'title' => $supplier->name,
@@ -499,7 +516,9 @@ class ShopFront extends RootFrontController
                     ->setLimit(sc_config('product_list'))
                     ->getData();
 
-        return view($this->templatePath . '.screen.shop_product_list',
+        sc_check_view($this->templatePath . '.screen.shop_product_list');          
+        return view(
+            $this->templatePath . '.screen.shop_product_list',
             array(
                 'title' => trans('front.search') . ': ' . $keyword,
                 'products' => $products,
@@ -544,6 +563,7 @@ class ShopFront extends RootFrontController
                 $viewCaptcha = view(sc_captcha_method()->pathPlugin.'::render', $dataView)->render();
             }
         }
+        sc_check_view($this->templatePath . '.screen.shop_contact');
         return view(
             $this->templatePath . '.screen.shop_contact',
             array(
@@ -644,6 +664,8 @@ class ShopFront extends RootFrontController
     {
         $page = (new ShopPage)->getDetail($alias, $type = 'alias');
         if ($page) {
+
+            sc_check_view($this->templatePath . '.screen.shop_page');
             return view(
                 $this->templatePath . '.screen.shop_page',
                 array(
@@ -671,6 +693,7 @@ class ShopFront extends RootFrontController
             ->setPaginate()
             ->getData();
 
+        sc_check_view($this->templatePath . '.screen.shop_news');
         return view(
             $this->templatePath . '.screen.shop_news',
             array(
@@ -694,6 +717,7 @@ class ShopFront extends RootFrontController
     {
         $news = (new ShopNews)->getDetail($alias, $type ='alias');
         if ($news) {
+            sc_check_view($this->templatePath . '.screen.shop_news_detail');
             return view(
                 $this->templatePath . '.screen.shop_news_detail',
                 array(

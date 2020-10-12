@@ -134,6 +134,7 @@ class ShopCart extends RootFrontController
             }
         }
 
+        sc_check_view($this->templatePath . '.screen.shop_cart');
         return view(
             $this->templatePath . '.screen.shop_cart',
             [
@@ -363,6 +364,7 @@ class ShopCart extends RootFrontController
         //Set session dataTotal
         session(['dataTotal' => $dataTotal]);
 
+        sc_check_view($this->templatePath . '.screen.shop_checkout');
         return view(
             $this->templatePath . '.screen.shop_checkout',
             [
@@ -698,7 +700,9 @@ class ShopCart extends RootFrontController
     {
 
         $wishlist = Cart::instance('wishlist')->content();
-        return view($this->templatePath . '.screen.shop_wishlist',
+        sc_check_view($this->templatePath . '.screen.shop_wishlist');
+        return view(
+            $this->templatePath . '.screen.shop_wishlist',
             array(
                 'title'       => trans('front.wishlist'),
                 'description' => '',
@@ -717,7 +721,9 @@ class ShopCart extends RootFrontController
     {
         $compare = Cart::instance('compare')->content();
 
-        return view($this->templatePath . '.screen.shop_compare',
+        sc_check_view($this->templatePath . '.screen.shop_compare');
+        return view(
+            $this->templatePath . '.screen.shop_compare',
             array(
                 'title'       => trans('front.compare'),
                 'description' => '',
@@ -937,6 +943,7 @@ class ShopCart extends RootFrontController
         if (!session('orderID')) {
             return redirect()->route('home');
         }
+        sc_check_view($this->templatePath . '.screen.shop_order_success');
         return view(
             $this->templatePath . '.screen.shop_order_success',
             [
