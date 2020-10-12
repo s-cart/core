@@ -31,7 +31,7 @@ class LoginController extends RootFrontController
     // protected $redirectTo = '/';
     protected function redirectTo()
     {
-        return route('member.index');
+        return sc_route('member.index');
     }
     /**
      * Create a new controller instance.
@@ -67,6 +67,7 @@ class LoginController extends RootFrontController
         if (Auth::user()) {
             return redirect()->route('home');
         }
+        sc_check_view($this->templatePath . '.auth.login');
         return view($this->templatePath . '.auth.login',
             array(
                 'title'       => trans('front.login'),

@@ -87,6 +87,7 @@ class ForgotPasswordController extends RootFrontController
                 $viewCaptcha = view(sc_captcha_method()->pathPlugin.'::render', $dataView)->render();
             }
         }
+        sc_check_view($this->templatePath . '.auth.forgot');
         return view($this->templatePath . '.auth.forgot',
             array(
                 'title' => trans('front.forgot_password'),

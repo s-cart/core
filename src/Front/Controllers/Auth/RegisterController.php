@@ -156,6 +156,7 @@ class RegisterController extends RootFrontController
                 $viewCaptcha = view(sc_captcha_method()->pathPlugin.'::render', $dataView)->render();
             }
         }
+        sc_check_view($this->templatePath . '.auth.register');
         return view($this->templatePath . '.auth.register',
             array(
                 'title'       => trans('account.title_register'),

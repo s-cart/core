@@ -53,6 +53,7 @@ class ResetPasswordController extends RootFrontController
         if (Auth::user()) {
             return redirect()->route('home');
         }
+        sc_check_view($this->templatePath . '.auth.reset');
         return view($this->templatePath . '.auth.reset',
             [
                 'title' => trans('front.reset_password'),
