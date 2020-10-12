@@ -245,7 +245,7 @@ class ScartServiceProvider extends ServiceProvider
         Validator::extend('product_alias_unique', function ($attribute, $value, $parameters, $validator) {
             $productId = $parameters[0] ?? '';
             return (new Admin\Models\AdminProduct)
-            ->checkProductValidationAdmin('alias', $value, $productId, session('adminStoreId'));
+                ->checkProductValidationAdmin('alias', $value, $productId, session('adminStoreId'));
         });
 
     }

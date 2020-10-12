@@ -5,7 +5,6 @@ use SCart\Core\Admin\Models\AdminPermission;
 use SCart\Core\Admin\Models\AdminRole;
 use SCart\Core\Admin\Models\AdminUser;
 use App\Http\Controllers\RootAdminController;
-use Illuminate\Http\Request;
 use Validator;
 
 class RoleController extends RootAdminController
@@ -29,11 +28,11 @@ class RoleController extends RootAdminController
             'js' => '',
         ];
         //Process add content
-        $data['menuRight'] = sc_config_group('menuRight', Request::route()->getName());
-        $data['menuLeft'] = sc_config_group('menuLeft', Request::route()->getName());
-        $data['topMenuRight'] = sc_config_group('topMenuRight', Request::route()->getName());
-        $data['topMenuLeft'] = sc_config_group('topMenuLeft', Request::route()->getName());
-        $data['blockBottom'] = sc_config_group('blockBottom', Request::route()->getName());
+        $data['menuRight'] = sc_config_group('menuRight', \Request::route()->getName());
+        $data['menuLeft'] = sc_config_group('menuLeft', \Request::route()->getName());
+        $data['topMenuRight'] = sc_config_group('topMenuRight', \Request::route()->getName());
+        $data['topMenuLeft'] = sc_config_group('topMenuLeft', \Request::route()->getName());
+        $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
             'id' => trans('role.id'),
@@ -89,7 +88,7 @@ class RoleController extends RootAdminController
 
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
-        $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links('admin.component.pagination');
+        $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
         $data['resultItems'] = trans('role.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
 
 //menuRight
