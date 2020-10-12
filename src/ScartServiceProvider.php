@@ -172,17 +172,17 @@ class ScartServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'localization'   => Front\Middleware\Localization::class,
-        'currency'       => Front\Middleware\Currency::class,
-        'api.connection' => Api\Middleware\ApiConnection::class,
-        'checkdomain'    => Front\Middleware\CheckDomain::class,
-        'json.response' => Api\Middleware\ForceJsonResponse::class,
+        'localization'     => Front\Middleware\Localization::class,
+        'currency'         => Front\Middleware\Currency::class,
+        'api.connection'   => Api\Middleware\ApiConnection::class,
+        'checkdomain'      => Front\Middleware\CheckDomain::class,
+        'json.response'    => Api\Middleware\ForceJsonResponse::class,
         //Admin
-        'admin.auth' => Admin\Middleware\Authenticate::class,
-        'admin.log' => Admin\Middleware\LogOperation::class,
+        'admin.auth'       => Admin\Middleware\Authenticate::class,
+        'admin.log'        => Admin\Middleware\LogOperation::class,
         'admin.permission' => Admin\Middleware\PermissionMiddleware::class,
-        'admin.theme' => Admin\Middleware\AdminTheme::class,
-        'admin.storeId' => Admin\Middleware\AdminStoreId::class,
+        'admin.storeId'    => Admin\Middleware\AdminStoreId::class,
+        'admin.theme'      => Admin\Middleware\AdminTheme::class,
     ];
 
     /**
@@ -193,9 +193,21 @@ class ScartServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.auth',
-            'admin.log',
             'admin.permission',
+            'admin.log',
+            'admin.storeId',
             'admin.theme',
+            'localization',
+        ],
+        'front' => [
+            'localization',
+            'currency',
+            'checkdomain',
+        ],
+        'api.extent' => [
+            'json.response',
+            'api.connection',
+            'throttle:1000',
         ],
     ];
 

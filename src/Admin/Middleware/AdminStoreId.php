@@ -16,7 +16,7 @@ class AdminStoreId
      */
     public function handle($request, Closure $next)
     {
-        $adminStoreId = null;
+        $adminStoreId = 1;
         if (!Session::has('adminStoreId')) {
             if(\Admin::user() && count($arrStoreId = \Admin::user()->listStoreId())) {
                 if(in_array(0, $arrStoreId)) {
