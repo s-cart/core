@@ -38,6 +38,7 @@ class AdminSubCategory extends ShopSubCategory
 
         $categoryList = (new ShopSubCategory)
             ->leftJoin($tableDescription, $tableDescription . '.sub_category_id', $tableSubCategory . '.id')
+            ->where($tableSubCategory.'.store_id', session('adminStoreId'))
             ->where($tableDescription . '.lang', sc_get_locale());
 
         if ($keyword) {
@@ -75,6 +76,7 @@ class AdminSubCategory extends ShopSubCategory
             if (!Cache::has(session('adminStoreId').'_cache_sub_category_'.sc_get_locale())) {
                 if (self::$getListTitleAdmin === null) {
                     self::$getListTitleAdmin = self::join($tableDescription, $tableDescription.'.sub_category_id', $table.'.id')
+                    ->where($table.'.store_id', session('adminStoreId'))
                     ->where('lang', sc_get_locale())
                     ->pluck('title', 'id')
                     ->toArray();
@@ -86,29 +88,12 @@ class AdminSubCategory extends ShopSubCategory
             if (self::$getListTitleAdmin === null) {
                 self::$getListTitleAdmin = self::join($tableDescription, $tableDescription.'.sub_category_id', $table.'.id')
                 ->where('lang', sc_get_locale())
+                ->where($table.'.store_id', session('adminStoreId'))
                 ->pluck('title', 'id')
                 ->toArray();
             }
             return self::$getListTitleAdmin;
         }
-    }
-
-
-    /**
-     * Get array title category
-     * user for admin 
-     *
-     * @return  [type]  [return description]
-     */
-    public static function getListSubCategoryGroupByParentAdmin()
-    {
-        if (self::$getListSubCategoryGroupByParentAdmin === null) {
-            self::$getListSubCategoryGroupByParentAdmin = self::select('id', 'parent')
-            ->get()
-            ->groupBy('parent')
-            ->toArray();
-        }
-        return self::$getListSubCategoryGroupByParentAdmin;
     }
 
 

@@ -11,7 +11,7 @@ class ShopSubCategory extends Model
     use ModelTrait;
 
     public $timestamps = false;
-    public $table = SC_DB_PREFIX . 'sub_shop_category';
+    public $table = SC_DB_PREFIX . 'shop_sub_category';
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
 

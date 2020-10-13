@@ -18,7 +18,6 @@ class AdminSubCategoryController extends RootAdminController
 
     public function index()
     {
-        $categoriesTitle =  AdminSubCategory::getListTitleAdmin();
         $data = [
             'title'         => trans('sub_category.admin.list'),
             'subTitle'      => '',
@@ -128,7 +127,6 @@ class AdminSubCategoryController extends RootAdminController
             'icon' => 'fa fa-plus',
             'languages' => $this->languages,
             'sub_category' => [],
-            'categories' => (new AdminSubCategory)->getTreeCategoriesAdmin(),
             'url_action' => sc_route('admin_sub_category.create'),
         ];
 
@@ -171,6 +169,7 @@ class AdminSubCategoryController extends RootAdminController
             'alias'    => $data['alias'],
             'status'   => !empty($data['status']) ? 1 : 0,
             'sort'     => (int) $data['sort'],
+            'store_id' => session('adminStoreId'),
         ];
         $sub_category = AdminSubCategory::createSubCategoryAdmin($dataInsert);
         $dataDes = [];
@@ -210,7 +209,6 @@ class AdminSubCategoryController extends RootAdminController
             'icon'              => 'fa fa-edit',
             'languages'         => $this->languages,
             'sub_category'          => $sub_category,
-            'categories'        => (new AdminSubCategory)->getTreeCategoriesAdmin(),
             'url_action'        => sc_route('admin_sub_category.edit', ['id' => $sub_category['id']]),
         ];
         return view($this->templatePathAdmin.'screen.sub_category')
@@ -256,8 +254,8 @@ class AdminSubCategoryController extends RootAdminController
             'image'    => $data['image'],
             'alias'    => $data['alias'],
             'sort'     => $data['sort'],
-            'top'      => empty($data['top']) ? 0 : 1,
             'status'   => empty($data['status']) ? 0 : 1,
+            'store_id' => session('adminStoreId'),
         ];
 
         $sub_category->update($dataUpdate);
