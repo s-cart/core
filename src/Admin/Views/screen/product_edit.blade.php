@@ -188,6 +188,29 @@
                         @endif
                         {{-- //Category --}}
 
+                        {{-- Sub category --}}
+                        <div class="form-group row {{ $errors->has('sub_category_id') ? ' text-red' : '' }}">
+                            <label for="sub_category_id" class="col-sm-2 col-form-label">{{ trans('product.sub_category') }}</label>
+                            <div class="col-sm-8">
+                                <select class="form-control sub_category_id select2" style="width: 100%;"
+                                    name="sub_category_id">
+                                    <option value=""></option>
+                                    @foreach ($subCategories as $k => $v)
+                                    <option value="{{ $k }}"
+                                        {{ (old('sub_category_id') ==$k || (!old() && $product->sub_category_id ==$k) ) ? 'selected':'' }}>
+                                        {{ $v->name }}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('sub_category_id'))
+                                <span class="form-text">
+                                    <i class="fa fa-info-circle"></i> {{ $errors->first('sub_category_id') }}
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        {{-- //Sub category --}}
+
+
                         {{-- Images --}}
                         <div class="form-group row  {{ $errors->has('image') ? ' text-red' : '' }}">
                             <label for="image" class="col-sm-2 col-form-label">{{ trans('product.image') }}</label>
