@@ -836,6 +836,14 @@ class AdminProductController extends RootAdminController
             }
         }
 
+        if (sc_config_admin('product_sub_category')) {
+            if (sc_config_admin('product_sub_category_required')) {
+                $arrValidation['sub_category_id'] = 'required';
+            } else {
+                $arrValidation['sub_category_id'] = 'nullable';
+            }
+        }
+
         if (sc_config_admin('product_price')) {
             if (sc_config_admin('product_price_required')) {
                 $arrValidation['price'] = 'required|numeric|min:0';
