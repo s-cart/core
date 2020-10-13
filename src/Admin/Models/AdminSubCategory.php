@@ -68,11 +68,11 @@ class AdminSubCategory extends ShopSubCategory
      *
      * @return  [type]  [return description]
      */
-    public static function getListTitleAdmin()
+    public static function getCategoriesAdmin()
     {
         $tableDescription = (new ShopSubCategoryDescription)->getTable();
         $table = (new AdminSubCategory)->getTable();
-        if (sc_config_global('cache_status') && sc_config_global('cache_category')) {
+        if (sc_config_global('cache_status') && sc_config_global('cache_sub_category')) {
             if (!Cache::has(session('adminStoreId').'_cache_sub_category_'.sc_get_locale())) {
                 if (self::$getListTitleAdmin === null) {
                     self::$getListTitleAdmin = self::join($tableDescription, $tableDescription.'.sub_category_id', $table.'.id')

@@ -26,7 +26,7 @@
 
                 <div class="d-flex d-flex justify-content-center mb-3 {{ $errors->has('kind') ? ' text-red' : '' }}"  id="start-add">
                     <div class="input-group" style="width: 300px; z-index:999">
-                        @if (sc_config('product_kind'))
+                        @if (sc_config_admin('product_kind'))
                         <select class="form-control" style="width: 100%;" name="kind">
                             <option value="">{{ trans('product.admin.select_kind') }}</option>
                             @foreach ($kinds as $key => $kind)
@@ -198,6 +198,7 @@
                         </div>
                         {{-- //select category --}}
 
+@if (sc_config_admin('product_sub_category'))
                         {{-- select sub_category --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('sub_category_id') ? ' text-red' : '' }}">
                             <label for="sub_category_id"
@@ -207,7 +208,7 @@
                                     name="sub_category_id">
                                     <option value=""></option>
                                     @foreach ($subCategories as $k => $v)
-                                    <option value="{{ $k }}" {{ (old('sub_category_id') ==$k) ? 'selected':'' }}>{{ $v->name }}
+                                    <option value="{{ $k }}" {{ (old('sub_category_id') == $k) ? 'selected':'' }}>{{ $v }}
                                     </option>
                                     @endforeach
                                 </select>
@@ -219,7 +220,7 @@
                             </div>
                         </div>
                         {{-- //select sub_category --}}   
-                        
+@endif
 
                         {{-- images --}}
                         <div class="form-group row kind kind0 kind1 {{ $errors->has('image') ? ' text-red' : '' }}">
@@ -330,7 +331,7 @@
                         </div>
                         {{-- //alias --}}
 
-@if (sc_config('product_brand'))
+@if (sc_config_admin('product_brand'))
                         {{-- select brand --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('brand_id') ? ' text-red' : '' }}">
                             <label for="brand_id"
@@ -355,7 +356,7 @@
 @endif
 
 
-@if (sc_config('product_supplier'))
+@if (sc_config_admin('product_supplier'))
                         {{-- select supplier --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
                             @php
@@ -389,7 +390,7 @@
                         {{--// select supplier --}}
 @endif
 
-@if (sc_config('product_cost'))
+@if (sc_config_admin('product_cost'))
                         {{-- cost --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('cost') ? ' text-red' : '' }}">
                             <label for="cost" class="col-sm-2 col-form-label">{{ trans('product.cost') }}</label>
@@ -412,7 +413,7 @@
                         {{-- //cost --}}
 @endif
 
-@if (sc_config('product_price'))
+@if (sc_config_admin('product_price'))
                         {{-- price --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('price') ? ' text-red' : '' }}">
                             <label for="price" class="col-sm-2 col-form-label">{{ trans('product.price') }}</label>
@@ -436,7 +437,7 @@
 @endif
 
 
-@if (sc_config('product_tax'))
+@if (sc_config_admin('product_tax'))
                         {{-- select tax --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('tax_id') ? ' text-red' : '' }}">
                             <label for="tax_id"
@@ -461,7 +462,7 @@
                         {{-- //select tax --}}   
 @endif
 
-@if (sc_config('product_promotion'))
+@if (sc_config_admin('product_promotion'))
                         {{-- price promotion --}}
                         <div class="form-group row kind kind0 kind1   {{ $errors->has('price_promotion') ? ' text-red' : '' }}">
                             <label for="price"
@@ -525,7 +526,7 @@
                         {{-- //price promotion --}}
 @endif
 
-@if (sc_config('product_stock'))
+@if (sc_config_admin('product_stock'))
                         {{-- stock --}}
                         <div class="form-group row kind kind0  kind1 {{ $errors->has('stock') ? ' text-red' : '' }}">
                             <label for="stock" class="col-sm-2 col-form-label">{{ trans('product.stock') }}</label>
@@ -550,7 +551,7 @@
 
 
 
-@if (sc_config('product_weight'))
+@if (sc_config_admin('product_weight'))
                         {{-- weight --}}
                         <div class="form-group row kind kind0  kind1  {{ $errors->has('weight_class') ? ' text-red' : '' }}">
                             <label for="weight_class" class="col-sm-2 col-form-label">{{ trans('product.weight_class') }}</label>
@@ -595,7 +596,7 @@
 @endif
 
 
-@if (sc_config('product_length'))
+@if (sc_config_admin('product_length'))
                         {{-- length --}}
                         <div class="form-group row kind kind0  kind1  {{ $errors->has('length_class') ? ' text-red' : '' }}">
                             <label for="length_class" class="col-sm-2 col-form-label">{{ trans('product.length_class') }}</label>
@@ -678,7 +679,7 @@
 @endif
 
 
-@if (sc_config('product_property'))
+@if (sc_config_admin('product_property'))
                         {{-- property --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('property') ? ' text-red' : '' }}">
                             <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }}</label>
@@ -702,7 +703,7 @@
 @endif
 
 
-@if (sc_config('product_available'))
+@if (sc_config_admin('product_available'))
                         {{-- date available --}}
                         <div
                             class="form-group row kind kind0 kind1  {{ $errors->has('date_available') ? ' text-red' : '' }}">
@@ -788,7 +789,7 @@
                         </div>
                         {{-- //status --}}
 
-@if (sc_config('product_kind'))
+@if (sc_config_admin('product_kind'))
                         <hr class="kind kind2">
                         {{-- List product in groups --}}
                         <div class="form-group row kind kind2 {{ $errors->has('productInGroup') ? ' text-red' : '' }}">
@@ -868,7 +869,7 @@
 @endif
 
 
-@if (sc_config('product_attribute'))
+@if (sc_config_admin('product_attribute'))
                         {{-- List product attributes --}}
 
                         @if (!empty($attributeGroup))
@@ -1092,7 +1093,7 @@ $('.removeAttribute').click(function(event) {
 // $("input.image").fileinput({"browseLabel":"Browse","cancelLabel":"Cancel","showRemove":true,"showUpload":false,"dropZoneEnabled":false});
 
 /* process_form(); */
-@if(sc_config('product_kind') == 0)
+@if(sc_config_admin('product_kind') == 0)
 $('#main-add').show();
 @endif
 

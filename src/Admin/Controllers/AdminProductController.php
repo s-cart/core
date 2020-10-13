@@ -15,6 +15,7 @@ use SCart\Core\Front\Models\ShopProductImage;
 use SCart\Core\Front\Models\ShopSupplier;
 use SCart\Core\Admin\Models\AdminProduct;
 use SCart\Core\Admin\Models\AdminCategory;
+use SCart\Core\Admin\Models\AdminSubCategory;
 use Illuminate\Support\Facades\Validator;
 
 class AdminProductController extends RootAdminController
@@ -70,16 +71,16 @@ class AdminProductController extends RootAdminController
             'name'     => trans('product.name'),
             'category' => trans('product.category'),
         ];
-        if (sc_config('product_cost')) {
+        if (sc_config_admin('product_cost')) {
             $listTh['cost'] = trans('product.cost');
         }
-        if (sc_config('product_price')) {
+        if (sc_config_admin('product_price')) {
             $listTh['price'] = trans('product.price');
         }
-        if (sc_config('product_kind')) {
+        if (sc_config_admin('product_kind')) {
             $listTh['kind'] = trans('product.kind');
         }
-        if (sc_config('product_property')) {
+        if (sc_config_admin('product_property')) {
             $listTh['property'] = trans('product.property');
         }
         $listTh['status'] = trans('product.status');
@@ -123,16 +124,16 @@ class AdminProductController extends RootAdminController
                 'category' => implode(';<br>', $arrName),
                 
             ];
-            if (sc_config('product_cost')) {
+            if (sc_config_admin('product_cost')) {
                 $dataMap['cost'] = $row['cost'];
             }
-            if (sc_config('product_price')) {
+            if (sc_config_admin('product_price')) {
                 $dataMap['price'] = $row['price'];
             }
-            if (sc_config('product_kind')) {
+            if (sc_config_admin('product_kind')) {
                 $dataMap['kind'] = $kind;
             }
-            if (sc_config('product_property')) {
+            if (sc_config_admin('product_property')) {
                 $dataMap['property'] = $this->propertys[$row['property']] ?? $row['property'];
             }
             $dataMap['status'] = $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>';
@@ -230,6 +231,7 @@ class AdminProductController extends RootAdminController
             'title_description'    => trans('product.admin.add_new_des'),
             'icon'                 => 'fa fa-plus',
             'languages'            => $this->languages,
+            'subCategories'        => (new AdminSubCategory)->getCategoriesAdmin(),
             'categories'           => (new AdminCategory)->getTreeCategoriesAdmin(),
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -355,32 +357,33 @@ class AdminProductController extends RootAdminController
                 ->withInput($data);
         }
 
-        $category = $data['category'] ?? [];
-        $attribute = $data['attribute'] ?? [];
-        $descriptions = $data['descriptions'];
-        $productInGroup = $data['productInGroup'] ?? [];
-        $productBuild = $data['productBuild'] ?? [];
+        $category        = $data['category'] ?? [];
+        $attribute       = $data['attribute'] ?? [];
+        $descriptions    = $data['descriptions'];
+        $productInGroup  = $data['productInGroup'] ?? [];
+        $productBuild    = $data['productBuild'] ?? [];
         $productBuildQty = $data['productBuildQty'] ?? [];
-        $subImages = $data['sub_image'] ?? [];
-        $supplier_id = $data['supplier_id']?? [];
+        $subImages       = $data['sub_image'] ?? [];
+        $supplier_id     = $data['supplier_id'] ??  [];
         $dataInsert = [
-            'brand_id'       => $data['brand_id']??0,
+            'brand_id'       => $data['brand_id'] ?? 0,
+            'sub_category_id' => $data['sub_category_id'] ?? 0,
             'supplier_id'    => implode(',', $supplier_id ),
-            'price'          => $data['price']??0,
+            'price'          => $data['price'] ?? 0,
             'sku'            => $data['sku'],
-            'cost'           => $data['cost']??0,
-            'stock'          => $data['stock']??0,
+            'cost'           => $data['cost'] ?? 0,
+            'stock'          => $data['stock'] ?? 0,
             'weight_class'   => $data['weight_class'] ?? '',
             'length_class'   => $data['length_class'] ?? '',
             'weight'         => $data['weight'] ?? 0,
             'height'         => $data['height'] ?? 0,
             'length'         => $data['length'] ?? 0,
             'width'          => $data['width'] ?? 0,
-            'kind'           => $data['kind']??SC_PRODUCT_SINGLE,
+            'kind'           => $data['kind'] ?? SC_PRODUCT_SINGLE,
             'alias'          => $data['alias'],
             'property'       => $data['property'] ?? SC_PROPERTY_PHYSICAL,
-            'image'          => $data['image']??'',
-            'tax_id'         => $data['tax_id']??0,
+            'image'          => $data['image'] ?? '',
+            'tax_id'         => $data['tax_id'] ?? 0,
             'status'         => (!empty($data['status']) ? 1 : 0),
             'sort'           => (int) $data['sort'],
             'minimum'        => (int) $data['minimum'],
@@ -522,6 +525,7 @@ class AdminProductController extends RootAdminController
             'icon'                 => 'fa fa-edit',
             'languages'            => $this->languages,
             'product'              => $product,
+            'subCategories'        => (new AdminSubCategory)->getCategoriesAdmin(),
             'categories'           => (new AdminCategory)->getTreeCategoriesAdmin(),
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -641,17 +645,18 @@ class AdminProductController extends RootAdminController
         }
         //Edit
 
-        $category = $data['category'] ?? [];
-        $attribute = $data['attribute'] ?? [];
-        $productInGroup = $data['productInGroup'] ?? [];
-        $productBuild = $data['productBuild'] ?? [];
+        $category        = $data['category'] ?? [];
+        $attribute       = $data['attribute'] ?? [];
+        $productInGroup  = $data['productInGroup'] ?? [];
+        $productBuild    = $data['productBuild'] ?? [];
         $productBuildQty = $data['productBuildQty'] ?? [];
-        $subImages = $data['sub_image'] ?? [];
-        $supplier_id = $data['supplier_id']?? [];
+        $subImages       = $data['sub_image'] ?? [];
+        $supplier_id     = $data['supplier_id'] ??  [];
         $dataUpdate = [
             'image'        => $data['image'] ?? '',
             'tax_id'       => $data['tax_id'] ?? 0,
             'brand_id'     => $data['brand_id'] ?? 0,
+            'sub_category_id'     => $data['sub_category_id'] ?? 0,
             'supplier_id'  => implode(',', $supplier_id ),
             'price'        => $data['price'] ?? 0,
             'cost'         => $data['cost'] ?? 0,
@@ -815,72 +820,72 @@ class AdminProductController extends RootAdminController
      * Validate attribute product
      */
     public function validateAttribute(array $arrValidation) {
-        if (sc_config('product_brand')) {
-            if (sc_config('product_brand_required')) {
+        if (sc_config_admin('product_brand')) {
+            if (sc_config_admin('product_brand_required')) {
                 $arrValidation['brand_id'] = 'required|numeric';
             } else {
                 $arrValidation['brand_id'] = 'nullable|numeric';
             }
         }
 
-        if (sc_config('product_supplier')) {
-            if (sc_config('product_supplier_required')) {
+        if (sc_config_admin('product_supplier')) {
+            if (sc_config_admin('product_supplier_required')) {
                 $arrValidation['supplier_id'] = 'required';
             } else {
                 $arrValidation['supplier_id'] = 'nullable';
             }
         }
 
-        if (sc_config('product_price')) {
-            if (sc_config('product_price_required')) {
+        if (sc_config_admin('product_price')) {
+            if (sc_config_admin('product_price_required')) {
                 $arrValidation['price'] = 'required|numeric|min:0';
             } else {
                 $arrValidation['price'] = 'nullable|numeric|min:0';
             }
         }
 
-        if (sc_config('product_cost')) {
-            if (sc_config('product_cost_required')) {
+        if (sc_config_admin('product_cost')) {
+            if (sc_config_admin('product_cost_required')) {
                 $arrValidation['cost'] = 'required|numeric|min:0';
             } else {
                 $arrValidation['cost'] = 'nullable|numeric|min:0';
             }
         }
 
-        if (sc_config('product_promotion')) {
-            if (sc_config('product_promotion_required')) {
+        if (sc_config_admin('product_promotion')) {
+            if (sc_config_admin('product_promotion_required')) {
                 $arrValidation['price_promotion'] = 'required|numeric|min:0';
             } else {
                 $arrValidation['price_promotion'] = 'nullable|numeric|min:0';
             }
         }
 
-        if (sc_config('product_stock')) {
-            if (sc_config('product_stock_required')) {
+        if (sc_config_admin('product_stock')) {
+            if (sc_config_admin('product_stock_required')) {
                 $arrValidation['stock'] = 'required|numeric';
             } else {
                 $arrValidation['stock'] = 'nullable|numeric';
             }
         }
 
-        if (sc_config('product_property')) {
-            if (sc_config('product_property_required')) {
+        if (sc_config_admin('product_property')) {
+            if (sc_config_admin('product_property_required')) {
                 $arrValidation['property'] = 'required|string';
             } else {
                 $arrValidation['property'] = 'nullable|string';
             }
         }
 
-        if (sc_config('product_available')) {
-            if (sc_config('product_available_required')) {
+        if (sc_config_admin('product_available')) {
+            if (sc_config_admin('product_available_required')) {
                 $arrValidation['date_available'] = 'required|date';
             } else {
                 $arrValidation['date_available'] = 'nullable|date';
             }
         }
 
-        if (sc_config('product_weight')) {
-            if (sc_config('product_weight_required')) {
+        if (sc_config_admin('product_weight')) {
+            if (sc_config_admin('product_weight_required')) {
                 $arrValidation['weight'] = 'required|numeric';
                 $arrValidation['weight_class'] = 'required|string';
             } else {
@@ -889,8 +894,8 @@ class AdminProductController extends RootAdminController
             }
         }
 
-        if (sc_config('product_length')) {
-            if (sc_config('product_length_required')) {
+        if (sc_config_admin('product_length')) {
+            if (sc_config_admin('product_length_required')) {
                 $arrValidation['length_class'] = 'required|string';
                 $arrValidation['length'] = 'required|numeric|min:0';
                 $arrValidation['width'] = 'required|numeric|min:0';

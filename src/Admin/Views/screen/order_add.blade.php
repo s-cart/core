@@ -55,7 +55,7 @@
                                 </div>
                             </div>
 
-                        @if (sc_config('customer_lastname'))
+                        @if (sc_config_admin('customer_lastname'))
                             <div class="form-group row {{ $errors->has('last_name') ? ' text-red' : '' }}">
                                 <label for="last_name" class="col-sm-2 col-form-label">{{ trans('order.shipping_last_name') }}</label>
                                 <div class="col-sm-8">
@@ -74,7 +74,7 @@
                             </div>
                         @endif
 
-                        @if (sc_config('customer_name_kana'))
+                        @if (sc_config_admin('customer_name_kana'))
                             <div class="form-group row {{ $errors->has('first_name_kana') ? ' text-red' : '' }}">
                                 <label for="first_name_kana" class="col-sm-2 col-form-label">{{ trans('order.shipping_first_name_kana') }}</label>
                                 <div class="col-sm-8">
@@ -111,7 +111,7 @@
 
                         @endif
 
-                        @if (sc_config('customer_company'))
+                        @if (sc_config_admin('customer_company'))
                             <div class="form-group row {{ $errors->has('company') ? ' text-red' : '' }}">
                                 <label for="company" class="col-sm-2 col-form-label">{{ trans('order.company') }}</label>
                                 <div class="col-sm-8">
@@ -130,7 +130,7 @@
                             </div>
                         @endif
 
-                        @if (sc_config('customer_postcode'))
+                        @if (sc_config_admin('customer_postcode'))
                             <div class="form-group row {{ $errors->has('postcode') ? ' text-red' : '' }}">
                                 <label for="postcode" class="col-sm-2 col-form-label">{{ trans('order.postcode') }}</label>
                                 <div class="col-sm-8">
@@ -166,7 +166,7 @@
                                 </div>
                             </div>
 
-                        @if (sc_config('customer_address2'))    
+                        @if (sc_config_admin('customer_address2'))    
                             <div class="form-group row {{ $errors->has('address2') ? ' text-red' : '' }}">
                                 <label for="address2" class="col-sm-2 col-form-label">{{ trans('order.shipping_address2') }}</label>
                                 <div class="col-sm-8">
@@ -185,7 +185,7 @@
                             </div>
                         @endif
 
-                        @if (sc_config('customer_country'))
+                        @if (sc_config_admin('customer_country'))
                             <div class="form-group row {{ $errors->has('country') ? ' text-red' : '' }}">
                                 <label for="country" class="col-sm-2 asterisk col-form-label">{{ trans('order.country') }}</label>
                                 <div class="col-sm-8">
@@ -204,7 +204,7 @@
                             </div>
                         @endif
 
-                        @if (sc_config('customer_phone'))
+                        @if (sc_config_admin('customer_phone'))
                             <div class="form-group row  {{ $errors->has('phone') ? ' text-red' : '' }}">
                                 <label for="phone" class="col-sm-2 col-form-label">{{ trans('order.shipping_phone') }}</label>
                                 <div class="col-sm-8">

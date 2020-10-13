@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <div class="fields-group">
 
-                            @if (sc_config('customer_lastname'))
+                            @if (sc_config_admin('customer_lastname'))
                             <div class="form-group row {{ $errors->has('first_name') ? ' text-red' : '' }}">
                                 <label for="first_name"
                                     class="col-sm-2 col-form-label">{{ trans('account.first_name') }}</label>
@@ -80,7 +80,7 @@
                             @endif
     
     
-                            @if (sc_config('customer_phone'))
+                            @if (sc_config_admin('customer_phone'))
                             <div class="form-group row {{ $errors->has('phone') ? ' text-red' : '' }}">
                                 <label for="phone"
                                     class="col-sm-2 col-form-label">{{ trans('account.phone') }}</label>
@@ -101,7 +101,7 @@
                             </div>
                             @endif
     
-                            @if (sc_config('customer_postcode'))
+                            @if (sc_config_admin('customer_postcode'))
                             <div class="form-group row {{ $errors->has('postcode') ? ' text-red' : '' }}">
                                 <label for="postcode"
                                     class="col-sm-2 col-form-label">{{ trans('account.postcode') }}</label>
@@ -124,7 +124,7 @@
                             @endif
     
     
-                            @if (sc_config('customer_address2'))
+                            @if (sc_config_admin('customer_address2'))
                             <div class="form-group row {{ $errors->has('address1') ? ' text-red' : '' }}">
                                 <label for="address1"
                                     class="col-sm-2 col-form-label">{{ trans('account.address1') }}</label>
@@ -183,7 +183,7 @@
                             @endif
     
     
-                            @if (sc_config('customer_country'))
+                            @if (sc_config_admin('customer_country'))
                             @php
                             $country = old('country', $address['country'] ?? '');
                             @endphp

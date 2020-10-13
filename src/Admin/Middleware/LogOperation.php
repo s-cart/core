@@ -45,7 +45,7 @@ class LogOperation
      */
     protected function shouldLogOperation(Request $request)
     {
-        return sc_config('ADMIN_LOG')
+        return sc_config_global('ADMIN_LOG')
         && !$this->inExceptArray($request)
         && Admin::user();
     }
@@ -59,7 +59,7 @@ class LogOperation
      */
     protected function inExceptArray($request)
     {
-        foreach (explode(',', sc_config('ADMIN_LOG_EXP')) as $except) {
+        foreach (explode(',', sc_config_global('ADMIN_LOG_EXP')) as $except) {
             if ($except !== '/') {
                 $except = trim($except, '/');
             }

@@ -293,8 +293,8 @@ class AdminCustomerController extends RootAdminController
             'first_name' => 'required|string|max:100',
         ];
         
-        if (sc_config('customer_lastname')) {
-            if (sc_config('customer_lastname_required')) {
+        if (sc_config_admin('customer_lastname')) {
+            if (sc_config_admin('customer_lastname_required')) {
                 $validate['last_name'] = 'required|string|max:100';
             } else {
                 $validate['last_name'] = 'nullable|string|max:100';
@@ -302,8 +302,8 @@ class AdminCustomerController extends RootAdminController
             $dataUpdate['last_name'] = $data['last_name']??'';
         }
 
-        if (sc_config('customer_address1')) {
-            if (sc_config('customer_address1_required')) {
+        if (sc_config_admin('customer_address1')) {
+            if (sc_config_admin('customer_address1_required')) {
                 $validate['address1'] = 'required|string|max:100';
             } else {
                 $validate['address1'] = 'nullable|string|max:100';
@@ -311,8 +311,8 @@ class AdminCustomerController extends RootAdminController
             $dataUpdate['address1'] = $data['address1']??'';
         }
 
-        if (sc_config('customer_address2')) {
-            if (sc_config('customer_address1_required')) {
+        if (sc_config_admin('customer_address2')) {
+            if (sc_config_admin('customer_address1_required')) {
                 $validate['address2'] = 'required|string|max:100';
             } else {
                 $validate['address2'] = 'nullable|string|max:100';
@@ -320,8 +320,8 @@ class AdminCustomerController extends RootAdminController
             $dataUpdate['address2'] = $data['address2']??'';
         }
 
-        if (sc_config('customer_phone')) {
-            if (sc_config('customer_phone_required')) {
+        if (sc_config_admin('customer_phone')) {
+            if (sc_config_admin('customer_phone_required')) {
                 $validate['phone'] = 'required|regex:/^0[^0][0-9\-]{7,13}$/';
             } else {
                 $validate['phone'] = 'nullable|regex:/^0[^0][0-9\-]{7,13}$/';
@@ -329,9 +329,9 @@ class AdminCustomerController extends RootAdminController
             $dataUpdate['phone'] = $data['phone']??'';
         }
 
-        if (sc_config('customer_country')) {
+        if (sc_config_admin('customer_country')) {
             $arraycountry = (new ShopCountry)->pluck('code')->toArray();
-            if (sc_config('customer_country_required')) {
+            if (sc_config_admin('customer_country_required')) {
                 $validate['country'] = 'required|string|min:2|in:'. implode(',', $arraycountry);
             } else {
                 $validate['country'] = 'nullable|string|min:2|in:'. implode(',', $arraycountry);
@@ -340,8 +340,8 @@ class AdminCustomerController extends RootAdminController
             $dataUpdate['country'] = $data['country']??'';
         }
 
-        if (sc_config('customer_postcode')) {
-            if (sc_config('customer_postcode_required')) {
+        if (sc_config_admin('customer_postcode')) {
+            if (sc_config_admin('customer_postcode_required')) {
                 $validate['postcode'] = 'required|min:5';
             } else {
                 $validate['postcode'] = 'nullable|min:5';
@@ -349,8 +349,8 @@ class AdminCustomerController extends RootAdminController
             $dataUpdate['postcode'] = $data['postcode']??'';
         }
 
-        if (sc_config('customer_name_kana')) {
-            if (sc_config('customer_name_kana_required')) {
+        if (sc_config_admin('customer_name_kana')) {
+            if (sc_config_admin('customer_name_kana_required')) {
                 $validate['first_name_kana'] = 'required|string|max:100';
                 $validate['last_name_kana'] = 'required|string|max:100';
             } else {

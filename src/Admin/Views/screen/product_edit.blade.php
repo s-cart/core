@@ -25,7 +25,7 @@
             <form action="{{ route('admin_product.edit',['id'=>$product['id']]) }}" method="post" accept-charset="UTF-8"
                 class="form-horizontal" id="form-main" enctype="multipart/form-data">
 
-@if (sc_config('product_kind'))
+@if (sc_config_admin('product_kind'))
             <div class="d-flex d-flex justify-content-center mb-3"  id="start-add">
                 <div class="form-group">
                     <div style="width: 300px;text-align: center; z-index:999">
@@ -188,6 +188,7 @@
                         @endif
                         {{-- //Category --}}
 
+@if (sc_config_admin('product_sub_Category'))
                         {{-- Sub category --}}
                         <div class="form-group row {{ $errors->has('sub_category_id') ? ' text-red' : '' }}">
                             <label for="sub_category_id" class="col-sm-2 col-form-label">{{ trans('product.sub_category') }}</label>
@@ -198,7 +199,7 @@
                                     @foreach ($subCategories as $k => $v)
                                     <option value="{{ $k }}"
                                         {{ (old('sub_category_id') ==$k || (!old() && $product->sub_category_id ==$k) ) ? 'selected':'' }}>
-                                        {{ $v->name }}</option>
+                                        {{ $v }}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('sub_category_id'))
@@ -209,7 +210,7 @@
                             </div>
                         </div>
                         {{-- //Sub category --}}
-
+@endif
 
                         {{-- Images --}}
                         <div class="form-group row  {{ $errors->has('image') ? ' text-red' : '' }}">
@@ -321,7 +322,7 @@
                         </div>
                         {{-- //Alias --}}
 
-@if (sc_config('product_brand'))
+@if (sc_config_admin('product_brand'))
                         {{-- Brand --}}
                         <div class="form-group row {{ $errors->has('brand_id') ? ' text-red' : '' }}">
                             <label for="brand_id" class="col-sm-2 col-form-label">{{ trans('product.brand') }}</label>
@@ -345,7 +346,7 @@
                         {{-- //Brand --}}
 @endif
 
-@if (sc_config('product_supplier'))
+@if (sc_config_admin('product_supplier'))
                         {{-- Supplier --}}
                         <div class="form-group row {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
                             @php
@@ -379,7 +380,7 @@
                         {{-- //Supplier --}}
 @endif
 
-@if (sc_config('product_cost'))
+@if (sc_config_admin('product_cost'))
                         {{-- Cost --}}
                         @if ($product->kind == SC_PRODUCT_SINGLE)
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('cost') ? ' text-red' : '' }}">
@@ -404,7 +405,7 @@
                         {{-- //Cost --}}
 @endif
 
-@if (sc_config('product_price'))
+@if (sc_config_admin('product_price'))
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
                         {{-- Price --}}
                         <div class="form-group row  {{ $errors->has('price') ? ' text-red' : '' }}">
@@ -428,7 +429,7 @@
                         {{-- //Price --}}
 @endif
 
-@if (sc_config('product_tax'))
+@if (sc_config_admin('product_tax'))
                     @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
                         {{-- Tax --}}
                         <div class="form-group row {{ $errors->has('tax_id') ? ' text-red' : '' }}">
@@ -455,7 +456,7 @@
                     @endif
 @endif
 
-@if (sc_config('product_promotion'))
+@if (sc_config_admin('product_promotion'))
                         {{-- price promotion --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('price_promotion') ? ' text-red' : '' }}">
                             <label for="price"
@@ -528,7 +529,7 @@
                         @endif
 @endif
 
-@if (sc_config('product_stock'))
+@if (sc_config_admin('product_stock'))
                         {{-- Stock --}}
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
                         <div class="form-group row {{ $errors->has('stock') ? ' text-red' : '' }}">
@@ -553,7 +554,7 @@
                         {{-- //Stock --}}
 @endif
 
-@if (sc_config('product_weight'))
+@if (sc_config_admin('product_weight'))
                         {{-- weight --}}
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
 
@@ -602,7 +603,7 @@
 @endif
 
 
-@if (sc_config('product_length'))
+@if (sc_config_admin('product_length'))
                         {{-- length --}}
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
 
@@ -689,7 +690,7 @@
 @endif
 
 
-@if (sc_config('product_property'))
+@if (sc_config_admin('product_property'))
                         {{-- Virtual --}}
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('property') ? ' text-red' : '' }}">
@@ -715,7 +716,7 @@
                         {{-- //Virtual --}}
 @endif
 
-@if (sc_config('product_available'))
+@if (sc_config_admin('product_available'))
                         {{-- Date vailalable --}}
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
                         <div
@@ -802,7 +803,7 @@
                         </div>
                         {{-- //Status --}}
 
-@if (sc_config('product_kind'))
+@if (sc_config_admin('product_kind'))
                         @if ($product->kind == SC_PRODUCT_GROUP)
                         {{-- List product in groups --}}
                         <hr>
@@ -920,7 +921,7 @@
 @endif
 
 
-@if (sc_config('product_attribute'))
+@if (sc_config_admin('product_attribute'))
                     @if ($product->kind == SC_PRODUCT_SINGLE)
                         {{-- List product attributes --}}
                         <hr>

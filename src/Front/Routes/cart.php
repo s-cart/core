@@ -5,36 +5,36 @@ $prefixCartDefault = sc_config('PREFIX_CART_DEFAULT')??'cart';
 $prefixCartCheckout = sc_config('PREFIX_CART_CHECKOUT')??'checkout';
 $prefixOrderSuccess = sc_config('PREFIX_ORDER_SUCCESS')??'order-success';
 
-Route::get('/'.$prefixCartWishlist.$suffix, 'ShopCart@wishlist')
+Route::get('/'.$prefixCartWishlist.$suffix, 'ShopCartController@wishlist')
 ->name('wishlist');
-Route::get('/wishlist_remove/{id}', 'ShopCart@removeItemWishlist')
+Route::get('/wishlist_remove/{id}', 'ShopCartController@removeItemWishlist')
 ->name('wishlist.remove');
 
-Route::get('/'.$prefixCartCompare.$suffix, 'ShopCart@compare')
+Route::get('/'.$prefixCartCompare.$suffix, 'ShopCartController@compare')
 ->name('compare');
-Route::get('/compare_remove/{id}', 'ShopCart@removeItemCompare')
+Route::get('/compare_remove/{id}', 'ShopCartController@removeItemCompare')
 ->name('compare.remove');    
 
-Route::get('/'.$prefixCartDefault.$suffix, 'ShopCart@getCart')
+Route::get('/'.$prefixCartDefault.$suffix, 'ShopCartController@getCart')
 ->name('cart');
-Route::post('/cart_add', 'ShopCart@addToCart')
+Route::post('/cart_add', 'ShopCartController@addToCart')
 ->name('cart.add');
-Route::get('/cart_remove/{id}', 'ShopCart@removeItem')
+Route::get('/cart_remove/{id}', 'ShopCartController@removeItem')
 ->name('cart.remove');
-Route::get('/clear_Cart/{instance?}', 'ShopCart@clearCart')
+Route::get('/clear_Cart/{instance?}', 'ShopCartController@clearCart')
 ->name('cart.clear');
-Route::post('/add_to_cart_ajax', 'ShopCart@addToCartAjax')
+Route::post('/add_to_cart_ajax', 'ShopCartController@addToCartAjax')
 ->name('cart.add_ajax');
-Route::post('/update_to_cart', 'ShopCart@updateToCart')
+Route::post('/update_to_cart', 'ShopCartController@updateToCart')
 ->name('cart.update');
-Route::post('/checkout_prepare', 'ShopCart@processCart')
+Route::post('/checkout_prepare', 'ShopCartController@processCart')
 ->name('cart.process');
 
-Route::get('/'.$prefixCartCheckout.$suffix, 'ShopCart@getCheckout')
+Route::get('/'.$prefixCartCheckout.$suffix, 'ShopCartController@getCheckout')
 ->name('checkout');
 
-Route::post('/order_add', 'ShopCart@addOrder')
+Route::post('/order_add', 'ShopCartController@addOrder')
 ->name('order.add');
 
-Route::get('/'.$prefixOrderSuccess.$suffix, 'ShopCart@orderSuccess')
+Route::get('/'.$prefixOrderSuccess.$suffix, 'ShopCartController@orderSuccess')
 ->name('order.success');

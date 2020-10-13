@@ -13,7 +13,7 @@ use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ShopCart extends RootFrontController
+class ShopCartController extends RootFrontController
 {
     const ORDER_STATUS_NEW = 1;
     const PAYMENT_UNPAID = 1;

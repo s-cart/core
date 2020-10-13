@@ -2,7 +2,7 @@
 $prefixSupplier = sc_config('PREFIX_SUPPLIER')??'supplier';
 
 Route::group(['prefix' => $prefixSupplier], function ($router) use($suffix) {
-    $router->get('/', 'ShopFront@allSupplier')->name('supplier.all');
-    $router->get('/{alias}'.$suffix, 'ShopFront@supplierDetail')
+    $router->get('/', 'ShopSupplierController@allSuppliers')->name('supplier.all');
+    $router->get('/{alias}'.$suffix, 'ShopSupplierController@supplierDetail')
         ->name('supplier.detail');
 });

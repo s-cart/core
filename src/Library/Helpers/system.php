@@ -48,6 +48,22 @@ if (!function_exists('sc_config')) {
 }
 
 
+if (!function_exists('sc_config_admin')) {
+/**
+ * Get config value in adin with session store id
+ *
+ * @param   [type]$key  [$key description]
+ * @param   null        [ description]
+ *
+ * @return  [type]      [return description]
+ */
+    function sc_config_admin($key = null)
+    {
+        return sc_config($key, session('adminStoreId'));
+    }
+}
+
+
 if (!function_exists('sc_config_global')) {
     /**
      * Get value config from table sc_config for store_id 0

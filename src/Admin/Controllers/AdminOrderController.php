@@ -223,22 +223,22 @@ class AdminOrderController extends RootAdminController
             'payment_method'  => 'required',
             'shipping_method' => 'required',
         ];
-        if(sc_config('customer_lastname')) {
+        if(sc_config_admin('customer_lastname')) {
             $validate['last_name'] = 'required|max:100';
         }
-        if(sc_config('customer_address2')) {
+        if(sc_config_admin('customer_address2')) {
             $validate['address2'] = 'required|max:100';
         }
-        if(sc_config('customer_phone')) {
+        if(sc_config_admin('customer_phone')) {
             $validate['phone'] = 'required|regex:/^0[^0][0-9\-]{7,13}$/';
         }
-        if(sc_config('customer_country')) {
+        if(sc_config_admin('customer_country')) {
             $validate['country'] = 'required|min:2';
         }
-        if(sc_config('customer_postcode')) {
+        if(sc_config_admin('customer_postcode')) {
             $validate['postcode'] = 'required|min:5';
         }
-        if(sc_config('customer_company')) {
+        if(sc_config_admin('customer_company')) {
             $validate['company'] = 'required|min:3';
         }
         $messages = [

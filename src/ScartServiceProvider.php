@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use SCart\Core\Front\Models\ShopProduct;
 use SCart\Core\Front\Models\ShopCategory;
+use SCart\Core\Front\Models\ShopSubCategory;
 use SCart\Core\Front\Models\ShopBanner;
 use SCart\Core\Front\Models\ShopBrand;
 use SCart\Core\Front\Models\ShopSupplier;
@@ -154,6 +155,7 @@ class ScartServiceProvider extends ServiceProvider
         //variable model
         view()->share('modelProduct', (new ShopProduct));
         view()->share('modelCategory', (new ShopCategory));
+        view()->share('modelSubCategory', (new ShopSubCategory));
         view()->share('modelBanner', (new ShopBanner));
         view()->share('modelBrand', (new ShopBrand));
         view()->share('modelSupplier', (new ShopSupplier));

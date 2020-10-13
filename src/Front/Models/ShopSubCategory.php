@@ -15,9 +15,6 @@ class ShopSubCategory extends Model
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
 
-    protected  $sc_parent = ''; // category id parent
-    protected  $sc_top = 'all'; // 1 - category display top, 0 -non top, all - all
-
     public function products()
     {
         return $this->hasMany(ShopProduct::class, 'sub_category_id', 'id');

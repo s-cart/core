@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
 
-class ShopAccount extends RootFrontController
+class ShopAccountController extends RootFrontController
 {
     use AuthTrait;
 

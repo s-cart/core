@@ -15,7 +15,7 @@ Route::group(
 
 $suffix = sc_config('SUFFIX_URL')??'';
 Route::middleware(SC_FRONT_MIDDLEWARE)
-    ->namespace('SCart\Core\Front\Controllers')
+    ->namespace('App\Http\Controllers')
     ->group(function () use($suffix){
         foreach (glob(__DIR__ . '/Routes/*.php') as $filename) {
             require_once $filename;
@@ -26,15 +26,15 @@ Route::middleware(SC_FRONT_MIDDLEWARE)
 Route::group(
     [
         'middleware' => SC_FRONT_MIDDLEWARE,
-        'namespace' => 'SCart\Core\Front\Controllers',
+        'namespace' => 'App\Http\Controllers',
     ], 
     function () {
     
     $prefixShop = sc_config('PREFIX_SHOP')??'shop';
 
-    Route::get('/', 'ShopFront@index')->name('home');
-    Route::get('/'.$prefixShop, 'ShopFront@shop')->name('shop');
-    Route::get('index.html', 'ShopFront@index');
+    Route::get('/', 'ShopContentController@index')->name('home');
+    Route::get('/'.$prefixShop, 'ShopContentController@shop')->name('shop');
+    Route::get('index.html', 'ShopContentController@index');
     
     $suffix = sc_config('SUFFIX_URL')??'';
     
@@ -51,12 +51,12 @@ Route::group(
     })->name('currency');
     
     //Process click banner
-    Route::get('/banner/{id}', 'ShopFront@clickBanner')
+    Route::get('/banner/{id}', 'ShopContentController@clickBanner')
     ->name('banner.click');    
     
     //--Please keep 2 lines route (pages + pageNotFound) at the bottom
-    Route::get('/{alias}'.$suffix, 'ShopFront@pageDetail')->name('page.detail');
-    // Route::fallback('ShopFront@pageNotFound')->name('pageNotFound'); //Make sure before using this route. 
+    Route::get('/{alias}'.$suffix, 'ShopContentController@pageDetail')->name('page.detail');
+    // Route::fallback('ShopContentController@pageNotFound')->name('pageNotFound'); //Make sure before using this route. 
     // There will be disadvantages when detecting 404 errors for static files like images, scripts ..
     //--end keep
     

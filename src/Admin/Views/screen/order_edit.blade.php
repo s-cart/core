@@ -30,13 +30,13 @@
                       <td class="td-title">{{ trans('order.shipping_first_name') }}:</td><td><a href="#" class="updateInfoRequired" data-name="first_name" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.shipping_first_name') }}" >{!! $order->first_name !!}</a></td>
                     </tr>
 
-                    @if (sc_config('customer_lastname'))
+                    @if (sc_config_admin('customer_lastname'))
                     <tr>
                       <td class="td-title">{{ trans('order.shipping_last_name') }}:</td><td><a href="#" class="updateInfoRequired" data-name="last_name" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.shipping_last_name') }}" >{!! $order->last_name !!}</a></td>
                     </tr>
                     @endif
 
-                    @if (sc_config('customer_phone'))
+                    @if (sc_config_admin('customer_phone'))
                     <tr>
                       <td class="td-title">{{ trans('order.shipping_phone') }}:</td><td><a href="#" class="updateInfoRequired" data-name="phone" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.shipping_phone') }}" >{!! $order->phone !!}</a></td>
                     </tr>
@@ -46,13 +46,13 @@
                       <td class="td-title">{{ trans('order.email') }}:</td><td>{!! empty($order->email)?'N/A':$order->email!!}</td>
                     </tr>
 
-                    @if (sc_config('customer_company'))
+                    @if (sc_config_admin('customer_company'))
                     <tr>
                       <td class="td-title">{{ trans('order.company') }}:</td><td><a href="#" class="updateInfoRequired" data-name="company" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.company') }}" >{!! $order->company !!}</a></td>
                     </tr>
                     @endif
 
-                    @if (sc_config('customer_postcode'))
+                    @if (sc_config_admin('customer_postcode'))
                     <tr>
                       <td class="td-title">{{ trans('order.postcode') }}:</td><td><a href="#" class="updateInfoRequired" data-name="postcode" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.postcode') }}" >{!! $order->postcode !!}</a></td>
                     </tr>
@@ -62,13 +62,13 @@
                       <td class="td-title">{{ trans('order.shipping_address1') }}:</td><td><a href="#" class="updateInfoRequired" data-name="address1" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.address1') }}" >{!! $order->address1 !!}</a></td>
                     </tr>
 
-                    @if (sc_config('customer_address2'))
+                    @if (sc_config_admin('customer_address2'))
                     <tr>
                       <td class="td-title">{{ trans('order.shipping_address2') }}:</td><td><a href="#" class="updateInfoRequired" data-name="address2" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.address2') }}" >{!! $order->address2 !!}</a></td>
                     </tr>
                     @endif
 
-                    @if (sc_config('customer_country'))
+                    @if (sc_config_admin('customer_country'))
                     <tr>
                       <td class="td-title">{{ trans('order.country') }}:</td><td><a href="#" class="updateInfoRequired" data-name="country" data-type="select" data-source ="{{ json_encode($country) }}" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.country') }}" data-value="{!! $order->country !!}"></a></td>
                     </tr>

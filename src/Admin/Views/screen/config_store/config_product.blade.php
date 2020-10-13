@@ -13,7 +13,7 @@
            @if ($config['key'] == 'product_tax')
            <tr>
             <td>{{ trans('product.config_manager.tax') }}</td>
-            <td><a href="#" class="editable-required" data-name="product_tax" data-type="select" data-pk="" data-source="{{ json_encode($taxs) }}" data-url="{{ route('admin_config.update') }}" data-title="{{ trans('product.config_manager.tax') }}" data-value="{{ sc_config('product_tax', $storeId) }}" data-original-title="" title="" data-placement="left"></a></td>
+            <td><a href="#" class="editable-required" data-name="product_tax" data-type="select" data-pk="" data-source="{{ json_encode($taxs) }}" data-url="{{ route('admin_config.update') }}" data-title="{{ trans('product.config_manager.tax') }}" data-value="{{ sc_config_admin('product_tax', $storeId) }}" data-original-title="" title="" data-placement="left"></a></td>
           </tr>
            @else
            <tr>
