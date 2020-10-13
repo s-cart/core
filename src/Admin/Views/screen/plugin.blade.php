@@ -47,6 +47,12 @@
                   </tr>
                 @else
                 @foreach ($plugins as $codePlugin => $pluginClassName)
+
+                @php
+                //Begin try catch error
+                try{
+                @endphp
+
                 @php
                   $classConfig = $pluginClassName.'\\AppConfig';
                   $pluginClass = new $classConfig;
@@ -98,6 +104,14 @@
                       {!! $pluginAction !!}
                     </td>
                   </tr>
+
+                  @php
+                  //End try cacth
+                    }catch(\Exception $e) {
+                      echo json_encode($pluginClassName)." : ".$e->getMessage();
+                    }
+                  @endphp
+                  
                 @endforeach
                 @endif
               </tbody>
