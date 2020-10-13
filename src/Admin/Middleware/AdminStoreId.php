@@ -17,16 +17,14 @@ class AdminStoreId
     public function handle($request, Closure $next)
     {
         $adminStoreId = 1;
-        if (!Session::has('adminStoreId')) {
-            if(\Admin::user() && count($arrStoreId = \Admin::user()->listStoreId())) {
-                if(in_array(0, $arrStoreId)) {
-                    $adminStoreId = $arrStoreId[1];
-                } else {
-                    $adminStoreId = $arrStoreId[0];
-                }
+        if(\Admin::user() && count($arrStoreId = \Admin::user()->listStoreId())) {
+            if(in_array(0, $arrStoreId)) {
+                $adminStoreId = $arrStoreId[1];
+            } else {
+                $adminStoreId = $arrStoreId[0];
             }
         } else {
-            $adminStoreId = session('adminStoreId');
+            $adminStoreId = session('adminStoreId', $adminStoreId);
         }
         session(['adminStoreId' => $adminStoreId]);
         return $next($request);
