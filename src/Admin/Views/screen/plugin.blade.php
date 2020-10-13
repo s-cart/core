@@ -108,6 +108,7 @@
                   @php
                   //End try cacth
                     }catch(\Exception $e) {
+                      sc_report(json_encode($pluginClassName)." : ".$e->getMessage());
                       echo json_encode($pluginClassName)." : ".$e->getMessage();
                     }
                   @endphp
