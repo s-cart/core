@@ -160,7 +160,7 @@ class ScartServiceProvider extends ServiceProvider
         view()->share('modelNews', (new ShopNews));
         view()->share('modelPage', (new ShopPage));
         //
-        view()->share('templatePathAdmin', (config('admin.custom') ? 'admin.': 's-cart::'));
+        view()->share('templatePathAdmin', (config('admin.customize') ? 'admin.': 's-cart::'));
 
 
     }
