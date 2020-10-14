@@ -1,5 +1,4 @@
 <?php
-#S-Cart/Core/Front/Models/ShopStore.php
 namespace SCart\Core\Front\Models;
 
 use App\Admin\Models\AdminConfig;
