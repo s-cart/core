@@ -24,6 +24,7 @@ class ShopProduct extends Model
     protected  $sc_property = 'all'; // 0:physical, 1:download, 2:only view, 3: Service
     protected  $sc_promotion = 0; // 1: only produc promotion,
     protected  $sc_store = 0; // 1: only produc promotion,
+    protected  $sc_sub_category = 'all'; 
     protected  $sc_array_ID = []; // array ID product
     protected  $sc_category = []; // array category id
     protected  $sc_brand = []; // array brand id
@@ -402,6 +403,16 @@ class ShopProduct extends Model
     }
 
     /**
+     * Set sub category 
+     *
+     * @param   [int]  $category 
+     *
+     */
+    private function setSubCategory($category) {
+        $this->sc_sub_category = (int)$category;
+        return $this;
+    }
+    /**
      * Set array brand 
      *
      * @param   [array|int]  $brand 
@@ -502,6 +513,15 @@ class ShopProduct extends Model
      */
     public function getProductToCategory($arrCategory) {
         $this->setCategory($arrCategory);
+        return $this;
+    }
+
+    /**
+     * Get product to  Sub Catgory
+     * @param   [int]  $category 
+     */
+    public function getProductToSubCategory($category) {
+        $this->setSubCategory($category);
         return $this;
     }
 
@@ -648,6 +668,10 @@ class ShopProduct extends Model
 
         if (count($this->sc_brand)) {
             $query = $query->whereIn($this->getTable().'.brand_id', $this->sc_brand);
+        }
+
+        if ($this->sc_sub_category !== 'all') {
+            $query = $query->where($this->getTable().'.sub_category_id', $this->sc_sub_category);
         }
 
         if (count($this->sc_supplier)) {
