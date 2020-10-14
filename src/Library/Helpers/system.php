@@ -1,6 +1,6 @@
 <?php 
 use SCart\Core\Admin\Models\AdminConfig;
-use SCart\Core\Front\Models\ShopStore;
+use SCart\Core\Admin\Models\AdminStore;
 
 if (!function_exists('sc_admin_can_config')) {
     /**
@@ -133,7 +133,7 @@ if (!function_exists('sc_store')) {
         if (is_array($key)) {
             if (count($key) == 1) {
                 foreach ($key as $k => $v) {
-                    return ShopStore::where('id', $store)->update([$k => $v]);
+                    return AdminStore::where('id', $store)->update([$k => $v]);
                 }
             } else {
                 return false;
@@ -143,7 +143,7 @@ if (!function_exists('sc_store')) {
 
         $allStoreInfo = [];
         try {
-            $allStoreInfo = ShopStore::getListAll()[$store]->toArray() ?? [];
+            $allStoreInfo = AdminStore::getListAll()[$store]->toArray() ?? [];
         } catch(\Throwable $e) {
             //
         }
@@ -159,5 +159,23 @@ if (!function_exists('sc_store')) {
             return $allStoreInfo;
         }
         return $allStoreInfo[$key] ?? null;
+    }
+}
+
+if (!function_exists('sc_store_active')) {
+    function sc_store_active($field = null) {
+        switch ($field) {
+            case 'code':
+                return AdminStore::getCodeActive();
+                break;
+
+            case 'domain':
+                return AdminStore::getDomainActive();
+                break;
+
+            default:
+                return AdminStore::getListAllActive();
+                break;
+        }
     }
 }

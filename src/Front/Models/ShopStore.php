@@ -10,6 +10,9 @@ class ShopStore extends Model
     public $table = SC_DB_PREFIX.'admin_store';
     protected $guarded = [];
     protected static $getAll = null;
+    protected static $getDomainActive = null;
+    protected static $getCodeActive = null;
+    protected static $getListAllActive = null;
     protected $connection = SC_CONNECTION;
     
     public function descriptions()
@@ -80,15 +83,64 @@ class ShopStore extends Model
     }
 
     /**
+     * [getAll active description]
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getListAllActive()
+    {
+        if (self::$getListAllActive === null) {
+            self::$getListAllActive = self::with('descriptions')
+                ->where('active', 1)
+                ->get()
+                ->keyBy('id');
+        }
+        return self::$getListAllActive;
+    }
+
+    /**
      * Get all domain and id store active
      *
      * @return  [array]  [return description]
      */
     public static function getDomainActive()
     {
-        return self::where('status', 1)
+        if (self::$getDomainActive === null) {
+            self::$getDomainActive = self::where('active', 1)
             ->pluck('domain', 'id')
             ->all();
+        }
+        return self::$getDomainActive;
     }
+
+    /**
+     * Get all code and id store active
+     *
+     * @return  [array]  [return description]
+     */
+    public static function getCodeActive()
+    {
+        if (self::$getCodeActive === null) {
+            self::$getCodeActive = self::where('active', 1)
+            ->pluck('code', 'id')
+            ->all();
+        }
+        return self::$getCodeActive;
+    }
+
+        //Function get text description 
+        public function getText() {
+            return $this->descriptions()->where('lang', sc_get_locale())->first();
+        }
+        public function getTitle() {
+            return $this->getText()->title;
+        }
+        public function getDescription() {
+            return $this->getText()->description;
+        }
+        public function getKeyword() {
+            return $this->getText()->keyword;
+        }
+        //End  get text description
 
 }

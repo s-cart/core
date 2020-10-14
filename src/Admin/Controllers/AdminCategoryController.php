@@ -156,7 +156,7 @@ class AdminCategoryController extends RootAdminController
         $validator = Validator::make($data, [
                 'parent'                 => 'required',
                 'sort'                   => 'numeric|min:0',
-                'alias'                  => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
+                'alias'                  => 'required|unique|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
                 'descriptions.*.title'   => 'required|string|max:200',
                 'descriptions.*.keyword' => 'nullable|string|max:200',
                 'descriptions.*.description' => 'nullable|string|max:300',
@@ -244,7 +244,7 @@ class AdminCategoryController extends RootAdminController
         $validator = Validator::make($data, [
             'parent'                 => 'required',
             'sort'                   => 'numeric|min:0',
-            'alias'                  => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
+            'alias'                  => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100|unique:"'.AdminCategory::class.'",alias,' . $id . '',
             'descriptions.*.title'   => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:300',
