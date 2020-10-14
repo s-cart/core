@@ -3,6 +3,7 @@
 namespace SCart\Core\Admin\Middleware;
 
 use Closure;
+use Session;
 
 class AdminStoreId
 {
@@ -15,15 +16,16 @@ class AdminStoreId
      */
     public function handle($request, Closure $next)
     {
-        $adminStoreId = null;
         if(\Admin::user() && count($arrStoreId = \Admin::user()->listStoreId())) {
             if(in_array(0, $arrStoreId)) {
                 $adminStoreId = $arrStoreId[1];
             } else {
                 $adminStoreId = $arrStoreId[0];
             }
-        } 
-        session(['adminStoreId' => $adminStoreId]);
+            session(['adminStoreId' => $adminStoreId]);
+        } else {
+            session()->forget('adminStoreId');
+        }
         return $next($request);
     }
 }
