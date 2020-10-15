@@ -12,7 +12,14 @@ class AdminBannerController extends RootAdminController
     {
         parent::__construct();
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
-        $this->dataType  = ['0'      => 'Banner', '1'     => 'Background', '2' => 'Breadcrumbs', '3' => 'Other'];
+        $this->dataType  = [
+            'banner-website'     => 'Banner website',
+            'background-website' => 'Background', 
+            'banner-breadcrumbs' => 'Breadcrumbs', 
+            'banner-store'       => 'Banner store', 
+            'background-store'   => 'Background store', 
+            'other'              => 'Other'
+        ];
     }
 
     public function index()
