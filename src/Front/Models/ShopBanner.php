@@ -11,7 +11,7 @@ class ShopBanner extends Model
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
 
-    protected  $sc_type = 'all'; // all or interger,0 - banner, 1 - background, 2 - other
+    protected  $sc_type = 'all'; // all or interger
 
     /*
     Get thumb
@@ -72,11 +72,7 @@ class ShopBanner extends Model
      * Set type
      */
     private function setType($type) {
-        if ($type === 'all') {
-            $this->sc_type = $type;
-        } else {
-            $this->sc_type = (int)$type;
-        }
+        $this->sc_type = $type;
         return $this;
     }
 
@@ -84,7 +80,15 @@ class ShopBanner extends Model
      * Get banner
      */
     public function getBanner() {
-        $this->setType(0);
+        $this->setType('banner-website');
+        return $this;
+    }
+
+    /**
+     * Get banner
+     */
+    public function getBannerStore() {
+        $this->setType('banner-store');
         return $this;
     }
 
@@ -92,7 +96,16 @@ class ShopBanner extends Model
      * Get background
      */
     public function getBackground() {
-        $this->setType(1);
+        $this->setType('background-website');
+        $this->setLimit(1);
+        return $this;
+    }
+
+    /**
+     * Get background
+     */
+    public function getBackgroundStore() {
+        $this->setType('background-store');
         $this->setLimit(1);
         return $this;
     }
