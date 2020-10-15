@@ -160,34 +160,33 @@ class ShopProduct extends Model
      * '' if is all status
      * @return [type]     [description]
      */
-    public function getDetail($key = null, $type = null)
+    public function getDetail($key = null, $type = null, $storeCode = null)
     {
-        if (empty($key)) {
+        if (empty($key) || empty($storeCode)) {
             return null;
         }
         $tableDescription = (new ShopProductDescription)->getTable();
-        $product = $this
+        $tableStore = (new ShopStore)->getTable();
+
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
+
+        $product = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
+            ->join($tableStore, $tableStore . '.id', $this->getTable() . '.store_id')
+            ->where($tableStore . '.code', $storeCode)
             ->where($tableDescription . '.lang', sc_get_locale());
 
-        //Get product active for store
-        // If stor ID is 1, will get product of all stores
-        if(config('app.storeId') != 1) {
-            $product = $product->where('store_id', config('app.storeId'));
-        }
-        //End store
-
         if (empty($type)) {
-            $product = $product->where('id', (int)$key);  
+            $product = $product->where($this->getTable().'.id', (int)$key);  
         } elseif ($type == 'alias') {
-            $product = $product->where('alias', $key);
+            $product = $product->where($this->getTable().'.alias', $key);
         } elseif ($type == 'sku') {
-            $product = $product->where('sku', $key);
+            $product = $product->where($this->getTable().'.sku', $key);
         } else {
             return null;
         }
 
-        $product = $product->where('status', 1);
+        $product = $product->where($this->getTable().'.status', 1);
         
         $product = $product
             ->with('images')
@@ -236,7 +235,7 @@ class ShopProduct extends Model
      */
     public function getUrl()
     {
-        return route('product.detail', ['alias' => $this->alias]);
+        return route('product.detail', ['alias' => $this->alias, 'storeCode' => $this->store->code]);
     }
 
     /**

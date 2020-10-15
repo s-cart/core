@@ -58,9 +58,9 @@ class ShopProductController extends RootFrontController
      * @param  [string] $alias
      * @return [view]
      */
-    public function productDetail($alias)
+    public function productDetail($alias, $storeCode)
     {
-        $product = (new ShopProduct)->getDetail($alias, $type = 'alias' );
+        $product = (new ShopProduct)->getDetail($alias, $type = 'alias', $storeCode );
         if ($product && $product->status && (!sc_config('product_stock') || sc_config('product_display_out_of_stock') || $product->stock > 0)) {
             //Update last view
             $product->view += 1;
