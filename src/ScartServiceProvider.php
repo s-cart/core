@@ -14,13 +14,17 @@ use SCart\Core\Front\Models\ShopSupplier;
 use SCart\Core\Front\Models\ShopNews;
 use SCart\Core\Front\Models\ShopPage;
 use SCart\Core\Front\Models\ShopStore;
+use SCart\Core\Commands\Customize;
 use SCart\Core\Commands\Backup;
+use SCart\Core\Commands\Restore;
 use SCart\Core\Commands\MakePlugin;
 use SCart\Core\Commands\Infomation;
 class ScartServiceProvider extends ServiceProvider
 {
     protected $commands = [
+        Customize::class,
         Backup::class,
+        Restore::class,
         MakePlugin::class,
         Infomation::class,
     ];
@@ -260,7 +264,7 @@ class ScartServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
         $this->publishes([__DIR__.'/Admin/Views'  => resource_path('views/admin')], 'sc:view');
-        $this->publishes([__DIR__.'/Config' => config_path()], 'sc:config');
+        $this->publishes([__DIR__.'/Config/admin.php' => config_path('admin.php')], 'sc:config-admin');
         }
     }
 }

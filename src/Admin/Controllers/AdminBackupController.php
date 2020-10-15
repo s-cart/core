@@ -2,7 +2,7 @@
 namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use DB;
+use Illuminate\Support\Facades\Artisan;
 
 class AdminBackupController extends RootAdminController
 {
@@ -59,20 +59,19 @@ class AdminBackupController extends RootAdminController
             }
         } else if ($action === 'restore') {
             try {
-                DB::connection(SC_CONNECTION)->unprepared(file_get_contents($pathFull));
-                $return = ['error' => 0, 'msg' => trans('backup.restore_success')];
+                $return = Artisan::call("sc:restore --path=".$file);
             } catch (\Throwable $e) {
                 sc_report($e->getMessage());
-                $return = ['error' => 1, 'msg' => $e->getMessage()];
+                $return = json_encode(['error' => 1, 'msg' => $e->getMessage()]);
             }
         }
 
-        return json_encode($return);
+        return $return;
     }
 
     public function generateBackup()
     {
-        $return = shell_exec("php " . base_path() . "/artisan sc:backup");
+        $return = Artisan::call("sc:backup");
         return $return;
     }
 

@@ -13,14 +13,14 @@ class Backup extends Command
      *
      * @var string
      */
-    protected $signature = 'sc:backup';
+    protected $signature = 'sc:backup {--path=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Backup database';
+    protected $description = 'Backup database "sc:backup --path=abc.sql"';
     const LIMIT = 10;
 
     /**
@@ -30,11 +30,16 @@ class Backup extends Command
      */
     public function handle()
     {
+        $path = $this->option('path');
         if (count(glob(storage_path() . "/backups/*.sql")) >= self::LIMIT) {
             echo json_encode(['error' => 1, 'msg' => trans('backup.limit_backup')]);
             exit;
         }
-        $fileBackup = storage_path('backups/backup-' . date('Y-m-d-H-i-s') . '.sql');
+        if($path) {
+            $fileBackup = storage_path('backups/' . $path);
+        } else {
+            $fileBackup = storage_path('backups/backup-' . date('Y-m-d-H-i-s') . '.sql');
+        }
         try {
             $string = sprintf(
                 'mysqldump --user="%s" --password="%s" %s > %s',
@@ -44,13 +49,15 @@ class Backup extends Command
                 $fileBackup
             );
             Process::fromShellCommandline($string)->mustRun();
-            echo json_encode(['error' => 0, 'msg' => 'Backup success!']);
+            echo json_encode(['error' => 0, 'msg' => 'Backup success path '.$fileBackup]);
+            exit;
         } catch (Throwable $exception) {
             if (file_exists($fileBackup)) {
                 @unlink($fileBackup);
             }
             sc_report($exception->getMessage());
             echo json_encode(['error' => 1, 'msg' => $exception->getMessage()]);
+            exit;
         }
     }
 }
