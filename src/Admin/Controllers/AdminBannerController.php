@@ -14,7 +14,7 @@ class AdminBannerController extends RootAdminController
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
         $this->dataType  = [
             'banner-website'     => 'Banner website',
-            'background-website' => 'Background', 
+            'background-website' => 'Background website', 
             'banner-breadcrumbs' => 'Breadcrumbs', 
             'banner-store'       => 'Banner store', 
             'background-store'   => 'Background store', 
