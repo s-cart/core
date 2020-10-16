@@ -12,7 +12,7 @@ class ShopBanner extends Model
     protected $connection = SC_CONNECTION;
 
     protected  $sc_type = 'all'; // all or interger
-
+    protected  $sc_store = 0; // 1: only produc promotion,
     /*
     Get thumb
     */
@@ -129,13 +129,21 @@ class ShopBanner extends Model
     }
 
     /**
+     * Set store id
+     *
+     */
+    public function setStore($id) {
+        $this->sc_store = (int)$id;
+        return $this;
+    }
+
+    /**
      * build Query
      */
     public function buildQuery() {
         $query = $this;
 
-        $query = $query->where('status', 1)
-            ->where('store_id', config('app.storeId'));
+        $query = $query->where('status', 1);
 
         if ($this->sc_type !== 'all') {
             $query = $query->where('type', $this->sc_type);
@@ -148,6 +156,16 @@ class ShopBanner extends Model
                 }
             }
         }
+
+        //Get product active for store
+        if (!empty($this->sc_store)) {
+            //If sepcify store id
+            $query = $query->where($this->getTable().'.store_id', $this->sc_store);
+        } else {
+            // If stor ID is 1, will get product of all stores
+            $query = $query->where($this->getTable().'.store_id', config('app.storeId'));
+        }
+        //End store
 
         if ($this->sc_random) {
             $query = $query->inRandomOrder();

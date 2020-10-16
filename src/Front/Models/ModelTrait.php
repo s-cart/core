@@ -91,9 +91,9 @@ trait ModelTrait
 
 
      /**
-     * Get Query
+     * Get Sql
      */
-    public function getQuery() {
+    public function getSql() {
         $query = $this->buildQuery();
         if (!$this->sc_paginate) {
             if ($this->sc_limit !== 'all') {

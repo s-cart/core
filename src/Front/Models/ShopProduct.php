@@ -23,7 +23,7 @@ class ShopProduct extends Model
     protected  $sc_kind = 'all'; // 0:single, 1:bundle, 2:group
     protected  $sc_property = 'all'; // 0:physical, 1:download, 2:only view, 3: Service
     protected  $sc_promotion = 0; // 1: only produc promotion,
-    protected  $sc_store = 0; // 1: only produc promotion,
+    protected  $sc_store = 0; 
     protected  $sc_sub_category = 'all'; 
     protected  $sc_array_ID = []; // array ID product
     protected  $sc_category = []; // array category id
@@ -641,10 +641,10 @@ class ShopProduct extends Model
         }
 
         //Get product active for store
-        if(!empty($this->sc_store)) {
+        if (!empty($this->sc_store)) {
             //If sepcify store id
             $query = $query->where($this->getTable().'.store_id', $this->sc_store);
-        } else if(config('app.storeId') != 1) {
+        } elseif (config('app.storeId') != 1) {
             // If stor ID is 1, will get product of all stores
             $query = $query->where($this->getTable().'.store_id', config('app.storeId'));
         }
