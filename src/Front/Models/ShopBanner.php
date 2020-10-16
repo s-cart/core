@@ -80,7 +80,7 @@ class ShopBanner extends Model
      * Get banner
      */
     public function getBanner() {
-        $this->setType('banner-website');
+        $this->setType('banner');
         return $this;
     }
 
@@ -96,7 +96,7 @@ class ShopBanner extends Model
      * Get background
      */
     public function getBackground() {
-        $this->setType('background-website');
+        $this->setType('background');
         $this->setLimit(1);
         return $this;
     }
@@ -113,8 +113,17 @@ class ShopBanner extends Model
     /**
      * Get banner
      */
-    public function getBannerBreadcrumb() {
-        $this->setType(2);
+    public function getBreadcrumb() {
+        $this->setType('breadcrumb');
+        $this->setLimit(1);
+        return $this;
+    }
+
+    /**
+     * Get banner
+     */
+    public function getBreadcrumbStore() {
+        $this->setType('breadcrumb-store');
         $this->setLimit(1);
         return $this;
     }
