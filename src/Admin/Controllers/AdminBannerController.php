@@ -15,11 +15,15 @@ class AdminBannerController extends RootAdminController
         $this->dataType  = [
             'banner-website'     => 'Banner website',
             'background-website' => 'Background website', 
-            'banner-breadcrumbs' => 'Breadcrumbs', 
-            'banner-store'       => 'Banner store', 
-            'background-store'   => 'Background store', 
+            'breadcrumb-website' => 'Breadcrumb website', 
             'other'              => 'Other'
         ];
+        if(sc_config_global('MultiStorePro')) {
+            $this->dataType['banner-store'] = 'Banner store';
+            $this->dataType['background-store'] = 'Background store';
+            $this->dataType['breadcrumb-store'] = 'Breadcrumb store';
+        }
+        ksort($this->dataType);
     }
 
     public function index()
