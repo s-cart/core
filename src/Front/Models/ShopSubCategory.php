@@ -3,6 +3,7 @@ namespace SCart\Core\Front\Models;
 
 use SCart\Core\Front\Models\ShopSubCategoryDescription;
 use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopStore;
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ModelTrait;
 
@@ -24,6 +25,12 @@ class ShopSubCategory extends Model
     {
         return $this->hasMany(ShopSubCategoryDescription::class, 'sub_category_id', 'id');
     }
+
+    public function store()
+    {
+        return $this->belongsTo(ShopStore::class, 'store_id', 'id');
+    }
+
     //Function get text description 
     public function getText() {
         return $this->descriptions()->where('lang', sc_get_locale())->first();
@@ -67,7 +74,7 @@ class ShopSubCategory extends Model
 
     public function getUrl()
     {
-        return route('sub_category.detail', ['alias' => $this->alias]);
+        return route('sub_category.detail', ['alias' => $this->alias, 'storeCode' => $this->store->code]);
     }
 
     //Scort
@@ -78,29 +85,42 @@ class ShopSubCategory extends Model
     }
 
     /**
-     * Get categoy detail
+     * Get sub category detail
      *
-     * @param   [string]  $key     [$key description]
-     * @param   [string]  $type  [id, alias]
+     * @param   [type]$key        [$key description]
+     * @param   [type]$type       [$type description]
+     * @param   null  $storeCode  [$storeCode description]
      *
+     * @return  [type]            [return description]
      */
-    public function getDetail($key, $type = null)
+    public function getDetail($key, $type = null, $storeCode)
     {
         if(empty($key)) {
             return null;
         }
         $tableDescription = (new ShopSubCategoryDescription)->getTable();
-        $category = $this
-            ->leftJoin($tableDescription, $tableDescription . '.sub_category_id', $this->getTable() . '.id')
-            ->where( $this->getTable() . '.store_id', config('app.storeId'))
-            ->where($tableDescription . '.lang', sc_get_locale());
+        $tableStore = (new ShopStore)->getTable();
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
+
+        if ($storeCode) {
+            $category = $this->selectRaw($dataSelect)
+                ->leftJoin($tableDescription, $tableDescription . '.sub_category_id', $this->getTable() . '.id')
+                ->join($tableStore, $tableStore . '.id', $this->getTable() . '.store_id')
+                ->where($tableStore . '.code', $storeCode)
+                ->where($tableDescription . '.lang', sc_get_locale());
+        } else {
+            $category = $this
+                ->leftJoin($tableDescription, $tableDescription . '.sub_category_id', $this->getTable() . '.id')
+                ->where( $this->getTable() . '.store_id', config('app.storeId'))
+                ->where($tableDescription . '.lang', sc_get_locale());
+        }
 
         if ($type === null) {
-            $category = $category->where('id', (int) $key);
+            $category = $category->where($this->getTable() .'.id', (int) $key);
         } else {
             $category = $category->where($type, $key);
         }
-        $category = $category->where('status', 1);
+        $category = $category->where($this->getTable() .'.status', 1);
         return $category->first();
     }
     

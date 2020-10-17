@@ -92,6 +92,7 @@ class ShopCategoryController extends RootFrontController
                 ->setPaginate()
                 ->getData();
 
+            sc_check_view($this->templatePath . '.screen.shop_product_list');
             return view($this->templatePath . '.screen.shop_product_list',
                 array(
                     'title' => $category->title,
