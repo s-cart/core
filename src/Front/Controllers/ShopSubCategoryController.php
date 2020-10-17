@@ -42,17 +42,16 @@ class ShopSubCategoryController extends RootFrontController
             'id_asc' => ['id', 'asc'],
         ];
         if (array_key_exists($filter_sort, $filterArr)) {
-            $sortBy = $filterArr[$filter_sort][0];
+            $sortBy    = $filterArr[$filter_sort][0];
             $sortOrder = $filterArr[$filter_sort][1];
         }
 
         $category = (new ShopSubCategory)->getDetail($alias, $type = 'alias', $storeId);
-
         if ($category) {
             $products = (new ShopProduct)
-                ->getProductToCategory([$category->id])
-                ->setLimit(sc_config('product_list'))
-                ->setStore($category->store_id)
+                ->getProductToSubCategory($category->id)
+                ->setLimit(sc_config('product_list', $storeId))
+                ->setStore($storeId)
                 ->setSort([$sortBy, $sortOrder])
                 ->setPaginate()
                 ->getData();
@@ -60,12 +59,13 @@ class ShopSubCategoryController extends RootFrontController
             sc_check_view($this->templatePath . '.store.store_product_list');
             return view($this->templatePath . '.store.store_product_list',
                 array(
-                    'title' => $category->title,
+                    'title'       => $category->title,
                     'description' => $category->description,
-                    'keyword' => $category->keyword,
-                    'products' => $products,
+                    'keyword'     => $category->keyword,
+                    'products'    => $products,
+                    'storeId'     => $storeId,
                     'layout_page' => 'store_product_list',
-                    'og_image' => asset($category->getImage()),
+                    'og_image'    => asset($category->getImage()),
                     'filter_sort' => $filter_sort,
                 )
             );

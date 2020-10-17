@@ -16,6 +16,8 @@ class ShopSubCategory extends Model
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
 
+    protected  $sc_store = 0; 
+
     public function products()
     {
         return $this->hasMany(ShopProduct::class, 'sub_category_id', 'id');
@@ -75,6 +77,15 @@ class ShopSubCategory extends Model
     public function getUrl()
     {
         return route('sub_category.detail', ['alias' => $this->alias, 'storeCode' => $this->store->code]);
+    }
+
+    /**
+     * Set store id
+     *
+     */
+    public function setStore($id) {
+        $this->sc_store = (int)$id;
+        return $this;
     }
 
     //Scort
@@ -139,13 +150,23 @@ class ShopSubCategory extends Model
         if ($this->sc_keyword !='') {
             $query = $query->where(function ($sql) use($tableDescription){
                 $sql->where($tableDescription . '.title', 'like', '%' . $this->sc_keyword . '%')
-                ->orWhere($tableDescription . '.keyword', 'like', '%' . $this->sc_keyword . '%')
-                ->orWhere($tableDescription . '.description', 'like', '%' . $this->sc_keyword . '%');
+                    ->orWhere($tableDescription . '.keyword', 'like', '%' . $this->sc_keyword . '%')
+                    ->orWhere($tableDescription . '.description', 'like', '%' . $this->sc_keyword . '%');
             });
         }
 
         $query = $query->where('status', 1);
-        $query = $query->where('store_id', config('app.storeId'));
+
+        //Get product active for store
+        if (!empty($this->sc_store)) {
+            //If sepcify store id
+            $query = $query->where($this->getTable().'.store_id', $this->sc_store);
+        } elseif (config('app.storeId') != 1) {
+            // If stor ID is 1, will get product of all stores
+            $query = $query->where($this->getTable().'.store_id', config('app.storeId'));
+        }
+        //End store
+
 
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {

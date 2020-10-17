@@ -655,11 +655,12 @@ class ShopProduct extends Model
 
             foreach ($this->sc_supplier as  $supplier_id) {
                 $query = $query->where(function($query) use($supplier_id){
-                $query->where($this->getTable().'.supplier_id', $supplier_id)
-                      ->orWhere($this->getTable().'.supplier_id', 'like', $supplier_id.',%')
-                      ->orWhere($this->getTable().'.supplier_id', 'like', '%,'.$supplier_id.',%')
-                      ->orWhere($this->getTable().'.supplier_id', 'like', '%,'.$supplier_id);
-                });
+                    $query->where($this->getTable().'.supplier_id', $supplier_id)
+                        ->orWhere($this->getTable().'.supplier_id', 'like', $supplier_id.',%')
+                        ->orWhere($this->getTable().'.supplier_id', 'like', '%,'.$supplier_id.',%')
+                        ->orWhere($this->getTable().'.supplier_id', 'like', '%,'.$supplier_id);
+                    }
+                );
             }
         }
 
