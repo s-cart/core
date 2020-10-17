@@ -1,5 +1,4 @@
 <?php
-#S-Cart/Core/Front/Models/ShopProduct.php
 namespace SCart\Core\Front\Models;
 
 use SCart\Core\Front\Models\ShopAttributeGroup;
@@ -127,7 +126,8 @@ class ShopProduct extends Model
                 'price' => $price,
                 'priceFinal' => $priceFinal,
                 'kind' => $this->kind,
-            ])->render();
+            ]
+        )->render();
     }
 
     /**
@@ -162,7 +162,7 @@ class ShopProduct extends Model
      */
     public function getDetail($key = null, $type = null, $storeCode = null)
     {
-        if (empty($key) || empty($storeCode)) {
+        if (empty($key)) {
             return null;
         }
         $tableDescription = (new ShopProductDescription)->getTable();
@@ -170,11 +170,20 @@ class ShopProduct extends Model
 
         $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
 
-        $product = $this->selectRaw($dataSelect)
-            ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
-            ->join($tableStore, $tableStore . '.id', $this->getTable() . '.store_id')
-            ->where($tableStore . '.code', $storeCode)
-            ->where($tableDescription . '.lang', sc_get_locale());
+        if ($storeCode) {
+            $product = $this->selectRaw($dataSelect)
+                ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
+                ->join($tableStore, $tableStore . '.id', $this->getTable() . '.store_id')
+                ->where($tableStore . '.code', $storeCode)
+                ->where($tableDescription . '.lang', sc_get_locale());
+
+        } else {
+            $product = $this->selectRaw($dataSelect)
+                ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
+                ->where($this->getTable() . '.store_id', config('app.storeId'))
+                ->where($tableDescription . '.lang', sc_get_locale());
+
+        }
 
         if (empty($type)) {
             $product = $product->where($this->getTable().'.id', (int)$key);  
@@ -250,35 +259,13 @@ class ShopProduct extends Model
     public function renderAttributeDetails()
     {
         return  view('templates.'.sc_store('template').'.common.render_attribute', 
-        [
-            'details' => $this->attributes()->get()->groupBy('attribute_group_id'),
-            'groups' => ShopAttributeGroup::getListAll(),
-        ]);
+            [
+                'details' => $this->attributes()->get()->groupBy('attribute_group_id'),
+                'groups' => ShopAttributeGroup::getListAll(),
+            ]
+        );
     }
 
-    /**
-     * Render html option price in admin
-     *
-     * @param   [type]$currency  [$currency description]
-     * @param   nul   $rate      [$rate description]
-     * @param   null             [ description]
-     *
-     * @return  [type]           [return description]
-     */
-    public function renderAttributeDetailsAdmin($currency = nul, $rate = null)
-    {
-        $html = '';
-        $details = $this->attributes()->get()->groupBy('attribute_group_id');
-        $groups = ShopAttributeGroup::getListAll();
-        foreach ($details as $groupId => $detailsGroup) {
-            $html .= '<br><b><label>' . $groups[$groupId] . '</label></b>: ';
-            foreach ($detailsGroup as $k => $detail) {
-                $valueOption = $detail->name.'__'.$detail->add_price;
-                $html .= '<label class="radio-inline"><input ' . (($k == 0) ? "checked" : "") . ' type="radio" name="add_att[' . $this->id . '][' . $groupId . ']" value="' . $valueOption . '">' . sc_render_option_price($valueOption, $currency, $rate) . '</label> ';
-            }
-        }
-        return $html;
-    }
 
 //Scort
     public function scopeSort($query, $sortBy = null, $sortOrder = 'desc')
