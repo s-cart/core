@@ -153,44 +153,14 @@ class ShopProduct extends Model
     }
 
     /**
-     * [getDetail description]
-     *
-     * @param   [int]  $id  [$id description]
-     *
-     * @return  [type]       [return description]
-     */
-    public function getDetail($id)
-    {
-        if (empty($id)) {
-            return null;
-        }
-        $tableDescription = (new ShopProductDescription)->getTable();
-
-        $product = $this
-            ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
-            ->where($tableDescription . '.lang', sc_get_locale());
-
-        $product = $product->where($this->getTable().'.id', (int)$id);  
-
-        $product = $product->where($this->getTable().'.status', 1);
-        
-        $product = $product
-            ->with('images')
-            ->with('store')
-            ->with('promotionPrice');
-        $product = $product->first();
-        return $product;
-    }
-
-    /**
-     * Get product detail wiht store code
+     * Get product detail
      * @param  [string] $key [description]
      * @param  [string] $type id, sku, alias
      * @param  [''|int] $status 
      * '' if is all status
      * @return [type]     [description]
      */
-    public function getDetailWithStoreCode($key = null, $type = null, $storeCode = null)
+    public function getDetail($key = null, $type = null, $storeCode = null)
     {
         if (empty($key) || empty($storeCode)) {
             return null;
@@ -225,7 +195,6 @@ class ShopProduct extends Model
         $product = $product->first();
         return $product;
     }
-
 
     protected static function boot()
     {
