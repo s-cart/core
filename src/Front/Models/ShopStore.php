@@ -106,8 +106,8 @@ class ShopStore extends Model
     {
         if (self::$getDomainActive === null) {
             self::$getDomainActive = self::where('active', 1)
-            ->pluck('domain', 'id')
-            ->all();
+                ->pluck('domain', 'id')
+                ->all();
         }
         return self::$getDomainActive;
     }
@@ -121,8 +121,8 @@ class ShopStore extends Model
     {
         if (self::$getCodeActive === null) {
             self::$getCodeActive = self::where('active', 1)
-            ->pluck('code', 'id')
-            ->all();
+                ->pluck('code', 'id')
+                ->all();
         }
         return self::$getCodeActive;
     }

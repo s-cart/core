@@ -93,27 +93,17 @@ class ShopSubCategory extends Model
      *
      * @return  [type]            [return description]
      */
-    public function getDetail($key, $type = null, $storeCode)
+    public function getDetail($key, $type = null, $storeId = null)
     {
         if(empty($key)) {
             return null;
         }
+        $storeId = empty($storeId) ? config('app.storeId') : $storeId;
         $tableDescription = (new ShopSubCategoryDescription)->getTable();
-        $tableStore = (new ShopStore)->getTable();
-        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
-
-        if ($storeCode) {
-            $category = $this->selectRaw($dataSelect)
-                ->leftJoin($tableDescription, $tableDescription . '.sub_category_id', $this->getTable() . '.id')
-                ->join($tableStore, $tableStore . '.id', $this->getTable() . '.store_id')
-                ->where($tableStore . '.code', $storeCode)
-                ->where($tableDescription . '.lang', sc_get_locale());
-        } else {
-            $category = $this
-                ->leftJoin($tableDescription, $tableDescription . '.sub_category_id', $this->getTable() . '.id')
-                ->where( $this->getTable() . '.store_id', config('app.storeId'))
-                ->where($tableDescription . '.lang', sc_get_locale());
-        }
+        $category = $this
+            ->leftJoin($tableDescription, $tableDescription . '.sub_category_id', $this->getTable() . '.id')
+            ->where($this->getTable() . '.store_id', $storeId)
+            ->where($tableDescription . '.lang', sc_get_locale());
 
         if ($type === null) {
             $category = $category->where($this->getTable() .'.id', (int) $key);

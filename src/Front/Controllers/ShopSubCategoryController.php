@@ -20,6 +20,16 @@ class ShopSubCategoryController extends RootFrontController
      */
     public function categoryDetail($alias, $storeCode)
     {
+        if ($storeCode) {
+            if(!in_array($storeCode, sc_store_active('code'))) {
+                return null;
+            } else {
+                $storeId = array_search($storeCode, sc_store_active('code'));
+            }
+        } else {
+            $storeId = config('app.storeId');
+        }
+
         $sortBy = 'sort';
         $sortOrder = 'asc';
         $filter_sort = request('filter_sort') ?? '';
@@ -36,7 +46,7 @@ class ShopSubCategoryController extends RootFrontController
             $sortOrder = $filterArr[$filter_sort][1];
         }
 
-        $category = (new ShopSubCategory)->getDetail($alias, $type = 'alias', $storeCode);
+        $category = (new ShopSubCategory)->getDetail($alias, $type = 'alias', $storeId);
 
         if ($category) {
             $products = (new ShopProduct)

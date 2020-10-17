@@ -160,30 +160,21 @@ class ShopProduct extends Model
      * '' if is all status
      * @return [type]     [description]
      */
-    public function getDetail($key = null, $type = null, $storeCode = null)
+    public function getDetail($key = null, $type = null, $storeId = null)
     {
         if (empty($key)) {
             return null;
         }
         $tableDescription = (new ShopProductDescription)->getTable();
-        $tableStore = (new ShopStore)->getTable();
 
         $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
 
-        if ($storeCode) {
-            $product = $this->selectRaw($dataSelect)
-                ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
-                ->join($tableStore, $tableStore . '.id', $this->getTable() . '.store_id')
-                ->where($tableStore . '.code', $storeCode)
-                ->where($tableDescription . '.lang', sc_get_locale());
+        $storeId = empty($storeId) ? config('app.storeId') : $storeId;
 
-        } else {
-            $product = $this->selectRaw($dataSelect)
-                ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
-                ->where($this->getTable() . '.store_id', config('app.storeId'))
-                ->where($tableDescription . '.lang', sc_get_locale());
-
-        }
+        $product = $this->selectRaw($dataSelect)
+            ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
+            ->where($this->getTable() . '.store_id', $storeId)
+            ->where($tableDescription . '.lang', sc_get_locale());
 
         if (empty($type)) {
             $product = $product->where($this->getTable().'.id', (int)$key);  

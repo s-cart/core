@@ -1,9 +1,9 @@
 <?php
-$prefixCartWishlist = sc_config('PREFIX_CART_WISHLIST')??'wishlist';
-$prefixCartCompare = sc_config('PREFIX_CART_COMPARE')??'compare';
-$prefixCartDefault = sc_config('PREFIX_CART_DEFAULT')??'cart';
-$prefixCartCheckout = sc_config('PREFIX_CART_CHECKOUT')??'checkout';
-$prefixOrderSuccess = sc_config('PREFIX_ORDER_SUCCESS')??'order-success';
+$prefixCartWishlist = sc_config('PREFIX_CART_WISHLIST') ?? 'wishlist';
+$prefixCartCompare = sc_config('PREFIX_CART_COMPARE') ?? 'compare';
+$prefixCartDefault = sc_config('PREFIX_CART_DEFAULT') ?? 'cart';
+$prefixCartCheckout = sc_config('PREFIX_CART_CHECKOUT') ?? 'checkout';
+$prefixOrderSuccess = sc_config('PREFIX_ORDER_SUCCESS') ?? 'order-success';
 
 Route::get('/'.$prefixCartWishlist.$suffix, 'ShopCartController@wishlist')
 ->name('wishlist');

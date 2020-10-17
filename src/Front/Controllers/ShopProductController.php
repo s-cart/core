@@ -54,14 +54,27 @@ class ShopProductController extends RootFrontController
     }
 
     /**
-     * product detail
-     * @param  [string] $alias
-     * @return [view]
+     * Get product detail
+     *
+     * @param   [string]  $alias      [$alias description]
+     * @param   [string]  $storeCode  [$storeCode description]
+     *
+     * @return  [type]              [return description]
      */
     public function productDetail($alias, $storeCode)
     {
-        $product = (new ShopProduct)->getDetail($alias, $type = 'alias', $storeCode );
-        if ($product && $product->status && (!sc_config('product_stock') || sc_config('product_display_out_of_stock') || $product->stock > 0)) {
+        if ($storeCode) {
+            if(!in_array($storeCode, sc_store_active('code'))) {
+                return null;
+            } else {
+                $storeId = array_search($storeCode, sc_store_active('code'));
+            }
+        } else {
+            $storeId = config('app.storeId');
+        }
+
+        $product = (new ShopProduct)->getDetail($alias, $type = 'alias', $storeId);
+        if ($product && $product->status && (!sc_config('product_stock', $storeId) || sc_config('product_display_out_of_stock', $storeId) || $product->stock > 0)) {
             //Update last view
             $product->view += 1;
             $product->date_lastview = date('Y-m-d H:i:s');
@@ -80,7 +93,7 @@ class ShopProductController extends RootFrontController
 
             $productRelation = (new ShopProduct)
                 ->getProductToCategory($arrCategoriId)
-                ->setLimit(sc_config('product_relation'))
+                ->setLimit(sc_config('product_relation', $storeId))
                 ->setRandom()
                 ->getData();
 
@@ -100,40 +113,5 @@ class ShopProductController extends RootFrontController
         } else {
             return $this->itemNotFound();
         }
-    }
-
-    /**
-     * Get product info
-     * @return [json]
-     */
-    public function productInfo()
-    {
-        $id = request('id') ?? 0;
-        $product = (new ShopProduct)->getDetail($id);
-        $product['showPrice'] = $product->showPriceDetail();
-        $product['brand_name'] = $product->brand->name;
-        //Hidden cost
-        unset($product['cost']);
-        $product['image'] = asset($product->getImage());
-        $subImages = [];
-        if ($product->images->count()) {
-            foreach ($product->images as $key => $image) {
-                $subImages[] = asset($image->getImage());
-            }
-        }
-
-        $availability = '';
-        if (sc_config('show_date_available') && $product->date_available >= date('Y-m-d H:i:s')) {
-            $availability .= $product->date_available;
-        } elseif ($product->stock <= 0 && sc_config('product_buy_out_of_stock') == 0) {
-            $availability .= trans('product.out_stock');
-        } else {
-            $availability .= trans('product.in_stock');
-        }
-        $product['availability'] = $availability;
-        $product['url'] = $product->getUrl();
-        $product['subImages'] = $subImages;
-        return response()->json($product);
-
     }
 }

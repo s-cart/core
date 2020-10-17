@@ -57,6 +57,13 @@ class CartItem implements Arrayable, Jsonable
     public $options;
 
     /**
+     * The id store.
+     *
+     * @var int
+     */
+    public $storeId;
+
+    /**
      * The FQN of the associated model.
      *
      * @var string|null
@@ -71,25 +78,27 @@ class CartItem implements Arrayable, Jsonable
      * @param float      $price
      * @param array      $options
      * @param int        $tax
+     * @param int        $storeId
      */
-    public function __construct($id, $name, $price, array $options = [], $tax = 0)
+    public function __construct($id, $name, $price, array $options = [], $tax = 0, $storeId)
     {
-        if(empty($id)) {
+        if (empty($id)) {
             throw new \InvalidArgumentException('Please supply a valid identifier.');
         }
-        if(empty($name)) {
+        if (empty($name)) {
             throw new \InvalidArgumentException('Please supply a valid name.');
         }
-        if(strlen($price) < 0 || ! is_numeric($price)) {
+        if (strlen($price) < 0 || ! is_numeric($price)) {
             throw new \InvalidArgumentException('Please supply a valid price.');
         }
 
-        $this->id       = $id;
-        $this->name     = $name;
-        $this->price    = floatval($price);
-        $this->tax    = floatval($tax);
-        $this->options  = new CartItemOptions($options);
-        $this->rowId = $this->generateRowId($id, $options);
+        $this->id      = $id;
+        $this->name    = $name;
+        $this->price   = floatval($price);
+        $this->tax     = floatval($tax);
+        $this->options = new CartItemOptions($options);
+        $this->rowId   = $this->generateRowId($id, $options);
+        $this->storeId = $storeId;
     }
 
     /**
@@ -142,7 +151,7 @@ class CartItem implements Arrayable, Jsonable
      */
     public function setQuantity($qty)
     {
-        if(empty($qty) || ! is_numeric($qty))
+        if (empty($qty) || ! is_numeric($qty))
             throw new \InvalidArgumentException('Please supply a valid quantity.');
 
         $this->qty = $qty;
@@ -157,14 +166,15 @@ class CartItem implements Arrayable, Jsonable
      */
     public function updateFromArray(array $attributes)
     {
-        $this->id       = array_get($attributes, 'id', $this->id);
-        $this->qty      = array_get($attributes, 'qty', $this->qty);
-        $this->name     = array_get($attributes, 'name', $this->name);
-        $this->price    = array_get($attributes, 'price', $this->price);
-        $this->tax      = array_get($attributes, 'tax', $this->tax);
-        $this->options  = new CartItemOptions(array_get($attributes, 'options', $this->options));
+        $this->id      = array_get($attributes, 'id', $this->id);
+        $this->qty     = array_get($attributes, 'qty', $this->qty);
+        $this->name    = array_get($attributes, 'name', $this->name);
+        $this->price   = array_get($attributes, 'price', $this->price);
+        $this->tax     = array_get($attributes, 'tax', $this->tax);
+        $this->storeId = array_get($attributes, 'storeId', $this->storeId);
+        $this->options = new CartItemOptions(array_get($attributes, 'options', $this->options));
 
-        $this->rowId = $this->generateRowId($this->id, $this->options->all());
+        $this->rowId   = $this->generateRowId($this->id, $this->options->all());
     }
 
     /**
@@ -189,19 +199,19 @@ class CartItem implements Arrayable, Jsonable
      */
     public function __get($attribute)
     {
-        if(property_exists($this, $attribute)) {
+        if (property_exists($this, $attribute)) {
             return $this->{$attribute};
         }
-        if($attribute === 'subtotal') {
+        if ($attribute === 'subtotal') {
             return $this->qty * $this->price;
         }
         
-        if($attribute === 'total') {
+        if ($attribute === 'total') {
             return sc_tax_price($this->qty * $this->price, $this->tax);
         }
         
 
-        if($attribute === 'model' && isset($this->associatedModel)) {
+        if ($attribute === 'model' && isset($this->associatedModel)) {
             return with(new $this->associatedModel)->find($this->id);
         }
 
@@ -219,7 +229,7 @@ class CartItem implements Arrayable, Jsonable
     {
         $options = array_get($attributes, 'options', []);
 
-        return new self($attributes['id'], $attributes['name'], $attributes['price'], $options, $attributes['tax']);
+        return new self($attributes['id'], $attributes['name'], $attributes['price'], $options, $attributes['tax'], $attributes['storeId']);
     }
 
     /**
@@ -231,9 +241,9 @@ class CartItem implements Arrayable, Jsonable
      * @param array      $options
      * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
-    public static function fromAttributes($id, $name, $price, array $options = [], $tax = 0)
+    public static function fromAttributes($id, $name, $price, array $options = [], $tax = 0, $storeId)
     {
-        return new self($id, $name, $price, $options, $tax);
+        return new self($id, $name, $price, $options, $tax, $storeId);
     }
 
     /**
@@ -264,6 +274,7 @@ class CartItem implements Arrayable, Jsonable
             'qty'      => $this->qty,
             'price'    => $this->price,
             'tax'      => $this->tax,
+            'storeId'  => $this->storeId,
             'options'  => $this->options->toArray(),
             'subtotal' => $this->subtotal,
             'total'    => $this->total

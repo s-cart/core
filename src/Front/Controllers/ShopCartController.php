@@ -162,12 +162,12 @@ class ShopCartController extends RootFrontController
     public function processCart()
     {
         if (Cart::instance('default')->count() == 0) {
-            return redirect()->route('cart');
+            return redirect(sc_route('cart'));
         }
 
         //Not allow for guest
         if (!sc_config('shop_allow_guest') && !auth()->user()) {
-            return redirect()->route('login');
+            return redirect(sc_route('login'));
         }
 
         $data = request()->all();
@@ -325,11 +325,11 @@ class ShopCartController extends RootFrontController
             }
         }
         if (count($arrErrorQty)) {
-            return redirect()->route('cart')->with('arrErrorQty', $arrErrorQty);
+            return redirect(sc_route('cart'))->with('arrErrorQty', $arrErrorQty);
         }
         //End check minimum
 
-        return redirect()->route('checkout');
+        return redirect(sc_route('checkout'));
     }
 
     /**
@@ -343,7 +343,7 @@ class ShopCartController extends RootFrontController
             !session('paymentMethod') ||
             !session('shippingAddress')
         ) {
-            return redirect()->route('cart');
+            return redirect(sc_route('cart'));
         }
 
         $paymentMethod = session('paymentMethod');
@@ -387,8 +387,10 @@ class ShopCartController extends RootFrontController
      */
     public function addToCart()
     {
-        $data = request()->all();
+        $data      = request()->all();
         $productId = $data['product_id'];
+        $qty       = $data['qty'] ?? 0;
+        $storeId   = $data['storeId'] ?? config('app.storeId');
 
         //Process attribute price
         $formAttr = $data['form_attr'] ?? null;
@@ -400,28 +402,39 @@ class ShopCartController extends RootFrontController
         }
         //End addtribute price
 
-        $qty = $data['qty'];
-        $product = (new ShopProduct)->getDetail($productId);
+        $product = (new ShopProduct)->getDetail($productId, null, $storeId);
+
+        if (!$product) {
+            return response()->json(
+                [
+                    'error' => 1,
+                    'msg' => trans('front.notfound'),
+                ]
+            );
+        }
+        
+
         if ($product->allowSale()) {
             $options = array();
             $options = $formAttr;
             $dataCart = array(
-                'id'    => $productId,
-                'name'  => $product->name,
-                'qty'   => $qty,
-                'price' => $product->getFinalPrice() + $optionPrice,
-                'tax'   => $product->getTaxValue(),
+                'id'      => $productId,
+                'name'    => $product->name,
+                'qty'     => $qty,
+                'price'   => $product->getFinalPrice() + $optionPrice,
+                'tax'     => $product->getTaxValue(),
+                'storeId' => $storeId,
             );
             if ($options) {
                 $dataCart['options'] = $options;
             }
             Cart::instance('default')->add($dataCart);
-            return redirect()->route('cart')
+            return redirect(sc_route('cart'))
                 ->with(
                     ['success' => trans('cart.success', ['instance' => 'cart'])]
                 );
         } else {
-            return redirect()->route('cart')
+            return redirect(sc_route('cart'))
                 ->with(
                     ['error' => trans('cart.dont_allow_sale')]
                 );
@@ -441,12 +454,12 @@ class ShopCartController extends RootFrontController
         }
         //Not allow for guest
         if (!sc_config('shop_allow_guest') && !$user) {
-            return redirect()->route('login');
+            return redirect(sc_route('login'));
         } //
 
         $data = request()->all();
         if (!$data) {
-            return redirect()->route('cart');
+            return redirect(sc_route('cart'));
         } else {
             $dataTotal       = session('dataTotal') ?? [];
             $shippingAddress = session('shippingAddress') ?? [];
@@ -535,7 +548,7 @@ class ShopCartController extends RootFrontController
         $createOrder = (new ShopOrder)->createOrder($dataOrder, $dataTotal, $arrCartDetail);
 
         if ($createOrder['error'] == 1) {
-            return redirect()->route('cart')->with(['error' => $createOrder['msg']]);
+            return redirect(sc_route('cart'))->with(['error' => $createOrder['msg']]);
         }
         //Set session orderID
         session(['orderID' => $createOrder['orderID']]);
@@ -571,12 +584,23 @@ class ShopCartController extends RootFrontController
     public function addToCartAjax(Request $request)
     {
         if (!$request->ajax()) {
-            return redirect()->route('cart');
+            return redirect(sc_route('cart'));
         }
-        $instance = request('instance') ?? 'default';
-        $cart = Cart::instance($instance);
-        $id = request('id');
-        $product = (new ShopProduct)->getDetail($id);
+        $data     = request()->all();
+        $instance = $data['instance'] ?? 'default';
+        $id       = $data['id'] ?? '';
+        $storeId  = $data['storeId'] ?? config('app.storeId');
+        $cart     = Cart::instance($instance);
+
+        $product = (new ShopProduct)->getDetail($id, null, $storeId);
+        if (!$product) {
+            return response()->json(
+                [
+                    'error' => 1,
+                    'msg' => trans('front.notfound'),
+                ]
+            );
+        }
         switch ($instance) {
             case 'default':
                 if ($product->attributes->count() || $product->kind == SC_PRODUCT_GROUP) {
@@ -595,11 +619,12 @@ class ShopCartController extends RootFrontController
                 if ($product->allowSale()) {
                     $cart->add(
                         array(
-                            'id'    => $id,
-                            'name'  => $product->name,
-                            'qty'   => 1,
-                            'price' => $product->getFinalPrice(),
-                            'tax'   => $product->getTaxValue(),
+                            'id'      => $id,
+                            'name'    => $product->name,
+                            'qty'     => 1,
+                            'price'   => $product->getFinalPrice(),
+                            'tax'     => $product->getTaxValue(),
+                            'storeId' => $storeId,
                         )
                     );
                 } else {
@@ -619,14 +644,15 @@ class ShopCartController extends RootFrontController
                     try {
                         $cart->add(
                             array(
-                                'id'    => $id,
-                                'name'  => $product->name,
-                                'qty'   => 1,
-                                'price' => $product->getFinalPrice(),
-                                'tax'   => $product->getTaxValue(),
+                                'id'      => $id,
+                                'name'    => $product->name,
+                                'qty'     => 1,
+                                'price'   => $product->getFinalPrice(),
+                                'tax'     => $product->getTaxValue(),
+                                'storeId' => $storeId,
                             )
                         );
-                    } catch (\Exception $e) {
+                    } catch (\Throwable $e) {
                         return response()->json(
                             [
                                 'error' => 1,
@@ -647,7 +673,6 @@ class ShopCartController extends RootFrontController
         }
 
         $carts = Cart::getListCart($instance);
-        
         return response()->json(
             [
                 'error'      => 0,
@@ -668,13 +693,25 @@ class ShopCartController extends RootFrontController
     public function updateToCart(Request $request)
     {
         if (!$request->ajax()) {
-            return redirect()->route('cart');
+            return redirect(sc_route('cart'));
         }
-        $id = request('id');
-        $rowId = request('rowId');
-        $product = (new ShopProduct)->getDetail($id);
-        $new_qty = request('new_qty');
-        if ($product->stock < $new_qty && !sc_config('product_buy_out_of_stock')) {
+        $data    = request()->all();
+        $id      = $data['id'] ?? '';
+        $rowId   = $data['rowId'] ?? '';
+        $new_qty = $data['new_qty'] ?? 0;
+        $storeId = $data['storeId'] ?? config('app.storeId');
+        $product = (new ShopProduct)->getDetail($id, null, $storeId);
+        
+        if (!$product) {
+            return response()->json(
+                [
+                    'error' => 1,
+                    'msg' => trans('front.notfound'),
+                ]
+            );
+        }
+        
+        if ($product->stock < $new_qty && !sc_config('product_buy_out_of_stock', $product->store_id)) {
             return response()->json(
                 [
                     'error' => 1,
@@ -741,7 +778,7 @@ class ShopCartController extends RootFrontController
     public function clearCart($instance = 'default')
     {
         Cart::instance($instance)->destroy();
-        return redirect()->route('cart');
+        return redirect(sc_route('cart'));
     }
 
     /**
@@ -751,13 +788,13 @@ class ShopCartController extends RootFrontController
     public function removeItem($id = null)
     {
         if ($id === null) {
-            return redirect()->route('cart');
+            return redirect(sc_route('cart'));
         }
 
         if (array_key_exists($id, Cart::instance('default')->content()->toArray())) {
             Cart::instance('default')->remove($id);
         }
-        return redirect()->route('cart');
+        return redirect(sc_route('cart'));
     }
 
     /**

@@ -4,6 +4,7 @@ namespace SCart\Core\Admin\Models;
 
 use SCart\Core\Front\Models\ShopProduct;
 use SCart\Core\Front\Models\ShopProductDescription;
+use SCart\Core\Front\Models\ShopAttributeGroup;
 
 class AdminProduct extends ShopProduct
 {

@@ -84,9 +84,9 @@ class Cart
      * @param array     $options
      * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
-    public function add($id, $name = null, $qty = null, $price = null, array $options = [], $tax = 0)
+    public function add($id, $name = null, $qty = null, $price = null, array $options = [], $tax = 0, $storeId = null)
     {
-        $cartItem = $this->createCartItem($id, $name, $qty, $price, $options, $tax);
+        $cartItem = $this->createCartItem($id, $name, $qty, $price, $options, $tax, $storeId);
 
         $content = $this->getContent();
 
@@ -390,13 +390,13 @@ class Cart
      * @param array     $options
      * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
-    private function createCartItem($id, $name, $qty, $price, array $options, $tax = 0)
+    private function createCartItem($id, $name, $qty, $price, array $options, $tax = 0, $storeId)
     {
         if (is_array($id)) {
             $cartItem = CartItem::fromArray($id);
             $cartItem->setQuantity($id['qty']);
         } else {
-            $cartItem = CartItem::fromAttributes($id, $name, $price, $options, $tax);
+            $cartItem = CartItem::fromAttributes($id, $name, $price, $options, $tax, $storeId);
             $cartItem->setQuantity($qty);
         }
 
@@ -457,16 +457,18 @@ class Cart
         if ($cart->count()) {
             foreach ($cart->content() as $key => $item) {
                 $product = \SCart\Core\Front\Models\ShopProduct::find($item->id);
-                $arrCart['items'][] = [
-                    'id' => $item->id,
-                    'qty' => $item->qty,
-                    'image' => asset($product->getThumb()),
-                    'price' => $product->getFinalPrice(),
-                    'showPrice' => $product->showPrice(),
-                    'url' => $product->getUrl(),
-                    'rowId' => $item->rowId,
-                    'name' => $product->name,
-                ];
+                if ($product) {
+                    $arrCart['items'][] = [
+                        'id'        => $item->id,
+                        'rowId'     => $item->rowId,
+                        'name'      => $product->getName(),
+                        'qty'       => $item->qty,
+                        'image'     => asset($product->getThumb()),
+                        'price'     => $product->getFinalPrice(),
+                        'showPrice' => $product->showPrice(),
+                        'url'       => $product->getUrl(),
+                    ];
+                }
             }
         }
 
