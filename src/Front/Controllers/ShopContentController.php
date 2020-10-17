@@ -23,14 +23,14 @@ class ShopContentController extends RootFrontController
      */
     public function index()
     {
-        sc_check_view($this->templatePath . '.screen.shop_home');
+        sc_check_view($this->templatePath . '.screen.home');
         return view(
-            $this->templatePath . '.screen.shop_home',
+            $this->templatePath . '.screen.home',
             array(
                 'title' => sc_store('title'),
                 'keyword' => sc_store('keyword'),
                 'description' => sc_store('description'),
-                'layout_page' => 'shop_home',
+                'layout_page' => 'home',
             )
         );
     }
@@ -63,15 +63,15 @@ class ShopContentController extends RootFrontController
             ->setSort([$sortBy, $sortOrder])
             ->getData();
 
-        sc_check_view($this->templatePath . '.screen.shop_product_list');
+        sc_check_view($this->templatePath . '.screen.shop_home');
         return view(
-            $this->templatePath . '.screen.shop_product_list',
+            $this->templatePath . '.screen.shop_home',
             array(
                 'title' => trans('front.shop'),
                 'keyword' => sc_store('keyword'),
                 'description' => sc_store('description'),
                 'products' => $products,
-                'layout_page' => 'product_list',
+                'layout_page' => 'shop_home',
                 'filter_sort' => $filter_sort,
             )
         );
