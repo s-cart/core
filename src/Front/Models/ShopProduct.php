@@ -624,12 +624,11 @@ class ShopProduct extends Model
         }
         $storeId = $this->sc_store ? $this->sc_store : config('app.storeId');
         //Get product active for store
-        if (!$storeId || config('app.storeId') != 1) {
+        if (!empty($this->sc_store) || config('app.storeId') != 1) {
             //If sepcify store id
             $query = $query->where($this->getTable().'.store_id', $storeId);
         }
         //End store
-
         if (count($this->sc_array_ID)) {
             $query = $query->whereIn($this->getTable().'.id', $this->sc_array_ID);
         }
