@@ -198,7 +198,7 @@
                         </div>
                         {{-- //select category --}}
 
-@if (sc_config_admin('product_sub_category'))
+@if (sc_config_global('MultiStorePro'))
                         {{-- select sub_category --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('sub_category_id') ? ' text-red' : '' }}">
                             <label for="sub_category_id"

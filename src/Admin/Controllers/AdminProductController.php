@@ -834,12 +834,8 @@ class AdminProductController extends RootAdminController
             }
         }
 
-        if (sc_config_admin('product_sub_category')) {
-            if (sc_config_admin('product_sub_category_required')) {
-                $arrValidation['sub_category_id'] = 'required';
-            } else {
-                $arrValidation['sub_category_id'] = 'nullable';
-            }
+        if (sc_config_global('MultiStorePro')) {
+            $arrValidation['sub_category_id'] = 'required';
         }
 
         if (sc_config_admin('product_price')) {
