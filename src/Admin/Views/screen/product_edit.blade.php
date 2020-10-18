@@ -190,21 +190,21 @@
 
 @if (sc_config_global('MultiStorePro'))
                         {{-- Sub category --}}
-                        <div class="form-group row {{ $errors->has('sub_category_id') ? ' text-red' : '' }}">
-                            <label for="sub_category_id" class="col-sm-2 col-form-label">{{ trans('product.sub_category') }}</label>
+                        <div class="form-group row {{ $errors->has('category_store_id') ? ' text-red' : '' }}">
+                            <label for="category_store_id" class="col-sm-2 col-form-label">{{ trans('product.category_store') }}</label>
                             <div class="col-sm-8">
-                                <select class="form-control sub_category_id select2" style="width: 100%;"
-                                    name="sub_category_id">
+                                <select class="form-control category_store_id select2" style="width: 100%;"
+                                    name="category_store_id">
                                     <option value=""></option>
-                                    @foreach ($subCategories as $k => $v)
+                                    @foreach ($categoriesStore as $k => $v)
                                     <option value="{{ $k }}"
-                                        {{ (old('sub_category_id') ==$k || (!old() && $product->sub_category_id ==$k) ) ? 'selected':'' }}>
+                                        {{ (old('category_store_id') ==$k || (!old() && $product->category_store_id ==$k) ) ? 'selected':'' }}>
                                         {{ $v }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('sub_category_id'))
+                                @if ($errors->has('category_store_id'))
                                 <span class="form-text">
-                                    <i class="fa fa-info-circle"></i> {{ $errors->first('sub_category_id') }}
+                                    <i class="fa fa-info-circle"></i> {{ $errors->first('category_store_id') }}
                                 </span>
                                 @endif
                             </div>

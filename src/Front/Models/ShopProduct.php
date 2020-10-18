@@ -23,7 +23,7 @@ class ShopProduct extends Model
     protected  $sc_property = 'all'; // 0:physical, 1:download, 2:only view, 3: Service
     protected  $sc_promotion = 0; // 1: only produc promotion,
     protected  $sc_store = 0; 
-    protected  $sc_sub_category = 'all'; 
+    protected  $sc_category_store = 'all'; 
     protected  $sc_array_ID = []; // array ID product
     protected  $sc_category = []; // array category id
     protected  $sc_brand = []; // array brand id
@@ -392,8 +392,8 @@ class ShopProduct extends Model
      * @param   [int]  $category 
      *
      */
-    private function setSubCategory($category) {
-        $this->sc_sub_category = (int)$category;
+    private function setCategoryStore($category) {
+        $this->sc_category_store = (int)$category;
         return $this;
     }
     /**
@@ -501,11 +501,11 @@ class ShopProduct extends Model
     }
 
     /**
-     * Get product to  Sub Catgory
+     * Get product to  Catgory store
      * @param   [int]  $category 
      */
-    public function getProductToSubCategory($category) {
-        $this->setSubCategory($category);
+    public function getProductToCategoryStore($category) {
+        $this->setCategoryStore($category);
         return $this;
     }
 
@@ -623,12 +623,15 @@ class ShopProduct extends Model
             $query = $query->whereIn($tablePTC . '.category_id', $this->sc_category);
         }
         $storeId = $this->sc_store ? $this->sc_store : config('app.storeId');
-        //Get product active for store
+
+        //Process store
         if (!empty($this->sc_store) || config('app.storeId') != 1) {
-            //If sepcify store id
+            //If the store is specified or the default is not the primary store
+            //Only get products from eligible stores
             $query = $query->where($this->getTable().'.store_id', $storeId);
         }
         //End store
+
         if (count($this->sc_array_ID)) {
             $query = $query->whereIn($this->getTable().'.id', $this->sc_array_ID);
         }
@@ -648,8 +651,8 @@ class ShopProduct extends Model
             $query = $query->whereIn($this->getTable().'.brand_id', $this->sc_brand);
         }
 
-        if ($this->sc_sub_category !== 'all') {
-            $query = $query->where($this->getTable().'.sub_category_id', $this->sc_sub_category);
+        if ($this->sc_category_store !== 'all') {
+            $query = $query->where($this->getTable().'.category_store_id', $this->sc_category_store);
         }
 
         if (count($this->sc_supplier)) {

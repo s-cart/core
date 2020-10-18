@@ -15,7 +15,6 @@ use SCart\Core\Front\Models\ShopProductImage;
 use SCart\Core\Front\Models\ShopSupplier;
 use SCart\Core\Admin\Models\AdminProduct;
 use SCart\Core\Admin\Models\AdminCategory;
-use SCart\Core\Admin\Models\AdminSubCategory;
 use Illuminate\Support\Facades\Validator;
 
 class AdminProductController extends RootAdminController
@@ -225,13 +224,19 @@ class AdminProductController extends RootAdminController
         $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
         //end add more images
 
+        if (function_exists('sc_get_categories_store')) {
+            $categoriesStore = sc_get_categories_store();
+        } else {
+            $categoriesStore = [];
+        }
+
         $data = [
             'title'                => trans('product.admin.add_new_title'),
             'subTitle'             => '',
             'title_description'    => trans('product.admin.add_new_des'),
             'icon'                 => 'fa fa-plus',
             'languages'            => $this->languages,
-            'subCategories'        => (new AdminSubCategory)->getCategoriesAdmin(),
+            'categoriesStore'      => $categoriesStore,
             'categories'           => (new AdminCategory)->getTreeCategoriesAdmin(),
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -367,7 +372,7 @@ class AdminProductController extends RootAdminController
         $dataInsert = [
             'brand_id'       => $data['brand_id'] ?? 0,
             'supplier_id'    => $data['supplier_id'] ?? 0,
-            'sub_category_id' => $data['sub_category_id'] ?? 0,
+            'category_store_id' => $data['category_store_id'] ?? 0,
             'price'          => $data['price'] ?? 0,
             'sku'            => $data['sku'],
             'cost'           => $data['cost'] ?? 0,
@@ -517,6 +522,12 @@ class AdminProductController extends RootAdminController
         $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
+        if (function_exists('sc_get_categories_store')) {
+            $categoriesStore = sc_get_categories_store();
+        } else {
+            $categoriesStore = [];
+        }
+
         $data = [
             'title'                => trans('product.admin.edit'),
             'subTitle'             => '',
@@ -524,7 +535,7 @@ class AdminProductController extends RootAdminController
             'icon'                 => 'fa fa-edit',
             'languages'            => $this->languages,
             'product'              => $product,
-            'subCategories'        => (new AdminSubCategory)->getCategoriesAdmin(),
+            'categoriesStore'      => $categoriesStore,
             'categories'           => (new AdminCategory)->getTreeCategoriesAdmin(),
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -655,7 +666,7 @@ class AdminProductController extends RootAdminController
             'tax_id'       => $data['tax_id'] ?? 0,
             'brand_id'     => $data['brand_id'] ?? 0,
             'supplier_id'  => $data['supplier_id'] ?? 0,
-            'sub_category_id'     => $data['sub_category_id'] ?? 0,
+            'category_store_id'     => $data['category_store_id'] ?? 0,
             'price'        => $data['price'] ?? 0,
             'cost'         => $data['cost'] ?? 0,
             'stock'        => $data['stock'] ?? 0,
@@ -835,7 +846,7 @@ class AdminProductController extends RootAdminController
         }
 
         if (sc_config_global('MultiStorePro')) {
-            $arrValidation['sub_category_id'] = 'required';
+            $arrValidation['category_store_id'] = 'required';
         }
 
         if (sc_config_admin('product_price')) {

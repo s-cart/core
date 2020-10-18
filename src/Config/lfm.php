@@ -72,8 +72,8 @@ return [
             ],
         ],
 
-        'sub_category' => [
-            'folder_name' => 'sub_category',
+        'category_store' => [
+            'folder_name' => 'category_store',
             'startup_view' => 'grid',
             'max_size' => 30000, // size in KB
             'valid_mime' => [

@@ -13,13 +13,13 @@ class AdminBannerController extends RootAdminController
         parent::__construct();
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
         $this->dataType  = [
-            'banner'     => 'Banner website',
-            'background' => 'Background website', 
-            'breadcrumb' => 'Breadcrumb website', 
-            'other'              => 'Other'
+            'banner'       => 'Banner website',
+            'background'   => 'Background website', 
+            'breadcrumb'   => 'Breadcrumb website', 
+            'banner-store' => 'Banner store', 
+            'other'        => 'Other'
         ];
         if(sc_config_global('MultiStorePro')) {
-            $this->dataType['banner-store'] = 'Banner store';
             $this->dataType['background-store'] = 'Background store';
             $this->dataType['breadcrumb-store'] = 'Breadcrumb store';
         }
