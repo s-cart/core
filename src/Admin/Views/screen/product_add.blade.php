@@ -355,31 +355,20 @@
                         {{-- //select brand --}}   
 @endif
 
-
 @if (sc_config_admin('product_supplier'))
                         {{-- select supplier --}}
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
-                            @php
-                            $listSupplier = [];
-                            if(is_array(old('supplier_id'))){
-                            foreach(old('supplier_id') as $value){
-                            $listSupplier[] = (int)$value;
-                            }
-                            }
-                            @endphp
                             <label for="supplier_id"
                                 class="col-sm-2 col-form-label">{{ trans('product.supplier') }}</label>
                             <div class="col-sm-8">
-                            <select class="form-control input-sm supplier_id select2" multiple="multiple"
-                                data-placeholder="{{ trans('product.admin.select_supplier') }}" style="width: 100%;"
-                                name="supplier_id[]">
-                                <option value=""></option>
-                                @foreach ($suppliers as $k => $v)
-                                <option value="{{ $k }}"
-                                    {{ (count($listSupplier) && in_array($v->id, $listSupplier))?'selected':'' }}>{{ $v->name }}
-                                </option>
-                                @endforeach
-                            </select>
+                                <select class="form-control input-sm supplier_id select2" style="width: 100%;"
+                                    name="supplier_id">
+                                    <option value=""></option>
+                                    @foreach ($suppliers as $k => $v)
+                                    <option value="{{ $k }}" {{ (old('supplier_id') ==$k) ? 'selected':'' }}>{{ $v->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
                                 @if ($errors->has('supplier_id'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('supplier_id') }}
@@ -387,8 +376,9 @@
                                 @endif
                             </div>
                         </div>
-                        {{--// select supplier --}}
+                        {{-- //select brand --}}   
 @endif
+
 
 @if (sc_config_admin('product_cost'))
                         {{-- cost --}}

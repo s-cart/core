@@ -83,7 +83,7 @@ class ShopSupplier extends Model
         }
 
         $data = $data->where('status', 1)
-        ->where('store_id', config('app.storeId'));
+            ->where('store_id', config('app.storeId'));
 
         return $data->first();
     }
@@ -98,21 +98,6 @@ class ShopSupplier extends Model
         return new ShopSupplier;
     }
 
-    /**
-     * Get banner
-     */
-    public function getBanner() {
-        $this->setType(0);
-        return $this;
-    }
-
-    /**
-     * Get background
-     */
-    public function getBackground() {
-        $this->setType(1);
-        return $this;
-    }
 
     /**
      * build Query

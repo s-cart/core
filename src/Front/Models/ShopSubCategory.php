@@ -76,7 +76,7 @@ class ShopSubCategory extends Model
 
     public function getUrl()
     {
-        return route('sub_category.detail', ['alias' => $this->alias, 'storeCode' => $this->store->code]);
+        return route('sub_category.detail', ['alias' => $this->alias, 'storeId' => $this->store_id]);
     }
 
     /**

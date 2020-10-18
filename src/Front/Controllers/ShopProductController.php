@@ -61,18 +61,8 @@ class ShopProductController extends RootFrontController
      *
      * @return  [type]              [return description]
      */
-    public function productDetail($alias, $storeCode)
+    public function productDetail($alias, $storeId)
     {
-        if ($storeCode) {
-            if(!in_array($storeCode, sc_store_active('code'))) {
-                return null;
-            } else {
-                $storeId = array_search($storeCode, sc_store_active('code'));
-            }
-        } else {
-            $storeId = config('app.storeId');
-        }
-
         $product = (new ShopProduct)->getDetail($alias, $type = 'alias', $storeId);
         if ($product && $product->status && (!sc_config('product_stock', $storeId) || sc_config('product_display_out_of_stock', $storeId) || $product->stock > 0)) {
             //Update last view

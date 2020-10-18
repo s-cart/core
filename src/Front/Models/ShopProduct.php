@@ -34,6 +34,12 @@ class ShopProduct extends Model
     {
         return $this->belongsTo(ShopBrand::class, 'brand_id', 'id');
     }
+
+    public function supplier()
+    {
+        return $this->belongsTo(ShopSupplier::class, 'supplier_id', 'id');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(ShopCategory::class, ShopProductCategory::class, 'product_id', 'category_id');
@@ -115,7 +121,7 @@ class ShopProduct extends Model
      */
     public function showPrice()
     {
-        if (!sc_config('product_price')) {
+        if (!sc_config('product_price', $this->store_id)) {
             return false;
         }
         $price = $this->price;
@@ -138,18 +144,19 @@ class ShopProduct extends Model
      */
     public function showPriceDetail()
     {
-        if (!sc_config('product_price')) {
+        if (!sc_config('product_price', $this->store_id)) {
             return false;
         }
         $price = $this->price;
         $priceFinal = $this->getFinalPrice();
         // Process with tax
         return  view('templates.'.sc_store('template').'.common.show_price_detail', 
-        [
-            'price' => $price,
-            'priceFinal' => $priceFinal,
-            'kind' => $this->kind,
-        ])->render();
+            [
+                'price' => $price,
+                'priceFinal' => $priceFinal,
+                'kind' => $this->kind,
+            ]
+        )->render();
     }
 
     /**
@@ -235,7 +242,7 @@ class ShopProduct extends Model
      */
     public function getUrl()
     {
-        return route('product.detail', ['alias' => $this->alias, 'storeCode' => $this->store->code]);
+        return route('product.detail', ['alias' => $this->alias, 'storeId' => $this->store_id]);
     }
 
     /**
@@ -274,12 +281,12 @@ class ShopProduct extends Model
     */
     public function allowSale()
     {
-        if (!sc_config('product_price')) {
+        if (!sc_config('product_price', $this->store_id)) {
             return false;
         }
         if ($this->status &&
-            (sc_config('product_preorder') == 1 || $this->date_available === null || date('Y-m-d H:i:s') >= $this->date_available) 
-            && (sc_config('product_buy_out_of_stock') || $this->stock || empty(sc_config('product_stock'))) 
+            (sc_config('product_preorder', $this->store_id) == 1 || $this->date_available === null || date('Y-m-d H:i:s') >= $this->date_available) 
+            && (sc_config('product_buy_out_of_stock', $this->store_id) || $this->stock || empty(sc_config('product_stock', $this->store_id))) 
             && $this->kind != SC_PRODUCT_GROUP
         ) {
             return true;
@@ -595,11 +602,9 @@ class ShopProduct extends Model
         //Promotion
         if ($this->sc_promotion == 1) {
             $tablePromotion = (new ShopProductPromotion)->getTable();
-            $query = $query->join(
-                $tablePromotion,
-                $this->getTable() . '.id', '=', $tablePromotion . '.product_id')
+            $query = $query->join($tablePromotion,$this->getTable() . '.id', '=', $tablePromotion . '.product_id')
                 ->where($tablePromotion . '.status_promotion', 1)
-                ->where(function ($query) use($tablePromotion){
+                ->where(function ($query) use ($tablePromotion) {
                     $query->where($tablePromotion . '.date_end', '>=', date("Y-m-d"))
                         ->orWhereNull($tablePromotion . '.date_end');
                 })
@@ -617,14 +622,11 @@ class ShopProduct extends Model
             $query = $query->leftJoin($tablePTC, $tablePTC . '.product_id', $this->getTable() . '.id');
             $query = $query->whereIn($tablePTC . '.category_id', $this->sc_category);
         }
-
+        $storeId = $this->sc_store ? $this->sc_store : config('app.storeId');
         //Get product active for store
-        if (!empty($this->sc_store)) {
+        if (!$storeId || config('app.storeId') != 1) {
             //If sepcify store id
-            $query = $query->where($this->getTable().'.store_id', $this->sc_store);
-        } elseif (config('app.storeId') != 1) {
-            // If stor ID is 1, will get product of all stores
-            $query = $query->where($this->getTable().'.store_id', config('app.storeId'));
+            $query = $query->where($this->getTable().'.store_id', $storeId);
         }
         //End store
 
@@ -652,16 +654,7 @@ class ShopProduct extends Model
         }
 
         if (count($this->sc_supplier)) {
-
-            foreach ($this->sc_supplier as  $supplier_id) {
-                $query = $query->where(function($query) use($supplier_id){
-                    $query->where($this->getTable().'.supplier_id', $supplier_id)
-                        ->orWhere($this->getTable().'.supplier_id', 'like', $supplier_id.',%')
-                        ->orWhere($this->getTable().'.supplier_id', 'like', '%,'.$supplier_id.',%')
-                        ->orWhere($this->getTable().'.supplier_id', 'like', '%,'.$supplier_id);
-                    }
-                );
-            }
+            $query = $query->whereIn($this->getTable().'.supplier_id', $this->sc_supplier);
         }
 
         if (count($this->sc_moreWhere)) {
@@ -686,7 +679,7 @@ class ShopProduct extends Model
         }
 
         //Hidden product out of stock
-        if (empty(sc_config('product_display_out_of_stock')) && !empty(sc_config('product_stock'))) {
+        if (empty(sc_config('product_display_out_of_stock', $storeId)) && !empty(sc_config('product_stock', $storeId))) {
             $query = $query->where($this->getTable().'.stock', '>', 0);
         }
 

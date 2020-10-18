@@ -347,27 +347,17 @@
 @endif
 
 @if (sc_config_admin('product_supplier'))
-                        {{-- Supplier --}}
+                        {{-- Brand --}}
                         <div class="form-group row {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
-                            @php
-                            $listSupplier = [];
-                            $supplier_id = old('supplier_id', explode(',', $product->supplier_id));
-                            if(is_array($supplier_id)){
-                                foreach($supplier_id as $value){
-                                    $listSupplier[] = (int)$value;
-                                }
-                            }
-                            @endphp
                             <label for="supplier_id" class="col-sm-2 col-form-label">{{ trans('product.supplier') }}</label>
                             <div class="col-sm-8">
-                                <select class="form-control supplier_id select2" multiple="multiple"
-                                    data-placeholder="{{ trans('product.admin.select_supplier') }}" style="width: 100%;"
-                                    name="supplier_id[]">
+                                <select class="form-control supplier_id select2" style="width: 100%;"
+                                    name="supplier_id">
                                     <option value=""></option>
                                     @foreach ($suppliers as $k => $v)
                                     <option value="{{ $k }}"
-                                        {{ (count($listSupplier) && in_array($v->id, $listSupplier))?'selected':'' }}>{{ $v->name }}
-                                    </option>
+                                        {{ (old('supplier_id') ==$k || (!old() && $product->supplier_id ==$k) ) ? 'selected':'' }}>
+                                        {{ $v->name }}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('supplier_id'))
@@ -377,7 +367,7 @@
                                 @endif
                             </div>
                         </div>
-                        {{-- //Supplier --}}
+                        {{-- //Brand --}}
 @endif
 
 @if (sc_config_admin('product_cost'))

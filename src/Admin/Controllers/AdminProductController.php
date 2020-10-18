@@ -364,11 +364,10 @@ class AdminProductController extends RootAdminController
         $productBuild    = $data['productBuild'] ?? [];
         $productBuildQty = $data['productBuildQty'] ?? [];
         $subImages       = $data['sub_image'] ?? [];
-        $supplier_id     = $data['supplier_id'] ??  [];
         $dataInsert = [
             'brand_id'       => $data['brand_id'] ?? 0,
+            'supplier_id'    => $data['supplier_id'] ?? 0,
             'sub_category_id' => $data['sub_category_id'] ?? 0,
-            'supplier_id'    => implode(',', $supplier_id ),
             'price'          => $data['price'] ?? 0,
             'sku'            => $data['sku'],
             'cost'           => $data['cost'] ?? 0,
@@ -651,13 +650,12 @@ class AdminProductController extends RootAdminController
         $productBuild    = $data['productBuild'] ?? [];
         $productBuildQty = $data['productBuildQty'] ?? [];
         $subImages       = $data['sub_image'] ?? [];
-        $supplier_id     = $data['supplier_id'] ??  [];
         $dataUpdate = [
             'image'        => $data['image'] ?? '',
             'tax_id'       => $data['tax_id'] ?? 0,
             'brand_id'     => $data['brand_id'] ?? 0,
+            'supplier_id'  => $data['supplier_id'] ?? 0,
             'sub_category_id'     => $data['sub_category_id'] ?? 0,
-            'supplier_id'  => implode(',', $supplier_id ),
             'price'        => $data['price'] ?? 0,
             'cost'         => $data['cost'] ?? 0,
             'stock'        => $data['stock'] ?? 0,
@@ -675,7 +673,7 @@ class AdminProductController extends RootAdminController
             'minimum'      => (int) $data['minimum'],
             'store_id'     => session('adminStoreId'),
         ];
-        if($data['date_available']) {
+        if ($data['date_available']) {
             $dataUpdate['date_available'] = $data['date_available'];
         }
         $product->update($dataUpdate);
