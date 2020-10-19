@@ -30,19 +30,19 @@ class AdminPluginsController extends RootAdminController
         $code = sc_word_format_class($code);
 
         $arrDefault = []; // plugin default, cannot remove
-        if($code == 'Payment') {
+        if ($code == 'Payment') {
             $arrDefault[] = 'Cash';
         }
-        if($code == 'Shipping') {
+        if ($code == 'Shipping') {
             $arrDefault[] = 'ShippingStandard';
         }
-        if($code == 'Total') {
+        if ($code == 'Total') {
             $arrDefault[] = 'Discount';
         }
-        if($code == 'Other') {
+        if ($code == 'Other') {
             $arrDefault[] = 'GoogleCaptcha';
         }
-        if($code == 'Cms') {
+        if ($code == 'Cms') {
             $arrDefault[] = 'Content';
         }
         $pluginsInstalled = sc_get_plugin_installed($code, $onlyActive = false);
@@ -55,12 +55,13 @@ class AdminPluginsController extends RootAdminController
     {
         return view($this->templatePathAdmin.'screen.plugin')->with(
             [
-                "title" => $title,
+                "title"            => $title,
                 "pluginsInstalled" => $pluginsInstalled,
-                "plugins" => $plugins,
-                "code" => $code,
-                "arrDefault" => $arrDefault,
-            ]);
+                "plugins"          => $plugins,
+                "code"             => $code,
+                "arrDefault"       => $arrDefault,
+            ]
+        );
     }
 
     /**
@@ -87,7 +88,7 @@ class AdminPluginsController extends RootAdminController
         $onlyRemoveData = request('onlyRemoveData');
         $namespace = sc_get_class_plugin_config($code, $key);
         $response = (new $namespace)->uninstall();
-        if(!$onlyRemoveData) {
+        if (!$onlyRemoveData) {
             File::deleteDirectory(app_path('Plugins/'.$code.'/'.$key));
             File::deleteDirectory(public_path('Plugins/'.$code.'/'.$key));
         }
@@ -155,11 +156,11 @@ class AdminPluginsController extends RootAdminController
         $pathTmp = time();
         $linkRedirect = '';
         $pathFile = sc_file_upload($data['file'],'tmp', $pathFolder = $pathTmp)['pathFile'] ?? '';
-        if($pathFile) {
+        if ($pathFile) {
             $unzip = sc_unzip(storage_path('tmp/'.$pathFile), storage_path('tmp/'.$pathTmp));
-            if($unzip) {
+            if ($unzip) {
                 $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
-                if($checkConfig) {
+                if ($checkConfig) {
                     $folderName = explode('/src',$checkConfig[0]);
                     $folderName = explode('/', $folderName[0]);
                     $folderName = end($folderName);
@@ -174,7 +175,7 @@ class AdminPluginsController extends RootAdminController
                     }
 
                     $arrPluginLocal = sc_get_all_plugin($configCode);
-                    if(array_key_exists($configKey, $arrPluginLocal)) {
+                    if (array_key_exists($configKey, $arrPluginLocal)) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         return redirect()->back()->with('error', trans('plugin.error_exist'));
                     }
@@ -186,7 +187,7 @@ class AdminPluginsController extends RootAdminController
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         $namespace = sc_get_class_plugin_config($configCode, $configKey);
                         $response = (new $namespace)->install();
-                        if(!is_array($response) || $response['error'] == 1) {
+                        if (!is_array($response) || $response['error'] == 1) {
                             return redirect()->back()->with('error', $response['msg']);
                         }
                         $linkRedirect = route('admin_plugin', ['code' => (new $namespace)->configCode]);
@@ -205,7 +206,7 @@ class AdminPluginsController extends RootAdminController
         } else {
             return redirect()->back()->with('error', trans('plugin.error_upload'));
         }
-        if($linkRedirect) {
+        if ($linkRedirect) {
             return redirect($linkRedirect)->with('success', trans('plugin.import_success')); 
         } else {
             return redirect()->back()->with('success', trans('plugin.import_success')); 
