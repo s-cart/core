@@ -9,7 +9,6 @@ use SCart\Core\Front\Models\ShopProduct;
 use SCart\Core\Front\Models\ShopCategory;
 use SCart\Core\Front\Models\ShopBanner;
 use SCart\Core\Front\Models\ShopBrand;
-use SCart\Core\Front\Models\ShopSupplier;
 use SCart\Core\Front\Models\ShopNews;
 use SCart\Core\Front\Models\ShopPage;
 use SCart\Core\Front\Models\ShopStore;
