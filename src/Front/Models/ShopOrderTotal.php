@@ -1,5 +1,4 @@
 <?php
-#S-Cart/Core/Front/Models/ShopOrderTotal.php
 namespace SCart\Core\Front\Models;
 
 use SCart\Core\Front\Models\ShopOrder;
