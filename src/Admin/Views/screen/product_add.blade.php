@@ -953,7 +953,7 @@
     {
         display: none;
     }
-    @if($kindOpt == '')
+    @if($kindOpt == '' && sc_config_admin('product_kind'))
         #main-add, #card-footer {
             display: none;
         }
