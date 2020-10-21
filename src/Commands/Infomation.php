@@ -31,10 +31,9 @@ class Infomation extends Command
     public function handle()
     {
         $this->info(config('s-cart.name').' - '.config('s-cart.title'));
-        $this->info(config('s-cart.name'));
         $this->info(config('s-cart.auth').'<'.config('s-cart.email').'>');
         $this->info('Version: '.config('s-cart.version'));
-        $this->info('Sub-version: '.config('s-cart.sub_version'));
+        $this->info('Sub-version: '.config('s-cart.sub-version'));
         $this->info('Homepage: '.config('s-cart.homepage'));
         $this->info('Github: '.config('s-cart.github'));
         $this->info('Facebook: '.config('s-cart.facebook'));

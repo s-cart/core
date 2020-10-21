@@ -148,10 +148,10 @@ class ShopCartController extends RootFrontController
                 'addressList'     => auth()->user() ? auth()->user()->addresses : [],
                 'dataTotal'       => ShopOrderTotal::processDataTotal($objects),
                 'shippingAddress' => $shippingAddress,
-                'layout_page'     => 'shop_cart',
                 'countries'       => ShopCountry::getCodeAll(),
                 'attributesGroup' => ShopAttributeGroup::pluck('name', 'id')->all(),
                 'viewCaptcha'     => $viewCaptcha,
+                'layout_page'     => 'shop_cart',
             ]
         );
     }
