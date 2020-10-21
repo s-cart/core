@@ -20,7 +20,7 @@ class MakePlugin extends Command
      *
      * @var string
      */
-    protected $description = 'Make plugin, template format';
+    protected $description = 'Make plugin format';
 
     protected $tmpFolder = 'tmp';
     /**
@@ -41,10 +41,6 @@ class MakePlugin extends Command
             exit;
         }
         switch ($function) {
-            case 'template':
-                $this->template($name, $download);
-                break;
-
             case 'plugin':
                 $arrOpt = explode('/', $name);
                 if(empty($arrOpt[1])) {
@@ -62,52 +58,6 @@ class MakePlugin extends Command
                 break;
         }
         
-    }
-
-    //Create format template
-    public function template($name, $download){
-        $error = 0;
-        $msg = '';
-
-        $name = sc_word_format_url($name);
-        $source = "format/template/src";
-        $sourcePublic = "format/template/public";
-        $sID = md5(time());
-        $tmp = $this->tmpFolder."/".$sID.'/'.$name.'/src';
-        $tmpPublic = $this->tmpFolder."/".$sID.'/'.$name.'/public';
-        $description = "views/templates/".$name;
-        $descriptionPublic = "public/templates/".$name;
-        
-        try {
-            if($download) {
-                File::copyDirectory(storage_path($source), storage_path($tmp));
-                File::copyDirectory(storage_path($sourcePublic), storage_path($tmpPublic));
-
-                $appConfigJson = file_get_contents(storage_path($tmp.'/config.json'));
-                $appConfigJson      = str_replace('Template_Key', $name, $appConfigJson);
-                file_put_contents(storage_path($tmp.'/config.json'), $appConfigJson);
-
-
-                sc_zip(storage_path($this->tmpFolder."/".$sID), storage_path($this->tmpFolder.'/'.$sID.'.zip'));
-                $path = $sID;
-            } else {
-                File::copyDirectory(storage_path($source), resource_path($description));
-                File::copyDirectory(storage_path($sourcePublic), base_path($descriptionPublic));
-
-                $appConfigJson = file_get_contents(resource_path($description.'/config.json'));
-                $appConfigJson      = str_replace('Template_Key', $name, $appConfigJson);
-                file_put_contents(resource_path($description.'/config.json'), $appConfigJson);
-            }
-            File::deleteDirectory(storage_path($this->tmpFolder.'/'.$sID));
-        } catch(\Exception $e) {
-            $msg = $e->getMessage();
-            $error = 1;
-        }
-        echo json_encode([
-            'error' => $error,
-            'path' => $path ?? '',
-            'msg' => $msg
-        ]);
     }
 
     //Create format plugin
