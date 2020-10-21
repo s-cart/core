@@ -393,7 +393,7 @@ class AdminProductController extends RootAdminController
             'minimum'        => (int) $data['minimum'],
             'store_id'       => session('adminStoreId'),
         ];
-        if($data['date_available']) {
+        if(!empty($data['date_available'])) {
             $dataInsert['date_available'] = $data['date_available'];
         }
         //insert product
@@ -684,7 +684,7 @@ class AdminProductController extends RootAdminController
             'minimum'      => (int) $data['minimum'],
             'store_id'     => session('adminStoreId'),
         ];
-        if ($data['date_available']) {
+        if (!empty($data['date_available'])) {
             $dataUpdate['date_available'] = $data['date_available'];
         }
         $product->update($dataUpdate);
