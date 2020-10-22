@@ -163,7 +163,7 @@ class AdminStoreLinkController extends RootAdminController
             'arrGroup' => $this->arrGroup,
             'url_action' => sc_route('admin_store_link.edit', ['id' => $link['id']]),
         ];
-        return view($this->templatePathAdmin.'screen.link')
+        return view($this->templatePathAdmin.'screen.store_link')
             ->with($data);
     }
 
