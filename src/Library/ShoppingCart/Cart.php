@@ -209,6 +209,16 @@ class Cart
     }
 
     /**
+     * Get items in cart group by storeId
+     *
+     * @return  [type]  [return description]
+     */
+    public function getItems() {
+
+        return $this->content()->groupBy('storeId');
+    }
+
+    /**
      * Get the number of items in the cart.
      *
      * @return int|float
