@@ -68,37 +68,37 @@ class ShopCartController extends RootFrontController
         } 
 
         // Shipping address
-        $user = auth()->user();
-        if ($user) {
-            $address = $user->getAddressDefault();
+        $customer = session('customer');
+        if ($customer) {
+            $address = $customer->getAddressDefault();
             if ($address) {
                 $addressDefaul = [
                     'first_name'      => $address->first_name,
                     'last_name'       => $address->last_name,
                     'first_name_kana' => $address->first_name_kana,
                     'last_name_kana'  => $address->last_name_kana,
-                    'email'           => $user->email,
+                    'email'           => $customer->email,
                     'address1'        => $address->address1,
                     'address2'        => $address->address2,
                     'postcode'        => $address->postcode,
-                    'company'         => $user->company,
+                    'company'         => $customer->company,
                     'country'         => $address->country,
                     'phone'           => $address->phone,
                     'comment'         => '',
                 ];
             } else {
                 $addressDefaul = [
-                    'first_name'      => $user->first_name,
-                    'last_name'       => $user->last_name,
-                    'first_name_kana' => $user->first_name_kana,
-                    'last_name_kana'  => $user->last_name_kana,
-                    'email'           => $user->email,
-                    'address1'        => $user->address1,
-                    'address2'        => $user->address2,
-                    'postcode'        => $user->postcode,
-                    'company'         => $user->company,
-                    'country'         => $user->country,
-                    'phone'           => $user->phone,
+                    'first_name'      => $customer->first_name,
+                    'last_name'       => $customer->last_name,
+                    'first_name_kana' => $customer->first_name_kana,
+                    'last_name_kana'  => $customer->last_name_kana,
+                    'email'           => $customer->email,
+                    'address1'        => $customer->address1,
+                    'address2'        => $customer->address2,
+                    'postcode'        => $customer->postcode,
+                    'company'         => $customer->company,
+                    'country'         => $customer->country,
+                    'phone'           => $customer->phone,
                     'comment'         => '',
                 ];
             }
@@ -145,7 +145,7 @@ class ShopCartController extends RootFrontController
                 'shippingMethod'  => $shippingMethod,
                 'paymentMethod'   => $paymentMethod,
                 'totalMethod'     => $totalMethod,
-                'addressList'     => auth()->user() ? auth()->user()->addresses : [],
+                'addressList'     => $customer ? $customer->addresses : [],
                 'dataTotal'       => ShopOrderTotal::processDataTotal($objects),
                 'shippingAddress' => $shippingAddress,
                 'countries'       => ShopCountry::getCodeAll(),
@@ -161,12 +161,13 @@ class ShopCartController extends RootFrontController
      */
     public function processCart()
     {
+        $customer = session('customer');
         if (Cart::instance('default')->count() == 0) {
             return redirect(sc_route('cart'));
         }
 
         //Not allow for guest
-        if (!sc_config('shop_allow_guest') && !auth()->user()) {
+        if (!sc_config('shop_allow_guest') && !$customer) {
             return redirect(sc_route('login'));
         }
 
@@ -448,12 +449,13 @@ class ShopCartController extends RootFrontController
      */
     public function addOrder(Request $request)
     {
-        $user = auth()->user();
+        $customer = session('customer');
+        //if cart empty
         if (Cart::instance('default')->count() == 0) {
             return redirect()->route('home');
         }
         //Not allow for guest
-        if (!sc_config('shop_allow_guest') && !$user) {
+        if (!sc_config('shop_allow_guest') && !$customer) {
             return redirect(sc_route('login'));
         } //
 
@@ -467,7 +469,7 @@ class ShopCartController extends RootFrontController
             $shippingMethod  = session('shippingMethod') ?? '';
             $address_process = session('address_process') ?? '';
         }
-        $uID = $user->id ?? 0;
+        $uID = $customer->id ?? 0;
         //Process total
         $subtotal = (new ShopOrderTotal)->sumValueTotal('subtotal', $dataTotal); //sum total
         $tax      = (new ShopOrderTotal)->sumValueTotal('tax', $dataTotal); //sum tax
@@ -567,7 +569,7 @@ class ShopCartController extends RootFrontController
                 'country'         => $shippingAddress['country'] ?? '',
                 'phone'           => $shippingAddress['phone'] ?? '',
             ];
-            $user->addresses()->save(new ShopCustomerAddress(sc_clean($addressNew)));
+            $customer->addresses()->save(new ShopCustomerAddress(sc_clean($addressNew)));
             session()->forget('address_process'); //destroy address_process
         }
 

@@ -31,7 +31,7 @@ class LoginController extends RootFrontController
     // protected $redirectTo = '/';
     protected function redirectTo()
     {
-        return sc_route('member.index');
+        return sc_route('customer.index');
     }
     /**
      * Create a new controller instance.
@@ -84,6 +84,11 @@ class LoginController extends RootFrontController
         $request->session()->invalidate();
 
         return $this->loggedOut($request) ?: redirect()->route('login');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        session(['customer' => auth()->user()]);
     }
 
 }

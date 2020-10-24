@@ -34,7 +34,7 @@ class RegisterController extends RootFrontController
     // protected $redirectTo = '/home';
     protected function redirectTo()
     {
-        return route('member.index');
+        return route('customer.index');
     }
 
     /**
@@ -142,7 +142,7 @@ class RegisterController extends RootFrontController
      */
     public function showRegisterForm()
     {
-        if (auth()->user()) {
+        if (session('customer')) {
             return redirect()->route('home');
         }
         $viewCaptcha = '';

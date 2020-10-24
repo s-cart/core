@@ -30,14 +30,14 @@ class ShopAccountController extends RootFrontController
      */
     public function index()
     {
-        $user = auth()->user();
+        $customer = session('customer');
 
         sc_check_view($this->templatePath . '.account.index');
         return view($this->templatePath . '.account.index')
             ->with(
                 [
                     'title' => trans('account.my_profile'),
-                    'user' => $user,
+                    'customer' => $customer,
                     'layout_page' => 'shop_profile',
                 ]
             );
@@ -50,13 +50,13 @@ class ShopAccountController extends RootFrontController
      */
     public function changePassword()
     {
-        $user = auth()->user();
+        $customer = session('customer');
         sc_check_view($this->templatePath . '.account.change_password');
         return view($this->templatePath . '.account.change_password')
         ->with(
             [
                 'title' => trans('account.change_password'),
-                'user' => $user,
+                'customer' => $customer,
                 'layout_page' => 'shop_profile',
             ]
         );
@@ -110,7 +110,7 @@ class ShopAccountController extends RootFrontController
         $dataUser->password = bcrypt($password);
         $dataUser->save();
 
-        return redirect()->route('member.index')
+        return redirect()->route('customer.index')
             ->with(['success' => trans('account.update_success')]);
     }
 
@@ -158,7 +158,7 @@ class ShopAccountController extends RootFrontController
         }
         ShopCustomer::updateInfo($dataMapping['dataUpdate'], $id);
 
-        return redirect()->route('member.index')
+        return redirect()->route('customer.index')
             ->with(['success' => trans('account.update_success')]);
     }
 
@@ -187,10 +187,11 @@ class ShopAccountController extends RootFrontController
      */
     public function orderDetail($id)
     {
+        $customer = session('customer');
         $statusOrder = ShopOrderStatus::getIdAll();
         $statusShipping = ShopShippingStatus::getIdAll();
         $attributesGroup = ShopAttributeGroup::pluck('name', 'id')->all();
-        $order = ShopOrder::where('id', $id) ->where('customer_id', auth()->user()->id)->first();
+        $order = ShopOrder::where('id', $id) ->where('customer_id', $customer->id)->first();
         if($order) {
             $title = trans('account.order_detail').' #'.$order->id;
         } else {
@@ -219,12 +220,13 @@ class ShopAccountController extends RootFrontController
      */
     public function addressList()
     {
+        $customer = session('customer');
         sc_check_view($this->templatePath . '.account.address_list');
         return view($this->templatePath . '.account.address_list')
             ->with(
                 [
                 'title' => trans('account.address_list'),
-                'addresses' => auth()->user()->addresses,
+                'addresses' => $customer->addresses,
                 'countries' => ShopCountry::getCodeAll(),
                 'layout_page' => 'shop_profile',
                 ]
@@ -238,9 +240,10 @@ class ShopAccountController extends RootFrontController
      */
     public function updateAddress($id)
     {
-        $address =  (new ShopCustomerAddress)->where('customer_id', auth()->user()->id)
-        ->where('id', $id)
-        ->first();
+        $customer = session('customer');
+        $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
+            ->where('id', $id)
+            ->first();
         if($address) {
             $title = trans('account.address_detail').' #'.$address->id;
         } else {
@@ -268,11 +271,11 @@ class ShopAccountController extends RootFrontController
      */
     public function postUpdateAddress(Request $request, $id)
     {
-        $user = auth()->user();
+        $customer = session('customer');
         $data = request()->all();
-        $address =  (new ShopCustomerAddress)->where('customer_id', $user->id)
-        ->where('id', $id)
-        ->first();
+        $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
+            ->where('id', $id)
+            ->first();
         
         $dataUpdate = [
             'first_name' => $data['first_name'],
@@ -332,10 +335,9 @@ class ShopAccountController extends RootFrontController
         $address->update(sc_clean($dataUpdate));
 
         if(!empty($data['default'])) {
-            $user->address_id = $id;
-            $user->save();
+            (new ShopCustomer)->find($customer->id)->update(['address_id' => $id]);
         }
-        return redirect()->route('member.address_list')
+        return redirect()->route('customer.address_list')
             ->with(['success' => trans('account.update_success')]);
     }
 
@@ -347,10 +349,11 @@ class ShopAccountController extends RootFrontController
      * @return  [json] 
      */
     public function getAddress() {
+        $customer = session('customer');
         $id = request('id');
-        $address =  (new ShopCustomerAddress)->where('customer_id', auth()->user()->id)
-        ->where('id', $id)
-        ->first();
+        $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
+            ->where('id', $id)
+            ->first();
         if($address) {
             return $address->toJson();
         } else {
@@ -364,10 +367,11 @@ class ShopAccountController extends RootFrontController
      * @return  [json] 
      */
     public function deleteAddress() {
+        $customer = session('customer');
         $id = request('id');
-        (new ShopCustomerAddress)->where('customer_id', auth()->user()->id)
-        ->where('id', $id)
-        ->delete();
+        (new ShopCustomerAddress)->where('customer_id', $customer->id)
+            ->where('id', $id)
+            ->delete();
         return json_encode(['error' => 0, 'msg' => trans('account.delete_address_success')]);
     }
 

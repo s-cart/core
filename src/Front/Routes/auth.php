@@ -1,6 +1,6 @@
 <?php
 Auth::routes();
-$prefixMember = sc_config('PREFIX_MEMBER')??'member';
+$prefixMember = sc_config('PREFIX_MEMBER') ?? 'customer';
 //--Auth
 Route::group(['namespace' => 'Auth', 'prefix' => $prefixMember], function ($router) use($suffix){
     $router->get('/login'.$suffix, 'LoginController@showLoginForm')

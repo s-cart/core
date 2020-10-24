@@ -1,5 +1,5 @@
 <?php
-$prefixMember = sc_config('PREFIX_MEMBER')??'member';
+$prefixMember = sc_config('PREFIX_MEMBER') ?? 'customer';
 
 Route::group(['prefix' => $prefixMember, 'middleware' => 'auth'], function ($router) use($suffix){
     $prefixMemberOrderList = sc_config('PREFIX_MEMBER_ORDER_LIST')??'order-list';
@@ -11,27 +11,27 @@ Route::group(['prefix' => $prefixMember, 'middleware' => 'auth'], function ($rou
     $prefixMemberChangeInfo = sc_config('PREFIX_MEMBER_CHANGE_INFO')??'change-infomation';
 
 
-    $router->get('/', 'ShopAccountController@index')->name('member.index');
+    $router->get('/', 'ShopAccountController@index')->name('customer.index');
     $router->get('/'.$prefixMemberOrderList.$suffix, 'ShopAccountController@orderList')
-        ->name('member.order_list');
+        ->name('customer.order_list');
     $router->get('/'.$prefixMemberOrderDetail.'/{id}', 'ShopAccountController@orderDetail')
-        ->name('member.order_detail');
+        ->name('customer.order_detail');
     $router->get('/'.$prefixMemberAddresList.$suffix, 'ShopAccountController@addressList')
-        ->name('member.address_list');
+        ->name('customer.address_list');
     $router->get('/'.$prefixMemberUpdateAddres.'/{id}', 'ShopAccountController@updateAddress')
-        ->name('member.update_address');
+        ->name('customer.update_address');
     $router->post('/'.$prefixMemberUpdateAddres.'/{id}', 'ShopAccountController@postUpdateAddress')
-        ->name('member.post_update_address');
+        ->name('customer.post_update_address');
     $router->post('/'.$prefixMemberDeleteAddres, 'ShopAccountController@deleteAddress')
-        ->name('member.delete_address');
+        ->name('customer.delete_address');
     $router->get('/'.$prefixMemberChangePwd.$suffix, 'ShopAccountController@changePassword')
-        ->name('member.change_password');
+        ->name('customer.change_password');
     $router->post('/change_password', 'ShopAccountController@postChangePassword')
-        ->name('member.post_change_password');
+        ->name('customer.post_change_password');
     $router->get('/'.$prefixMemberChangeInfo.$suffix, 'ShopAccountController@changeInfomation')
-        ->name('member.change_infomation');
+        ->name('customer.change_infomation');
     $router->post('/change_infomation', 'ShopAccountController@postChangeInfomation')
-        ->name('member.post_change_infomation');
+        ->name('customer.post_change_infomation');
     $router->post('/address-detail', 'ShopAccountController@getAddress')
-        ->name('member.address_detail');   
+        ->name('customer.address_detail');   
 });

@@ -72,7 +72,8 @@ class ShopOrder extends Model
  */
     public function updateStatus($orderId, $status = 0, $msg = '')
     {
-        $uID = auth()->user()->id ?? 0;
+        $customer = session('customer');
+        $uID = $customer->id ?? 0;
         $order = $this->find($orderId);
         if ($order) {
             //Update status
@@ -246,9 +247,10 @@ class ShopOrder extends Model
         if(empty($orderID)) {
             return null;
         }
-        if(auth()->user()) {
+        $customer = session('customer');
+        if($customer) {
             return $this->where('id', $orderID)
-            ->where('customer_id', auth()->user()->id)
+            ->where('customer_id', $customer->id)
             ->first();
         } else {
             return null;
@@ -322,11 +324,12 @@ class ShopOrder extends Model
      * build Query
      */
     public function buildQuery() {
+        $customer = session('customer');
         if ($this->sc_order_profile == 1) {
-            if(!auth()->user()) {
+            if(!$customer) {
                 return null;
             }
-            $uID = auth()->user()->id;
+            $uID = $customer->id;
             $query = $this->with('orderTotal')->where('customer_id', $uID);
         } else {
             $query = $this->with('orderTotal')->with('details');
