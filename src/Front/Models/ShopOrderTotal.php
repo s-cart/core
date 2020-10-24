@@ -1,9 +1,7 @@
 <?php
 namespace SCart\Core\Front\Models;
 
-use SCart\Core\Front\Models\ShopOrder;
 use SCart\Core\Front\Models\ShopCurrency;
-use Cart;
 use Illuminate\Database\Eloquent\Model;
 
 class ShopOrderTotal extends Model
@@ -30,7 +28,7 @@ class ShopOrderTotal extends Model
      */
     public static function processDataTotal(array $objects = [])
     {
-        $carts  = ShopCurrency::sumCart(Cart::instance('default')->content());
+        $carts  = ShopCurrency::sumCart();
         $subtotal = $carts['subTotal'];
         $tax = $carts['subTotalWithTax'] - $carts['subTotal'];
 
@@ -51,8 +49,6 @@ class ShopOrderTotal extends Model
             'text' => sc_currency_render_symbol($tax),
             'sort' => self::POSITION_TAX,
         ];
-
-
 
         // set total value
         $total = $subtotal + $tax;
@@ -82,7 +78,6 @@ class ShopOrderTotal extends Model
         usort($objects, function ($a, $b) {
             return $a['sort'] > $b['sort'];
         });
-        //
 
         return $objects;
     }
@@ -150,7 +145,7 @@ class ShopOrderTotal extends Model
         $totalMethod = [];
 
         $totalMethod = session('totalMethod', []);
-        if($totalMethod && is_array($totalMethod)) {
+        if ($totalMethod && is_array($totalMethod)) {
             foreach ($totalMethod as $keyMethod => $valueMethod) {
                 $classTotalConfig = sc_get_class_plugin_config('Total', $keyMethod);
                 $returnModuleTotal = (new $classTotalConfig)->getData();
@@ -163,7 +158,7 @@ class ShopOrderTotal extends Model
                 ];
             }
         }
-        if(!count($totalMethod)) {
+        if (!count($totalMethod)) {
             $totalMethod[] = array(
                 'title' => trans('order.totals.discount'),
                 'code' => 'discount',
@@ -201,5 +196,4 @@ class ShopOrderTotal extends Model
         $objects[] = self::getReceived();
         return $objects;
     }
-
 }

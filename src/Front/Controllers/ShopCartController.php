@@ -8,6 +8,7 @@ use SCart\Core\Front\Models\ShopCountry;
 use SCart\Core\Front\Models\ShopOrder;
 use SCart\Core\Front\Models\ShopOrderTotal;
 use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopCustomer;
 use SCart\Core\Front\Models\ShopCustomerAddress;
 use Cart;
 use Illuminate\Http\Request;
@@ -121,9 +122,8 @@ class ShopCartController extends RootFrontController
         }
         $shippingAddress = session('shippingAddress') ?? $addressDefaul;
         $objects = ShopOrderTotal::getObjectOrderTotal();
-
         $viewCaptcha = '';
-        if(sc_captcha_method() && in_array('forgot', sc_captcha_page())) {
+        if(sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
             if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
                 $dataView = [
                     'titleButton' => trans('cart.checkout'),
@@ -450,6 +450,7 @@ class ShopCartController extends RootFrontController
     public function addOrder(Request $request)
     {
         $customer = session('customer');
+        $uID = $customer->id ?? 0;
         //if cart empty
         if (Cart::instance('default')->count() == 0) {
             return redirect()->route('home');
@@ -469,7 +470,7 @@ class ShopCartController extends RootFrontController
             $shippingMethod  = session('shippingMethod') ?? '';
             $address_process = session('address_process') ?? '';
         }
-        $uID = $customer->id ?? 0;
+
         //Process total
         $subtotal = (new ShopOrderTotal)->sumValueTotal('subtotal', $dataTotal); //sum total
         $tax      = (new ShopOrderTotal)->sumValueTotal('tax', $dataTotal); //sum tax
@@ -548,13 +549,13 @@ class ShopCartController extends RootFrontController
         session(['arrCartDetail' => $arrCartDetail]);
 
         //Create new order
-        $createOrder = (new ShopOrder)->createOrder($dataOrder, $dataTotal, $arrCartDetail);
+        $newOrder = (new ShopOrder)->createOrder($dataOrder, $dataTotal, $arrCartDetail);
 
-        if ($createOrder['error'] == 1) {
-            return redirect(sc_route('cart'))->with(['error' => $createOrder['msg']]);
+        if ($newOrder['error'] == 1) {
+            return redirect(sc_route('cart'))->with(['error' => $newOrder['msg']]);
         }
         //Set session orderID
-        session(['orderID' => $createOrder['orderID']]);
+        session(['orderID' => $newOrder['orderID']]);
 
         //Create new address
         if ($address_process == 'new') {
@@ -569,7 +570,7 @@ class ShopCartController extends RootFrontController
                 'country'         => $shippingAddress['country'] ?? '',
                 'phone'           => $shippingAddress['phone'] ?? '',
             ];
-            $customer->addresses()->save(new ShopCustomerAddress(sc_clean($addressNew)));
+            ShopCustomer::find($uID)->addresses()->save(new ShopCustomerAddress(sc_clean($addressNew)));
             session()->forget('address_process'); //destroy address_process
         }
 

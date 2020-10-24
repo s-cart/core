@@ -207,25 +207,36 @@ class ShopCurrency extends Model
     /**
      * Sum value of cart
      *
-     * @param   [\SCart\Core\Library\ShoppingCart\CartItem] $details  [$details description]
      * @param   float  $rate     [$rate description]
      *
      * @return  [array]
      */
-    public static function sumCart($details, float $rate = null)
+    public static function sumCart(float $rate = null)
     {
+        $carts = Cart::instance('default')->getItemsGroupByStore();
+        $dataReturn = [];
+
         $sumSubtotal  = 0;
         $sumSubtotalWithTax  = 0;
         $rate = ($rate) ? $rate : self::$exchange_rate;
-        foreach ($details as $detail) {
-            $sumSubtotal += $detail->qty * self::getValue($detail->price, $rate);
-            $sumSubtotalWithTax += $detail->qty * self::getValue(sc_tax_price($detail->price, $detail->tax), $rate);
+        foreach ($carts as $storeId => $cart) {
+            $sumSubtotalStore  = 0;
+            $sumSubtotalWithTaxStore  = 0;
+            foreach ($cart as $detail) {
+                $sumValue = $detail->qty * self::getValue($detail->price, $rate);
+                $sumValueWithTax = $detail->qty * self::getValue(sc_tax_price($detail->price, $detail->tax), $rate);
+                $sumSubtotal += $sumValue;
+                $sumSubtotalStore += $sumValue;
+                $sumSubtotalWithTax +=  $sumValueWithTax;
+                $sumSubtotalWithTaxStore+= $sumValueWithTax;
+            }
+            $dataReturn['store'][$storeId]['subTotal'] = $sumSubtotalStore;
+            $dataReturn['store'][$storeId]['subTotalWithTax'] = $sumSubtotalWithTaxStore;
+
         }
-        return 
-            [
-                'subTotal' => $sumSubtotal,
-                'subTotalWithTax' => $sumSubtotalWithTax,
-            ];
+        $dataReturn['subTotal'] = $sumSubtotal;
+        $dataReturn['subTotalWithTax'] = $sumSubtotalWithTax;
+        return $dataReturn;
     }
 
     public static function getListRate()

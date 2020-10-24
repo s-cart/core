@@ -9,14 +9,11 @@
               <h3 class="card-title">{{ trans('order.order_detail') }} #{{ $order->id }}</h3>
               <div class="card-tools not-print">
                   <div class="btn-group float-right" style="margin-right: 0px">
-                      <a href="{{ route('admin_order.index') }}" class="btn btn-flat btn-default"><i class="fa fa-list"></i>&nbsp;{{ trans('admin.list') }}</a>
+                      <a href="{{ sc_route('admin_order.index') }}" class="btn btn-flat btn-default"><i class="fa fa-list"></i>&nbsp;{{ trans('admin.list') }}</a>
                   </div>
                   <div class="btn-group float-right" style="margin-right: 10px">
-                      <a href="{{ route('admin_order.export_detail').'?order_id='.$order->id.'&type=invoice' }}" class="btn btn-flat btn-twitter" title="Export"><i class="fas fa-file-excel"></i><span class="hidden-xs"> Excel</span></a>
+                      <a href="{{ sc_route('admin_order.export_detail').'?order_id='.$order->id.'&type=invoice' }}" class="btn btn-flat btn-twitter" title="Export"><i class="fas fa-file-excel"></i><span class="hidden-xs"> Excel</span></a>
                   </div>
-{{--                   <div class="btn-group float-right" style="margin-right: 10px">
-                      <a href="{{ route('admin_order.export_detail').'?order_id='.$order->id.'&type=pdf' }}" class="btn btn-flat btn-warning" title="Export"><i class="fa fa-file-pdf-o"></i><span class="hidden-xs"> PDF</span></a>
-                  </div> --}}
                   <div class="btn-group float-right" style="margin-right: 10px;border:1px solid #c5b5b5;">
                       <a class="btn btn-flat" title="Export" onclick="order_print()"><i class="fa fa-print"></i><span class="hidden-xs"> Print</span></a>
                   </div>
@@ -83,6 +80,7 @@
                     <tr><td>{{ trans('order.order_payment_status') }}:</td><td><a href="#" class="updateStatus" data-name="payment_status" data-type="select" data-source ="{{ json_encode($statusPayment) }}"  data-pk="{{ $order->id }}" data-value="{!! $order->payment_status !!}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.order_payment_status') }}">{{ $statusPayment[$order->payment_status]??'' }}</a></td></tr>
                     <tr><td>{{ trans('order.shipping_method') }}:</td><td><a href="#" class="updateStatus" data-name="shipping_method" data-type="select" data-source ="{{ json_encode($shippingMethod) }}"  data-pk="{{ $order->id }}" data-value="{!! $order->shipping_method !!}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.shipping_method') }}">{{ $order->shipping_method }}</a></td></tr>
                     <tr><td>{{ trans('order.payment_method') }}:</td><td><a href="#" class="updateStatus" data-name="payment_method" data-type="select" data-source ="{{ json_encode($paymentMethod) }}"  data-pk="{{ $order->id }}" data-value="{!! $order->payment_method !!}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.payment_method') }}">{{ $order->payment_method }}</a></td></tr>
+                    <tr><td></i> {{ trans('order.created_at') }}:</td><td>{{ $order->created_at }}</td></tr>
                   </table>
                  <table class="table table-bordered">
                     <tr>
@@ -352,7 +350,7 @@ function update_total(e){
             node.find('.add_tax').html('');
         }else{
             $.ajax({
-                url : '{{ route('admin_order.product_info') }}',
+                url : '{{ sc_route('admin_order.product_info') }}',
                 type : "get",
                 dateType:"application/json; charset=utf-8",
                 data : {

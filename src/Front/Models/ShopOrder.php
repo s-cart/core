@@ -110,7 +110,6 @@ class ShopOrder extends Model
             DB::connection(SC_CONNECTION)->beginTransaction();
             $dataOrder = sc_clean($dataOrder);
             $dataOrder['domain'] = url('/');
-            $dataOrder['store_id'] = config('app.storeId');
             $uID = $dataOrder['customer_id'];
             $currency = $dataOrder['currency'];
             $exchange_rate = $dataOrder['exchange_rate'];
@@ -142,17 +141,25 @@ class ShopOrder extends Model
                     return $return = ['error' => 1, 'msg' => trans('cart.over', ['item' => $product->sku])];
                 }
                 //
+                $tax = (sc_tax_price($cartDetail['price'], $product->getTaxValue()) - $cartDetail['price']) *  $cartDetail['qty'];
+
                 $cartDetail['order_id'] = $orderID;
                 $cartDetail['currency'] = $currency;
                 $cartDetail['exchange_rate'] = $exchange_rate;
                 $cartDetail['sku'] = $product->sku;
-                $cartDetail['tax'] = (sc_tax_price($cartDetail['price'], $product->getTaxValue()) - $cartDetail['price']) *  $cartDetail['qty'];
+                $cartDetail['tax'] = $tax;
+                $cartDetail['store_id'] = $cartDetail['store_id'];
                 $this->addOrderDetail($cartDetail);
 
                 //Update stock and sold
                 ShopProduct::updateStock($pID, $cartDetail['qty']);
             }
             //End order detail
+
+            //Add order store - MultiStorePro
+            if (function_exists('sc_create_order_store')) {
+                sc_create_order_store($orderID);
+            }
 
             //Add history
             $dataHistory = [
@@ -194,7 +201,7 @@ class ShopOrder extends Model
 
             DB::connection(SC_CONNECTION)->commit();
             $return = ['error' => 0, 'orderID' => $orderID, 'msg' => ""];
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             DB::connection(SC_CONNECTION)->rollBack();
             $return = ['error' => 1, 'msg' => $e->getMessage()];
         }

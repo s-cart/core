@@ -8,8 +8,6 @@ use Cache;
 
 class AdminOrder extends ShopOrder
 {
-    protected static $getListTitleAdmin = null;
-    protected static $getListOrderGroupByParentAdmin = null;
     public static $mapStyleStatus = [
         '1' => 'info', //new
         '2' => 'primary', //processing
@@ -28,7 +26,6 @@ class AdminOrder extends ShopOrder
     public static function getOrderAdmin($id) {
         return self::with(['details', 'orderTotal'])
         ->where('id', $id)
-        ->where('store_id', session('adminStoreId'))
         ->first();
     }
 
@@ -45,8 +42,7 @@ class AdminOrder extends ShopOrder
         $arrSort      = $dataSearch['arrSort'] ?? '';
         $order_status = $dataSearch['order_status'] ?? '';
 
-        $orderList = (new ShopOrder)
-            ->where('store_id', session('adminStoreId'));
+        $orderList = (new ShopOrder);
         if($order_status) {
             $orderList = $orderList->where('status', $order_status);
         }
@@ -234,7 +230,6 @@ class AdminOrder extends ShopOrder
     public static function getCountryInYear() {
         return self::selectRaw('country, count(id) as count')
             ->whereRaw('DATE(created_at) >=  DATE_SUB(DATE(NOW()), INTERVAL 12 MONTH)')
-            ->where('store_id', session('adminStoreId'))
             ->groupBy('country')
             ->orderBy('count', 'desc')
             ->get();
@@ -248,7 +243,6 @@ class AdminOrder extends ShopOrder
     public static function getSumOrderTotalInYear() {
         return self::selectRaw('DATE_FORMAT(created_at, "%Y-%m") AS ym, SUM(total/exchange_rate) AS total_amount')
             ->whereRaw('DATE_FORMAT(created_at, "%Y-%m") >=  DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH), "%Y-%m")')
-            ->where('store_id', session('adminStoreId'))
             ->groupBy('ym')->get();
     }
 
@@ -261,7 +255,6 @@ class AdminOrder extends ShopOrder
         return self::selectRaw('DATE_FORMAT(created_at, "%m-%d") AS md,
         SUM(total/exchange_rate) AS total_amount, count(id) AS total_order')
             ->whereRaw('created_at >=  DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), "%Y-%m-%d")')
-            ->where('store_id', session('adminStoreId'))
             ->groupBy('md')->get();
     }
 
@@ -271,7 +264,7 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getTotalOrderStore() {
-        return self::where('store_id', session('adminStoreId'))->count();
+        return self::count();
     }
 
 
@@ -281,7 +274,7 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getTopOrderStore() {
-        return self::with('orderStatus')->where('store_id', session('adminStoreId'))
+        return self::with('orderStatus')
             ->orderBy('id', 'desc')
             ->limit(10)
             ->get();
