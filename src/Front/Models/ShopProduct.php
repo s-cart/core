@@ -163,8 +163,6 @@ class ShopProduct extends Model
      * Get product detail
      * @param  [string] $key [description]
      * @param  [string] $type id, sku, alias
-     * @param  [''|int] $status 
-     * '' if is all status
      * @return [type]     [description]
      */
     public function getDetail($key = null, $type = null, $storeId = null)
@@ -177,6 +175,12 @@ class ShopProduct extends Model
         $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
 
         $storeId = empty($storeId) ? config('app.storeId') : $storeId;
+
+        if (config('app.storeId') != 1) {
+            //If the store is not the primary store
+            //Cannot view the product in another store
+            $storeId = config('app.storeId');
+        }
 
         $product = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
