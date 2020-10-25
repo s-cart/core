@@ -283,5 +283,19 @@ class AdminOrder extends ShopOrder
             return self::count();
         }
     }
+
+    /**
+     * Get count order new
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getCountOrderNew() {
+        if (sc_config_admin('MultiStorePro') && function_exists('sc_count_order_new_store')) {
+            return sc_count_order_new_store(session('adminStoreId'));
+        } else {
+            return self::where('status', 1)
+            ->count();
+        }
+    }
     
 }
