@@ -13,7 +13,7 @@
 
     @if (\Admin::user()->checkUrlAllowAccess(route('admin_order.index')))
     <!-- SEARCH FORM -->
-    <form action="{{ route('admin_order.index') }}" method="get" class="form-inline ml-3 d-none d-sm-block" >
+    <form action="{{ sc_route('admin_order.index') }}" method="get" class="form-inline ml-3 d-none d-sm-block" >
       <div class="input-group input-group-sm">
         <input name="keyword" class="form-control form-control-navbar" type="search" placeholder="{{trans('order.search')}}" aria-label="Search">
         <div class="input-group-append">
@@ -31,7 +31,7 @@
         @include($templatePathAdmin.'component.admin_select_store')
         @include($templatePathAdmin.'component.store_list')
       @else
-      <a class="nav-link" href="{{ route('home') }}" target=_new>
+      <a class="nav-link" href="{{ sc_route('home') }}" target=_new>
         <i class="fas fa-home"></i>
       </a> 
       @endif

@@ -12,10 +12,17 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_order') }}</span>
                 <span class="info-box-number">{{ number_format($totalOrder) }}</span>
-                <a href="{{ route('admin_order.index') }}" class="small-box-footer">
+                @if (sc_config_admin('MultiStorePro'))
+                  <a href="{{ sc_route('admin_order_store.index') }}" class="small-box-footer">
                     {{ trans('admin.more') }}&nbsp;
                     <i class="fa fa-arrow-circle-right"></i>
-                </a>
+                  </a>
+                @else
+                  <a href="{{ sc_route('admin_order.index') }}" class="small-box-footer">
+                    {{ trans('admin.more') }}&nbsp;
+                    <i class="fa fa-arrow-circle-right"></i>
+                  </a>
+                @endif
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -29,7 +36,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_product') }}</span>
                 <span class="info-box-number">{{ number_format($totalProduct) }}</span>
-                <a href="{{ route('admin_product.index') }}" class="small-box-footer">
+                <a href="{{ sc_route('admin_product.index') }}" class="small-box-footer">
                     {{ trans('admin.more') }}&nbsp;
                     <i class="fa fa-arrow-circle-right"></i>
                 </a>
@@ -49,7 +56,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_customer') }}</span>
                 <span class="info-box-number">{{ number_format($totalCustomer) }}</span>
-                <a href="{{ route('admin_customer.index') }}" class="small-box-footer">
+                <a href="{{ sc_route('admin_customer.index') }}" class="small-box-footer">
                     {{ trans('admin.more') }}&nbsp;
                     <i class="fa fa-arrow-circle-right"></i>
                 </a>
@@ -70,7 +77,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_blogs') }}</span>
                 <span class="info-box-number">{{ number_format($totalNews) }}</span>
-                <a href="{{ route('admin_news.index') }}" class="small-box-footer">
+                <a href="{{ sc_route('admin_news.index') }}" class="small-box-footer">
                     {{ trans('admin.more') }}&nbsp;
                     <i class="fa fa-arrow-circle-right"></i>
                 </a>
@@ -187,7 +194,7 @@
                       @if (count($topCustomer))
                       @foreach ($topCustomer as $customer)
                         <tr>
-                          <td><a href="{{ route('admin_customer.edit',['id'=>$customer->id]) }}">ID#{{ $customer->id }}</a></td>
+                          <td><a href="{{ sc_route('admin_customer.edit',['id'=>$customer->id]) }}">ID#{{ $customer->id }}</a></td>
                           <td>{{ $customer->email }}</td>
                           <td>{{ $customer->name }}</td>
                           <td>{{ $customer->created_at }}</td>

@@ -8,7 +8,7 @@
                 <h3 class="card-title">{!! $title!!}</h3>
             </div>
 
-            <form action="{{ route('admin_plugin.process_import') }}" method="post" accept-charset="UTF-8" class="form-horizontal" id="import-product" enctype="multipart/form-data">
+            <form action="{{ sc_route('admin_plugin.process_import') }}" method="post" accept-charset="UTF-8" class="form-horizontal" id="import-product" enctype="multipart/form-data">
                 @csrf
                 <div class="box-body">
                     <div class="fields-group">

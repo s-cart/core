@@ -27,7 +27,7 @@
   isChecked = (isChecked == false)?0:1;
   var name = $(this).attr('name');
     $.ajax({
-      url: '{{ route('admin_config.update') }}',
+      url: '{{ sc_route('admin_config.update') }}',
       type: 'POST',
       dataType: 'JSON',
       data: {
@@ -62,7 +62,7 @@
       $.ajax({
         type: 'POST',
         dataType:'json',
-        url: "{{ route('admin_config.update') }}",
+        url: "{{ sc_route('admin_config.update') }}",
         data: {
           "_token": "{{ csrf_token() }}",
           "name": $(this).attr('name'),
@@ -93,7 +93,7 @@
       $.ajax({
         type: 'POST',
         dataType:'json',
-        url: "{{ route('admin_store.update') }}",
+        url: "{{ sc_route('admin_store.update') }}",
         data: {
           "_token": "{{ csrf_token() }}",
           "name": $(this).attr('name'),
@@ -123,7 +123,7 @@
 
         this.on('click', function(e) {
           type = $(this).data('type') || type;//sc
-          var route_prefix = (options && options.prefix) ? options.prefix : '{{ route('admin.home').'/'.config('lfm.url_prefix') }}';
+          var route_prefix = (options && options.prefix) ? options.prefix : '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}';
           var target_input = $('#' + $(this).data('input'));
           var target_preview = $('#' + $(this).data('preview'));
           window.open(route_prefix + '?type=' + type, '{{ trans('admin.file_manager') }}', 'width=900,height=600');

@@ -93,10 +93,10 @@
 <script type="text/javascript">
     $('textarea.editor').ckeditor(
     {
-        filebrowserImageBrowseUrl: '{{ route('admin.home').'/'.config('lfm.url_prefix') }}?type=content',
-        filebrowserImageUploadUrl: '{{ route('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=content&_token={{csrf_token()}}',
-        filebrowserBrowseUrl: '{{ route('admin.home').'/'.config('lfm.url_prefix') }}?type=Files',
-        filebrowserUploadUrl: '{{ route('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=file&_token={{csrf_token()}}',
+        filebrowserImageBrowseUrl: '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}?type=content',
+        filebrowserImageUploadUrl: '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=content&_token={{csrf_token()}}',
+        filebrowserBrowseUrl: '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}?type=Files',
+        filebrowserUploadUrl: '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=file&_token={{csrf_token()}}',
         filebrowserWindowWidth: '900',
         filebrowserWindowHeight: '500'
     }

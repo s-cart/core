@@ -6,7 +6,7 @@
   <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100 main-login">
-        <form action="{{ route('admin.login') }}" method="post">
+        <form action="{{ sc_route('admin.login') }}" method="post">
           <div class="col-md-12">
             <img src="{{ asset(sc_store('logo')) }}" alt="logo" class="logo">
           </div>

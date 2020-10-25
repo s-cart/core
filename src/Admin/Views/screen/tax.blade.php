@@ -12,7 +12,7 @@
         <h3 class="card-title">{!! $title_action !!}</h3>
         @if ($layout == 'edit')
         <div class="btn-group float-right" style="margin-right: 5px">
-            <a href="{{ route('admin_tax.index') }}" class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span></a>
+            <a href="{{ sc_route('admin_tax.index') }}" class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span></a>
         </div>
       @endif
       </div>
@@ -229,7 +229,7 @@ $('.grid-trash').on('click', function() {
                       return;
                     }else{
                       alertMsg('success', data.msg);
-                      window.location.replace('{{ route('admin_tax.index') }}');
+                      window.location.replace('{{ sc_route('admin_tax.index') }}');
                     }
 
                 }

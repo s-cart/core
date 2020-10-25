@@ -7,7 +7,7 @@
     <div class="dropdown-menu dropdown-menu-left p-0">
     @foreach ($listStoreId as  $stID)
     @if ($stID != 0 && session('adminStoreId') != $stID)
-    <a href="{{ route('admin_store.switch', ['storeId' => $stID]) }}" class="dropdown-item ">
+    <a href="{{ sc_route('admin_store.switch', ['storeId' => $stID]) }}" class="dropdown-item ">
         <div class="hover">
             <i class="fab fa-shopify"></i> {{ trans('admin.store_title', ['id' => $stID]) }}
         </div>

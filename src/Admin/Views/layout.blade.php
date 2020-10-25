@@ -72,7 +72,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}"><i class="fa fa-home fa-1x"></i> {{ trans('admin.home') }}</a></li>
+              <li class="breadcrumb-item"><a href="{{ sc_route('admin.home') }}"><i class="fa fa-home fa-1x"></i> {{ trans('admin.home') }}</a></li>
               @if (!empty($breadcrumb))
               <li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a></li>
               @endif

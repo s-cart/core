@@ -163,7 +163,7 @@ $(document).ready(function() {
 //Logo
   $('.logo').change(function() {
         $.ajax({
-        url: '{{ route('admin_store.update') }}',
+        url: '{{ sc_route('admin_store.update') }}',
         type: 'POST',
         dataType: 'JSON',
         data: {"name": $(this).attr('name'),"value":$(this).val(),"_token": "{{ csrf_token() }}", "storeId": "{{ $storeId }}" },
