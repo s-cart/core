@@ -47,6 +47,7 @@ class LoginController extends RootAdminController
         $remember = $request->get('remember', false);
 
         if ($this->guard()->attempt($credentials, $remember)) {
+            session(['admin' => Admin::user()]);
             return $this->sendLoginResponse($request);
         }
         return back()->withInput()->withErrors([

@@ -19,7 +19,7 @@ class DashboardController extends RootAdminController
     public function index(Request $request)
     {
         //Check user allow view dasdboard
-        if(!\Admin::user()->checkUrlAllowAccess(route('admin.home')))
+        if(!session('admin')->checkUrlAllowAccess(route('admin.home')))
         {
             $data['title'] = trans('admin.dashboard');
             return view($this->templatePathAdmin.'default', $data);
@@ -28,7 +28,6 @@ class DashboardController extends RootAdminController
         $data                   = [];
         $data['title']          = trans('admin.dashboard');
         $data['totalOrder']     = AdminOrder::getTotalOrderStore();
-        $data['topOrder']       = AdminOrder::getTopOrderStore();
         $data['totalProduct']   = AdminProduct::getTotalProductStore();
         $data['topCustomer']    = AdminCustomer::getTopCustomerStore();
         $data['totalCustomer']  = AdminCustomer::getTotalCustomerStore();

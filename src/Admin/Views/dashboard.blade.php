@@ -158,61 +158,7 @@
         <div class="row">
 
           <!-- Left col -->
-          <div class="col-md-6">
-            <!-- TABLE: LATEST ORDERS -->
-            <div class="card">
-              <div class="card-header border-transparent">
-                <h3 class="card-title">{{ trans('admin.top_order_new') }}</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body p-0">
-                <div class="table-responsive">
-                  <table class="table m-0">
-                    <thead>
-                      <tr>
-                        <th>{{ trans('order.id') }}</th>
-                        <th>{{ trans('order.email') }}</th>
-                        <th>{{ trans('order.status') }}</th>
-                        <th>{{ trans('order.created_at') }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @if (count($topOrder))
-                      @foreach ($topOrder as $order)
-                            <tr>
-                              <td><a href="{{ route('admin_order.detail',['id'=>$order->id]) }}">Order#{{ $order->id }}</a></td>
-                              <td>{{ $order->email }}</td>
-                              <td><span class="badge badge-{{ $mapStyleStatus[$order->status]??'' }}">{{ $order->orderStatus->name }}</span></td>
-                              <td>{{ $order->created_at }}</td>
-                            </tr>
-                      @endforeach
-                    @endif
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.table-responsive -->
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                
-              </div>
-              <!-- /.card-footer -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
-
-          <!-- Left col -->
-          <div class="col-md-6">
+          <div class="col-md-12">
             <!-- TABLE: LATEST ORDERS -->
             <div class="card">
               <div class="card-header border-transparent">
