@@ -121,13 +121,13 @@ class ShopAccountController extends RootFrontController
      */
     public function changeInfomation()
     {
-        $user = Auth::user();
+        $customer = session('customer');
         sc_check_view($this->templatePath . '.account.change_infomation');
         return view($this->templatePath . '.account.change_infomation')
             ->with(
                 [
                     'title' => trans('account.change_infomation'),
-                    'user' => $user,
+                    'customer' => $customer,
                     'countries' => ShopCountry::getCodeAll(),
                     'layout_page' => 'shop_profile',
                 ]
