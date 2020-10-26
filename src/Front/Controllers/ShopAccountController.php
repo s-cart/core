@@ -30,7 +30,7 @@ class ShopAccountController extends RootFrontController
      */
     public function index()
     {
-        $customer = session('customer');
+        $customer = auth()->user();
 
         sc_check_view($this->templatePath . '.account.index');
         return view($this->templatePath . '.account.index')
@@ -50,7 +50,7 @@ class ShopAccountController extends RootFrontController
      */
     public function changePassword()
     {
-        $customer = session('customer');
+        $customer = auth()->user();
         sc_check_view($this->templatePath . '.account.change_password');
         return view($this->templatePath . '.account.change_password')
         ->with(
@@ -121,7 +121,7 @@ class ShopAccountController extends RootFrontController
      */
     public function changeInfomation()
     {
-        $customer = session('customer');
+        $customer = auth()->user();
         sc_check_view($this->templatePath . '.account.change_infomation');
         return view($this->templatePath . '.account.change_infomation')
             ->with(
@@ -187,7 +187,7 @@ class ShopAccountController extends RootFrontController
      */
     public function orderDetail($id)
     {
-        $customer = session('customer');
+        $customer = auth()->user();
         $statusOrder = ShopOrderStatus::getIdAll();
         $statusShipping = ShopShippingStatus::getIdAll();
         $attributesGroup = ShopAttributeGroup::pluck('name', 'id')->all();
@@ -220,7 +220,7 @@ class ShopAccountController extends RootFrontController
      */
     public function addressList()
     {
-        $customer = session('customer');
+        $customer = auth()->user();
         sc_check_view($this->templatePath . '.account.address_list');
         return view($this->templatePath . '.account.address_list')
             ->with(
@@ -240,7 +240,7 @@ class ShopAccountController extends RootFrontController
      */
     public function updateAddress($id)
     {
-        $customer = session('customer');
+        $customer = auth()->user();
         $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
             ->where('id', $id)
             ->first();
@@ -271,7 +271,7 @@ class ShopAccountController extends RootFrontController
      */
     public function postUpdateAddress(Request $request, $id)
     {
-        $customer = session('customer');
+        $customer = auth()->user();
         $data = request()->all();
         $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
             ->where('id', $id)
@@ -349,7 +349,7 @@ class ShopAccountController extends RootFrontController
      * @return  [json] 
      */
     public function getAddress() {
-        $customer = session('customer');
+        $customer = auth()->user();
         $id = request('id');
         $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
             ->where('id', $id)
@@ -367,7 +367,7 @@ class ShopAccountController extends RootFrontController
      * @return  [json] 
      */
     public function deleteAddress() {
-        $customer = session('customer');
+        $customer = auth()->user();
         $id = request('id');
         (new ShopCustomerAddress)->where('customer_id', $customer->id)
             ->where('id', $id)
