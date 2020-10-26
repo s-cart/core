@@ -69,7 +69,7 @@ class ShopCartController extends RootFrontController
         } 
 
         // Shipping address
-        $customer = session('customer');
+        $customer = auth()->user();
         if ($customer) {
             $address = $customer->getAddressDefault();
             if ($address) {
@@ -161,7 +161,7 @@ class ShopCartController extends RootFrontController
      */
     public function processCart()
     {
-        $customer = session('customer');
+        $customer = auth()->user();
         if (Cart::instance('default')->count() == 0) {
             return redirect(sc_route('cart'));
         }
@@ -449,7 +449,7 @@ class ShopCartController extends RootFrontController
      */
     public function addOrder(Request $request)
     {
-        $customer = session('customer');
+        $customer = auth()->user();
         $uID = $customer->id ?? 0;
         //if cart empty
         if (Cart::instance('default')->count() == 0) {
