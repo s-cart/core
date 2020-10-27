@@ -140,7 +140,7 @@ class ShopOrderTotal extends Model
     /**
      * Get total method
      */
-    public static function getTotalMethod()
+    public static function getTotal()
     {
         $totalMethod = [];
 
@@ -190,7 +190,7 @@ class ShopOrderTotal extends Model
     public static function getObjectOrderTotal(){
         $objects = array();
         $objects[] = self::getShippingMethod();
-        foreach (self::getTotalMethod() as  $totalMethod) {
+        foreach (self::getTotal() as  $totalMethod) {
             $objects[] = $totalMethod;
         }
         $objects[] = self::getReceived();
