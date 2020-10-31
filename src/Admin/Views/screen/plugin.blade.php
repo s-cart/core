@@ -9,7 +9,7 @@
             <li class="nav-item">
               <a class="nav-link active" href="#"  aria-controls="custom-tabs-four-home" aria-selected="true">{{ trans('plugin.local') }}</a>
             </li>
-            @if (config('s-cart.settings.api_plugin'))
+            @if (config('admin.settings.api_plugin'))
             <li class="nav-item">
               <a class="nav-link" href="{{ sc_route('admin_plugin_online', ['code' => strtolower($code)]) }}" >{{ trans('plugin.online') }}</a>
             </li>

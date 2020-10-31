@@ -31,4 +31,9 @@ return [
             'sidebar'     => 'sidebar-pink',
         ],        
     ],
+    //Enable, disable page libary online
+    'settings' => [
+        'api_plugin'   => 1,
+        'api_template' => 1,
+    ],
 ];

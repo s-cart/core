@@ -9,7 +9,7 @@
               <li class="nav-item">
                 <a class="nav-link active" href="#"  aria-controls="custom-tabs-four-home" aria-selected="true">{{ trans('template.local') }}</a>
               </li>
-              @if (config('s-cart.settings.api_template'))
+              @if (config('admin.settings.api_template'))
               <li class="nav-item">
                 <a class="nav-link" href="{{ sc_route('admin_template_online.index') }}" >{{ trans('template.online') }}</a>
               </li>

@@ -18,7 +18,7 @@ Route::group(['prefix' => 'plugin'], function () {
     Route::post('/disable', 'AdminPluginsController@disable')
         ->name('admin_plugin.disable');
 
-    if(config('s-cart.settings.api_plugin')) {
+    if(config('admin.settings.api_plugin')) {
         Route::get('/{code}/online', 'AdminPluginsOnlineController@index')
         ->name('admin_plugin_online');
         Route::post('/install/online', 'AdminPluginsOnlineController@install')

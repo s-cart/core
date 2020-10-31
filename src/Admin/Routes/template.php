@@ -11,7 +11,7 @@ Route::group(['prefix' => 'template'], function () {
     Route::post('changeTemplate', 'AdminTemplateController@changeTemplate')->name('admin_template.changeTemplate');
     Route::post('remove', 'AdminTemplateController@remove')->name('admin_template.remove');
 
-    if(config('s-cart.settings.api_template')) {
+    if(config('admin.settings.api_template')) {
         Route::get('/online', 'AdminTemplateOnlineController@index')->name('admin_template_online.index');
         Route::post('/online/install', 'AdminTemplateOnlineController@install')
         ->name('admin_template_online.install');
