@@ -25,6 +25,7 @@
 
           <div class="card-body" id="pjax-container">
             <div class="tab-content" id="custom-tabs-four-tabContent">
+              <div class="table-responsive">
               <table class="table table-hover text-nowrap table-bordered">
                 <thead>
                   <tr>
@@ -62,7 +63,7 @@
                 @endforeach
                 </tbody>
               </table>
-
+              </div>
             </div>
           </div>
           <!-- /.card -->

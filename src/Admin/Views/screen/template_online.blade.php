@@ -70,6 +70,7 @@
 
       <div class="card-body" id="pjax-container">
         <div class="tab-content" id="custom-tabs-four-tabContent">
+          <div class="table-responsive">
           <table class="table table-hover text-nowrap table-bordered">
             <thead>
               <tr>
@@ -178,7 +179,7 @@
               @endif
             </tbody>
           </table>
-
+          </div>
         </div>
 
         <div class="block-pagination clearfix m-10">

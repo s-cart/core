@@ -302,7 +302,7 @@ class ShopProduct extends Model
     /*
     Check promotion price
     */
-    public function processPromotionPrice()
+    private function processPromotionPrice()
     {
         $promotion = $this->promotionPrice;
         if ($promotion) {
@@ -526,7 +526,7 @@ class ShopProduct extends Model
      * Get product to array Supplier
      * @param   [array|int]  $arrSupplier 
      */
-    public function getProductToSupplier($arrSupplier) {
+    private function getProductToSupplier($arrSupplier) {
         $this->setSupplier($arrSupplier);
         return $this;
     }
