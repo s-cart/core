@@ -84,7 +84,7 @@
       <div class="card-body p-0">
             <section id="pjax-container" class="table-list">
               <div class="box-body table-responsivep-0" >
-                 <table class="table table-hover">
+                 <table class="table table-hover box-body text-nowrap table-bordered">
                     <thead>
                        <tr>
                         @if (!empty($removeList))

@@ -7,7 +7,7 @@
       </div>
 
       <div class="card-body table-responsivep-0">
-       <table class="table table-hover">
+       <table class="table table-hover box-body text-nowrap table-bordered">
          <tbody>
            @foreach ($productConfig as $config)
            @if ($config['key'] == 'product_tax')
@@ -36,7 +36,7 @@
       </div>
 
       <div class="card-body table-responsivep-0">
-       <table class="table table-hover">
+       <table class="table table-hover box-body text-nowrap table-bordered">
         <thead>
           <tr>
             <th>{{ trans('product.config_manager.field') }}</th>

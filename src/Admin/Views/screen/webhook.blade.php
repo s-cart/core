@@ -11,7 +11,7 @@
       </div>
 
       <div class="card-body table-responsivep-0">
-       <table class="table table-hover">
+       <table class="table table-hover box-body text-nowrap table-bordered">
          <tbody>
           <tr>
             <td>{{ trans('config.LOG_SLACK_WEBHOOK_URL') }}</td>

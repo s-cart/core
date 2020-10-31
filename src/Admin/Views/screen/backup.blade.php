@@ -10,7 +10,7 @@
             <!-- /.card-header -->
             <div class="card-body"  id="pjax-container">
               <div><button id="generate" onClick="generateBackup($(this));" class="btn btn-success btn-flat" data-loading-text="{{ trans('backup.processing') }}"><span class="glyphicon glyphicon-plus"></span>{{ trans('backup.generate_now') }}</button></div>
-             <table id="main-table" class="table table-bordered table-hover">
+              <table id="main-table" class="table table-hover box-body text-nowrap table-bordered">
                 <thead>
                 <tr>
                   <th>{{ trans('backup.sort') }}</th>

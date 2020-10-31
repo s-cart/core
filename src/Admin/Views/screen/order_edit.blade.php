@@ -22,7 +22,7 @@
 
           <div class="row" id="order-body">
             <div class="col-sm-6">
-                 <table class="table table-bordered">
+                 <table class="table table-hover box-body text-nowrap table-bordered">
                     <tr>
                       <td class="td-title">{{ trans('order.shipping_first_name') }}:</td><td><a href="#" class="updateInfoRequired" data-name="first_name" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.shipping_first_name') }}" >{!! $order->first_name !!}</a></td>
                     </tr>
@@ -83,7 +83,7 @@
                     <tr><td>{{ trans('order.domain') }}:</td><td>{{ $order->domain }}</td></tr>
                     <tr><td></i> {{ trans('order.created_at') }}:</td><td>{{ $order->created_at }}</td></tr>
                   </table>
-                 <table class="table table-bordered">
+                 <table class="table table-hover box-body text-nowrap table-bordered">
                     <tr>
                       <td class="td-title"><i class="far fa-money-bill-alt nav-icon"></i> {{ trans('order.currency') }}:</td><td>{{ $order->currency }}</td>
                     </tr>
@@ -113,7 +113,7 @@
         <div class="col-sm-12">
           <div class="card collapsed-card">
           <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-hover box-body text-nowrap table-bordered">
                 <thead>
                   <tr>
                     <th>{{ trans('product.name') }}</th>
@@ -206,7 +206,7 @@
           {{-- History --}}
           <div class="col-sm-6">
             <div class="card">
-              <table class="table table-bordered">
+              <table class="table table-hover box-body text-nowrap table-bordered">
                 <tr>
                   <td  class="td-title">{{ trans('order.order_note') }}:</td>
                   <td>
