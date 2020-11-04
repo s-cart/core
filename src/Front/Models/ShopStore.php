@@ -9,8 +9,9 @@ class ShopStore extends Model
     public $table = SC_DB_PREFIX.'admin_store';
     protected $guarded = [];
     protected static $getAll = null;
-    protected static $getDomainActive = null;
+    protected static $getStoreActive = null;
     protected static $getCodeActive = null;
+    protected static $getDomainEnable = null;
     protected static $getListAllActive = null;
     protected $connection = SC_CONNECTION;
     
@@ -97,20 +98,39 @@ class ShopStore extends Model
         return self::$getListAllActive;
     }
 
+
+    /**
+     * Get all domain and id store enable domain
+     *
+     * @return  [array]  [return description]
+     */
+    public static function getDomainEnable()
+    {
+        if (self::$getDomainEnable === null) {
+            self::$getDomainEnable = self::where('status', 1)
+                ->whereNotNull('domain') 
+                ->pluck('domain', 'id')
+                ->all();
+        }
+        return self::$getDomainEnable;
+    }
+    
+
     /**
      * Get all domain and id store active
      *
      * @return  [array]  [return description]
      */
-    public static function getDomainActive()
+    public static function getStoreActive()
     {
-        if (self::$getDomainActive === null) {
-            self::$getDomainActive = self::where('active', 1)
+        if (self::$getStoreActive === null) {
+            self::$getStoreActive = self::where('active', 1)
                 ->pluck('domain', 'id')
                 ->all();
         }
-        return self::$getDomainActive;
+        return self::$getStoreActive;
     }
+    
 
     /**
      * Get all code and id store active

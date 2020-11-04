@@ -170,7 +170,7 @@ if (!function_exists('sc_store_active')) {
                 break;
 
             case 'domain':
-                return AdminStore::getDomainActive();
+                return AdminStore::getStoreActive();
                 break;
 
             default:
