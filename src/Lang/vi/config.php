@@ -25,7 +25,6 @@ return [
     'CHATWORK_CHAT_WEBHOOK_URL'  => 'Gửi thông báo lỗi tới Chatwork',
     'SUFFIX_URL'                 => 'Hậu tố URL',
     'PREFIX_BRAND'               => 'Tiền tố trang NHÃN HIỆU',
-    'PREFIX_SUPPLIER'            => 'Tiền tố trang NHÀ CUNG CẤP',
     'PREFIX_CATEGORY'            => 'Tiền tố trang DANH MỤC',
     'PREFIX_SUB_CATEGORY'        => 'Tiền tố trang DANH MỤC nhỏ',
     'PREFIX_PRODUCT'             => 'Tiền tố trang SẢN PHẨM',

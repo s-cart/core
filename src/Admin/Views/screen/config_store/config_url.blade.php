@@ -34,11 +34,6 @@
       </tr>
 
       <tr>
-        <td>{{ trans('env.PREFIX_SUPPLIER') }}</td>
-        <td>https://your-domain.com/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_SUPPLIER" data-type="text" data-pk="" data-source="" data-url="{{ sc_route('admin_config.update') }}" data-title="{{ trans('env.PREFIX_SUPPLIER') }}" data-value="{{ sc_config_admin('PREFIX_SUPPLIER', $storeId) }}" data-original-title="" title=""></a>/name-of-supplier{{ sc_config_admin('SUFFIX_URL', $storeId) }}</td>
-      </tr>
-
-      <tr>
         <td>{{ trans('env.PREFIX_SEARCH') }}</td>
         <td>https://your-domain.com/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_SEARCH" data-type="text" data-pk="" data-source="" data-url="{{ sc_route('admin_config.update') }}" data-title="{{ trans('env.PREFIX_SEARCH') }}" data-value="{{ sc_config_admin('PREFIX_SEARCH', $storeId) }}" data-original-title="" title=""></a>{{ sc_config_admin('SUFFIX_URL', $storeId) }}</td>
       </tr>
