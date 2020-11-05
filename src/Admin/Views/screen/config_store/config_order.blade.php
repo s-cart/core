@@ -4,7 +4,7 @@
 
     <div class="card">
       <div class="card-body table-responsivep-0 card-primary">
-       <table class="table table-hover box-body text-nowrap table-bordered">
+       <table class="table table-hover box-body text-wrap table-bordered">
          <tbody>
            @foreach ($orderConfig as $config)
              <tr>

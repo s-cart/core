@@ -122,7 +122,7 @@
       <!-- /.card-header -->
       <div class="card-body p-0" id="pjax-container">
         <div class="table-responsive">
-        <table class="table table-hover box-body text-nowrap table-bordered">
+        <table class="table table-hover box-body text-wrap table-bordered">
           <thead>
             <tr>
               @if (!empty($removeList))

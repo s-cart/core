@@ -9,7 +9,7 @@
           </div>
     
           <div class="card-body table-responsivep-0">
-             <table class="table table-hover box-body text-nowrap table-bordered">
+             <table class="table table-hover box-body text-wrap table-bordered">
                <tbody>
                  @if (!empty($emailConfig['email_action']))
                  @foreach ($emailConfig['email_action'] as $config)
@@ -43,7 +43,7 @@
           </div>
     
           <div class="card-body table-responsivep-0">
-             <table class="table table-hover box-body text-nowrap table-bordered">
+             <table class="table table-hover box-body text-wrap table-bordered">
              <tbody>
                @if (!empty($emailConfig['smtp_config']))
                @foreach ($emailConfig['smtp_config'] as $config)
