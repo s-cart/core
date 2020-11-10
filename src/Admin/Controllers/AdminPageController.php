@@ -259,7 +259,6 @@ class AdminPageController extends RootAdminController
                 'keyword'     => $row['keyword'],
                 'description' => $row['description'],
                 'content'     => $row['content'],
-                'store_id'    => session('adminStoreId'),
             ];
         }
         AdminPage::insertDescriptionAdmin($dataDes);
