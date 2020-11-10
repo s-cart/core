@@ -12,5 +12,4 @@ class ShopNewsDescription extends Model
     public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_news_description';
     protected $connection = SC_CONNECTION;
-    protected $fillable = ['lang', 'title', 'description', 'keyword', 'news_id', 'content'];
 }
