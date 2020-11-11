@@ -12,7 +12,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_order') }}</span>
                 <span class="info-box-number">{{ number_format($totalOrder) }}</span>
-                @if (sc_config_admin('MultiStorePro'))
+                @if (sc_config_global('MultiStorePro'))
                   <a href="{{ sc_route('admin_order_store.index') }}" class="small-box-footer">
                     {{ trans('admin.more') }}&nbsp;
                     <i class="fa fa-arrow-circle-right"></i>
