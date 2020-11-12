@@ -79,8 +79,11 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      */
 
     if (!function_exists('sc_get_class_plugin_controller')) {
-        function sc_get_class_plugin_controller($code, $key){
-
+        function sc_get_class_plugin_controller($code, $key = null){
+            if ($key == null) {
+                return null;
+            }
+            
             $code = sc_word_format_class($code);
             $key = sc_word_format_class($key);
 
