@@ -245,6 +245,7 @@ class AdminProductController extends RootAdminController
         //end add more images
 
         if (function_exists('sc_get_categories_store_admin')) {
+            // Dont process in __construct because session 
             $categoriesStore = sc_get_categories_store_admin();
         } else {
             $categoriesStore = [];
