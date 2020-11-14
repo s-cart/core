@@ -121,7 +121,8 @@ class UsersController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
 
-        $data['urlSort'] = sc_route('admin_user.index');
+        $data['urlSort'] = sc_route('admin_user.index', request()->except(['_token', '_pjax', 'sort_order']));
+
         $data['optionSort'] = $optionSort;
 //=menuSort
 

@@ -92,8 +92,7 @@ class AdminSubscribeController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
-
-        $data['urlSort'] = sc_route('admin_subscribe.index');
+        $data['urlSort'] = sc_route('admin_subscribe.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
         //=menuSort
 

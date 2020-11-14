@@ -182,7 +182,7 @@ class AdminProductController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
         $data['optionSort'] = $optionSort;
-        $data['urlSort'] = sc_route('admin_product.index');
+        $data['urlSort'] = sc_route('admin_product.index', request()->except(['_token', '_pjax', 'sort_order']));
         //=menuSort
 
         //Search with category

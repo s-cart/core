@@ -140,7 +140,7 @@ class AdminOrderController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $sort . '</option>';
         }
         $data['optionSort'] = $optionSort;
-        $data['urlSort'] = sc_route('admin_order.index');
+        $data['urlSort'] = sc_route('admin_order.index', request()->except(['_token', '_pjax', 'sort_order']));
         //=menuSort
 
         //menuSearch        

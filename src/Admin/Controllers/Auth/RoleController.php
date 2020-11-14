@@ -102,8 +102,7 @@ class RoleController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
-
-        $data['urlSort'] = sc_route('admin_role.index');
+        $data['urlSort'] = sc_route('admin_role.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
 //=menuSort
 

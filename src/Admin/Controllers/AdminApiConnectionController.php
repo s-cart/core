@@ -69,7 +69,7 @@ class AdminApiConnectionController extends RootAdminController
         $data['rightContentMain'] = '<input class="switch-data-config" data-store=0 name="api_connection_required" type="checkbox"  '.(sc_config_global('api_connection_required')?'checked':'').'><br> '.trans('api_connection.api_connection_required_help');
     
         $optionSort = '';
-        $data['urlSort'] = sc_route('admin_api_connection.index');
+        $data['urlSort'] = sc_route('admin_api_connection.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
         return view($this->templatePathAdmin.'screen.api_connection')
             ->with($data);
@@ -179,7 +179,7 @@ public function edit($id)
     $data['rightContentMain'] = '<input class="switch-data-config" data-store=0 name="api_connection_required" type="checkbox"  '.(sc_config_global('api_connection_required')?'checked':'').'><br> '.trans('api_connection.api_connection_required_help');
 
     $optionSort = '';
-    $data['urlSort'] = sc_route('admin_api_connection.index');
+    $data['urlSort'] = sc_route('admin_api_connection.index', request()->except(['_token', '_pjax', 'sort_order']));
     $data['optionSort'] = $optionSort;
     return view($this->templatePathAdmin.'screen.api_connection')
         ->with($data);

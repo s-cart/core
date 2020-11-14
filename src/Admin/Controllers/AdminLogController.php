@@ -104,7 +104,7 @@ class AdminLogController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
         $data['optionSort'] = $optionSort;
-        $data['urlSort'] = sc_route('admin_log.index');
+        $data['urlSort'] = sc_route('admin_log.index', request()->except(['_token', '_pjax', 'sort_order']));
 //=menuSort
 
         return view($this->templatePathAdmin.'screen.list')

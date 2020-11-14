@@ -121,8 +121,8 @@ class AdminReportController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
+        $data['urlSort'] = sc_route('admin_report.index', request()->except(['_token', '_pjax', 'sort_order']));
 
-        $data['urlSort'] = sc_route('admin_report.product');
         $data['optionSort'] = $optionSort;
         //=menuSort
 

@@ -105,7 +105,8 @@ class AdminCurrencyController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
 
-        $data['urlSort'] = sc_route('admin_currency.index');
+        $data['urlSort'] = sc_route('admin_currency.index', request()->except(['_token', '_pjax', 'sort_order']));
+
         $data['optionSort'] = $optionSort;
 //=menuSort
 
