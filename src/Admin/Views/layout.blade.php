@@ -66,7 +66,7 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">
               <i class="{{ $icon??'' }}" aria-hidden="true"></i> {!! $title??'' !!}
-              <small>{!!$subTitle??'' !!}</small>
+              <span class="sub-title">{!!$subTitle??'' !!}</span>
             </h1>
             <div class="more_info">{!! $more_info??'' !!}</div>
           </div><!-- /.col -->
