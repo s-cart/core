@@ -152,11 +152,11 @@ class AdminOrderController extends RootAdminController
                 <form action="' . sc_route('admin_order.index') . '" id="button_search">
                     <div class="input-group input-group float-left">
                         <div class="btn-group">
-                        <select class="form-control" name="order_status" id="order_sort">
+                        <select class="form-control rounded-0" name="order_status" id="order_sort">
                         ' . $optionStatus . '
                         </select>
                     </div>
-                    <input type="text" name="keyword" class="form-control float-right" placeholder="' . trans('order.admin.search_place') . '" value="' . $keyword . '">
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>

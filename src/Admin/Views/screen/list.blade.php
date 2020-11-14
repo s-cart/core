@@ -85,7 +85,7 @@
           <div class="menu-left">
             <div class="input-group float-right ml-1" style="width: 250px;">
               <div class="btn-group">
-                <select class="form-control float-right" id="order_sort">
+                <select class="form-control rounded-0 float-right" id="order_sort">
                 {!! $optionSort??'' !!}
                 </select>
               </div>

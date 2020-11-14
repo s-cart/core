@@ -130,7 +130,7 @@ class AdminReportController extends RootAdminController
         $data['topMenuRight'][] = '
                 <form action="' . sc_route('admin_report.product') . '" id="button_search">
                 <div class="input-group input-group" style="width: 250px;">
-                    <input type="text" name="keyword" class="form-control float-right" placeholder="' . trans('product.admin.search_place') . '" value="' . $keyword . '">
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('product.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
