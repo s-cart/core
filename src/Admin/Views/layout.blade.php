@@ -66,7 +66,9 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">
               <i class="{{ $icon??'' }}" aria-hidden="true"></i> {!! $title??'' !!}
-              <span class="sub-title">{!!$subTitle??'' !!}</span>
+              @if (!empty($subTitle))
+              <span class="sub-title">{!! $subTitle !!}</span>
+              @endif
             </h1>
             <div class="more_info">{!! $more_info??'' !!}</div>
           </div><!-- /.col -->

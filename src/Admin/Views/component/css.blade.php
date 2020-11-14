@@ -311,5 +311,7 @@
 .sub-title {
   font-size: 15px;
   margin: 10px;
+  border: 1px dotted #b58989;
+  padding: 5px;
 }
 </style>
