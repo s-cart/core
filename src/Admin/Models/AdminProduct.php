@@ -5,6 +5,7 @@ namespace SCart\Core\Admin\Models;
 use SCart\Core\Front\Models\ShopProduct;
 use SCart\Core\Front\Models\ShopProductDescription;
 use SCart\Core\Front\Models\ShopAttributeGroup;
+use SCart\Core\Front\Models\ShopProductCategory;
 
 class AdminProduct extends ShopProduct
 {
@@ -34,15 +35,25 @@ class AdminProduct extends ShopProduct
      */
     public static function getProductListAdmin(array $dataSearch) {
         $keyword          = $dataSearch['keyword'] ?? '';
+        $category_id      = $dataSearch['category_id'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
         $tableDescription = (new ShopProductDescription)->getTable();
+        $tablePTC         = (new ShopProductCategory)->getTable();
         $tableProduct     = (new ShopProduct)->getTable();
-
-        $productList = (new ShopProduct)
-            ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
-            ->where($tableProduct . '.store_id', session('adminStoreId'))
-            ->where($tableDescription . '.lang', sc_get_locale());
+        if ($category_id) {
+            $productList = (new ShopProduct)
+                ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
+                ->join($tablePTC, $tablePTC . '.product_id', $tableProduct . '.id')
+                ->where($tablePTC . '.category_id', $category_id)
+                ->where($tableProduct . '.store_id', session('adminStoreId'))
+                ->where($tableDescription . '.lang', sc_get_locale());
+        } else {
+            $productList = (new ShopProduct)
+                ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
+                ->where($tableProduct . '.store_id', session('adminStoreId'))
+                ->where($tableDescription . '.lang', sc_get_locale());
+        }
 
         if ($keyword) {
             $productList = $productList->where(function ($sql) use($tableDescription, $tableProduct, $keyword){

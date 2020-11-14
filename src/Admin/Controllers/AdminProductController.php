@@ -19,7 +19,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminProductController extends RootAdminController
 {
-    public $languages, $kinds, $propertys, $attributeGroup, $listWeight, $listLength;
+    public $languages;
+    public $kinds;
+    public $propertys;
+    public $attributeGroup;
+    public $listWeight;
+    public $listLength;
+    public $categories;
 
     public function __construct()
     {
@@ -39,6 +45,14 @@ class AdminProductController extends RootAdminController
             SC_PROPERTY_ONLY_VIEW => trans('product.propertys.only_view'),
             SC_PROPERTY_SERVICE   => trans('product.propertys.service'),
         ];
+
+        if (function_exists('sc_get_categories_store_admin')) {
+            $this->categoriesStore = sc_get_categories_store_admin();
+        } else {
+            $this->categoriesStore = [];
+        }
+
+        $this->categories =  (new AdminCategory)->getTreeCategoriesAdmin();
 
     }
 
@@ -86,6 +100,7 @@ class AdminProductController extends RootAdminController
         $listTh['action'] = trans('product.admin.action');
 
         $keyword = request('keyword') ?? '';
+        $category_id = request('category_id') ?? '';
 
         $sort_order = request('sort_order') ?? 'id_desc';
 
@@ -96,9 +111,10 @@ class AdminProductController extends RootAdminController
             'name__asc'  => trans('product.admin.sort_order.name_asc'),
         ];
         $dataSearch = [
-            'keyword'    => $keyword,
-            'sort_order' => $sort_order,
-            'arrSort'    => $arrSort,
+            'keyword'     => $keyword,
+            'category_id' => $category_id,
+            'sort_order'  => $sort_order,
+            'arrSort'     => $arrSort,
         ];
 
         $dataTmp = (new AdminProduct)->getProductListAdmin($dataSearch);
@@ -169,11 +185,22 @@ class AdminProductController extends RootAdminController
         $data['urlSort'] = sc_route('admin_product.index');
         //=menuSort
 
+        //Search with category
+        $optionCategory = '';
+        if ($this->categories) {
+            foreach ($this->categories as $k => $v) {
+                $optionCategory .= "<option value='{$k}' ".(($category_id == $k) ? 'selected' : '').">{$v}</option>";
+            }
+        }
 
         //topMenuRight
         $data['topMenuRight'][] ='
                 <form action="' . sc_route('admin_product.index') . '" id="button_search">
-                <div class="input-group input-group" style="width: 250px;">
+                <div class="input-group input-group float-left">
+                    <select class="form-control rounded-0 select2" name="category_id" id="category_id">
+                    <option value="">'.trans('product.admin.select_category').'</option>
+                    '.$optionCategory.'
+                    </select>
                     <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('product.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
@@ -224,19 +251,14 @@ class AdminProductController extends RootAdminController
         $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control rounded-0 input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
         //end add more images
 
-        if (function_exists('sc_get_categories_store_admin')) {
-            $categoriesStore = sc_get_categories_store_admin();
-        } else {
-            $categoriesStore = [];
-        }
         $data = [
             'title'                => trans('product.admin.add_new_title'),
             'subTitle'             => '',
             'title_description'    => trans('product.admin.add_new_des'),
             'icon'                 => 'fa fa-plus',
             'languages'            => $this->languages,
-            'categoriesStore'      => $categoriesStore,
-            'categories'           => (new AdminCategory)->getTreeCategoriesAdmin(),
+            'categoriesStore'      => $this->categoriesStore,
+            'categories'           => $this->categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
@@ -521,11 +543,6 @@ class AdminProductController extends RootAdminController
         $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
-        if (function_exists('sc_get_categories_store')) {
-            $categoriesStore = sc_get_categories_store();
-        } else {
-            $categoriesStore = [];
-        }
 
         $data = [
             'title'                => trans('product.admin.edit'),
@@ -534,8 +551,8 @@ class AdminProductController extends RootAdminController
             'icon'                 => 'fa fa-edit',
             'languages'            => $this->languages,
             'product'              => $product,
-            'categoriesStore'      => $categoriesStore,
-            'categories'           => (new AdminCategory)->getTreeCategoriesAdmin(),
+            'categoriesStore'      => $this->categoriesStore,
+            'categories'           => $this->categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
