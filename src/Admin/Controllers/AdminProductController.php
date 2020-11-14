@@ -45,13 +45,6 @@ class AdminProductController extends RootAdminController
             SC_PROPERTY_ONLY_VIEW => trans('product.propertys.only_view'),
             SC_PROPERTY_SERVICE   => trans('product.propertys.service'),
         ];
-
-        if (function_exists('sc_get_categories_store_admin')) {
-            $this->categoriesStore = sc_get_categories_store_admin();
-        } else {
-            $this->categoriesStore = [];
-        }
-
         $this->categories =  (new AdminCategory)->getTreeCategoriesAdmin();
 
     }
@@ -251,13 +244,19 @@ class AdminProductController extends RootAdminController
         $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control rounded-0 input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
         //end add more images
 
+        if (function_exists('sc_get_categories_store_admin')) {
+            $categoriesStore = sc_get_categories_store_admin();
+        } else {
+            $categoriesStore = [];
+        }
+
         $data = [
             'title'                => trans('product.admin.add_new_title'),
             'subTitle'             => '',
             'title_description'    => trans('product.admin.add_new_des'),
             'icon'                 => 'fa fa-plus',
             'languages'            => $this->languages,
-            'categoriesStore'      => $this->categoriesStore,
+            'categoriesStore'      => $categoriesStore,
             'categories'           => $this->categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -543,7 +542,11 @@ class AdminProductController extends RootAdminController
         $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
-
+        if (function_exists('sc_get_categories_store_admin')) {
+            $categoriesStore = sc_get_categories_store_admin();
+        } else {
+            $categoriesStore = [];
+        }
         $data = [
             'title'                => trans('product.admin.edit'),
             'subTitle'             => '',
@@ -551,7 +554,7 @@ class AdminProductController extends RootAdminController
             'icon'                 => 'fa fa-edit',
             'languages'            => $this->languages,
             'product'              => $product,
-            'categoriesStore'      => $this->categoriesStore,
+            'categoriesStore'      => $categoriesStore,
             'categories'           => $this->categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
