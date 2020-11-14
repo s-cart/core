@@ -121,7 +121,7 @@
 
       <!-- /.card-header -->
       <div class="card-body p-0" id="pjax-container">
-        <div id="url-sort" data-urlsort="{!! strpos($urlSort, "?")?$urlSort."&":$urlSort."?" !!}"  style="display: none;"></div>
+        <div id="url-sort" data-urlsort="{!! strpos($urlSort ?? '', "?")?$urlSort."&":$urlSort."?" !!}"  style="display: none;"></div>
         <div class="table-responsive">
         <table class="table table-hover box-body text-wrap table-bordered">
           <thead>

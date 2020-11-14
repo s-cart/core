@@ -67,6 +67,7 @@ class AdminEmailTemplateController extends RootAdminController
                            <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
                            </a>';
         //=menuRight
+        $data['urlSort'] = sc_route('admin_email_template.index', request()->except(['_token', '_pjax', 'sort_order']));
 
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);
