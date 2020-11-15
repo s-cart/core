@@ -1,3 +1,6 @@
+{{-- Use sc_config with storeId, dont use sc_config_admin because will switch the store to the specified store Id
+--}}
+
 <div class="row">
   <div class="col-md-12">
     <div class="card">

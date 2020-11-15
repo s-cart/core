@@ -1,5 +1,7 @@
-{{-- Use sc_config with storeId, dont use sc_config_admin because switch store no session adminStoreId--}}
-{{-- Use sc_config with storeId, dont use sc_config_admin because switch store no session adminStoreId--}}
+{{-- Use sc_config with storeId, dont use sc_config_admin because will switch the store to the specified store Id
+--}}
+{{-- Use sc_config with storeId, dont use sc_config_admin because will switch the store to the specified store Id
+--}}
 
 <div class="card">
 
