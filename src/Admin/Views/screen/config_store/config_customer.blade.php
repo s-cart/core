@@ -1,3 +1,6 @@
+{{-- Use sc_config with storeId, dont use sc_config_admin because switch store no session adminStoreId--}}
+{{-- Use sc_config with storeId, dont use sc_config_admin because switch store no session adminStoreId--}}
+
 <div class="card">
 
   <div class="card-body table-responsivep-0">

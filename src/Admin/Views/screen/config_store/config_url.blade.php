@@ -1,3 +1,5 @@
+{{-- Use sc_config with storeId, dont use sc_config_admin because switch store no session adminStoreId--}}
+
 <div class="card">
   <div class="card-body table-responsive">
    <table class="table table-hover box-body text-wrap table-bordered">
