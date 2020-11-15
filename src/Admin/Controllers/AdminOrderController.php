@@ -79,6 +79,9 @@ class AdminOrderController extends RootAdminController
         ];
         $sort_order   = request('sort_order') ?? 'id_desc';
         $keyword      = request('keyword') ?? '';
+        $email        = request('email') ?? '';
+        $from_to      = request('from_to') ?? '';
+        $end_to       = request('end_to') ?? '';
         $order_status = request('order_status') ?? '';
         $arrSort = [
             'id__desc'         => trans('order.admin.sort_order.id_desc'),
@@ -89,10 +92,13 @@ class AdminOrderController extends RootAdminController
             'created_at__asc'  => trans('order.admin.sort_order.date_asc'),
         ];
         $dataSearch = [
-            'keyword'    => $keyword,
-            'sort_order' => $sort_order,
-            'arrSort'    => $arrSort,
-            'order_status'    => $order_status,
+            'keyword'      => $keyword,
+            'email'        => $email,
+            'from_to'      => $from_to,
+            'end_to'       => $end_to,
+            'sort_order'   => $sort_order,
+            'arrSort'      => $arrSort,
+            'order_status' => $order_status,
         ];
         $dataTmp = (new AdminOrder)->getOrderListAdmin($dataSearch);
 
@@ -150,13 +156,18 @@ class AdminOrderController extends RootAdminController
         }
         $data['topMenuRight'][] = '
                 <form action="' . sc_route('admin_order.index') . '" id="button_search">
-                    <div class="input-group input-group float-left">
+                    <div class="input-group float-left">
+                        <input type="date" style="width: 120px;" name="from_to" id="from_to" class="form-control input-sm date_time rounded-0" placeholder="" /> &nbsp; 
+                        <label>To</label> &nbsp;
+                        <input type="date" style="width: 120px;" name="end_to" class="form-control input-sm date_time rounded-0" placeholder="" /> &nbsp;
                         <div class="btn-group">
-                            <select class="form-control rounded-0" name="order_status" id="order_sort">
+                            <select class="form-control rounded-0" name="order_status">
+                            <option value="">'.trans('order.admin.search_order_status').'</option>
                             ' . $optionStatus . '
                             </select>
-                        </div>
-                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_place') . '" value="' . $keyword . '">
+                        </div> &nbsp;
+                        <input type="text" name="email" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_email') . '" value="' . $email . '"> &nbsp;
+                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_id') . '" value="' . $keyword . '">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>

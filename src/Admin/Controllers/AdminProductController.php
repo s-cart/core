@@ -193,7 +193,7 @@ class AdminProductController extends RootAdminController
                     <select class="form-control rounded-0 select2" name="category_id" id="category_id">
                     <option value="">'.trans('product.admin.select_category').'</option>
                     '.$optionCategory.'
-                    </select>
+                    </select> &nbsp;
                     <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('product.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>

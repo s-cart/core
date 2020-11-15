@@ -38,6 +38,9 @@ class AdminOrder extends ShopOrder
      */
     public static function getOrderListAdmin(array $dataSearch) {
         $keyword      = $dataSearch['keyword'] ?? '';
+        $email        = $dataSearch['email'] ?? '';
+        $from_to      = $dataSearch['from_to'] ?? '';
+        $end_to       = $dataSearch['end_to'] ?? '';
         $sort_order   = $dataSearch['sort_order'] ?? '';
         $arrSort      = $dataSearch['arrSort'] ?? '';
         $order_status = $dataSearch['order_status'] ?? '';
@@ -48,8 +51,25 @@ class AdminOrder extends ShopOrder
         }
         if ($keyword) {
             $orderList = $orderList->where(function ($sql) use($keyword){
-                $sql->where('email', 'like', '%' . $keyword . '%')
-                    ->orWhere('id', 'like', '%' . $keyword . '%');
+                $sql->Where('id', $keyword );
+            });
+        }
+
+        if ($email) {
+            $orderList = $orderList->where(function ($sql) use($email){
+                $sql->Where('email', 'like' , '%'.$email.'%' );
+            });
+        }
+
+        if ($from_to) {
+            $orderList = $orderList->where(function ($sql) use($from_to){
+                $sql->Where('created_at', '>=' , $from_to);
+            });
+        }
+
+        if ($end_to) {
+            $orderList = $orderList->where(function ($sql) use($end_to){
+                $sql->Where('created_at', '<=' , $end_to);
             });
         }
 
