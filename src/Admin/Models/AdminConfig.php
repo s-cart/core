@@ -48,7 +48,7 @@ class AdminConfig extends Model
         if ($onlyActive) {
             $query = $query->where('value', 1);
         }
-        $data = $query->orderBy('sort', 'asc')
+        $data = $query->orderBy('sort', 'desc')
             ->get()->keyBy('key');
         return $data;
     }
@@ -147,16 +147,15 @@ class AdminConfig extends Model
             $data = self::where('code', $dataQuery['code']);
         }
         $storeId = $dataQuery['storeId'] ?? 0;
-        $Sort    = $dataQuery['Sort'] ?? 'desc';
+        $sort    = $dataQuery['sort'] ?? 'desc';
         $groupBy = $dataQuery['groupBy'] ?? null;
         $keyBy   = $dataQuery['keyBy'] ?? null;
         $data = $data->where('store_id', $storeId)
-        ->orderBy('sort', $Sort)
-        ->get();
-        if($groupBy) {
+            ->orderBy('sort', $sort)
+            ->get();
+        if ($groupBy) {
             $data = $data->groupBy($groupBy);
-        }
-        elseif($keyBy) {
+        } elseif ($keyBy) {
             $data = $data->keyBy($keyBy);
         }
         return $data;

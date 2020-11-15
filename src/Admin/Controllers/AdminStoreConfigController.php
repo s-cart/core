@@ -103,6 +103,7 @@ class AdminStoreConfigController extends RootAdminController
             'code' => ['smtp_config', 'email_action'],
             'storeId' => $id,
             'groupBy' => 'code',
+            'sort'    => 'asc',
         ];
         $emailConfig = AdminConfig::getListConfigByCode($emailConfigQuery);
 
