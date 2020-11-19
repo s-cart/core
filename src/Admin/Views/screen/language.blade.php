@@ -99,7 +99,7 @@
             <label for="rtl" class="col-sm-2 col-form-label">{!! trans('language.layout_rtl') !!}</label>
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
-                <input type="checkbox" id="rtl" name="rtl"
+                <input class="checkbox" type="checkbox" id="rtl" name="rtl"
                     class="form-control input {{ $errors->has('rtl') ? ' is-invalid' : '' }}" placeholder=""  {!!
                       old('rtl',(empty($language['rtl'])?0:1))?'checked':''!!}/>
               </div>
@@ -136,7 +136,7 @@
             <label for="status" class="col-sm-2 col-form-label">{!! trans('language.status') !!}</label>
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
-                <input type="checkbox" id="status" name="status"
+                <input class="checkbox" type="checkbox" id="status" name="status"
                     class="form-control input {{ $errors->has('status') ? ' is-invalid' : '' }}" placeholder="" {!!
                       old('status',(empty($language['status'])?0:1))?'checked':''!!}/>
               </div>
