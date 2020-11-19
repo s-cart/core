@@ -149,7 +149,7 @@ class AdminCategory extends ShopCategory
      * @return  [type]              [return description]
      */
     public static function createCategoryAdmin(array $dataInsert) {
-        $dataInsert = sc_clean($dataInsert);
+        $dataInsert = $dataInsert;
         return self::create($dataInsert);
     }
 
@@ -162,7 +162,7 @@ class AdminCategory extends ShopCategory
      * @return  [type]              [return description]
      */
     public static function insertDescriptionAdmin(array $dataInsert) {
-        $dataInsert = sc_clean($dataInsert);
+        $dataInsert = $dataInsert;
         return ShopCategoryDescription::create($dataInsert);
     }
 

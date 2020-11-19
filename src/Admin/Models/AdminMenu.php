@@ -152,7 +152,7 @@ Re-sort menu
      */
     public static function createMenu($dataInsert)
     {
-        $dataUpdate = sc_clean($dataInsert);
+        $dataUpdate = $dataInsert;
         return self::create($dataUpdate);
     }
 

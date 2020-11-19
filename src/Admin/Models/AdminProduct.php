@@ -124,7 +124,7 @@ class AdminProduct extends ShopProduct
      * @return  [type]              [return description]
      */
     public static function createProductAdmin(array $dataInsert) {
-        $dataInsert = sc_clean($dataInsert);
+        $dataInsert = $dataInsert;
         return self::create($dataInsert);
     }
 
@@ -137,7 +137,7 @@ class AdminProduct extends ShopProduct
      * @return  [type]              [return description]
      */
     public static function insertDescriptionAdmin(array $dataInsert) {
-        $dataInsert = sc_clean($dataInsert);
+        $dataInsert = $dataInsert;
         return ShopProductDescription::create($dataInsert);
     }
 

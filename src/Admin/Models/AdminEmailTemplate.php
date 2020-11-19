@@ -62,7 +62,7 @@ class AdminEmailTemplate extends ShopEmailTemplate
      * @return  [type]              [return description]
      */
     public static function createEmailTemplateAdmin(array $dataInsert) {
-        $dataInsert = sc_clean($dataInsert);
+        $dataInsert = $dataInsert;
         return self::create($dataInsert);
     }
 }

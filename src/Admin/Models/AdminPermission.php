@@ -74,7 +74,7 @@ class AdminPermission extends Model
  */
     public static function updateInfo($dataUpdate, $id)
     {
-        $dataUpdate = sc_clean($dataUpdate);
+        $dataUpdate = $dataUpdate;
         $obj = self::find($id);
         return $obj->update($dataUpdate);
     }
@@ -85,7 +85,7 @@ class AdminPermission extends Model
      */
     public static function createPermission($dataInsert)
     {
-        $dataUpdate = sc_clean($dataInsert);
+        $dataUpdate = $dataInsert;
         return self::create($dataUpdate);
     }
 
