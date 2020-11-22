@@ -228,6 +228,7 @@ class ShopAccountController extends RootFrontController
                 'title' => trans('account.address_list'),
                 'addresses' => $customer->addresses,
                 'countries' => ShopCountry::getCodeAll(),
+                'customer' => $customer,
                 'layout_page' => 'shop_profile',
                 ]
             );
@@ -255,6 +256,7 @@ class ShopAccountController extends RootFrontController
             [
             'title' => $title,
             'address' => $address,
+            'customer' => $customer,
             'countries' => ShopCountry::getCodeAll(),
             'layout_page' => 'shop_profile',
             ]
