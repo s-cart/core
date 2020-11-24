@@ -248,7 +248,7 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
     */
     public static function getCountryInYear() {
-        if (sc_config_global('MultiStorePro') && function_exists('sc_order_store_country_in_year')) {
+        if (function_exists('sc_order_store_country_in_year')) {
             return sc_order_store_country_in_year(session('adminStoreId'));
         } else {
             return self::selectRaw('country, count(id) as count')
@@ -265,7 +265,7 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getSumOrderTotalInYear() {
-        if (sc_config_global('MultiStorePro') && function_exists('sc_total_order_store_in_year')) {
+        if (function_exists('sc_total_order_store_in_year')) {
             return sc_total_order_store_in_year(session('adminStoreId'));
         } else {
             return self::selectRaw('DATE_FORMAT(created_at, "%Y-%m") AS ym, SUM(total/exchange_rate) AS total_amount')
@@ -281,7 +281,7 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getSumOrderTotalInMonth() {
-        if (sc_config_global('MultiStorePro') && function_exists('sc_total_order_store_in_month')) {
+        if (function_exists('sc_total_order_store_in_month')) {
             return sc_total_order_store_in_month(session('adminStoreId'));
         } else {
             return self::selectRaw('DATE_FORMAT(created_at, "%m-%d") AS md,
@@ -297,7 +297,7 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getTotalOrderStore() {
-        if (sc_config_global('MultiStorePro') && function_exists('sc_count_order_store')) {
+        if (function_exists('sc_count_order_store')) {
             return sc_count_order_store(session('adminStoreId'));
         } else {
             return self::count();
@@ -310,7 +310,7 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getCountOrderNew() {
-        if (sc_config_global('MultiStorePro') && function_exists('sc_count_order_new_store')) {
+        if (function_exists('sc_count_order_new_store')) {
             return sc_count_order_new_store(session('adminStoreId'));
         } else {
             return self::where('status', 1)
