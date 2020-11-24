@@ -53,7 +53,9 @@
 
       <tr>
         <td><i class="fab fa-chrome"></i> {{ trans('store.domain') }}</td>
-        <td><a href="#" class="editable-required editable editable-click" data-name="domain" data-type="text" data-pk="" data-source="" data-url="{{ sc_route('admin_store.update') }}" data-title="{{ trans('store.domain') }}" data-value="{{ $store->domain }}" data-original-title="" title="">{{$store->domain }}</a></td>
+        <td>
+          <a href="#" class="editable-required editable editable-click" data-name="domain" data-type="text" data-pk="" data-source="" data-url="{{ sc_route('admin_store.update') }}" data-title="{{ trans('store.domain') }}" data-value="{{ $store->domain }}" data-original-title="" title="">{{$store->domain }}</a>
+        </td>
       </tr>
 
       <tr>
