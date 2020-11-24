@@ -167,7 +167,7 @@ class AdminOrderController extends RootAdminController
                             </select>
                         </div> &nbsp;
                         <input type="text" name="email" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_email') . '" value="' . $email . '"> &nbsp;
-                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_id') . '" value="' . $keyword . '">
+                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_id') . '" value="' . htmlentities($keyword) . '">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
