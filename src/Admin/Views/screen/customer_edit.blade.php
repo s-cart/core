@@ -416,7 +416,7 @@
                         <b>{{ trans('account.address1') }}:</b> {{ $address['address1'] }}<br>
                         <b>{{ trans('account.address2') }}:</b> {{ $address['address2'] }}<br>
                         @else
-                        <b>{{ trans('account.address') }}:</b> {{ $address['first_address1'] }}<br>
+                        <b>{{ trans('account.address') }}:</b> {{ $address['address1'] }}<br>
                         @endif
             
                         @if (sc_config_admin('customer_country'))
