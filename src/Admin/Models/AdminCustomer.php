@@ -11,7 +11,7 @@ class AdminCustomer extends ShopCustomer
     protected static $getListCustomerGroupByParentAdmin = null;
     private static $getList = null;
     /**
-     * Get page detail in admin
+     * Get customer detail in admin
      *
      * @param   [type]  $id  [$id description]
      *
@@ -25,7 +25,7 @@ class AdminCustomer extends ShopCustomer
     }
 
     /**
-     * Get page detail in admin json
+     * Get customer detail in admin json
      *
      * @param   [type]  $id  [$id description]
      *
@@ -37,7 +37,7 @@ class AdminCustomer extends ShopCustomer
     }
 
     /**
-     * Get list page in admin
+     * Get list customer in admin
      *
      * @param   [array]  $dataSearch  [$dataSearch description]
      *
@@ -48,11 +48,11 @@ class AdminCustomer extends ShopCustomer
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
 
-        $pageList = (new ShopCustomer)
+        $customerList = (new ShopCustomer)
             ->where('store_id', session('adminStoreId'));
 
         if ($keyword) {
-            $pageList->where('email', 'like', '%' . $keyword . '%')
+            $customerList->where('email', 'like', '%' . $keyword . '%')
             ->orWhere('last_name', 'like', '%' . $keyword . '%')
             ->orWhere('first_name', 'like', '%' . $keyword . '%');
         }
@@ -60,13 +60,13 @@ class AdminCustomer extends ShopCustomer
         if ($sort_order && array_key_exists($sort_order, $arrSort)) {
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];
-            $pageList = $pageList->orderBy($field, $sort_field);
+            $customerList = $customerList->orderBy($field, $sort_field);
         } else {
-            $pageList = $pageList->orderBy('id', 'desc');
+            $customerList = $customerList->orderBy('id', 'desc');
         }
-        $pageList = $pageList->paginate(20);
+        $customerList = $customerList->paginate(20);
 
-        return $pageList;
+        return $customerList;
     }
 
     /**
