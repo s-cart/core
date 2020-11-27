@@ -37,7 +37,8 @@ class AdminCategory extends ShopCategory
         $tableCategory     = (new ShopCategory)->getTable();
 
         $categoryList = (new ShopCategory)
-            ->leftJoin($tableDescription, $tableDescription . '.category_id', $tableCategory . '.id');
+            ->leftJoin($tableDescription, $tableDescription . '.category_id', $tableCategory . '.id')
+            ->where($tableDescription . '.lang', sc_get_locale());
         if ($keyword) {
             $categoryList = $categoryList->where(function ($sql) use($tableDescription, $keyword){
                 $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%');
