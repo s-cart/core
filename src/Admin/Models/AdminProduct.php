@@ -22,7 +22,6 @@ class AdminProduct extends ShopProduct
         return self::where('id', $id)
         ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
         ->where($tableProduct . '.store_id', session('adminStoreId'))
-        ->where($tableDescription . '.lang', sc_get_locale())
         ->first();
     }
 
@@ -63,6 +62,7 @@ class AdminProduct extends ShopProduct
                     ->orWhere($tableProduct . '.sku', 'like', '%' . $keyword . '%');
             });
         }
+        $productList->groupBy($tableProduct.'.id');
 
         if ($sort_order && array_key_exists($sort_order, $arrSort)) {
             $field = explode('__', $sort_order)[0];
@@ -108,10 +108,10 @@ class AdminProduct extends ShopProduct
             });
         }
 
-        $productList = $productList->sort('id', 'desc');
         if($limit) {
             $productList = $productList->limit($limit);
         }
+        $productList->groupBy($tableProduct.'.id');
         return $productList->get()->keyBy('id');
     }
 
@@ -124,7 +124,6 @@ class AdminProduct extends ShopProduct
      * @return  [type]              [return description]
      */
     public static function createProductAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
         return self::create($dataInsert);
     }
 
@@ -137,7 +136,6 @@ class AdminProduct extends ShopProduct
      * @return  [type]              [return description]
      */
     public static function insertDescriptionAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
         return ShopProductDescription::create($dataInsert);
     }
 

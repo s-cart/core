@@ -37,8 +37,7 @@ class AdminCategory extends ShopCategory
         $tableCategory     = (new ShopCategory)->getTable();
 
         $categoryList = (new ShopCategory)
-            ->leftJoin($tableDescription, $tableDescription . '.category_id', $tableCategory . '.id')
-            ->where($tableDescription . '.lang', sc_get_locale());
+            ->leftJoin($tableDescription, $tableDescription . '.category_id', $tableCategory . '.id');
 
         if ($keyword) {
             $categoryList = $categoryList->where(function ($sql) use($tableDescription, $keyword){
@@ -55,6 +54,8 @@ class AdminCategory extends ShopCategory
         } else {
             $categoryList = $categoryList->sort('id', 'desc');
         }
+        $categoryList->groupBy($tableCategory.'.id');
+
         $categoryList = $categoryList->paginate(20);
 
         return $categoryList;
@@ -149,7 +150,6 @@ class AdminCategory extends ShopCategory
      * @return  [type]              [return description]
      */
     public static function createCategoryAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
         return self::create($dataInsert);
     }
 
@@ -162,7 +162,6 @@ class AdminCategory extends ShopCategory
      * @return  [type]              [return description]
      */
     public static function insertDescriptionAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
         return ShopCategoryDescription::create($dataInsert);
     }
 
