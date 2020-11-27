@@ -44,9 +44,7 @@ class AdminNews extends ShopNews
 
         if ($keyword) {
             $newsList = $newsList->where(function ($sql) use($tableDescription, $keyword){
-                $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableDescription . '.keyword', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableDescription . '.description', 'like', '%' . $keyword . '%');
+                $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%');
             });
         }
 

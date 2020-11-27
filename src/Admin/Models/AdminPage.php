@@ -44,9 +44,7 @@ class AdminPage extends ShopPage
 
         if ($keyword) {
             $pageList = $pageList->where(function ($sql) use($tableDescription, $keyword){
-                $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableDescription . '.keyword', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableDescription . '.description', 'like', '%' . $keyword . '%');
+                $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%');
             });
         }
 

@@ -38,12 +38,9 @@ class AdminCategory extends ShopCategory
 
         $categoryList = (new ShopCategory)
             ->leftJoin($tableDescription, $tableDescription . '.category_id', $tableCategory . '.id');
-
         if ($keyword) {
             $categoryList = $categoryList->where(function ($sql) use($tableDescription, $keyword){
-                $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableDescription . '.keyword', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableDescription . '.description', 'like', '%' . $keyword . '%');
+                $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%');
             });
         }
 
@@ -79,7 +76,7 @@ class AdminCategory extends ShopCategory
         $lisCategory = $categories[$parent] ?? [];
         if ($lisCategory) {
             foreach ($lisCategory as $category) {
-                $tree[$category['id']] = $st . $categoriesTitle[$category['id']]??'';
+                $tree[$category['id']] = $st . ($categoriesTitle[$category['id']]??'');
                 if (!empty($categories[$category['id']])) {
                     $st .= '--';
                     $this->getTreeCategoriesAdmin($category['id'], $tree, $categories, $st);
