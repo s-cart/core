@@ -106,7 +106,7 @@ class AdminNews extends ShopNews
      * @return  [type]              [return description]
      */
     public static function createNewsAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
+
         return self::create($dataInsert);
     }
 
@@ -119,7 +119,7 @@ class AdminNews extends ShopNews
      * @return  [type]              [return description]
      */
     public static function insertDescriptionAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
+
         return ShopNewsDescription::create($dataInsert);
     }
 

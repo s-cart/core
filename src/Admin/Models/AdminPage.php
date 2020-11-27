@@ -106,7 +106,7 @@ class AdminPage extends ShopPage
      * @return  [type]              [return description]
      */
     public static function createPageAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
+
         return self::create($dataInsert);
     }
 
@@ -119,7 +119,7 @@ class AdminPage extends ShopPage
      * @return  [type]              [return description]
      */
     public static function insertDescriptionAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
+
         return ShopPageDescription::create($dataInsert);
     }
 }

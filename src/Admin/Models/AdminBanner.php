@@ -52,7 +52,7 @@ class AdminBanner extends ShopBanner
      * @return  [type]              [return description]
      */
     public static function createBannerAdmin(array $dataInsert) {
-        $dataInsert = $dataInsert;
+
         return self::create($dataInsert);
     }
 
