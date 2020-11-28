@@ -157,8 +157,8 @@ class ShopOrder extends Model
             //End order detail
 
             //Add order store - MultiStorePro
-            if (function_exists('sc_create_order_store')) {
-                sc_create_order_store($orderID);
+            if (function_exists('sc_store_create_order')) {
+                sc_store_create_order($orderID);
             }
 
             //Add history

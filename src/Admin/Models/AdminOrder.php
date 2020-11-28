@@ -248,8 +248,8 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
     */
     public static function getCountryInYear() {
-        if (function_exists('sc_order_store_country_in_year')) {
-            return sc_order_store_country_in_year(session('adminStoreId'));
+        if (function_exists('sc_store_order_country_in_year')) {
+            return sc_store_order_country_in_year(session('adminStoreId'));
         } else {
             return self::selectRaw('country, count(id) as count')
             ->whereRaw('DATE(created_at) >=  DATE_SUB(DATE(NOW()), INTERVAL 12 MONTH)')
@@ -265,8 +265,8 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getSumOrderTotalInYear() {
-        if (function_exists('sc_total_order_store_in_year')) {
-            return sc_total_order_store_in_year(session('adminStoreId'));
+        if (function_exists('sc_store_total_order_in_year')) {
+            return sc_store_total_order_in_year(session('adminStoreId'));
         } else {
             return self::selectRaw('DATE_FORMAT(created_at, "%Y-%m") AS ym, SUM(total/exchange_rate) AS total_amount')
             ->whereRaw('DATE_FORMAT(created_at, "%Y-%m") >=  DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH), "%Y-%m")')
@@ -281,8 +281,8 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getSumOrderTotalInMonth() {
-        if (function_exists('sc_total_order_store_in_month')) {
-            return sc_total_order_store_in_month(session('adminStoreId'));
+        if (function_exists('sc_store_total_order_in_month')) {
+            return sc_store_total_order_in_month(session('adminStoreId'));
         } else {
             return self::selectRaw('DATE_FORMAT(created_at, "%m-%d") AS md,
             SUM(total/exchange_rate) AS total_amount, count(id) AS total_order')
@@ -297,8 +297,8 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getTotalOrderStore() {
-        if (function_exists('sc_count_order_store')) {
-            return sc_count_order_store(session('adminStoreId'));
+        if (function_exists('sc_store_count_order')) {
+            return sc_store_count_order(session('adminStoreId'));
         } else {
             return self::count();
         }
@@ -310,8 +310,8 @@ class AdminOrder extends ShopOrder
      * @return  [type]  [return description]
      */
     public static function getCountOrderNew() {
-        if (function_exists('sc_count_order_new_store')) {
-            return sc_count_order_new_store(session('adminStoreId'));
+        if (function_exists('sc_store_count_order_new')) {
+            return sc_store_count_order_new(session('adminStoreId'));
         } else {
             return self::where('status', 1)
             ->count();
