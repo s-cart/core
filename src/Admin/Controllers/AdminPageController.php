@@ -43,8 +43,8 @@ class AdminPageController extends RootAdminController
             'status' => trans('page.status'),
             'action' => trans('page.admin.action'),
         ];
-        $sort_order = request('sort_order') ?? 'id_desc';
-        $keyword = request('keyword') ?? '';
+        $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
+        $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
             'id__desc'    => trans('page.admin.sort_order.id_desc'),
             'id__asc'     => trans('page.admin.sort_order.id_asc'),

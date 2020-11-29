@@ -61,8 +61,8 @@ class AdminReportController extends RootAdminController
             'kind' => trans('product.kind'),
             'status' => trans('product.status'),
         ];
-        $sort_order = request('sort_order') ?? 'id_desc';
-        $keyword = request('keyword') ?? '';
+        $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
+        $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
             'id__desc' => trans('product.admin.sort_order.id_desc'),
             'id__asc' => trans('product.admin.sort_order.id_asc'),

@@ -77,12 +77,12 @@ class AdminOrderController extends RootAdminController
             'created_at'     => trans('order.admin.created_at'),
             'action'         => trans('order.admin.action'),
         ];
-        $sort_order   = request('sort_order') ?? 'id_desc';
-        $keyword      = request('keyword') ?? '';
-        $email        = request('email') ?? '';
-        $from_to      = request('from_to') ?? '';
-        $end_to       = request('end_to') ?? '';
-        $order_status = request('order_status') ?? '';
+        $sort_order   = sc_clean(request('sort_order') ?? 'id_desc');
+        $keyword      = sc_clean(request('keyword') ?? '');
+        $email        = sc_clean(request('email') ?? '');
+        $from_to      = sc_clean(request('from_to') ?? '');
+        $end_to       = sc_clean(request('end_to') ?? '');
+        $order_status = sc_clean(request('order_status') ?? '');
         $arrSort = [
             'id__desc'         => trans('order.admin.sort_order.id_desc'),
             'id__asc'          => trans('order.admin.sort_order.id_asc'),

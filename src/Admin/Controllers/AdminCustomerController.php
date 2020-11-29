@@ -53,8 +53,8 @@ class AdminCustomerController extends RootAdminController
             'created_at' => trans('customer.created_at'),
             'action'     => trans('customer.admin.action'),
         ];
-        $sort_order = request('sort_order') ?? 'id_desc';
-        $keyword    = request('keyword') ?? '';
+        $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
+        $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
             'id__desc' => trans('customer.admin.sort_order.id_desc'),
             'id__asc' => trans('customer.admin.sort_order.id_asc'),

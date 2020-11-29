@@ -92,10 +92,9 @@ class AdminProductController extends RootAdminController
         $listTh['status'] = trans('product.status');
         $listTh['action'] = trans('product.admin.action');
 
-        $keyword = request('keyword') ?? '';
-        $category_id = request('category_id') ?? '';
-
-        $sort_order = request('sort_order') ?? 'id_desc';
+        $keyword     = sc_clean(request('keyword') ?? '');
+        $category_id = sc_clean(request('category_id') ?? '');
+        $sort_order  = sc_clean(request('sort_order') ?? 'id_desc');
 
         $arrSort = [
             'id__desc'   => trans('product.admin.sort_order.id_desc'),

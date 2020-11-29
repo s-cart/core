@@ -47,8 +47,8 @@ class AdminCategoryController extends RootAdminController
             'sort'   => trans('category.sort'),
             'action' => trans('category.admin.action'),
         ];
-        $sort_order = request('sort_order') ?? 'id_desc';
-        $keyword = request('keyword') ?? '';
+        $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
+        $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
             'id__desc' => trans('category.admin.sort_order.id_desc'),
             'id__asc' => trans('category.admin.sort_order.id_asc'),

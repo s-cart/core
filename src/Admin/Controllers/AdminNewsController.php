@@ -44,8 +44,8 @@ class AdminNewsController extends RootAdminController
             'status' => trans('news.status'),
             'action' => trans('news.admin.action'),
         ];
-        $sort_order = request('sort_order') ?? 'id_desc';
-        $keyword = request('keyword') ?? '';
+        $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
+        $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
             'id__desc' => trans('news.admin.sort_order.id_desc'),
             'id__asc' => trans('news.admin.sort_order.id_asc'),
