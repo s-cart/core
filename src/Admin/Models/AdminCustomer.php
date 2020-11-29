@@ -98,6 +98,15 @@ class AdminCustomer extends ShopCustomer
         return self::where('store_id', session('adminStoreId'))->count();
     }
 
+    /**
+     * Get total customer of system
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getTotalCustomer() {
+        return self::count();
+    }
+
 
     /**
      * Get total customer of store
@@ -110,6 +119,19 @@ class AdminCustomer extends ShopCustomer
             ->limit(10)
             ->get();
     }
+
+
+    /**
+     * Get total customer of system
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getTopCustomer() {
+        return self::orderBy('id', 'desc')
+            ->limit(10)
+            ->get();
+    }
+
 
     /**
      * [getListAll description]

@@ -34,11 +34,12 @@ class DashboardController extends RootAdminController
 
         $data                   = [];
         $data['title']          = trans('admin.dashboard');
-        $data['totalOrder']     = AdminOrder::getTotalOrderStore();
-        $data['totalProduct']   = AdminProduct::getTotalProductStore();
-        $data['topCustomer']    = AdminCustomer::getTopCustomerStore();
-        $data['totalCustomer']  = AdminCustomer::getTotalCustomerStore();
-        $data['totalNews']      = AdminNews::getTotalNewsStore();
+        $data['totalOrder']     = AdminOrder::getTotalOrder();
+        $data['totalProduct']   = AdminProduct::getTotalProduct();
+        $data['totalNews']      = AdminNews::getTotalNews();
+        $data['totalCustomer']  = AdminCustomer::getTotalCustomer();
+        $data['topCustomer']    = AdminCustomer::getTopCustomer();
+        $data['topOrder']       = AdminOrder::getTopOrder();
         $data['mapStyleStatus'] = AdminOrder::$mapStyleStatus;
 
         //Country statistics

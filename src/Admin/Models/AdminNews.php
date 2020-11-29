@@ -129,4 +129,13 @@ class AdminNews extends ShopNews
     public static function getTotalNewsStore() {
         return self::where('store_id', session('adminStoreId'))->count();
     }
+
+     /**
+     * Get total news of system
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getTotalNews() {
+        return self::count();
+    }
 }

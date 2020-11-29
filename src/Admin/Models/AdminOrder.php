@@ -16,6 +16,7 @@ class AdminOrder extends ShopOrder
         '5' => 'success', //Success
         '6' => 'default', //Failed
     ];
+
     /**
      * Get order detail in admin
      *
@@ -304,6 +305,17 @@ class AdminOrder extends ShopOrder
         }
     }
 
+
+    /**
+     * Get total order of system
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getTotalOrder() {
+        return self::count();
+    }
+
+
     /**
      * Get count order new
      *
@@ -316,6 +328,18 @@ class AdminOrder extends ShopOrder
             return self::where('status', 1)
             ->count();
         }
+    }
+    
+    /**
+     * Get total order of system
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getTopOrder() {
+        return self::with('orderStatus')
+            ->orderBy('id', 'desc')
+            ->limit(10)
+            ->get();
     }
     
 }
