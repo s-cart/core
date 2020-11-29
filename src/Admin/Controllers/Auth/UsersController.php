@@ -190,7 +190,7 @@ class UsersController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $store = $data['store'] ?? [];
+        $store = $data['store'] ?? 1;
 
         $dataInsert = [
             'name'     => $data['name'],
@@ -227,13 +227,7 @@ class UsersController extends RootAdminController
         }
 
         //Insert store
-        if ($store) {
-            if(is_array($store) && in_array(0, $store)) {
-                $user->stores()->attach([0]);
-            } else {
-                $user->stores()->attach($store);
-            }
-        }
+        $user->stores()->attach([$store]);
 
         return redirect()->route('admin_user.index')->with('success', trans('user.admin.create_success'));
 
@@ -291,7 +285,7 @@ class UsersController extends RootAdminController
                 ->withInput();
         }
 //Edit
-        $store = $data['store'] ?? [];
+        $store = $data['store'] ?? 1;
         $dataUpdate = [
             'name' => $data['name'],
             'username' => strtolower($data['username']),
@@ -319,14 +313,7 @@ class UsersController extends RootAdminController
 
             //Update store
             $user->stores()->detach();
-            if (count($store)) {
-                if(is_array($store) && in_array(0, $store)) {
-                    $user->stores()->attach([0]);
-                } else {
-                    $user->stores()->attach($store);
-                }
-                
-            }
+            $user->stores()->attach([$store]);
 
         }
 

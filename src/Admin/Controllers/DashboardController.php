@@ -18,6 +18,13 @@ class DashboardController extends RootAdminController
     
     public function index(Request $request)
     {
+        // Check redirect dashboard multi-store
+        if (function_exists('sc_store_redirect_dashboard')) {
+            if (sc_store_redirect_dashboard()) {
+                return redirect(sc_store_redirect_dashboard());
+            }
+        }
+
         //Check user allow view dasdboard
         if(!session('admin')->checkUrlAllowAccess(route('admin.home')))
         {

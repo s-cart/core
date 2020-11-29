@@ -76,7 +76,6 @@ class ShopStore extends Model
     {
         if (self::$getAll === null) {
             self::$getAll = self::with('descriptions')
-                ->where('id', '<>', 1)
                 ->get()
                 ->keyBy('id');
         }
@@ -92,7 +91,6 @@ class ShopStore extends Model
     {
         if (self::$getListAllActive === null) {
             self::$getListAllActive = self::with('descriptions')
-                ->where('id', '<>', 1)
                 ->where('active', 1)
                 ->get()
                 ->keyBy('id');

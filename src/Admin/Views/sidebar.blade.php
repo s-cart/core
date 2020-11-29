@@ -1,22 +1,13 @@
    <!-- Main Sidebar Container -->
    <aside class="main-sidebar sidebar-light-pink elevation-4 sidebar-no-expand">
     <!-- Brand Logo -->
-    <a href="{{ sc_route('admin.home') }}" class="brand-link navbar-secondary">
+    <a href="{{ sc_route('admin.home') }}" class="brand-link navbar-secondary"">
       S-Cart
       <span class="brand-text font-weight-light">Admin</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar {{ config($styleDefine.'.sidebar') }}">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ Admin::user()->avatar?asset(Admin::user()->avatar):asset('admin/avatar/user.jpg') }}" class="img-circle" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">{{ Admin::user()->name }}</a>
-        </div>
-      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">

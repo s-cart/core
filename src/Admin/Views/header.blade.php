@@ -27,14 +27,9 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      @if (sc_config_global('MultiStorePro'))
-        @include($templatePathAdmin.'component.admin_select_store')
-        @include($templatePathAdmin.'component.store_list')
-      @else
       <a class="nav-link" href="{{ sc_route('home') }}" target=_new>
         <i class="fas fa-home"></i>
       </a> 
-      @endif
 
       @include($templatePathAdmin.'component.notice')
 

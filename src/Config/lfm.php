@@ -285,6 +285,9 @@ return [
     // setting it to false show `error-file-exist` error and stop upload
     'over_write_on_duplicate'  => false,
 
+    // Item Columns
+    'item_columns' => ['name', 'url', 'time', 'icon', 'is_file', 'is_image', 'thumb_url'],
+
     /*
     |--------------------------------------------------------------------------
     | Thumbnail
@@ -292,7 +295,7 @@ return [
      */
 
     // If true, image thumbnails would be created during upload
-    'should_create_thumbnails' => false,
+    'should_create_thumbnails' => true,
 
     'thumb_folder_name'        => 'thumbs',
 

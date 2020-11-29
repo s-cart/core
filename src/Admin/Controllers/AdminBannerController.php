@@ -48,6 +48,7 @@ class AdminBannerController extends RootAdminController
 
         $listTh = [
             'image'  => trans('banner.image'),
+            'title'  => trans('banner.title'),
             'url'    => trans('banner.url'),
             'sort'   => trans('banner.sort'),
             'status' => trans('banner.status'),
@@ -75,6 +76,7 @@ class AdminBannerController extends RootAdminController
         foreach ($dataTmp as $key => $row) {
             $dataTr[] = [
                 'image' => sc_image_render($row->getThumb(), '', '50px', 'Banner'),
+                'title' => $row['title'],
                 'url' => $row['url'],
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
@@ -100,6 +102,19 @@ class AdminBannerController extends RootAdminController
         //=menuRight
 
         //menuSearch        
+        $data['topMenuRight'][] = '
+        <form action="' . sc_route('admin_banner.index') . '" id="button_search">
+        <div class="input-group input-group" style="width: 250px;">
+            <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('banner.admin.search_place') . '" value="' . $keyword . '">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        </form>';
+        //=menuSearch
+
+
+        //menuSort        
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';

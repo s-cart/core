@@ -29,9 +29,12 @@ class AdminBanner extends ShopBanner
     public static function getBannerListAdmin(array $dataSearch) {
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
+        $keyword          = $dataSearch['keyword'] ?? '';
         $bannerList = (new AdminBanner)
             ->where('store_id', session('adminStoreId'));
-
+        if ($keyword) {
+            $bannerList->where('title', 'like', '%'.$keyword.'%');
+        }
         if ($sort_order && array_key_exists($sort_order, $arrSort)) {
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];

@@ -215,7 +215,6 @@
                         {{-- //select permission --}}
 
 
-
                         {{-- select store --}}
                         @if (sc_config_global('MultiStorePro'))
                             @if (!empty($isAllStore))
@@ -238,13 +237,11 @@
                                         {{ trans('store.select_store') }}
                                     </label>
                                     <div class="col-sm-8">
-                                        <select class="form-control input-sm store select2" multiple="multiple"
-                                            data-placeholder="{{ trans('store.select_store') }}" style="width: 100%;"
-                                            name="store[]">
-                                            <option value="0" {{ (in_array(0, $listStore)) ? 'selected' : ''}}>{{ trans('store.all_stories') }}</option>
+                                        <select class="form-control input-sm store" data-placeholder="{{ trans('store.select_store') }}" style="width: 100%;"
+                                            name="store">
                                             @foreach ($stores as $id => $store)
-                                            <option value="{{ $id }}"
-                                                {{ (count($listStore) && in_array($id, $listStore))?'selected':'' }}>{{ sc_store('title', $id) }}
+                                            <option value="{{ $id }}" {{ (count($listStore) && in_array($id, $listStore))?'selected':'' }}>
+                                                {{ sc_store('title', $id) }}
                                             </option>
                                             @endforeach
                                         </select>
@@ -257,7 +254,7 @@
                                 </div>
                             @endif
                         @else
-                            <input type="hidden" name="store[]" value="0">
+                            <input type="hidden" name="store" value="1">
                         @endif
                         {{-- //select store --}}
 
