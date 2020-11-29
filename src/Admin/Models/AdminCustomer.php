@@ -90,34 +90,12 @@ class AdminCustomer extends ShopCustomer
     }
 
     /**
-     * Get total customer of store
-     *
-     * @return  [type]  [return description]
-     */
-    public static function getTotalCustomerStore() {
-        return self::where('store_id', session('adminStoreId'))->count();
-    }
-
-    /**
      * Get total customer of system
      *
      * @return  [type]  [return description]
      */
     public static function getTotalCustomer() {
         return self::count();
-    }
-
-
-    /**
-     * Get total customer of store
-     *
-     * @return  [type]  [return description]
-     */
-    public static function getTopCustomerStore() {
-        return self::where('store_id', session('adminStoreId'))
-            ->orderBy('id', 'desc')
-            ->limit(10)
-            ->get();
     }
 
 

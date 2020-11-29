@@ -171,18 +171,6 @@ class AdminProduct extends ShopProduct
     }
 
     /**
-     * Get total product of store
-     *
-     * @return  [type]  [return description]
-     */
-    public static function getTotalProductStore() {
-        $table = (new ShopProduct)->getTable();
-        return self::where($table.'.store_id', session('adminStoreId'))
-            ->count();
-    }
-
-
-    /**
      * Get total product of system
      *
      * @return  [type]  [return description]
