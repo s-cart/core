@@ -16,17 +16,17 @@
            @elseif($config->key == 'captcha_page')
            <tr>
             <td>{{ trans('captcha.captcha_page_help') }}</td>
-            <td align="left"><a href="#" class="editable-required editable editable-click" data-name="{{ $config->key }}" data-type="checklist" data-pk="{{ $config->key }}" data-source="{{ json_encode($captcha_page) }}" data-url="{{ sc_route('admin_config.update') }}" data-title="{{ sc_language_render($config->detail) }}" data-value="{{ $config->value }}" data-original-title="" title=""></a></td>
+            <td align="left"><a href="#" class="editable-required editable editable-click" data-name="{{ $config->key }}" data-type="checklist" data-pk="{{ $config->key }}" data-source="{{ json_encode($captcha_page) }}" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render($config->detail) }}" data-value="{{ $config->value }}" data-original-title="" title=""></a></td>
           </tr>
            @elseif($config->key == 'captcha_method')
           <tr>
             <td>{{ sc_language_render($config->detail) }}</td>
-            <td align="left"><a href="#" class="editable-required editable editable-click" data-name="{{ $config->key }}" data-type="select" data-pk="{{ $config->key }}" data-source="{{ json_encode($pluginCaptchaInstalled) }}" data-url="{{ sc_route('admin_config.update') }}" data-title="{{ sc_language_render($config->detail) }}" data-value="{{ $config->value }}" data-original-title="" title=""></a></td>
+            <td align="left"><a href="#" class="editable-required editable editable-click" data-name="{{ $config->key }}" data-type="select" data-pk="{{ $config->key }}" data-source="{{ json_encode($pluginCaptchaInstalled) }}" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render($config->detail) }}" data-value="{{ $config->value }}" data-original-title="" title=""></a></td>
           </tr>
           @else
           <tr>
             <td>{{ sc_language_render($config->detail) }}</td>
-            <td align="left"><a href="#" class="editable-required editable editable-click" data-name="{{ $config->key }}" data-type="text" data-pk="{{ $config->key }}" data-source="" data-url="{{ sc_route('admin_config.update') }}" data-title="{{ sc_language_render($config->detail) }}" data-value="{{ $config->value }}" data-original-title="" title=""></a></td>
+            <td align="left"><a href="#" class="editable-required editable editable-click" data-name="{{ $config->key }}" data-type="text" data-pk="{{ $config->key }}" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render($config->detail) }}" data-value="{{ $config->value }}" data-original-title="" title=""></a></td>
           </tr>
            @endif
 

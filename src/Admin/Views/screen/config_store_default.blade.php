@@ -144,14 +144,39 @@ $(document).ready(function() {
     });
 
 });
+
+
+$('input.check-data-config').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-blue',
+    increaseArea: '20%' /* optional */
+  }).on('ifChanged', function(e) {
+  var isChecked = e.currentTarget.checked;
+  isChecked = (isChecked == false)?0:1;
+  var name = $(this).attr('name');
+    $.ajax({
+      url: '{{ $urlUpdateConfig }}',
+      type: 'POST',
+      dataType: 'JSON',
+      data: {
+          "_token": "{{ csrf_token() }}",
+          "name": $(this).attr('name'),
+          "storeId": $(this).data('store'),
+          "value": isChecked
+        },
+    })
+    .done(function(data) {
+      if(data.error == 0){
+        alertJs('success', '{{ trans('admin.msg_change_success') }}');
+      } else {
+        alertJs('error', data.msg);
+      }
+    });
+
+    });
+
+
 </script>
-
-
-  <script type="text/javascript">
-
-    {!! $script_sort??'' !!}
-
-  </script>
 
 {{-- //Pjax --}}
 <script src="{{ asset('admin/plugin/jquery.pjax.js')}}"></script>
@@ -160,79 +185,7 @@ $(document).ready(function() {
 <script>
   // Update store_info
 
-//Logo
-  $('.logo').change(function() {
-        $.ajax({
-        url: '{{ sc_route('admin_store.update') }}',
-        type: 'POST',
-        dataType: 'JSON',
-        data: {"name": $(this).attr('name'),"value":$(this).val(),"_token": "{{ csrf_token() }}", "storeId": "{{ $storeId }}" },
-      })
-      .done(function(data) {
-        if(data.error == 0){
-          alertJs('success', '{{ trans('admin.msg_change_success') }}');
-        } else {
-          alertJs('error', data.msg);
-        }
-      });
-  });
-//End logo
-
-
-  function deleteItem(id){
-  Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-success',
-      cancelButton: 'btn btn-danger'
-    },
-    buttonsStyling: true,
-  }).fire({
-    title: '{{ trans('admin.store_confirm_delete') }} #'+id,
-    text: "",
-    type: 'warning',
-    showCancelButton: true,
-    confirmButtonText: '{{ trans('admin.confirm_delete_yes') }}',
-    confirmButtonColor: "#DD6B55",
-    cancelButtonText: '{{ trans('admin.confirm_delete_no') }}',
-    reverseButtons: true,
-
-    preConfirm: function() {
-        return new Promise(function(resolve) {
-            $.ajax({
-                method: 'post',
-                url: '{{ $urlDeleteItem ?? '' }}',
-                data: {
-                  id:id,
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function (data) {
-                  console.log(data);
-                    if(data.error == 1){
-                      alertMsg('error', data.msg, '{{ trans('admin.warning') }}');
-                      $.pjax.reload('#pjax-container');
-                      return;
-                    }else{
-                      alertMsg('success', data.msg);
-                      $.pjax.reload('#pjax-container');
-                      resolve(data);
-                    }
-
-                }
-            });
-        });
-    }
-
-  }).then((result) => {
-    if (result.value) {
-      alertMsg('success', '{{ trans('admin.confirm_delete_deleted_msg') }}', '{{ trans('admin.confirm_delete_deleted') }}');
-    } else if (
-      // Read more about handling dismissals
-      result.dismiss === Swal.DismissReason.cancel
-    ) {
-    }
-  })
-}
-  //End update store_info
+//End update store_info
 </script>
 
 @endpush

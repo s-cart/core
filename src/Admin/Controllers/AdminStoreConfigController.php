@@ -131,8 +131,50 @@ class AdminStoreConfigController extends RootAdminController
         $data['languages']                      = $this->languages;
         $data['currencies']                     = $this->currencies;
         $data['storeId']                        = $id;
+        $data['urlUpdateConfig']                = sc_route('admin_config.update');
 
         return view($this->templatePathAdmin.'screen.config_store_default')
         ->with($data);
     }
+
+    public function webhook()
+    {
+        $data = [
+            'title' => trans('config.admin.webhook'),
+            'subTitle' => '',
+            'icon' => 'fa fa-indent',  
+        ];
+        return view($this->templatePathAdmin.'screen.webhook')
+            ->with($data);
+    }
+
+    /*
+    Update value config
+    */
+    public function update()
+    {
+        $data = request()->all();
+        $name = $data['name'];
+        $value = $data['value'];
+        $storeId = $data['storeId'] ?? 0;
+        try {
+            AdminConfig::where('key', $name)
+                ->where('store_id', $storeId)
+                ->update(['value' => $value]);
+            $error = 0;
+            $msg = trans('admin.update_success');
+        } catch (\Throwable $e) {
+            $error = 1;
+            $msg = $e->getMessage();
+        }
+        return response()->json([
+            'error' => $error,
+            'field' => $name,
+            'value' => $value,
+            'msg'   => $msg,
+            ]
+        );
+
+    }
+
 }

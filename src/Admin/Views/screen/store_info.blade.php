@@ -85,12 +85,18 @@
                       <td><i class="fas fa-envelope"></i> {{ trans('store.email') }}</td>
                       <td><a href="#" class="editable-required editable editable-click" data-name="email" data-type="text" data-pk="" data-source="" data-url="{{ sc_route('admin_store.update') }}" data-title="{{ trans('store.email') }}" data-value="{{ $store->email }}" data-original-title="" title="">{{$store->email }}</a></td>
                     </tr>
-              
+
+@if ($storeId == 1)
+{{-- Only the root domain can edit this information --}}
                     <tr>
                       <td><i class="fab fa-chrome"></i> {{ trans('store.domain') }}</td>
                       <td><a href="#" class="editable-required editable editable-click" data-name="domain" data-type="text" data-pk="" data-source="" data-url="{{ sc_route('admin_store.update') }}" data-title="{{ trans('store.domain') }}" data-value="{{ $store->domain }}" data-original-title="" title="">{{$store->domain }}</a></td>
                     </tr>
-          
+@endif
+
+
+@if (function_exists('sc_store_is_partner') && sc_store_is_partner($storeId))
+{{-- Only the partner account can edit this information --}}          
                     <tr>
                       <td><i class="far fa-money-bill-alt nav-icon"></i> {{ trans('store.currency') }}</td>
                       <td>
@@ -112,7 +118,7 @@
                         <a href="#" class="editable-required editable editable-click" data-name="timezone" data-type="select" data-pk="" data-source="{{ json_encode($timezones) }}" data-url="{{ sc_route('admin_store.update') }}" data-title="{{ trans('store.timezone') }}" data-value="{{ $store->timezone }}" data-original-title="" title=""></a>
                        </td>
                     </tr>
-          
+@endif
                     <tr>
                       <td><i class="nav-icon  fas fa-object-ungroup "></i>{{ trans('store.template') }}</td>
                       <td>
@@ -264,6 +270,39 @@ $(document).ready(function() {
       });
   });
 //End logo
+
+
+$("input.switch-data-store").bootstrapSwitch();
+  $('input.switch-data-store').on('switchChange.bootstrapSwitch', function (event, state) {
+      var valueSet;
+      if (state == true) {
+          valueSet =  '1';
+      } else {
+          valueSet = '0';
+      }
+      $('#loading').show();
+      $.ajax({
+        type: 'POST',
+        dataType:'json',
+        url: "{{ sc_route('admin_store.update') }}",
+        data: {
+          "_token": "{{ csrf_token() }}",
+          "name": $(this).attr('name'),
+          "storeId": $(this).data('store'),
+          "value": valueSet
+        },
+        success: function (response) {
+          if(parseInt(response.error) ==0){
+            alertMsg('success', '{{ trans('admin.msg_change_success') }}');
+          }else{
+            alertMsg('error', response.msg);
+          }
+          $('#loading').hide();
+        }
+      });
+  }); 
+
+
 </script>
 
 @endpush

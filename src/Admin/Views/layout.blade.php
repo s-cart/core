@@ -38,7 +38,10 @@
   <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
 
-  @include($templatePathAdmin.'component.css')
+  @section('block_component_css')
+    @include($templatePathAdmin.'component.css')
+  @show
+
   @endif
 
   <link rel="stylesheet" href="{{ asset('admin/LTE/dist/css/adminlte.min.css')}}">
@@ -53,9 +56,18 @@
   @if ((Admin::isLoginPage() || Admin::isLogoutPage()))
     @yield('main')
   @else
-  @include($templatePathAdmin.'component.exception')
-  @include($templatePathAdmin.'header')
-  @include($templatePathAdmin.'sidebar')
+
+  @section('block_component_exception')
+    @include($templatePathAdmin.'component.exception')
+  @show
+
+  @section('block_header')
+    @include($templatePathAdmin.'header')
+  @show
+
+  @section('block_sidebar')
+    @include($templatePathAdmin.'sidebar')
+  @show
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -96,7 +108,9 @@
   </div>
   <!-- /.content-wrapper -->
 
-  @include($templatePathAdmin.'footer')
+  @section('block_footer')
+    @include($templatePathAdmin.'footer')
+  @show
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -162,8 +176,14 @@
 
 @stack('scripts')
 
+@section('block_component_script')
 @include($templatePathAdmin.'component.script')
+@show
+
+@section('block_component_alerts')
 @include($templatePathAdmin.'component.alerts')
+@show
+
 
 </body>
 </html>

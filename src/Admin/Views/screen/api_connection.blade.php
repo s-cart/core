@@ -141,7 +141,7 @@
           <div class="card-body p-0">   
             <div class="row">
                 <div class="col-md-12 m-2">
-                    {!! $rightContentMain !!}
+                  <input class="switch-data-config" data-store=0 name="api_connection_required" type="checkbox"  {{ (sc_config_global('api_connection_required')?'checked':'') }}><br> {!! trans('api_connection.api_connection_required_help') !!}
                 </div>
             </div>
         </div>
@@ -228,6 +228,39 @@ $(document).ready(function() {
         });
     });
 });
+
+
+$("input.switch-data-config").bootstrapSwitch();
+  $('input.switch-data-config').on('switchChange.bootstrapSwitch', function (event, state) {
+      var valueSet;
+      if (state == true) {
+          valueSet =  '1';
+      } else {
+          valueSet = '0';
+      }
+      $('#loading').show();
+      $.ajax({
+        type: 'POST',
+        dataType:'json',
+        url: "{{ sc_route('admin_config.update') }}",
+        data: {
+          "_token": "{{ csrf_token() }}",
+          "name": $(this).attr('name'),
+          "storeId": $(this).data('store'),
+          "value": valueSet
+        },
+        success: function (response) {
+          if(parseInt(response.error) ==0){
+            alertMsg('success', '{{ trans('admin.msg_change_success') }}');
+          }else{
+            alertMsg('error', response.msg);
+          }
+          $('#loading').hide();
+        }
+      });
+  }); 
+
+
 </script>
 
 {!! $js ?? '' !!}

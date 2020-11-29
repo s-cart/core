@@ -41,34 +41,44 @@ class AdminStoreInfoController extends RootAdminController
         $name      = $parseName[0];
         $lang      = $parseName[1] ?? '';
         $msg       = '';
-        if (!in_array($name, ['title', 'description', 'keyword', 'maintain_content'])) {
-            if (config('app.storeId') == $storeId && $name == 'status') {
-                $error = 1;
-                $msg = trans('store.cannot_disable');
-            } else {
-                try {
-                    if ($name == 'domain') {
+        // Check store
+        $store     = AdminStore::find($storeId);
+        if (!$store) {
+            return response()->json(['error' => 1, 'msg' => 'Store not found!']);
+        }
+
+        if (!$lang) {
+            try {
+                if ($name == 'type') {
+                    // Can not change type in here
+                    $error = 1;
+                    $msg = trans('store.admin.value_cannot_change');
+                } else if ($name == 'domain') {
+                    if ($storeId == 1) {
+                        // Only store root can edit domain
                         $domain = sc_process_domain_store($value);
                         if (AdminStore::where('domain', $domain)->where('id', '<>', $storeId)->first()) {
                             $error = 1;
-                            $msg = trans('store.domain_exist');
+                            $msg = trans('store.admin.domain_exist');
                         } else {
                             AdminStore::where('id', $storeId)->update([$name => $domain]);
                             $error = 0;
                         }
                     } else {
-                        AdminStore::where('id', $storeId)->update([$name => $value]);
-                        $error = 0;
+                        $error = 1;
+                        $msg = trans('store.admin.value_cannot_change');
                     }
-
-                } catch (\Throwable $e) {
-                    $error = 1;
-                    $msg = $e->getMessage();
+                } else {
+                    AdminStore::where('id', $storeId)->update([$name => $value]);
+                    $error = 0;
                 }
-            }
 
-            
+            } catch (\Throwable $e) {
+                $error = 1;
+                $msg = $e->getMessage();
+            }
         } else {
+            // Process description
             $dataUpdate = [
                 'storeId' => $storeId,
                 'lang' => $lang,
@@ -96,19 +106,17 @@ class AdminStoreInfoController extends RootAdminController
                 'title' => trans('store.admin.title'),
                 'subTitle' => '',
                 'icon' => 'fas fa-cogs',
-                'dataNotFound' => 1       
+                'dataNotFound' => 1
             ];
             return view($this->templatePathAdmin.'screen.store_info')
             ->with($data);
         }
-
         $data = [
             'title' => trans('store.admin.title'),
             'subTitle' => '',
             'icon' => 'fas fa-cogs',        
         ];
-        $stores = AdminStore::getListAll();
-        $data['store'] = $stores[$id] ?? [];
+        $data['store'] = $store;
         $data['templates'] = $this->templates;
         $data['timezones'] = $this->timezones;
         $data['languages'] = $this->languages;
