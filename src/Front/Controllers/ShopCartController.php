@@ -416,7 +416,7 @@ class ShopCartController extends RootFrontController
     public function addToCart()
     {
         $data      = request()->all();
-        
+
         //Process escape
         $data      = sc_clean($data);
 
@@ -604,7 +604,7 @@ class ShopCartController extends RootFrontController
             //Process escape
             $addressNew = sc_clean($addressNew);
 
-            ShopCustomer::find($uID)->addresses()->save(new ShopCustomerAddress(sc_clean($addressNew)));
+            ShopCustomer::find($uID)->addresses()->save(new ShopCustomerAddress($addressNew));
             session()->forget('address_process'); //destroy address_process
         }
 
