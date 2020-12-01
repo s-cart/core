@@ -106,9 +106,13 @@ class ShopOrder extends Model
      */
     public function createOrder($dataOrder, $dataTotal, $arrCartDetail)
     {
+        //Process escape
+        $dataOrder     = sc_clean($dataOrder);
+        $dataTotal     = sc_clean($dataTotal);
+        $arrCartDetail = sc_clean($arrCartDetail);
+
         try {
             DB::connection(SC_CONNECTION)->beginTransaction();
-            $dataOrder = sc_clean($dataOrder);
             $dataOrder['domain'] = url('/');
             $uID = $dataOrder['customer_id'];
             $currency = $dataOrder['currency'];

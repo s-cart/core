@@ -416,6 +416,10 @@ class ShopCartController extends RootFrontController
     public function addToCart()
     {
         $data      = request()->all();
+        
+        //Process escape
+        $data      = sc_clean($data);
+
         $productId = $data['product_id'];
         $qty       = $data['qty'] ?? 0;
         $storeId   = $data['storeId'] ?? config('app.storeId');
@@ -574,7 +578,6 @@ class ShopCartController extends RootFrontController
         //Set session info order
         session(['dataOrder' => $dataOrder]);
         session(['arrCartDetail' => $arrCartDetail]);
-
         //Create new order
         $newOrder = (new ShopOrder)->createOrder($dataOrder, $dataTotal, $arrCartDetail);
 
@@ -597,6 +600,10 @@ class ShopCartController extends RootFrontController
                 'country'         => $shippingAddress['country'] ?? '',
                 'phone'           => $shippingAddress['phone'] ?? '',
             ];
+
+            //Process escape
+            $addressNew = sc_clean($addressNew);
+
             ShopCustomer::find($uID)->addresses()->save(new ShopCustomerAddress(sc_clean($addressNew)));
             session()->forget('address_process'); //destroy address_process
         }

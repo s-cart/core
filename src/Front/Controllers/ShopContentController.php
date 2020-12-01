@@ -200,6 +200,9 @@ class ShopContentController extends RootFrontController
                         ->withErrors($validator)
                         ->withInput();
         }
+        // Process escape
+        $data = sc_clean($data);
+        
         //Send email
         $data['content'] = str_replace("\n", "<br>", $data['content']);
 
