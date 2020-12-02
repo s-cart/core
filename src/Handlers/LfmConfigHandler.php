@@ -6,7 +6,12 @@ class LfmConfigHandler extends \UniSharp\LaravelFilemanager\Handlers\ConfigHandl
 {
     public function userField()
     {
-        if(sc_config_global('MultiStorePro') && !in_array(0, \Admin::user()->listStoreId())) {
+        // If domain is root, dont split folder
+        if (session('adminStoreId') == 1) {
+            return ;
+        }
+
+        if (sc_config_global('MultiStorePro')) {
             return session('adminStoreId');
         } else {
             return;
