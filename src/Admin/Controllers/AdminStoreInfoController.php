@@ -54,7 +54,7 @@ class AdminStoreInfoController extends RootAdminController
                     $error = 1;
                     $msg = trans('store.admin.value_cannot_change');
                 } else if ($name == 'domain') {
-                    if ($storeId == 1) {
+                    if ($storeId == 1 || (function_exists('sc_store_is_partner') && sc_store_is_partner($storeId))) {
                         // Only store root can edit domain
                         $domain = sc_process_domain_store($value);
                         if (AdminStore::where('domain', $domain)->where('id', '<>', $storeId)->first()) {
