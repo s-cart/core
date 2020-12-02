@@ -11,7 +11,7 @@ class ShopStore extends Model
     protected static $getAll = null;
     protected static $getStoreActive = null;
     protected static $getCodeActive = null;
-    protected static $getDomainUnlock = null;
+    protected static $getDomainPartner = null;
     protected static $getListAllActive = null;
     protected $connection = SC_CONNECTION;
     
@@ -104,15 +104,15 @@ class ShopStore extends Model
      *
      * @return  [array]  [return description]
      */
-    public static function getDomainUnlock()
+    public static function getDomainPartner()
     {
-        if (self::$getDomainUnlock === null) {
-            self::$getDomainUnlock = self::where('status', 1)
+        if (self::$getDomainPartner === null) {
+            self::$getDomainPartner = self::where('partner', 1)
                 ->whereNotNull('domain') 
                 ->pluck('domain', 'id')
                 ->all();
         }
-        return self::$getDomainUnlock;
+        return self::$getDomainPartner;
     }
     
 

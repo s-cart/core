@@ -101,21 +101,23 @@ class ScartServiceProvider extends ServiceProvider
 
     public function bootScart()
     {
-        //Check domain exist
+        // Set store id
+        // Default is domain root
         $storeId = 1;
 
         //Process for multi store
         if(sc_config_global('MultiStorePro')) {
             $domain = sc_process_domain_store(url('/'));
-            $arrDomain = ShopStore::getDomainUnlock();
+            $arrDomain = ShopStore::getDomainPartner();
             if (in_array($domain, $arrDomain)) {
                 $storeId =  array_search($domain, $arrDomain);
             }
         }
         //End process multi store
 
-        //Get storeId
         config(['app.storeId' => $storeId]);
+        // end set store Id
+
         if (sc_config('LOG_SLACK_WEBHOOK_URL')) {
             config(['logging.channels.slack.url' => sc_config('LOG_SLACK_WEBHOOK_URL')]);
         }
