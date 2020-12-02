@@ -15,10 +15,12 @@
                <tbody>
                  @if (!empty($emailConfig['email_action']))
                  @foreach ($emailConfig['email_action'] as $config)
+                 @if ($config->key != 'email_action_queue' || $storeId == 1)
                  <tr>
                    <td>{!! sc_language_render($config->detail) !!}</td>
                    <td><input class="check-data-config" data-store="{{ $storeId }}"  type="checkbox" name="{{ $config->key }}"  {{ $config->value?"checked":"" }}></td>
                  </tr>
+                 @endif
                @endforeach
                  @endif
                  <tr>
@@ -27,9 +29,12 @@
                 </tr>
                </tbody>
                <tfoot>
-                <tr>
+                 @if ($storeId == 1)
+                 <tr>
                   <td colspan="2">{!! trans('email.admin.help_note') !!}</td>
                 </tr>
+                 @endif
+
               </tfoot>
              </table>
           </div>
