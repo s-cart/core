@@ -30,3 +30,5 @@ define('SC_CONNECTION_LOG', 'mysql');
 define('SC_ADMIN_PREFIX', config('const.ADMIN_PREFIX'));
 //Prefix database
 define('SC_DB_PREFIX', config('const.DB_PREFIX'));
+// Root ID store
+define('SC_ID_ROOT', 1);
