@@ -86,7 +86,7 @@
                       <td><a href="#" class="editable-required editable editable-click" data-name="email" data-type="text" data-pk="" data-source="" data-url="{{ sc_route('admin_store.update') }}" data-title="{{ trans('store.email') }}" data-value="{{ $store->email }}" data-original-title="" title="">{{$store->email }}</a></td>
                     </tr>
 
-@if ($storeId == 1)
+@if ($storeId == SC_ID_ROOT)
 {{-- Only the root domain can edit this information --}}
                     <tr>
                       <td><i class="fab fa-chrome"></i> {{ trans('store.domain') }}</td>

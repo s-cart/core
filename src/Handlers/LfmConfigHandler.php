@@ -7,7 +7,7 @@ class LfmConfigHandler extends \UniSharp\LaravelFilemanager\Handlers\ConfigHandl
     public function userField()
     {
         // If domain is root, dont split folder
-        if (session('adminStoreId') == 1) {
+        if (session('adminStoreId') == SC_ID_ROOT) {
             return ;
         }
 
