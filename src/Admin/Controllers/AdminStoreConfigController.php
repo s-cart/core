@@ -137,26 +137,15 @@ class AdminStoreConfigController extends RootAdminController
         ->with($data);
     }
 
-    public function webhook()
-    {
-        $data = [
-            'title' => trans('config.admin.webhook'),
-            'subTitle' => '',
-            'icon' => 'fa fa-indent',  
-        ];
-        return view($this->templatePathAdmin.'screen.webhook')
-            ->with($data);
-    }
-
     /*
-    Update value config
+    Update value config store
     */
     public function update()
     {
         $data = request()->all();
         $name = $data['name'];
         $value = $data['value'];
-        $storeId = $data['storeId'] ?? 0;
+        $storeId = $data['storeId'];
         try {
             AdminConfig::where('key', $name)
                 ->where('store_id', $storeId)

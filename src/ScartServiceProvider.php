@@ -103,7 +103,7 @@ class ScartServiceProvider extends ServiceProvider
     {
         // Set store id
         // Default is domain root
-        $storeId = 1;
+        $storeId = SC_ID_ROOT;
 
         //Process for multi store
         if(sc_config_global('MultiStorePro')) {
