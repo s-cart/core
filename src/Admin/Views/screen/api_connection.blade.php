@@ -141,7 +141,7 @@
           <div class="card-body p-0">   
             <div class="row">
                 <div class="col-md-12 m-2">
-                  <input class="switch-data-config" data-store=0 name="api_connection_required" type="checkbox"  {{ (sc_config_global('api_connection_required')?'checked':'') }}><br> {!! trans('api_connection.api_connection_required_help') !!}
+                  <input class="switch-data-config" name="api_connection_required" type="checkbox"  {{ (sc_config_global('api_connection_required')?'checked':'') }}><br> {!! trans('api_connection.api_connection_required_help') !!}
                 </div>
             </div>
         </div>
@@ -242,11 +242,10 @@ $("input.switch-data-config").bootstrapSwitch();
       $.ajax({
         type: 'POST',
         dataType:'json',
-        url: "{{ sc_route('admin_config.update') }}",
+        url: "{{ sc_route('admin_config_global.update') }}",
         data: {
           "_token": "{{ csrf_token() }}",
           "name": $(this).attr('name'),
-          "storeId": $(this).data('store'),
           "value": valueSet
         },
         success: function (response) {

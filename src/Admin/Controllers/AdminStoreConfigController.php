@@ -132,6 +132,7 @@ class AdminStoreConfigController extends RootAdminController
         $data['currencies']                     = $this->currencies;
         $data['storeId']                        = $id;
         $data['urlUpdateConfig']                = sc_route('admin_config.update');
+        $data['urlUpdateConfigGlobal']          = sc_route('admin_config_global.update');
 
         return view($this->templatePathAdmin.'screen.config_store_default')
         ->with($data);
@@ -145,7 +146,17 @@ class AdminStoreConfigController extends RootAdminController
         $data = request()->all();
         $name = $data['name'];
         $value = $data['value'];
-        $storeId = $data['storeId'];
+        $storeId = $data['storeId'] ?? '';
+        if (!$storeId) {
+            return response()->json([
+                'error' => 1,
+                'field' => 'storeId',
+                'value' => $storeId,
+                'msg'   => 'Store ID can not empty!',
+                ]
+            );
+        }
+
         try {
             AdminConfig::where('key', $name)
                 ->where('store_id', $storeId)

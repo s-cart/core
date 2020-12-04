@@ -118,8 +118,8 @@ class ScartServiceProvider extends ServiceProvider
         config(['app.storeId' => $storeId]);
         // end set store Id
 
-        if (sc_config('LOG_SLACK_WEBHOOK_URL')) {
-            config(['logging.channels.slack.url' => sc_config('LOG_SLACK_WEBHOOK_URL')]);
+        if (sc_config_global('LOG_SLACK_WEBHOOK_URL')) {
+            config(['logging.channels.slack.url' => sc_config_global('LOG_SLACK_WEBHOOK_URL')]);
         }
 
         config(['app.name' => sc_store('title')]);
