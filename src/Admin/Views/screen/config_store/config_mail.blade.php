@@ -14,34 +14,28 @@
              <table class="table table-hover box-body text-wrap table-bordered">
                <tbody>
                  @if (!empty($emailConfig['email_action']))
-
-                 @if ($storeId == SC_ID_ROOT)
-                 <tr>
-                   <td>{!! sc_language_render('email.admin.smtp_mode') !!}</td>
-                   <td><input class="check-data-config" data-store="{{ $storeId }}"  type="checkbox" name="smtp_mode" {{ sc_config('smtp_mode', session('adminStoreId'))?"checked":"" }}></td>
-                 </tr>
-                 @endif
-
                  @foreach ($emailConfig['email_action'] as $config)
-                 @if ($config->key != 'email_action_queue' || $storeId == SC_ID_ROOT)
                  <tr>
                    <td>{!! sc_language_render($config->detail) !!}</td>
                    <td><input class="check-data-config" data-store="{{ $storeId }}"  type="checkbox" name="{{ $config->key }}"  {{ $config->value?"checked":"" }}></td>
                  </tr>
-                 @endif
                @endforeach
                  @endif
                  <tr>
                   <td>{{ trans('email.email_action.forgot_password') }}</td>
                   <td><input class="check-data-config" data-store="{{ $storeId }}"  type="checkbox" checked disabled></td>
                 </tr>
+
+                <tr>
+                  <td>{!! sc_language_render('email.admin.smtp_mode') !!}</td>
+                  <td><input class="check-data-config-global"  type="checkbox" name="smtp_mode" {{ sc_config('smtp_mode', session('adminStoreId'))?"checked":"" }}></td>
+                </tr>
+
                </tbody>
                <tfoot>
-                 @if ($storeId == SC_ID_ROOT)
                  <tr>
                   <td colspan="2">{!! trans('email.admin.help_note') !!}</td>
                 </tr>
-                 @endif
 
               </tfoot>
              </table>
@@ -49,7 +43,7 @@
         </div>
       </div>
     
-    
+
       <div class="col-md-6">
     
         <div class="card">

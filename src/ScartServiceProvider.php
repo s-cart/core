@@ -142,7 +142,7 @@ class ScartServiceProvider extends ServiceProvider
 
         if ($storeId == SC_ID_ROOT) {
             // Use smtp config from admin if smtp_mode enable
-            if (sc_config('smtp_mode')) {
+            if (sc_config_global('smtp_mode')) {
                 config(['mail.default' => 'smtp']);
                 $smtpHost     = sc_config('smtp_host');
                 $smtpPort     = sc_config('smtp_port');

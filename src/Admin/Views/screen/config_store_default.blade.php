@@ -175,6 +175,34 @@ $('input.check-data-config').iCheck({
 
     });
 
+  $('input.check-data-config-global').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-blue',
+    increaseArea: '20%' /* optional */
+  }).on('ifChanged', function(e) {
+  var isChecked = e.currentTarget.checked;
+  isChecked = (isChecked == false)?0:1;
+  var name = $(this).attr('name');
+    $.ajax({
+      url: '{{ $urlUpdateConfigGlobal }}',
+      type: 'POST',
+      dataType: 'JSON',
+      data: {
+          "_token": "{{ csrf_token() }}",
+          "name": $(this).attr('name'),
+          "value": isChecked
+        },
+    })
+    .done(function(data) {
+      if(data.error == 0){
+        alertJs('success', '{{ trans('admin.msg_change_success') }}');
+      } else {
+        alertJs('error', data.msg);
+      }
+    });
+
+    });
+
 
 </script>
 
