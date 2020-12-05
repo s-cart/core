@@ -195,6 +195,11 @@ $('input.check-data-config').iCheck({
     })
     .done(function(data) {
       if(data.error == 0){
+        if (isChecked == 0) {
+          $('#smtp-config').hide();
+        } else {
+          $('#smtp-config').show();
+        }
         alertJs('success', '{{ trans('admin.msg_change_success') }}');
       } else {
         alertJs('error', data.msg);

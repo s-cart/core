@@ -42,9 +42,20 @@
           </div>
         </div>
       </div>
-    
 
-      <div class="col-md-6">
+<style>
+  @if(sc_config_global('smtp_mode'))
+    #smtp-config {
+      display:block;
+    }
+  @else
+    #smtp-config {
+      display:none;
+    }
+  @endif
+</style>
+
+      <div class="col-md-6" id="smtp-config">
     
         <div class="card">
           <div class="card-header with-border">
