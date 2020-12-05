@@ -14,6 +14,14 @@
              <table class="table table-hover box-body text-wrap table-bordered">
                <tbody>
                  @if (!empty($emailConfig['email_action']))
+
+                 @if ($storeId == SC_ID_ROOT)
+                 <tr>
+                   <td>{!! sc_language_render('email.admin.smtp_mode') !!}</td>
+                   <td><input class="check-data-config" data-store="{{ $storeId }}"  type="checkbox" name="smtp_mode" {{ sc_config('smtp_mode', session('adminStoreId'))?"checked":"" }}></td>
+                 </tr>
+                 @endif
+
                  @foreach ($emailConfig['email_action'] as $config)
                  @if ($config->key != 'email_action_queue' || $storeId == SC_ID_ROOT)
                  <tr>
