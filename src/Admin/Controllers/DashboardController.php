@@ -26,7 +26,7 @@ class DashboardController extends RootAdminController
         }
 
         //Check user allow view dasdboard
-        if(!session('admin')->checkUrlAllowAccess(route('admin.home')))
+        if(!\Admin::user()->checkUrlAllowAccess(route('admin.home')))
         {
             $data['title'] = trans('admin.dashboard');
             return view($this->templatePathAdmin.'default', $data);
