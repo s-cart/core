@@ -285,6 +285,7 @@
         $htmlSelectProduct = str_replace("\n", '', $htmlSelectProduct);
         $htmlSelectProduct = str_replace("\t", '', $htmlSelectProduct);
         $htmlSelectProduct = str_replace("\r", '', $htmlSelectProduct);
+        $htmlSelectProduct = str_replace("'", '"', $htmlSelectProduct);
 @endphp
     </div>
   </div>
