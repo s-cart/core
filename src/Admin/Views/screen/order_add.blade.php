@@ -19,18 +19,18 @@
 
                     <div class="card-body">
 
-                            <div class="form-group row {{ $errors->has('user_id') ? ' text-red' : '' }}">
-                                <label for="user_id" class="col-sm-2 asterisk col-form-label">{{ trans('order.select_customer') }}</label>
+                            <div class="form-group row {{ $errors->has('customer_id') ? ' text-red' : '' }}">
+                                <label for="customer_id" class="col-sm-2 asterisk col-form-label">{{ trans('order.select_customer') }}</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control user_id " style="width: 100%;" name="user_id" >
+                                    <select class="form-control customer_id " style="width: 100%;" name="customer_id" >
                                         <option value=""></option>
                                         @foreach ($users as $k => $v)
-                                            <option value="{{ $k }}" {{ (old('user_id') ==$k) ? 'selected':'' }}>{{ $v->name.'<'.$v->email.'>' }}</option>
+                                            <option value="{{ $k }}" {{ (old('customer_id') ==$k) ? 'selected':'' }}>{{ $v->name.'<'.$v->email.'>' }}</option>
                                         @endforeach
                                     </select>
-                                        @if ($errors->has('user_id'))
+                                        @if ($errors->has('customer_id'))
                                             <span class="text-sm">
-                                                {{ $errors->first('user_id') }}
+                                                {{ $errors->first('customer_id') }}
                                             </span>
                                         @endif
                                 </div>
@@ -353,7 +353,7 @@ $(document).ready(function() {
 //Initialize Select2 Elements
 $('.select2').select2()
 });
-$('[name="user_id"]').change(function(){
+$('[name="customer_id"]').change(function(){
     addInfo();
 });
 $('[name="currency"]').change(function(){
@@ -367,7 +367,7 @@ function addExchangeRate(){
 }
 
 function addInfo(){
-    id = $('[name="user_id"]').val();
+    id = $('[name="customer_id"]').val();
     if(id){
        $.ajax({
             url : '{{ sc_route('admin_order.user_info') }}',
