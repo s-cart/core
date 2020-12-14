@@ -234,6 +234,7 @@
                       <th>{{ trans('customer.id') }}</th>
                       <th>{{ trans('customer.email') }}</th>
                       <th>{{ trans('customer.name') }}</th>
+                      <th>{{ trans('customer.provider') }}</th>
                       <th>{{ trans('customer.created_at') }}</th>
                     </tr>
                     <tbody>
@@ -243,6 +244,7 @@
                           <td><a href="{{ sc_route('admin_customer.edit',['id'=>$customer->id]) }}">ID#{{ $customer->id }}</a></td>
                           <td>{{ $customer->email }}</td>
                           <td>{{ $customer->name }}</td>
+                          <td>{{ $customer->provider }}</td>
                           <td>{{ $customer->created_at }}</td>
                         </tr>
                       @endforeach
