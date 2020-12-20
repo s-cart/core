@@ -1,6 +1,6 @@
 <?php
 return [
-    'version'     => '4.4',
+    'version'     => '4.5',
     'sub-version' => '4.5.0',
     'homepage'    => 'https://s-cart.org',
     'name'        => 'S-Cart',
