@@ -113,7 +113,8 @@ class AdminStoreConfigController extends RootAdminController
             'register' => trans('captcha.captcha_page_register'), 
             'forgot'   => trans('captcha.captcha_page_forgot_password'), 
             'checkout' => trans('captcha.captcha_page_checkout'), 
-            'contact'  => trans('captcha.captcha_page_contact'), 
+            'contact'  => trans('captcha.captcha_page_contact'),
+            'review'   => trans('captcha.captcha_page_review'),
         ];
         //End email
         $data['customerConfigs']                = $customerConfigs;

@@ -403,7 +403,7 @@ class ShopCartController extends RootFrontController
                 'shippingMethodData' => $shippingMethodData,
                 'shippingAddress'    => $shippingAddress,
                 'attributesGroup'    => ShopAttributeGroup::getListAll(),
-                'layout_page'        => 'shop_cart',
+                'layout_page'        => 'shop_checkout',
             ]
         );
     }
@@ -787,7 +787,7 @@ class ShopCartController extends RootFrontController
                 'description' => '',
                 'keyword'     => '',
                 'wishlist'    => $wishlist,
-                'layout_page' => 'shop_cart',
+                'layout_page' => 'shop_wishlist',
             )
         );
     }
@@ -808,7 +808,7 @@ class ShopCartController extends RootFrontController
                 'description' => '',
                 'keyword'     => '',
                 'compare'     => $compare,
-                'layout_page' => 'shop_cart',
+                'layout_page' => 'shop_compare',
             )
         );
     }
@@ -1027,7 +1027,7 @@ class ShopCartController extends RootFrontController
             $this->templatePath . '.screen.shop_order_success',
             [
                 'title' => trans('order.success.title'),
-                'layout_page' =>'shop_cart',
+                'layout_page' =>'shop_order_success',
             ]
         );
     }

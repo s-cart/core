@@ -314,4 +314,7 @@
   border: 1px dotted #b58989;
   padding: 5px;
 }
+.form-inline label {
+  display: inherit !important; 
+}
 </style>
