@@ -323,3 +323,36 @@ if (!function_exists('sc_process_domain_store')) {
         return $domain;
     }
 }
+
+if (!function_exists('sc_push_include_view')) {
+    /**
+     * Push view
+     *
+     * @param   [string]  $position
+     * @param   [string]  $pathView
+     *
+     */
+    function sc_push_include_view($position, $pathView)
+    {
+        $includePathView = config('sc_include_view.'.$position, []);
+        $includePathView[] = $pathView;
+        config(['sc_include_view.'.$position => $includePathView]);
+    }
+}
+
+
+if (!function_exists('sc_push_include_script')) {
+    /**
+     * Push script
+     *
+     * @param   [string]  $position
+     * @param   [string]  $pathScript
+     *
+     */
+    function sc_push_include_script($position, $pathScript)
+    {
+        $includePathScript = config('sc_include_script.'.$position, []);
+        $includePathScript[] = $pathScript;
+        config(['sc_include_script.'.$position => $includePathScript]);
+    }
+}
