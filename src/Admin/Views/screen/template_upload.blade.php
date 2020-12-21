@@ -17,13 +17,16 @@
                             </label>
                             <div class="col-sm-6">
                                 <div class="input-group">
-                                     <input accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" type="file" required="required" name="file" class="form-control">
-                                    <div class="input-group-append">
-                                      <span class="btn btn-primary button-upload pointer" id=""><i class="fa fa-floppy-o" aria-hidden="true"></i> {{ trans('template.import_submit') }}</span>
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"  required="required" name="file">
+                                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
-                                  </div>
-                                <div>
+                                    <div class="input-group-append">
+                                      <span class="btn button-upload">{{ trans('template.import_submit') }}</span>
+                                    </div>
+                                </div>
 
+                                <div>
                                     @if ($errors->has('file'))
                                     <span class="form-text text-red">
                                         <i class="fa fa-info-circle"></i> {{ $errors->first('file') }}
