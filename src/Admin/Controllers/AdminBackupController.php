@@ -3,7 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use Illuminate\Support\Facades\Artisan;
-
+use DB;
 class AdminBackupController extends RootAdminController
 {
 
@@ -14,6 +14,14 @@ class AdminBackupController extends RootAdminController
     
     public function index()
     {
+        $tableInfo = DB::connection(SC_CONNECTION)
+            ->table('INFORMATION_SCHEMA.TABLES')
+            ->select(['table_name', 'table_rows', 'data_length'])
+            ->where('TABLE_SCHEMA', config('database.connections.'.SC_CONNECTION.'.database'))
+            ->where('table_type', 'BASE TABLE')
+            ->get()
+            ->toArray();
+
         $download = request('download') ?? '';
         if ($download) {
             $file = storage_path() . "/backups/" . $download;
@@ -41,9 +49,16 @@ class AdminBackupController extends RootAdminController
             [
                 "title"    => trans('backup.title'),
                 "arrFiles" => $arrFiles,
-            ])->render();
+                "tableInfo" => $tableInfo,
+            ]
+        )->render();
     }
 
+    /**
+     * Process file backup
+     *
+     * @return  [type]  [return description]
+     */
     public function processBackupFile()
     {
         $file     = request('file');
@@ -69,9 +84,18 @@ class AdminBackupController extends RootAdminController
         return $return;
     }
 
+    /**
+     * Create file backup
+     *
+     * @return  [type]  [return description]
+     */
     public function generateBackup()
     {
-        $return = Artisan::call("sc:backup");
+        $data = request()->all();
+        $path = $data['path'] ?? '';
+        $includeTables = $data['includeTables'] ?? '';
+        $excludeTables = $data['excludeTables'] ?? '';
+        $return = Artisan::call("sc:backup --path=$path --includeTables=$includeTables --excludeTables=$excludeTables");
         return $return;
     }
 

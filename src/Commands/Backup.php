@@ -3,7 +3,6 @@
 namespace SCart\Core\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Process\Process;
 use Throwable;
 
 class Backup extends Command
@@ -13,14 +12,14 @@ class Backup extends Command
      *
      * @var string
      */
-    protected $signature = 'sc:backup {--path=}';
+    protected $signature = 'sc:backup {--path=} {--includeTables=} {--excludeTables=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Backup database "sc:backup --path=abc.sql"';
+    protected $description = 'Backup database "sc:backup --path=abc.sql --includeTables=table1,table2 --excludeTables=t1,t2"';
     const LIMIT = 10;
 
     /**
@@ -31,24 +30,41 @@ class Backup extends Command
     public function handle()
     {
         $path = $this->option('path');
+        $includeTables = $this->option('includeTables');
+        $excludeTables = $this->option('excludeTables');
         if (count(glob(storage_path() . "/backups/*.sql")) >= self::LIMIT) {
             echo json_encode(['error' => 1, 'msg' => trans('backup.limit_backup')]);
             exit;
         }
-        if($path) {
+        if ($path) {
             $fileBackup = storage_path('backups/' . $path);
         } else {
             $fileBackup = storage_path('backups/backup-' . date('Y-m-d-H-i-s') . '.sql');
         }
         try {
-            $string = sprintf(
-                'mysqldump --user="%s" --password="%s" %s > %s',
-                config('database.connections.'.SC_CONNECTION.'.username'),
-                config('database.connections.'.SC_CONNECTION.'.password'),
-                config('database.connections.'.SC_CONNECTION.'.database'),
-                $fileBackup
-            );
-            Process::fromShellCommandline($string)->mustRun();
+            $databaseName = config('database.connections.'.SC_CONNECTION.'.database');
+            $userName = config('database.connections.'.SC_CONNECTION.'.username');
+            $password = config('database.connections.'.SC_CONNECTION.'.password');
+            $host = config('database.connections.'.SC_CONNECTION.'.host');
+            $pathMysqlBin = env('PATH_MYSQL_BIN'); // C:\xampp\mysql\bin
+            $includeTables = explode(',', $includeTables);
+            $excludeTables = explode(',', $excludeTables);
+
+            $backupProcess = \Spatie\DbDumper\Databases\MySql::create()
+                ->setDbName($databaseName)
+                ->setUserName($userName)
+                ->setPassword($password)
+                ->setHost($host);
+            if ($pathMysqlBin) {
+                $backupProcess->setDumpBinaryPath($pathMysqlBin);
+            }
+            if ($includeTables) {
+                $backupProcess->includeTables($includeTables);
+            } elseif ($excludeTables) {
+                $backupProcess->excludeTables($excludeTables);
+            }
+            $backupProcess->dumpToFile($fileBackup);
+
             echo json_encode(['error' => 0, 'msg' => 'Backup success path '.$fileBackup]);
             exit;
         } catch (Throwable $exception) {
