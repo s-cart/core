@@ -39,12 +39,12 @@ class AdminBackupController extends RootAdminController
                 $fileInfo['path'] = $file;
                 $arr              = explode('/', $file);
                 $fileInfo['name'] = end($arr);
-                $fileInfo['size'] = number_format(filesize($file) / 1048576, 2) . 'MB';
+                $fileInfo['size'] = number_format(filesize($file) / 1048576, 3) . 'MB';
                 $fileInfo['time'] = date('Y-m-d H:i:s', filemtime($file));
-                $arrFiles[]       = $fileInfo;
+                $arrFiles[date('Y-m-d H:i:s', filemtime($file))]       = $fileInfo;
             }
         }
-        rsort($arrFiles);
+        krsort($arrFiles);
         return view($this->templatePathAdmin.'screen.backup')->with(
             [
                 "title"    => trans('backup.title'),
@@ -92,10 +92,10 @@ class AdminBackupController extends RootAdminController
     public function generateBackup()
     {
         $data = request()->all();
-        $path = $data['path'] ?? '';
+        $fileName = $data['fileName'] ?? '';
         $includeTables = $data['includeTables'] ?? '';
         $excludeTables = $data['excludeTables'] ?? '';
-        $return = Artisan::call("sc:backup --path=$path --includeTables=$includeTables --excludeTables=$excludeTables");
+        $return = Artisan::call("sc:backup --path=$fileName --includeTables=$includeTables --excludeTables=$excludeTables");
         return $return;
     }
 

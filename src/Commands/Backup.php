@@ -37,7 +37,7 @@ class Backup extends Command
             exit;
         }
         if ($path) {
-            $fileBackup = storage_path('backups/' . $path);
+            $fileBackup = storage_path('backups/' . $path).".sql";
         } else {
             $fileBackup = storage_path('backups/backup-' . date('Y-m-d-H-i-s') . '.sql');
         }

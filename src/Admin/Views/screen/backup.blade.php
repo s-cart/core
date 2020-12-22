@@ -32,16 +32,22 @@
                           {{ $table->table_rows }}
                         </td>
                         <td>
-                          {{ number_format($table->data_length/1048576, 2) }}MB
+                          {{ number_format($table->data_length/1048576, 4) }}MB
                         </td>
                       </tr>
                     @endforeach
                     </table>
                   </li>
-                  <li class="divider" style="border-top: 1px solid #eaeae1; padding-bottom: 5px;"></li>
-                  <li class="text-right">
-                      <button class="btn btn-sm btn-default column-select-all">All</button>&nbsp;&nbsp;
-                      <button class="btn btn-sm btn-success column-select-submit" onClick="generateBackup($(this));" id="generate">Submit</button>
+                  <li class="divider" style="border-top: 1px solid #eaeae1; padding-bottom: 5px;">
+                  </li>
+                  <li>
+                      &nbsp;<input id="file-name" value="" placeholder="File name">.sql
+                      <div class="float-right">
+                        <button class="btn btn-sm btn-default column-un-select-all">X</button>&nbsp;
+                        <button class="btn btn-sm btn-default column-select-all">All</button>&nbsp;
+                        <button class="btn btn-sm btn-success column-select-submit" onClick="generateBackup($(this));" id="generate">Submit</button>
+                      </div>
+
                   </li>
               </ul>
               </div>
@@ -60,9 +66,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach ($arrFiles as $key => $file)
+                  @php
+                      $sort = count($arrFiles)
+                  @endphp
+                  @foreach ($arrFiles as $file)
                     <tr>
-                     <td>{{ (count($arrFiles) - $key) }}</td>
+                     <td>{{($sort--) }}</td>
                      <td>{{ $file['time']}}</td>
                      <td>{{ $file['name']}}</td>
                      <td>{{ $file['size']}}</td>
@@ -94,12 +103,9 @@
 @endpush
 
 @push('scripts')
-{{-- //Pjax --}}
-<script src="{{ asset('admin/plugin/jquery.pjax.js')}}"></script>
 
 <script type="text/javascript">
   function processBackup(obj,file,action) {
-      // var checkstr =  confirm('are you sure you want to do this?');
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -124,11 +130,11 @@
             success: function (response) {
               // console.log(response);
               if(parseInt(response.error) ==0){
-                  $.pjax.reload({container:'#pjax-container'});
                   alertJs('success', response.msg);
               }else{
                 alertJs('error', response.msg);
               }
+              location.reload();
               $('#loading').hide();
               obj.button('reset');
             }
@@ -153,11 +159,10 @@
         data: {
           "_token": "{{ csrf_token() }}",
           "includeTables": includeTables,
+          "fileName": $('#file-name').val(),
         },
         success: function (response) {
-          console.log(response);
           if(parseInt(response.error) ==0){
-              $.pjax.reload({container:'#pjax-container'});
                 Swal.fire(
                 'Success!',
                 '',
@@ -170,6 +175,7 @@
               'error'
               )
           }
+          location.reload();
           $('#loading').hide();
           obj.button('reset');
         }
@@ -177,15 +183,13 @@
 
   }
 
-    $(document).ready(function(){
-    // does current browser support PJAX
-      if ($.support.pjax) {
-        $.pjax.defaults.timeout = 2000; // time in milliseconds
-      }
-    });
-
     $('.column-select-all').on('click', function () {
       $('.column-select-item').iCheck('check');
+      return false;
+    });
+
+    $('.column-un-select-all').on('click', function () {
+      $('.column-select-item').iCheck('uncheck');
       return false;
     });
 
