@@ -3,6 +3,7 @@
 namespace SCart\Core\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 use Throwable;
 
 class Backup extends Command
@@ -37,7 +38,7 @@ class Backup extends Command
             exit;
         }
         if ($path) {
-            $fileBackup = storage_path('backups/' . $path).".sql";
+            $fileBackup = Str::finish(storage_path('backups/' . $path), '.sql');
         } else {
             $fileBackup = storage_path('backups/backup-' . date('Y-m-d-H-i-s') . '.sql');
         }
