@@ -2,7 +2,7 @@
    <aside class="main-sidebar sidebar-light-pink elevation-4 sidebar-no-expand">
     <!-- Brand Logo -->
     <a href="{{ sc_route('admin.home') }}" class="brand-link navbar-secondary"">
-      S-Cart
+      Zini Baby
       <span class="brand-text font-weight-light">Admin</span>
     </a>
 

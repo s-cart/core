@@ -18,4 +18,9 @@ class ShopProductGroup extends Model
     {
         return $this->belongsTo(ShopProduct::class, 'product_id', 'id');
     }
+
+    public function groupProduct()
+    {
+        return $this->belongsTo(ShopProduct::class, 'group_id', 'id')->first();
+    }
 }

@@ -163,6 +163,35 @@ class ShopCategory extends Model
     }
 
     /**
+     * Get tree
+     */
+    public function getCategoryTree() {
+        $refs = array();
+        $list = array();
+
+        $result = $this->getData();
+
+        foreach ($result as $row)
+        {
+            $ref = & $refs[$row['id']];
+
+            $ref['parent'] = $row['parent'];
+            $ref['title']   = $row['title'];
+            $ref['url'] = $row->getUrl();
+
+            if ($row['parent'] == 0)
+            {
+                $list[$row['id']] = & $ref;
+            }
+            else
+            {
+                $refs[$row['parent']]['children'][$row['id']] = & $ref;
+            }
+        }
+        return $list;
+    }
+
+    /**
      * build Query
      */
     public function buildQuery() {

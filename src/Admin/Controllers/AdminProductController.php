@@ -51,6 +51,7 @@ class AdminProductController extends RootAdminController
 
     public function index()
     {
+        $categories =  (new AdminCategory)->getTreeCategoriesAdmin();
         $categoriesTitle = AdminCategory::getListTitleAdmin();
         $data = [
             'title'         => trans('product.admin.list'),
@@ -179,8 +180,8 @@ class AdminProductController extends RootAdminController
 
         //Search with category
         $optionCategory = '';
-        if ($this->categories) {
-            foreach ($this->categories as $k => $v) {
+        if ($categories) {
+            foreach ($categories as $k => $v) {
                 $optionCategory .= "<option value='{$k}' ".(($category_id == $k) ? 'selected' : '').">{$v}</option>";
             }
         }
@@ -211,6 +212,7 @@ class AdminProductController extends RootAdminController
  */
     public function create()
     {
+        $categories =  (new AdminCategory)->getTreeCategoriesAdmin();
         $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
 
         // html select product group
@@ -257,7 +259,7 @@ class AdminProductController extends RootAdminController
             'icon'                 => 'fa fa-plus',
             'languages'            => $this->languages,
             'categoriesStore'      => $categoriesStore,
-            'categories'           => $this->categories,
+            'categories'           => $categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
@@ -508,6 +510,7 @@ class AdminProductController extends RootAdminController
     */
     public function edit($id)
     {
+        $categories =  (new AdminCategory)->getTreeCategoriesAdmin();
         $product = (new AdminProduct)->getProductAdmin($id);
 
         if ($product === null) {
@@ -555,7 +558,7 @@ class AdminProductController extends RootAdminController
             'languages'            => $this->languages,
             'product'              => $product,
             'categoriesStore'      => $categoriesStore,
-            'categories'           => $this->categories,
+            'categories'           => $categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),

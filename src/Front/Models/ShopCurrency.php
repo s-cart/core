@@ -109,7 +109,7 @@ class ShopCurrency extends Model
      */
     public static function getRate()
     {
-        return self::$exchange_rate;
+        return 1;
     }
 
     /**
@@ -123,7 +123,7 @@ class ShopCurrency extends Model
         if ($rate) {
             return $money * $rate;
         } else {
-            return $money * self::$exchange_rate;
+            return $money;
         }
 
     }
@@ -218,7 +218,7 @@ class ShopCurrency extends Model
 
         $sumSubtotal  = 0;
         $sumSubtotalWithTax  = 0;
-        $rate = ($rate) ? $rate : self::$exchange_rate;
+        $rate = ($rate) ? $rate : 1;
         foreach ($carts as $storeId => $cart) {
             $sumSubtotalStore  = 0;
             $sumSubtotalWithTaxStore  = 0;

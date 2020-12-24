@@ -6,6 +6,7 @@ use SCart\Core\Front\Models\ShopProduct;
 use SCart\Core\Front\Models\ShopProductDescription;
 use SCart\Core\Front\Models\ShopAttributeGroup;
 use SCart\Core\Front\Models\ShopProductCategory;
+use Illuminate\Support\Facades\DB;
 
 class AdminProduct extends ShopProduct
 {
@@ -22,6 +23,7 @@ class AdminProduct extends ShopProduct
         return self::where('id', $id)
         ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
         ->where($tableProduct . '.store_id', session('adminStoreId'))
+        ->where($tableDescription . '.lang', sc_get_locale())
         ->first();
     }
 
@@ -41,10 +43,11 @@ class AdminProduct extends ShopProduct
         $tablePTC         = (new ShopProductCategory)->getTable();
         $tableProduct     = (new ShopProduct)->getTable();
         if ($category_id) {
+            $catIds = array_merge([$category_id], AdminProduct::getAllDecendantCategories($category_id));
             $productList = (new ShopProduct)
                 ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
                 ->join($tablePTC, $tablePTC . '.product_id', $tableProduct . '.id')
-                ->where($tablePTC . '.category_id', $category_id)
+                ->whereIn($tablePTC . '.category_id', $catIds)
                 ->where($tableProduct . '.store_id', session('adminStoreId'))
                 ->where($tableDescription . '.lang', sc_get_locale());
         } else {
@@ -62,7 +65,6 @@ class AdminProduct extends ShopProduct
                     ->orWhere($tableProduct . '.sku', 'like', '%' . $keyword . '%');
             });
         }
-        $productList->groupBy($tableProduct.'.id');
 
         if ($sort_order && array_key_exists($sort_order, $arrSort)) {
             $field = explode('__', $sort_order)[0];

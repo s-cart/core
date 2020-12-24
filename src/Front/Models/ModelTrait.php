@@ -1,6 +1,7 @@
 <?php
 
 namespace SCart\Core\Front\Models;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Trait Model.
@@ -143,6 +144,24 @@ trait ModelTrait
             return $this;
         }
 
+    }
+
+    /**
+     * Get all decendant categories
+     */
+    public static function getAllDecendantCategories($baseCatId) {
+        $rawSQL = <<<_SQL_
+select  id
+from    (select * from sc_shop_category
+         order by parent, id) category_sorted,
+        (select @pv := ?) initialisation
+where   find_in_set(parent, @pv)
+and     length(@pv := concat(@pv, ',', id))
+_SQL_;
+        $catIdObjs = DB::select($rawSQL, [$baseCatId]);
+        $catIds = array_column($catIdObjs, 'id');
+
+        return $catIds;
     }
 
 }

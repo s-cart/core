@@ -181,16 +181,12 @@ Function get path thumb of image if saved in storage
  */
 function sc_image_get_path_thumb($pathFile)
 {
-    if (strpos($pathFile, "/storage/") === 0) {
-        $arrPath = explode('/', $pathFile);
-        $fileName = end($arrPath);
-        $pathThumb = substr($pathFile, 0, -strlen($fileName)) . 'thumbs/' . $fileName;
-        if (file_exists(public_path($pathThumb))) {
-            return $pathThumb;
-        } else {
-            return sc_image_get_path($pathFile);
-        }
+    $arrPath = explode('/', $pathFile);
+    $fileName = end($arrPath);
+    $pathThumb = substr($pathFile, 0, -strlen($fileName)) . 'thumbs/' . $fileName;
+    if (file_exists(public_path($pathThumb))) {
+        return $pathThumb;
     } else {
-        return $pathFile;
+        return sc_image_get_path($pathFile);
     }
 }
