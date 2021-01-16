@@ -14,7 +14,7 @@
       "php": "^7.3|^8.0",
       "laravel/framework": "^8.0",
       "unisharp/laravel-filemanager": "^2.2",
-      "spatie/laravel-pjax": "^2.0",
+      "spatie/laravel-pjax": "^2.1",
       "phpoffice/phpspreadsheet": "^1.16",
       "spatie/laravel-json-api-paginate": "^1.10",
 	    "spatie/db-dumper": "^2.18"
