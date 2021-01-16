@@ -61,7 +61,7 @@ class MakePlugin extends Command
     }
 
     //Create format plugin
-    public function plugin($code = 'Other', $key, $download = 0) {
+    public function plugin($code = 'Other', $key = '', $download = 0) {
         $error = 0;
         $msg = '';
 
