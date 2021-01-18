@@ -17,7 +17,7 @@ class Localization
      */
     public function handle($request, Closure $next)
     {
-//Set language
+        //Set language
         $languages = ShopLanguage::getListActive();
         $requestLocale = $request->get('lang');
         if ($requestLocale) {
@@ -31,7 +31,7 @@ class Localization
         $currentLocale = array_key_exists($detectLocale, $languages->toArray()) ? $detectLocale : $languages->first()->code;
         session(['locale' => $currentLocale, 'locale_id' => $languages[$currentLocale]['id']]);
         app()->setLocale($currentLocale);
-//End language
+        //End language
         return $next($request);
     }
 }

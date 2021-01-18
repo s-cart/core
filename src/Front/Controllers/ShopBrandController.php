@@ -3,15 +3,7 @@ namespace SCart\Core\Front\Controllers;
 
 use App\Http\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopBrand;
-use SCart\Core\Front\Models\ShopBanner;
-use SCart\Core\Front\Models\ShopCategory;
 use SCart\Core\Front\Models\ShopProduct;
-use SCart\Core\Front\Models\ShopSupplier;
-use SCart\Core\Front\Models\ShopEmailTemplate;
-use SCart\Core\Front\Models\ShopNews;
-use SCart\Core\Front\Models\ShopPage;
-use SCart\Core\Front\Models\ShopSubscribe;
-use Illuminate\Http\Request;
 
 class ShopBrandController extends RootFrontController
 {
@@ -21,10 +13,24 @@ class ShopBrandController extends RootFrontController
     }
     
     /**
-     * get all brand
+     * Process front get all brand
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function allBrandsProcessFront(...$params) {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_allBrands();
+    }
+
+    /**
+     * Get all brand
      * @return [view]
      */
-    public function allBrands()
+    private function _allBrands()
     {
         $sortBy = 'sort';
         $sortOrder = 'asc';
@@ -63,11 +69,28 @@ class ShopBrandController extends RootFrontController
     }
 
     /**
+     * Process front get brand detail
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function brandDetailProcessFront(...$params) {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $alias = $params[1] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $alias = $params[0] ?? '';
+        }
+        return $this->_brandDetail($alias);
+    }
+
+    /**
      * brand detail
      * @param  [string] $alias
      * @return [view] 
      */
-    public function brandDetail($alias)
+    private function _brandDetail($alias)
     {
         $sortBy = 'sort';
         $sortOrder = 'asc';

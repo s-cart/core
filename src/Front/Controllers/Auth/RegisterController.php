@@ -34,7 +34,7 @@ class RegisterController extends RootFrontController
     // protected $redirectTo = '/home';
     protected function redirectTo()
     {
-        return route('customer.index');
+        return sc_route('customer.index');
     }
 
     /**
@@ -126,7 +126,7 @@ class RegisterController extends RootFrontController
     
     public function showRegistrationForm()
     {
-        return redirect()->route('register');
+        return redirect(sc_route('register'));
         // return view('auth.register');
     }
 
@@ -135,12 +135,28 @@ class RegisterController extends RootFrontController
         redirect()->route('home')->with(['message' => trans('account.register_success')]);
     }
 
+
+    /**
+     * Process front form register
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function showRegisterFormProcessFront(...$params) {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_showRegisterForm();
+    }
+
+
     /**
      * Form register
      *
      * @return  [type]  [return description]
      */
-    public function showRegisterForm()
+    private function _showRegisterForm()
     {
         if (session('customer')) {
             return redirect()->route('home');

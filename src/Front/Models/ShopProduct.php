@@ -246,7 +246,7 @@ class ShopProduct extends Model
      */
     public function getUrl()
     {
-        return route('product.detail', ['alias' => $this->alias, 'storeId' => $this->store_id]);
+        return sc_route('product.detail', ['alias' => $this->alias, 'storeId' => $this->store_id]);
     }
 
     /**

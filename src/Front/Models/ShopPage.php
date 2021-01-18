@@ -57,7 +57,7 @@ class ShopPage extends Model
 
     public function getUrl()
     {
-        return route('page.detail', ['alias' => $this->alias]);
+        return sc_route('page.detail', ['alias' => $this->alias]);
     }
 
     /**

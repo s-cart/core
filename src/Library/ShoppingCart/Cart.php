@@ -58,6 +58,7 @@ class Cart
     public function instance($instance = null)
     {
         $instance = $instance ?: self::DEFAULT_INSTANCE;
+        $instance = ($instance == 'cart') ? self::DEFAULT_INSTANCE : $instance;
 
         $this->instance = sprintf('%s.%s', 'cart', $instance);
 

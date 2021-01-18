@@ -1,11 +1,12 @@
 <?php
 
 use SCart\Core\Front\Models\ShopStoreBlockContent;
-use SCart\Core\Front\Models\ShopLanguage;
 use SCart\Core\Front\Models\ShopLink;
 use SCart\Core\Front\Models\ShopStoreCss;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
+
 /*
 Get all block content
  */
@@ -108,32 +109,6 @@ if (!function_exists('sc_url_render')) {
     }
 }
 
-if (!function_exists('sc_language_all')) {
-    //Get all language
-    function sc_language_all()
-    {
-        return ShopLanguage::getListActive();
-    }
-}
-
-if (!function_exists('sc_language_render')) {
-    /*
-    Render language
-     */
-    function sc_language_render($string)
-    {
-        if(empty($string)) {
-            return null;
-        }
-        
-        $arrCheck = explode('lang::', $string);
-        if (count($arrCheck) == 2) {
-            return trans($arrCheck[1]);
-        } else {
-            return trans($string);
-        }
-    }
-}
 
 if (!function_exists('sc_html_render')) {
     /*
@@ -255,17 +230,6 @@ if (!function_exists('sc_unzip')) {
 }
 
 
-if (!function_exists('sc_get_locale')) {
-    /*
-    Get locale
-    */
-    function sc_get_locale()
-    {
-        return app()->getLocale();
-    }
-}
-
-
 if (!function_exists('sc_get_all_template')) {
     /*
     Get all template
@@ -294,11 +258,19 @@ if (!function_exists('sc_route')) {
      * Render route
      *
      * @param   [string]  $name
+     * @param   [array]  $param
      *
      * @return  [type]         [return description]
      */
-    function sc_route($name, $param = null)
+    function sc_route($name, $param = [])
     {
+        if (!config('app.seoLang')) {
+            $param = Arr::except($param, ['lang']);
+        } else {
+            if (!key_exists('lang', $param) && $name != 'locale' && $name != 'home') {
+                $param['lang'] = app()->getLocale();
+            }
+        }
         if (Route::has($name)) {
             return route($name, $param);
         } else {

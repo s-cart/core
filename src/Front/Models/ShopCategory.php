@@ -79,7 +79,7 @@ class ShopCategory extends Model
 
     public function getUrl()
     {
-        return route('category.detail', ['alias' => $this->alias]);
+        return sc_route('category.detail', ['alias' => $this->alias]);
     }
 
     //Scort

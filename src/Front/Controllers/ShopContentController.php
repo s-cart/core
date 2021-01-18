@@ -36,10 +36,25 @@ class ShopContentController extends RootFrontController
     }
 
     /**
+     * Process front shop page
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function shopProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_shop();
+    }
+
+    /**
      * Shop page
      * @return [view]
      */
-    public function shop()
+    private function _shop()
     {
         $sortBy = 'sort';
         $sortOrder = 'asc';
@@ -78,11 +93,26 @@ class ShopContentController extends RootFrontController
     }
 
     /**
+     * Process front search page
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function searchProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_search();
+    }
+
+    /**
      * search product
      * @return [view]
      */
-    public function search()
-    {
+    private function _search()
+    {       
         $sortBy = 'sort';
         $sortOrder = 'asc';
         $filter_sort = request('filter_sort') ?? '';
@@ -123,9 +153,9 @@ class ShopContentController extends RootFrontController
      * @param   [int]  $id  
      *
      */
-    public function clickBanner($id){
+    public function clickBanner($id = 0) {
         $banner = ShopBanner::find($id);
-        if($banner) {
+        if ($banner) {
             $banner->click +=1;
             $banner->save();
             return redirect(url($banner->url??'/'));
@@ -134,10 +164,25 @@ class ShopContentController extends RootFrontController
     }
 
     /**
+     * Process front form contact page
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function getContactProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_getContact();
+    }
+
+    /**
      * form contact
      * @return [view]
      */
-    public function getContact()
+    private function _getContact()
     {
         $viewCaptcha = '';
         if(sc_captcha_method() && in_array('contact', sc_captcha_page())) {
@@ -241,16 +286,33 @@ class ShopContentController extends RootFrontController
             }
         }
 
-        return redirect()
-            ->route('contact')
+        return redirect(sc_route('contact'))
             ->with('success', trans('front.thank_contact'));
+    }
+
+    /**
+     * Process front form page detail
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function pageDetailProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $alias = $params[1] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $alias = $params[0] ?? '';
+        }
+        return $this->_pageDetail($alias);
     }
 
     /**
      * Render page
      * @param  [string] $alias
      */
-    public function pageDetail($alias)
+    private function _pageDetail($alias)
     {
         $page = (new ShopPage)->getDetail($alias, $type = 'alias');
         if ($page) {
@@ -273,10 +335,25 @@ class ShopContentController extends RootFrontController
     }
 
     /**
+     * Process front news
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function newsProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_news();
+    }
+
+    /**
      * Render news
      * @return [type] [description]
      */
-    public function news()
+    private function _news()
     {
         $news = (new ShopNews)
             ->setLimit(sc_config('news_list'))
@@ -297,13 +374,31 @@ class ShopContentController extends RootFrontController
     }
 
     /**
+     * Process front news detail
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function newsDetailProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $alias = $params[1] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $alias = $params[0] ?? '';
+        }
+        return $this->_newsDetail($alias);
+    }
+
+    /**
      * News detail
      *
      * @param   [string]  $alias 
      *
      * @return  view
      */
-    public function newsDetail($alias)
+    private function _newsDetail($alias)
     {
         $news = (new ShopNews)->getDetail($alias, $type ='alias');
         if ($news) {

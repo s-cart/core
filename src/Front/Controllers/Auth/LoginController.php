@@ -58,11 +58,26 @@ class LoginController extends RootFrontController
     }
 
     /**
+     * Process front form login
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function showLoginFormProcessFront(...$params) {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_showLoginForm();
+    }
+
+
+    /**
      * Form login
      *
      * @return  [type]  [return description]
      */
-    public function showLoginForm()
+    private function _showLoginForm()
     {
         if (Auth::user()) {
             return redirect()->route('home');
@@ -77,13 +92,14 @@ class LoginController extends RootFrontController
         );
     }
 
+
     public function logout(Request $request)
     {
         $this->guard()->logout();
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect()->route('login');
+        return $this->loggedOut($request) ?: redirect(sc_route('login'));
     }
 
     protected function authenticated(Request $request, $user)

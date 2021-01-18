@@ -41,6 +41,23 @@ class ResetPasswordController extends RootFrontController
     }
 
     /**
+     * Process front Form forgot password
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function showResetFormProcessFront(...$params) {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $token = $params[1] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $token = $params[0] ?? '';
+        }
+        return $this->_showResetForm($token);
+    }
+
+    /**
      * Form reset password
      *
      * @param   Request  $request
@@ -48,7 +65,7 @@ class ResetPasswordController extends RootFrontController
      *
      * @return  [view]
      */
-    public function showResetForm(Request $request, $token = null)
+    private function _showResetForm($token = null)
     {
         if (Auth::user()) {
             return redirect()->route('home');
@@ -58,7 +75,6 @@ class ResetPasswordController extends RootFrontController
             [
                 'title' => trans('front.reset_password'),
                 'token' => $token,
-                'email' => $request->email,
                 'layout_page' => 'shop_auth',
             ]
         );

@@ -25,11 +25,27 @@ class ShopCartController extends RootFrontController
         parent::__construct();
 
     }
+
+    /**
+     * Process front get cart
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function getCartProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_getCart();
+    }
+
     /**
      * Get list cart: screen get cart
      * @return [type] [description]
      */
-    public function getCart()
+    private function _getCart()
     {
         session()->forget('paymentMethod'); //destroy paymentMethod
         session()->forget('shippingMethod'); //destroy shippingMethod
@@ -157,9 +173,24 @@ class ShopCartController extends RootFrontController
     }
 
     /**
+     * Process front prepare checkout
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function checkoutPrepareProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_checkoutPrepare();
+    }
+
+    /**
      * Process Cart, prepare for the checkout screen
      */
-    public function processCart()
+    private function _checkoutPrepare()
     {
         $customer = auth()->user();
         if (Cart::instance('default')->count() == 0) {
@@ -347,10 +378,25 @@ class ShopCartController extends RootFrontController
     }
 
     /**
+     * Process front checkout screen
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function getCheckoutProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_getCheckout();
+    }
+
+    /**
      * Checkout screen
      * @return [view]
      */
-    public function getCheckout()
+    private function _getCheckout()
     {
         //Check shipping address
         if (
@@ -772,10 +818,25 @@ class ShopCartController extends RootFrontController
     }
 
     /**
+     * Process front wishlist
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function wishlistProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_wishlist();
+    }
+
+    /**
      * Get product in wishlist
      * @return [view]
      */
-    public function wishlist()
+    private function _wishlist()
     {
 
         $wishlist = Cart::instance('wishlist')->content();
@@ -793,10 +854,25 @@ class ShopCartController extends RootFrontController
     }
 
     /**
+     * Process front compare
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function compareProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_compare();
+    }
+
+    /**
      * Get product in compare
      * @return [view]
      */
-    public function compare()
+    private function _compare()
     {
         $compare = Cart::instance('compare')->content();
 
@@ -813,66 +889,73 @@ class ShopCartController extends RootFrontController
         );
     }
 
+
+    /**
+     * Process front compare
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function clearCartProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $instance = $params[1] ?? 'cart';
+            sc_lang_switch($lang);
+        } else {
+            $instance = $params[0] ?? 'cart';
+        }
+        return $this->_clearCart($instance);
+    }
+
+
     /**
      * Clear all cart
      * @return [redirect]
      */
-    public function clearCart($instance = 'default')
+    private function _clearCart($instance = 'cart')
     {
         Cart::instance($instance)->destroy();
-        return redirect(sc_route('cart'));
+        return redirect(sc_route($instance));
     }
+
+    /**
+     * Process front remove item cart
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function removeItemProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $instance = $params[1] ?? 'cart';
+            $id = $params[2] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $instance = $params[0] ?? 'cart';
+            $id = $params[1] ?? '';
+        }
+        return $this->_removeItem($instance, $id);
+    }
+
 
     /**
      * Remove item from cart
      * @return [redirect]
      */
-    public function removeItem($id = null)
+    private function _removeItem($instance = 'cart', $id = null)
     {
         if ($id === null) {
-            return redirect(sc_route('cart'));
+            return redirect(sc_route($instance));
         }
-
-        if (array_key_exists($id, Cart::instance('default')->content()->toArray())) {
-            Cart::instance('default')->remove($id);
+        if (array_key_exists($id, Cart::instance($instance)->content()->toArray())) {
+            Cart::instance($instance)->remove($id);
         }
-        return redirect(sc_route('cart'));
+        return redirect(sc_route($instance));
     }
 
-    /**
-     * Remove item from wishlist
-     * @param  [string | null] $id
-     * @return [redirect]
-     */
-    public function removeItemWishlist($id = null)
-    {
-        if ($id === null) {
-            return redirect()->route('wishlist');
-        }
-
-        if (array_key_exists($id, Cart::instance('wishlist')->content()->toArray())) {
-            Cart::instance('wishlist')->remove($id);
-        }
-        return redirect()->route('wishlist');
-    }
-
-    /**
-     * Remove item from compare
-     * @param  [string | null] $id
-     * @return [redirect]
-     */
-    public function removeItemCompare($id = null)
-    {
-        if ($id === null) {
-            return redirect()->route('compare');
-        }
-
-        if (array_key_exists($id, Cart::instance('compare')->content()->toArray())) {
-            Cart::instance('compare')->remove($id);
-        }
-        return redirect()->route('compare');
-    }
-
+    
     /**
      * Complete order
      *
@@ -1009,7 +1092,23 @@ class ShopCartController extends RootFrontController
 
         }
 
-        return redirect()->route('order.success')->with('orderID', $orderID);
+        return redirect(sc_route('order.success'))->with('orderID', $orderID);
+    }
+
+
+    /**
+     * Process front page order success
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function orderSuccessProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_orderSuccess();
     }
 
     /**
@@ -1017,7 +1116,7 @@ class ShopCartController extends RootFrontController
      *
      * @return  [view]
      */
-    public function orderSuccess(){
+    private function _orderSuccess() {
 
         if (!session('orderID')) {
             return redirect()->route('home');

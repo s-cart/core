@@ -13,10 +13,24 @@ class ShopCategoryController extends RootFrontController
     }
 
     /**
+     * Process front get category all
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function allCategoriesProcessFront(...$params) {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_allCategories();
+    }
+
+    /**
      * display list category root (parent = 0)
      * @return [view]  
      */
-    public function allCategories()
+    private function _allCategories()
     {
         $sortBy = 'sort';
         $sortOrder = 'asc';
@@ -54,11 +68,29 @@ class ShopCategoryController extends RootFrontController
     }
 
     /**
+     * Process front get category detail
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function categoryDetailProcessFront(...$params) {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $alias = $params[1] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $alias = $params[0] ?? '';
+        }
+        return $this->_categoryDetail($alias);
+    }
+
+
+    /**
      * Category detail: list category child + product list
      * @param  [string] $alias
      * @return [view]
      */
-    public function categoryDetail($alias)
+    private function _categoryDetail($alias)
     {
         $sortBy = 'sort';
         $sortOrder = 'asc';

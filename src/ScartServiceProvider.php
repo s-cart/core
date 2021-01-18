@@ -122,6 +122,10 @@ class ScartServiceProvider extends ServiceProvider
             config(['logging.channels.slack.url' => sc_config_global('LOG_SLACK_WEBHOOK_URL')]);
         }
 
+        //Config language url
+        config(['app.seoLang' => (sc_config_global('url_seo_lang') ? '{lang?}/' : '')]);
+
+        //Title app
         config(['app.name' => sc_store('title')]);
 
         //Config for  email

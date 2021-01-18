@@ -59,7 +59,7 @@ class ShopNews extends Model
      */
     public function getUrl()
     {
-        return route('news.detail', ['alias' => $this->alias]);
+        return sc_route('news.detail', ['alias' => $this->alias]);
     }
 
     //Scort

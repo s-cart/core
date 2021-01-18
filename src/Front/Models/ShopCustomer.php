@@ -66,7 +66,7 @@ class ShopCustomer extends Authenticatable
                 trans('email.forgot_password.reason_sendmail'),
                 trans('email.forgot_password.note_sendmail', ['site_admin' => config('mail.from.name')]),
                 trans('email.forgot_password.note_access_link', ['reset_button' => trans('email.forgot_password.reset_button')]),
-                route('password.reset', ['token' => $token]),
+                sc_route('password.reset', ['token' => $token]),
                 trans('email.forgot_password.reset_button'),
             ];
             $content = preg_replace($dataFind, $dataReplace, $content);

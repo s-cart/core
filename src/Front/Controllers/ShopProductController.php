@@ -12,11 +12,25 @@ class ShopProductController extends RootFrontController
     }
     
     /**
-     * All products
-     * @param  [type] $key [description]
-     * @return [type]      [description]
+     * Process front all products
+     *
+     * @param [type] ...$params
+     * @return void
      */
-    public function allProducts()
+    public function allProductsProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_allProducts();
+    }
+
+    /**
+     * All products
+     * @return [view]
+     */
+    private function _allProducts()
     {
         $sortBy = 'sort';
         $sortOrder = 'asc';
@@ -50,18 +64,39 @@ class ShopProductController extends RootFrontController
                 'products' => $products,
                 'layout_page' => 'product_list',
                 'filter_sort' => $filter_sort,
-        ));
+            )
+        );
+    }
+
+    /**
+     * Process front product detail
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function productDetailProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $alias = $params[1] ?? '';
+            $storeId = $params[2] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $alias = $params[0] ?? '';
+            $storeId = $params[1] ?? '';
+        }
+        return $this->_productDetail($alias, $storeId);
     }
 
     /**
      * Get product detail
      *
      * @param   [string]  $alias      [$alias description]
-     * @param   [string]  $storeCode  [$storeCode description]
+     * @param   [string]  $storeId  [$storeCode description]
      *
-     * @return  [type]              [return description]
+     * @return  [mix]
      */
-    public function productDetail($alias, $storeId)
+    private function _productDetail($alias, $storeId)
     {
         $product = (new ShopProduct)->getDetail($alias, $type = 'alias', $storeId);
         if ($product && $product->status && (!sc_config('product_stock', $storeId) || sc_config('product_display_out_of_stock', $storeId) || $product->stock > 0)) {

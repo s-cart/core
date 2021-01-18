@@ -37,7 +37,7 @@ class ShopSupplier extends Model
      */
     public function getUrl()
     {
-        return route('supplier.detail', ['alias' => $this->alias]);
+        return sc_route('supplier.detail', ['alias' => $this->alias]);
     }
 
     /*

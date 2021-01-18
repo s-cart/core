@@ -197,7 +197,7 @@ class ShopOrder extends Model
                         } else {
                             $msg = trans('promotion.process.undefined');
                         }
-                        return redirect()->route('cart')->with(['error_discount' => $msg]);
+                        return redirect(sc_route('cart'))->with(['error_discount' => $msg]);
                     }
                 }
             }

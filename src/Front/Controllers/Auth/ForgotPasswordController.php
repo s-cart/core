@@ -68,10 +68,24 @@ class ForgotPasswordController extends RootFrontController
 
 
     /**
+     * Process front Form forgot password
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function showLinkRequestFormProcessFront(...$params) {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_showLinkRequestForm();
+    }
+
+    /**
      * Form forgot password
      * @return [view] 
      */
-    public function showLinkRequestForm()
+    private function _showLinkRequestForm()
     {
         if (Auth::user()) {
             return redirect()->route('home');

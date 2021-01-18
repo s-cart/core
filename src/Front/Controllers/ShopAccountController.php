@@ -24,11 +24,26 @@ class ShopAccountController extends RootFrontController
     }
 
     /**
+     * Process front index profile
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function indexProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_index();
+    }
+
+    /**
      * Index user profile
      *
      * @return  [view]
      */
-    public function index()
+    private function _index()
     {
         $customer = auth()->user();
 
@@ -44,11 +59,26 @@ class ShopAccountController extends RootFrontController
     }
 
     /**
+     * Process front change passord
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function changePasswordProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_changePassword();
+    }
+
+    /**
      * Form Change password
      *
      * @return  [view]
      */
-    public function changePassword()
+    private function _changePassword()
     {
         $customer = auth()->user();
         sc_check_view($this->templatePath . '.account.change_password');
@@ -110,8 +140,23 @@ class ShopAccountController extends RootFrontController
         $dataUser->password = bcrypt($password);
         $dataUser->save();
 
-        return redirect()->route('customer.index')
+        return redirect(sc_route('customer.index'))
             ->with(['success' => trans('account.update_success')]);
+    }
+
+    /**
+     * Process front change info
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function changeInfomationProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_changeInfomation();
     }
 
     /**
@@ -119,7 +164,7 @@ class ShopAccountController extends RootFrontController
      *
      * @return  [view]
      */
-    public function changeInfomation()
+    private function _changeInfomation()
     {
         $customer = auth()->user();
         sc_check_view($this->templatePath . '.account.change_infomation');
@@ -158,15 +203,30 @@ class ShopAccountController extends RootFrontController
         }
         ShopCustomer::updateInfo($dataMapping['dataUpdate'], $id);
 
-        return redirect()->route('customer.index')
+        return redirect(sc_route('customer.index'))
             ->with(['success' => trans('account.update_success')]);
+    }
+
+    /**
+     * Process front order list
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function orderListProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_orderList();
     }
 
     /**
      * Render order list
      * @return [view]
      */
-    public function orderList()
+    private function _orderList()
     {
         $statusOrder = ShopOrderStatus::getIdAll();
         sc_check_view($this->templatePath . '.account.order_list');
@@ -182,10 +242,28 @@ class ShopAccountController extends RootFrontController
     }
 
     /**
+     * Process front order detail
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function orderDetailProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $id = $params[1] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $id = $params[0] ?? '';
+        }
+        return $this->_orderDetail($id);
+    }
+
+    /**
      * Render order detail
      * @return [view]
      */
-    public function orderDetail($id)
+    private function _orderDetail($id)
     {
         $customer = auth()->user();
         $statusOrder = ShopOrderStatus::getIdAll();
@@ -213,12 +291,26 @@ class ShopAccountController extends RootFrontController
 
     }
 
+    /**
+     * Process front address list
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function addressListProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_addressList();
+    }
 
     /**
      * Render address list
      * @return [view]
      */
-    public function addressList()
+    private function _addressList()
     {
         $customer = auth()->user();
         sc_check_view($this->templatePath . '.account.address_list');
@@ -234,12 +326,29 @@ class ShopAccountController extends RootFrontController
             );
     }
 
+    /**
+     * Process front address update
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function updateAddressProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $id = $params[1] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $id = $params[0] ?? '';
+        }
+        return $this->_updateAddress($id);
+    }
 
     /**
      * Render address detail
      * @return [view]
      */
-    public function updateAddress($id)
+    private function _updateAddress($id)
     {
         $customer = auth()->user();
         $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
@@ -342,8 +451,6 @@ class ShopAccountController extends RootFrontController
         return redirect()->route('customer.address_list')
             ->with(['success' => trans('account.update_success')]);
     }
-
-
 
     /**
      * Get address detail 
