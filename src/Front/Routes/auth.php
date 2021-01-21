@@ -33,4 +33,9 @@ Route::group(
         $router->post('/password/reset', 'ResetPasswordController@reset');
     }
 );
+
+Route::get('/login', function () {
+    return redirect(sc_route('login'));
+});
+
 //End Auth
