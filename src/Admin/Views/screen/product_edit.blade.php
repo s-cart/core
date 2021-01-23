@@ -679,7 +679,7 @@
 
 @if (sc_config_admin('product_property'))
                         {{-- Virtual --}}
-                        @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
+                        @if ($product->kind == SC_PRODUCT_SINGLE)
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('property') ? ' text-red' : '' }}">
                             <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }}</label>
                             <div class="col-sm-8">
