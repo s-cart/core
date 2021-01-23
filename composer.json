@@ -17,7 +17,8 @@
       "spatie/laravel-pjax": "^2.1",
       "phpoffice/phpspreadsheet": "^1.16",
       "spatie/laravel-json-api-paginate": "^1.10",
-	    "spatie/db-dumper": "^2.18"
+	    "spatie/db-dumper": "^2.18",
+	    "google/apiclient:": "^2.0"
   },
   "autoload": {
       "psr-4": {
