@@ -3,8 +3,8 @@
 return [
     'customer'   => [
         'first_name'         => 'required|string|max:100',
-        'password_null'           => 'nullable|string|min:6',
-        'password_confirm'           => 'required|string|min:6|confirmed',
+        'password_null'      => 'nullable|string|min:6',
+        'password_confirm'   => 'required|string|min:6|confirmed',
         'email'              => 'required|string|email|max:255',
         'last_name_required' => 'required|string|max:100',
         'last_name_null'     => 'nullable|string|max:100',
