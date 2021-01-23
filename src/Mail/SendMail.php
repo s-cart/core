@@ -86,7 +86,7 @@ class SendMail extends Mailable
                     if(!empty($attachment['file_storage'])) {
                         $this->attachFromStorageDisk($attachment['file_storage'], $attachment['file_path']);
                     } else {
-                        $this->attachFromStorageDisk($attachment['file_path'], $attachment['file_name'] ?? '');
+                        $this->attachFromStorage($attachment['file_path'], $attachment['file_name'] ?? '');
                     }
                 }
             }

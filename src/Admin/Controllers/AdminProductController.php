@@ -163,9 +163,17 @@ class AdminProductController extends RootAdminController
         $data['resultItems'] = trans('product.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
 
         //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_product.create') . '" class="btn btn-success btn-flat" title="New" id="button_create_new">
-        <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+        $data['menuRight'][] = '<a href="' . sc_route('admin_product.create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title').'" id="button_create_new">
+        <i class="fa fa-plus"></i>
         </a>';
+        if (sc_config_admin('product_kind')) {
+            $data['menuRight'][] = '<a href="' . sc_route('admin_product.build_create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title_build').'" id="button_create_new">
+            <i class="fas fa-puzzle-piece"></i>
+            </a>';
+            $data['menuRight'][] = '<a href="' . sc_route('admin_product.group_create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title_group').'" id="button_create_new">
+            <i class="fas fa-network-wired"></i>
+            </a>';
+        }
         //=menuRight
 
         //menuSort        
@@ -206,39 +214,11 @@ class AdminProductController extends RootAdminController
     }
 
 /**
- * Form create new order in admin
+ * Form create new item in admin
  * @return [type] [description]
  */
     public function create()
     {
-        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
-
-        // html select product group
-        $htmlSelectGroup = '<div class="select-product">';
-        $htmlSelectGroup .= '<table width="100%"><tr><td width="80%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . trans('product.admin.select_product_in_group') . '" style="width: 100%;" name="productInGroup[]" >';
-        $htmlSelectGroup .= '';
-        foreach ($listProductSingle as $k => $v) {
-            $htmlSelectGroup .= '<option value="' . $k . '">' . $v['name'] . '</option>';
-        }
-        $htmlSelectGroup .= '</select></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductInGroup"><i class="fa fa-times"></i></span></td></tr></table>';
-        $htmlSelectGroup .= '</div>';
-        //End select product group
-
-        // html select product build
-        $htmlSelectBuild = '<div class="select-product">';
-        $htmlSelectBuild .= '<table width="100%"><tr><td width="70%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . trans('product.admin.select_product_in_build') . '" style="width: 100%;" name="productBuild[]" >';
-        $htmlSelectBuild .= '';
-        foreach ($listProductSingle as $k => $v) {
-            $htmlSelectBuild .= '<option value="' . $k . '">' . $v['name'] . '</option>';
-        }
-        $htmlSelectBuild .= '</select></td><td style="width:100px"><input class="form-control rounded-0"  type="number" name="productBuildQty[]" value="1" min=1></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductBuild"><i class="fa fa-times"></i></span></td></tr></table>';
-        $htmlSelectBuild .= '</div>';
-        //end select product build
-
-        // html select attribute
-        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
-        //end select attribute
-
         // html add more images
         $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control rounded-0 input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
         //end add more images
@@ -264,10 +244,6 @@ class AdminProductController extends RootAdminController
             'propertys'            => $this->propertys,
             'kinds'                => $this->kinds,
             'attributeGroup'       => $this->attributeGroup,
-            'htmlSelectGroup'      => $htmlSelectGroup,
-            'htmlSelectBuild'      => $htmlSelectBuild,
-            'listProductSingle'    => $listProductSingle,
-            'htmlProductAtrribute' => $htmlProductAtrribute,
             'htmlMoreImage'        => $htmlMoreImage,
             'listWeight'           => $this->listWeight,
             'listLength'           => $this->listLength, 
@@ -278,7 +254,119 @@ class AdminProductController extends RootAdminController
     }
 
 /**
- * Post create new order in admin
+ * Form create new item in admin
+ * @return [type] [description]
+ */
+public function createProductBuild()
+{
+    $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
+
+    // html select product build
+    $htmlSelectBuild = '<div class="select-product">';
+    $htmlSelectBuild .= '<table width="100%"><tr><td width="70%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . trans('product.admin.select_product_in_build') . '" style="width: 100%;" name="productBuild[]" >';
+    $htmlSelectBuild .= '';
+    foreach ($listProductSingle as $k => $v) {
+        $htmlSelectBuild .= '<option value="' . $k . '">' . $v['name'] . '</option>';
+    }
+    $htmlSelectBuild .= '</select></td><td style="width:100px"><input class="form-control rounded-0"  type="number" name="productBuildQty[]" value="1" min=1></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductBuild"><i class="fa fa-times"></i></span></td></tr></table>';
+    $htmlSelectBuild .= '</div>';
+    //end select product build
+
+    // html select attribute
+    $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
+    //end select attribute
+
+    // html add more images
+    $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control rounded-0 input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
+    //end add more images
+
+    if (function_exists('sc_store_get_categories_admin')) {
+        // Dont process in __construct because session 
+        $categoriesStore = sc_store_get_categories_admin();
+    } else {
+        $categoriesStore = [];
+    }
+
+    $data = [
+        'title'                => trans('product.admin.add_new_title_build'),
+        'subTitle'             => '',
+        'title_description'    => trans('product.admin.add_new_des'),
+        'icon'                 => 'fa fa-plus',
+        'languages'            => $this->languages,
+        'categoriesStore'      => $categoriesStore,
+        'categories'           => $this->categories,
+        'brands'               => (new ShopBrand)->getListAll(),
+        'suppliers'            => (new ShopSupplier)->getListAll(),
+        'taxs'                 => (new ShopTax)->getListAll(),
+        'propertys'            => $this->propertys,
+        'kinds'                => $this->kinds,
+        'attributeGroup'       => $this->attributeGroup,
+        'htmlSelectBuild'      => $htmlSelectBuild,
+        'listProductSingle'    => $listProductSingle,
+        'htmlProductAtrribute' => $htmlProductAtrribute,
+        'htmlMoreImage'        => $htmlMoreImage,
+        'listWeight'           => $this->listWeight,
+        'listLength'           => $this->listLength, 
+    ];
+
+    return view($this->templatePathAdmin.'screen.product_add_build')
+        ->with($data);
+}
+
+
+/**
+ * Form create new item in admin
+ * @return [type] [description]
+ */
+public function createProductGroup()
+{
+    $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
+
+    // html select product group
+    $htmlSelectGroup = '<div class="select-product">';
+    $htmlSelectGroup .= '<table width="100%"><tr><td width="80%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . trans('product.admin.select_product_in_group') . '" style="width: 100%;" name="productInGroup[]" >';
+    $htmlSelectGroup .= '';
+    foreach ($listProductSingle as $k => $v) {
+        $htmlSelectGroup .= '<option value="' . $k . '">' . $v['name'] . '</option>';
+    }
+    $htmlSelectGroup .= '</select></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductInGroup"><i class="fa fa-times"></i></span></td></tr></table>';
+    $htmlSelectGroup .= '</div>';
+    //End select product group
+
+    if (function_exists('sc_store_get_categories_admin')) {
+        // Dont process in __construct because session 
+        $categoriesStore = sc_store_get_categories_admin();
+    } else {
+        $categoriesStore = [];
+    }
+
+    $data = [
+        'title'                => trans('product.admin.add_new_title_group'),
+        'subTitle'             => '',
+        'title_description'    => trans('product.admin.add_new_des'),
+        'icon'                 => 'fa fa-plus',
+        'languages'            => $this->languages,
+        'categoriesStore'      => $categoriesStore,
+        'categories'           => $this->categories,
+        'brands'               => (new ShopBrand)->getListAll(),
+        'suppliers'            => (new ShopSupplier)->getListAll(),
+        'taxs'                 => (new ShopTax)->getListAll(),
+        'propertys'            => $this->propertys,
+        'kinds'                => $this->kinds,
+        'attributeGroup'       => $this->attributeGroup,
+        'listProductSingle'    => $listProductSingle,
+        'htmlSelectGroup'      => $htmlSelectGroup,
+        'listWeight'           => $this->listWeight,
+        'listLength'           => $this->listLength, 
+    ];
+
+    return view($this->templatePathAdmin.'screen.product_add_group')
+        ->with($data);
+}
+
+
+/**
+ * Post create new item in admin
  * @return [type] [description]
  */
 
@@ -353,7 +441,7 @@ class AdminProductController extends RootAdminController
                     'sku'                        => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|product_sku_unique',
                     'alias'                      => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:120|product_alias_unique',
                     'sort'                       => 'numeric|min:0',
-                    'minimum'                    => 'numeric|min:0',
+                    'category'                   => 'required',
                     'descriptions.*.name'        => 'required|string|max:200',
                     'descriptions.*.keyword'     => 'nullable|string|max:200',
                     'descriptions.*.description' => 'nullable|string|max:300',
@@ -361,6 +449,7 @@ class AdminProductController extends RootAdminController
                 $arrMsg = [
                     'descriptions.*.name.required' => trans('validation.required', ['attribute' => trans('product.name')]),
                     'sku.regex'                    => trans('product.sku_validate'),
+                    'category.required'            => trans('validation.required', ['attribute' => trans('product.category')]),
                     'sku.product_sku_unique'       => trans('product.sku_unique'),
                     'alias.regex'                  => trans('product.alias_validate'),
                     'alias.product_alias_unique'   => trans('product.alias_unique'),
@@ -410,7 +499,7 @@ class AdminProductController extends RootAdminController
             'tax_id'         => $data['tax_id'] ?? 0,
             'status'         => (!empty($data['status']) ? 1 : 0),
             'sort'           => (int) $data['sort'],
-            'minimum'        => (int) $data['minimum'],
+            'minimum'        => (int) ($data['minimum'] ?? 0),
             'store_id'       => session('adminStoreId'),
         ];
         if(!empty($data['date_available'])) {
@@ -428,7 +517,7 @@ class AdminProductController extends RootAdminController
         }
 
         //Insert category
-        if ($category && in_array($data['kind'], [SC_PRODUCT_SINGLE, SC_PRODUCT_BUILD])) {
+        if ($category) {
             $product->categories()->attach($category);
         }
 
@@ -646,8 +735,8 @@ class AdminProductController extends RootAdminController
                     'sku' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|product_sku_unique:'.$id,
                     'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:120|product_alias_unique:'.$id,
                     'productInGroup' => 'required',
+                    'category' => 'required',
                     'sort' => 'numeric|min:0',
-                    'minimum' => 'numeric|min:0',
                     'descriptions.*.name' => 'required|string|max:200',
                     'descriptions.*.keyword' => 'nullable|string|max:200',
                     'descriptions.*.description' => 'nullable|string|max:300',
@@ -655,6 +744,7 @@ class AdminProductController extends RootAdminController
                 $arrMsg = [
                     'sku.regex'                    => trans('product.sku_validate'),
                     'sku.product_sku_unique'       => trans('product.sku_unique'),
+                    'category.required'            => trans('validation.required', ['attribute' => trans('product.category')]),
                     'alias.regex'                  => trans('product.alias_validate'),
                     'alias.product_alias_unique'   => trans('product.alias_unique'),
                     'descriptions.*.name.required' => trans('validation.required', ['attribute' => trans('product.name')]),
@@ -700,7 +790,7 @@ class AdminProductController extends RootAdminController
             'alias'        => $data['alias'],
             'status'       => (!empty($data['status']) ? 1 : 0),
             'sort'         => (int) $data['sort'],
-            'minimum'      => (int) $data['minimum'],
+            'minimum'      => (int) ($data['minimum'] ?? 0),
             'store_id'     => session('adminStoreId'),
         ];
         if (!empty($data['date_available'])) {
@@ -731,13 +821,9 @@ class AdminProductController extends RootAdminController
         }
         AdminProduct::insertDescriptionAdmin($dataDes);
 
-        //Update category
-        if (in_array($product['kind'], [SC_PRODUCT_SINGLE, SC_PRODUCT_BUILD])) {
-            $product->categories()->detach();
-            if (count($category)) {
-                $product->categories()->attach($category);
-            }
-
+        $product->categories()->detach();
+        if (count($category)) {
+            $product->categories()->attach($category);
         }
 
         //Update group

@@ -84,19 +84,9 @@ if (!function_exists('sc_url_render')) {
         if (count($arrCheckRoute) == 2) {
             $arrRoute = explode('::', $string);
             if (isset($arrRoute[2])) {
-                try {
-                    return sc_route($arrRoute[1], $arrRoute[2]);
-                } catch(\Throwable $e) {
-                    sc_report($e->getMessage());
-                    return false;
-                }  
+                return sc_route($arrRoute[1], [$arrRoute[2]]);
             } else {
-                try {
-                    return sc_route($arrRoute[1]);
-                } catch(\Throwable $e) {
-                    sc_report($e->getMessage());
-                    return false;
-                }                
+                return sc_route($arrRoute[1]);               
             }
         }
 
@@ -167,7 +157,7 @@ if (!function_exists('sc_report')) {
                 try {
                     \Log::channel('slack')->error($msg);
                 } catch(\Throwable $e) {
-                    $msg .= $e->getMessage().PHP_EOL; 
+                    $msg .= $e->getFile().'- Line: '.$e->getLine().PHP_EOL.$e->getMessage().PHP_EOL; 
                 }
             }
         }

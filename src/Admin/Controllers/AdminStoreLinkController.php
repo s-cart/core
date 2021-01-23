@@ -90,7 +90,7 @@ class AdminStoreLinkController extends RootAdminController
     }
 
     /**
-     * Form create new order in admin
+     * Form create new item in admin
      * @return [type] [description]
      */
     public function create()
@@ -110,7 +110,7 @@ class AdminStoreLinkController extends RootAdminController
     }
 
     /**
-     * Post create new order in admin
+     * Post create new item in admin
      * @return [type] [description]
      */
     public function postCreate()

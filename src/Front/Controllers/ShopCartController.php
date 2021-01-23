@@ -1063,6 +1063,7 @@ class ShopCartController extends RootFrontController
                     sc_currency_render($data['total'], '', '', '', false),
                 ];
 
+                // Send mail order success to admin 
                 if (sc_config('order_success_to_admin') && $checkContent) {
                     $content = $checkContent->text;
                     $content = preg_replace($dataFind, $dataReplace, $content);
@@ -1075,6 +1076,8 @@ class ShopCartController extends RootFrontController
                     ];
                     sc_send_mail($this->templatePath . '.mail.order_success_to_admin', $dataView, $config, []);
                 }
+
+                // Send mail order success to customer
                 if (sc_config('order_success_to_customer') && $checkContentCustomer) {
                     $contentCustomer = $checkContentCustomer->text;
                     $contentCustomer = preg_replace($dataFind, $dataReplace, $contentCustomer);
@@ -1086,7 +1089,21 @@ class ShopCartController extends RootFrontController
                         'replyTo' => sc_store('email'),
                         'subject' => trans('order.send_mail.new_title'),
                     ];
-                    sc_send_mail($this->templatePath . '.mail.order_success_to_customer', $dataView, $config, []);
+
+                    $attach = [];
+                    if (sc_config('order_success_to_customer_pdf')) {
+                        // Invoice pdf
+                        \PDF::loadView($this->templatePath . '.mail.order_success_to_customer_pdf', $dataView)
+                            ->save(\Storage::disk('invoice')->path('order-'.$orderID.'.pdf'));
+                        $attach['attachFromStorage'] = [
+                            [
+                                'file_storage' => 'invoice',
+                                'file_path' => 'order-'.$orderID.'.pdf',
+                            ]
+                        ];
+                    }
+
+                    sc_send_mail($this->templatePath . '.mail.order_success_to_customer', $dataView, $config, $attach);
                 }
             }
 

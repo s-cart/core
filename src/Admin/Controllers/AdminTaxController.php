@@ -64,7 +64,7 @@ class AdminTaxController extends RootAdminController
 
 
 /**
- * Post create new order in admin
+ * Post create new item in admin
  * @return [type] [description]
  */
     public function postCreate()

@@ -1,9 +1,6 @@
 @extends($templatePathAdmin.'layout')
 
 @section('main')
-@php
-    $kindOpt = old('kind', '');
-@endphp
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -23,37 +20,9 @@
             <!-- form start -->
             <form action="{{ sc_route('admin_product.create') }}" method="post" name="form_name" accept-charset="UTF-8" 
                 class="form-horizontal" id="form-main" enctype="multipart/form-data">
+                <input type="hidden" name="kind" value="{{ SC_PRODUCT_SINGLE }}">
 
-                <div class="d-flex d-flex justify-content-center mb-3 {{ $errors->has('kind') ? ' text-red' : '' }}"  id="start-add">
-                    <div class="input-group" style="width: 300px; z-index:999">
-                        @if (sc_config_admin('product_kind'))
-                        <select class="form-control" style="width: 100%;" name="kind">
-                            <option value="">{{ trans('product.admin.select_kind') }}</option>
-                            @foreach ($kinds as $key => $kind)
-                            <option value="{{ $key }}" {{ (old() && (int)old('kind') === $key)?'selected':'' }}>
-                                {{ $kind }}
-                            </option>
-                            @endforeach
-                        </select>
-                        <div class="input-group-append">
-                            <span class="input-group">
-                                &nbsp; <i class="far fa-hand-point-left fa-2x"></i>
-                            </span>
-                        </div>                                                
-                        @else
-                            <select class="form-control" style="display:none" name="kind">
-                                <option value="0" selected="selected">{{ $kinds[0] }}</option>
-                            </select>
-                        @endif
-                    </div>
-                    @if ($errors->has('kind'))
-                    <span class="text-sm">
-                        <i class="fa fa-info-circle"></i> {{ $errors->first('kind') }}
-                    </span>
-                    @endif
-                </div>
-
-                <div id="main-add" class="card-body {{ 'kind'.$kindOpt }}">
+                <div id="main-add" class="card-body">
                         {{-- descriptions --}}
                         @foreach ($languages as $code => $language)
                         <div class="card">
@@ -142,7 +111,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row kind kind0 {{ $errors->has('descriptions.'.$code.'.content') ? ' text-red' : '' }}">
+                        <div class="form-group row kind  {{ $errors->has('descriptions.'.$code.'.content') ? ' text-red' : '' }}">
                             <label for="{{ $code }}__content" class="col-sm-2 col-form-label">
                                 {{ trans('product.content') }}
                             </label>
@@ -166,7 +135,7 @@
 
 
                         {{-- select category --}}
-                        <div class="form-group row kind kind0 kind1 {{ $errors->has('category') ? ' text-red' : '' }}">
+                        <div class="form-group row kind  {{ $errors->has('category') ? ' text-red' : '' }}">
                             @php
                             $listCate = [];
                             if (is_array(old('category'))) {
@@ -200,7 +169,7 @@
 
 @if (sc_config_global('MultiStorePro'))
                         {{-- select category_store --}}
-                        <div class="form-group row kind kind0 kind1  {{ $errors->has('category_store_id') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('category_store_id') ? ' text-red' : '' }}">
                             <label for="category_store_id"
                                 class="col-sm-2 col-form-label">{{ trans('product.category_store') }}</label>
                             <div class="col-sm-8">
@@ -223,7 +192,7 @@
 @endif
 
                         {{-- images --}}
-                        <div class="form-group row kind kind0 kind1 {{ $errors->has('image') ? ' text-red' : '' }}">
+                        <div class="form-group row kind  {{ $errors->has('image') ? ' text-red' : '' }}">
                             <label for="image" class="col-sm-2 col-form-label">
                                 {{ trans('product.image') }}
                             </label>
@@ -281,7 +250,7 @@
                         {{-- //images --}}
 
                         {{-- sku --}}
-                        <div class="form-group row kind kind0 kind1 kind2 {{ $errors->has('sku') ? ' text-red' : '' }}">
+                        <div class="form-group row kind  {{ $errors->has('sku') ? ' text-red' : '' }}">
                             <label for="sku" class="col-sm-2 col-form-label">{{ trans('product.sku') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -307,7 +276,7 @@
 
 
                         {{-- alias --}}
-                        <div class="form-group row kind kind0 kind1 kind2 {{ $errors->has('alias') ? ' text-red' : '' }}">
+                        <div class="form-group row kind  {{ $errors->has('alias') ? ' text-red' : '' }}">
                             <label for="alias" class="col-sm-2 col-form-label">{!! trans('product.alias') !!}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -333,7 +302,7 @@
 
 @if (sc_config_admin('product_brand'))
                         {{-- select brand --}}
-                        <div class="form-group row kind kind0 kind1  {{ $errors->has('brand_id') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('brand_id') ? ' text-red' : '' }}">
                             <label for="brand_id"
                                 class="col-sm-2 col-form-label">{{ trans('product.brand') }}</label>
                             <div class="col-sm-8">
@@ -357,7 +326,7 @@
 
 @if (sc_config_admin('product_supplier'))
                         {{-- select supplier --}}
-                        <div class="form-group row kind kind0 kind1  {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
                             <label for="supplier_id"
                                 class="col-sm-2 col-form-label">{{ trans('product.supplier') }}</label>
                             <div class="col-sm-8">
@@ -382,7 +351,7 @@
 
 @if (sc_config_admin('product_cost'))
                         {{-- cost --}}
-                        <div class="form-group row kind kind0 kind1  {{ $errors->has('cost') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('cost') ? ' text-red' : '' }}">
                             <label for="cost" class="col-sm-2 col-form-label">{{ trans('product.cost') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -405,7 +374,7 @@
 
 @if (sc_config_admin('product_price'))
                         {{-- price --}}
-                        <div class="form-group row kind kind0 kind1  {{ $errors->has('price') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('price') ? ' text-red' : '' }}">
                             <label for="price" class="col-sm-2 col-form-label">{{ trans('product.price') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -429,7 +398,7 @@
 
 @if (sc_config_admin('product_tax'))
                         {{-- select tax --}}
-                        <div class="form-group row kind kind0 kind1  {{ $errors->has('tax_id') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('tax_id') ? ' text-red' : '' }}">
                             <label for="tax_id"
                                 class="col-sm-2 col-form-label">{{ trans('product.tax') }}</label>
                             <div class="col-sm-8">
@@ -454,7 +423,7 @@
 
 @if (sc_config_admin('product_promotion'))
                         {{-- price promotion --}}
-                        <div class="form-group row kind kind0 kind1   {{ $errors->has('price_promotion') ? ' text-red' : '' }}">
+                        <div class="form-group row kind    {{ $errors->has('price_promotion') ? ' text-red' : '' }}">
                             <label for="price"
                                 class="col-sm-2 col-form-label">{{ trans('product.price_promotion') }}</label>
                             <div class="col-sm-8">
@@ -518,7 +487,7 @@
 
 @if (sc_config_admin('product_stock'))
                         {{-- stock --}}
-                        <div class="form-group row kind kind0  kind1 {{ $errors->has('stock') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('stock') ? ' text-red' : '' }}">
                             <label for="stock" class="col-sm-2 col-form-label">{{ trans('product.stock') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -543,7 +512,7 @@
 
 @if (sc_config_admin('product_weight'))
                         {{-- weight --}}
-                        <div class="form-group row kind kind0  kind1  {{ $errors->has('weight_class') ? ' text-red' : '' }}">
+                        <div class="form-group row kind    {{ $errors->has('weight_class') ? ' text-red' : '' }}">
                             <label for="weight_class" class="col-sm-2 col-form-label">{{ trans('product.weight_class') }}</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm weight_class select2" style="width: 100%;"
@@ -564,7 +533,7 @@
                         </div>
 
 
-                        <div class="form-group row kind kind0  kind1 {{ $errors->has('weight') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('weight') ? ' text-red' : '' }}">
                             <label for="weight" class="col-sm-2 col-form-label">{{ trans('product.weight') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -588,7 +557,7 @@
 
 @if (sc_config_admin('product_length'))
                         {{-- length --}}
-                        <div class="form-group row kind kind0  kind1  {{ $errors->has('length_class') ? ' text-red' : '' }}">
+                        <div class="form-group row kind    {{ $errors->has('length_class') ? ' text-red' : '' }}">
                             <label for="length_class" class="col-sm-2 col-form-label">{{ trans('product.length_class') }}</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm length_class select2" style="width: 100%;"
@@ -609,7 +578,7 @@
                         </div>
 
 
-                        <div class="form-group row kind kind0  kind1 {{ $errors->has('length') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('length') ? ' text-red' : '' }}">
                             <label for="length" class="col-sm-2 col-form-label">{{ trans('product.length') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -628,7 +597,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row kind kind0  kind1 {{ $errors->has('height') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('height') ? ' text-red' : '' }}">
                             <label for="height" class="col-sm-2 col-form-label">{{ trans('product.height') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -647,7 +616,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row kind kind0  kind1 {{ $errors->has('width') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('width') ? ' text-red' : '' }}">
                             <label for="width" class="col-sm-2 col-form-label">{{ trans('product.width') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -671,7 +640,7 @@
 
 @if (sc_config_admin('product_property'))
                         {{-- property --}}
-                        <div class="form-group row kind kind0 kind1  {{ $errors->has('property') ? ' text-red' : '' }}">
+                        <div class="form-group row kind   {{ $errors->has('property') ? ' text-red' : '' }}">
                             <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }}</label>
                             <div class="col-sm-8">
                                 @foreach ( $propertys as $key => $property)
@@ -696,7 +665,7 @@
 @if (sc_config_admin('product_available'))
                         {{-- date available --}}
                         <div
-                            class="form-group row kind kind0 kind1  {{ $errors->has('date_available') ? ' text-red' : '' }}">
+                            class="form-group row kind   {{ $errors->has('date_available') ? ' text-red' : '' }}">
                             <label for="date_available"
                                 class="col-sm-2 col-form-label">{{ trans('product.date_available') }}</label>
                             <div class="col-sm-8">
@@ -779,86 +748,6 @@
                         </div>
                         {{-- //status --}}
 
-@if (sc_config_admin('product_kind'))
-                        <hr class="kind kind2">
-                        {{-- List product in groups --}}
-                        <div class="form-group row kind kind2 {{ $errors->has('productInGroup') ? ' text-red' : '' }}">
-                            
-                            <label class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-8"><label>{{ trans('product.admin.select_product_in_group') }}</label>
-                            </div>
-                        </div>
-                        <div class="form-group row kind kind2 {{ $errors->has('productInGroup') ? ' text-red' : '' }}">
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-8">
-                                @if (old('productInGroup'))
-                                @foreach (old('productInGroup') as $pID)
-                                @if ( (int)$pID)
-                                @php
-                                $newHtml = str_replace('value="'.(int)$pID.'"', 'value="'.(int)$pID.'" selected',
-                                $htmlSelectGroup);
-                                @endphp
-                                {!! $newHtml !!}
-                                @endif
-                                @endforeach
-                                @endif
-                                <button type="button" id="add_product_in_group" class="btn btn-flat btn-success">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                    {{ trans('product.admin.add_product') }}
-                                </button>
-                                @if ($errors->has('productInGroup'))
-                                <span class="form-text">
-                                    <i class="fa fa-info-circle"></i> {{ $errors->first('productInGroup') }}
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                        {{-- //end List product in groups --}}
-
-                        <hr class="kind kind2">
-                        {{-- List product build --}}
-                        <div class="form-group row kind kind1 {{ $errors->has('productBuild') ? ' text-red' : '' }}">
-                            <label class="col-sm-2 col-form-label"></label>
-                            <div class="col-sm-8">
-                                <label>{{ trans('product.admin.select_product_in_build') }}</label>
-                            </div>
-                        </div>
-
-                        <div
-                            class="form-group row kind kind1 {{ ($errors->has('productBuild') || $errors->has('productBuildQty'))? ' text-red' : '' }}">
-                            <div class="col-sm-2">
-                            </div>
-                            <div class="col-sm-8">
-
-                                @if (old('productBuild'))
-                                @foreach (old('productBuild') as $key => $pID)
-                                @if ( (int)$pID && (int)old('productBuildQty')[$key])
-                                @php
-                                $newHtml = str_replace('value="'.(int)$pID.'"', 'value="'.(int)$pID.'" selected',
-                                $htmlSelectBuild);
-                                $newHtml = str_replace('name="productBuildQty[]" value="1" min=1',
-                                'name="productBuildQty[]" value="'.(int)old('productBuildQty')[$key].'"', $newHtml);
-                                @endphp
-                                {!! $newHtml !!}
-                                @endif
-                                @endforeach
-                                @endif
-                                <button type="button" id="add_product_in_build" class="btn btn-flat btn-success">
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                    {{ trans('product.admin.add_product') }}
-                                </button>
-                                @if ($errors->has('productBuild') || $errors->has('productBuildQty'))
-                                <span class="form-text">
-                                    <i class="fa fa-info-circle"></i> {{ $errors->first('productBuild') }}
-                                </span>
-                                @endif
-
-                            </div>
-                        </div>
-                        {{-- //end List product build --}}
-@endif
-
-
 @if (sc_config_admin('product_attribute'))
                         {{-- List product attributes --}}
 
@@ -869,8 +758,8 @@
                         @endphp
 
 
-                        <hr class="kind kind0">
-                        <div class="form-group kind kind0 row">
+                        <hr class="kind ">
+                        <div class="form-group kind  row">
                             <div class="col-sm-2">
                                 <label>{{ trans('product.attribute') }}</label>
                             </div>
@@ -917,7 +806,7 @@
                 <!-- /.card-body -->
 
 
-                <div class="card-footer kind kind0  kind1 kind2 row" id="card-footer">
+                <div class="card-footer kind   row" id="card-footer">
                     @csrf
                     <div class="col-md-2">
                     </div>
@@ -947,17 +836,6 @@
     #start-add {
         margin: 20px;
     }
-    #main-add.kind0 .kind:not(.kind0),
-    #main-add.kind1 .kind:not(.kind1),
-    #main-add.kind2 .kind:not(.kind2)
-    {
-        display: none;
-    }
-    @if($kindOpt == '' && sc_config_admin('product_kind'))
-        #main-add, #card-footer {
-            display: none;
-        }
-    @endif 
 </style>
 
 @endpush
@@ -1033,35 +911,6 @@ $('#add_sub_image').click(function(event) {
     });
 //end sub images
 
-// Select product in group
-$('#add_product_in_group').click(function(event) {
-    var htmlSelectGroup = '{!! $htmlSelectGroup !!}';
-    $(this).before(htmlSelectGroup);
-    $('.select2').select2();
-    $('.removeproductInGroup').click(function(event) {
-        $(this).closest('table').remove();
-    });
-});
-$('.removeproductInGroup').click(function(event) {
-    $(this).closest('table').remove();
-});
-//end select in group
-
-// Select product in build
-$('#add_product_in_build').click(function(event) {
-    var htmlSelectBuild = '{!! $htmlSelectBuild !!}';
-    $(this).before(htmlSelectBuild);
-    $('.select2').select2();
-    $('.removeproductBuild').click(function(event) {
-        $(this).closest('table').remove();
-    });
-});
-$('.removeproductBuild').click(function(event) {
-    $(this).closest('table').remove();
-});
-//end select in build
-
-
 // Select product attributes
 $('.add_attribute').click(function(event) {
     var htmlProductAtrribute = '{!! $htmlProductAtrribute??'' !!}';
@@ -1083,43 +932,6 @@ $('.removeAttribute').click(function(event) {
 // $("input.image").fileinput({"browseLabel":"Browse","cancelLabel":"Cancel","showRemove":true,"showUpload":false,"dropZoneEnabled":false});
 
 /* process_form(); */
-@if(sc_config_admin('product_kind') == 0)
-$('#main-add').show();
-@endif
-
-
-$('[name="kind"]').change(function(event) {
-    process_form();
-});
-
-
-
-function process_form(){
-    var kind = $('[name="kind"] option:selected').val();
-    if(kind){
-        $('#loading').show();
-        setTimeout(
-            function(){
-                $('#main-add').removeClass('kind');
-                $('#main-add').removeClass('kind0');
-                $('#main-add').removeClass('kind1');
-                $('#main-add').removeClass('kind2');
-                $('#main-add').addClass('kind'+kind);
-                $('#main-add').show();
-                 $('#loading').hide();
-                  }
-            , 500);
-        $('#card-footer').show();
-    }else{
-        Swal.fire(
-          '{{ trans('product.admin.select_kind') }}',
-          '',
-          'error'
-        );
-        $('#main-add').hide();
-        $('#card-footer').hide();
-    }
-}
 
 $('textarea.editor').ckeditor(
     {
