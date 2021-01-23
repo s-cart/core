@@ -205,8 +205,8 @@ class ShopCartController extends RootFrontController
         $data = request()->all();
 
         $validate = [
-            'first_name'     => 'required|max:100',
-            'email'          => 'required|string|email|max:255',
+            'first_name'     => config('validation.customer.first_name', 'required|string|max:100'),
+            'email'          => config('validation.customer.email', 'required|string|email|max:255'),
         ];
         //check shipping
         if (!sc_config('shipping_off')) {
@@ -219,90 +219,90 @@ class ShopCartController extends RootFrontController
 
         if (sc_config('customer_lastname')) {
             if (sc_config('customer_lastname_required')) {
-                $validate['last_name'] = 'required|string|max:100';
+                $validate['last_name'] = config('validation.customer.last_name_required', 'required|string|max:100');
             } else {
-                $validate['last_name'] = 'nullable|string|max:100';
+                $validate['last_name'] = config('validation.customer.last_name_null', 'nullable|string|max:100');
             }
         }
         if (sc_config('customer_address1')) {
             if (sc_config('customer_address1_required')) {
-                $validate['address1'] = 'required|string|max:100';
+                $validate['address1'] = config('validation.customer.address1_required', 'required|string|max:100');
             } else {
-                $validate['address1'] = 'nullable|string|max:100';
+                $validate['address1'] = config('validation.customer.address1_null', 'nullable|string|max:100');
             }
         }
 
         if (sc_config('customer_address2')) {
             if (sc_config('customer_address2_required')) {
-                $validate['address2'] = 'required|string|max:100';
+                $validate['address2'] = config('validation.customer.address2_required', 'required|string|max:100');
             } else {
-                $validate['address2'] = 'nullable|string|max:100';
+                $validate['address2'] = config('validation.customer.address2_null', 'nullable|string|max:100');
             }
         }
         if (sc_config('customer_phone')) {
             if (sc_config('customer_phone_required')) {
-                $validate['phone'] = 'required|regex:/^0[^0][0-9\-]{7,13}$/';
+                $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{7,13}$/');
             } else {
-                $validate['phone'] = 'nullable|regex:/^0[^0][0-9\-]{7,13}$/';
+                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^0[^0][0-9\-]{7,13}$/');
             }
         }
         if (sc_config('customer_country')) {
             $arraycountry = (new ShopCountry)->pluck('code')->toArray();
             if (sc_config('customer_country_required')) {
-                $validate['country'] = 'required|string|min:2|in:'. implode(',', $arraycountry);
+                $validate['country'] = config('validation.customer.country_required', 'required|string|min:2').'|in:'. implode(',', $arraycountry);
             } else {
-                $validate['country'] = 'nullable|string|min:2|in:'. implode(',', $arraycountry);
+                $validate['country'] = config('validation.customer.country_null', 'nullable|string|min:2').'|in:'. implode(',', $arraycountry);
             }
         }
 
         if (sc_config('customer_postcode')) {
             if (sc_config('customer_postcode_required')) {
-                $validate['postcode'] = 'required|min:5';
+                $validate['postcode'] = config('validation.customer.postcode_required', 'required|min:5');
             } else {
-                $validate['postcode'] = 'nullable|min:5';
+                $validate['postcode'] = config('validation.customer.postcode_null', 'nullable|min:5');
             }
         }
         if (sc_config('customer_company')) {
             if (sc_config('customer_company_required')) {
-                $validate['company'] = 'required|string|max:100';
+                $validate['company'] = config('validation.customer.company_required', 'required|string|max:100');
             } else {
-                $validate['company'] = 'nullable|string|max:100';
+                $validate['company'] = config('validation.customer.company_null', 'nullable|string|max:100');
             }
         } 
 
         if (sc_config('customer_name_kana')) {
             if (sc_config('customer_name_kana_required')) {
-                $validate['first_name_kana'] = 'required|string|max:100';
-                $validate['last_name_kana'] = 'required|string|max:100';
+                $validate['first_name_kana'] = config('validation.customer.name_kana_required', 'required|string|max:100');
+                $validate['last_name_kana'] = config('validation.customer.name_kana_required', 'required|string|max:100');
             } else {
-                $validate['first_name_kana'] = 'nullable|string|max:100';
-                $validate['last_name_kana'] = 'nullable|string|max:100';
+                $validate['first_name_kana'] = config('validation.customer.name_kana_null', 'nullable|string|max:100');
+                $validate['last_name_kana'] = config('validation.customer.name_kana_null', 'nullable|string|max:100');
             }
         }
 
         $messages = [
-            'last_name.required'      => trans('validation.required',['attribute'=> trans('cart.last_name')]),
-            'first_name.required'     => trans('validation.required',['attribute'=> trans('cart.first_name')]),
-            'email.required'          => trans('validation.required',['attribute'=> trans('cart.email')]),
-            'address1.required'       => trans('validation.required',['attribute'=> trans('cart.address1')]),
-            'address2.required'       => trans('validation.required',['attribute'=> trans('cart.address2')]),
-            'phone.required'          => trans('validation.required',['attribute'=> trans('cart.phone')]),
-            'country.required'        => trans('validation.required',['attribute'=> trans('cart.country')]),
-            'postcode.required'       => trans('validation.required',['attribute'=> trans('cart.postcode')]),
-            'company.required'        => trans('validation.required',['attribute'=> trans('cart.company')]),
-            'sex.required'            => trans('validation.required',['attribute'=> trans('cart.sex')]),
-            'birthday.required'       => trans('validation.required',['attribute'=> trans('cart.birthday')]),
-            'email.email'             => trans('validation.email',['attribute'=> trans('cart.email')]),
-            'phone.regex'             => trans('validation.regex',['attribute'=> trans('cart.phone')]),
-            'postcode.min'            => trans('validation.min',['attribute'=> trans('cart.postcode')]),
-            'country.min'             => trans('validation.min',['attribute'=> trans('cart.country')]),
-            'first_name.max'          => trans('validation.max',['attribute'=> trans('cart.first_name')]),
-            'email.max'               => trans('validation.max',['attribute'=> trans('cart.email')]),
-            'address1.max'            => trans('validation.max',['attribute'=> trans('cart.address1')]),
-            'address2.max'            => trans('validation.max',['attribute'=> trans('cart.address2')]),
-            'last_name.max'           => trans('validation.max',['attribute'=> trans('cart.last_name')]),
-            'birthday.date'           => trans('validation.date',['attribute'=> trans('cart.birthday')]),
-            'birthday.date_format'    => trans('validation.date_format',['attribute'=> trans('cart.birthday')]),
+            'last_name.required'      => trans('validation.required', ['attribute'=> trans('cart.last_name')]),
+            'first_name.required'     => trans('validation.required', ['attribute'=> trans('cart.first_name')]),
+            'email.required'          => trans('validation.required', ['attribute'=> trans('cart.email')]),
+            'address1.required'       => trans('validation.required', ['attribute'=> trans('cart.address1')]),
+            'address2.required'       => trans('validation.required', ['attribute'=> trans('cart.address2')]),
+            'phone.required'          => trans('validation.required', ['attribute'=> trans('cart.phone')]),
+            'country.required'        => trans('validation.required', ['attribute'=> trans('cart.country')]),
+            'postcode.required'       => trans('validation.required', ['attribute'=> trans('cart.postcode')]),
+            'company.required'        => trans('validation.required', ['attribute'=> trans('cart.company')]),
+            'sex.required'            => trans('validation.required', ['attribute'=> trans('cart.sex')]),
+            'birthday.required'       => trans('validation.required', ['attribute'=> trans('cart.birthday')]),
+            'email.email'             => trans('validation.email', ['attribute'=> trans('cart.email')]),
+            'phone.regex'             => trans('validation.regex', ['attribute'=> trans('cart.phone')]),
+            'postcode.min'            => trans('validation.min', ['attribute'=> trans('cart.postcode')]),
+            'country.min'             => trans('validation.min', ['attribute'=> trans('cart.country')]),
+            'first_name.max'          => trans('validation.max', ['attribute'=> trans('cart.first_name')]),
+            'email.max'               => trans('validation.max', ['attribute'=> trans('cart.email')]),
+            'address1.max'            => trans('validation.max', ['attribute'=> trans('cart.address1')]),
+            'address2.max'            => trans('validation.max', ['attribute'=> trans('cart.address2')]),
+            'last_name.max'           => trans('validation.max', ['attribute'=> trans('cart.last_name')]),
+            'birthday.date'           => trans('validation.date', ['attribute'=> trans('cart.birthday')]),
+            'birthday.date_format'    => trans('validation.date_format', ['attribute'=> trans('cart.birthday')]),
             'shippingMethod.required' => trans('cart.validation.shippingMethod_required'),
             'paymentMethod.required'  => trans('cart.validation.paymentMethod_required'),
         ];

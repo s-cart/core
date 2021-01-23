@@ -122,15 +122,15 @@ class ShopAccountController extends RootFrontController
             }
         }
         $messages = [
-            'password.required' => trans('validation.required',['attribute'=> trans('account.password')]),
-            'password.confirmed' => trans('validation.confirmed',['attribute'=> trans('account.password')]),
-            'password_old.required' => trans('validation.required',['attribute'=> trans('account.password_old')]),
+            'password.required' => trans('validation.required', ['attribute'=> trans('account.password')]),
+            'password.confirmed' => trans('validation.confirmed', ['attribute'=> trans('account.password')]),
+            'password_old.required' => trans('validation.required', ['attribute'=> trans('account.password_old')]),
         ];
         $v = Validator::make(
             $request->all(), 
             [
                 'password_old' => 'required',
-                'password' => 'required|string|min:6|confirmed',
+                'password' => config('validation.customer.password_confirm', 'required|string|min:6|confirmed'),
             ],
             $messages
         );
@@ -270,7 +270,7 @@ class ShopAccountController extends RootFrontController
         $statusShipping = ShopShippingStatus::getIdAll();
         $attributesGroup = ShopAttributeGroup::pluck('name', 'id')->all();
         $order = ShopOrder::where('id', $id) ->where('customer_id', $customer->id)->first();
-        if($order) {
+        if ($order) {
             $title = trans('account.order_detail').' #'.$order->id;
         } else {
             $title = trans('account.order_detail_notfound');
@@ -354,7 +354,7 @@ class ShopAccountController extends RootFrontController
         $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
             ->where('id', $id)
             ->first();
-        if($address) {
+        if ($address) {
             $title = trans('account.address_detail').' #'.$address->id;
         } else {
             $title = trans('account.address_detail_notfound');
@@ -393,45 +393,45 @@ class ShopAccountController extends RootFrontController
             'address1' => $data['address1'],
         ];
         $validate = [
-            'first_name' => 'required|string|max:100',
-            'address1' => 'required|string|max:255',
+            'first_name' => config('validation.customer.first_name', 'required|string|max:100'),
+            'address1' => config('validation.customer.address1_required', 'required|string|max:100'),
         ];
-        if(sc_config('customer_lastname')) {
-            $validate['last_name'] = 'required|max:100';
+        if (sc_config('customer_lastname')) {
+            $validate['last_name'] = config('validation.customer.last_name_required', 'required|string|max:100');
             $dataUpdate['last_name'] = $data['last_name']??'';
         }
-        if(sc_config('customer_address2')) {
-            $validate['address2'] = 'required|max:100';
+        if (sc_config('customer_address2')) {
+            $validate['address2'] = config('validation.customer.address2_required', 'required|string|max:100');
             $dataUpdate['address2'] = $data['address2']??'';
         }
-        if(sc_config('customer_phone')) {
-            $validate['phone'] = 'required|regex:/^0[^0][0-9\-]{7,13}$/';
+        if (sc_config('customer_phone')) {
+            $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{7,13}$/');
             $dataUpdate['phone'] = $data['phone']??'';
         }
-        if(sc_config('customer_country')) {
-            $validate['country'] = 'required|min:2';
+        if (sc_config('customer_country')) {
+            $validate['country'] = config('validation.customer.country_required', 'required|string|min:2');
             $dataUpdate['country'] = $data['country']??'';
         }
-        if(sc_config('customer_postcode')) {
-            $validate['postcode'] = 'nullable|min:5';
+        if (sc_config('customer_postcode')) {
+            $validate['postcode'] = config('validation.customer.postcode_null', 'nullable|min:5');
             $dataUpdate['postcode'] = $data['postcode']??'';
         }
 
         $messages = [
-            'last_name.required' => trans('validation.required',['attribute'=> trans('account.last_name')]),
-            'first_name.required' => trans('validation.required',['attribute'=> trans('account.first_name')]),
-            'address1.required' => trans('validation.required',['attribute'=> trans('account.address1')]),
-            'address2.required' => trans('validation.required',['attribute'=> trans('account.address2')]),
-            'phone.required' => trans('validation.required',['attribute'=> trans('account.phone')]),
-            'country.required' => trans('validation.required',['attribute'=> trans('account.country')]),
-            'postcode.required' => trans('validation.required',['attribute'=> trans('account.postcode')]),
-            'phone.regex' => trans('validation.regex',['attribute'=> trans('account.phone')]),
-            'postcode.min' => trans('validation.min',['attribute'=> trans('account.postcode')]),
-            'country.min' => trans('validation.min',['attribute'=> trans('account.country')]),
-            'first_name.max' => trans('validation.max',['attribute'=> trans('account.first_name')]),
-            'address1.max' => trans('validation.max',['attribute'=> trans('account.address1')]),
-            'address2.max' => trans('validation.max',['attribute'=> trans('account.address2')]),
-            'last_name.max' => trans('validation.max',['attribute'=> trans('account.last_name')]),
+            'last_name.required' => trans('validation.required', ['attribute'=> trans('account.last_name')]),
+            'first_name.required' => trans('validation.required', ['attribute'=> trans('account.first_name')]),
+            'address1.required' => trans('validation.required', ['attribute'=> trans('account.address1')]),
+            'address2.required' => trans('validation.required', ['attribute'=> trans('account.address2')]),
+            'phone.required' => trans('validation.required', ['attribute'=> trans('account.phone')]),
+            'country.required' => trans('validation.required', ['attribute'=> trans('account.country')]),
+            'postcode.required' => trans('validation.required', ['attribute'=> trans('account.postcode')]),
+            'phone.regex' => trans('validation.regex', ['attribute'=> trans('account.phone')]),
+            'postcode.min' => trans('validation.min', ['attribute'=> trans('account.postcode')]),
+            'country.min' => trans('validation.min', ['attribute'=> trans('account.country')]),
+            'first_name.max' => trans('validation.max', ['attribute'=> trans('account.first_name')]),
+            'address1.max' => trans('validation.max', ['attribute'=> trans('account.address1')]),
+            'address2.max' => trans('validation.max', ['attribute'=> trans('account.address2')]),
+            'last_name.max' => trans('validation.max', ['attribute'=> trans('account.last_name')]),
         ];
 
         $v = Validator::make(
@@ -445,7 +445,7 @@ class ShopAccountController extends RootFrontController
 
         $address->update(sc_clean($dataUpdate));
 
-        if(!empty($data['default'])) {
+        if (!empty($data['default'])) {
             (new ShopCustomer)->find($customer->id)->update(['address_id' => $id]);
         }
         return redirect()->route('customer.address_list')
@@ -463,7 +463,7 @@ class ShopAccountController extends RootFrontController
         $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
             ->where('id', $id)
             ->first();
-        if($address) {
+        if ($address) {
             return $address->toJson();
         } else {
             return json_encode(['error' => 1, 'msg' => 'Address not found']);
