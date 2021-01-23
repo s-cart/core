@@ -34,8 +34,11 @@ Route::group(
     }
 );
 
-Route::get('/login', function () {
-    return redirect(sc_route('login'));
-});
+if ($suffix) {
+    Route::get('/login', function () {
+        return redirect(sc_route('login'));
+    });
+}
+
 
 //End Auth
