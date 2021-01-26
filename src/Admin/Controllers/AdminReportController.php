@@ -8,7 +8,7 @@ use SCart\Core\Admin\Models\AdminProduct;
 
 class AdminReportController extends RootAdminController
 {
-    public $languages, $kinds, $propertys, $attributeGroup;
+    public $languages, $kinds, $properties, $attributeGroup;
 
     public function __construct()
     {
@@ -20,11 +20,11 @@ class AdminReportController extends RootAdminController
             SC_PRODUCT_BUILD => trans('product.kinds.build'),
             SC_PRODUCT_GROUP => trans('product.kinds.group'),
         ];
-        $this->propertys = [
-            SC_PROPERTY_PHYSICAL => trans('product.propertys.physical'),
-            SC_PROPERTY_DOWNLOAD => trans('product.propertys.download'),
-            SC_PROPERTY_ONLY_VIEW => trans('product.propertys.only_view'),
-            SC_PROPERTY_SERVICE => trans('product.propertys.service'),
+        $this->properties = [
+            SC_PROPERTY_PHYSICAL => trans('product.properties.physical'),
+            SC_PROPERTY_DOWNLOAD => trans('product.properties.download'),
+            SC_PROPERTY_ONLY_VIEW => trans('product.properties.only_view'),
+            SC_PROPERTY_SERVICE => trans('product.properties.service'),
         ];
 
     }

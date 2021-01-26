@@ -1017,10 +1017,17 @@ class ShopCartController extends RootFrontController
                                     <td>' . trans('email.order.total') . '</td>
                                 </tr>';
                 foreach ($data['details'] as $key => $detail) {
+                    $product = (new ShopProduct)->getDetail($detail['product_id']);
+                    $pathDownload = $product->downloadPath->path ?? '';
+                    $nameProduct = $detail['name'];
+                    if ($product && $pathDownload && $product->property == SC_PROPERTY_DOWNLOAD) {
+                        $nameProduct .="<br><a href='".sc_path_download_render($pathDownload)."'>Download</a>";
+                    }
+
                     $orderDetail .= '<tr>
                                     <td>' . ($key + 1) . '</td>
                                     <td>' . $detail['sku'] . '</td>
-                                    <td>' . $detail['name'] . '</td>
+                                    <td>' . $nameProduct . '</td>
                                     <td>' . sc_currency_render($detail['price'], '', '', '', false) . '</td>
                                     <td>' . number_format($detail['qty']) . '</td>
                                     <td align="right">' . sc_currency_render($detail['total_price'], '', '', '', false) . '</td>

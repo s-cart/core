@@ -121,7 +121,7 @@ return [
         'build'                             => 'Bộ sản phẩm',
         'group'                             => 'Nhóm sản phẩm',
     ],
-    'propertys'                             => [
+    'properties'                             => [
         'physical'                          => 'Vật lý',
         'download'                          => 'Tải xuống',
         'only_view'                         => 'Chỉ xem',

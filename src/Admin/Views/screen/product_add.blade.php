@@ -643,7 +643,7 @@
                         <div class="form-group row kind   {{ $errors->has('property') ? ' text-red' : '' }}">
                             <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }}</label>
                             <div class="col-sm-8">
-                                @foreach ( $propertys as $key => $property)
+                                @foreach ( $properties as $key => $property)
                                 <div class="icheck-primary d-inline">
                                     <input type="radio" id="radioPrimary{{ $key }}" name="property" value="{{ $key }}" {{ ((!old() && $key ==0) || old('property') == $key)?'checked':'' }}>
                                     <label for="radioPrimary{{ $key }}">
@@ -656,6 +656,9 @@
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('property') }}
                                 </span>
                                 @endif
+                                <div style="margin-top: 10px; {{ (old('property') != SC_PROPERTY_DOWNLOAD) ? 'display:none':'' }}" id="download_path">
+                                    <input type="text"  name="download_path" value="{{ old('download_path') }}" class="form-control input-sm" placeholder="{{ trans('product.properties.download_path') }}" />
+                                </div>
                             </div>
                         </div>
                         {{-- //property --}}
@@ -844,7 +847,15 @@
 @include($templatePathAdmin.'component.ckeditor_js')
 
 <script type="text/javascript">
-    // Promotion
+
+$("[name='property']").change(function() {
+    if($(this).val() == {{ SC_PROPERTY_DOWNLOAD }}) {
+        $('#download_path').show();
+    } else {
+        $('#download_path').hide();
+    }
+});
+// Promotion
 $('#add_product_promotion').click(function(event) {
     $(this).before(
         '<div class="price_promotion">'

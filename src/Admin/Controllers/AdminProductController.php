@@ -13,6 +13,7 @@ use SCart\Core\Front\Models\ShopProductBuild;
 use SCart\Core\Front\Models\ShopProductGroup;
 use SCart\Core\Front\Models\ShopProductImage;
 use SCart\Core\Front\Models\ShopSupplier;
+use SCart\Core\Front\Models\ShopProductDownload;
 use SCart\Core\Admin\Models\AdminProduct;
 use SCart\Core\Admin\Models\AdminCategory;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +22,7 @@ class AdminProductController extends RootAdminController
 {
     public $languages;
     public $kinds;
-    public $propertys;
+    public $properties;
     public $attributeGroup;
     public $listWeight;
     public $listLength;
@@ -39,11 +40,11 @@ class AdminProductController extends RootAdminController
             SC_PRODUCT_BUILD  => trans('product.kinds.build'),
             SC_PRODUCT_GROUP  => trans('product.kinds.group'),
         ];
-        $this->propertys = [
-            SC_PROPERTY_PHYSICAL  => trans('product.propertys.physical'),
-            SC_PROPERTY_DOWNLOAD  => trans('product.propertys.download'),
-            SC_PROPERTY_ONLY_VIEW => trans('product.propertys.only_view'),
-            SC_PROPERTY_SERVICE   => trans('product.propertys.service'),
+        $this->properties = [
+            SC_PROPERTY_PHYSICAL  => trans('product.properties.physical'),
+            SC_PROPERTY_DOWNLOAD  => trans('product.properties.download'),
+            SC_PROPERTY_ONLY_VIEW => trans('product.properties.only_view'),
+            SC_PROPERTY_SERVICE   => trans('product.properties.service'),
         ];
         $this->categories =  (new AdminCategory)->getTreeCategoriesAdmin();
 
@@ -141,7 +142,7 @@ class AdminProductController extends RootAdminController
                 $dataMap['kind'] = $kind;
             }
             if (sc_config_admin('product_property')) {
-                $dataMap['property'] = $this->propertys[$row['property']] ?? $row['property'];
+                $dataMap['property'] = $this->properties[$row['property']] ?? $row['property'];
             }
             $dataMap['status'] = $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>';
             $dataMap['action'] = '
@@ -245,7 +246,7 @@ class AdminProductController extends RootAdminController
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
-            'propertys'            => $this->propertys,
+            'properties'            => $this->properties,
             'kinds'                => $this->kinds,
             'attributeGroup'       => $this->attributeGroup,
             'htmlMoreImage'        => $htmlMoreImage,
@@ -303,7 +304,7 @@ public function createProductBuild()
         'brands'               => (new ShopBrand)->getListAll(),
         'suppliers'            => (new ShopSupplier)->getListAll(),
         'taxs'                 => (new ShopTax)->getListAll(),
-        'propertys'            => $this->propertys,
+        'properties'            => $this->properties,
         'kinds'                => $this->kinds,
         'attributeGroup'       => $this->attributeGroup,
         'htmlSelectBuild'      => $htmlSelectBuild,
@@ -356,7 +357,7 @@ public function createProductGroup()
         'brands'               => (new ShopBrand)->getListAll(),
         'suppliers'            => (new ShopSupplier)->getListAll(),
         'taxs'                 => (new ShopTax)->getListAll(),
-        'propertys'            => $this->propertys,
+        'properties'            => $this->properties,
         'kinds'                => $this->kinds,
         'attributeGroup'       => $this->attributeGroup,
         'listProductSingle'    => $listProductSingle,
@@ -483,6 +484,7 @@ public function createProductGroup()
         $productBuild    = $data['productBuild'] ?? [];
         $productBuildQty = $data['productBuildQty'] ?? [];
         $subImages       = $data['sub_image'] ?? [];
+        $downloadPath    = $data['download_path'] ?? '';
         $dataInsert = [
             'brand_id'       => $data['brand_id'] ?? 0,
             'supplier_id'    => $data['supplier_id'] ?? 0,
@@ -507,6 +509,7 @@ public function createProductGroup()
             'minimum'        => (int) ($data['minimum'] ?? 0),
             'store_id'       => session('adminStoreId'),
         ];
+
         if(!empty($data['date_available'])) {
             $dataInsert['date_available'] = $data['date_available'];
         }
@@ -562,6 +565,11 @@ public function createProductGroup()
 
             }
             $product->attributes()->saveMany($arrDataAtt);
+        }
+
+        //Insert path download
+        if ($data['property'] == SC_PROPERTY_DOWNLOAD && $downloadPath) {
+            (new ShopProductDownload)->insert(['product_id' => $product->id, 'path' => $downloadPath]);
         }
 
         //Insert description
@@ -653,7 +661,7 @@ public function createProductGroup()
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
-            'propertys'            => $this->propertys,
+            'properties'            => $this->properties,
             'kinds'                => $this->kinds,
             'attributeGroup'       => $this->attributeGroup,
             'htmlSelectGroup'      => $htmlSelectGroup,
@@ -775,6 +783,7 @@ public function createProductGroup()
         $productBuild    = $data['productBuild'] ?? [];
         $productBuildQty = $data['productBuildQty'] ?? [];
         $subImages       = $data['sub_image'] ?? [];
+        $downloadPath    = $data['download_path'] ?? '';
         $dataUpdate = [
             'image'        => $data['image'] ?? '',
             'tax_id'       => $data['tax_id'] ?? 0,
@@ -860,6 +869,13 @@ public function createProductGroup()
             }
 
         }
+
+        //Update path download
+        (new ShopProductDownload)->where('product_id', $product->id)->delete();
+        if ($product['property'] == SC_PROPERTY_DOWNLOAD && $downloadPath) {
+            (new ShopProductDownload)->insert(['product_id' => $product->id, 'path' => $downloadPath]);
+        }
+
 
         //Update attribute
         if ($product['kind'] == SC_PRODUCT_SINGLE) {

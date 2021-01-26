@@ -318,3 +318,17 @@ if (!function_exists('sc_push_include_script')) {
         config(['sc_include_script.'.$position => $includePathScript]);
     }
 }
+
+if (!function_exists('sc_path_download_render')) {
+    /*
+    Render path download
+     */
+    function sc_path_download_render(string $string)
+    {
+        if (filter_var($string, FILTER_VALIDATE_URL)) {
+            return $string;
+        } else {
+            return \Storage::disk('path_download')->url($string);
+        }
+    }
+}

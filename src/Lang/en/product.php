@@ -120,7 +120,7 @@ return [
         'build'                             => 'Build',
         'group'                             => 'Group',
     ],
-    'propertys'                             => [
+    'properties'                             => [
         'physical'                          => 'Physical',
         'download'                          => 'Download',
         'only_view'                         => 'Only view',

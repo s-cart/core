@@ -683,7 +683,7 @@
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('property') ? ' text-red' : '' }}">
                             <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }}</label>
                             <div class="col-sm-8">
-                                @foreach ( $propertys as $key => $property)
+                                @foreach ( $properties as $key => $property)
                                 <div class="icheck-primary d-inline">
                                     <input type="radio" id="radioPrimary{{ $key }}" name="property" value="{{ $key }}"  {{ (old('property',$product->property) == $key)?'checked':'' }}>
                                     <label for="radioPrimary{{ $key }}">
@@ -697,6 +697,14 @@
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('property') }}
                                 </span>
                                 @endif
+
+                                <div class="input-group" style="margin-top: 10px; {{ (old('property', $product->property) != SC_PROPERTY_DOWNLOAD) ? 'display:none':'' }}" id="download_path">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-download"></i></span>
+                                    </div>
+                                    <input type="text"  name="download_path" value="{{ old('download_path', $product->downloadPath->path ?? '') }}" class="form-control input-sm" placeholder="{{ trans('product.properties.download_path') }}" />
+                                </div>
+
                             </div>
                         </div>
                         @endif
@@ -1021,6 +1029,15 @@
 
 
 <script type="text/javascript">
+
+$("[name='property']").change(function() {
+    if($(this).val() == {{ SC_PROPERTY_DOWNLOAD }}) {
+        $('#download_path').show();
+    } else {
+        $('#download_path').hide();
+    }
+});
+
     // Promotion
 $('#add_product_promotion').click(function(event) {
     $(this).before(

@@ -74,6 +74,10 @@ class ShopProduct extends Model
     {
         return $this->hasMany(ShopProductAttribute::class, 'product_id', 'id');
     }
+    public function downloadPath()
+    {
+        return $this->hasOne(ShopProductDownload::class, 'product_id', 'id');
+    }
 
     //Function get text description 
     public function getText() {
@@ -217,6 +221,7 @@ class ShopProduct extends Model
             $product->promotionPrice()->delete();
             $product->groups()->delete();
             $product->attributes()->delete();
+            $product->downloadPath()->delete();
             $product->builds()->delete();
             $product->categories()->detach();
             }
