@@ -23,7 +23,7 @@ class AdminCategoryController extends RootAdminController
             'title'         => trans('category.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_category.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_category.delete'),
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
@@ -74,7 +74,7 @@ class AdminCategoryController extends RootAdminController
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'sort' => $row['sort'],
                 'action' => '
-                    <a href="' . sc_route('admin_category.edit', ['id' => $row['id']]) . '"><span title="' . trans('category.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_category.edit', ['id' => $row['id']]) . '"><span title="' . trans('category.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
                     <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
                 ,
@@ -88,7 +88,7 @@ class AdminCategoryController extends RootAdminController
 
 
         //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_category.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_category.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
         <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
         </a>';
         //=menuRight
@@ -99,13 +99,13 @@ class AdminCategoryController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $sort . '</option>';
         }
 
-        $data['urlSort'] = sc_route('admin_category.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_category.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
         //=menuSort
 
         //menuSearch        
         $data['topMenuRight'][] = '
-                <form action="' . sc_route('admin_category.index') . '" id="button_search">
+                <form action="' . sc_route_admin('admin_category.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 250px;">
                     <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('category.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
@@ -133,7 +133,7 @@ class AdminCategoryController extends RootAdminController
             'languages' => $this->languages,
             'category' => [],
             'categories' => (new AdminCategory)->getTreeCategoriesAdmin(),
-            'url_action' => sc_route('admin_category.create'),
+            'url_action' => sc_route_admin('admin_category.create'),
         ];
 
         return view($this->templatePathAdmin.'screen.category')
@@ -218,7 +218,7 @@ class AdminCategoryController extends RootAdminController
             'languages'         => $this->languages,
             'category'          => $category,
             'categories'        => (new AdminCategory)->getTreeCategoriesAdmin(),
-            'url_action'        => sc_route('admin_category.edit', ['id' => $category['id']]),
+            'url_action'        => sc_route_admin('admin_category.edit', ['id' => $category['id']]),
         ];
         return view($this->templatePathAdmin.'screen.category')
             ->with($data);

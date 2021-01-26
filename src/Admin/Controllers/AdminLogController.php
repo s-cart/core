@@ -20,7 +20,7 @@ class AdminLogController extends RootAdminController
             'title' => trans('log.admin.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_log.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_log.delete'),
             'removeList' => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort' => 1, // 1 - Enable button sort
@@ -102,7 +102,7 @@ class AdminLogController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
         $data['optionSort'] = $optionSort;
-        $data['urlSort'] = sc_route('admin_log.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_log.index', request()->except(['_token', '_pjax', 'sort_order']));
 //=menuSort
 
         return view($this->templatePathAdmin.'screen.list')

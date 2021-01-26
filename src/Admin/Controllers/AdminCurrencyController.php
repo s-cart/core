@@ -18,7 +18,7 @@ class AdminCurrencyController extends RootAdminController
             'title' => trans('currency.admin.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_currency.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_currency.delete'),
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
@@ -81,7 +81,7 @@ class AdminCurrencyController extends RootAdminController
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route('admin_currency.edit', ['id' => $row['id']]) . '"><span title="' . trans('currency.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_currency.edit', ['id' => $row['id']]) . '"><span title="' . trans('currency.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
                   <span ' . (in_array($row['id'], SC_GUARD_CURRENCY) ? "style='display:none'" : "") . ' onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('currency.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
@@ -94,7 +94,7 @@ class AdminCurrencyController extends RootAdminController
         $data['resultItems'] = trans('currency.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
 
 //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_currency.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_currency.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
         <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
                            </a>';
 //=menuRight
@@ -105,14 +105,14 @@ class AdminCurrencyController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
 
-        $data['urlSort'] = sc_route('admin_currency.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_currency.index', request()->except(['_token', '_pjax', 'sort_order']));
 
         $data['optionSort'] = $optionSort;
 //=menuSort
 
 //menuSearch
         $data['topMenuRight'][] = '
-                <form action="' . sc_route('admin_currency.index') . '" id="button_search">
+                <form action="' . sc_route_admin('admin_currency.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 250px;">
                     <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('currency.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
@@ -138,7 +138,7 @@ class AdminCurrencyController extends RootAdminController
             'title_description' => trans('currency.admin.add_new_des'),
             'icon' => 'fa fa-plus',
             'currency' => [],
-            'url_action' => sc_route('admin_currency.create'),
+            'url_action' => sc_route_admin('admin_currency.create'),
         ];
         return view($this->templatePathAdmin.'screen.currency')
             ->with($data);
@@ -201,7 +201,7 @@ class AdminCurrencyController extends RootAdminController
             'title_description' => '',
             'icon' => 'fa fa-edit',
             'currency' => $currency,
-            'url_action' => sc_route('admin_currency.edit', ['id' => $currency['id']]),
+            'url_action' => sc_route_admin('admin_currency.edit', ['id' => $currency['id']]),
         ];
         return view($this->templatePathAdmin.'screen.currency')
             ->with($data);

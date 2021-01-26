@@ -50,7 +50,7 @@ class AdminOrderController extends RootAdminController
             'title'         => trans('order.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_order.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_order.delete'),
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
@@ -120,7 +120,7 @@ class AdminOrderController extends RootAdminController
                 'status'         => $styleStatus[$row['status']],
                 'created_at'     => $row['created_at'],
                 'action'         => '
-                                <a href="' . sc_route('admin_order.detail', ['id' => $row['id']]) . '">
+                                <a href="' . sc_route_admin('admin_order.detail', ['id' => $row['id']]) . '">
                                  <span title="' . trans('order.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span>
                                 </a>&nbsp;
                                 <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
@@ -135,7 +135,7 @@ class AdminOrderController extends RootAdminController
 
 
         //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_order.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_order.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
                            </a>';
         //=menuRight
@@ -146,7 +146,7 @@ class AdminOrderController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $sort . '</option>';
         }
         $data['optionSort'] = $optionSort;
-        $data['urlSort'] = sc_route('admin_order.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_order.index', request()->except(['_token', '_pjax', 'sort_order']));
         //=menuSort
 
         //menuSearch        
@@ -155,7 +155,7 @@ class AdminOrderController extends RootAdminController
             $optionStatus .= '<option  ' . (($order_status == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
         $data['topMenuRight'][] = '
-                <form action="' . sc_route('admin_order.index') . '" id="button_search">
+                <form action="' . sc_route_admin('admin_order.index') . '" id="button_search">
                     <div class="input-group float-left">
                         <input type="date" style="width: 120px;" name="from_to" id="from_to" class="form-control input-sm date_time rounded-0" placeholder="" /> &nbsp; 
                         <label>To</label> &nbsp;

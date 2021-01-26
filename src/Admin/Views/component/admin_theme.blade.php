@@ -4,7 +4,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-left p-0">
     @foreach (config('admin.theme') as  $theme)
-    <a href="{{ sc_route('admin.theme', ['theme' => $theme]) }}" class="dropdown-item  {{ (config('admin.theme_default') == $theme) ? 'disabled active':'' }}">
+    <a href="{{ sc_route_admin('admin.theme', ['theme' => $theme]) }}" class="dropdown-item  {{ (config('admin.theme_default') == $theme) ? 'disabled active':'' }}">
         <div class="hover">
         {{ ucfirst($theme) }}
         </div>

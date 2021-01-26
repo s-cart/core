@@ -27,7 +27,7 @@ class UsersController extends RootAdminController
             'title'         => trans('user.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_user.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_user.delete'),
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
@@ -98,7 +98,7 @@ class UsersController extends RootAdminController
                 'permission' => $showPermission,
                 'created_at' => $row['created_at'],
                 'action' => '
-                    <a href="' . sc_route('admin_user.edit', ['id' => $row['id']]) . '"><span title="' . trans('user.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_user.edit', ['id' => $row['id']]) . '"><span title="' . trans('user.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
                     ' . ((Admin::user()->id == $row['id'] || in_array($row['id'], SC_GUARD_ADMIN)) ? '' : '<span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>')
                 ,
             ];
@@ -110,7 +110,7 @@ class UsersController extends RootAdminController
         $data['resultItems'] = trans('user.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
 
 //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_user.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_user.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
                            </a>';
 //=menuRight
@@ -121,14 +121,14 @@ class UsersController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
 
-        $data['urlSort'] = sc_route('admin_user.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_user.index', request()->except(['_token', '_pjax', 'sort_order']));
 
         $data['optionSort'] = $optionSort;
 //=menuSort
 
 //menuSearch
         $data['topMenuRight'][] = '
-                <form action="' . sc_route('admin_user.index') . '" id="button_search">
+                <form action="' . sc_route_admin('admin_user.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 250px;">
                     <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('user.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
@@ -157,7 +157,7 @@ class UsersController extends RootAdminController
             'user'              => [],
             'roles'             => $this->roles,
             'permissions'       => $this->permissions,
-            'url_action'        => sc_route('admin_user.create'),
+            'url_action'        => sc_route_admin('admin_user.create'),
             'stores'            => $this->stores,
 
         ];
@@ -251,7 +251,7 @@ class UsersController extends RootAdminController
             'roles'             => $this->roles,
             'permissions'       => $this->permissions,
             'stores'            => $this->stores,
-            'url_action'        => sc_route('admin_user.edit', ['id' => $user['id']]),
+            'url_action'        => sc_route_admin('admin_user.edit', ['id' => $user['id']]),
             'storesPivot'       => AdminUserStore::where('user_id', $id)->pluck('store_id')->all(),
             'isAllStore'        => ($user->isAdministrator() || $user->isViewAll()) ? 1: 0,
 

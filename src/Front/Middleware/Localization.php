@@ -19,10 +19,6 @@ class Localization
     {
         //Set language
         $languages = ShopLanguage::getListActive();
-        $requestLocale = $request->get('lang');
-        if ($requestLocale) {
-            $detectLocale = $requestLocale;
-        } else
         if (!Session::has('locale')) {
             $detectLocale = sc_store('language') ?? config('app.locale');
         } else {

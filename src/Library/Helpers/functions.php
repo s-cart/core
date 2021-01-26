@@ -269,6 +269,26 @@ if (!function_exists('sc_route')) {
     }
 }
 
+
+if (!function_exists('sc_route_admin')) {
+    /**
+     * Render route admin
+     *
+     * @param   [string]  $name
+     * @param   [array]  $param
+     *
+     * @return  [type]         [return description]
+     */
+    function sc_route_admin($name, $param = [])
+    {
+        if (Route::has($name)) {
+            return route($name, $param);
+        } else {
+            return url('#'.$name);
+        }
+    }
+}
+
 if (!function_exists('sc_process_domain_store')) {
     /**
      * Process domain store

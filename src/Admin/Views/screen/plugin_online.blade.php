@@ -8,13 +8,13 @@
           <div class="card-header p-0 border-bottom-0">
             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link" href="{{ sc_route('admin_plugin', ['code' => strtolower($code)]) }}" >{{ trans('plugin.local') }}</a>
+                <a class="nav-link" href="{{ sc_route_admin('admin_plugin', ['code' => strtolower($code)]) }}" >{{ trans('plugin.local') }}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="#" >{{ trans('plugin.online') }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" target=_new  href="{{ sc_route('admin_plugin.import') }}" ><span><i class="fas fa-save"></i> {{ trans('plugin.import_data', ['data' => 'plugin']) }}</span></a>
+                <a class="nav-link" target=_new  href="{{ sc_route_admin('admin_plugin.import') }}" ><span><i class="fas fa-save"></i> {{ trans('plugin.import_data', ['data' => 'plugin']) }}</span></a>
               </li>
               <li class="btn-group float-right m-2">
                 {!! trans('plugin.plugin_more') !!}
@@ -185,17 +185,17 @@
               <ul class="pagination pagination-sm no-margin pull-right">
                 <!-- Previous Page Link -->
                     @if ($dataApi['current_page'] > 1)
-                    <li class="page-item"><a class="page-link pjax-container" href="{{ sc_route('admin_plugin_online', ['code' => strtolower($code)]) }}?page={{ $dataApi['current_page'] - 1}}" rel="prev">«</a></li>
+                    <li class="page-item"><a class="page-link pjax-container" href="{{ sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]) }}?page={{ $dataApi['current_page'] - 1}}" rel="prev">«</a></li>
                     @endif
                     @for ($i = 1; $i < $dataApi['last_page']; $i++)
                         @if ( $dataApi['current_page'] == $i)
                         <li class="page-item active"><span class="page-link pjax-container">{{ $i }}</span></li>
                         @else
-                        <li class="page-item"><a class="page-link" href="{{ sc_route('admin_plugin_online', ['code' => strtolower($code)]) }}?page={{ $i }}">{{ $i }}</a></li>
+                        <li class="page-item"><a class="page-link" href="{{ sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]) }}?page={{ $i }}">{{ $i }}</a></li>
                         @endif
                     @endfor
                     @if ($dataApi['current_page'] < $dataApi['last_page'])
-                    <li class="page-item"><a class="page-link pjax-container" href="{{ sc_route('admin_plugin_online', ['code' => strtolower($code)]) }}?page={{ $dataApi['current_page'] + 1}}" rel="next">»</a></li>
+                    <li class="page-item"><a class="page-link pjax-container" href="{{ sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]) }}?page={{ $dataApi['current_page'] + 1}}" rel="next">»</a></li>
 
                     @endif
                 </ul>
@@ -218,7 +218,7 @@
       $.ajax({
         type: 'POST',
         dataType:'json',
-        url: '{{ sc_route('admin_plugin_online.install') }}',
+        url: '{{ sc_route_admin('admin_plugin_online.install') }}',
         data: {
           "_token": "{{ csrf_token() }}",
           "key":key,

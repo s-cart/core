@@ -11,11 +11,11 @@
               </li>
               @if (config('admin.settings.api_template'))
               <li class="nav-item">
-                <a class="nav-link" href="{{ sc_route('admin_template_online.index') }}" >{{ trans('template.online') }}</a>
+                <a class="nav-link" href="{{ sc_route_admin('admin_template_online.index') }}" >{{ trans('template.online') }}</a>
               </li>
               @endif
               <li class="nav-item">
-                <a class="nav-link" target=_new  href="{{ sc_route('admin_template.import') }}" ><span><i class="fas fa-save"></i> {{ trans('plugin.import_data', ['data' => 'template']) }}</span></a>
+                <a class="nav-link" target=_new  href="{{ sc_route_admin('admin_template.import') }}" ><span><i class="fas fa-save"></i> {{ trans('plugin.import_data', ['data' => 'template']) }}</span></a>
               </li>
               <li class="btn-group float-right m-2">
                 {!! trans('template.template_more') !!}
@@ -100,7 +100,7 @@
               $.ajax({
                 type: 'POST',
                 dataType:'json',
-                url: '{{ sc_route('admin_template.remove') }}',
+                url: '{{ sc_route_admin('admin_template.remove') }}',
                 data: {
                   "_token": "{{ csrf_token() }}",
                   "key":key,

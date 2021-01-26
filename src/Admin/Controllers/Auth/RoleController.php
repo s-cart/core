@@ -20,7 +20,7 @@ class RoleController extends RootAdminController
             'title' => trans('role.admin.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_role.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_role.delete'),
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort' => 1, // 1 - Enable button sort
@@ -79,7 +79,7 @@ class RoleController extends RootAdminController
                 'created_at' => $row['created_at'],
                 'updated_at' => $row['updated_at'],
                 'action' => ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '
-                    <a href="' . sc_route('admin_role.edit', ['id' => $row['id']]) . '"><span title="' . trans('role.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_role.edit', ['id' => $row['id']]) . '"><span title="' . trans('role.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
                     ') 
                     . ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '<span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>')
                 ,
@@ -92,7 +92,7 @@ class RoleController extends RootAdminController
         $data['resultItems'] = trans('role.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
 
 //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_role.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_role.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
                            </a>';
 //=menuRight
@@ -102,7 +102,7 @@ class RoleController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
-        $data['urlSort'] = sc_route('admin_role.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_role.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
 //=menuSort
 
@@ -124,7 +124,7 @@ class RoleController extends RootAdminController
             'role' => [],
             'permission' => (new AdminPermission)->pluck('name', 'id')->all(),
             'userList' => (new AdminUser)->pluck('name', 'id')->all(),
-            'url_action' => sc_route('admin_role.create'),
+            'url_action' => sc_route_admin('admin_role.create'),
 
         ];
 
@@ -190,7 +190,7 @@ class RoleController extends RootAdminController
             'role' => $role,
             'permission' => (new AdminPermission)->pluck('name', 'id')->all(),
             'userList' => (new AdminUser)->pluck('name', 'id')->all(),
-            'url_action' => sc_route('admin_role.edit', ['id' => $role['id']]),
+            'url_action' => sc_route_admin('admin_role.edit', ['id' => $role['id']]),
         ];
         return view($this->templatePathAdmin.'auth.role')
             ->with($data);

@@ -28,7 +28,7 @@ class AdminStoreBlockController extends RootAdminController
             'title'         => trans('store_block.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_store_block.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_store_block.delete'),
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 0, // 1 - Enable button sort
@@ -85,7 +85,7 @@ class AdminStoreBlockController extends RootAdminController
                 'text' => htmlspecialchars($row['text']),
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route('admin_store_block.edit', ['id' => $row['id']]) . '"><span title="' . trans('store_block.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_store_block.edit', ['id' => $row['id']]) . '"><span title="' . trans('store_block.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
                   <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('store_block.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
@@ -99,7 +99,7 @@ class AdminStoreBlockController extends RootAdminController
 
         //menuRight
         $data['menuRight'][] = '
-                           <a href="' . sc_route('admin_store_block.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+                           <a href="' . sc_route_admin('admin_store_block.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
                            </a>';
         //=menuRight
@@ -125,7 +125,7 @@ class AdminStoreBlockController extends RootAdminController
             'layoutType'        => $this->layoutType,
             'listViewBlock'     => $listViewBlock,
             'layout'            => [],
-            'url_action'        => sc_route('admin_store_block.create'),
+            'url_action'        => sc_route_admin('admin_store_block.create'),
         ];
         return view($this->templatePathAdmin.'screen.store_block')
             ->with($data);
@@ -191,7 +191,7 @@ class AdminStoreBlockController extends RootAdminController
             'layoutType' => $this->layoutType,
             'listViewBlock' => $listViewBlock,
             'layout' => $layout,
-            'url_action' => sc_route('admin_store_block.edit', ['id' => $layout['id']]),
+            'url_action' => sc_route_admin('admin_store_block.edit', ['id' => $layout['id']]),
         ];
         return view($this->templatePathAdmin.'screen.store_block')
             ->with($data);

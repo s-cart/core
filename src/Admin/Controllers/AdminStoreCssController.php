@@ -28,7 +28,7 @@ class AdminStoreCssController extends RootAdminController
             'title_description' => '',
             'icon' => 'fa fa-edit',
             'css' => $cssContent->css,
-            'url_action' => sc_route('admin_store_css.index'),
+            'url_action' => sc_route_admin('admin_store_css.index'),
         ];
         return view($this->templatePathAdmin.'screen.store_css')
             ->with($data);

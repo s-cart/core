@@ -8,7 +8,7 @@
                 <h2 class="card-title">{{ $title_description??'' }}</h2>
                 <div class="card-tools">
                     <div class="btn-group float-right mr-5">
-                        <a href="{{ sc_route('admin_product.index') }}" class="btn  btn-flat btn-default" title="List">
+                        <a href="{{ sc_route_admin('admin_product.index') }}" class="btn  btn-flat btn-default" title="List">
                             <i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span>
                         </a>
                     </div>
@@ -18,7 +18,7 @@
 
 
             <!-- form start -->
-            <form action="{{ sc_route('admin_product.create') }}" method="post" name="form_name" accept-charset="UTF-8" 
+            <form action="{{ sc_route_admin('admin_product.create') }}" method="post" name="form_name" accept-charset="UTF-8" 
                 class="form-horizontal" id="form-main" enctype="multipart/form-data">
                 <input type="hidden" name="kind" value="{{ SC_PRODUCT_GROUP }}">
                 
@@ -359,10 +359,10 @@ $('.removeproductInGroup').click(function(event) {
 
 $('textarea.editor').ckeditor(
     {
-        filebrowserImageBrowseUrl: '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}?type=product',
-        filebrowserImageUploadUrl: '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=product&_token={{csrf_token()}}',
-        filebrowserBrowseUrl: '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}?type=Files',
-        filebrowserUploadUrl: '{{ sc_route('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=file&_token={{csrf_token()}}',
+        filebrowserImageBrowseUrl: '{{ sc_route_admin('admin.home').'/'.config('lfm.url_prefix') }}?type=product',
+        filebrowserImageUploadUrl: '{{ sc_route_admin('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=product&_token={{csrf_token()}}',
+        filebrowserBrowseUrl: '{{ sc_route_admin('admin.home').'/'.config('lfm.url_prefix') }}?type=Files',
+        filebrowserUploadUrl: '{{ sc_route_admin('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=file&_token={{csrf_token()}}',
         filebrowserWindowWidth: '900',
         filebrowserWindowHeight: '500'
     }

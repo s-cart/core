@@ -33,7 +33,7 @@ class AdminStoreMaintainController extends RootAdminController
             'icon' => 'fa fa-edit',
             'languages' => $this->languages,
             'maintain' => $maintain,
-            'url_action' => sc_route('admin_store_maintain.index'),
+            'url_action' => sc_route_admin('admin_store_maintain.index'),
         ];
         return view($this->templatePathAdmin.'screen.store_maintain')
             ->with($data);

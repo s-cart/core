@@ -121,14 +121,14 @@ class AdminReportController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
-        $data['urlSort'] = sc_route('admin_report.product', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_report.product', request()->except(['_token', '_pjax', 'sort_order']));
 
         $data['optionSort'] = $optionSort;
         //=menuSort
 
         //menuSearch
         $data['topMenuRight'][] = '
-                <form action="' . sc_route('admin_report.product') . '" id="button_search">
+                <form action="' . sc_route_admin('admin_report.product') . '" id="button_search">
                 <div class="input-group input-group" style="width: 250px;">
                     <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('product.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">

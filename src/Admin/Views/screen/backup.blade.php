@@ -121,7 +121,7 @@
           $.ajax({
             type: 'POST',
             dataType:'json',
-            url: '{{ sc_route('admin.backup.process') }}',
+            url: '{{ sc_route_admin('admin.backup.process') }}',
             data: {
               "_token": "{{ csrf_token() }}",
               "file":file,
@@ -155,7 +155,7 @@
       $.ajax({
         type: 'POST',
         dataType:'json',
-        url: '{{ sc_route('admin.backup.generate') }}',
+        url: '{{ sc_route_admin('admin.backup.generate') }}',
         data: {
           "_token": "{{ csrf_token() }}",
           "includeTables": includeTables,

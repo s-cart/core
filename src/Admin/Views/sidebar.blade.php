@@ -1,7 +1,7 @@
    <!-- Main Sidebar Container -->
    <aside class="main-sidebar sidebar-light-pink elevation-4 sidebar-no-expand">
     <!-- Brand Logo -->
-    <a href="{{ sc_route('admin.home') }}" class="brand-link navbar-secondary"">
+    <a href="{{ sc_route_admin('admin.home') }}" class="brand-link navbar-secondary"">
       S-Cart
       <span class="brand-text font-weight-light">Admin</span>
     </a>
@@ -15,7 +15,7 @@
 
           @if (\Admin::user()->checkUrlAllowAccess(route('admin_order.index')))
           <!-- SEARCH FORM -->
-          <form action="{{ sc_route('admin_order.index') }}" method="get" class="form-inline m-1 d-block d-sm-none" >
+          <form action="{{ sc_route_admin('admin_order.index') }}" method="get" class="form-inline m-1 d-block d-sm-none" >
             <div class="input-group input-group-sm">
               <input name="keyword" class="form-control form-control-navbar" type="search" placeholder="{{trans('order.search')}}" aria-label="Search">
               <div class="input-group-append">

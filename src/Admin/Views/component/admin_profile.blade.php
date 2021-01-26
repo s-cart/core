@@ -16,10 +16,10 @@
           <!-- Menu Footer-->
           <div class="user-footer">
             <div class="float-left">
-              <a href="{{ sc_route('admin.setting') }}" class="btn btn-default btn-flat">{{ trans('admin.setting') }}</a>
+              <a href="{{ sc_route_admin('admin.setting') }}" class="btn btn-default btn-flat">{{ trans('admin.setting') }}</a>
             </div>
             <div class="float-right">
-              <a href="{{ sc_route('admin.logout') }}" class="btn btn-default btn-flat">{{ trans('admin.logout') }}</a>
+              <a href="{{ sc_route_admin('admin.logout') }}" class="btn btn-default btn-flat">{{ trans('admin.logout') }}</a>
             </div>
           </div>
         </div>

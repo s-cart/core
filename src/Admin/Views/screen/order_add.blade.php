@@ -9,13 +9,13 @@
 
                     <div class="card-tools">
                         <div class="btn-group float-right" style="margin-right: 5px">
-                            <a href="{{ sc_route('admin_order.index') }}" class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span></a>
+                            <a href="{{ sc_route_admin('admin_order.index') }}" class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span></a>
                         </div>
                     </div>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="{{ sc_route('admin_order.create') }}" method="post" accept-charset="UTF-8" class="form-horizontal" id="form-main">
+                <form action="{{ sc_route_admin('admin_order.create') }}" method="post" accept-charset="UTF-8" class="form-horizontal" id="form-main">
 
                     <div class="card-body">
 
@@ -370,7 +370,7 @@ function addInfo(){
     id = $('[name="customer_id"]').val();
     if(id){
        $.ajax({
-            url : '{{ sc_route('admin_order.user_info') }}',
+            url : '{{ sc_route_admin('admin_order.user_info') }}',
             type : "get",
             dateType:"application/json; charset=utf-8",
             data : {

@@ -22,7 +22,7 @@ class AdminNewsController extends RootAdminController
             'title'         => trans('news.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_news.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_news.delete'),
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
@@ -68,7 +68,7 @@ class AdminNewsController extends RootAdminController
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route('admin_news.edit', ['id' => $row['id']]) . '"><span title="' . trans('news.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_news.edit', ['id' => $row['id']]) . '"><span title="' . trans('news.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
                     <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
                 ,
@@ -82,7 +82,7 @@ class AdminNewsController extends RootAdminController
 
 
         //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_news.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_news.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
                            </a>';
         //=menuRight
@@ -92,13 +92,13 @@ class AdminNewsController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
-        $data['urlSort'] = sc_route('admin_news.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_news.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
         //=menuSort
 
         //menuSearch        
         $data['topMenuRight'][] = '
-                <form action="' . sc_route('admin_news.index') . '" id="button_search">
+                <form action="' . sc_route_admin('admin_news.index') . '" id="button_search">
                     <div class="input-group input-group" style="width: 250px;">
                         <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('news.admin.search_place') . '" value="' . $keyword . '">
                         <div class="input-group-append">
@@ -127,7 +127,7 @@ class AdminNewsController extends RootAdminController
             'icon'              => 'fa fa-plus',
             'languages'         => $this->languages,
             'news'              => $news,
-            'url_action'        => sc_route('admin_news.create'),
+            'url_action'        => sc_route_admin('admin_news.create'),
         ];
 
         return view($this->templatePathAdmin.'screen.news')
@@ -209,7 +209,7 @@ class AdminNewsController extends RootAdminController
             'icon'              => 'fa fa-edit',
             'languages'         => $this->languages,
             'news'              => $news,
-            'url_action'        => sc_route('admin_news.edit', ['id' => $news['id']]),
+            'url_action'        => sc_route_admin('admin_news.edit', ['id' => $news['id']]),
         ];
         return view($this->templatePathAdmin.'screen.news')
             ->with($data);

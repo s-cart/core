@@ -13,7 +13,7 @@
 
     @if (\Admin::user()->checkUrlAllowAccess(route('admin_order.index')))
     <!-- SEARCH FORM -->
-    <form action="{{ sc_route('admin_order.index') }}" method="get" class="form-inline ml-3 d-none d-sm-block" >
+    <form action="{{ sc_route_admin('admin_order.index') }}" method="get" class="form-inline ml-3 d-none d-sm-block" >
       <div class="input-group input-group-sm">
         <input name="keyword" class="form-control form-control-navbar" type="search" placeholder="{{trans('order.search')}}" aria-label="Search">
         <div class="input-group-append">
@@ -27,7 +27,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <a class="nav-link" href="{{ sc_route('home') }}" target=_new>
+      <a class="nav-link" href="{{ sc_route_admin('home') }}" target=_new>
         <i class="fas fa-home"></i>
       </a> 
 

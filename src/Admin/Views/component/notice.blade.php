@@ -10,6 +10,6 @@
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
       <span class="dropdown-item dropdown-header">{{ trans('admin.menu_notice.new_order',['total'=> $orderNew]) }}</span>
       <div class="dropdown-divider"></div>
-        <a href="{{ sc_route('admin_order.index') }}?order_status=1" class="dropdown-item dropdown-footer">{{ trans('admin.menu_notice.view_all') }}</a>
+        <a href="{{ sc_route_admin('admin_order.index') }}?order_status=1" class="dropdown-item dropdown-footer">{{ trans('admin.menu_notice.view_all') }}</a>
     </div>
   </li>

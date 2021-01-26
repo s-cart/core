@@ -32,7 +32,7 @@
                 <div class="dd-handle header-fix  {{ ($level0->id == $id)? 'active-item' : '' }}">
                   {!! sc_language_render($level0->title) !!}
                   <span class="float-right dd-nodrag">
-                      <a href="{{ sc_route('admin_menu.edit',['id'=>$level0->id]) }}"><i class="fa fa-edit"></i></a>
+                      <a href="{{ sc_route_admin('admin_menu.edit',['id'=>$level0->id]) }}"><i class="fa fa-edit"></i></a>
                       &nbsp; 
                       <a data-id="{{ $level0->id }}" class="remove_menu"><i class="fa fa-trash"></i></a>
                   </span>
@@ -43,7 +43,7 @@
                 <div class="dd-handle {{ ($level0->id == $id)? 'active-item' : '' }}">
                   <i class="{{ $level0->icon }}"></i> {!! sc_language_render($level0->title) !!}
                   <span class="float-right dd-nodrag">
-                      <a href="{{ sc_route('admin_menu.edit',['id'=>$level0->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
+                      <a href="{{ sc_route_admin('admin_menu.edit',['id'=>$level0->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
                       &nbsp; 
                       <a data-id="{{ $level0->id }}" class="remove_menu"><i class="fa fa-trash fa-edit"></i></a>
                   </span>
@@ -54,7 +54,7 @@
               <div class="dd-handle {{ ($level0->id == $id)? 'active-item' : '' }}">
                 <i class="{{ $level0->icon }}"></i> {!! sc_language_render($level0->title) !!}
                   <span class="float-right dd-nodrag">
-                      <a href="{{ sc_route('admin_menu.edit',['id'=>$level0->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
+                      <a href="{{ sc_route_admin('admin_menu.edit',['id'=>$level0->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
                       &nbsp; 
                       <a data-id="{{ $level0->id }}" class="remove_menu"><i class="fa fa-trash fa-edit"></i></a>
                   </span>
@@ -68,7 +68,7 @@
                         <div class="dd-handle {{ ($level1->id == $id)? 'active-item' : '' }}">
                           <i class="{{ $level1->icon }}"></i> {!! sc_language_render($level1->title) !!}
                           <span class="float-right dd-nodrag">
-                              <a href="{{ sc_route('admin_menu.edit',['id'=>$level1->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
+                              <a href="{{ sc_route_admin('admin_menu.edit',['id'=>$level1->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
                               &nbsp; 
                               <a data-id="{{ $level1->id }}" class="remove_menu"><i class="fa fa-trash fa-edit"></i></a>
                           </span>
@@ -79,7 +79,7 @@
                     <div class="dd-handle {{ ($level1->id == $id)? 'active-item' : '' }}">
                       <i class="{{ $level1->icon }}"></i> {!! sc_language_render($level1->title) !!}
                       <span class="float-right dd-nodrag">
-                          <a href="{{ sc_route('admin_menu.edit',['id'=>$level1->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
+                          <a href="{{ sc_route_admin('admin_menu.edit',['id'=>$level1->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
                           &nbsp; 
                           <a data-id="{{ $level1->id }}" class="remove_menu"><i class="fa fa-trash fa-edit"></i></a>
                       </span>
@@ -93,7 +93,7 @@
                                     <div class="dd-handle {{ ($level2->id == $id)? 'active-item' : '' }}">
                                       <i class="{{ $level2->icon }}"></i> {!! sc_language_render($level2->title) !!}
                                       <span class="float-right dd-nodrag">
-                                          <a href="{{ sc_route('admin_menu.edit',['id'=>$level2->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
+                                          <a href="{{ sc_route_admin('admin_menu.edit',['id'=>$level2->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
                                           &nbsp; 
                                           <a data-id="{{ $level2->id }}" class="remove_menu"><i class="fa fa-trash fa-edit"></i></a>
                                       </span>
@@ -104,7 +104,7 @@
                                 <div class="dd-handle {{ ($level2->id == $id)? 'active-item' : '' }}">
                                   <i class="{{ $level2->icon }}"></i> {!! sc_language_render($level2->title) !!}
                                   <span class="float-right dd-nodrag">
-                                      <a href="{{ sc_route('admin_menu.edit',['id'=>$level2->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
+                                      <a href="{{ sc_route_admin('admin_menu.edit',['id'=>$level2->id]) }}"><i class="fa fa-edit fa-edit"></i></a>
                                       &nbsp; 
                                       <a data-id="{{ $level2->id }}" class="remove_menu"><i class="fa fa-trash fa-edit"></i></a>
                                   </span>
@@ -142,7 +142,7 @@
                 @if ($layout == 'edit')
                 <div class="card-tools">
                     <div class="btn-group float-right" style="margin-right: 5px">
-                        <a href="{{ sc_route('admin_menu.index') }}" class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span></a>
+                        <a href="{{ sc_route_admin('admin_menu.index') }}" class="btn  btn-flat btn-default" title="List"><i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span></a>
                     </div>
                 </div>
                 @endif
@@ -331,7 +331,7 @@ $('.remove_menu').click(function(event) {
                       return;
                     }else{
                       alertMsg('success', 'Success');
-                      window.location.replace('{{ sc_route('admin_menu.index') }}');
+                      window.location.replace('{{ sc_route_admin('admin_menu.index') }}');
                     }
 
                 }
@@ -363,7 +363,7 @@ $('.menu-sort-save').click(function () {
     var serialize = $('#menu-sort').nestable('serialize');
     var menu = JSON.stringify(serialize);
     $.ajax({
-      url: '{{ sc_route('admin_menu.update_sort') }}',
+      url: '{{ sc_route_admin('admin_menu.update_sort') }}',
       type: 'POST',
       dataType: 'json',
       data: {

@@ -57,7 +57,7 @@ class AdminProductController extends RootAdminController
             'title'         => trans('product.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_product.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_product.delete'),
             'removeList'    => 1, // Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
@@ -146,7 +146,7 @@ class AdminProductController extends RootAdminController
             }
             $dataMap['status'] = $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>';
             $dataMap['action'] = '
-            <a href="' . sc_route('admin_product.edit', ['id' => $row['id']]) . '">
+            <a href="' . sc_route_admin('admin_product.edit', ['id' => $row['id']]) . '">
             <span title="' . trans('product.admin.edit') . '" type="button" class="btn btn-flat btn-primary">
             <i class="fa fa-edit"></i>
             </span>
@@ -164,14 +164,14 @@ class AdminProductController extends RootAdminController
         $data['resultItems'] = trans('product.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
 
         //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_product.create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title').'" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title').'" id="button_create_new">
         <i class="fa fa-plus"></i>
         </a>';
         if (sc_config_admin('product_kind')) {
-            $data['menuRight'][] = '<a href="' . sc_route('admin_product.build_create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title_build').'" id="button_create_new">
+            $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.build_create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title_build').'" id="button_create_new">
             <i class="fas fa-puzzle-piece"></i>
             </a>';
-            $data['menuRight'][] = '<a href="' . sc_route('admin_product.group_create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title_group').'" id="button_create_new">
+            $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.group_create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title_group').'" id="button_create_new">
             <i class="fas fa-network-wired"></i>
             </a>';
         }
@@ -183,7 +183,7 @@ class AdminProductController extends RootAdminController
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
         $data['optionSort'] = $optionSort;
-        $data['urlSort'] = sc_route('admin_product.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_product.index', request()->except(['_token', '_pjax', 'sort_order']));
         //=menuSort
 
         //Search with category
@@ -196,7 +196,7 @@ class AdminProductController extends RootAdminController
 
         //topMenuRight
         $data['topMenuRight'][] ='
-                <form action="' . sc_route('admin_product.index') . '" id="button_search">
+                <form action="' . sc_route_admin('admin_product.index') . '" id="button_search">
                 <div class="input-group input-group float-left">
                     <select class="form-control rounded-0 select2" name="category_id" id="category_id">
                     <option value="">'.trans('product.admin.select_category').'</option>

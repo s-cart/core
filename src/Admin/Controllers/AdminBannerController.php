@@ -32,7 +32,7 @@ class AdminBannerController extends RootAdminController
             'title'         => trans('banner.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_banner.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_banner.delete'),
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
@@ -84,7 +84,7 @@ class AdminBannerController extends RootAdminController
                 'target' => $row['target'],
                 'type' => $this->dataType[$row['type']]??'N/A',
                 'action' => '
-                    <a href="' . sc_route('admin_banner.edit', ['id' => $row['id']]) . '"><span title="' . trans('banner.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_banner.edit', ['id' => $row['id']]) . '"><span title="' . trans('banner.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
                   <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('banner.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
@@ -96,14 +96,14 @@ class AdminBannerController extends RootAdminController
         $data['resultItems'] = trans('banner.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
 
         //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route('admin_banner.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_banner.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
         <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
                            </a>';
         //=menuRight
 
         //menuSearch        
         $data['topMenuRight'][] = '
-        <form action="' . sc_route('admin_banner.index') . '" id="button_search">
+        <form action="' . sc_route_admin('admin_banner.index') . '" id="button_search">
         <div class="input-group input-group" style="width: 250px;">
             <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('banner.admin.search_place') . '" value="' . $keyword . '">
             <div class="input-group-append">
@@ -119,7 +119,7 @@ class AdminBannerController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
-        $data['urlSort'] = sc_route('admin_banner.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['urlSort'] = sc_route_admin('admin_banner.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
         //=menuSort
 
@@ -141,7 +141,7 @@ class AdminBannerController extends RootAdminController
             'banner' => [],
             'arrTarget' => $this->arrTarget,
             'dataType' => $this->dataType,
-            'url_action' => sc_route('admin_banner.create'),
+            'url_action' => sc_route_admin('admin_banner.create'),
         ];
         return view($this->templatePathAdmin.'screen.banner')
             ->with($data);
@@ -199,7 +199,7 @@ class AdminBannerController extends RootAdminController
             'arrTarget'         => $this->arrTarget,
             'dataType'          => $this->dataType,
             'banner'            => $banner,
-            'url_action'        => sc_route('admin_banner.edit', ['id' => $banner['id']]),
+            'url_action'        => sc_route_admin('admin_banner.edit', ['id' => $banner['id']]),
         ];
         return view($this->templatePathAdmin.'screen.banner')
             ->with($data);

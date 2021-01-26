@@ -132,8 +132,8 @@ class AdminStoreConfigController extends RootAdminController
         $data['languages']                      = $this->languages;
         $data['currencies']                     = $this->currencies;
         $data['storeId']                        = $id;
-        $data['urlUpdateConfig']                = sc_route('admin_config.update');
-        $data['urlUpdateConfigGlobal']          = sc_route('admin_config_global.update');
+        $data['urlUpdateConfig']                = sc_route_admin('admin_config.update');
+        $data['urlUpdateConfigGlobal']          = sc_route_admin('admin_config_global.update');
 
         return view($this->templatePathAdmin.'screen.config_store_default')
         ->with($data);

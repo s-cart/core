@@ -9,10 +9,10 @@
               <h3 class="card-title">{{ trans('order.order_detail') }} #{{ $order->id }}</h3>
               <div class="card-tools not-print">
                   <div class="btn-group float-right" style="margin-right: 0px">
-                      <a href="{{ sc_route('admin_order.index') }}" class="btn btn-flat btn-default"><i class="fa fa-list"></i>&nbsp;{{ trans('admin.list') }}</a>
+                      <a href="{{ sc_route_admin('admin_order.index') }}" class="btn btn-flat btn-default"><i class="fa fa-list"></i>&nbsp;{{ trans('admin.list') }}</a>
                   </div>
                   <div class="btn-group float-right" style="margin-right: 10px">
-                      <a href="{{ sc_route('admin_order.export_detail').'?order_id='.$order->id.'&type=invoice' }}" class="btn btn-flat btn-twitter" title="Export"><i class="fas fa-file-excel"></i><span class="hidden-xs"> Excel</span></a>
+                      <a href="{{ sc_route_admin('admin_order.export_detail').'?order_id='.$order->id.'&type=invoice' }}" class="btn btn-flat btn-twitter" title="Export"><i class="fas fa-file-excel"></i><span class="hidden-xs"> Excel</span></a>
                   </div>
                   <div class="btn-group float-right" style="margin-right: 10px;border:1px solid #c5b5b5;">
                       <a class="btn btn-flat" title="Export" onclick="order_print()"><i class="fa fa-print"></i><span class="hidden-xs"> Print</span></a>
@@ -352,7 +352,7 @@ function update_total(e){
             node.find('.add_tax').html('');
         }else{
             $.ajax({
-                url : '{{ sc_route('admin_order.product_info') }}',
+                url : '{{ sc_route_admin('admin_order.product_info') }}',
                 type : "get",
                 dateType:"application/json; charset=utf-8",
                 data : {

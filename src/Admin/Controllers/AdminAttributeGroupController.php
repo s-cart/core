@@ -24,13 +24,13 @@ class AdminAttributeGroupController extends RootAdminController
             'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . trans('attribute_group.admin.add_new_title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
-            'urlDeleteItem' => sc_route('admin_attribute_group.delete'),
+            'urlDeleteItem' => sc_route_admin('admin_attribute_group.delete'),
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
             'css' => '', 
             'js' => '',
-            'url_action' => sc_route('admin_attribute_group.create'),
+            'url_action' => sc_route_admin('admin_attribute_group.create'),
         ];
 
         $listTh = [
@@ -50,7 +50,7 @@ class AdminAttributeGroupController extends RootAdminController
                 'name' => $row['name'],
                 'type' => $row['type'],
                 'action' => '
-                    <a href="' . sc_route('admin_attribute_group.edit', ['id' => $row['id']]) . '"><span title="' . trans('attribute_group.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_attribute_group.edit', ['id' => $row['id']]) . '"><span title="' . trans('attribute_group.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
                   <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('attribute_group.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
@@ -114,13 +114,13 @@ public function edit($id)
         'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . trans('attribute_group.admin.edit'),
         'subTitle' => '',
         'icon' => 'fa fa-indent',
-        'urlDeleteItem' => sc_route('admin_attribute_group.delete'),
+        'urlDeleteItem' => sc_route_admin('admin_attribute_group.delete'),
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
         'buttonSort' => 0, // 1 - Enable button sort
         'css' => '', 
         'js' => '',
-        'url_action' => sc_route('admin_attribute_group.edit', ['id' => $attribute_group['id']]),
+        'url_action' => sc_route_admin('admin_attribute_group.edit', ['id' => $attribute_group['id']]),
         'attribute_group' => $attribute_group,
         'id' => $id,
     ];
@@ -143,7 +143,7 @@ public function edit($id)
             'name' => $row['name'],
             'type' => $row['type'],
             'action' => '
-                <a href="' . sc_route('admin_attribute_group.edit', ['id' => $row['id']]) . '"><span title="' . trans('attribute_group.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                <a href="' . sc_route_admin('admin_attribute_group.edit', ['id' => $row['id']]) . '"><span title="' . trans('attribute_group.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
               <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('attribute_group.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
               ',

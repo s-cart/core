@@ -12,7 +12,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_order') }}</span>
                 <span class="info-box-number">{{ number_format($totalOrder) }}</span>
-                <a href="{{ sc_route('admin_order.index') }}" class="small-box-footer">
+                <a href="{{ sc_route_admin('admin_order.index') }}" class="small-box-footer">
                   {{ trans('admin.more') }}&nbsp;
                   <i class="fa fa-arrow-circle-right"></i>
                 </a>
@@ -29,7 +29,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_product') }}</span>
                 <span class="info-box-number">{{ number_format($totalProduct) }}</span>
-                <a href="{{ sc_route('admin_product.index') }}" class="small-box-footer">
+                <a href="{{ sc_route_admin('admin_product.index') }}" class="small-box-footer">
                     {{ trans('admin.more') }}&nbsp;
                     <i class="fa fa-arrow-circle-right"></i>
                 </a>
@@ -49,7 +49,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_customer') }}</span>
                 <span class="info-box-number">{{ number_format($totalCustomer) }}</span>
-                <a href="{{ sc_route('admin_customer.index') }}" class="small-box-footer">
+                <a href="{{ sc_route_admin('admin_customer.index') }}" class="small-box-footer">
                     {{ trans('admin.more') }}&nbsp;
                     <i class="fa fa-arrow-circle-right"></i>
                 </a>
@@ -69,7 +69,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">{{ trans('admin.total_blogs') }}</span>
                 <span class="info-box-number">{{ number_format($totalNews) }}</span>
-                <a href="{{ sc_route('admin_news.index') }}" class="small-box-footer">
+                <a href="{{ sc_route_admin('admin_news.index') }}" class="small-box-footer">
                     {{ trans('admin.more') }}&nbsp;
                     <i class="fa fa-arrow-circle-right"></i>
                 </a>
@@ -241,7 +241,7 @@
                       @if (count($topCustomer))
                       @foreach ($topCustomer as $customer)
                         <tr>
-                          <td><a href="{{ sc_route('admin_customer.edit',['id'=>$customer->id]) }}">ID#{{ $customer->id }}</a></td>
+                          <td><a href="{{ sc_route_admin('admin_customer.edit',['id'=>$customer->id]) }}">ID#{{ $customer->id }}</a></td>
                           <td>{{ $customer->email }}</td>
                           <td>{{ $customer->name }}</td>
                           <td>{{ $customer->provider }}</td>

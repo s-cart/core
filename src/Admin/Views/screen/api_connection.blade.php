@@ -12,7 +12,7 @@
             <h3 class="card-title">{!! $title_action !!}</h3>
             @if ($layout == 'edit')
             <div class="btn-group float-right" style="margin-right: 5px">
-                <a href="{{ sc_route('admin_api_connection.index') }}" class="btn btn-flat btn-default" title="List"><i class="fa fa-list"></i>
+                <a href="{{ sc_route_admin('admin_api_connection.index') }}" class="btn btn-flat btn-default" title="List"><i class="fa fa-list"></i>
                   <span class="hidden-xs"> {{trans('admin.back_list')}}</span>
                 </a>
             </div>
@@ -220,7 +220,7 @@ $(document).ready(function() {
         $('#loading').show();
         $.ajax({
             method: 'get',
-            url: '{{ sc_route('admin_api_connection.generate_key') }}',
+            url: '{{ sc_route_admin('admin_api_connection.generate_key') }}',
             success: function (data) {
                 $('#apikey').val(data.data);
                 $('#loading').hide();
@@ -242,7 +242,7 @@ $("input.switch-data-config").bootstrapSwitch();
       $.ajax({
         type: 'POST',
         dataType:'json',
-        url: "{{ sc_route('admin_config_global.update') }}",
+        url: "{{ sc_route_admin('admin_config_global.update') }}",
         data: {
           "_token": "{{ csrf_token() }}",
           "name": $(this).attr('name'),
