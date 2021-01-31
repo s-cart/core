@@ -4,7 +4,7 @@
 <p align="center">Free Laravel e-commerce for business<br>
     <code><b>composer create-project s-cart/s-cart</b></code></p>
 <p align="center">
- <a href="https://s-cart.org">Home page</a> | <a href="https://demo.s-cart.org">Demo</a> | <a href="https://demo.s-cart.org/sc_admin">Demo admin</a> | <a href="https://s-cart.org/docs/master/installation.html">Installation</a>  | <a href="https://s-cart.org/docs/master/video-guide.html">Video Guide</a> | <a href="https://s-cart.org/download.html">Download full source</a>
+ <a href="https://s-cart.org">Home page</a> | <a href="https://demo.s-cart.org">Demo</a> | <a href="https://s-cart.org/en/docs/master/installation.html">Installation</a>  | <a href="https://s-cart.org/en/docs/master/video-guide.html">Video Guide</a> | <a href="https://s-cart.org/en/download.html">Download full source</a>
 </p>
 
 <p align="center">
