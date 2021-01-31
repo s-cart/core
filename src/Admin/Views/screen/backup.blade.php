@@ -131,10 +131,10 @@
               // console.log(response);
               if(parseInt(response.error) ==0){
                   alertJs('success', response.msg);
+                  location.reload();
               }else{
                 alertJs('error', response.msg);
               }
-              location.reload();
               $('#loading').hide();
               obj.button('reset');
             }
@@ -167,7 +167,8 @@
                 'Success!',
                 '',
                 'success'
-                )
+                );
+                location.reload();
           }else{
             Swal.fire(
               response.msg,
@@ -175,7 +176,6 @@
               'error'
               )
           }
-          location.reload();
           $('#loading').hide();
           obj.button('reset');
         }
