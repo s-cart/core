@@ -287,7 +287,7 @@ class ScartServiceProvider extends ServiceProvider
     protected function registerPublishing()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/Admin/Views'  => resource_path('views/admin')], 'sc:view');
+            $this->publishes([__DIR__.'/Admin/Views'  => resource_path('views/admin')], 'sc:view-admin');
             $this->publishes([__DIR__.'/Config/admin.php' => config_path('admin.php')], 'sc:config-admin');
             $this->publishes([__DIR__.'/Config/validation.php' => config_path('validation.php')], 'sc:config-validation');
         }
