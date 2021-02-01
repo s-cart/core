@@ -43,6 +43,21 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div
+                                class="form-group {{ $errors->has('descriptions.'.$code.'.maintain_note') ? ' text-red' : '' }}">
+                                <label for="{{ $code }}__maintain_note"
+                                    class="col-sm-2 col-form-label">{{ trans('store_maintain.admin.description_note') }}</label>
+                                <div class="col-sm-8">
+                                    <input id="{{ $code }}__maintain_note" type="text" class="form-control input-sm"
+                                        name="descriptions[{{ $code }}][maintain_note]" value="{{ old('descriptions.'.$code.'.maintain_note',($descriptions[$code]['maintain_note']??'')) }}">
+                                    @if ($errors->has('descriptions.'.$code.'.maintain_note'))
+                                    <span class="form-text">
+                                        <i class="fa fa-info-circle"></i> {{ $errors->first('descriptions.'.$code.'.maintain_note') }}
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             </div>
                         </div>
                         @endforeach

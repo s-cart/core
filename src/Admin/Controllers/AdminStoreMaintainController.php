@@ -65,6 +65,14 @@ class AdminStoreMaintainController extends RootAdminController
                 'value' => $row['maintain_content'],
             ];
             AdminStore::updateDescription($dataUpdate);
+
+            $dataUpdate = [
+                'storeId' => $id,
+                'lang' => $code,
+                'name' => 'maintain_note',
+                'value' => $row['maintain_note'],
+            ];
+            AdminStore::updateDescription($dataUpdate);
         }
 //
         return redirect()->route('admin_store_maintain.index')->with('success', trans('store_maintain.admin.edit_success'));
