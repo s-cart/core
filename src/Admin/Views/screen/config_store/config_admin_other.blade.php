@@ -19,10 +19,6 @@
         <td>{{ trans('env.ADMIN_LOGO') }}</td>
         <td><a href="#" class="editable-required editable editable-click" data-name="ADMIN_LOGO" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ trans('env.ADMIN_LOGO') }}" data-value="{{ sc_config('ADMIN_LOGO', $storeId) }}" data-original-title="" title=""></a></td>
       </tr>
-      <tr>
-        <td>{{ trans('env.ADMIN_FOOTER_OFF') }}</td>
-        <td><input class="check-data-config" data-store="{{ $storeId }}" type="checkbox" name="ADMIN_FOOTER_OFF"  {{ sc_config('ADMIN_FOOTER_OFF', $storeId) ? "checked":"" }}>
-      </tr>
 
      </tbody>
    </table>
