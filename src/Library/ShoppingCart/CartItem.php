@@ -80,8 +80,10 @@ class CartItem implements Arrayable, Jsonable
      * @param int        $tax
      * @param int        $storeId
      */
-    public function __construct($id, $name, $price, array $options = [], $tax = 0, $storeId)
+    public function __construct($id, $name, $price, array $options = [], $tax = 0, $storeId = null)
     {
+        $storeId = empty($storeId) ? config('app.storeId') : $storeId;
+
         if (empty($id)) {
             throw new \InvalidArgumentException('Please supply a valid identifier.');
         }
@@ -241,8 +243,9 @@ class CartItem implements Arrayable, Jsonable
      * @param array      $options
      * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
-    public static function fromAttributes($id, $name, $price, array $options = [], $tax = 0, $storeId)
+    public static function fromAttributes($id, $name, $price, array $options = [], $tax = 0, $storeId = null)
     {
+        $storeId = empty($storeId) ? config('app.storeId') : $storeId;
         return new self($id, $name, $price, $options, $tax, $storeId);
     }
 
