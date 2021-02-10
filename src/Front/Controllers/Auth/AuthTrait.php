@@ -71,9 +71,9 @@ trait AuthTrait
         }
         if (sc_config('customer_phone')) {
             if (sc_config('customer_phone_required')) {
-                $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{7,13}$/');
+                $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^[0-9\-]{8,14}$/');
             } else {
-                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^0[^0][0-9\-]{7,13}$/');
+                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^[0-9\-]{8,14}$/');
             }
             if (!empty($data['phone'])) {
                 $dataUpdate['phone'] = $data['phone'];
@@ -173,7 +173,7 @@ trait AuthTrait
             'sex.required'         => trans('validation.required', ['attribute'=> trans('customer.sex')]),
             'birthday.required'    => trans('validation.required', ['attribute'=> trans('customer.birthday')]),
             'email.email'          => trans('validation.email', ['attribute'=> trans('customer.email')]),
-            'phone.regex'          => trans('validation.regex', ['attribute'=> trans('customer.phone')]),
+            'phone.regex'          => trans('customer.phone_regex'),
             'password.confirmed'   => trans('validation.confirmed', ['attribute'=> trans('customer.password')]),
             'postcode.min'         => trans('validation.min', ['attribute'=> trans('customer.postcode')]),
             'password.min'         => trans('validation.min', ['attribute'=> trans('customer.password')]),
@@ -233,9 +233,9 @@ trait AuthTrait
         }
         if (sc_config('customer_phone')) {
             if (sc_config('customer_phone_required')) {
-                $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{7,13}$/');
+                $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^[0-9\-]{8,14}$/');
             } else {
-                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^0[^0][0-9\-]{7,13}$/');
+                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^[0-9\-]{8,14}$/');
             }
         }
         if (sc_config('customer_country')) {
@@ -307,7 +307,7 @@ trait AuthTrait
             'sex.required'         => trans('validation.required', ['attribute'=> trans('customer.sex')]),
             'birthday.required'    => trans('validation.required', ['attribute'=> trans('customer.birthday')]),
             'email.email'          => trans('validation.email', ['attribute'=> trans('customer.email')]),
-            'phone.regex'          => trans('validation.regex', ['attribute'=> trans('customer.phone')]),
+            'phone.regex'          => trans('customer.phone_regex'),
             'password.confirmed'   => trans('validation.confirmed', ['attribute'=> trans('customer.password')]),
             'postcode.min'         => trans('validation.min', ['attribute'=> trans('customer.postcode')]),
             'password.min'         => trans('validation.min', ['attribute'=> trans('customer.password')]),
