@@ -3,6 +3,7 @@
 return [
     'customer'   => [
         'first_name'         => 'required|string|max:100',
+        'password'           => 'required|string|min:6',
         'password_null'      => 'nullable|string|min:6',
         'password_confirm'   => 'required|string|min:6|confirmed',
         'email'              => 'required|string|email|max:255',
