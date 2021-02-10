@@ -76,7 +76,11 @@ class ShopOrderTotal extends Model
 
         //re-sort item total
         usort($objects, function ($a, $b) {
-            return $a['sort'] > $b['sort'];
+            if ($a['sort'] > $b['sort']) {
+                return 1;
+            } else {
+                return -1;
+            }
         });
 
         return $objects;

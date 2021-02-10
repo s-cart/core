@@ -401,7 +401,7 @@ class Cart
      * @param array     $options
      * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
-    private function createCartItem($id, $name, $qty, $price, array $options, $tax = 0, $storeId)
+    private function createCartItem($id, $name, $qty, $price, array $options, $tax = 0, $storeId = null)
     {
         if (is_array($id)) {
             $cartItem = CartItem::fromArray($id);
