@@ -115,6 +115,7 @@ class AuthController extends RootFrontController
                         '/\{\{\$password\}\}/',
                         '/\{\{\$address1\}\}/',
                         '/\{\{\$address2\}\}/',
+                        '/\{\{\$address3\}\}/',
                         '/\{\{\$country\}\}/',
                     ];
                     $dataReplace = [
@@ -126,6 +127,7 @@ class AuthController extends RootFrontController
                         $dataMap['password'],
                         $dataMap['address1'],
                         $dataMap['address2'],
+                        $dataMap['address3'],
                         $dataMap['country'],
                     ];
                     $content = preg_replace($dataFind, $dataReplace, $content);

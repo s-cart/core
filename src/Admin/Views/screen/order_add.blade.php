@@ -185,6 +185,27 @@
                             </div>
                         @endif
 
+
+                        @if (sc_config_admin('customer_address3'))    
+                        <div class="form-group row {{ $errors->has('address3') ? ' text-red' : '' }}">
+                            <label for="address3" class="col-sm-2 col-form-label">{{ trans('order.shipping_address3') }}</label>
+                            <div class="col-sm-8">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                                    </div>
+                                    <input type="text" id="address3" name="address3" value="{!! old('address3') !!}" class="form-control address3" placeholder="" />
+                                </div>
+                                    @if ($errors->has('address3'))
+                                        <span class="text-sm">
+                                            {{ $errors->first('address3') }}
+                                        </span>
+                                    @endif
+                            </div>
+                        </div>
+                    @endif
+
+
                         @if (sc_config_admin('customer_country'))
                             <div class="form-group row {{ $errors->has('country') ? ' text-red' : '' }}">
                                 <label for="country" class="col-sm-2 asterisk col-form-label">{{ trans('order.country') }}</label>
@@ -387,6 +408,7 @@ function addInfo(){
                 $('[name="last_name_kana"]').val(returnedData.last_name_kana);
                 $('[name="address1"]').val(returnedData.address1);
                 $('[name="address2"]').val(returnedData.address2);
+                $('[name="address3"]').val(returnedData.address3);
                 $('[name="phone"]').val(returnedData.phone);
                 $('[name="company"]').val(returnedData.company);
                 $('[name="postcode"]').val(returnedData.postcode);

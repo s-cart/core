@@ -48,6 +48,7 @@ class AdminCustomerController extends RootAdminController
             'phone'      => trans('customer.phone'),
             'address1'   => trans('customer.address1'),
             'address2'   => trans('customer.address2'),
+            'address3'   => trans('customer.address3'),
             'country'    => trans('customer.country'),
             'status'     => trans('customer.status'),
             'created_at' => trans('customer.created_at'),
@@ -81,6 +82,7 @@ class AdminCustomerController extends RootAdminController
                 'phone' => $row['phone'],
                 'address1' => $row['address1'],
                 'address2' => $row['address2'],
+                'address3' => $row['address3'],
                 'country' => $this->countries[$row['country']]->name ?? '',
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'created_at' => $row['created_at'],
@@ -312,12 +314,21 @@ class AdminCustomerController extends RootAdminController
         }
 
         if (sc_config_admin('customer_address2')) {
-            if (sc_config_admin('customer_address1_required')) {
+            if (sc_config_admin('customer_address2_required')) {
                 $validate['address2'] = 'required|string|max:100';
             } else {
                 $validate['address2'] = 'nullable|string|max:100';
             }
             $dataUpdate['address2'] = $data['address2']??'';
+        }
+
+        if (sc_config_admin('customer_address3')) {
+            if (sc_config_admin('customer_address3_required')) {
+                $validate['address3'] = 'required|string|max:100';
+            } else {
+                $validate['address3'] = 'nullable|string|max:100';
+            }
+            $dataUpdate['address3'] = $data['address3']??'';
         }
 
         if (sc_config_admin('customer_phone')) {
@@ -366,6 +377,7 @@ class AdminCustomerController extends RootAdminController
             'first_name.required' => trans('validation.required',['attribute'=> trans('account.first_name')]),
             'address1.required'   => trans('validation.required',['attribute'=> trans('account.address1')]),
             'address2.required'   => trans('validation.required',['attribute'=> trans('account.address2')]),
+            'address3.required'   => trans('validation.required',['attribute'=> trans('account.address3')]),
             'phone.required'      => trans('validation.required',['attribute'=> trans('account.phone')]),
             'country.required'    => trans('validation.required',['attribute'=> trans('account.country')]),
             'postcode.required'   => trans('validation.required',['attribute'=> trans('account.postcode')]),
@@ -375,6 +387,7 @@ class AdminCustomerController extends RootAdminController
             'first_name.max'      => trans('validation.max',['attribute'=> trans('account.first_name')]),
             'address1.max'        => trans('validation.max',['attribute'=> trans('account.address1')]),
             'address2.max'        => trans('validation.max',['attribute'=> trans('account.address2')]),
+            'address3.max'        => trans('validation.max',['attribute'=> trans('account.address3')]),
             'last_name.max'       => trans('validation.max',['attribute'=> trans('account.last_name')]),
         ];
 

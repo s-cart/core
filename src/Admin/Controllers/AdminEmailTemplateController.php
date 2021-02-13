@@ -229,6 +229,7 @@ class AdminEmailTemplateController extends RootAdminController
                     '$address',
                     '$address1',
                     '$address2',
+                    '$address3',
                     '$email',
                     '$phone',
                     '$comment',
@@ -269,6 +270,7 @@ class AdminEmailTemplateController extends RootAdminController
                         '$password',
                         '$address1',
                         '$address2',
+                        '$address3',
                         '$country',
                     ];
                     break;

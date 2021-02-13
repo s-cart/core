@@ -10,6 +10,7 @@ return [
     'address'         => 'Địa chỉ',
     'address1'        => 'Tỉnh/Thành',
     'address2'        => 'Quận/Huyện',
+    'address3'        => 'Địa chỉ 3',
     'country'         => 'Quốc gia',
     'company'         => 'Công ty',
     'postcode'        => 'Mã bưu chính',

@@ -240,6 +240,9 @@ class AdminOrderController extends RootAdminController
         if(sc_config_admin('customer_address2')) {
             $validate['address2'] = 'required|max:100';
         }
+        if(sc_config_admin('customer_address3')) {
+            $validate['address3'] = 'required|max:100';
+        }
         if(sc_config_admin('customer_phone')) {
             $validate['phone'] = 'required|regex:/^0[^0][0-9\-]{7,13}$/';
         }
@@ -258,6 +261,7 @@ class AdminOrderController extends RootAdminController
             'email.required'           => trans('validation.required',['attribute'=> trans('cart.email')]),
             'address1.required'        => trans('validation.required',['attribute'=> trans('cart.address1')]),
             'address2.required'        => trans('validation.required',['attribute'=> trans('cart.address2')]),
+            'address3.required'        => trans('validation.required',['attribute'=> trans('cart.address3')]),
             'phone.required'           => trans('validation.required',['attribute'=> trans('cart.phone')]),
             'country.required'         => trans('validation.required',['attribute'=> trans('cart.country')]),
             'postcode.required'        => trans('validation.required',['attribute'=> trans('cart.postcode')]),
@@ -272,6 +276,7 @@ class AdminOrderController extends RootAdminController
             'email.max'                => trans('validation.max',['attribute'=> trans('cart.email')]),
             'address1.max'             => trans('validation.max',['attribute'=> trans('cart.address1')]),
             'address2.max'             => trans('validation.max',['attribute'=> trans('cart.address2')]),
+            'address3.max'             => trans('validation.max',['attribute'=> trans('cart.address3')]),
             'last_name.max'            => trans('validation.max',['attribute'=> trans('cart.last_name')]),
             'birthday.date'            => trans('validation.date',['attribute'=> trans('cart.birthday')]),
             'birthday.date_format'     => trans('validation.date_format',['attribute'=> trans('cart.birthday')]),
@@ -296,6 +301,7 @@ class AdminOrderController extends RootAdminController
             'currency'        => $data['currency'],
             'address1'        => $data['address1'],
             'address2'        => $data['address2'] ?? '',
+            'address3'        => $data['address3'] ?? '',
             'country'         => $data['country'] ?? '',
             'company'         => $data['company'] ?? '',
             'postcode'        => $data['postcode'] ?? '',
@@ -674,7 +680,7 @@ class AdminOrderController extends RootAdminController
         if ($order) {
             $data                    = array();
             $data['name']            = $order['first_name'] . ' ' . $order['last_name'];
-            $data['address']         = $order['address1'] . ', ' . $order['address2'] . ', ' . $order['country'];
+            $data['address']         = $order['address1'] . ', ' . $order['address2'] . ', ' . $order['address3'].', '.$order['country'];
             $data['phone']           = $order['phone'];
             $data['email']           = $order['email'];
             $data['comment']         = $order['comment'];

@@ -123,8 +123,7 @@
                             </div>
                             @endif
     
-    
-                            @if (sc_config_admin('customer_address2'))
+
                             <div class="form-group row {{ $errors->has('address1') ? ' text-red' : '' }}">
                                 <label for="address1"
                                     class="col-sm-2 col-form-label">{{ trans('account.address1') }}</label>
@@ -143,7 +142,8 @@
     
                                 </div>
                             </div>
-    
+
+                            @if (sc_config_admin('customer_address2'))
                             <div class="form-group row {{ $errors->has('address2') ? ' text-red' : '' }}">
                                 <label for="address2"
                                     class="col-sm-2 col-form-label">{{ trans('account.address2') }}</label>
@@ -161,28 +161,30 @@
     
                                 </div>
                             </div>
-                            @else
-                            <div class="form-group row {{ $errors->has('address1') ? ' text-red' : '' }}">
-                                <label for="address1"
-                                    class="col-sm-2 col-form-label">{{ trans('account.address') }}</label>
+                            @endif
     
+    
+                            @if (sc_config_admin('customer_address3'))
+                            <div class="form-group row {{ $errors->has('address3') ? ' text-red' : '' }}">
+                                <label for="address3"
+                                    class="col-sm-2 col-form-label">{{ trans('account.address3') }}</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                    <input id="address1" type="text" class="form-control" name="address1" required
-                                        value="{{ (old('address1', $address['address1'] ?? ''))}}">
+                                    <input id="address3" type="text" class="form-control" name="address3" required
+                                        value="{{ (old('address3', $address['address3'] ?? ''))}}">
                                     </div>
-                                    @if($errors->has('address1'))
-                                    <span class="form-text">{{ $errors->first('address1') }}</span>
+                                    @if($errors->has('address3'))
+                                    <span class="form-text">{{ $errors->first('address3') }}</span>
                                     @endif
     
                                 </div>
                             </div>
                             @endif
-    
-    
+
+
                             @if (sc_config_admin('customer_country'))
                             @php
                             $country = old('country', $address['country'] ?? '');

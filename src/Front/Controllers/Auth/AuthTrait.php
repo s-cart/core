@@ -69,6 +69,19 @@ trait AuthTrait
                 $dataUpdate['address2'] = $data['address2'];
             }
         }
+
+        if (sc_config('customer_address3')) {
+            if (sc_config('customer_address3_required')) {
+                $validate['address3'] = config('validation.customer.address3_required', 'required|string|max:100');
+            } else {
+                $validate['address3'] = config('validation.customer.address3_null', 'nullable|string|max:100');
+            }
+            if (!empty($data['address3'])) {
+                $dataUpdate['address3'] = $data['address3'];
+            }
+        }
+
+
         if (sc_config('customer_phone')) {
             if (sc_config('customer_phone_required')) {
                 $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^[0-9\-]{8,14}$/');
@@ -166,6 +179,7 @@ trait AuthTrait
             'password.required'    => trans('validation.required', ['attribute'=> trans('customer.password')]),
             'address1.required'    => trans('validation.required', ['attribute'=> trans('customer.address1')]),
             'address2.required'    => trans('validation.required', ['attribute'=> trans('customer.address2')]),
+            'address3.required'    => trans('validation.required', ['attribute'=> trans('customer.address3')]),
             'phone.required'       => trans('validation.required', ['attribute'=> trans('customer.phone')]),
             'country.required'     => trans('validation.required', ['attribute'=> trans('customer.country')]),
             'postcode.required'    => trans('validation.required', ['attribute'=> trans('customer.postcode')]),
@@ -182,6 +196,7 @@ trait AuthTrait
             'email.max'            => trans('validation.max', ['attribute'=> trans('customer.email')]),
             'address1.max'         => trans('validation.max', ['attribute'=> trans('customer.address1')]),
             'address2.max'         => trans('validation.max', ['attribute'=> trans('customer.address2')]),
+            'address3.max'         => trans('validation.max', ['attribute'=> trans('customer.address3')]),
             'last_name.max'        => trans('validation.max', ['attribute'=> trans('customer.last_name')]),
             'birthday.date'        => trans('validation.date', ['attribute'=> trans('customer.birthday')]),
             'birthday.date_format' => trans('validation.date_format', ['attribute'=> trans('customer.birthday')]),
@@ -231,6 +246,16 @@ trait AuthTrait
                 $validate['address2'] = config('validation.customer.address2_null', 'nullable|string|max:100');
             }
         }
+
+        if (sc_config('customer_address3')) {
+            if (sc_config('customer_address3_required')) {
+                $validate['address3'] = config('validation.customer.address3_required', 'required|string|max:100');
+            } else {
+                $validate['address3'] = config('validation.customer.address3_null', 'nullable|string|max:100');
+            }
+        }
+
+
         if (sc_config('customer_phone')) {
             if (sc_config('customer_phone_required')) {
                 $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^[0-9\-]{8,14}$/');
@@ -300,6 +325,7 @@ trait AuthTrait
             'password.required'    => trans('validation.required', ['attribute'=> trans('customer.password')]),
             'address1.required'    => trans('validation.required', ['attribute'=> trans('customer.address1')]),
             'address2.required'    => trans('validation.required', ['attribute'=> trans('customer.address2')]),
+            'address3.required'    => trans('validation.required', ['attribute'=> trans('customer.address3')]),
             'phone.required'       => trans('validation.required', ['attribute'=> trans('customer.phone')]),
             'country.required'     => trans('validation.required', ['attribute'=> trans('customer.country')]),
             'postcode.required'    => trans('validation.required', ['attribute'=> trans('customer.postcode')]),
@@ -316,6 +342,7 @@ trait AuthTrait
             'email.max'            => trans('validation.max', ['attribute'=> trans('customer.email')]),
             'address1.max'         => trans('validation.max', ['attribute'=> trans('customer.address1')]),
             'address2.max'         => trans('validation.max', ['attribute'=> trans('customer.address2')]),
+            'address3.max'         => trans('validation.max', ['attribute'=> trans('customer.address3')]),
             'last_name.max'        => trans('validation.max', ['attribute'=> trans('customer.last_name')]),
             'birthday.date'        => trans('validation.date', ['attribute'=> trans('customer.birthday')]),
             'birthday.date_format' => trans('validation.date_format', ['attribute'=> trans('customer.birthday')]),
@@ -370,6 +397,13 @@ trait AuthTrait
                 $dataInsert['address2'] = $data['address2'];
             }
         }
+
+        if (sc_config('customer_address3')) {
+            if (!empty($data['address3'])) {
+                $dataInsert['address3'] = $data['address3'];
+            }
+        }
+
         if (sc_config('customer_phone')) {
             if (!empty($data['phone'])) {
                 $dataInsert['phone'] = $data['phone'];

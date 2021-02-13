@@ -120,7 +120,7 @@ class ShopCurrency extends Model
      */
     public static function getValue(float $money, $rate = null)
     {
-        if ($rate) {
+        if (!empty($rate)) {
             return $money * $rate;
         } else {
             return $money * self::$exchange_rate;

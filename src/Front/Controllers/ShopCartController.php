@@ -97,6 +97,7 @@ class ShopCartController extends RootFrontController
                     'email'           => $customer->email,
                     'address1'        => $address->address1,
                     'address2'        => $address->address2,
+                    'address3'        => $address->address3,
                     'postcode'        => $address->postcode,
                     'company'         => $customer->company,
                     'country'         => $address->country,
@@ -112,6 +113,7 @@ class ShopCartController extends RootFrontController
                     'email'           => $customer->email,
                     'address1'        => $customer->address1,
                     'address2'        => $customer->address2,
+                    'address3'        => $customer->address3,
                     'postcode'        => $customer->postcode,
                     'company'         => $customer->company,
                     'country'         => $customer->country,
@@ -131,6 +133,7 @@ class ShopCartController extends RootFrontController
                 'email'           => '',
                 'address1'        => '',
                 'address2'        => '',
+                'address3'        => '',
                 'country'         => '',
                 'phone'           => '',
                 'comment'         => '',
@@ -239,6 +242,15 @@ class ShopCartController extends RootFrontController
                 $validate['address2'] = config('validation.customer.address2_null', 'nullable|string|max:100');
             }
         }
+
+        if (sc_config('customer_address3')) {
+            if (sc_config('customer_address3_required')) {
+                $validate['address3'] = config('validation.customer.address3_required', 'required|string|max:100');
+            } else {
+                $validate['address3'] = config('validation.customer.address3_null', 'nullable|string|max:100');
+            }
+        }
+
         if (sc_config('customer_phone')) {
             if (sc_config('customer_phone_required')) {
                 $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{7,13}$/');
@@ -286,6 +298,7 @@ class ShopCartController extends RootFrontController
             'email.required'          => trans('validation.required', ['attribute'=> trans('cart.email')]),
             'address1.required'       => trans('validation.required', ['attribute'=> trans('cart.address1')]),
             'address2.required'       => trans('validation.required', ['attribute'=> trans('cart.address2')]),
+            'address3.required'       => trans('validation.required', ['attribute'=> trans('cart.address3')]),
             'phone.required'          => trans('validation.required', ['attribute'=> trans('cart.phone')]),
             'country.required'        => trans('validation.required', ['attribute'=> trans('cart.country')]),
             'postcode.required'       => trans('validation.required', ['attribute'=> trans('cart.postcode')]),
@@ -300,6 +313,7 @@ class ShopCartController extends RootFrontController
             'email.max'               => trans('validation.max', ['attribute'=> trans('cart.email')]),
             'address1.max'            => trans('validation.max', ['attribute'=> trans('cart.address1')]),
             'address2.max'            => trans('validation.max', ['attribute'=> trans('cart.address2')]),
+            'address3.max'            => trans('validation.max', ['attribute'=> trans('cart.address3')]),
             'last_name.max'           => trans('validation.max', ['attribute'=> trans('cart.last_name')]),
             'birthday.date'           => trans('validation.date', ['attribute'=> trans('cart.birthday')]),
             'birthday.date_format'    => trans('validation.date_format', ['attribute'=> trans('cart.birthday')]),
@@ -348,6 +362,7 @@ class ShopCartController extends RootFrontController
                     'country'         => request('country'),
                     'address1'        => request('address1'),
                     'address2'        => request('address2'),
+                    'address3'        => request('address3'),
                     'phone'           => request('phone'),
                     'postcode'        => request('postcode'),
                     'company'         => request('company'),
@@ -593,6 +608,9 @@ class ShopCartController extends RootFrontController
         if (!empty($shippingAddress['address2'])) {
             $dataOrder['address2']       = $shippingAddress['address2'];
         }
+        if (!empty($shippingAddress['address3'])) {
+            $dataOrder['address3']       = $shippingAddress['address3'];
+        }
         if (!empty($shippingAddress['country'])) {
             $dataOrder['country']       = $shippingAddress['country'];
         }
@@ -643,6 +661,7 @@ class ShopCartController extends RootFrontController
                 'postcode'        => $shippingAddress['postcode'] ?? '',
                 'address1'        => $shippingAddress['address1'] ?? '',
                 'address2'        => $shippingAddress['address2'] ?? '',
+                'address3'        => $shippingAddress['address3'] ?? '',
                 'country'         => $shippingAddress['country'] ?? '',
                 'phone'           => $shippingAddress['phone'] ?? '',
             ];
@@ -1042,6 +1061,7 @@ class ShopCartController extends RootFrontController
                     '/\{\{\$address\}\}/',
                     '/\{\{\$address1\}\}/',
                     '/\{\{\$address2\}\}/',
+                    '/\{\{\$address3\}\}/',
                     '/\{\{\$email\}\}/',
                     '/\{\{\$phone\}\}/',
                     '/\{\{\$comment\}\}/',
@@ -1057,9 +1077,10 @@ class ShopCartController extends RootFrontController
                     $data['first_name'],
                     $data['last_name'],
                     $data['first_name'].' '.$data['last_name'],
-                    $data['address1'] . ' ' . $data['address2'],
+                    $data['address1'] . ' ' . $data['address2'].' '.$data['address3'],
                     $data['address1'],
                     $data['address2'],
+                    $data['address3'],
                     $data['email'],
                     $data['phone'],
                     $data['comment'],

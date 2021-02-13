@@ -257,7 +257,7 @@ if (!function_exists('sc_route')) {
         if (!config('app.seoLang')) {
             $param = Arr::except($param, ['lang']);
         } else {
-            if (!key_exists('lang', $param) && $name != 'locale' && $name != 'home') {
+            if (!key_exists('lang', $param) && $name != 'locale' && $name != 'currency' && $name != 'home') {
                 $param['lang'] = app()->getLocale();
             }
         }

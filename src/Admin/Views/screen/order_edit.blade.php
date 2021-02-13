@@ -65,6 +65,12 @@
                     </tr>
                     @endif
 
+                    @if (sc_config_admin('customer_address3'))
+                    <tr>
+                      <td class="td-title">{{ trans('order.shipping_address3') }}:</td><td><a href="#" class="updateInfoRequired" data-name="address3" data-type="text" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.address3') }}" >{!! $order->address3 !!}</a></td>
+                    </tr>
+                    @endif
+
                     @if (sc_config_admin('customer_country'))
                     <tr>
                       <td class="td-title">{{ trans('order.country') }}:</td><td><a href="#" class="updateInfoRequired" data-name="country" data-type="select" data-source ="{{ json_encode($country) }}" data-pk="{{ $order->id }}" data-url="{{ route("admin_order.update") }}" data-title="{{ trans('order.country') }}" data-value="{!! $order->country !!}"></a></td>
