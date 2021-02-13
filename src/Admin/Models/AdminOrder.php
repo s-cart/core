@@ -107,7 +107,11 @@ class AdminOrder extends ShopOrder
     {
         $objects = ShopOrderTotal::where('order_id', $orderId)->get()->toArray();
         usort($objects, function ($a, $b) {
-            return $a['sort'] > $b['sort'];
+            if ($a['sort'] > $b['sort']) {
+                return 1;
+            } else {
+                return -1;
+            }
         });
         return $objects;
     }
