@@ -404,6 +404,10 @@ class ShopAccountController extends RootFrontController
             $validate['address2'] = config('validation.customer.address2_required', 'required|string|max:100');
             $dataUpdate['address2'] = $data['address2']??'';
         }
+        if (sc_config('customer_address3')) {
+            $validate['address3'] = config('validation.customer.address3_required', 'required|string|max:100');
+            $dataUpdate['address3'] = $data['address3']??'';
+        }
         if (sc_config('customer_phone')) {
             $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{7,13}$/');
             $dataUpdate['phone'] = $data['phone']??'';
@@ -422,6 +426,7 @@ class ShopAccountController extends RootFrontController
             'first_name.required' => trans('validation.required', ['attribute'=> trans('account.first_name')]),
             'address1.required' => trans('validation.required', ['attribute'=> trans('account.address1')]),
             'address2.required' => trans('validation.required', ['attribute'=> trans('account.address2')]),
+            'address3.required' => trans('validation.required', ['attribute'=> trans('account.address3')]),
             'phone.required' => trans('validation.required', ['attribute'=> trans('account.phone')]),
             'country.required' => trans('validation.required', ['attribute'=> trans('account.country')]),
             'postcode.required' => trans('validation.required', ['attribute'=> trans('account.postcode')]),
@@ -431,6 +436,7 @@ class ShopAccountController extends RootFrontController
             'first_name.max' => trans('validation.max', ['attribute'=> trans('account.first_name')]),
             'address1.max' => trans('validation.max', ['attribute'=> trans('account.address1')]),
             'address2.max' => trans('validation.max', ['attribute'=> trans('account.address2')]),
+            'address3.max' => trans('validation.max', ['attribute'=> trans('account.address3')]),
             'last_name.max' => trans('validation.max', ['attribute'=> trans('account.last_name')]),
         ];
 

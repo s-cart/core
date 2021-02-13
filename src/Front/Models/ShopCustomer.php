@@ -120,6 +120,7 @@ class ShopCustomer extends Authenticatable
             'postcode'        => $dataClean['postcode'] ?? '',
             'address1'        => $dataClean['address1'] ?? '',
             'address2'        => $dataClean['address2'] ?? '',
+            'address3'        => $dataClean['address3'] ?? '',
             'country'         => $dataClean['country'] ?? '',
             'phone'           => $dataClean['phone'] ?? '',
         ];
