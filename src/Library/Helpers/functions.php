@@ -257,7 +257,8 @@ if (!function_exists('sc_route')) {
         if (!config('app.seoLang')) {
             $param = Arr::except($param, ['lang']);
         } else {
-            if (!key_exists('lang', $param) && $name != 'locale' && $name != 'currency' && $name != 'home') {
+            $arrRouteExcludeLanguage = ['home','locale', 'currency', 'banner.click'];
+            if (!key_exists('lang', $param) && !in_array($name, $arrRouteExcludeLanguage)) {
                 $param['lang'] = app()->getLocale();
             }
         }
