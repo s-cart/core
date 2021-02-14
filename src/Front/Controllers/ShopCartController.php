@@ -306,7 +306,7 @@ class ShopCartController extends RootFrontController
             'sex.required'            => trans('validation.required', ['attribute'=> trans('cart.sex')]),
             'birthday.required'       => trans('validation.required', ['attribute'=> trans('cart.birthday')]),
             'email.email'             => trans('validation.email', ['attribute'=> trans('cart.email')]),
-            'phone.regex'             => trans('validation.regex', ['attribute'=> trans('cart.phone')]),
+            'phone.regex'             => trans('customer.phone_regex'),
             'postcode.min'            => trans('validation.min', ['attribute'=> trans('cart.postcode')]),
             'country.min'             => trans('validation.min', ['attribute'=> trans('cart.country')]),
             'first_name.max'          => trans('validation.max', ['attribute'=> trans('cart.first_name')]),

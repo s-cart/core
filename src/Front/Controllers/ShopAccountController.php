@@ -422,22 +422,22 @@ class ShopAccountController extends RootFrontController
         }
 
         $messages = [
-            'last_name.required' => trans('validation.required', ['attribute'=> trans('account.last_name')]),
+            'last_name.required'  => trans('validation.required', ['attribute'=> trans('account.last_name')]),
             'first_name.required' => trans('validation.required', ['attribute'=> trans('account.first_name')]),
-            'address1.required' => trans('validation.required', ['attribute'=> trans('account.address1')]),
-            'address2.required' => trans('validation.required', ['attribute'=> trans('account.address2')]),
-            'address3.required' => trans('validation.required', ['attribute'=> trans('account.address3')]),
-            'phone.required' => trans('validation.required', ['attribute'=> trans('account.phone')]),
-            'country.required' => trans('validation.required', ['attribute'=> trans('account.country')]),
-            'postcode.required' => trans('validation.required', ['attribute'=> trans('account.postcode')]),
-            'phone.regex' => trans('validation.regex', ['attribute'=> trans('account.phone')]),
-            'postcode.min' => trans('validation.min', ['attribute'=> trans('account.postcode')]),
-            'country.min' => trans('validation.min', ['attribute'=> trans('account.country')]),
-            'first_name.max' => trans('validation.max', ['attribute'=> trans('account.first_name')]),
-            'address1.max' => trans('validation.max', ['attribute'=> trans('account.address1')]),
-            'address2.max' => trans('validation.max', ['attribute'=> trans('account.address2')]),
-            'address3.max' => trans('validation.max', ['attribute'=> trans('account.address3')]),
-            'last_name.max' => trans('validation.max', ['attribute'=> trans('account.last_name')]),
+            'address1.required'   => trans('validation.required', ['attribute'=> trans('account.address1')]),
+            'address2.required'   => trans('validation.required', ['attribute'=> trans('account.address2')]),
+            'address3.required'   => trans('validation.required', ['attribute'=> trans('account.address3')]),
+            'phone.required'      => trans('validation.required', ['attribute'=> trans('account.phone')]),
+            'country.required'    => trans('validation.required', ['attribute'=> trans('account.country')]),
+            'postcode.required'   => trans('validation.required', ['attribute'=> trans('account.postcode')]),
+            'phone.regex'         => trans('customer.phone_regex'),
+            'postcode.min'        => trans('validation.min', ['attribute'=> trans('account.postcode')]),
+            'country.min'         => trans('validation.min', ['attribute'=> trans('account.country')]),
+            'first_name.max'      => trans('validation.max', ['attribute'=> trans('account.first_name')]),
+            'address1.max'        => trans('validation.max', ['attribute'=> trans('account.address1')]),
+            'address2.max'        => trans('validation.max', ['attribute'=> trans('account.address2')]),
+            'address3.max'        => trans('validation.max', ['attribute'=> trans('account.address3')]),
+            'last_name.max'       => trans('validation.max', ['attribute'=> trans('account.last_name')]),
         ];
 
         $v = Validator::make(

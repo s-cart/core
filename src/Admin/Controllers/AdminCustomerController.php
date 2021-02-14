@@ -381,7 +381,7 @@ class AdminCustomerController extends RootAdminController
             'phone.required'      => trans('validation.required',['attribute'=> trans('account.phone')]),
             'country.required'    => trans('validation.required',['attribute'=> trans('account.country')]),
             'postcode.required'   => trans('validation.required',['attribute'=> trans('account.postcode')]),
-            'phone.regex'         => trans('validation.regex',['attribute'=> trans('account.phone')]),
+            'phone.regex'         => trans('customer.phone_regex'),
             'postcode.min'        => trans('validation.min',['attribute'=> trans('account.postcode')]),
             'country.min'         => trans('validation.min',['attribute'=> trans('account.country')]),
             'first_name.max'      => trans('validation.max',['attribute'=> trans('account.first_name')]),

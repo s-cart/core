@@ -226,13 +226,13 @@ class ShopContentController extends RootFrontController
             'phone' => 'required|regex:/^0[^0][0-9\-]{7,13}$/',
         ];
         $message = [
-            'name.required' => trans('validation.required', ['attribute' => trans('front.contact_form.name')]),
+            'name.required'    => trans('validation.required', ['attribute' => trans('front.contact_form.name')]),
             'content.required' => trans('validation.required', ['attribute' => trans('front.contact_form.content')]),
-            'title.required' => trans('validation.required', ['attribute' => trans('front.contact_form.title')]),
-            'email.required' => trans('validation.required', ['attribute' => trans('front.contact_form.email')]),
-            'email.email' => trans('validation.email', ['attribute' => trans('front.contact_form.email')]),
-            'phone.required' => trans('validation.required', ['attribute' => trans('front.contact_form.phone')]),
-            'phone.regex' => trans('validation.phone', ['attribute' => trans('front.contact_form.phone')]),
+            'title.required'   => trans('validation.required', ['attribute' => trans('front.contact_form.title')]),
+            'email.required'   => trans('validation.required', ['attribute' => trans('front.contact_form.email')]),
+            'email.email'      => trans('validation.email', ['attribute' => trans('front.contact_form.email')]),
+            'phone.required'   => trans('validation.required', ['attribute' => trans('front.contact_form.phone')]),
+            'phone.regex'      => trans('customer.phone_regex'),
         ];
 
         if(sc_captcha_method() && in_array('contact', sc_captcha_page())) {
