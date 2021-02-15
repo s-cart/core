@@ -202,6 +202,7 @@ class ScartServiceProvider extends ServiceProvider
      */
     protected $routeMiddleware = [
         'localization'     => Front\Middleware\Localization::class,
+        'email.verify'     => Front\Middleware\EmailIsVerified::class,
         'currency'         => Front\Middleware\Currency::class,
         'api.connection'   => Api\Middleware\ApiConnection::class,
         'checkdomain'      => Front\Middleware\CheckDomain::class,

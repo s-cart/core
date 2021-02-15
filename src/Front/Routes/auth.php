@@ -1,13 +1,12 @@
 <?php
 Auth::routes();
-$prefixMember = sc_config('PREFIX_MEMBER') ?? 'customer';
-$langUrl = config('app.seoLang'); 
-
+$prefixCustomer = sc_config('PREFIX_MEMBER') ?? 'customer';
+$langUrl = config('app.seoLang');
 //--Auth
 Route::group(
     [
         'namespace' => 'Auth', 
-        'prefix' => $langUrl.$prefixMember
+        'prefix' => $langUrl.$prefixCustomer,
     ],
     function ($router) use ($suffix) {
         $router->get('/login'.$suffix, 'LoginController@showLoginFormProcessFront')

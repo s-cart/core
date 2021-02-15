@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Auth;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Auth\AuthenticationException;
 
 class ShopCustomer extends Authenticatable
 {
@@ -61,12 +62,13 @@ class ShopCustomer extends Authenticatable
                 '/\{\{\$reset_link\}\}/',
                 '/\{\{\$reset_button\}\}/',
             ];
+            $url = sc_route('password.reset', ['token' => $token]);
             $dataReplace = [
                 trans('email.forgot_password.title'),
                 trans('email.forgot_password.reason_sendmail'),
-                trans('email.forgot_password.note_sendmail', ['site_admin' => config('mail.from.name')]),
-                trans('email.forgot_password.note_access_link', ['reset_button' => trans('email.forgot_password.reset_button')]),
-                sc_route('password.reset', ['token' => $token]),
+                trans('email.forgot_password.note_sendmail', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]),
+                trans('email.forgot_password.note_access_link', ['reset_button' => trans('email.forgot_password.reset_button'), 'url' => $url]),
+                $url,
                 trans('email.forgot_password.reset_button'),
             ];
             $content = preg_replace($dataFind, $dataReplace, $content);
@@ -147,6 +149,77 @@ class ShopCustomer extends Authenticatable
             self::$profile = Auth::user();
         }
         return self::$profile;
+    }
+
+    /**
+     * Check customer has Check if the user is verified
+     *
+     * @return boolean
+     */
+    public function isVerified() {
+        return ! is_null($this->email_verified_at)  || $this->provider_id ;
+    }
+
+    /**
+     * Check customer need verify email
+     *
+     * @return boolean
+     */
+    public function hasVerifiedEmail() {
+        return !$this->isVerified() && sc_config('customer_verify');
+    }
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerify() {
+
+        if ($this->hasVerifiedEmail()) {
+            
+            $url = \Illuminate\Support\Facades\URL::temporarySignedRoute(
+                'customer.verify_process',
+                \Carbon\Carbon::now()->addMinutes(config('auth.verification', 60)),
+                [
+                    'id' => $this->id,
+                    'token' => sha1($this->email),
+                ]
+            );
+
+            $checkContent = (new ShopEmailTemplate)->where('group', 'customer_verify')->where('status', 1)->first();
+            if ($checkContent) {
+                $content = $checkContent->text;
+                $dataFind = [
+                    '/\{\{\$title\}\}/',
+                    '/\{\{\$reason_sendmail\}\}/',
+                    '/\{\{\$note_sendmail\}\}/',
+                    '/\{\{\$note_access_link\}\}/',
+                    '/\{\{\$url_verify\}\}/',
+                    '/\{\{\$button\}\}/',
+                ];
+                $dataReplace = [
+                    trans('email.verification_content.title'),
+                    trans('email.verification_content.reason_sendmail'),
+                    trans('email.verification_content.note_sendmail', ['count' => config('auth.verification')]),
+                    trans('email.verification_content.note_access_link', ['button' => trans('email.verification_content.button'), 'url' => $url]),
+                    $url,
+                    trans('email.verification_content.button'),
+                ];
+                $content = preg_replace($dataFind, $dataReplace, $content);
+                $dataView = [
+                    'content' => $content,
+                ];
+    
+                $config = [
+                    'to' => $this->email,
+                    'subject' => trans('email.verification_content.button'),
+                ];
+    
+                sc_send_mail('templates.' . sc_store('template') . '.mail.customer_verify', $dataView, $config, $dataAtt = []);
+                return true;
+            }
+        } 
+        return false;
     }
 
 }

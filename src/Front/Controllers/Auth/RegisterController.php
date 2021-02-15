@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
+
 class RegisterController extends RootFrontController
 {
     /*
@@ -184,4 +187,82 @@ class RegisterController extends RootFrontController
             )
         );
     }
+
+
+    /**
+     * Handle a registration request for the application.
+     * User for Front
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        if ($user) {
+            if (sc_config('welcome_customer')) {
+
+                $checkContent = (new ShopEmailTemplate)->where('group', 'welcome_customer')->where('status', 1)->first();
+                if ($checkContent) {
+                    $content = $checkContent->text;
+                    $dataFind = [
+                        '/\{\{\$title\}\}/',
+                        '/\{\{\$first_name\}\}/',
+                        '/\{\{\$last_name\}\}/',
+                        '/\{\{\$email\}\}/',
+                        '/\{\{\$phone\}\}/',
+                        '/\{\{\$password\}\}/',
+                        '/\{\{\$address1\}\}/',
+                        '/\{\{\$address2\}\}/',
+                        '/\{\{\$address3\}\}/',
+                        '/\{\{\$country\}\}/',
+                    ];
+                    $dataReplace = [
+                        trans('email.welcome_customer.title'),
+                        $dataMap['first_name'],
+                        $dataMap['last_name'],
+                        $dataMap['email'],
+                        $dataMap['phone'],
+                        $dataMap['password'],
+                        $dataMap['address1'],
+                        $dataMap['address2'],
+                        $dataMap['address3'],
+                        $dataMap['country'],
+                    ];
+                    $content = preg_replace($dataFind, $dataReplace, $content);
+                    $dataView = [
+                        'content' => $content,
+                    ];
+
+                    $config = [
+                        'to' => $data['reg_email'],
+                        'subject' => trans('email.welcome_customer.title'),
+                    ];
+
+                    sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
+                }
+
+            }
+
+            //Send email verify
+            $user->sendEmailVerify();
+
+            //Login
+            $this->guard()->login($user);
+            
+            if ($response = $this->registered($request, $user)) {
+                return $response;
+            }
+
+        } else {
+            return back()->withInput();
+        }
+
+        return $request->wantsJson()
+                    ? new JsonResponse([], 201)
+                    : redirect($this->redirectPath());
+    }
+
+
 }

@@ -251,6 +251,18 @@ class AdminEmailTemplateController extends RootAdminController
                     '$reset_button',
                 ];
                 break;
+
+            case 'customer_verify':
+                $list = [
+                    '$title',
+                    '$reason_sednmail',
+                    '$note_sendmail',
+                    '$note_access_link',
+                    '$url_verify',
+                    '$button',
+                ];
+                break;
+
             case 'contact_to_admin':
                 $list = [
                     '$title',
@@ -287,6 +299,7 @@ class AdminEmailTemplateController extends RootAdminController
             'order_success_to_admin' => trans('email.email_action.order_success_to_admin'),
             'order_success_to_customer' => trans('email.email_action.order_success_to_cutomer'),
             'forgot_password' => trans('email.email_action.forgot_password'),
+            'customer_verify' => trans('email.email_action.customer_verify'),
             'welcome_customer' => trans('email.email_action.welcome_customer'),
             'contact_to_admin' => trans('email.email_action.contact_to_admin'),
             'other' => trans('email.email_action.other'),

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
+use Carbon\Carbon;
 
 class ShopAccountController extends RootFrontController
 {
@@ -490,4 +491,97 @@ class ShopAccountController extends RootFrontController
         return json_encode(['error' => 0, 'msg' => trans('account.delete_address_success')]);
     }
 
+    /**
+     * Process front address update
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function verificationProcessFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_verification();
+    }
+
+    /**
+     * _verification function
+     *
+     * @return void
+     */
+    private function _verification() {
+        $customer = auth()->user();
+        if (!$customer->hasVerifiedEmail()) {
+            return redirect(sc_route('customer.index'));
+        }
+        sc_check_view($this->templatePath . '.account.verify');
+        return view($this->templatePath . '.account.verify')
+            ->with(
+                [
+                    'title' => trans('account.verify_email.title_page'),
+                    'customer' => $customer,
+                ]
+            );
+    }
+
+    /**
+     * Resend email verification
+     *
+     * @return void
+     */
+    public function resendVerification() {
+        $customer = auth()->user();
+        if (!$customer->hasVerifiedEmail()) {
+            return redirect(sc_route('customer.index'));
+        }
+        $resend = $customer->sendEmailVerify();
+
+        if ($resend) {
+            return redirect()->back()->with('resent', true);
+        }
+    }
+
+    /**
+     * Process Verification
+     *
+     * @param [type] $id
+     * @param [type] $token
+     * @return void
+     */
+    public function verificationProcessData(Request $request, $id = null, $token = null) {
+        $arrMsg = [
+            'error' => 0,
+            'msg' => '',
+            'detail' => '',
+        ];
+        $customer = auth()->user();
+        if (!$customer) {
+            $arrMsg = [
+                'error' => 1,
+                'msg' => trans('account.verify_email.link_invalid'),
+            ];
+        } else if ($customer->id != $id) {
+            $arrMsg = [
+                'error' => 1,
+                'msg' => trans('account.verify_email.link_invalid'),
+            ];
+        } else if (sha1($customer->email) != $token) {
+            $arrMsg = [
+                'error' => 1,
+                'msg' => trans('account.verify_email.link_invalid'),
+            ];
+        }
+        if (! $request->hasValidSignature()) {
+            abort(401);
+        }
+        if ($arrMsg['error']) {
+            return redirect(route('home'))->with(['error' => $arrMsg['msg']]);
+        } else {
+            $customer->update(['email_verified_at' => \Carbon\Carbon::now()]);
+            return redirect(sc_route('customer.index'))->with(['message' => trans('account.verify_email.verify_success')]);
+        }
+    }
+    
 }
