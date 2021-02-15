@@ -971,7 +971,7 @@ public function createProductGroup()
             }
         }
 
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_config_global('MultiStorePro') && session('adminStoreId') != 1) {
             $arrValidation['category_store_id'] = 'required';
         }
 
