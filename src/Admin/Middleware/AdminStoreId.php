@@ -16,17 +16,24 @@ class AdminStoreId
      */
     public function handle($request, Closure $next)
     {
-        if(\Admin::user() && count($arrStoreId = \Admin::user()->listStoreId())) {
-            if (!Session::has('adminStoreId')) {
-                if(in_array(0, $arrStoreId)) {
-                    $adminStoreId = $arrStoreId[1];
+        if(\Admin::user()) {
+            $allStoreId = \SCart\Core\Admin\Models\AdminStore::getArrayStoreId();
+            if (!Session::has('adminStoreId') || !in_array(session('adminStoreId'), $allStoreId)) {
+                //Get array list store id of user
+                $arrStoreId = \Admin::user()->listStoreId();
+                //Compare with list Id store
+                $fillterStoreId = array_intersect($arrStoreId, $allStoreId);
+                if ($fillterStoreId) {
+                    $adminStoreId = min($fillterStoreId);
+                    session(['adminStoreId' => $adminStoreId]);
                 } else {
-                    $adminStoreId = $arrStoreId[0];
+                    session(['adminStoreId' => 0]);
+                    //Check access vendor admin
+                    if (function_exists('sc_vendor_check_access_vendor_admin')) {
+                        sc_vendor_check_access_vendor_admin();
+                    }
                 }
-            } else {
-                $adminStoreId = session('adminStoreId');
             }
-            session(['adminStoreId' => $adminStoreId]);
         } else {
             session()->forget('adminStoreId');
         }

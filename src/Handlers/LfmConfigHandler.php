@@ -11,7 +11,7 @@ class LfmConfigHandler extends \UniSharp\LaravelFilemanager\Handlers\ConfigHandl
             return ;
         }
 
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_config_global('MultiVendorPro')) {
             return session('adminStoreId');
         } else {
             return;

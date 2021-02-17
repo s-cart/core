@@ -353,3 +353,22 @@ if (!function_exists('sc_path_download_render')) {
         }
     }
 }
+
+/**
+ * Check store is partner
+ */
+if (!function_exists('sc_store_is_partner')) {
+    function sc_store_is_partner(int $storeId) {
+        $store = \SCart\Core\Admin\Models\AdminStore::find($storeId);
+        return $store->partner || $storeId == SC_ID_ROOT;
+    }
+}
+
+/**
+ * Check store is root
+ */
+if (!function_exists('sc_store_is_root')) {
+    function sc_store_is_root(int $storeId) {
+        return  $storeId == SC_ID_ROOT;
+    }
+}

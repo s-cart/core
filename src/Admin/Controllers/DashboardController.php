@@ -19,9 +19,9 @@ class DashboardController extends RootAdminController
     public function index(Request $request)
     {
         // Check redirect dashboard multi-store
-        if (function_exists('sc_store_redirect_dashboard')) {
-            if (sc_store_redirect_dashboard()) {
-                return redirect(sc_store_redirect_dashboard());
+        if (function_exists('sc_vendor_redirect_dashboard')) {
+            if (sc_vendor_redirect_dashboard()) {
+                return redirect(sc_vendor_redirect_dashboard());
             }
         }
 

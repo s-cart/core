@@ -107,7 +107,7 @@ class ScartServiceProvider extends ServiceProvider
         $storeId = SC_ID_ROOT;
 
         //Process for multi store
-        if(sc_config_global('MultiStorePro')) {
+        if(sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
             $domain = sc_process_domain_store(url('/'));
             $arrDomain = ShopStore::getDomainPartner();
             if (in_array($domain, $arrDomain)) {
@@ -130,8 +130,13 @@ class ScartServiceProvider extends ServiceProvider
         config(['app.name' => sc_store('title')]);
 
         //Config for  email
-        if ($storeId != SC_ID_ROOT && sc_config_global('MultiStorePro')) {
-            // Must use smtp for supplier if use multi-store
+        if (
+            // Default use smtp mode for for supplier if use multi-store
+            ($storeId != SC_ID_ROOT && (sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')))
+            ||
+            // Use smtp config from admin if root domain have smtp_mode enable
+            ($storeId == SC_ID_ROOT && sc_config_global('smtp_mode'))
+            ) {
             config(['mail.default' => 'smtp']);
             $smtpHost     = sc_config('smtp_host');
             $smtpPort     = sc_config('smtp_port');
@@ -144,25 +149,6 @@ class ScartServiceProvider extends ServiceProvider
             config(['mail.mailers.smtp.username' => $smtpUser]);
             config(['mail.mailers.smtp.password' => $smtpPassword]);
         }
-
-        if ($storeId == SC_ID_ROOT) {
-            // Use smtp config from admin if smtp_mode enable
-            if (sc_config_global('smtp_mode')) {
-                config(['mail.default' => 'smtp']);
-                $smtpHost     = sc_config('smtp_host');
-                $smtpPort     = sc_config('smtp_port');
-                $smtpSecurity = sc_config('smtp_security');
-                $smtpUser     = sc_config('smtp_user');
-                $smtpPassword = sc_config('smtp_password');
-                config(['mail.mailers.smtp.host' => $smtpHost]);
-                config(['mail.mailers.smtp.port' => $smtpPort]);
-                config(['mail.mailers.smtp.encryption' => $smtpSecurity]);
-                config(['mail.mailers.smtp.username' => $smtpUser]);
-                config(['mail.mailers.smtp.password' => $smtpPassword]);
-            }
-        }
-
-
         config(
             [
                 'mail.from.address' => sc_store('email'),

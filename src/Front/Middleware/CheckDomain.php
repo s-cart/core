@@ -16,7 +16,7 @@ class CheckDomain
      */
     public function handle($request, Closure $next)
     {
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_config_global('MultiVendorPro')) {
             //Check domain exist
             $domain = sc_process_domain_store(url('/'));
             $arrDomain = ShopStore::getDomainPartner();

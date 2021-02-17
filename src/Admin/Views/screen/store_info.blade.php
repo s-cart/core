@@ -95,7 +95,7 @@
 @endif
 
 
-@if (function_exists('sc_store_is_partner') && sc_store_is_partner($storeId))
+@if (sc_store_is_partner($storeId))
 {{-- Only the partner account can edit this information --}}          
                     <tr>
                       <td><i class="far fa-money-bill-alt nav-icon"></i> {{ trans('store.currency') }}</td>

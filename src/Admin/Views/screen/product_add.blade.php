@@ -167,30 +167,6 @@
                         </div>
                         {{-- //select category --}}
 
-@if (sc_config_global('MultiStorePro'))
-                        {{-- select category_store --}}
-                        <div class="form-group row kind   {{ $errors->has('category_store_id') ? ' text-red' : '' }}">
-                            <label for="category_store_id"
-                                class="col-sm-2 col-form-label">{{ trans('product.category_store') }}</label>
-                            <div class="col-sm-8">
-                                <select class="form-control input-sm category_store_id select2" style="width: 100%;"
-                                    name="category_store_id">
-                                    <option value=""></option>
-                                    @foreach ($categoriesStore as $k => $v)
-                                    <option value="{{ $k }}" {{ (old('category_store_id') == $k) ? 'selected':'' }}>{{ $v }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('category_store_id'))
-                                <span class="form-text">
-                                    <i class="fa fa-info-circle"></i> {{ $errors->first('category_store_id') }}
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                        {{-- //select category_store --}}   
-@endif
-
                         {{-- images --}}
                         <div class="form-group row kind  {{ $errors->has('image') ? ' text-red' : '' }}">
                             <label for="image" class="col-sm-2 col-form-label">

@@ -216,7 +216,7 @@
 
 
                         {{-- select store --}}
-                        @if (sc_config_global('MultiStorePro'))
+                        @if (sc_config_global('MultiVendorPro'))
                             @if (!empty($isAllStore))
                             <label for="store" class="col-sm-2 col-form-label">
                                 {{ trans('store.select_store') }}

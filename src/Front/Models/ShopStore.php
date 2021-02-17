@@ -1,7 +1,8 @@
 <?php
 namespace SCart\Core\Front\Models;
 
-use App\Admin\Models\AdminConfig;
+use SCart\Core\Admin\Models\AdminConfig;
+use SCart\Core\Admin\Models\AdminUserStore;
 use Illuminate\Database\Eloquent\Model;
 class ShopStore extends Model
 {
@@ -13,6 +14,7 @@ class ShopStore extends Model
     protected static $getCodeActive = null;
     protected static $getDomainPartner = null;
     protected static $getListAllActive = null;
+    protected static $arrayStoreId = null;
     protected $connection = SC_CONNECTION;
     
     public function descriptions()
@@ -24,12 +26,6 @@ class ShopStore extends Model
     {
         return $this->hasMany(ShopProduct::class, 'store_id', 'id');
     }
-
-    public function categories()
-    {
-        return $this->hasMany(ShopCategory::class, 'store_id', 'id');
-    }
-
 
     public function banners()
     {
@@ -59,10 +55,10 @@ class ShopStore extends Model
             //Delete store descrition
             $store->descriptions()->delete();
             $store->news()->delete();
-            $store->categories()->delete();
             $store->banners()->delete();
             $store->pages()->delete();
             AdminConfig::where('store_id', $store->id)->delete();
+            AdminUserStore::where('store_id', $store->id)->delete();
         });
     }
 
@@ -147,19 +143,32 @@ class ShopStore extends Model
         return self::$getCodeActive;
     }
 
-        //Function get text description 
-        public function getText() {
-            return $this->descriptions()->where('lang', sc_get_locale())->first();
+    /**
+     * Get array store ID
+     *
+     * @return array
+     */
+    public static function getArrayStoreId()
+    {
+        if (self::$arrayStoreId === null) {
+            self::$arrayStoreId = self::pluck('id')->all();
         }
-        public function getTitle() {
-            return $this->getText()->title;
-        }
-        public function getDescription() {
-            return $this->getText()->description;
-        }
-        public function getKeyword() {
-            return $this->getText()->keyword;
-        }
-        //End  get text description
+        return self::$arrayStoreId;
+    }
+
+    //Function get text description 
+    public function getText() {
+        return $this->descriptions()->where('lang', sc_get_locale())->first();
+    }
+    public function getTitle() {
+        return $this->getText()->title;
+    }
+    public function getDescription() {
+        return $this->getText()->description;
+    }
+    public function getKeyword() {
+        return $this->getText()->keyword;
+    }
+    //End  get text description
 
 }

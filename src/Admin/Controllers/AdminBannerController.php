@@ -19,7 +19,7 @@ class AdminBannerController extends RootAdminController
             'banner-store' => 'Banner store', 
             'other'        => 'Other'
         ];
-        if(sc_config_global('MultiStorePro')) {
+        if(sc_config_global('MultiVendorPro')) {
             $this->dataType['background-store'] = 'Background store';
             $this->dataType['breadcrumb-store'] = 'Breadcrumb store';
         }

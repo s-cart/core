@@ -228,20 +228,12 @@ class AdminProductController extends RootAdminController
         $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
-        if (function_exists('sc_store_get_categories_admin')) {
-            // Dont process in __construct because session 
-            $categoriesStore = sc_store_get_categories_admin();
-        } else {
-            $categoriesStore = [];
-        }
-
         $data = [
             'title'                => trans('product.admin.add_new_title'),
             'subTitle'             => '',
             'title_description'    => trans('product.admin.add_new_des'),
             'icon'                 => 'fa fa-plus',
             'languages'            => $this->languages,
-            'categoriesStore'      => $categoriesStore,
             'categories'           => $this->categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -286,12 +278,6 @@ public function createProductBuild()
     $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control rounded-0 input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
     //end add more images
 
-    if (function_exists('sc_store_get_categories_admin')) {
-        // Dont process in __construct because session 
-        $categoriesStore = sc_store_get_categories_admin();
-    } else {
-        $categoriesStore = [];
-    }
 
     $data = [
         'title'                => trans('product.admin.add_new_title_build'),
@@ -299,7 +285,6 @@ public function createProductBuild()
         'title_description'    => trans('product.admin.add_new_des'),
         'icon'                 => 'fa fa-plus',
         'languages'            => $this->languages,
-        'categoriesStore'      => $categoriesStore,
         'categories'           => $this->categories,
         'brands'               => (new ShopBrand)->getListAll(),
         'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -339,12 +324,6 @@ public function createProductGroup()
     $htmlSelectGroup .= '</div>';
     //End select product group
 
-    if (function_exists('sc_store_get_categories_admin')) {
-        // Dont process in __construct because session 
-        $categoriesStore = sc_store_get_categories_admin();
-    } else {
-        $categoriesStore = [];
-    }
 
     $data = [
         'title'                => trans('product.admin.add_new_title_group'),
@@ -352,7 +331,6 @@ public function createProductGroup()
         'title_description'    => trans('product.admin.add_new_des'),
         'icon'                 => 'fa fa-plus',
         'languages'            => $this->languages,
-        'categoriesStore'      => $categoriesStore,
         'categories'           => $this->categories,
         'brands'               => (new ShopBrand)->getListAll(),
         'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -644,11 +622,7 @@ public function createProductGroup()
         $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
-        if (function_exists('sc_store_get_categories_admin')) {
-            $categoriesStore = sc_store_get_categories_admin();
-        } else {
-            $categoriesStore = [];
-        }
+
         $data = [
             'title'                => trans('product.admin.edit'),
             'subTitle'             => '',
@@ -656,7 +630,6 @@ public function createProductGroup()
             'icon'                 => 'fa fa-edit',
             'languages'            => $this->languages,
             'product'              => $product,
-            'categoriesStore'      => $categoriesStore,
             'categories'           => $this->categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
@@ -969,10 +942,6 @@ public function createProductGroup()
             } else {
                 $arrValidation['supplier_id'] = 'nullable';
             }
-        }
-
-        if (sc_config_global('MultiStorePro') && session('adminStoreId') != 1) {
-            $arrValidation['category_store_id'] = 'required';
         }
 
         if (sc_config_admin('product_price')) {
