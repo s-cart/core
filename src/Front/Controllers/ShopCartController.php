@@ -1167,10 +1167,12 @@ class ShopCartController extends RootFrontController
             return redirect()->route('home');
         }
         sc_check_view($this->templatePath . '.screen.shop_order_success');
+        $dataTotal = ShopOrder::with('details')->find(session('orderID'))->toArray();
         return view(
             $this->templatePath . '.screen.shop_order_success',
             [
                 'title' => trans('order.success.title'),
+                'dataTotal' => $dataTotal,
                 'layout_page' =>'shop_order_success',
             ]
         );
