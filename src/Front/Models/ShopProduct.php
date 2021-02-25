@@ -22,12 +22,13 @@ class ShopProduct extends Model
     protected  $sc_kind = 'all'; // 0:single, 1:bundle, 2:group
     protected  $sc_property = 'all'; // 0:physical, 1:download, 2:only view, 3: Service
     protected  $sc_promotion = 0; // 1: only produc promotion,
-    protected  $sc_store = 0; 
+    protected  $sc_store_id = 0; 
     protected  $sc_category_store = 'all'; 
     protected  $sc_array_ID = []; // array ID product
     protected  $sc_category = []; // array category id
     protected  $sc_brand = []; // array brand id
     protected  $sc_supplier = []; // array supplier id
+    protected static $storeCode = null;
 
     
     public function brand()
@@ -180,7 +181,7 @@ class ShopProduct extends Model
 
         $storeId = empty($storeId) ? config('app.storeId') : $storeId;
 
-        if (config('app.storeId') != 1) {
+        if (config('app.storeId') != SC_ID_ROOT) {
             //If the store is not the primary store
             //Cannot view the product in another store
             $storeId = config('app.storeId');
@@ -434,7 +435,7 @@ class ShopProduct extends Model
      *
      */
     public function setStore($id) {
-        $this->sc_store = (int)$id;
+        $this->sc_store_id = (int)$id;
         return $this;
     }
 
@@ -593,6 +594,7 @@ class ShopProduct extends Model
     public function buildQuery() {
 
         $tableDescription = (new ShopProductDescription)->getTable();
+        $tableStore = (new ShopStore)->getTable();
 
         //description
         $query = $this
@@ -600,7 +602,7 @@ class ShopProduct extends Model
             ->where($tableDescription . '.lang', sc_get_locale());
         //search keyword
         if ($this->sc_keyword !='') {
-            $query = $query->where(function ($sql) use($tableDescription){
+            $query = $query->where(function ($sql) use ($tableDescription) {
                 $sql->where($tableDescription . '.name', 'like', '%' . $this->sc_keyword . '%')
                     ->orWhere($tableDescription . '.keyword', 'like', '%' . $this->sc_keyword . '%')
                     ->orWhere($tableDescription . '.description', 'like', '%' . $this->sc_keyword . '%')
@@ -611,19 +613,20 @@ class ShopProduct extends Model
         //Promotion
         if ($this->sc_promotion == 1) {
             $tablePromotion = (new ShopProductPromotion)->getTable();
-            $query = $query->join($tablePromotion,$this->getTable() . '.id', '=', $tablePromotion . '.product_id')
+            $query = $query->join($tablePromotion, $this->getTable() . '.id', '=', $tablePromotion . '.product_id')
                 ->where($tablePromotion . '.status_promotion', 1)
                 ->where(function ($query) use ($tablePromotion) {
                     $query->where($tablePromotion . '.date_end', '>=', date("Y-m-d"))
                         ->orWhereNull($tablePromotion . '.date_end');
                 })
-                ->where(function ($query) use($tablePromotion){
+                ->where(function ($query) use ($tablePromotion) {
                     $query->where($tablePromotion . '.date_start', '<=', date("Y-m-d"))
                         ->orWhereNull($tablePromotion . '.date_start');
                 });
         }
 
         $query = $query->with('promotionPrice');
+        $query = $query->with('store');
             
 
         if (count($this->sc_category)) {
@@ -631,10 +634,10 @@ class ShopProduct extends Model
             $query = $query->leftJoin($tablePTC, $tablePTC . '.product_id', $this->getTable() . '.id');
             $query = $query->whereIn($tablePTC . '.category_id', $this->sc_category);
         }
-        $storeId = $this->sc_store ? $this->sc_store : config('app.storeId');
+        $storeId = $this->sc_store_id ? $this->sc_store_id : config('app.storeId');
 
         //Process store
-        if (!empty($this->sc_store) || config('app.storeId') != 1) {
+        if (!empty($this->sc_store_id) || config('app.storeId') != 1) {
             //If the store is specified or the default is not the primary store
             //Only get products from eligible stores
             $query = $query->where($this->getTable().'.store_id', $storeId);
@@ -740,5 +743,4 @@ class ShopProduct extends Model
     public function goToStore() {
         return url('store/'.$this->store->code);
     }
-
 }

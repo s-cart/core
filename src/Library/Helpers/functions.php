@@ -359,7 +359,7 @@ if (!function_exists('sc_path_download_render')) {
  */
 if (!function_exists('sc_store_is_partner')) {
     function sc_store_is_partner(int $storeId) {
-        $store = \SCart\Core\Admin\Models\AdminStore::find($storeId);
+        $store = \SCart\Core\Front\Models\ShopStore::find($storeId);
         return $store->partner || $storeId == SC_ID_ROOT;
     }
 }

@@ -43,7 +43,7 @@ Route::group(
             ->name('home.lang');
 
         //Route shop
-        $prefixShop = sc_config('PREFIX_SHOP')??'shop';
+        $prefixShop = sc_config('PREFIX_SHOP') ?? 'shop';
         Route::get($langUrl.$prefixShop, 'ShopContentController@shopProcessFront')
             ->name('shop');
 

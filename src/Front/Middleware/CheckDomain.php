@@ -16,11 +16,11 @@ class CheckDomain
      */
     public function handle($request, Closure $next)
     {
-        if (sc_config_global('MultiVendorPro')) {
+        if (sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
             //Check domain exist
             $domain = sc_process_domain_store(url('/'));
             $arrDomain = ShopStore::getDomainPartner();
-            if (!in_array($domain, $arrDomain) && sc_config_global('domain_strict') ) {
+            if (!in_array($domain, $arrDomain) && sc_config_global('domain_strict') && config('app.storeId') != SC_ID_ROOT) {
                 echo view('deny_domain')->render();
                 exit();
             }
