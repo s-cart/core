@@ -58,7 +58,7 @@ class ShopSupplier extends Model
     }
 
     //Scort
-    public function scopeSort($query, $sortBy = null, $sortOrder = 'desc')
+    public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'sort';
         return $query->orderBy($sortBy, $sortOrder);
