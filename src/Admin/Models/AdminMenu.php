@@ -43,7 +43,7 @@ class AdminMenu extends Model
                 $listVisible[] = $menu;
             } else {
                 $url = sc_url_render($menu->uri);
-                if (\Admin::user()->checkUrlAllowAccess(null)) {
+                if (\Admin::user()->checkUrlAllowAccess($url)) {
                     $listVisible[] = $menu;
                 }
             }
