@@ -42,7 +42,7 @@ class ScartServiceProvider extends ServiceProvider
 
         $this->registerPublishing();
         
-        if (!file_exists(public_path('install.php')) && file_exists(app_path('.env'))) {
+        if (!file_exists(public_path('install.php')) && file_exists(base_path('.env'))) {
             foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
                 require_once $filename;
             }
