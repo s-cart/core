@@ -48,7 +48,7 @@ class AdminConfig extends Model
         if ($onlyActive) {
             $query = $query->where('value', 1);
         }
-        $data = $query->orderBy('sort', 'desc')
+        $data = $query->orderBy('sort', 'asc')
             ->get()->keyBy('key');
         return $data;
     }

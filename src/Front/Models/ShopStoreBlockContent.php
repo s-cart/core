@@ -17,7 +17,7 @@ class ShopStoreBlockContent extends Model
         if (self::$getLayout === null) {
             self::$getLayout = self::where('status', 1)
                 ->where('store_id', config('app.storeId'))
-                ->orderBy('sort', 'desc')
+                ->orderBy('sort', 'asc')
                 ->get()
                 ->groupBy('position');
         }
