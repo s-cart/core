@@ -42,42 +42,42 @@ class ScartServiceProvider extends ServiceProvider
 
         $this->registerPublishing();
         
-    if(!file_exists(public_path('install.php'))) {
-        foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
-            require_once $filename;
-        }
-        foreach (glob(app_path() . '/Library/Helpers/*.php') as $filename) {
-            require_once $filename;
-        }
+        if (!file_exists(public_path('install.php')) && file_exists(app_path('.env'))) {
+            foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
+                require_once $filename;
+            }
+            foreach (glob(app_path() . '/Library/Helpers/*.php') as $filename) {
+                require_once $filename;
+            }
 
-        foreach (glob(app_path() . '/Plugins/*/*/Provider.php') as $filename) {
-            require_once $filename;
-        }
+            foreach (glob(app_path() . '/Plugins/*/*/Provider.php') as $filename) {
+                require_once $filename;
+            }
 
-        $this->bootScart();
+            $this->bootScart();
 
-        //Route Admin
-        if (file_exists($routes = __DIR__.'/Admin/routes.php')) {
-            $this->loadRoutesFrom($routes);
-        }
+            //Route Admin
+            if (file_exists($routes = __DIR__.'/Admin/routes.php')) {
+                $this->loadRoutesFrom($routes);
+            }
 
-        //Route Api
-        if (file_exists($routes = __DIR__.'/Api/routes.php')) {
-            $this->loadRoutesFrom($routes);
-        }
+            //Route Api
+            if (file_exists($routes = __DIR__.'/Api/routes.php')) {
+                $this->loadRoutesFrom($routes);
+            }
 
-        //Route Front
-        if (file_exists($routes = __DIR__.'/Front/routes.php')) {
-            $this->loadRoutesFrom($routes);
-        }
+            //Route Front
+            if (file_exists($routes = __DIR__.'/Front/routes.php')) {
+                $this->loadRoutesFrom($routes);
+            }
 
-        try {
-            DB::connection(SC_CONNECTION)->getPdo();
-        } catch(\Throwable $e) {
-            sc_report($e->getMessage());
-            return;
+            try {
+                DB::connection(SC_CONNECTION)->getPdo();
+            } catch(\Throwable $e) {
+                sc_report($e->getMessage());
+                return;
+            }
         }
-    }
 
         $this->validationExtend();
 
