@@ -14,7 +14,7 @@ class AdminTemplateOnlineController extends RootAdminController
     public function index()
     {
         $arrTemplateLibrary = [];
-        $sc_version = config('s-cart.version');
+        $sc_version = config('s-cart.core');
         $all_version = request('all_version', 0);
         $only_free = request('only_free', 0);
         $sort_download = request('sort_download', 0);
