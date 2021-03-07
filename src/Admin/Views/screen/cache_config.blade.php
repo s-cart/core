@@ -37,7 +37,7 @@
            @if (!in_array($config->key, ['cache_status', 'cache_time']))
            <tr>
             <td>{{ sc_language_render($config->detail) }}</td>
-            <td><input class="check-data-config" data-store=0 type="checkbox" name="{{ $config->key }}"  {{ $config->value?"checked":"" }}></td>
+            <td><input class="check-data-config-global" type="checkbox" name="{{ $config->key }}"  {{ $config->value?"checked":"" }}></td>
             <td>
               <button type="button" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{ trans('cache.config_manager.cache_clear')}}" class="btn btn-flat btn-warning clear-cache" data-clear="{{ $config->key }}">
                 <i class="fas fa-sync-alt"></i> {{ trans('cache.config_manager.cache_clear') }}
@@ -72,7 +72,6 @@
   // Editable
 $(document).ready(function() {
 
-       {{-- $.fn.editable.defaults.mode = 'inline'; --}}
       $.fn.editable.defaults.params = function (params) {
         params._token = "{{ csrf_token() }}";
         return params;
@@ -155,46 +154,40 @@ $('.clear-cache').click(function() {
   });
 });
 
-</script>
 
-    {{-- //Pjax --}}
-   <script src="{{ asset('admin/plugin/jquery.pjax.js')}}"></script>
-
-  <script type="text/javascript">
-
-    $('.grid-refresh').click(function(){
-      $.pjax.reload({container:'#pjax-container'});
-    });
-
-    $(document).on('pjax:send', function() {
-      $('#loading').show()
+$('input.check-data-config-global').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-blue',
+    increaseArea: '20%' /* optional */
+  }).on('ifChanged', function(e) {
+  var isChecked = e.currentTarget.checked;
+  isChecked = (isChecked == false)?0:1;
+  var name = $(this).attr('name');
+    $.ajax({
+      url: '{{ $urlUpdateConfigGlobal }}',
+      type: 'POST',
+      dataType: 'JSON',
+      data: {
+          "_token": "{{ csrf_token() }}",
+          "name": $(this).attr('name'),
+          "value": isChecked
+        },
     })
-    $(document).on('pjax:complete', function() {
-      $('#loading').hide()
-    })
-    $(document).ready(function() {
-    // does current browser support PJAX
-      if ($.support.pjax) {
-        $.pjax.defaults.timeout = 2000; // time in milliseconds
+    .done(function(data) {
+      if(data.error == 0){
+        if (isChecked == 0) {
+          $('#smtp-config').hide();
+        } else {
+          $('#smtp-config').show();
+        }
+        alertJs('success', '{{ trans('admin.msg_change_success') }}');
+      } else {
+        alertJs('error', data.msg);
       }
     });
 
-    {!! $script_sort??'' !!}
-
-  </script>
-    {{-- //End pjax --}}
-
-
-<script type="text/javascript">
-{{-- sweetalert2 --}}
-var selectedRows = function () {
-    var selected = [];
-    $('.grid-row-checkbox:checked').each(function(){
-        selected.push($(this).data('id'));
     });
 
-    return selected;
-}
 
 </script>
 
