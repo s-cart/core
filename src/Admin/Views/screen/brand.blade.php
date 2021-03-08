@@ -123,6 +123,23 @@
             </div>
           </div>
 
+          <div class="form-group row {{ $errors->has('status') ? ' text-red' : '' }}">
+            <label for="status" class="col-sm-2 col-form-label">{!! trans('brand.status') !!}</label>
+            <div class="col-sm-10 ">
+              <div class="input-group mb-3">
+                <input class="checkbox" type="checkbox" id="status" name="status"
+                    class="form-control input {{ $errors->has('status') ? ' is-invalid' : '' }}" placeholder="" {!!
+                      old('status',(empty($brand['status'])?0:1))?'checked':''!!}/>
+              </div>
+
+              @if ($errors->has('status'))
+              <span class="text-sm">
+                <i class="fa fa-info-circle"></i> {{ $errors->first('status') }}
+              </span>
+              @endif
+
+            </div>
+          </div>
 
         </div>
         <!-- /.card-body -->
