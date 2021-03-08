@@ -137,24 +137,22 @@ class ScartServiceProvider extends ServiceProvider
             // Use smtp config from admin if root domain have smtp_mode enable
             ($storeId == SC_ID_ROOT && sc_config_global('smtp_mode'))
             ) {
-            config(['mail.default' => 'smtp']);
             $smtpHost     = sc_config('smtp_host');
             $smtpPort     = sc_config('smtp_port');
             $smtpSecurity = sc_config('smtp_security');
             $smtpUser     = sc_config('smtp_user');
             $smtpPassword = sc_config('smtp_password');
-            config(['mail.mailers.smtp.host' => $smtpHost]);
-            config(['mail.mailers.smtp.port' => $smtpPort]);
+            $smtpName     = sc_config('smtp_name');
+            $smtpFrom     = sc_config('smtp_from');
+            config(['mail.default'                 => 'smtp']);
+            config(['mail.mailers.smtp.host'       => $smtpHost]);
+            config(['mail.mailers.smtp.port'       => $smtpPort]);
             config(['mail.mailers.smtp.encryption' => $smtpSecurity]);
-            config(['mail.mailers.smtp.username' => $smtpUser]);
+            config(['mail.mailers.smtp.username'   => $smtpUser]);
             config(['mail.mailers.smtp.password' => $smtpPassword]);
+            config(['mail.from.address' => ($smtpFrom ?? sc_store('email'))]);
+            config(['mail.from.name' => ($smtpName ?? sc_store('title'))]);
         }
-        config(
-            [
-                'mail.from.address' => sc_store('email'),
-                'mail.from.name' => sc_store('title')
-            ]
-        );
         //email
 
         // Time zone
