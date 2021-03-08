@@ -29,7 +29,7 @@ class ShopBanner extends Model
         return sc_image_get_path($this->image);
 
     }
-//Scort
+    //Scort
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'sort';
@@ -71,7 +71,7 @@ class ShopBanner extends Model
     /**
      * Set type
      */
-    private function setType($type) {
+    public function setType($type) {
         $this->sc_type = $type;
         return $this;
     }
