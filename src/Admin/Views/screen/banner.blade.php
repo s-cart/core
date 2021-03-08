@@ -164,14 +164,35 @@
 @endsection
 
 @push('styles')
-
+<link rel="stylesheet" href="{{ asset('admin/plugin/mirror/doc/docs.css')}}">
+<link rel="stylesheet" href="{{ asset('admin/plugin/mirror/lib/codemirror.css')}}">
 @endpush
 
 @push('scripts')
-
-
-
-<script type="text/javascript">
-</script>
+<script src="{{ asset('admin/plugin/mirror/lib/codemirror.js')}}"></script>
+<script src="{{ asset('admin/plugin/mirror/mode/javascript/javascript.js')}}"></script>
+<script src="{{ asset('admin/plugin/mirror/mode/css/css.js')}}"></script>
+<script src="{{ asset('admin/plugin/mirror/mode/htmlmixed/htmlmixed.js')}}"></script>
+<script>
+    window.onload = function() {
+      editor = CodeMirror(document.getElementById("html"), {
+        mode: "text/html",
+        value: document.documentElement.innerHTML
+      });
+    };
+    var myModeSpec = {
+    name: "htmlmixed",
+    tags: {
+        style: [["type", /^text\/(x-)?scss$/, "text/x-scss"],
+                [null, null, "css"]],
+        custom: [[null, null, "customMode"]]
+    }
+    }
+    var editor = CodeMirror.fromTextArea(document.getElementById("html"), {
+      lineNumbers: true,
+      styleActiveLine: true,
+      matchBrackets: true
+    });
+  </script>
 
 @endpush
