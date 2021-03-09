@@ -1,7 +1,6 @@
 <?php
 Route::group(['prefix' => 'language'], function () {
     Route::get('/', 'AdminLanguageController@index')->name('admin_language.index');
-    Route::get('index', 'AdminLanguageController@create')->name('admin_language.create');
     Route::get('create', function () {
         return redirect()->route('admin_language.index');
     });
