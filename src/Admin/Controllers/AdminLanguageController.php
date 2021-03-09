@@ -218,8 +218,8 @@ public function edit($id)
     }
 
 /*
-Delete list item
-Need mothod destroy to boot deleting in model
+    Delete list item
+    Need mothod destroy to boot deleting in model
  */
     public function deleteList()
     {

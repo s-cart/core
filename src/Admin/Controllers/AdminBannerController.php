@@ -4,6 +4,7 @@ namespace SCart\Core\Admin\Controllers;
 use App\Http\Controllers\RootAdminController;
 use Validator;
 use SCart\Core\Admin\Models\AdminBanner;
+use SCart\Core\Front\Models\ShopBannerType;
 class AdminBannerController extends RootAdminController
 {
     protected $arrTarget;
@@ -12,13 +13,7 @@ class AdminBannerController extends RootAdminController
     {
         parent::__construct();
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
-        $this->dataType  = [
-            'banner'       => 'Banner website',
-            'background'   => 'Background website', 
-            'breadcrumb'   => 'Breadcrumb website', 
-            'banner-store' => 'Banner store', 
-            'other'        => 'Other'
-        ];
+        $this->dataType  = (new ShopBannerType)->pluck('name', 'code')->all();
         if(sc_config_global('MultiVendorPro')) {
             $this->dataType['background-store'] = 'Background store';
             $this->dataType['breadcrumb-store'] = 'Breadcrumb store';
@@ -98,6 +93,9 @@ class AdminBannerController extends RootAdminController
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_banner.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
         <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           </a>
+                           <a href="' . sc_route_admin('admin_banner_type.index') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
+                           <i class="fa fa-search-plus" aria-hidden="true"></i>
                            </a>';
         //=menuRight
 
