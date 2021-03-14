@@ -166,6 +166,7 @@ class AdminBannerController extends RootAdminController
         $dataInsert = [
             'image'    => $data['image'],
             'url'      => $data['url'],
+            'title'    => $data['title'],
             'html'     => $data['html'],
             'type'     => $data['type'] ?? 0,
             'target'   => $data['target'],
@@ -229,6 +230,7 @@ class AdminBannerController extends RootAdminController
         $dataUpdate = [
             'image'    => $data['image'],
             'url'      => $data['url'],
+            'title'    => $data['title'],
             'html'     => $data['html'],
             'type'     => $data['type'] ?? 0,
             'target'   => $data['target'],

@@ -275,7 +275,7 @@ class ShopProduct extends Model
     }
 
 
-//Scort
+    //Scort
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'id';

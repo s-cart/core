@@ -65,6 +65,26 @@
                             </div>
 
 
+                            <div class="form-group  row {{ $errors->has('title') ? ' text-red' : '' }}">
+                                <label for="title" class="col-sm-2 col-form-label">{{ trans('banner.title') }}</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                                            </div>
+                                        </div>
+                                        <input type="text" id="title" name="title" value="{{ old()?old('title'):$banner['title']??'' }}" class="form-control" placeholder="" />
+                                    </div>
+                                        @if ($errors->has('title'))
+                                            <span class="form-text">
+                                                <i class="fa fa-info-circle"></i> {{ $errors->first('title') }}
+                                            </span>
+                                        @endif
+                                </div>
+                            </div>
+
+
                             <div class="form-group row {{ $errors->has('target') ? ' text-red' : '' }}">
                                     <label for="target" class="col-sm-2 col-form-label">{{ trans('banner.admin.select_target') }}</label>
                                     <div class="col-sm-8">
