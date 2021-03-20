@@ -1,6 +1,6 @@
 <?php
 
-namespace SCart\Core\Admin\Controllers;
+namespace App\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminNews;

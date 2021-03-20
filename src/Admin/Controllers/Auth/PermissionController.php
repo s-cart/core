@@ -1,5 +1,5 @@
 <?php
-namespace SCart\Core\Admin\Controllers\Auth;
+namespace App\Admin\Controllers\Auth;
 
 use SCart\Core\Admin\Models\AdminPermission;
 use App\Http\Controllers\RootAdminController;
