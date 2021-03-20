@@ -23,7 +23,7 @@
   "autoload": {
       "psr-4": {
          "SCart\\Core\\": "src/",
-         "App\\Admin\\Controllers": "src/Publishing/Admin/Controllers",
+         "App\\Admin\\Controllers\\": "src/Publishing/Admin/Controllers",
       }
   },
   "extra": {
