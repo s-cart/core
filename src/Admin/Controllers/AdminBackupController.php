@@ -1,5 +1,5 @@
 <?php
-namespace App\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use Illuminate\Support\Facades\Artisan;

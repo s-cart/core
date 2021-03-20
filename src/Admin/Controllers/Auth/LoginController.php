@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controllers\Auth;
+namespace SCart\Core\Admin\Controllers\Auth;
 
 use SCart\Core\Admin\Admin;
 use SCart\Core\Admin\Models\AdminPermission;

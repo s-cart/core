@@ -1,5 +1,5 @@
 <?php
-namespace App\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Models\AdminLog;
 use SCart\Core\Admin\Models\AdminUser;

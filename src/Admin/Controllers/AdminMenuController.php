@@ -1,5 +1,5 @@
 <?php
-namespace App\Admin\Controllers;
+namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Models\AdminMenu;
 use App\Http\Controllers\RootAdminController;
