@@ -34,6 +34,7 @@ class Customize extends Command
             case 'admin':
                 $this->call('vendor:publish', ['--tag' => 'sc:config-admin']);
                 $this->call('vendor:publish', ['--tag' => 'sc:view-admin']);
+                $this->call('vendor:publish', ['--tag' => 'sc:controller-admin']);
                 break;
             
             case 'validation':
