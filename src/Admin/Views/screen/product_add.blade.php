@@ -280,7 +280,7 @@
                         {{-- select brand --}}
                         <div class="form-group row kind   {{ $errors->has('brand_id') ? ' text-red' : '' }}">
                             <label for="brand_id"
-                                class="col-sm-2 col-form-label">{{ trans('product.brand') }} (<a href="{{ sc_route_admin('admin_branch.index') }}"><i class="fas fa-university" aria-hidden="true"></i></a>)</label>
+                                class="col-sm-2 col-form-label">{{ trans('product.brand') }} (<a href="{{ sc_route_admin('admin_brand.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm brand_id select2" style="width: 100%;"
                                     name="brand_id">
@@ -304,7 +304,7 @@
                         {{-- select supplier --}}
                         <div class="form-group row kind   {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
                             <label for="supplier_id"
-                                class="col-sm-2 col-form-label">{{ trans('product.supplier') }} (<a href="{{ sc_route_admin('admin_supplier.index') }}"><i class="fas fa-user-secret" aria-hidden="true"></i></a>)</label>
+                                class="col-sm-2 col-form-label">{{ trans('product.supplier') }} (<a href="{{ sc_route_admin('admin_supplier.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm supplier_id select2" style="width: 100%;"
                                     name="supplier_id">
@@ -380,7 +380,7 @@
                             <div class="col-sm-8">
                                 <select class="form-control input-sm tax_id select2" style="width: 100%;"
                                     name="tax_id">
-                                    <option value="0" {{ (old('tax_id') == 0) ? 'selected':'' }}>{{ trans('tax.admin.non_tax') }} (<a href="{{ sc_route_admin('admin_tax.index') }}"><i class="far fa-calendar-minus" aria-hidden="true"></i></a>)</option>
+                                    <option value="0" {{ (old('tax_id') == 0) ? 'selected':'' }}>{{ trans('tax.admin.non_tax') }} (<a href="{{ sc_route_admin('admin_tax.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</option>
                                     <option value="auto" {{ (old('tax_id') == 'auto') ? 'selected':'' }}>{{ trans('tax.admin.auto') }}</option>
                                     @foreach ($taxs as $k => $v)
                                     <option value="{{ $k }}" {{ (old('tax_id') ==$k) ? 'selected':'' }}>{{ $v->name }}
@@ -489,7 +489,7 @@
 @if (sc_config_admin('product_weight'))
                         {{-- weight --}}
                         <div class="form-group row kind    {{ $errors->has('weight_class') ? ' text-red' : '' }}">
-                            <label for="weight_class" class="col-sm-2 col-form-label">{{ trans('product.weight_class') }} (<a href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fas fa-balance-scale" aria-hidden="true"></i></a>)</label>
+                            <label for="weight_class" class="col-sm-2 col-form-label">{{ trans('product.weight_class') }} (<a href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm weight_class select2" style="width: 100%;"
                                     name="weight_class">
@@ -534,7 +534,7 @@
 @if (sc_config_admin('product_length'))
                         {{-- length --}}
                         <div class="form-group row kind    {{ $errors->has('length_class') ? ' text-red' : '' }}">
-                            <label for="length_class" class="col-sm-2 col-form-label">{{ trans('product.length_class') }} (<a href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fas fa-minus" aria-hidden="true"></i></a>)</label>
+                            <label for="length_class" class="col-sm-2 col-form-label">{{ trans('product.length_class') }} (<a href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm length_class select2" style="width: 100%;"
                                     name="length_class">
@@ -617,7 +617,7 @@
 @if (sc_config_admin('product_property'))
                         {{-- property --}}
                         <div class="form-group row kind   {{ $errors->has('property') ? ' text-red' : '' }}">
-                            <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }} (<a href="{{ sc_route_admin('admin_product_property.index') }}"><i class="fa fa-sign-language" aria-hidden="true"></i></a>)</label>
+                            <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }} (<a href="{{ sc_route_admin('admin_product_property.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 @foreach ( $properties as $key => $property)
                                 <div class="icheck-primary d-inline">
@@ -740,7 +740,7 @@
                         <hr class="kind ">
                         <div class="form-group kind  row">
                             <div class="col-sm-2">
-                                <label>{{ trans('product.attribute') }} (<a href="{{ sc_route_admin('admin_attribute_group.index') }}"><i class="fas fa-bars nav-icon" aria-hidden="true"></i></a>)</label>
+                                <label>{{ trans('product.attribute') }} (<a href="{{ sc_route_admin('admin_attribute_group.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             </div>
                             <div class="col-sm-8">
                                 @foreach ($attributeGroup as $attGroupId => $attName)

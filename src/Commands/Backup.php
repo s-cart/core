@@ -47,7 +47,7 @@ class Backup extends Command
             $userName = config('database.connections.'.SC_CONNECTION.'.username');
             $password = config('database.connections.'.SC_CONNECTION.'.password');
             $host = config('database.connections.'.SC_CONNECTION.'.host');
-            $pathMysqlBin = env('PATH_MYSQL_BIN'); // C:\xampp\mysql\bin
+            $pathMysqlBin = config('database.connections.'.SC_CONNECTION.'.path_mysql_bin');// C:\xampp\mysql\bin
             $includeTables = explode(',', $includeTables);
             $excludeTables = explode(',', $excludeTables);
 

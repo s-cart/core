@@ -299,7 +299,7 @@
 @if (sc_config_admin('product_brand') && ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD))
                         {{-- Brand --}}
                         <div class="form-group row kind kind0 kind1 {{ $errors->has('brand_id') ? ' text-red' : '' }}">
-                            <label for="brand_id" class="col-sm-2 col-form-label">{{ trans('product.brand') }} (<a href="{{ sc_route_admin('admin_branch.index') }}"><i class="fas fa-university" aria-hidden="true"></i></a>)</label>
+                            <label for="brand_id" class="col-sm-2 col-form-label">{{ trans('product.brand') }} (<a href="{{ sc_route_admin('admin_brand.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control brand_id select2" style="width: 100%;"
                                     name="brand_id">
@@ -323,7 +323,7 @@
 @if (sc_config_admin('product_supplier') && ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD))
                         {{-- Brand --}}
                         <div class="form-group row kind kind0 kind1 {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
-                            <label for="supplier_id" class="col-sm-2 col-form-label">{{ trans('product.supplier') }} (<a href="{{ sc_route_admin('admin_supplier.index') }}"><i class="fas fa-user-secret" aria-hidden="true"></i></a>)</label>
+                            <label for="supplier_id" class="col-sm-2 col-form-label">{{ trans('product.supplier') }} (<a href="{{ sc_route_admin('admin_supplier.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control supplier_id select2" style="width: 100%;"
                                     name="supplier_id">
@@ -397,7 +397,7 @@
                     @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
                         {{-- Tax --}}
                         <div class="form-group row {{ $errors->has('tax_id') ? ' text-red' : '' }}">
-                            <label for="tax_id" class="col-sm-2 col-form-label">{{ trans('product.tax') }} (<a href="{{ sc_route_admin('admin_tax.index') }}"><i class="far fa-calendar-minus" aria-hidden="true"></i></a>)</label>
+                            <label for="tax_id" class="col-sm-2 col-form-label">{{ trans('product.tax') }} (<a href="{{ sc_route_admin('admin_tax.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control tax_id select2" style="width: 100%;"
                                     name="tax_id">
@@ -523,7 +523,7 @@
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
 
                         <div class="form-group row {{ $errors->has('weight_class') ? ' text-red' : '' }}">
-                            <label for="weight_class" class="col-sm-2 col-form-label">{{ trans('product.weight_class') }} (<a href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fas fa-balance-scale" aria-hidden="true"></i></a>)</label>
+                            <label for="weight_class" class="col-sm-2 col-form-label">{{ trans('product.weight_class') }} (<a href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control weight_class select2" style="width: 100%;"
                                     name="weight_class">
@@ -572,7 +572,7 @@
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
 
                         <div class="form-group row {{ $errors->has('length_class') ? ' text-red' : '' }}">
-                            <label for="length_class" class="col-sm-2 col-form-label">{{ trans('product.length_class') }} (<a href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fas fa-minus" aria-hidden="true"></i></a>)</label>
+                            <label for="length_class" class="col-sm-2 col-form-label">{{ trans('product.length_class') }} (<a href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control length_class select2" style="width: 100%;"
                                     name="length_class">
@@ -658,7 +658,7 @@
                         {{-- Virtual --}}
                         @if ($product->kind == SC_PRODUCT_SINGLE)
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('property') ? ' text-red' : '' }}">
-                            <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }} (<a href="{{ sc_route_admin('admin_product_property.index') }}"><i class="fa fa-sign-language" aria-hidden="true"></i></a>)</label>
+                            <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }} (<a href="{{ sc_route_admin('admin_product_property.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 @foreach ( $properties as $key => $property)
                                 <div class="icheck-primary d-inline">
@@ -904,7 +904,7 @@
                         @if (!empty($attributeGroup))
                         <div class="form-group row">
                             <div class="col-sm-2">
-                                <label>{{ trans('product.attribute') }} (<a href="{{ sc_route_admin('admin_attribute_group.index') }}"><i class="fas fa-bars nav-icon" aria-hidden="true"></i></a>)</label>
+                                <label>{{ trans('product.attribute') }} (<a href="{{ sc_route_admin('admin_attribute_group.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             </div>
                             <div class="col-sm-8">
 
