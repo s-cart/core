@@ -8,7 +8,7 @@
                 <h2 class="card-title">{{ $title_description??'' }}</h2>
                 <div class="card-tools">
                     <div class="btn-group float-right mr-5">
-                        <a href="{{ sc_route_admin('admin_product.index') }}" class="btn  btn-flat btn-default" title="List">
+                        <a target=_new href="{{ sc_route_admin('admin_product.index') }}" class="btn  btn-flat btn-default" title="List">
                             <i class="fa fa-list"></i><span class="hidden-xs"> {{trans('admin.back_list')}}</span>
                         </a>
                     </div>
@@ -280,7 +280,7 @@
                         {{-- select brand --}}
                         <div class="form-group row kind   {{ $errors->has('brand_id') ? ' text-red' : '' }}">
                             <label for="brand_id"
-                                class="col-sm-2 col-form-label">{{ trans('product.brand') }} (<a href="{{ sc_route_admin('admin_brand.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                                class="col-sm-2 col-form-label">{{ trans('product.brand') }} (<a target=_new href="{{ sc_route_admin('admin_brand.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm brand_id select2" style="width: 100%;"
                                     name="brand_id">
@@ -304,7 +304,7 @@
                         {{-- select supplier --}}
                         <div class="form-group row kind   {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
                             <label for="supplier_id"
-                                class="col-sm-2 col-form-label">{{ trans('product.supplier') }} (<a href="{{ sc_route_admin('admin_supplier.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                                class="col-sm-2 col-form-label">{{ trans('product.supplier') }} (<a target=_new href="{{ sc_route_admin('admin_supplier.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm supplier_id select2" style="width: 100%;"
                                     name="supplier_id">
@@ -380,7 +380,7 @@
                             <div class="col-sm-8">
                                 <select class="form-control input-sm tax_id select2" style="width: 100%;"
                                     name="tax_id">
-                                    <option value="0" {{ (old('tax_id') == 0) ? 'selected':'' }}>{{ trans('tax.admin.non_tax') }} (<a href="{{ sc_route_admin('admin_tax.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</option>
+                                    <option value="0" {{ (old('tax_id') == 0) ? 'selected':'' }}>{{ trans('tax.admin.non_tax') }} (<a target=_new href="{{ sc_route_admin('admin_tax.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</option>
                                     <option value="auto" {{ (old('tax_id') == 'auto') ? 'selected':'' }}>{{ trans('tax.admin.auto') }}</option>
                                     @foreach ($taxs as $k => $v)
                                     <option value="{{ $k }}" {{ (old('tax_id') ==$k) ? 'selected':'' }}>{{ $v->name }}
@@ -489,7 +489,7 @@
 @if (sc_config_admin('product_weight'))
                         {{-- weight --}}
                         <div class="form-group row kind    {{ $errors->has('weight_class') ? ' text-red' : '' }}">
-                            <label for="weight_class" class="col-sm-2 col-form-label">{{ trans('product.weight_class') }} (<a href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="weight_class" class="col-sm-2 col-form-label">{{ trans('product.weight_class') }} (<a target=_new href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm weight_class select2" style="width: 100%;"
                                     name="weight_class">
@@ -534,7 +534,7 @@
 @if (sc_config_admin('product_length'))
                         {{-- length --}}
                         <div class="form-group row kind    {{ $errors->has('length_class') ? ' text-red' : '' }}">
-                            <label for="length_class" class="col-sm-2 col-form-label">{{ trans('product.length_class') }} (<a href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="length_class" class="col-sm-2 col-form-label">{{ trans('product.length_class') }} (<a target=_new href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm length_class select2" style="width: 100%;"
                                     name="length_class">
@@ -617,11 +617,11 @@
 @if (sc_config_admin('product_property'))
                         {{-- property --}}
                         <div class="form-group row kind   {{ $errors->has('property') ? ' text-red' : '' }}">
-                            <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }} (<a href="{{ sc_route_admin('admin_product_property.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="property" class="col-sm-2 col-form-label">{{ trans('product.property') }} (<a target=_new href="{{ sc_route_admin('admin_product_property.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 @foreach ( $properties as $key => $property)
                                 <div class="icheck-primary d-inline">
-                                    <input type="radio" id="radioPrimary{{ $key }}" name="property" value="{{ $key }}" {{ ((!old() && $key ==0) || old('property') == $key)?'checked':'' }}>
+                                    <input type="radio" id="radioPrimary{{ $key }}" name="property" value="{{ $key }}" {{ ((!old() && $key == SC_PROPERTY_PHYSICAL) || old('property') == $key)?'checked':'' }}>
                                     <label for="radioPrimary{{ $key }}">
                                         {{ $property }}
                                     </label>
@@ -740,7 +740,7 @@
                         <hr class="kind ">
                         <div class="form-group kind  row">
                             <div class="col-sm-2">
-                                <label>{{ trans('product.attribute') }} (<a href="{{ sc_route_admin('admin_attribute_group.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                                <label>{{ trans('product.attribute') }} (<a target=_new href="{{ sc_route_admin('admin_attribute_group.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             </div>
                             <div class="col-sm-8">
                                 @foreach ($attributeGroup as $attGroupId => $attName)
@@ -777,6 +777,67 @@
                         @endif
                         {{-- //end List product attributes --}}
 @endif
+
+
+
+
+{{-- Custom fields --}}
+@if ($customFields)
+                <hr class="kind ">
+                <label>{{ trans('custom_field.admin.title') }} (<a target=_new href="{{ sc_route_admin('admin_custom_field.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                    @foreach ($customFields as $keyField => $field)
+                    @php
+                        $default  = json_decode($field->default, true)
+                    @endphp
+                    <div class="form-group row kind   {{ $errors->has('fields.'.$field->code) ? ' text-red' : '' }}">
+                        <label for="{{ $field->code }}" class="col-sm-2 col-form-label">{{ sc_language_render($field->name) }}</label>
+                        
+                        <div class="col-sm-8">
+                            @if ($field->option == 'radio')
+                                @if ($default)
+                                @foreach ($default as $key => $name)
+                                <div class="icheck-primary d-inline">
+                                    <input type="radio" id="{{ $keyField.'__'.$key }}" name="fields[{{ $field->code }}]" value="{{ $key }}" {{ (old('fields.'.$field->code) == $key)?'checked':'' }}>
+                                    <label for="{{ $keyField.'__'.$key }}">
+                                        {{ $name }}
+                                    </label>
+                                </div>
+                                @endforeach
+                                @endif
+                            @elseif($field->option == 'select')
+                                @if ($default)
+                                <select class="form-control input-sm {{ $field->code }}" style="width: 100%;"
+                                name="fields[{{ $field->code }}]">
+                                <option value=""></option>
+                                @foreach ($default as $key => $name)
+                                <option value="{{ $key }}" {{ (old('fields.'.$field->code) == $key) ? 'selected':'' }}>{{ $name }}
+                                </option>
+                                @endforeach
+                                </select>
+                                @endif
+                            @else
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                                    </div>
+                                    <input type="text" id="field_{{ $field->code }}" name="fields[{{ $field->code }}]"
+                                        value="{{ old('fields.'.$field->code) }}"
+                                        class="form-control input-sm {{ $field->code }}" placeholder="" />
+                                </div>
+                            @endif
+
+                            @if ($errors->has('fields.'.$field->code))
+                            <span class="form-text">
+                                <i class="fa fa-info-circle"></i> {{ $errors->first('fields.'.$field->code) }}
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
+@endif
+{{-- //Custom fields --}}
+
+
 
                 </div>
 

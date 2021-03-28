@@ -15,6 +15,8 @@ use SCart\Core\Front\Models\ShopProductImage;
 use SCart\Core\Front\Models\ShopSupplier;
 use SCart\Core\Front\Models\ShopProductDownload;
 use SCart\Core\Front\Models\ShopProductProperty;
+use SCart\Core\Front\Models\ShopCustomField;
+use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use SCart\Core\Admin\Models\AdminProduct;
 use SCart\Core\Admin\Models\AdminCategory;
 use Illuminate\Support\Facades\Validator;
@@ -240,7 +242,8 @@ class AdminProductController extends RootAdminController
             'htmlMoreImage'        => $htmlMoreImage,
             'htmlProductAtrribute' => $htmlProductAtrribute,
             'listWeight'           => $this->listWeight,
-            'listLength'           => $this->listLength, 
+            'listLength'           => $this->listLength,
+            'customFields'         => (new ShopCustomField)->getCustomField($type = 'product'),
         ];
 
         return view($this->templatePathAdmin.'screen.product_add')
@@ -373,6 +376,16 @@ public function createProductGroup()
                     'sku'                        => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|product_sku_unique',
                     'alias'                      => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:120|product_alias_unique',
                 ];
+
+                //Custom fields
+                $customFields = (new ShopCustomField)->getCustomField($type = 'product');
+                if ($customFields) {
+                    foreach ($customFields as $field) {
+                        if ($field->required) {
+                            $arrValidation['fields.'.$field->code] = 'required';
+                        }
+                    }
+                }
 
                 $arrValidation = $this->validateAttribute($arrValidation);
                 
@@ -546,6 +559,25 @@ public function createProductGroup()
             (new ShopProductDownload)->insert(['product_id' => $product->id, 'path' => $downloadPath]);
         }
 
+        //Insert custom fields
+        if ($data['fields']) {
+            $dataField = [];
+            foreach ($data['fields'] as $key => $value) {
+                $field = (new ShopCustomField)->where('code', $key)->where('type', 'product')->first();
+                if ($field) {
+                    $dataField[] = [
+                        'custom_field_id' => $field->id,
+                        'rel_id' => $product->id,
+                        'text' => $value,
+                    ];
+                }
+            }
+            if ($dataField) {
+                (new ShopCustomFieldDetail)->insert($dataField);
+            }
+        }
+
+
         //Insert description
         $dataDes = [];
         $languages = $this->languages;
@@ -638,7 +670,8 @@ public function createProductGroup()
             'listProductSingle'    => $listProductSingle,
             'htmlProductAtrribute' => $htmlProductAtrribute,
             'listWeight'           => $this->listWeight,
-            'listLength'           => $this->listLength,  
+            'listLength'           => $this->listLength,
+            'customFields'         => (new ShopCustomField)->getCustomField($type = 'product'),
 
         ];
         return view($this->templatePathAdmin.'screen.product_edit')
@@ -673,6 +706,16 @@ public function createProductGroup()
                     'sku' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|product_sku_unique:'.$id,
                     'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:120|product_alias_unique:'.$id,
                 ];
+
+                //Custom fields
+                $customFields = (new ShopCustomField)->getCustomField($type = 'product');
+                if ($customFields) {
+                    foreach ($customFields as $field) {
+                        if ($field->required) {
+                            $arrValidation['fields.'.$field->code] = 'required';
+                        }
+                    }
+                }
 
                 $arrValidation = $this->validateAttribute($arrValidation);
 
@@ -780,6 +823,34 @@ public function createProductGroup()
             $dataUpdate['date_available'] = $data['date_available'];
         }
         $product->update($dataUpdate);
+
+
+        //Update custom field
+        if ($data['fields']) {
+            (new ShopCustomFieldDetail)
+                ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+                ->select('code', 'name', 'text')
+                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $product->id)
+                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
+                ->delete();
+
+            $dataField = [];
+            foreach ($data['fields'] as $key => $value) {
+                $field = (new ShopCustomField)->where('code', $key)->where('type', 'product')->first();
+                if ($field) {
+                    $dataField[] = [
+                        'custom_field_id' => $field->id,
+                        'rel_id' => $product->id,
+                        'text' => $value,
+                    ];
+                }
+            }
+            if ($dataField) {
+                (new ShopCustomFieldDetail)->insert($dataField);
+            }
+        }
+
+
 
         //Promoton price
         $product->promotionPrice()->delete();

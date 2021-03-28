@@ -2,6 +2,7 @@
 
 namespace SCart\Core\Front\Controllers\Auth;
 use SCart\Core\Front\Models\ShopCustomer;
+use SCart\Core\Front\Models\ShopCustomField;
 use SCart\Core\Front\Models\ShopCountry;
 
 /**
@@ -223,6 +224,16 @@ trait AuthTrait
             'email' => config('validation.customer.email', 'required|string|email|max:255').'|unique:"'.ShopCustomer::class.'",email',
             'password' => config('validation.customer.password', 'nullable|string|min:6'),
         ];
+
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'customer');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $validate['fields.'.$field->code] = 'required';
+                }
+            }
+        }
 
         if (sc_config('customer_lastname')) {
             if (sc_config('customer_lastname_required')) {

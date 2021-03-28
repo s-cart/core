@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopAttributeGroup;
+use SCart\Core\Front\Models\ShopProductProperty;
 use SCart\Core\Front\Models\ShopLanguage;
 use SCart\Core\Admin\Models\AdminProduct;
 
@@ -20,12 +21,7 @@ class AdminReportController extends RootAdminController
             SC_PRODUCT_BUILD => trans('product.kinds.build'),
             SC_PRODUCT_GROUP => trans('product.kinds.group'),
         ];
-        $this->properties = [
-            SC_PROPERTY_PHYSICAL => trans('product.properties.physical'),
-            SC_PROPERTY_DOWNLOAD => trans('product.properties.download'),
-            SC_PROPERTY_ONLY_VIEW => trans('product.properties.only_view'),
-            SC_PROPERTY_SERVICE => trans('product.properties.service'),
-        ];
+        $this->properties = (new ShopProductProperty)->pluck('name', 'code')->toArray();
 
     }
 

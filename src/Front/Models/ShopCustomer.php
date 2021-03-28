@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Auth;
 use Laravel\Passport\HasApiTokens;
+use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use Illuminate\Auth\AuthenticationException;
 
 class ShopCustomer extends Authenticatable
@@ -95,11 +96,31 @@ class ShopCustomer extends Authenticatable
 
     }
 
-/**
- * Update info customer
- * @param  [array] $dataUpdate
- * @param  [int] $id
- */
+
+
+    protected static function boot()
+    {
+        parent::boot();
+        // before delete() method call this
+        static::deleting(function ($customer) {
+
+            //Delete custom field
+            (new ShopCustomFieldDetail)
+                ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+                ->select('code', 'name', 'text')
+                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $customer->id)
+                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
+                ->delete();
+            }
+        );
+    }
+
+
+    /**
+     * Update info customer
+     * @param  [array] $dataUpdate
+     * @param  [int] $id
+     */
     public static function updateInfo($dataUpdate, $id)
     {
         $dataUpdate = sc_clean($dataUpdate, 'password');
@@ -107,10 +128,10 @@ class ShopCustomer extends Authenticatable
         return $obj->update($dataUpdate);
     }
 
-/**
- * Create new customer
- * @return [type] [description]
- */
+    /**
+     * Create new customer
+     * @return [type] [description]
+     */
     public static function createCustomer($dataInsert)
     {
         $dataClean = sc_clean($dataInsert, 'password');
@@ -222,4 +243,18 @@ class ShopCustomer extends Authenticatable
         return false;
     }
 
+    /**
+     * Get all custom fields
+     *
+     * @return void
+     */
+    public function getCustomFields() {
+        return (new ShopCustomFieldDetail)
+            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+            ->select('code', 'name', 'text')
+            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
+            ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
+            ->get()
+            ->keyBy('code');
+    }
 }

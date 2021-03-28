@@ -373,6 +373,67 @@
                                 </div>
                             </div>
 
+
+
+{{-- Custom fields --}}
+@if ($customFields)
+@php
+    $fields = $customer->getCustomFields()
+@endphp
+                <hr class="kind ">
+                <label>{{ trans('custom_field.admin.title') }} (<a target=_new href="{{ sc_route_admin('admin_custom_field.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                    @foreach ($customFields as $keyField => $field)
+                    @php
+                        $default  = json_decode($field->default, true)
+                    @endphp
+                    <div class="form-group row kind   {{ $errors->has('fields.'.$field->code) ? ' text-red' : '' }}">
+                        <label for="{{ $field->code }}" class="col-sm-2 col-form-label">{{ sc_language_render($field->name) }}</label>
+                        
+                        <div class="col-sm-8">
+                            @if ($field->option == 'radio')
+                                @if ($default)
+                                @foreach ($default as $key => $name)
+                                <div class="icheck-primary d-inline">
+                                    <input type="radio" id="{{ $keyField.'__'.$key }}" name="fields[{{ $field->code }}]" value="{{ $key }}" {{ (old('fields.'.$field->code, ($fields[$field->code]['text'] ?? '')) == $key)?'checked':'' }}>
+                                    <label for="{{ $keyField.'__'.$key }}">
+                                        {{ $name }}
+                                    </label>
+                                </div>
+                                @endforeach
+                                @endif
+                            @elseif($field->option == 'select')
+                                @if ($default)
+                                <select class="form-control input-sm {{ $field->code }}" style="width: 100%;"
+                                name="fields[{{ $field->code }}]">
+                                <option value=""></option>
+                                @foreach ($default as $key => $name)
+                                <option value="{{ $key }}" {{ (old('fields.'.$field->code, ($fields[$field->code]['text'] ?? '')) == $key) ? 'selected':'' }}>{{ $name }}
+                                </option>
+                                @endforeach
+                                </select>
+                                @endif
+                            @else
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                                    </div>
+                                    <input type="text" id="field_{{ $field->code }}" name="fields[{{ $field->code }}]"
+                                        value="{{ old('fields.'.$field->code, ($fields[$field->code]['text'] ?? '')) }}"
+                                        class="form-control input-sm {{ $field->code }}" placeholder="" />
+                                </div>
+                            @endif
+
+                            @if ($errors->has('fields.'.$field->code))
+                            <span class="form-text">
+                                <i class="fa fa-info-circle"></i> {{ $errors->first('fields.'.$field->code) }}
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
+@endif
+{{-- //Custom fields --}}
+
                         </div>
                     </div>
 

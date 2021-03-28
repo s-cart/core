@@ -9,6 +9,7 @@ use SCart\Core\Front\Models\ShopProductGroup;
 use SCart\Core\Front\Models\ShopProductPromotion;
 use SCart\Core\Front\Models\ShopTax;
 use SCart\Core\Front\Models\ShopStore;
+use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ModelTrait;
 class ShopProduct extends Model
@@ -225,6 +226,16 @@ class ShopProduct extends Model
             $product->downloadPath()->delete();
             $product->builds()->delete();
             $product->categories()->detach();
+
+            //Delete custom field
+            (new ShopCustomFieldDetail)
+                ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+                ->select('code', 'name', 'text')
+                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $product->id)
+                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
+                ->delete();
+
+
             }
         );
     }
@@ -751,5 +762,20 @@ class ShopProduct extends Model
      */
     public function goToStore() {
         return url('store/'.$this->store->code);
+    }
+
+    /**
+     * Get all custom fields
+     *
+     * @return void
+     */
+    public function getCustomFields() {
+        return (new ShopCustomFieldDetail)
+            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+            ->select('code', 'name', 'text')
+            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
+            ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
+            ->get()
+            ->keyBy('code');
     }
 }

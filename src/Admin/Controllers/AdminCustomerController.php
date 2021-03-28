@@ -5,6 +5,8 @@ use App\Http\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopCountry;
 use SCart\Core\Front\Models\ShopLanguage;
 use SCart\Core\Admin\Models\AdminCustomer;
+use SCart\Core\Front\Models\ShopCustomField;
+use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
 use Validator;
 
@@ -144,6 +146,7 @@ class AdminCustomerController extends RootAdminController
             'countries'         => (new ShopCountry)->getCodeAll(),
             'customer'          => [],
             'url_action'        => sc_route_admin('admin_customer.create'),
+            'customFields'         => (new ShopCustomField)->getCustomField($type = 'customer'),
 
         ];
 
@@ -167,7 +170,25 @@ class AdminCustomerController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        AdminCustomer::createCustomer($dataMapping['dataInsert']);
+        $customer = AdminCustomer::createCustomer($dataMapping['dataInsert']);
+
+        //Insert custom fields
+        if ($data['fields']) {
+            $dataField = [];
+            foreach ($data['fields'] as $key => $value) {
+                $field = (new ShopCustomField)->where('code', $key)->where('type', 'customer')->first();
+                if ($field) {
+                    $dataField[] = [
+                        'custom_field_id' => $field->id,
+                        'rel_id' => $customer->id,
+                        'text' => $value,
+                    ];
+                }
+            }
+            if ($dataField) {
+                (new ShopCustomFieldDetail)->insert($dataField);
+            }
+        }
 
         return redirect()->route('admin_customer.index')->with('success', trans('customer.admin.create_success'));
 
@@ -191,6 +212,7 @@ class AdminCustomerController extends RootAdminController
             'countries' => (new ShopCountry)->getCodeAll(),
             'addresses' => $customer->addresses,
             'url_action' => sc_route_admin('admin_customer.edit', ['id' => $customer['id']]),
+            'customFields'         => (new ShopCustomField)->getCustomField($type = 'customer'),
         ];
         return view($this->templatePathAdmin.'screen.customer_edit')
             ->with($data);
@@ -220,7 +242,32 @@ class AdminCustomerController extends RootAdminController
                 ->withInput();
         }
         AdminCustomer::updateInfo($dataMapping['dataUpdate'], $id);
-    //
+
+        //Update custom field
+        if ($data['fields']) {
+            (new ShopCustomFieldDetail)
+                ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+                ->select('code', 'name', 'text')
+                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $customer->id)
+                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
+                ->delete();
+
+            $dataField = [];
+            foreach ($data['fields'] as $key => $value) {
+                $field = (new ShopCustomField)->where('code', $key)->where('type', 'customer')->first();
+                if ($field) {
+                    $dataField[] = [
+                        'custom_field_id' => $field->id,
+                        'rel_id' => $customer->id,
+                        'text' => $value,
+                    ];
+                }
+            }
+            if ($dataField) {
+                (new ShopCustomFieldDetail)->insert($dataField);
+            }
+        }
+
         return redirect()->route('admin_customer.index')->with('success', trans('customer.admin.edit_success'));
 
     }
