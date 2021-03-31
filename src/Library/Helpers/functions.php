@@ -54,8 +54,8 @@ if (!function_exists('sc_word_format_url')) {
             $str = preg_replace("/($uni)/i", $nonUnicode, $str);
         }
         return strtolower(preg_replace(
-            array('/[\'\/~`\!@#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', '/[\s-]+|[-\s]+|[--]+/', '/^[-\s_]|[-_\s]$/'),
-            array('', '-', ''),
+            array('/[\s-]+|[-\s]+|[--]+/', '/^[-\s_]|[-_\s]$/'),
+            array('-', ''),
             strtolower($str)
         ));
     }
