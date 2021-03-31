@@ -102,7 +102,7 @@ class AdminCustomFieldController extends RootAdminController
         ];
         $obj = ShopCustomField::create($dataInsert);
 
-        return redirect()->route('admin_custom_field.edit', ['id' => $obj['id']])->with('success', trans('custom_field.admin.create_success'));
+        return redirect()->route('admin_custom_field.index')->with('success', trans('custom_field.admin.create_success'));
 
     }
 

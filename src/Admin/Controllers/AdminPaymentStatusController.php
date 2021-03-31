@@ -90,7 +90,7 @@ class AdminPaymentStatusController extends RootAdminController
         ];
         $obj = ShopPaymentStatus::create($dataInsert);
 //
-        return redirect()->route('admin_payment_status.edit', ['id' => $obj['id']])->with('success', trans('payment_status.admin.create_success'));
+        return redirect()->route('admin_payment_status.index')->with('success', trans('payment_status.admin.create_success'));
 
     }
 

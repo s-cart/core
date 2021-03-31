@@ -90,7 +90,7 @@ class AdminTaxController extends RootAdminController
         ];
         $obj = ShopTax::create($dataInsert);
 
-        return redirect()->route('admin_tax.edit', ['id' => $obj['id']])->with('success', trans('tax.admin.create_success'));
+        return redirect()->route('admin_tax.index')->with('success', trans('tax.admin.create_success'));
 
     }
 

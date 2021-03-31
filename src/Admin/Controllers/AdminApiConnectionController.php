@@ -105,7 +105,7 @@ class AdminApiConnectionController extends RootAdminController
         ];
         $obj = ShopApiConnection::create($dataInsert);
 
-        return redirect()->route('admin_api_connection.edit', ['id' => $obj['id']])->with('success', trans('api_connection.admin.create_success'));
+        return redirect()->route('admin_api_connection.index')->with('success', trans('api_connection.admin.create_success'));
 
     }
 

@@ -91,7 +91,7 @@ class AdminShipingStatusController extends RootAdminController
         ];
         $obj = ShopShippingStatus::create($dataInsert);
 //
-        return redirect()->route('admin_shipping_status.edit', ['id' => $obj['id']])->with('success', trans('shipping_status.admin.create_success'));
+        return redirect()->route('admin_shipping_status.index')->with('success', trans('shipping_status.admin.create_success'));
 
     }
 

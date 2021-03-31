@@ -95,7 +95,7 @@ class AdminAttributeGroupController extends RootAdminController
         ];
         $obj = ShopAttributeGroup::create($dataInsert);
 //
-        return redirect()->route('admin_attribute_group.edit', ['id' => $obj['id']])->with('success', trans('attribute_group.admin.create_success'));
+        return redirect()->route('admin_attribute_group.index')->with('success', trans('attribute_group.admin.create_success'));
 
     }
 

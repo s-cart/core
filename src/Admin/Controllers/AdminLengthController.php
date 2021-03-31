@@ -95,7 +95,7 @@ class AdminLengthController extends RootAdminController
         ];
         $obj = ShopLength::create($dataInsert);
 //
-        return redirect()->route('admin_length_unit.edit', ['id' => $obj['id']])->with('success', trans('length.admin.create_success'));
+        return redirect()->route('admin_length_unit.index')->with('success', trans('length.admin.create_success'));
 
     }
 

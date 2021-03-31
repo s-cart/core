@@ -94,7 +94,7 @@ class AdminWeightController extends RootAdminController
         ];
         $obj = ShopWeight::create($dataInsert);
 //
-        return redirect()->route('admin_weight_unit.edit', ['id' => $obj['id']])->with('success', trans('weight.admin.create_success'));
+        return redirect()->route('admin_weight_unit.index')->with('success', trans('weight.admin.create_success'));
 
     }
 

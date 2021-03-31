@@ -96,7 +96,7 @@ class AdminBannerTypeController extends RootAdminController
         ];
         $obj = ShopBannerType::create($dataInsert);
 //
-        return redirect()->route('admin_banner_type.edit', ['id' => $obj['id']])->with('success', trans('banner_type.admin.create_success'));
+        return redirect()->route('admin_banner_type.index')->with('success', trans('banner_type.admin.create_success'));
 
     }
 

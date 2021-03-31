@@ -109,7 +109,7 @@ class AdminSupplierController extends RootAdminController
         ];
         $obj = ShopSupplier::create($dataInsert);
 
-        return redirect()->route('admin_supplier.index', ['id' => $obj['id']])->with('success', trans('supplier.admin.create_success'));
+        return redirect()->route('admin_supplier.index')->with('success', trans('supplier.admin.create_success'));
 
     }
 

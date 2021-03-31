@@ -104,7 +104,7 @@ class AdminBrandController extends RootAdminController
         ];
         $obj = ShopBrand::create($dataInsert);
 
-        return redirect()->route('admin_brand.index', ['id' => $obj['id']])->with('success', trans('brand.admin.create_success'));
+        return redirect()->route('admin_brand.index')->with('success', trans('brand.admin.create_success'));
 
     }
 
