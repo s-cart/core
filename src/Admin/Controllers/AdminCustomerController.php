@@ -173,7 +173,7 @@ class AdminCustomerController extends RootAdminController
         $customer = AdminCustomer::createCustomer($dataMapping['dataInsert']);
 
         //Insert custom fields
-        if ($data['fields']) {
+        if (!empty($data['fields'])) {
             $dataField = [];
             foreach ($data['fields'] as $key => $value) {
                 $field = (new ShopCustomField)->where('code', $key)->where('type', 'customer')->first();
@@ -244,7 +244,7 @@ class AdminCustomerController extends RootAdminController
         AdminCustomer::updateInfo($dataMapping['dataUpdate'], $id);
 
         //Update custom field
-        if ($data['fields']) {
+        if (!empty($data['fields'])) {
             (new ShopCustomFieldDetail)
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
                 ->select('code', 'name', 'text')

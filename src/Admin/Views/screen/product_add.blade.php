@@ -886,12 +886,13 @@
 <script type="text/javascript">
 
 $("[name='property']").change(function() {
-    if($(this).val() == {{ SC_PROPERTY_DOWNLOAD }}) {
+    if($(this).val() == '{{ SC_PROPERTY_DOWNLOAD }}') {
         $('#download_path').show();
     } else {
         $('#download_path').hide();
     }
 });
+
 // Promotion
 $('#add_product_promotion').click(function(event) {
     $(this).before(

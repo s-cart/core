@@ -555,12 +555,12 @@ public function createProductGroup()
         }
 
         //Insert path download
-        if ($data['property'] == SC_PROPERTY_DOWNLOAD && $downloadPath) {
+        if (!empty($data['property']) && $data['property'] == SC_PROPERTY_DOWNLOAD && $downloadPath) {
             (new ShopProductDownload)->insert(['product_id' => $product->id, 'path' => $downloadPath]);
         }
 
         //Insert custom fields
-        if ($data['fields']) {
+        if (!empty($data['fields'])) {
             $dataField = [];
             foreach ($data['fields'] as $key => $value) {
                 $field = (new ShopCustomField)->where('code', $key)->where('type', 'product')->first();
@@ -622,7 +622,7 @@ public function createProductGroup()
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
 
-        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
+        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [SC_PRODUCT_SINGLE]]);
 
         // html select product group
         $htmlSelectGroup = '<div class="select-product">';
@@ -671,9 +671,13 @@ public function createProductGroup()
             'htmlProductAtrribute' => $htmlProductAtrribute,
             'listWeight'           => $this->listWeight,
             'listLength'           => $this->listLength,
-            'customFields'         => (new ShopCustomField)->getCustomField($type = 'product'),
 
         ];
+
+        //Only prduct single have custom field
+        if ($product->kind == SC_PRODUCT_SINGLE) {
+            $data['customFields'] = (new ShopCustomField)->getCustomField($type = 'product');
+        }
         return view($this->templatePathAdmin.'screen.product_edit')
             ->with($data);
     }
@@ -826,7 +830,7 @@ public function createProductGroup()
 
 
         //Update custom field
-        if ($data['fields']) {
+        if (!empty($data['fields'])) {
             (new ShopCustomFieldDetail)
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
                 ->select('code', 'name', 'text')
