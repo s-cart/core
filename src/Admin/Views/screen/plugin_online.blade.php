@@ -105,7 +105,7 @@
     if (array_key_exists($plugin['key'], $arrPluginLocal)) 
     {
       $pluginAction = '<span class="btn btn-flat btn-default" type="button">'.trans('plugin.located').'</span>';
-    } elseif(!in_array(config('s-cart.version'), $scVersion)) {
+    } elseif(!in_array(config('s-cart.core'), $scVersion)) {
       $pluginAction = '';
     } else {
       if(($plugin['is_free'] || $plugin['price_final'] == 0)) {

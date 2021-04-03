@@ -108,7 +108,7 @@
   if (array_key_exists($template['key'], $arrTemplateLocal)) 
   {
   $templateAction = trans('template.located');
-  } elseif(!in_array(config('s-cart.version'), $scVersion)) {
+  } elseif(!in_array(config('s-cart.core'), $scVersion)) {
   $templateAction = '';
   } else {
   if(($template['is_free'] || $template['price_final'] == 0)) {
