@@ -62,7 +62,7 @@ class ShopProductController extends RootFrontController
                 'keyword' => '',
                 'description' => '',
                 'products' => $products,
-                'layout_page' => 'product_list',
+                'layout_page' => 'shop_product_list',
                 'filter_sort' => $filter_sort,
             )
         );
@@ -132,7 +132,7 @@ class ShopProductController extends RootFrontController
                     'productRelation' => $productRelation,
                     'goToStore' => $product->goToStore(),
                     'og_image' => asset($product->getImage()),
-                    'layout_page' => 'product_detail',
+                    'layout_page' => 'shop_product_detail',
                 )
             );
         } else {

@@ -61,7 +61,7 @@ class ShopCategoryController extends RootFrontController
                 'itemsList' => $itemsList,
                 'keyword' => '',
                 'description' => '',
-                'layout_page' => 'item_list',
+                'layout_page' => 'shop_item_list',
                 'filter_sort' => $filter_sort,
             )
         );
@@ -132,7 +132,7 @@ class ShopCategoryController extends RootFrontController
                     'keyword' => $category->keyword,
                     'products' => $products,
                     'subCategory' => $subCategory,
-                    'layout_page' => 'product_list',
+                    'layout_page' => 'shop_product_list',
                     'og_image' => asset($category->getImage()),
                     'filter_sort' => $filter_sort,
                 )

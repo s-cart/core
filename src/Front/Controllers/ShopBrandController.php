@@ -62,7 +62,7 @@ class ShopBrandController extends RootFrontController
                 'itemsList' => $itemsList,
                 'keyword' => '',
                 'description' => '',
-                'layout_page' => 'item_list',
+                'layout_page' => 'shop_item_list',
                 'filter_sort' => $filter_sort,
             )
         );
@@ -124,7 +124,7 @@ class ShopBrandController extends RootFrontController
                     'title' => $brand->name,
                     'description' => $brand->description,
                     'keyword' => $brand->keyword,
-                    'layout_page' => 'product_list',
+                    'layout_page' => 'shop_product_list',
                     'products' => $products,
                     'og_image' => asset($brand->getImage()),
                     'filter_sort' => $filter_sort,

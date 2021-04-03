@@ -141,7 +141,7 @@ class ShopContentController extends RootFrontController
             array(
                 'title' => trans('front.search') . ': ' . $keyword,
                 'products' => $products,
-                'layout_page' => 'product_list',
+                'layout_page' => 'shop_product_list',
                 'filter_sort' => $filter_sort,
             )
         );
@@ -368,7 +368,7 @@ class ShopContentController extends RootFrontController
                 'description' => sc_store('description'),
                 'keyword' => sc_store('keyword'),
                 'news' => $news,
-                'layout_page' => 'news_list',
+                'layout_page' => 'shop_news',
             )
         );
     }
@@ -411,7 +411,7 @@ class ShopContentController extends RootFrontController
                     'description' => $news->description,
                     'keyword' => $news->keyword,
                     'og_image' => asset($news->getImage()),
-                    'layout_page' => 'news_detail',
+                    'layout_page' => 'shop_news_detail',
                 )
             );
         } else {
