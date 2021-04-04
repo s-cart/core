@@ -140,6 +140,12 @@ class ShopOrder extends Model
             foreach ($arrCartDetail as $cartDetail) {
                 $pID = $cartDetail['product_id'];
                 $product = ShopProduct::find($pID);
+                
+                //Check product flash sale over stock
+                if (function_exists('sc_product_flash_check_over') && !sc_product_flash_check_over($pID, $cartDetail['qty'])) {
+                    return $return = ['error' => 1, 'msg' => trans('cart.over', ['item' => $product->sku])];
+                }
+
                 //If product out of stock
                 if (!sc_config('product_buy_out_of_stock') && $product->stock < $cartDetail['qty']) {
                     return $return = ['error' => 1, 'msg' => trans('cart.over', ['item' => $product->sku])];
@@ -154,6 +160,11 @@ class ShopOrder extends Model
                 $cartDetail['tax'] = $tax;
                 $cartDetail['store_id'] = $cartDetail['store_id'];
                 $this->addOrderDetail($cartDetail);
+
+                //Update stock flash sale
+                if (function_exists('sc_product_flash_update_stock') && !sc_product_flash_update_stock($pID, $cartDetail['qty'])) {
+                    return $return = ['error' => 1, 'msg' => trans('cart.over', ['item' => $product->sku])];
+                }
 
                 //Update stock and sold
                 ShopProduct::updateStock($pID, $cartDetail['qty']);
