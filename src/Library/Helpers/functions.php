@@ -372,3 +372,15 @@ if (!function_exists('sc_store_is_root')) {
         return  $storeId == SC_ID_ROOT;
     }
 }
+
+/**
+ * convert datetime to date
+ */
+if (!function_exists('sc_datetime_to_date')) {
+    function sc_datetime_to_date($datetime, $format = 'Y-m-d') {
+        if (empty($datetime)) {
+            return null;
+        }
+        return  date($format, strtotime($datetime));
+    }
+}

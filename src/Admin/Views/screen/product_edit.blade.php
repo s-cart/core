@@ -439,7 +439,6 @@
                                         <span title="Remove" class="btn btn-flat btn-danger removePromotion"><i
                                                 class="fa fa-times"></i></span>
                                     </div>
-
                                     <div class="form-group">
                                             <label>{{ trans('product.price_promotion_start') }}</label>
                                             <div class="input-group">
@@ -448,7 +447,7 @@
                                                 </div>
                                                 <input type="date" style="width: 100px;" id="price_promotion_start"
                                                     name="price_promotion_start"
-                                                    value="{!!old('price_promotion_start',$product->promotionPrice->date_start ?? '')!!}"
+                                                    value="{!!old('price_promotion_start', sc_datetime_to_date($product->promotionPrice->date_start))!!}"
                                                     class="form-control price_promotion_start date_time"
                                                     placeholder="" />
                                             </div>
@@ -460,7 +459,7 @@
                                                 </div>
                                                 <input type="date" style="width: 100px;" id="price_promotion_end"
                                                     name="price_promotion_end"
-                                                    value="{!!old('price_promotion_end',$product->promotionPrice->date_end ?? '')!!}"
+                                                    value="{!!old('price_promotion_end', sc_datetime_to_date($product->promotionPrice->date_end))!!}"
                                                     class="form-control price_promotion_end date_time"
                                                     placeholder="" />
                                             </div>
