@@ -959,7 +959,7 @@
 
 
 {{-- Custom fields --}}
-@if (!empty($customFields))
+@if (isset($customFields) && $customFields)
 @php
     $fields = $product->getCustomFields()
 @endphp

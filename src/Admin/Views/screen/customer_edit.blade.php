@@ -376,7 +376,7 @@
 
 
 {{-- Custom fields --}}
-@if ($customFields)
+@if (isset($customFields) && $customFields)
 @php
     $fields = $customer->getCustomFields()
 @endphp
