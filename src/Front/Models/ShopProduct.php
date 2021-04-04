@@ -20,7 +20,7 @@ class ShopProduct extends Model
 
     protected $connection = SC_CONNECTION;
 
-    protected  $sc_kind = 'all'; // 0:single, 1:bundle, 2:group
+    protected  $sc_kind = []; // 0:single, 1:bundle, 2:group
     protected  $sc_property = 'all'; // 0:physical, 1:download, 2:only view, 3: Service
     protected  $sc_promotion = 0; // 1: only produc promotion,
     protected  $sc_store_id = 0; 
@@ -372,10 +372,10 @@ class ShopProduct extends Model
      * Set product kind
      */
     private function setKind($kind) {
-        if ($kind === 'all') {
+        if (is_array($kind)) {
             $this->sc_kind = $kind;
         } else {
-            $this->sc_kind = (int)$kind;
+            $this->sc_kind = array((int)$kind);
         }
         return $this;
     }
@@ -661,8 +661,8 @@ class ShopProduct extends Model
 
         $query = $query->where($this->getTable().'.status', 1);
 
-        if ($this->sc_kind !== 'all') {
-            $query = $query->where($this->getTable().'.kind', $this->sc_kind);
+        if ($this->sc_kind !== []) {
+            $query = $query->whereIn($this->getTable().'.kind', $this->sc_kind);
         }
 
         
