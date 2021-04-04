@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="name" name="name" value="{!! old()?old('name'):$customField['name']??'' !!}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
+                <input type="text" id="name" name="name" value="{!! old('name', ($customField['name']??'')) !!}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('name'))
@@ -47,7 +47,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="code" name="code" value="{!! old()?old('code'):$customField['code']??'' !!}" class="form-control code {{ $errors->has('code') ? ' is-invalid' : '' }}">
+                <input type="text" id="code" name="code" value="{!! old('code', ($customField['code']??'')) !!}" class="form-control code {{ $errors->has('code') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('code'))
@@ -66,7 +66,7 @@
               <div class="input-group mb-3">
                 <select class="form-control input-sm" style="width: 100%;" name="type">
                 @foreach (['customer' => 'Customer', 'product' => 'Product'] as $key => $name)
-                <option value="{{ $key }}" {{ (old('type') == $key) ? 'selected':'' }}>{{ $name }}
+                <option value="{{ $key }}" {{ (old('type', ($customField['type'] ?? '')) == $key) ? 'selected':'' }}>{{ $name }}
                 </option>
                 @endforeach
               </select> 
@@ -110,7 +110,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="default" name="default" value="{{ old()?old('default'):$customField['default']??'' }}" class="form-control default {{ $errors->has('default') ? ' is-invalid' : '' }}">
+                <input type="text" id="default" name="default" value="{{ old('default', ($customField['default']??'')) }}" class="form-control default {{ $errors->has('default') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('default'))
