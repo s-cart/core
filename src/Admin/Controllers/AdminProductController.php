@@ -677,6 +677,8 @@ public function createProductGroup()
         //Only prduct single have custom field
         if ($product->kind == SC_PRODUCT_SINGLE) {
             $data['customFields'] = (new ShopCustomField)->getCustomField($type = 'product');
+        } else {
+            $data['customFields'] = [];
         }
         return view($this->templatePathAdmin.'screen.product_edit')
             ->with($data);
