@@ -397,12 +397,17 @@
                         {{-- //select tax --}}   
 @endif
 
+
+
+
 @if (sc_config_admin('product_promotion'))
                         {{-- price promotion --}}
                         <div class="form-group row kind    {{ $errors->has('price_promotion') ? ' text-red' : '' }}">
                             <label for="price"
                                 class="col-sm-2 col-form-label">{{ trans('product.price_promotion') }}</label>
                             <div class="col-sm-8">
+
+                                
                                 @if (old('price_promotion'))
                                 <div class="price_promotion">
                                     <div class="input-group">
@@ -416,9 +421,8 @@
                                                 class="fa fa-times"></i></span>
                                     </div>
 
-                                    <div class="form-inline">
-                                        <div class="input-group">
-                                            {{ trans('product.price_promotion_start') }}<br>
+                                    <div class="form-group">
+                                            <label>{{ trans('product.price_promotion_start') }}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
@@ -429,10 +433,8 @@
                                                     class="form-control input-sm price_promotion_start date_time"
                                                     placeholder="" />
                                             </div>
-                                        </div>
 
-                                        <div class="input-group">
-                                            {{ trans('product.price_promotion_end') }}<br>
+                                            <label>{{ trans('product.price_promotion_end') }}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
@@ -442,9 +444,12 @@
                                                     class="form-control input-sm price_promotion_end date_time"
                                                     placeholder="" />
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
+                                <button type="button" id="add_product_promotion" class="btn btn-flat btn-success" style="display:none">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    {{ trans('product.admin.add_product_promotion') }}
+                                </button>
                                 @else
                                 <button type="button" id="add_product_promotion" class="btn btn-flat btn-success">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
@@ -901,20 +906,17 @@ $('#add_product_promotion').click(function(event) {
         +'  <input type="number"  id="price_promotion" name="price_promotion" value="0" class="form-control input-sm price" placeholder="" />'
         +'  <span title="Remove" class="btn btn-flat btn-danger removePromotion"><i class="fa fa-times"></i></span>'
         +'</div>'
-        +'<div class="form-inline">'
-        +'  <div class="input-group">'
-        +'  {{ trans('product.price_promotion_start') }}<br>'
+        +'<div class="form-group">'
+        +'      <label>{{ trans('product.price_promotion_start') }}</label>'
         +'      <div class="input-group">'
         +'          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span></div>'
         +'          <input type="date" style="width: 150px;"  id="price_promotion_start" name="price_promotion_start" value="" class="form-control input-sm price_promotion_start date_time" placeholder="" />'
         +'      </div>'
-        +'  </div>'
-        +'  <div class="input-group">{{ trans('product.price_promotion_end') }}<br>'
+        +'      <label>{{ trans('product.price_promotion_end') }}</label>'
         +'      <div class="input-group">'
         +'          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span></div>'
         +'          <input type="date" style="width: 150px;"  id="price_promotion_end" name="price_promotion_end" value="" class="form-control input-sm price_promotion_end date_time" placeholder="" />'
         +'      </div>'
-        +'  </div>'
         +'  </div>'
         +'</div>');
     $(this).hide();

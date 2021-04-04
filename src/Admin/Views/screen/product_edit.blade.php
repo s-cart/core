@@ -440,34 +440,30 @@
                                                 class="fa fa-times"></i></span>
                                     </div>
 
-                                    <div class="form-inline">
-                                        <div class="input-group">
-                                            {{ trans('product.price_promotion_start') }}<br>
+                                    <div class="form-group">
+                                            <label>{{ trans('product.price_promotion_start') }}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
                                                 </div>
-                                                <input type="text" style="width: 100px;" id="price_promotion_start"
+                                                <input type="date" style="width: 100px;" id="price_promotion_start"
                                                     name="price_promotion_start"
                                                     value="{!!old('price_promotion_start',$product->promotionPrice->date_start ?? '')!!}"
                                                     class="form-control price_promotion_start date_time"
                                                     placeholder="" />
                                             </div>
-                                        </div>
 
-                                        <div class="input-group">
-                                            {{ trans('product.price_promotion_end') }}<br>
+                                            <label>{{ trans('product.price_promotion_end') }}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
                                                 </div>
-                                                <input type="text" style="width: 100px;" id="price_promotion_end"
+                                                <input type="date" style="width: 100px;" id="price_promotion_end"
                                                     name="price_promotion_end"
                                                     value="{!!old('price_promotion_end',$product->promotionPrice->date_end ?? '')!!}"
                                                     class="form-control price_promotion_end date_time"
                                                     placeholder="" />
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -1079,39 +1075,36 @@ $("[name='property']").change(function() {
     }
 });
 
-    // Promotion
+// Promotion
 $('#add_product_promotion').click(function(event) {
     $(this).before(
         '<div class="price_promotion">'
         +'<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-pencil-alt"></i></span></div>'
-        +'  <input type="number"  id="price_promotion" name="price_promotion" value="0" class="form-control price" placeholder="" />'
+        +'  <input type="number"  id="price_promotion" name="price_promotion" value="0" class="form-control input-sm price" placeholder="" />'
         +'  <span title="Remove" class="btn btn-flat btn-danger removePromotion"><i class="fa fa-times"></i></span>'
         +'</div>'
-        +'<div class="form-inline">'
-        +'  <div class="input-group">'
-        +'  {{ trans('product.price_promotion_start') }}<br>'
+        +'<div class="form-group">'
+        +'      <label>{{ trans('product.price_promotion_start') }}</label>'
         +'      <div class="input-group">'
         +'          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span></div>'
-        +'          <input type="date" style="width: 150px;"  id="price_promotion_start" name="price_promotion_start" value="" class="form-control price_promotion_start date_time" placeholder="" />'
+        +'          <input type="date" style="width: 150px;"  id="price_promotion_start" name="price_promotion_start" value="" class="form-control input-sm price_promotion_start date_time" placeholder="" />'
         +'      </div>'
-        +'  </div>'
-        +'  <div class="input-group">{{ trans('product.price_promotion_end') }}<br>'
+        +'      <label>{{ trans('product.price_promotion_end') }}</label>'
         +'      <div class="input-group">'
         +'          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span></div>'
-        +'          <input type="date" style="width: 150px;"  id="price_promotion_end" name="price_promotion_end" value="" class="form-control price_promotion_end date_time" placeholder="" />'
+        +'          <input type="date" style="width: 150px;"  id="price_promotion_end" name="price_promotion_end" value="" class="form-control input-sm price_promotion_end date_time" placeholder="" />'
         +'      </div>'
-        +'  </div>'
         +'  </div>'
         +'</div>');
-        $(this).hide();
+    $(this).hide();
     $('.removePromotion').click(function(event) {
         $(this).closest('.price_promotion').remove();
         $('#add_product_promotion').show();
     });
-    $('.date_time').datepicker({
+    /*$('.date_time').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd'
-    })
+    })*/
 });
 $('.removePromotion').click(function(event) {
     $('#add_product_promotion').show();
