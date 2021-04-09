@@ -75,7 +75,7 @@ class RegisterController extends RootFrontController
      */
     protected function create(array $data)
     {
-        $data['reg_country'] = strtoupper($data['reg_country'] ?? '');
+        $data['country'] = strtoupper($data['country'] ?? '');
         $dataMap = $this->mappDataInsert($data);
 
         $user = ShopCustomer::createCustomer($dataMap);
@@ -115,7 +115,7 @@ class RegisterController extends RootFrontController
                     ];
 
                     $config = [
-                        'to' => $data['reg_email'],
+                        'to' => $data['email'],
                         'subject' => trans('email.welcome_customer.title'),
                     ];
 
@@ -236,7 +236,7 @@ class RegisterController extends RootFrontController
                     ];
 
                     $config = [
-                        'to' => $data['reg_email'],
+                        'to' => $data['email'],
                         'subject' => trans('email.welcome_customer.title'),
                     ];
 
