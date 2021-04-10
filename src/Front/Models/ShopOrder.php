@@ -162,8 +162,8 @@ class ShopOrder extends Model
                 $this->addOrderDetail($cartDetail);
 
                 //Update stock flash sale
-                if (function_exists('sc_product_flash_update_stock') && !sc_product_flash_update_stock($pID, $cartDetail['qty'])) {
-                    return $return = ['error' => 1, 'msg' => trans('cart.over', ['item' => $product->sku])];
+                if (function_exists('sc_product_flash_update_stock')) {
+                    sc_product_flash_update_stock($pID, $cartDetail['qty']);
                 }
 
                 //Update stock and sold
