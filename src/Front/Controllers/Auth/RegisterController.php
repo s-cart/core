@@ -99,15 +99,15 @@ class RegisterController extends RootFrontController
                     ];
                     $dataReplace = [
                         trans('email.welcome_customer.title'),
-                        $dataMap['first_name'],
-                        $dataMap['last_name'],
-                        $dataMap['email'],
-                        $dataMap['phone'],
-                        $dataMap['password'],
-                        $dataMap['address1'],
-                        $dataMap['address2'],
-                        $dataMap['address3'],
-                        $dataMap['country'],
+                        $dataMap['first_name'] ?? '',
+                        $dataMap['last_name'] ?? '',
+                        $dataMap['email'] ?? '',
+                        $dataMap['phone'] ?? '',
+                        $dataMap['password'] ?? '',
+                        $dataMap['address1'] ?? '',
+                        $dataMap['address2'] ?? '',
+                        $dataMap['address3'] ?? '',
+                        $dataMap['country'] ?? '',
                     ];
                     $content = preg_replace($dataFind, $dataReplace, $content);
                     $dataView = [
@@ -199,7 +199,9 @@ class RegisterController extends RootFrontController
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-        $user = $this->create($request->all());
+        $data = $request->all();
+        $user = $this->create($data);
+        $dataMap = $this->mappDataInsert($data);
         if ($user) {
             if (sc_config('welcome_customer')) {
 
@@ -220,15 +222,15 @@ class RegisterController extends RootFrontController
                     ];
                     $dataReplace = [
                         trans('email.welcome_customer.title'),
-                        $dataMap['first_name'],
-                        $dataMap['last_name'],
-                        $dataMap['email'],
-                        $dataMap['phone'],
-                        $dataMap['password'],
-                        $dataMap['address1'],
-                        $dataMap['address2'],
-                        $dataMap['address3'],
-                        $dataMap['country'],
+                        $dataMap['first_name'] ?? '',
+                        $dataMap['last_name'] ?? '',
+                        $dataMap['email'] ?? '',
+                        $dataMap['phone'] ?? '',
+                        $dataMap['password'] ?? '',
+                        $dataMap['address1'] ?? '',
+                        $dataMap['address2'] ?? '',
+                        $dataMap['address3'] ?? '',
+                        $dataMap['country'] ?? '',
                     ];
                     $content = preg_replace($dataFind, $dataReplace, $content);
                     $dataView = [
