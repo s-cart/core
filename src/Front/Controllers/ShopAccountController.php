@@ -229,6 +229,7 @@ class ShopAccountController extends RootFrontController
      */
     private function _orderList()
     {
+        $customer = auth()->user();
         $statusOrder = ShopOrderStatus::getIdAll();
         sc_check_view($this->templatePath . '.account.order_list');
         return view($this->templatePath . '.account.order_list')
@@ -237,6 +238,7 @@ class ShopAccountController extends RootFrontController
                 'title' => trans('account.order_list'),
                 'statusOrder' => $statusOrder,
                 'orders' => (new ShopOrder)->profile()->getData(),
+                'customer' => $customer,
                 'layout_page' => 'shop_profile',
                 ]
             );
@@ -286,6 +288,7 @@ class ShopAccountController extends RootFrontController
             'countries' => ShopCountry::getCodeAll(),
             'attributesGroup' => $attributesGroup,
             'order' => $order,
+            'customer' => $customer,
             'layout_page' => 'shop_profile',
             ]
         );
