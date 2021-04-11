@@ -99,6 +99,15 @@ class AdminStoreConfigController extends RootAdminController
         ];
         $configCaptcha = AdminConfig::getListConfigByCode($configCaptchaQuery);
 
+        $configCustomizeQuery = [
+            'code' => 'admin_custom_config',
+            'storeId' => $id,
+            'keyBy' => 'key',
+        ];
+        $configCustomize = AdminConfig::getListConfigByCode($configCustomizeQuery);
+
+        
+
         $emailConfigQuery = [
             'code' => ['smtp_config', 'email_action'],
             'storeId' => $id,
@@ -127,6 +136,7 @@ class AdminStoreConfigController extends RootAdminController
         $data['configDisplay']                  = $configDisplay;
         $data['orderConfig']                    = $orderConfig;
         $data['configCaptcha']                  = $configCaptcha;
+        $data['configCustomize']                = $configCustomize;
         $data['templates']                      = $this->templates;
         $data['timezones']                      = $this->timezones;
         $data['languages']                      = $this->languages;

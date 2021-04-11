@@ -106,6 +106,7 @@ class CreateTablesAdmin extends Migration
             $table->string('code', 50)->index();
             $table->string('key', 50);
             $table->string('value', 200)->nullable();
+            $table->integer('security')->default(0)->nullable();
             $table->integer('store_id')->default(0);
             $table->integer('sort')->default(0);
             $table->string('detail', 300)->nullable();
