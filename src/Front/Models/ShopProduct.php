@@ -775,6 +775,7 @@ class ShopProduct extends Model
             ->select('code', 'name', 'text')
             ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
             ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
+            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1')
             ->get()
             ->keyBy('code');
     }
