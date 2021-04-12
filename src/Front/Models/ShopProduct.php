@@ -769,14 +769,18 @@ class ShopProduct extends Model
      *
      * @return void
      */
-    public function getCustomFields() {
-        return (new ShopCustomFieldDetail)
+    public function getCustomFields($code = null) {
+        $data =  (new ShopCustomFieldDetail)
             ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
             ->select('code', 'name', 'text')
             ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
             ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
-            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1')
-            ->get()
+            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1');
+        if ($code) {
+            $data = $data->where(SC_DB_PREFIX.'shop_custom_field.code', $code);
+        }
+        $data = $data->get()
             ->keyBy('code');
+        return $data;
     }
 }
