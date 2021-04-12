@@ -821,14 +821,8 @@
                                 </select>
                                 @endif
                             @else
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                                    </div>
-                                    <input type="text" id="field_{{ $field->code }}" name="fields[{{ $field->code }}]"
-                                        value="{{ old('fields.'.$field->code) }}"
-                                        class="form-control input-sm {{ $field->code }}" placeholder="" />
-                                </div>
+                            <textarea  id="field_{{ $field->code }}" name="fields[{{ $field->code }}]"
+                                class="form-control {{ $field->code }}" placeholder="" >{{ old('fields.'.$field->code) }}</textarea>
                             @endif
 
                             @if ($errors->has('fields.'.$field->code))
