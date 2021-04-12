@@ -181,7 +181,7 @@ class AdminCustomerController extends RootAdminController
                     $dataField[] = [
                         'custom_field_id' => $field->id,
                         'rel_id' => $customer->id,
-                        'text' => $value,
+                        'text' => nl2br(trim($value)),
                     ];
                 }
             }
@@ -259,7 +259,7 @@ class AdminCustomerController extends RootAdminController
                     $dataField[] = [
                         'custom_field_id' => $field->id,
                         'rel_id' => $customer->id,
-                        'text' => $value,
+                        'text' => nl2br(trim($value)),
                     ];
                 }
             }

@@ -568,7 +568,7 @@ public function createProductGroup()
                     $dataField[] = [
                         'custom_field_id' => $field->id,
                         'rel_id' => $product->id,
-                        'text' => $value,
+                        'text' => nl2br(trim($value)),
                     ];
                 }
             }
@@ -847,7 +847,7 @@ public function createProductGroup()
                     $dataField[] = [
                         'custom_field_id' => $field->id,
                         'rel_id' => $product->id,
-                        'text' => $value,
+                        'text' => nl2br(trim($value)),
                     ];
                 }
             }
