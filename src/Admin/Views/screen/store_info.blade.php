@@ -142,7 +142,7 @@
                         <td>{{ trans('store.title') }}</td>
                         <td>
                           @foreach ($languages->toArray() as  $codeLang => $lang)
-                            {{ $languages[$codeLang]->name }} <img src="{{ asset($languages[$codeLang]->icon )}}" style="width:20px">:<br>
+                            {{ $languages[$codeLang]->name }} <img src="{{ sc_file($languages[$codeLang]->icon )}}" style="width:20px">:<br>
                           <i><a href="#" class="editable-required editable editable-click" data-name="{{ 'title__'.$codeLang }}" data-type="text" data-pk="" data-source="" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ trans('store.title') }}" data-value="{{ $descriptions[$codeLang]['title'] ?? '' }}" data-original-title="" title="">{{ $descriptions[$codeLang]['title'] ?? '' }}</a></i><br>
                           <br>
                           @endforeach
@@ -153,7 +153,7 @@
                         <td>{{ trans('store.keyword') }}</td>
                         <td>
                           @foreach ($languages->toArray() as  $codeLang => $lang)
-                            {{ $languages[$codeLang]->name }} <img src="{{ asset($languages[$codeLang]->icon )}}" style="width:20px">:<br>
+                            {{ $languages[$codeLang]->name }} <img src="{{ sc_file($languages[$codeLang]->icon )}}" style="width:20px">:<br>
                           <i><a href="#" class="editable-required editable editable-click" data-name="{{ 'keyword__'.$codeLang }}" data-type="text" data-pk="" data-source="" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ trans('store.keyword') }}" data-value="{{ $descriptions[$codeLang]['keyword'] ?? '' }}" data-original-title="" title="">{{ $descriptions[$codeLang]['keyword'] ?? '' }}</a></i><br>
                           <br>
                           @endforeach
@@ -164,7 +164,7 @@
                         <td>{{ trans('store.description') }}</td>
                         <td>
                           @foreach ($languages->toArray() as  $codeLang => $lang)
-                            {{ $languages[$codeLang]->name }} <img src="{{ asset($languages[$codeLang]->icon )}}" style="width:20px">:<br>
+                            {{ $languages[$codeLang]->name }} <img src="{{ sc_file($languages[$codeLang]->icon )}}" style="width:20px">:<br>
                           <i><a href="#" class="editable-required editable editable-click" data-name="{{ 'description__'.$codeLang }}" data-type="text" data-pk="" data-source="" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ trans('store.description') }}" data-value="{{ $descriptions[$codeLang]['description'] ?? '' }}" data-original-title="" title="">{{ $descriptions[$codeLang]['description'] ?? '' }}</a></i><br>
                           <br>
                           @endforeach
@@ -187,7 +187,7 @@
 
 @push('styles')
 <!-- Ediable -->
-<link rel="stylesheet" href="{{ asset('admin/plugin/bootstrap-editable.css')}}">
+<link rel="stylesheet" href="{{ sc_file('admin/plugin/bootstrap-editable.css')}}">
 <style type="text/css">
   #maintain_content img{
     max-width: 100%;
@@ -198,7 +198,7 @@
 @if (empty($dataNotFound))
 @push('scripts')
 <!-- Ediable -->
-<script src="{{ asset('admin/plugin/bootstrap-editable.min.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/bootstrap-editable.min.js')}}"></script>
 
 <script type="text/javascript">
 
@@ -250,7 +250,7 @@ $(document).ready(function() {
   </script>
 
 {{-- //Pjax --}}
-<script src="{{ asset('admin/plugin/jquery.pjax.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/jquery.pjax.js')}}"></script>
 
 <script>
 //Logo

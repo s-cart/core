@@ -276,8 +276,8 @@
 @endpush
 
 @push('scripts')
-  <script src="{{ asset('admin/plugin/chartjs/highcharts.js') }}"></script>
-  <script src="{{ asset('admin/plugin/chartjs/highcharts-3d.js') }}"></script>
+  <script src="{{ sc_file('admin/plugin/chartjs/highcharts.js') }}"></script>
+  <script src="{{ sc_file('admin/plugin/chartjs/highcharts-3d.js') }}"></script>
   <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function () {
       var myChart = Highcharts.chart('chart-days', {

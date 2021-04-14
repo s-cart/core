@@ -1,6 +1,9 @@
 <?php 
 use SCart\Core\Admin\Models\AdminConfig;
 use SCart\Core\Admin\Models\AdminStore;
+use SCart\Core\Front\Models\ShopStoreBlockContent;
+use SCart\Core\Front\Models\ShopLink;
+use SCart\Core\Front\Models\ShopStoreCss;
 
 if (!function_exists('sc_admin_can_config')) {
     /**
@@ -118,14 +121,14 @@ if (!function_exists('sc_config_group')) {
 
 if (!function_exists('sc_store')) {
     /**
-     * Get info store
+     * Get info store, table shop_store
      *
      * @param   [string] $key      [$key description]
      * @param   [null|int]  $store    store id
      *
      * @return  [mix] 
      */
-    function sc_store($key = null, $store = null)
+    function sc_store($key = null, $store = null, $default = null)
     {
         $store = ($store == null) ? config('app.storeId') : $store;
 
@@ -158,7 +161,7 @@ if (!function_exists('sc_store')) {
         if ($key == null) {
             return $allStoreInfo;
         }
-        return $allStoreInfo[$key] ?? null;
+        return $allStoreInfo[$key] ?? $default;
     }
 }
 
@@ -176,6 +179,37 @@ if (!function_exists('sc_store_active')) {
             default:
                 return AdminStore::getListAllActive();
                 break;
+        }
+    }
+}
+
+/*
+Get all block content
+ */
+if (!function_exists('sc_link')) {
+    function sc_link()
+    {
+        return ShopLink::getGroup();
+    }
+}
+
+/*
+Get all layouts
+ */
+if (!function_exists('sc_store_block')) {
+    function sc_store_block()
+    {
+        return ShopStoreBlockContent::getLayout();
+    }
+}
+
+
+if (!function_exists('sc_store_css')) {
+    function sc_store_css()
+    {
+        $css =  ShopStoreCss::where('store_id', config('app.storeId'))->first();
+        if ($css) {
+            return $css->css;
         }
     }
 }

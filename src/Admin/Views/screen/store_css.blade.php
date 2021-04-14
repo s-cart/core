@@ -57,13 +57,13 @@
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('admin/plugin/mirror/doc/docs.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/plugin/mirror/lib/codemirror.css')}}">
+<link rel="stylesheet" href="{{ sc_file('admin/plugin/mirror/doc/docs.css')}}">
+<link rel="stylesheet" href="{{ sc_file('admin/plugin/mirror/lib/codemirror.css')}}">
 @endpush
 
 @push('scripts')
-<script src="{{ asset('admin/plugin/mirror/lib/codemirror.js')}}"></script>
-<script src="{{ asset('admin/plugin/mirror/mode/css/css.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/mirror/lib/codemirror.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/mirror/mode/css/css.js')}}"></script>
 <script>
     window.onload = function() {
       editor = CodeMirror(document.getElementById("css"), {

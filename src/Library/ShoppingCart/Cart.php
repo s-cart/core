@@ -474,7 +474,7 @@ class Cart
                         'rowId'     => $item->rowId,
                         'name'      => $product->getName(),
                         'qty'       => $item->qty,
-                        'image'     => asset($product->getThumb()),
+                        'image'     => sc_file($product->getThumb()),
                         'price'     => $product->getFinalPrice(),
                         'showPrice' => $product->showPrice(),
                         'url'       => $product->getUrl(),

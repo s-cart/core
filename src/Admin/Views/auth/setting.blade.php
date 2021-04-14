@@ -88,7 +88,7 @@
                                                 <i class="fa fa-info-circle"></i> {{ $errors->first('avatar') }}
                                             </span>
                                         @endif
-                                    <div id="preview_avatar" class="img_holder"><img src="{{ asset(old('avatar',$user['avatar']??'')) }}"></div>
+                                    <div id="preview_avatar" class="img_holder"><img src="{{ sc_file(old('avatar',$user['avatar']??'')) }}"></div>
                                 </div>
                             </div>
 

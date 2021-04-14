@@ -133,7 +133,7 @@ class ShopCategoryController extends RootFrontController
                     'products' => $products,
                     'subCategory' => $subCategory,
                     'layout_page' => 'shop_product_list',
-                    'og_image' => asset($category->getImage()),
+                    'og_image' => sc_file($category->getImage()),
                     'filter_sort' => $filter_sort,
                 )
             );

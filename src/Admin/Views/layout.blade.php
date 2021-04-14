@@ -6,36 +6,36 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="icon" href="{{ asset('images/icon.png') }}" type="image/png" sizes="16x16">
+  <link rel="icon" href="{{ sc_file('images/icon.png') }}" type="image/png" sizes="16x16">
   <title>{{sc_config_admin('ADMIN_TITLE')}} | {{ $title??'' }}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/fontawesome-free/css/all.min.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/jqvmap/jqvmap.min.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/jqvmap/jqvmap.min.css')}}">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/summernote/summernote-bs4.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/summernote/summernote-bs4.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
   <!-- iCheck -->
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/iCheck/square/blue.css')}}">
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/iCheck/square/blue.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   @if (!Admin::isLoginPage() && !Admin::isLogoutPage())
   <!-- Select2 -->
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/select2/css/select2.min.css')}}">
   <!-- Daterange picker -->
-  {{-- <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/daterangepicker/daterangepicker.css')}}"> --}}
+  {{-- <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/daterangepicker/daterangepicker.css')}}"> --}}
   <!-- Tempusdominus Bbootstrap 4 -->
-  {{-- <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}"> --}}
+  {{-- <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}"> --}}
 
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
 
   @section('block_component_css')
@@ -44,9 +44,9 @@
 
   @endif
 
-  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/jquery-ui/jquery-ui.min.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/jquery-ui/jquery-ui.min.css')}}">
 
-  <link rel="stylesheet" href="{{ asset('admin/LTE/dist/css/adminlte.min.css')}}">
+  <link rel="stylesheet" href="{{ sc_file('admin/LTE/dist/css/adminlte.min.css')}}">
 
   @stack('styles')
 
@@ -130,51 +130,51 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{ asset('admin/LTE/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="{{ asset('admin/LTE/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 {{-- <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script> --}}
 <!-- Bootstrap 4 -->
-<script src="{{ asset('admin/LTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 {{-- <!-- ChartJS -->
-<script src="{{ asset('admin/LTE/plugins/chart.js/Chart.min.js')}}"></script> --}}
+<script src="{{ sc_file('admin/LTE/plugins/chart.js/Chart.min.js')}}"></script> --}}
 <!-- JQVMap -->
-<script src="{{ asset('admin/LTE/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{ asset('admin/LTE/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
 <!-- daterangepicker -->
-{{-- <script src="{{ asset('admin/LTE/plugins/moment/moment.min.js')}}"></script>
-<script src="{{ asset('admin/LTE/plugins/daterangepicker/daterangepicker.js')}}"></script> --}}
+{{-- <script src="{{ sc_file('admin/LTE/plugins/moment/moment.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/daterangepicker/daterangepicker.js')}}"></script> --}}
 <!-- Tempusdominus Bootstrap 4 -->
-{{-- <script src="{{ asset('admin/LTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script> --}}
+{{-- <script src="{{ sc_file('admin/LTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script> --}}
 <!-- Summernote -->
-<script src="{{ asset('admin/LTE/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
-<script src="{{ asset('admin/LTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 
 
 @if (!Admin::isLoginPage() && !Admin::isLogoutPage())
-{{-- <script src="{{ asset('admin/AdminLTE/bower_components/raphael/raphael.min.js')}}"></script>
-<script src="{{ asset('admin/AdminLTE/bower_components/morris.js/morris.min.js')}}"></script> --}}
+{{-- <script src="{{ sc_file('admin/AdminLTE/bower_components/raphael/raphael.min.js')}}"></script>
+<script src="{{ sc_file('admin/AdminLTE/bower_components/morris.js/morris.min.js')}}"></script> --}}
 <!-- Sparkline -->
-<script src="{{ asset('admin/LTE/plugins/sparklines/sparkline.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/sparklines/sparkline.js')}}"></script>
 <!-- FastClick -->
-<script src="{{ asset('admin/LTE/plugins/fastclick/fastclick.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('admin/LTE/dist/js/adminlte.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/dist/js/adminlte.js')}}"></script>
 {{-- sweetalert2 --}}
-<script src="{{ asset('admin/plugin/sweetalert2.all.min.js')}}"></script>
-{{-- <script src="{{ asset('admin/plugin/promise-polyfill.js')}}"></script> --}}
+<script src="{{ sc_file('admin/plugin/sweetalert2.all.min.js')}}"></script>
+{{-- <script src="{{ sc_file('admin/plugin/promise-polyfill.js')}}"></script> --}}
 <!-- Select2 -->
-<script src="{{ asset('admin/LTE/plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/select2/js/select2.full.min.js')}}"></script>
 {{-- switch --}}
-<script src="{{ asset('admin/plugin/bootstrap-switch.min.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/bootstrap-switch.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-{{-- <script src="{{ asset('admin/LTE/dist/js/demo.js')}}"></script> --}}
+{{-- <script src="{{ sc_file('admin/LTE/dist/js/demo.js')}}"></script> --}}
 @endif
-<script src="{{ asset('admin/LTE/plugins/iCheck/icheck.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/iCheck/icheck.min.js')}}"></script>
 
 @stack('scripts')
 

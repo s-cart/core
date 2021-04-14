@@ -93,7 +93,7 @@
                 </div>
               </div>
               <div id="preview_image" class="img_holder"><img
-                src="{{ asset(old('image',$brand['image']??'images/no-image.jpg')) }}">
+                src="{{ sc_file(old('image',$brand['image']??'images/no-image.jpg')) }}">
               </div>
               @if ($errors->has('image'))
               <span class="text-sm">
@@ -221,7 +221,7 @@
 
 @push('scripts')
     {{-- //Pjax --}}
-   <script src="{{ asset('admin/plugin/jquery.pjax.js')}}"></script>
+   <script src="{{ sc_file('admin/plugin/jquery.pjax.js')}}"></script>
 
   <script type="text/javascript">
 

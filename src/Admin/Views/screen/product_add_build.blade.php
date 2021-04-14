@@ -173,7 +173,7 @@
                                 @endif
                                 <div id="preview_image" class="img_holder">
                                     @if (old('image'))
-                                        <img src="{{ asset(old('image')) }}">
+                                        <img src="{{ sc_file(old('image')) }}">
                                     @endif
                                     
                                 </div>
@@ -193,7 +193,7 @@
                                                 title="Remove" class="btn btn-flat btn-danger removeImage"><i
                                                     class="fa fa-times"></i></span></span></div>
                                     <div id="preview_sub_image_{{ $key }}" class="img_holder"><img
-                                            src="{{ asset($sub_image) }}"></div>
+                                            src="{{ sc_file($sub_image) }}"></div>
                                 </div>
 
                                 @endif

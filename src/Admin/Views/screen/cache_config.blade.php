@@ -61,12 +61,12 @@
 
 @push('styles')
 <!-- Ediable -->
-<link rel="stylesheet" href="{{ asset('admin/plugin/bootstrap-editable.css')}}">
+<link rel="stylesheet" href="{{ sc_file('admin/plugin/bootstrap-editable.css')}}">
 @endpush
 
 @push('scripts')
 <!-- Ediable -->
-<script src="{{ asset('admin/plugin/bootstrap-editable.min.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/bootstrap-editable.min.js')}}"></script>
 
 <script type="text/javascript">
   // Editable

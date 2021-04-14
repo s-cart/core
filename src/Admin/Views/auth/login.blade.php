@@ -8,7 +8,7 @@
       <div class="wrap-login100 main-login">
         <form action="{{ sc_route_admin('admin.login') }}" method="post">
           <div class="col-md-12">
-            <img src="{{ asset(sc_store('logo')) }}" alt="logo" class="logo">
+            <img src="{{ sc_file(sc_store('logo')) }}" alt="logo" class="logo">
           </div>
           <div class="login-title-des col-md-12 p-b-41">
             <a><b>{{sc_config_admin('ADMIN_NAME')}}</b></a>
@@ -76,7 +76,7 @@
     @push('styles')
     <style type="text/css">
       .container-login100 {
-        background-image: url({!! asset('images/bg-system.jpg') !!});
+        background-image: url({!! sc_file('images/bg-system.jpg') !!});
       }
     </style>
     @endpush

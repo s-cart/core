@@ -45,10 +45,10 @@
                     @php
                         $pathImage = $template['config']['image'] ?? '';
                     @endphp
-                   <td>{!!sc_image_render(asset('templates/'.$key.'/'.$pathImage)??'','50px','', $template['config']['name']??'')!!}</td>
+                   <td>{!!sc_image_render(sc_file('templates/'.$key.'/'.$pathImage)??'','50px','', $template['config']['name']??'')!!}</td>
                    <td>{{ $template['config']['name']??'' }}</td>
                    <td>{{ $key??'' }}</td>
-                   <td class="pointer" onclick="imagedemo('{{ asset('templates/'.$key.'/images/demo.jpg') }}')"><a>{{ trans('template.click_here') }}</a></td>
+                   <td class="pointer" onclick="imagedemo('{{ sc_file('templates/'.$key.'/images/demo.jpg') }}')"><a>{{ trans('template.click_here') }}</a></td>
                    <td>{{ $template['config']['auth']??'' }}</td>
                    <td><a href="{{ $template['config']['website']??'' }}" target=_new><i class="fa fa-link" aria-hidden="true"></i>Link</a></td>
                    <td>{{ $template['config']['version']??'' }}</td>

@@ -285,15 +285,15 @@
 
 @push('styles')
 <!-- Ediable -->
-<link rel="stylesheet" href="{{ asset('admin/plugin/nestable/jquery.nestable.min.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/plugin/iconpicker/fontawesome-iconpicker.min.css')}}">
+<link rel="stylesheet" href="{{ sc_file('admin/plugin/nestable/jquery.nestable.min.css')}}">
+<link rel="stylesheet" href="{{ sc_file('admin/plugin/iconpicker/fontawesome-iconpicker.min.css')}}">
 @endpush
 
 @push('scripts')
 <!-- Ediable -->
 
-<script src="{{ asset('admin/plugin/nestable/jquery.nestable.min.js')}}"></script>
-<script src="{{ asset('admin/plugin/iconpicker/fontawesome-iconpicker.min.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/nestable/jquery.nestable.min.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/iconpicker/fontawesome-iconpicker.min.js')}}"></script>
 
 <script type="text/javascript">
 $('.remove_menu').click(function(event) {

@@ -157,7 +157,7 @@ function sc_image_render($path, $width = null, $height = null, $alt = null, $tit
     $style = '';
     $style .= ($width) ? ' width:' . $width . ';' : '';
     $style .= ($height) ? ' height:' . $height . ';' : '';
-    return '<img  alt="' . $alt . '" title="' . $title . '" ' . (($options) ?? '') . ' src="' . asset($image) . '"   ' . ($style ? 'style="' . $style . '"' : '') . '   >';
+    return '<img  alt="' . $alt . '" title="' . $title . '" ' . (($options) ?? '') . ' src="' . sc_file($image) . '"   ' . ($style ? 'style="' . $style . '"' : '') . '   >';
 }
 
 /*

@@ -171,7 +171,7 @@
                                 @endif
                                 <div id="preview_image" class="img_holder">
                                     @if (old('image',$news['image']??''))
-                                    <img src="{{ asset(old('image',$news['image']??'')) }}">
+                                    <img src="{{ sc_file(old('image',$news['image']??'')) }}">
                                     @endif
 
                                 </div>

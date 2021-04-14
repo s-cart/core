@@ -116,7 +116,7 @@
 
 @push('scripts')
     {{-- //Pjax --}}
-   <script src="{{ asset('admin/plugin/jquery.pjax.js')}}"></script>
+   <script src="{{ sc_file('admin/plugin/jquery.pjax.js')}}"></script>
 
   <script type="text/javascript">
 

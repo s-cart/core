@@ -88,7 +88,7 @@
                                         @endif
                                         <div id="preview_avatar" class="img_holder">
                                         @if (old('avatar',$user['avatar']??''))
-                                            <img src="{{ asset(old('avatar',$user['avatar']??'')) }}">
+                                            <img src="{{ sc_file(old('avatar',$user['avatar']??'')) }}">
                                         @endif
                                         </div>
                                 </div>

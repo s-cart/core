@@ -208,7 +208,7 @@
                                 @endif
                                 <div id="preview_image" class="img_holder">
                                     @if (old('image',$product->image))
-                                        <img src="{{ asset(old('image',$product->image)) }}">
+                                        <img src="{{ sc_file(old('image',$product->image)) }}">
                                     @endif
                                 </div>
                                 @php
@@ -229,7 +229,7 @@
                                                 title="Remove" class="btn btn-flat btn-danger removeImage"><i
                                                     class="fa fa-times"></i></span></span></div>
                                     <div id="preview_sub_image_{{ $key }}" class="img_holder"><img
-                                            src="{{ asset($sub_image) }}"></div>
+                                            src="{{ sc_file($sub_image) }}"></div>
                                 </div>
 
                                 @endif
@@ -1044,7 +1044,7 @@
 @push('styles')
 
 {{-- input image --}}
-{{-- <link rel="stylesheet" href="{{ asset('admin/plugin/fileinput.min.css')}}"> --}}
+{{-- <link rel="stylesheet" href="{{ sc_file('admin/plugin/fileinput.min.css')}}"> --}}
 
 @endpush
 
@@ -1052,7 +1052,7 @@
 @include($templatePathAdmin.'component.ckeditor_js')
 
 {{-- input image --}}
-{{-- <script src="{{ asset('admin/plugin/fileinput.min.js')}}"></script> --}}
+{{-- <script src="{{ sc_file('admin/plugin/fileinput.min.js')}}"></script> --}}
 
 
 

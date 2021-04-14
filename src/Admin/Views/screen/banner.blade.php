@@ -39,7 +39,7 @@
                                         @endif
                                     <div id="preview_image" class="img_holder">
                                         @if (old('image',$banner['image']??''))
-                                        <img src="{{ asset(old('image',$banner['image']??'')) }}">
+                                        <img src="{{ sc_file(old('image',$banner['image']??'')) }}">
                                         @endif
                                     </div>
                                 </div>
@@ -184,15 +184,15 @@
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('admin/plugin/mirror/doc/docs.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/plugin/mirror/lib/codemirror.css')}}">
+<link rel="stylesheet" href="{{ sc_file('admin/plugin/mirror/doc/docs.css')}}">
+<link rel="stylesheet" href="{{ sc_file('admin/plugin/mirror/lib/codemirror.css')}}">
 @endpush
 
 @push('scripts')
-<script src="{{ asset('admin/plugin/mirror/lib/codemirror.js')}}"></script>
-<script src="{{ asset('admin/plugin/mirror/mode/javascript/javascript.js')}}"></script>
-<script src="{{ asset('admin/plugin/mirror/mode/css/css.js')}}"></script>
-<script src="{{ asset('admin/plugin/mirror/mode/htmlmixed/htmlmixed.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/mirror/lib/codemirror.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/mirror/mode/javascript/javascript.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/mirror/mode/css/css.js')}}"></script>
+<script src="{{ sc_file('admin/plugin/mirror/mode/htmlmixed/htmlmixed.js')}}"></script>
 <script>
     window.onload = function() {
       editor = CodeMirror(document.getElementById("html"), {

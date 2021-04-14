@@ -131,7 +131,7 @@ class ShopProductController extends RootFrontController
                     'product' => $product,
                     'productRelation' => $productRelation,
                     'goToStore' => $product->goToStore(),
-                    'og_image' => asset($product->getImage()),
+                    'og_image' => sc_file($product->getImage()),
                     'layout_page' => 'shop_product_detail',
                 )
             );

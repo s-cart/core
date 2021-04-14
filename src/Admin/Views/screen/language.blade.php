@@ -89,7 +89,7 @@
               </span>
               @endif
               <div id="preview_icon" class="img_holder"><img
-                src="{{ asset(old('icon',$language['icon']??'images/no-image.jpg')) }}">
+                src="{{ sc_file(old('icon',$language['icon']??'images/no-image.jpg')) }}">
               </div>
             </div>
           </div>
@@ -231,7 +231,7 @@
 
 @push('scripts')
     {{-- //Pjax --}}
-   <script src="{{ asset('admin/plugin/jquery.pjax.js')}}"></script>
+   <script src="{{ sc_file('admin/plugin/jquery.pjax.js')}}"></script>
 
   <script type="text/javascript">
 

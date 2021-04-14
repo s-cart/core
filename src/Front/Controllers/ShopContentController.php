@@ -325,7 +325,7 @@ class ShopContentController extends RootFrontController
                     'description' => $page->description,
                     'keyword' => $page->keyword,
                     'page' => $page,
-                    'og_image' => asset($page->getImage()),
+                    'og_image' => sc_file($page->getImage()),
                     'layout_page' => 'shop_page',
                 )
             );
@@ -410,7 +410,7 @@ class ShopContentController extends RootFrontController
                     'news' => $news,
                     'description' => $news->description,
                     'keyword' => $news->keyword,
-                    'og_image' => asset($news->getImage()),
+                    'og_image' => sc_file($news->getImage()),
                     'layout_page' => 'shop_news_detail',
                 )
             );

@@ -1,31 +1,8 @@
 <?php
 
-use SCart\Core\Front\Models\ShopStoreBlockContent;
-use SCart\Core\Front\Models\ShopLink;
-use SCart\Core\Front\Models\ShopStoreCss;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
-
-/*
-Get all block content
- */
-if (!function_exists('sc_link')) {
-    function sc_link()
-    {
-        return ShopLink::getGroup();
-    }
-}
-
-/*
-Get all layouts
- */
-if (!function_exists('sc_store_block')) {
-    function sc_store_block()
-    {
-        return ShopStoreBlockContent::getLayout();
-    }
-}
 
 /*
 String to Url
@@ -61,16 +38,6 @@ if (!function_exists('sc_word_format_url')) {
     }
 }
 
-
-if (!function_exists('sc_store_css')) {
-    function sc_store_css()
-    {
-        $css =  ShopStoreCss::where('store_id', config('app.storeId'))->first();
-        if($css) {
-            return $css->css;
-        }
-    }
-}
 
 if (!function_exists('sc_url_render')) {
     /*
@@ -382,5 +349,14 @@ if (!function_exists('sc_datetime_to_date')) {
             return null;
         }
         return  date($format, strtotime($datetime));
+    }
+}
+
+/**
+ * Process path file
+ */
+if (!function_exists('sc_file')) {
+    function sc_file($pathFile = null, $security = null) {
+        return asset($pathFile, $security);
     }
 }
