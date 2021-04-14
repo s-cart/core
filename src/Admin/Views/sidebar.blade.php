@@ -2,8 +2,7 @@
    <aside class="main-sidebar sidebar-light-pink elevation-4 sidebar-no-expand">
     <!-- Brand Logo -->
     <a href="{{ sc_route_admin('admin.home') }}" class="brand-link navbar-secondary"">
-      S-Cart
-      <span class="brand-text font-weight-light">Admin</span>
+      {!! sc_config_admin('ADMIN_LOGO') !!}
     </a>
 
     <!-- Sidebar -->
