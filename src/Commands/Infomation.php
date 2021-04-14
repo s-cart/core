@@ -35,7 +35,6 @@ class Infomation extends Command
         $this->info('Version: '.config('s-cart.version'));
         $this->info('Sub-version: '.config('s-cart.sub-version'));
         $this->info('Core: '.config('s-cart.core'));
-        $this->info('Sub-core: '.config('s-cart.sub-core'));
         $this->info('Type: '.config('s-cart.type'));
         $this->info('Homepage: '.config('s-cart.homepage'));
         $this->info('Github: '.config('s-cart.github'));
