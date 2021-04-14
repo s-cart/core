@@ -7,7 +7,7 @@ return [
     'expire' => 'Expire',
     'api_connection_required' => 'Require connection',
     'api_connection_required_help' => '<i class="fa fa-warning text-red" aria-hidden="true"></i> Connection account is required to use the API<br>
-    <a href="https://s-cart.org/docs/master/api-shop-info.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true"></i>See full infomation</a>
+    <a href="https://s-cart.org/en/docs/master/api-shop-info.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true"></i>See full infomation</a>
     <hr>
     <b>API list support:</b><br>
     <i>
