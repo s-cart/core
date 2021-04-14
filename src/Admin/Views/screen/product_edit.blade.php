@@ -445,11 +445,11 @@
                                                 <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
                                                 </div>
-                                                <input type="date" style="width: 100px;" id="price_promotion_start"
+                                                <input type="text" style="width: 100px;" id="price_promotion_start"
                                                     name="price_promotion_start"
                                                     value="{!!old('price_promotion_start', sc_datetime_to_date($product->promotionPrice->date_start))!!}"
                                                     class="form-control price_promotion_start date_time"
-                                                    placeholder="" />
+                                                    placeholder="yyyy-mm-dd" />
                                             </div>
 
                                             <label>{{ trans('product.price_promotion_end') }}</label>
@@ -457,11 +457,11 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
                                                 </div>
-                                                <input type="date" style="width: 100px;" id="price_promotion_end"
+                                                <input type="text" style="width: 100px;" id="price_promotion_end"
                                                     name="price_promotion_end"
                                                     value="{!!old('price_promotion_end', sc_datetime_to_date($product->promotionPrice->date_end))!!}"
                                                     class="form-control price_promotion_end date_time"
-                                                    placeholder="" />
+                                                    placeholder="yyyy-mm-dd" />
                                             </div>
                                     </div>
                                 </div>
@@ -695,9 +695,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
                                     </div>
-                                    <input type="date" style="width: 100px;" id="date_available" name="date_available"
+                                    <input type="text" style="width: 100px;" id="date_available" name="date_available"
                                         value="{!!old('date_available',$product->date_available)!!}"
-                                        class="form-control date_available date_time" placeholder="" />
+                                        class="form-control date_available date_time" placeholder="yyyy-mm-dd" />
                                 </div>
                                 @if ($errors->has('date_available'))
                                 <span class="form-text">
@@ -1080,12 +1080,12 @@ $('#add_product_promotion').click(function(event) {
         +'      <label>{{ trans('product.price_promotion_start') }}</label>'
         +'      <div class="input-group">'
         +'          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span></div>'
-        +'          <input type="date" style="width: 150px;"  id="price_promotion_start" name="price_promotion_start" value="" class="form-control input-sm price_promotion_start date_time" placeholder="" />'
+        +'          <input type="text" style="width: 150px;"  id="price_promotion_start" name="price_promotion_start" value="" class="form-control input-sm price_promotion_start date_time" placeholder="yyyy-mm-dd" />'
         +'      </div>'
         +'      <label>{{ trans('product.price_promotion_end') }}</label>'
         +'      <div class="input-group">'
         +'          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span></div>'
-        +'          <input type="date" style="width: 150px;"  id="price_promotion_end" name="price_promotion_end" value="" class="form-control input-sm price_promotion_end date_time" placeholder="" />'
+        +'          <input type="text" style="width: 150px;"  id="price_promotion_end" name="price_promotion_end" value="" class="form-control input-sm price_promotion_end date_time" placeholder="yyyy-mm-dd" />'
         +'      </div>'
         +'  </div>'
         +'</div>');
@@ -1094,10 +1094,11 @@ $('#add_product_promotion').click(function(event) {
         $(this).closest('.price_promotion').remove();
         $('#add_product_promotion').show();
     });
-    /*$('.date_time').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
-    })*/
+    $(function () {
+      $(".date_time").datepicker({
+          dateFormat: "yy-mm-dd"
+      });
+  });
 });
 $('.removePromotion').click(function(event) {
     $('#add_product_promotion').show();
@@ -1177,12 +1178,6 @@ $('.removeAttribute').click(function(event) {
     $(this).closest('tr').remove();
 });
 //end select attributes
-
-//Date picker
-// $('.date_time').datepicker({
-//   autoclose: true,
-//   format: 'yyyy-mm-dd'
-// })
 
 $('textarea.editor').ckeditor(
     {

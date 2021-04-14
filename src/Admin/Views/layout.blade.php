@@ -44,6 +44,8 @@
 
   @endif
 
+  <link rel="stylesheet" href="{{ asset('admin/LTE/plugins/jquery-ui/jquery-ui.min.css')}}">
+
   <link rel="stylesheet" href="{{ asset('admin/LTE/dist/css/adminlte.min.css')}}">
 
   @stack('styles')
@@ -184,6 +186,13 @@
 @include($templatePathAdmin.'component.alerts')
 @show
 
+<script>
+  $(function () {
+      $(".date_time").datepicker({
+          dateFormat: "yy-mm-dd"
+      });
+  });
+</script>
 
 </body>
 </html>

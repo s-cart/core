@@ -298,8 +298,8 @@
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                    <input type="date" id="birthday" data-date-format="YYYY-MM-DD" class="form-control"
-                                        name="birthday"
+                                    <input type="text" id="birthday" class="form-control date_time"
+                                        name="birthday" placeholder="yyyy-mm-dd"
                                         value="{{ (old('birthday', $customer['birthday'] ?? ''))}}">
                                     </div>
                                     @if($errors->has('birthday'))

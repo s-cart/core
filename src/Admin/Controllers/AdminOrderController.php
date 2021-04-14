@@ -157,9 +157,9 @@ class AdminOrderController extends RootAdminController
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_order.index') . '" id="button_search">
                     <div class="input-group float-left">
-                        <input type="date" style="width: 120px;" name="from_to" id="from_to" class="form-control input-sm date_time rounded-0" placeholder="" /> &nbsp; 
+                        <input type="text" style="width: 120px;" name="from_to" id="from_to" class="form-control input-sm date_time rounded-0" placeholder="yyyy-mm-dd" /> &nbsp; 
                         <label>To</label> &nbsp;
-                        <input type="date" style="width: 120px;" name="end_to" class="form-control input-sm date_time rounded-0" placeholder="" /> &nbsp;
+                        <input type="text" style="width: 120px;" name="end_to" class="form-control input-sm date_time rounded-0" placeholder="yyyy-mm-dd" /> &nbsp;
                         <div class="btn-group">
                             <select class="form-control rounded-0" name="order_status">
                             <option value="">'.trans('order.admin.search_order_status').'</option>

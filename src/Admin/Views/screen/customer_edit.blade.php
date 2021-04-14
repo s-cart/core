@@ -297,7 +297,7 @@
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                    <input type="date" id="birthday" data-date-format="YYYY-MM-DD" class="form-control"
+                                    <input type="text" id="birthday" class="form-control date_time" placeholder="yyyy-mm-dd"
                                         name="birthday" 
                                         value="{{ (old('birthday', $customer['birthday'] ?? ''))}}">
                                     </div>
