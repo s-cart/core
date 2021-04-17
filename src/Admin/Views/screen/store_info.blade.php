@@ -52,6 +52,20 @@
                             </a>
                       </td>
                     </tr>
+
+                    <tr>
+                      <td>{{ trans('store.icon') }}</td>
+                      <td>
+                          <div class="input-group">
+                              <input type="hidden" id="icon" name="icon" value="{{ $store->icon }}" class="form-control input-sm icon" placeholder=""  />
+                          </div>
+                          <div id="preview_icon" class="img_holder">{!! sc_image_render($store->icon,'100px', '', 'icon') !!}</div>
+                            <a data-input="icon" data-preview="preview_icon" data-type="logo" class="lfm pointer">
+                              <i class="fa fa-image"></i> {{trans('product.admin.choose_image')}}
+                            </a>
+                      </td>
+                    </tr>
+
               
                     <tr>
                       <td><i class="fas fa-phone-alt"></i> {{ trans('store.phone') }}</td>
@@ -254,7 +268,7 @@ $(document).ready(function() {
 
 <script>
 //Logo
-  $('.logo').change(function() {
+  $('.logo, .icon').change(function() {
         $.ajax({
         url: '{{ sc_route_admin('admin_store.update') }}',
         type: 'POST',
