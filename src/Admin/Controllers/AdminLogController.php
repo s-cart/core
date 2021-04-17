@@ -83,7 +83,7 @@ class AdminLogController extends RootAdminController
                 'path' => '<code>' . $row['path'] . '</code>',
                 'ip' => $row['ip'],
                 'user_agent' => $row['user_agent'],
-                'input' => $row['input'],
+                'input' => htmlspecialchars($row['input']),
                 'created_at' => $row['created_at'],
                 'action' => '
                   <span  onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('log.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
