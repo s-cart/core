@@ -5,11 +5,6 @@ use Illuminate\Support\Facades\Route;
 $suffix = sc_config('SUFFIX_URL')??'';
 $langUrl = config('app.seoLang'); 
 
-//Include route custom
-if (file_exists(base_path('routes/myroute.php'))) {
-    require_once base_path('routes/myroute.php');
-}
-
 //Route plugin
 Route::group(
     [
@@ -18,7 +13,11 @@ Route::group(
     function () {
         foreach (glob(app_path() . '/Plugins/*/*/Route.php') as $filename) {
             require_once $filename;
-        }       
+        }
+        //Include route custom
+        if (file_exists(base_path('routes/myroute.php'))) {
+            require_once base_path('routes/myroute.php');
+        }  
     }
 );
 
