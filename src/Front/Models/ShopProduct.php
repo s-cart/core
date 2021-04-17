@@ -324,7 +324,7 @@ class ShopProduct extends Model
         $promotion = $this->promotionPrice;
         if ($promotion) {
             if (($promotion['date_end'] >= date("Y-m-d") || $promotion['date_end'] === null)
-                && ($promotion['date_start'] <= date("Y-m-d") || $promotion['date_start'] === null)
+                && ($promotion['date_start'] <= date("Y-m-d H:i:s") || $promotion['date_start'] === null)
                 && $promotion['status_promotion'] = 1) {
                 return $promotion['price_promotion'];
             }
