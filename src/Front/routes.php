@@ -6,8 +6,8 @@ $suffix = sc_config('SUFFIX_URL')??'';
 $langUrl = config('app.seoLang'); 
 
 //Include route custom
-if (file_exists(base_path('routes/customize.php'))) {
-    require_once base_path('routes/customize.php');
+if (file_exists(base_path('routes/myroute.php'))) {
+    require_once base_path('routes/myroute.php');
 }
 
 //Route plugin
