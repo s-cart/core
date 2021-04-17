@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 $suffix = sc_config('SUFFIX_URL')??'';
 $langUrl = config('app.seoLang'); 
 
+//Include route custom
+if (file_exists(base_path('routes/web.php'))) {
+    require_once base_path('routes/web.php');
+}
+
 //Route plugin
 Route::group(
     [
