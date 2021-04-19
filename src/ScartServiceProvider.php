@@ -152,6 +152,10 @@ class ScartServiceProvider extends ServiceProvider
             config(['mail.mailers.smtp.password' => $smtpPassword]);
             config(['mail.from.address' => ($smtpFrom ?? sc_store('email'))]);
             config(['mail.from.name' => ($smtpName ?? sc_store('title'))]);
+        } else {
+            //Set default
+            config(['mail.from.address' => (config('mail.from.address')) ? config('mail.from.address'): sc_store('email')]);
+            config(['mail.from.name' => (config('mail.from.name')) ? config('mail.from.name'): sc_store('title')]);
         }
         //email
 
