@@ -384,7 +384,26 @@ class ShopAccountController extends RootFrontController
      *
      * @return  [redirect] 
      */
-    public function postUpdateAddress(Request $request, $id)
+    public function postUpdateAddressFront(...$params) 
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            $id = $params[1] ?? '';
+            sc_lang_switch($lang);
+        } else {
+            $id = $params[0] ?? '';
+        }
+        return $this->_postUpdateAddress($id);
+    }
+
+    /**
+     * Process update address
+     *
+     * @param   Request  $request  [$request description]
+     *
+     * @return  [redirect] 
+     */
+    private function _postUpdateAddress($id)
     {
         $customer = auth()->user();
         $data = request()->all();
@@ -458,8 +477,8 @@ class ShopAccountController extends RootFrontController
         if (!empty($data['default'])) {
             (new ShopCustomer)->find($customer->id)->update(['address_id' => $id]);
         }
-        return redirect()->route('customer.address_list')
-            ->with(['success' => trans('account.update_success')]);
+        return redirect(sc_route('customer.address_list'))
+            ->with(['success' => sc_language_render('account.update_success')]);
     }
 
     /**

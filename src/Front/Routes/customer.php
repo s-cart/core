@@ -31,7 +31,7 @@ Route::group(
             ->name('customer.address_list');
         $router->get('/'.$prefixCustomerUpdateAddres.'/{id}', 'ShopAccountController@updateAddressProcessFront')
             ->name('customer.update_address');
-        $router->post('/'.$prefixCustomerUpdateAddres.'/{id}', 'ShopAccountController@postUpdateAddress')
+        $router->post('/'.$prefixCustomerUpdateAddres.'/{id}', 'ShopAccountController@postUpdateAddressFront')
             ->name('customer.post_update_address');
         $router->post('/'.$prefixCustomerDeleteAddres, 'ShopAccountController@deleteAddress')
             ->name('customer.delete_address');
