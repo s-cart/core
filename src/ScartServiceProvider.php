@@ -38,7 +38,7 @@ class ScartServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/Config/validation.php', 'validation');
         $this->mergeConfigFrom(__DIR__.'/Config/lfm.php', 'lfm');
         $this->mergeConfigFrom(__DIR__.'/Config/s-cart.php', 's-cart');
-        $this->loadViewsFrom(__DIR__.'/Admin/Views', 's-cart');
+        $this->loadViewsFrom(__DIR__.'/Views', 's-cart');
 
         $this->registerPublishing();
         
@@ -178,7 +178,7 @@ class ScartServiceProvider extends ServiceProvider
         view()->share('modelNews', (new ShopNews));
         view()->share('modelPage', (new ShopPage));
         //
-        view()->share('templatePathAdmin', (config('admin.customize') ? 'admin.': 's-cart::'));
+        view()->share('templatePathAdmin', 's-cart::');
 
 
     }
@@ -276,7 +276,7 @@ class ScartServiceProvider extends ServiceProvider
     protected function registerPublishing()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/Admin/Views'  => resource_path('views/admin')], 'sc:view-admin');
+            $this->publishes([__DIR__.'/Views'  => resource_path('views/vendor/s-cart')], 'sc:view');
             $this->publishes([__DIR__.'/Config/admin.php' => config_path('admin.php')], 'sc:config-admin');
             $this->publishes([__DIR__.'/Config/validation.php' => config_path('validation.php')], 'sc:config-validation');
             $this->publishes([__DIR__.'/Publishing/database' => base_path('database')], 'sc:migrate-database');

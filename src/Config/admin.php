@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'customize'           => false, 
     'theme'               => ['lightblue', 'dark', 'blue', 'white', 'pink'],
     'theme_default'       => 'lightblue',
     'theme_define'        => [

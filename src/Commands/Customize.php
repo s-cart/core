@@ -33,7 +33,7 @@ class Customize extends Command
         switch ($obj) {
             case 'admin':
                 $this->call('vendor:publish', ['--tag' => 'sc:config-admin']);
-                $this->call('vendor:publish', ['--tag' => 'sc:view-admin']);
+                $this->call('vendor:publish', ['--tag' => 'sc:view']);
                 break;
             
             case 'validation':
