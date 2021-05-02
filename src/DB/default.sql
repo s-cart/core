@@ -30,8 +30,8 @@ INSERT INTO `__SC_DB_PREFIX__admin_menu` (`id`, `parent_id`, `sort`, `title`, `i
 (28, 9, 4,'admin.menu_titles.error_log', 'far fa-clone','','',0),
 (29, 25, 0,'admin.menu_titles.email_template', 'fas fa-bars','admin::email_template',null,0),
 (30, 9, 5,'admin.menu_titles.localisation', 'fab fa-shirtsinbulk','',null,0),
-(31, 30, 0,'admin.menu_titles.language', 'fas fa-language','admin::language',null,0),
-(32, 30, 0,'admin.menu_titles.currency', 'far fa-money-bill-alt','admin::currency',null,0),
+(31, 30, 1,'admin.menu_titles.language', 'fas fa-language','admin::language',null,0),
+(32, 30, 3,'admin.menu_titles.currency', 'far fa-money-bill-alt','admin::currency',null,0),
 (33, 7, 101,'admin.menu_titles.banner', 'fas fa-image','admin::banner',null,0),
 (34, 5, 5,'admin.menu_titles.backup_restore', 'fas fa-save','admin::backup',null,0),
 (35, 8, 202,'admin.menu_titles.plugin', 'fas fa-puzzle-piece','','PLUGIN',0),
@@ -64,7 +64,8 @@ INSERT INTO `__SC_DB_PREFIX__admin_menu` (`id`, `parent_id`, `sort`, `title`, `i
 (65, 0, 250,'admin.menu_titles.ADMIN_SHOP_SETTING', 'fas fa-store-alt','','ADMIN_SHOP_SETTING',0),
 (66, 59, 1,'admin.menu_titles.api_config', 'fas fa fa-cog','admin::api_connection',null,0),
 (67, 65, 5,'admin.menu_titles.layout', 'far fa-object-group','',null,0),
-(68, 27, 5,'admin.menu_titles.custom_field', 'fa fa-american-sign-language-interpreting','admin::custom_field',null,0);
+(68, 27, 5,'admin.menu_titles.custom_field', 'fa fa-american-sign-language-interpreting','admin::custom_field',null,0),
+(69, 30, 2,'admin.menu_titles.language_manager', 'fa fa-universal-access','admin::language_manager',null,0);
 
 /*admin_permission*/
 INSERT INTO `__SC_DB_PREFIX__admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at`) VALUES 
