@@ -27,14 +27,14 @@
                 </tr>
 
                 <tr>
-                  <td>{!! sc_language_render('email.admin.smtp_mode') !!}</td>
+                  <td>{!! sc_language_render('email.email_action.smtp_mode') !!}</td>
                   <td><input class="check-data-config-global"  type="checkbox" name="smtp_mode" {{ sc_config('smtp_mode', session('adminStoreId'))?"checked":"" }}></td>
                 </tr>
 
                </tbody>
                <tfoot>
                  <tr>
-                  <td colspan="2">{!! sc_language_render('email.admin.help_note') !!}</td>
+                  <td colspan="2">{!! sc_language_render('email.email_action.help_note') !!}</td>
                 </tr>
 
               </tfoot>

@@ -15,8 +15,8 @@ class AdminLanguageController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => sc_language_render('language.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('language.add_new_title'),
+            'title' => sc_language_render('admin.language.list'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('admin.language.add_new_title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_language.delete'),
@@ -30,12 +30,12 @@ class AdminLanguageController extends RootAdminController
 
         $listTh = [
             'id' => 'ID',
-            'name' => sc_language_render('language.name'),
-            'code' => sc_language_render('language.code'),
-            'icon' => sc_language_render('language.icon'),
-            'rtl' => sc_language_render('language.layout_rtl'),
-            'sort' => sc_language_render('language.sort'),
-            'status' => sc_language_render('language.status'),
+            'name' => sc_language_render('admin.language.name'),
+            'code' => sc_language_render('admin.language.code'),
+            'icon' => sc_language_render('admin.language.icon'),
+            'rtl' => sc_language_render('admin.language.layout_rtl'),
+            'sort' => sc_language_render('admin.language.sort'),
+            'status' => sc_language_render('admin.language.status'),
             'action' => sc_language_render('action.title'),
         ];
 
@@ -116,7 +116,7 @@ public function edit($id)
         return 'No data';
     }
     $data = [
-        'title' => sc_language_render('language.list'),
+        'title' => sc_language_render('admin.language.list'),
         'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
         'icon' => 'fa fa-indent',
@@ -132,12 +132,12 @@ public function edit($id)
 
     $listTh = [
         'id' => 'ID',
-        'name' => sc_language_render('language.name'),
-        'code' => sc_language_render('language.code'),
-        'icon' => sc_language_render('language.icon'),
-        'rtl' => sc_language_render('language.layout_rtl'),
-        'sort' => sc_language_render('language.sort'),
-        'status' => sc_language_render('language.status'),
+        'name' => sc_language_render('admin.language.name'),
+        'code' => sc_language_render('admin.language.code'),
+        'icon' => sc_language_render('admin.language.icon'),
+        'rtl' => sc_language_render('admin.language.layout_rtl'),
+        'sort' => sc_language_render('admin.language.sort'),
+        'status' => sc_language_render('admin.language.status'),
         'action' => sc_language_render('action.title'),
     ];
     $obj = new ShopLanguage;

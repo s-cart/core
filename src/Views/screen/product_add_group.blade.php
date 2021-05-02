@@ -205,7 +205,7 @@
 
                         {{-- sort --}}
                         <div class="form-group row   {{ $errors->has('sort') ? ' text-red' : '' }}">
-                            <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('product.sort') }}</label>
+                            <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.sort') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="input-group-prepend">

@@ -27,7 +27,7 @@ class AdminStoreMaintainController extends RootAdminController
             return 'no data';
         }
         $data = [
-            'title' => sc_language_render('admin.store_maintain.title'),
+            'title' => sc_language_render('admin.maintain.title'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',

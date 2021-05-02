@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">
-                            <h2>{{ sc_language_render('store.css') }}</h2>
+                            <h2>{{ sc_language_render('store.admin.css') }}</h2>
                             <div class="form-group row {{ $errors->has('css') ? 'text-red' : '' }}">
                                 <div class="col-sm-12">
                                         <textarea  id="css" name="css">{{ old('css',$css??'') }}</textarea>

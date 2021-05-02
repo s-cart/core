@@ -7,22 +7,22 @@
 
     <div class="card">
       <div class="card-header with-border">
-        <h3 class="card-title">{{ sc_language_render('config.setting_website') }}</h3>
+        <h3 class="card-title">{{ sc_language_render('admin.config.setting_website') }}</h3>
       </div>
 
       <div class="card-body table-responsivep-0">
        <table class="table table-hover box-body text-wrap table-bordered">
          <tbody>
           <tr>
-            <td>{{ sc_language_render('config.LOG_SLACK_WEBHOOK_URL') }}</td>
+            <td>{{ sc_language_render('admin.config.LOG_SLACK_WEBHOOK_URL') }}</td>
             <td><a href="#" class="updateInfo editable editable-click" data-name="LOG_SLACK_WEBHOOK_URL" data-type="password" data-pk="" data-source="" data-url="{{ sc_route_admin('admin_config_global.update') }}" data-title="" data-value="{{ (sc_admin_can_config()) ? sc_config_global('LOG_SLACK_WEBHOOK_URL') : 'hidden' }}" data-original-title="" title=""></a></td>
           </tr>
           <tr>
-            <td>{{ sc_language_render('config.GOOGLE_CHAT_WEBHOOK_URL') }}</td>
+            <td>{{ sc_language_render('admin.config.GOOGLE_CHAT_WEBHOOK_URL') }}</td>
             <td><a href="#" class="updateInfo editable editable-click" data-name="GOOGLE_CHAT_WEBHOOK_URL" data-type="password" data-pk="" data-source="" data-url="{{ sc_route_admin('admin_config_global.update') }}" data-title="" data-value="{{ (sc_admin_can_config()) ? sc_config_global('GOOGLE_CHAT_WEBHOOK_URL') : 'hidden' }}" data-original-title="" title=""></a></td>
           </tr>
           <tr>
-            <td>{{ sc_language_render('config.CHATWORK_CHAT_WEBHOOK_URL') }}</td>
+            <td>{{ sc_language_render('admin.config.CHATWORK_CHAT_WEBHOOK_URL') }}</td>
             <td><a href="#" class="updateInfo editable editable-click" data-name="CHATWORK_CHAT_WEBHOOK_URL" data-type="password" data-pk="" data-source="" data-url="{{ sc_route_admin('admin_config_global.update') }}" data-title="" data-value="{{ (sc_admin_can_config()) ? sc_config_global('CHATWORK_CHAT_WEBHOOK_URL') : 'hidden' }}" data-original-title="" title=""></a></td>
           </tr>
          </tbody>

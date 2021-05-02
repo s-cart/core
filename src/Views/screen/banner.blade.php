@@ -86,7 +86,7 @@
 
 
                             <div class="form-group row {{ $errors->has('target') ? ' text-red' : '' }}">
-                                    <label for="target" class="col-sm-2 col-form-label">{{ sc_language_render('admin.banner.admin.select_target') }}</label>
+                                    <label for="target" class="col-sm-2 col-form-label">{{ sc_language_render('admin.banner.select_target') }}</label>
                                     <div class="col-sm-8">
                                         <select class="form-control target select2" style="width: 100%;" name="target" >
                                             <option value=""></option>

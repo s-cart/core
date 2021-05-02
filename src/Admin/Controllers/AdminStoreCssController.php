@@ -23,7 +23,7 @@ class AdminStoreCssController extends RootAdminController
             return 'no data';
         }
         $data = [
-            'title' => sc_language_render('store.css'),
+            'title' => sc_language_render('store.admin.css'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',

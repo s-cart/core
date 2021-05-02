@@ -475,11 +475,11 @@
 @if (sc_config_admin('product_weight'))
                         {{-- weight --}}
                         <div class="form-group row kind  {{ $errors->has('weight_class') ? ' text-red' : '' }}">
-                            <label for="weight_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.weight_class') }}</label>
+                            <label for="weight_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.weight_class') }}</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm weight_class select2" style="width: 100%;"
                                     name="weight_class">
-                                    <option value="">{{ sc_language_render('product.select_weight') }}<option>
+                                    <option value="">{{ sc_language_render('product.admin.select_weight') }}<option>
                                     @foreach ($listWeight as $k => $v)
                                     <option value="{{ $k }}"
                                         {{ (old('weight_class') == $k || (!old()) ) ? 'selected':'' }}>
@@ -520,11 +520,11 @@
 @if (sc_config_admin('product_length'))
                         {{-- length --}}
                         <div class="form-group row kind  {{ $errors->has('length_class') ? ' text-red' : '' }}">
-                            <label for="length_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.length_class') }}</label>
+                            <label for="length_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.length_class') }}</label>
                             <div class="col-sm-8">
                                 <select class="form-control input-sm length_class select2" style="width: 100%;"
                                     name="length_class">
-                                    <option value="">{{ sc_language_render('product.select_length') }}<option>
+                                    <option value="">{{ sc_language_render('product.admin.select_length') }}<option>
                                     @foreach ($listLength as $k => $v)
                                     <option value="{{ $k }}"
                                         {{ (old('length_class') == $k || (!old()) ) ? 'selected':'' }}>
@@ -651,7 +651,7 @@
 
                         {{-- sort --}}
                         <div class="form-group row   {{ $errors->has('sort') ? ' text-red' : '' }}">
-                            <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('product.sort') }}</label>
+                            <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.sort') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="input-group-prepend">

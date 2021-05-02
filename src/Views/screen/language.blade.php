@@ -22,7 +22,7 @@
         <div class="card-body">
 
           <div class="form-group row {{ $errors->has('name') ? ' text-red' : '' }}">
-            <label for="name" class="col-sm-2 col-form-label">{{ sc_language_render('language.name') }}</label>
+            <label for="name" class="col-sm-2 col-form-label">{{ sc_language_render('admin.language.name') }}</label>
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -41,7 +41,7 @@
           </div>
 
           <div class="form-group row {{ $errors->has('code') ? ' text-red' : '' }}">
-            <label for="code" class="col-sm-2 col-form-label">{!! sc_language_render('language.code') !!}</label>
+            <label for="code" class="col-sm-2 col-form-label">{!! sc_language_render('admin.language.code') !!}</label>
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -70,7 +70,7 @@
 
 
           <div class="form-group row {{ $errors->has('icon') ? ' text-red' : '' }}">
-            <label for="icon" class="col-sm-2 col-form-label">{!! sc_language_render('language.icon') !!}</label>
+            <label for="icon" class="col-sm-2 col-form-label">{!! sc_language_render('admin.language.icon') !!}</label>
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -96,7 +96,7 @@
 
 
           <div class="form-group row {{ $errors->has('rtl') ? ' text-red' : '' }}">
-            <label for="rtl" class="col-sm-2 col-form-label">{!! sc_language_render('language.layout_rtl') !!}</label>
+            <label for="rtl" class="col-sm-2 col-form-label">{!! sc_language_render('admin.language.layout_rtl') !!}</label>
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <input class="checkbox" type="checkbox" id="rtl" name="rtl"
@@ -114,7 +114,7 @@
           </div>
 
           <div class="form-group row {{ $errors->has('sort') ? ' text-red' : '' }}">
-            <label for="sort" class="col-sm-2 col-form-label">{!! sc_language_render('language.sort') !!}</label>
+            <label for="sort" class="col-sm-2 col-form-label">{!! sc_language_render('admin.language.sort') !!}</label>
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <input type="number" id="sort" name="sort"
@@ -133,7 +133,7 @@
 
 
           <div class="form-group row {{ $errors->has('status') ? ' text-red' : '' }}">
-            <label for="status" class="col-sm-2 col-form-label">{!! sc_language_render('language.status') !!}</label>
+            <label for="status" class="col-sm-2 col-form-label">{!! sc_language_render('admin.language.status') !!}</label>
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <input class="checkbox" type="checkbox" id="status" name="status"

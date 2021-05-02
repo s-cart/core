@@ -20,7 +20,7 @@
 
                     <div class="card-body">
                             <div class="form-group row {{ $errors->has('name') ? ' text-red' : '' }}">
-                                <label for="name" class="col-sm-2 col-form-label">{{ sc_language_render('admin.linkname') }}</label>
+                                <label for="name" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.name') }}</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="form-group row {{ $errors->has('url') ? ' text-red' : '' }}">
-                                <label for="url" class="col-sm-2 col-form-label">{{ sc_language_render('admin.linkurl') }}</label>
+                                <label for="url" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.url') }}</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -51,7 +51,7 @@
                                             </span>
                                         @else
                                             <span class="form-text">
-                                                <i class="fa fa-info-circle"></i> {{ sc_language_render('admin.linkhelper_url') }}
+                                                <i class="fa fa-info-circle"></i> {{ sc_language_render('admin.link.helper_url') }}
                                             </span>
                                         @endif
                                 </div>
@@ -59,7 +59,7 @@
 
 
                             <div class="form-group row {{ $errors->has('target') ? ' text-red' : '' }}">
-                                <label for="target" class="col-sm-2 col-form-label">{{ sc_language_render('admin.linkselect_target') }}</label>
+                                <label for="target" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.select_target') }}</label>
                                 <div class="col-sm-8">
                                     <select class="form-control target select2" style="width: 100%;" name="target" >
                                         <option value=""></option>
@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="form-group row {{ $errors->has('group') ? ' text-red' : '' }}">
-                                <label for="group" class="col-sm-2 col-form-label">{{ sc_language_render('admin.linkselect_group') }}</label>
+                                <label for="group" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.select_group') }}</label>
                                 <div class="col-sm-8">
                                     <select class="form-control group select2" style="width: 100%;" name="group" >
                                         <option value=""></option>
@@ -95,7 +95,7 @@
 
 
                             <div class="form-group row {{ $errors->has('sort') ? ' text-red' : '' }}">
-                                <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('admin.linksort') }}</label>
+                                <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.sort') }}</label>
                                 <div class="col-sm-8">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -112,7 +112,7 @@
                             </div>
 
                             <div class="form-group row ">
-                                <label for="status" class="col-sm-2 col-form-label">{{ sc_language_render('admin.linkstatus') }}</label>
+                                <label for="status" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.status') }}</label>
                                 <div class="col-sm-8">
                                 <input class="checkbox" type="checkbox" name="status"  {{ old('status',(empty($link['status'])?0:1))?'checked':''}}>
 

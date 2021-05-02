@@ -47,7 +47,7 @@ class PermissionController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => sc_language_render('admin.permissionadmin.list'),
+            'title' => sc_language_render('admin.permission.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_permission.delete'),
@@ -65,10 +65,10 @@ class PermissionController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id' => sc_language_render('admin.permissionid'),
-            'slug' => sc_language_render('admin.permissionslug'),
-            'name' => sc_language_render('admin.permissionname'),
-            'http_path' => sc_language_render('admin.permissionhttp_path'),
+            'id' => 'ID',
+            'slug' => sc_language_render('admin.permission.slug'),
+            'name' => sc_language_render('admin.permission.name'),
+            'http_path' => sc_language_render('admin.permission.http_path'),
             'updated_at' => sc_language_render('admin.updated_at'),
             'action' => sc_language_render('action.title'),
         ];
@@ -153,9 +153,9 @@ class PermissionController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => sc_language_render('admin.permissionadmin.add_new_title'),
+            'title' => sc_language_render('admin.permission.admin.add_new_title'),
             'subTitle' => '',
-            'title_description' => sc_language_render('admin.permissionadmin.add_new_des'),
+            'title_description' => sc_language_render('admin.permission.admin.add_new_des'),
             'icon' => 'fa fa-plus',
             'permission' => [],
             'routeAdmin' => $this->routeAdmin,
@@ -179,7 +179,7 @@ class PermissionController extends RootAdminController
             'name' => 'required|string|max:50|unique:"'.AdminPermission::class.'",name',
             'slug' => 'required|regex:/(^([0-9A-Za-z\._\-]+)$)/|unique:"'.AdminPermission::class.'",slug|string|max:50|min:3',
         ], [
-            'slug.regex' => sc_language_render('admin.permissionslug_validate'),
+            'slug.regex' => sc_language_render('admin.permission.slug_validate'),
         ]);
 
         if ($validator->fails()) {
@@ -234,7 +234,7 @@ class PermissionController extends RootAdminController
             'name' => 'required|string|max:50|unique:"'.AdminPermission::class.'",name,' . $permission->id . '',
             'slug' => 'required|regex:/(^([0-9A-Za-z\._\-]+)$)/|unique:"'.AdminPermission::class.'",slug,' . $permission->id . '|string|max:50|min:3',
         ], [
-            'slug.regex' => sc_language_render('admin.permissionslug_validate'),
+            'slug.regex' => sc_language_render('admin.permission.slug_validate'),
         ]);
 
         if ($validator->fails()) {

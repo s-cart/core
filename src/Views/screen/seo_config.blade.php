@@ -11,7 +11,7 @@
                <tbody>
                 <tr>
                   <td>
-                    {!! sc_language_render('seo.url_seo_lang') !!}
+                    {!! sc_language_render('admin.seo.url_seo_lang') !!}
                   </td>
                   <td>
                     <input class="check-data-config-global"  type="checkbox" name="url_seo_lang" {{ sc_config_global('url_seo_lang')?"checked":"" }}>

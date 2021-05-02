@@ -38,13 +38,13 @@ class AdminCategoryController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'     => sc_language_render('category.id'),
-            'image'  => sc_language_render('category.image'),
-            'title'  => sc_language_render('category.title'),
-            'parent' => sc_language_render('category.parent'),
-            'top'    => sc_language_render('category.top'),
-            'status' => sc_language_render('category.status'),
-            'sort'   => sc_language_render('category.sort'),
+            'id'     => 'ID',
+            'image'  => sc_language_render('admin.category.image'),
+            'title'  => sc_language_render('admin.category.title'),
+            'parent' => sc_language_render('admin.category.parent'),
+            'top'    => sc_language_render('admin.category.top'),
+            'status' => sc_language_render('admin.category.status'),
+            'sort'   => sc_language_render('admin.category.sort'),
             'action' => sc_language_render('action.title'),
         ];
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
@@ -126,9 +126,9 @@ class AdminCategoryController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => sc_language_render('category.admin.add_new_title'),
+            'title' => sc_language_render('admin.category.add_new_title'),
             'subTitle' => '',
-            'title_description' => sc_language_render('category.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.category.add_new_des'),
             'icon' => 'fa fa-plus',
             'languages' => $this->languages,
             'category' => [],
@@ -161,8 +161,8 @@ class AdminCategoryController extends RootAdminController
                 'descriptions.*.keyword' => 'nullable|string|max:200',
                 'descriptions.*.description' => 'nullable|string|max:300',
             ], [
-                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('category.title')]),
-                'alias.regex' => sc_language_render('category.alias_validate'),
+                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.category.title')]),
+                'alias.regex' => sc_language_render('admin.category.alias_validate'),
             ]
         );
 
@@ -249,8 +249,8 @@ class AdminCategoryController extends RootAdminController
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:300',
             ], [
-                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('category.title')]),
-                'alias.regex'                   => sc_language_render('category.alias_validate'),
+                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.category.title')]),
+                'alias.regex'                   => sc_language_render('admin.category.alias_validate'),
             ]
         );
 

@@ -16,7 +16,7 @@ class AdminConfigGlobalController extends RootAdminController
     public function webhook()
     {
         $data = [
-            'title' => sc_language_render('config.webhook'),
+            'title' => sc_language_render('admin.config.webhook'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',  
         ];

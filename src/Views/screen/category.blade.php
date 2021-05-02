@@ -41,7 +41,7 @@
 
                         <div class="form-group row  {{ $errors->has('descriptions.'.$code.'.title') ? ' text-red' : '' }}">
                             <label for="{{ $code }}__title"
-                                class="col-sm-2 col-form-label">{{ sc_language_render('category.title') }} <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span></label>
+                                class="col-sm-2 col-form-label">{{ sc_language_render('admin.category.title') }} <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span></label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -66,7 +66,7 @@
                         <div
                             class="form-group row  {{ $errors->has('descriptions.'.$code.'.keyword') ? ' text-red' : '' }}">
                             <label for="{{ $code }}__keyword"
-                                class="col-sm-2 col-form-label">{{ sc_language_render('category.keyword') }} <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span></label>
+                                class="col-sm-2 col-form-label">{{ sc_language_render('admin.category.keyword') }} <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span></label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -92,7 +92,7 @@
                         <div
                             class="form-group row  {{ $errors->has('descriptions.'.$code.'.description') ? ' text-red' : '' }}">
                             <label for="{{ $code }}__description"
-                                class="col-sm-2 col-form-label">{{ sc_language_render('category.description') }} <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span></label>
+                                class="col-sm-2 col-form-label">{{ sc_language_render('admin.category.description') }} <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span></label>
                             <div class="col-sm-8">
                                     <textarea type="text" id="{{ $code }}__description" 
                                         name="descriptions[{{ $code }}][description]"
@@ -114,7 +114,7 @@
 
                         <div class="form-group row {{ $errors->has('parent') ? ' text-red' : '' }}">
                             <label for="parent"
-                                class="col-sm-2 col-form-label">{{ sc_language_render('category.select_category') }}</label>
+                                class="col-sm-2 col-form-label">{{ sc_language_render('admin.category.select_category') }}</label>
                             <div class="col-sm-8">
                                 <select class="form-control parent select2" style="width: 100%;" name="parent">
                                     <option value=""></option>
@@ -136,7 +136,7 @@
                         </div>
 
                         <div class="form-group row  {{ $errors->has('alias') ? ' text-red' : '' }}">
-                            <label for="alias" class="col-sm-2 col-form-label">{!! sc_language_render('category.alias') !!}</label>
+                            <label for="alias" class="col-sm-2 col-form-label">{!! sc_language_render('admin.category.alias') !!}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -155,7 +155,7 @@
                         </div>                        
 
                         <div class="form-group row  {{ $errors->has('image') ? ' text-red' : '' }}">
-                            <label for="image" class="col-sm-2 col-form-label">{{ sc_language_render('category.image') }}</label>
+                            <label for="image" class="col-sm-2 col-form-label">{{ sc_language_render('admin.category.image') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input type="text" id="image" name="image"
@@ -183,7 +183,7 @@
                         </div>
 
                         <div class="form-group row  {{ $errors->has('sort') ? ' text-red' : '' }}">
-                            <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('category.sort') }}</label>
+                            <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('admin.category.sort') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -202,18 +202,18 @@
                         </div>
 
                         <div class="form-group  row">
-                            <label for="top" class="col-sm-2 col-form-label">{{ sc_language_render('category.top') }}</label>
+                            <label for="top" class="col-sm-2 col-form-label">{{ sc_language_render('admin.category.top') }}</label>
                             <div class="col-sm-8">
                                 <input class="checkbox" type="checkbox" name="top"
                                     {{ old('top',(empty($category['top'])?0:1))?'checked':''}}>
                             </div>
                             <span class="form-text">
-                                <i class="fa fa-info-circle"></i> {{ sc_language_render('category.top_help') }}
+                                <i class="fa fa-info-circle"></i> {{ sc_language_render('admin.category.top_help') }}
                             </span>
                         </div>
 
                         <div class="form-group  row">
-                            <label for="status" class="col-sm-2 col-form-label">{{ sc_language_render('category.status') }}</label>
+                            <label for="status" class="col-sm-2 col-form-label">{{ sc_language_render('admin.category.status') }}</label>
                             <div class="col-sm-8">
                                 <input class="checkbox" type="checkbox" name="status"
                                     {{ old('status',(empty($category['status'])?0:1))?'checked':''}}>

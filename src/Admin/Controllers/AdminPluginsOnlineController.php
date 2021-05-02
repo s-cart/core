@@ -97,7 +97,7 @@ class AdminPluginsOnlineController extends RootAdminController
         $code = sc_word_format_class($code);
 
         $arrPluginLocal = sc_get_all_plugin($code);
-        $title = sc_language_render('plugin.' . $code.'_plugin');
+        $title = sc_language_render('admin.plugin.' . $code.'_plugin');
 
         return view($this->templatePathAdmin.'screen.plugin_online')->with(
             [

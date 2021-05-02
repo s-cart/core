@@ -141,7 +141,7 @@ class LoginController extends RootAdminController
      */
     protected function getFailedLoginMessage()
     {
-        return Lang::has('auth.failed')
+        return lang::has('auth.failed')
         ? sc_language_render('admin.failed')
         : 'These credentials do not match our records.';
     }

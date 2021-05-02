@@ -11,7 +11,7 @@
        <tr>
          <th>{{ sc_language_render('customer.admin.field') }}</th>
          <th>{{ sc_language_render('customer.admin.value') }}</th>
-         <th>{{ sc_language_render('customer.admin.reqired') }}</th>
+         <th>{{ sc_language_render('customer.admin.required') }}</th>
        </tr>
      </thead>
      <tbody>

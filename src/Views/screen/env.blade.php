@@ -11,7 +11,7 @@
                <tbody>
                 <tr>
                   <td>
-                    {!! sc_language_render('env.ADMIN_FOOTER_OFF') !!}
+                    {!! sc_language_render('admin.env.ADMIN_FOOTER_OFF') !!}
                   </td>
                   <td>
                     <input class="check-data-config-global"  type="checkbox" name="ADMIN_FOOTER_OFF" {{ sc_config_global('ADMIN_FOOTER_OFF')?"checked":"" }}>

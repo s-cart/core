@@ -16,20 +16,20 @@ class AdminStoreLinkController extends RootAdminController
         parent::__construct();
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
         $this->arrGroup = [
-            'menu' => sc_language_render('admin.linklink_position.menu'), 
-            'menu_left' => sc_language_render('admin.linklink_position.menu_left'), 
-            'menu_right' => sc_language_render('admin.linklink_position.menu_right'),
-            'footer' => sc_language_render('admin.linklink_position.footer'),
-            'footer_right' => sc_language_render('admin.linklink_position.footer_right'),
-            'footer_left' => sc_language_render('admin.linklink_position.footer_left'),
-            'sidebar' => sc_language_render('admin.linklink_position.sidebar'),
+            'menu' => sc_language_render('admin.link_position.menu'), 
+            'menu_left' => sc_language_render('admin.link_position.menu_left'), 
+            'menu_right' => sc_language_render('admin.link_position.menu_right'),
+            'footer' => sc_language_render('admin.link_position.footer'),
+            'footer_right' => sc_language_render('admin.link_position.footer_right'),
+            'footer_left' => sc_language_render('admin.link_position.footer_left'),
+            'sidebar' => sc_language_render('admin.link_position.sidebar'),
         ];
     }
     public function index()
     {
 
         $data = [
-            'title' => sc_language_render('admin.linklist'),
+            'title' => sc_language_render('admin.link.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_store_link.delete'),
@@ -47,12 +47,12 @@ class AdminStoreLinkController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'name' => sc_language_render('admin.linkname'),
-            'url' => sc_language_render('admin.linkurl'),
-            'target' => sc_language_render('admin.linktarget'),
-            'group' => sc_language_render('admin.linkgroup'),
-            'sort' => sc_language_render('admin.linksort'),
-            'status' => sc_language_render('admin.linkstatus'),
+            'name' => sc_language_render('admin.link.name'),
+            'url' => sc_language_render('admin.link.url'),
+            'target' => sc_language_render('admin.link.target'),
+            'group' => sc_language_render('admin.link.group'),
+            'sort' => sc_language_render('admin.link.sort'),
+            'status' => sc_language_render('admin.link.status'),
             'action' => sc_language_render('action.title'),
         ];
         $dataTmp = AdminLink::getLinkListAdmin();
@@ -81,7 +81,7 @@ class AdminStoreLinkController extends RootAdminController
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_store_link.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="' . sc_language_render('admin.linkadd_new') . '"></i>
+                           <i class="fa fa-plus" title="' . sc_language_render('admin.link.add_new') . '"></i>
                            </a>';
         //=menuRight
 
@@ -96,9 +96,9 @@ class AdminStoreLinkController extends RootAdminController
     public function create()
     {
         $data = [
-            'title'             => sc_language_render('admin.linkadd_new_title'),
+            'title'             => sc_language_render('admin.link.add_new_title'),
             'subTitle'          => '',
-            'title_description' => sc_language_render('admin.linkadd_new_des'),
+            'title_description' => sc_language_render('admin.link.add_new_des'),
             'icon'              => 'fa fa-plus',
             'link'              => [],
             'arrTarget'         => $this->arrTarget,

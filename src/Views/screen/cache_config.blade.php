@@ -13,23 +13,23 @@
          <tbody>
           <tr>
             <td colspan="3">
-              <button type="button" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{ sc_language_render('admin.cache..cache_clear_processing')}}" class="btn btn-flat btn-success clear-cache" data-clear="cache_all">
-                <i class="fas fa-sync-alt"></i> {{ sc_language_render('admin.cache..cache_clear_all') }}
+              <button type="button" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{ sc_language_render('admin.cache.cache_clear_processing')}}" class="btn btn-flat btn-success clear-cache" data-clear="cache_all">
+                <i class="fas fa-sync-alt"></i> {{ sc_language_render('admin.cache.cache_clear_all') }}
               </button>
             </td>
             
           </tr>
           <tr>
-            <td>{{ sc_language_render('admin.cache..cache_status') }}</td>
+            <td>{{ sc_language_render('admin.cache.cache_status') }}</td>
             <td>
-              <a href="#" class="fied-required editable editable-click" data-name="cache_status" data-type="select" data-pk="" data-source="{{ json_encode(['1'=>'ON','0'=>'OFF']) }}" data-url="{{ sc_route_admin('admin_config_global.update') }}" data-title="{{ sc_language_render('admin.cache..cache_status') }}" data-value="{{ sc_config_admin('cache_status') }}" data-original-title="" title=""></a>
+              <a href="#" class="fied-required editable editable-click" data-name="cache_status" data-type="select" data-pk="" data-source="{{ json_encode(['1'=>'ON','0'=>'OFF']) }}" data-url="{{ sc_route_admin('admin_config_global.update') }}" data-title="{{ sc_language_render('admin.cache.cache_status') }}" data-value="{{ sc_config_admin('cache_status') }}" data-original-title="" title=""></a>
             </td>
             <td></td>
           </tr>
           <tr>
-            <td>{{ sc_language_render('admin.cache..cache_time') }}</td>
+            <td>{{ sc_language_render('admin.cache.cache_time') }}</td>
             <td>
-              <a href="#" class="cache-time data-cache_time"  data-name="cache_time" data-type="text" data-pk="" data-url="{{ sc_route_admin('admin_config_global.update') }}" data-title="{{ sc_language_render('admin.cache..cache_time') }}">{{ sc_config_admin('cache_time') }}</a>
+              <a href="#" class="cache-time data-cache_time"  data-name="cache_time" data-type="text" data-pk="" data-url="{{ sc_route_admin('admin_config_global.update') }}" data-title="{{ sc_language_render('admin.cache.cache_time') }}">{{ sc_config_admin('cache_time') }}</a>
             </td>
             <td></td>
           </tr>
@@ -39,8 +39,8 @@
             <td>{{ sc_language_render($config->detail) }}</td>
             <td><input class="check-data-config-global" type="checkbox" name="{{ $config->key }}"  {{ $config->value?"checked":"" }}></td>
             <td>
-              <button type="button" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{ sc_language_render('admin.cache..cache_clear')}}" class="btn btn-flat btn-warning clear-cache" data-clear="{{ $config->key }}">
-                <i class="fas fa-sync-alt"></i> {{ sc_language_render('admin.cache..cache_clear') }}
+              <button type="button" data-loading-text="<i class='fa fa-spinner fa-spin'></i> {{ sc_language_render('admin.cache.cache_clear')}}" class="btn btn-flat btn-warning clear-cache" data-clear="{{ $config->key }}">
+                <i class="fas fa-sync-alt"></i> {{ sc_language_render('admin.cache.cache_clear') }}
               </button>      
             </td>
           </tr>
@@ -147,7 +147,7 @@ $('.clear-cache').click(function() {
 
     
     if(data.error == 0){
-      alertJs('success', '{{ sc_language_render('admin.cache..cache_clear_success') }}');
+      alertJs('success', '{{ sc_language_render('admin.cache.cache_clear_success') }}');
     } else {
       alertJs('error', data.msg);
     }

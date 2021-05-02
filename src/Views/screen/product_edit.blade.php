@@ -518,7 +518,7 @@
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
 
                         <div class="form-group row {{ $errors->has('weight_class') ? ' text-red' : '' }}">
-                            <label for="weight_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.weight_class') }} (<a href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="weight_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.weight_class') }} (<a href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control weight_class select2" style="width: 100%;"
                                     name="weight_class">
@@ -567,7 +567,7 @@
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
 
                         <div class="form-group row {{ $errors->has('length_class') ? ' text-red' : '' }}">
-                            <label for="length_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.length_class') }} (<a href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="length_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.length_class') }} (<a href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
                             <div class="col-sm-8">
                                 <select class="form-control length_class select2" style="width: 100%;"
                                     name="length_class">
@@ -741,7 +741,7 @@
 
                         {{-- Sort --}}
                         <div class="form-group row  {{ $errors->has('sort') ? ' text-red' : '' }}">
-                            <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('product.sort') }}</label>
+                            <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.sort') }}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
