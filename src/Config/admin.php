@@ -35,4 +35,6 @@ return [
         'api_plugin'   => 1,
         'api_template' => 1,
     ],
+    //Prefix path view admin
+    'path_view' => 's-cart-admin::',
 ];

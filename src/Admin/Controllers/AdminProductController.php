@@ -89,7 +89,7 @@ class AdminProductController extends RootAdminController
             $listTh['property'] = sc_language_render('product.property');
         }
         $listTh['status'] = sc_language_render('product.status');
-        $listTh['action'] = sc_language_render('product.action.title');
+        $listTh['action'] = sc_language_render('action.title');
 
         $keyword     = sc_clean(request('keyword') ?? '');
         $category_id = sc_clean(request('category_id') ?? '');
