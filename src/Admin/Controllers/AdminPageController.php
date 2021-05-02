@@ -19,7 +19,7 @@ class AdminPageController extends RootAdminController
     public function index()
     {
         $data = [
-            'title'         => trans('page.admin.list'),
+            'title'         => sc_language_render('admin.page.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_page.delete'),
@@ -37,19 +37,19 @@ class AdminPageController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'title'  => trans('page.title'),
-            'image'  => trans('page.image'),
-            'alias'  => trans('page.alias'),
-            'status' => trans('page.status'),
-            'action' => trans('page.admin.action'),
+            'title'  => sc_language_render('admin.page.title'),
+            'image'  => sc_language_render('admin.page.image'),
+            'alias'  => sc_language_render('admin.page.alias'),
+            'status' => sc_language_render('admin.page.status'),
+            'action' => sc_language_render('action.title'),
         ];
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
-            'id__desc'    => trans('page.admin.sort_order.id_desc'),
-            'id__asc'     => trans('page.admin.sort_order.id_asc'),
-            'title__desc' => trans('page.admin.sort_order.title_desc'),
-            'title__asc'  => trans('page.admin.sort_order.title_asc'),
+            'id__desc'    => sc_language_render('filter_sort.id_desc'),
+            'id__asc'     => sc_language_render('filter_sort.id_asc'),
+            'title__desc' => sc_language_render('filter_sort.title_desc'),
+            'title__asc'  => sc_language_render('filter_sort.title_asc'),
         ];
 
         $dataSearch = [
@@ -67,8 +67,8 @@ class AdminPageController extends RootAdminController
                 'alias' => $row['alias'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_page.edit', ['id' => $row['id']]) . '"><span title="' . trans('page.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-                      <span  onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('language.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
+                    <a href="' . sc_route_admin('admin_page.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                      <span  onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
                 ,
             ];
         }
@@ -76,12 +76,12 @@ class AdminPageController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('page.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_page.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
         //=menuRight
 
@@ -98,8 +98,8 @@ class AdminPageController extends RootAdminController
         //menuSearch        
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_page.index') . '" id="button_search">
-                <div class="input-group input-group" style="width: 250px;">
-                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('page.admin.search_place') . '" value="' . $keyword . '">
+                <div class="input-group input-group" style="width: 350px;">
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('admin.page.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -119,9 +119,9 @@ class AdminPageController extends RootAdminController
     {
         $page = [];
         $data = [
-            'title'             => trans('page.admin.add_new_title'),
+            'title'             => sc_language_render('admin.page.add_new_title'),
             'subTitle'          => '',
-            'title_description' => trans('page.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.page.add_new_des'),
             'icon'              => 'fa fa-plus',
             'languages'         => $this->languages,
             'page'              => $page,
@@ -150,8 +150,8 @@ class AdminPageController extends RootAdminController
                 'descriptions.*.keyword' => 'nullable|string|max:200',
                 'descriptions.*.description' => 'nullable|string|max:300',
             ], [
-                'alias.regex' => trans('page.alias_validate'),
-                'descriptions.*.title.required' => trans('validation.required', ['attribute' => trans('page.title')]),
+                'alias.regex' => sc_language_render('admin.page.alias_validate'),
+                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.page.title')]),
             ]
         );
 
@@ -181,7 +181,7 @@ class AdminPageController extends RootAdminController
         }
         AdminPage::insertDescriptionAdmin($dataDes);
         sc_clear_cache('cache_page');
-        return redirect()->route('admin_page.index')->with('success', trans('page.admin.create_success'));
+        return redirect()->route('admin_page.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -196,7 +196,7 @@ class AdminPageController extends RootAdminController
         }
 
         $data = [
-            'title' => trans('page.admin.edit'),
+            'title' => sc_language_render('action.edit'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -230,8 +230,8 @@ class AdminPageController extends RootAdminController
                 'descriptions.*.description' => 'nullable|string|max:300',
                 'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
             ], [
-                'alias.regex' => trans('page.alias_validate'),
-                'descriptions.*.title.required' => trans('validation.required', ['attribute' => trans('page.title')]),
+                'alias.regex' => sc_language_render('admin.page.alias_validate'),
+                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.page.title')]),
             ]
         );
 
@@ -263,7 +263,7 @@ class AdminPageController extends RootAdminController
         }
         AdminPage::insertDescriptionAdmin($dataDes);
         sc_clear_cache('cache_page');
-        return redirect()->route('admin_page.index')->with('success', trans('page.admin.edit_success'));
+        return redirect()->route('admin_page.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -274,7 +274,7 @@ class AdminPageController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -285,7 +285,7 @@ class AdminPageController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             }
             AdminPage::destroy($arrID);
             sc_clear_cache('cache_page');

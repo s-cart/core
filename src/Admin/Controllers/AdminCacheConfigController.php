@@ -12,7 +12,7 @@ class AdminCacheConfigController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('cache.config_manager.title'),
+            'title' => sc_language_render('admin.cache..title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',        ];
         $configs = AdminConfig::getListConfigByCode(['code' => 'cache']);

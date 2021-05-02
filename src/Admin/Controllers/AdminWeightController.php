@@ -20,8 +20,8 @@ class AdminWeightController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('weight.admin.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . trans('weight.admin.add_new_title'),
+            'title' => sc_language_render('admin.weightlist'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('admin.weightadd_new_title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_weight_unit.delete'),
@@ -34,10 +34,10 @@ class AdminWeightController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('weight.id'),
-            'name' => trans('weight.name'),
-            'description' => trans('weight.description'),
-            'action' => trans('weight.admin.action'),
+            'id' => 'ID',
+            'name' => sc_language_render('admin.weightname'),
+            'description' => sc_language_render('admin.weightdescription'),
+            'action' => sc_language_render('action.title'),
         ];
         $obj = new ShopWeight;
         $obj = $obj->orderBy('id', 'desc');
@@ -50,8 +50,8 @@ class AdminWeightController extends RootAdminController
                 'name' => $row['name'],
                 'description' => $row['description'],
                 'action' => '
-                    <a href="' . sc_route_admin('admin_weight_unit.edit', ['id' => $row['id']]) . '"><span title="' . trans('weight.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('weight.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                    <a href="' . sc_route_admin('admin_weight_unit.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -59,7 +59,7 @@ class AdminWeightController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('weight.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'index';
         return view($this->templatePathAdmin.'screen.weight')
@@ -78,7 +78,7 @@ class AdminWeightController extends RootAdminController
             'name' => 'required|unique:"'.ShopWeight::class.'",name',
             'description' => 'required',
         ], [
-            'name.required' => trans('validation.required'),
+            'name.required' => sc_language_render('validation.required'),
         ]);
 
         if ($validator->fails()) {
@@ -94,7 +94,7 @@ class AdminWeightController extends RootAdminController
         ];
         $obj = ShopWeight::create($dataInsert);
 //
-        return redirect()->route('admin_weight_unit.index')->with('success', trans('weight.admin.create_success'));
+        return redirect()->route('admin_weight_unit.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -108,8 +108,8 @@ public function edit($id)
         return 'No data';
     }
     $data = [
-        'title' => trans('weight.admin.list'),
-        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . trans('weight.admin.edit'),
+        'title' => sc_language_render('admin.weightlist'),
+        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
         'icon' => 'fa fa-indent',
         'urlDeleteItem' => sc_route_admin('admin_weight_unit.delete'),
@@ -124,10 +124,10 @@ public function edit($id)
     ];
 
     $listTh = [
-        'id' => trans('weight.id'),
-        'name' => trans('weight.name'),
-        'description' => trans('weight.description'),
-        'action' => trans('weight.admin.action'),
+        'id' => 'ID',
+        'name' => sc_language_render('admin.weightname'),
+        'description' => sc_language_render('admin.weightdescription'),
+        'action' => sc_language_render('action.title'),
     ];
     $obj = new ShopWeight;
     $obj = $obj->orderBy('id', 'desc');
@@ -140,8 +140,8 @@ public function edit($id)
             'name' => $row['name'],
             'description' => $row['description'],
             'action' => '
-                <a href="' . sc_route_admin('admin_weight_unit.edit', ['id' => $row['id']]) . '"><span title="' . trans('weight.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('weight.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                <a href="' . sc_route_admin('admin_weight_unit.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
             ',
         ];
     }
@@ -149,7 +149,7 @@ public function edit($id)
     $data['listTh'] = $listTh;
     $data['dataTr'] = $dataTr;
     $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = trans('weight.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
     $data['layout'] = 'edit';
     return view($this->templatePathAdmin.'screen.weight')
@@ -168,7 +168,7 @@ public function edit($id)
             'name' => 'required|unique:"'.ShopWeight::class.'",name,' . $obj->id . ',id',
             'description' => 'required',
         ], [
-            'name.required' => trans('validation.required'),
+            'name.required' => sc_language_render('validation.required'),
         ]);
 
         if ($validator->fails()) {
@@ -185,7 +185,7 @@ public function edit($id)
         $obj->update($dataUpdate);
 
 //
-        return redirect()->back()->with('success', trans('weight.admin.edit_success'));
+        return redirect()->back()->with('success', sc_language_render('admin.edit_success'));
 
     }
 
@@ -196,7 +196,7 @@ Need mothod destroy to boot deleting in model
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

@@ -17,7 +17,7 @@ class RoleController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('role.admin.list'),
+            'title' => sc_language_render('admin.role.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_role.delete'),
@@ -35,21 +35,21 @@ class RoleController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id' => trans('role.id'),
-            'slug' => trans('role.slug'),
-            'name' => trans('role.name'),
-            'permission' => trans('role.permission'),
-            'created_at' => trans('role.created_at'),
-            'updated_at' => trans('role.updated_at'),
-            'action' => trans('role.admin.action'),
+            'id' => 'ID',
+            'slug' => sc_language_render('admin.role.slug'),
+            'name' => sc_language_render('admin.role.name'),
+            'permission' => sc_language_render('admin.role.permission'),
+            'created_at' => sc_language_render('admin.role.created_at'),
+            'updated_at' => sc_language_render('admin.updated_at'),
+            'action' => sc_language_render('action.title'),
         ];
         $sort_order = request('sort_order') ?? 'id_desc';
         $keyword = request('keyword') ?? '';
         $arrSort = [
-            'id__desc' => trans('role.admin.sort_order.id_desc'),
-            'id__asc' => trans('role.admin.sort_order.id_asc'),
-            'name__desc' => trans('role.admin.sort_order.name_desc'),
-            'name__asc' => trans('role.admin.sort_order.name_asc'),
+            'id__desc' => sc_language_render('filter_sort.id_desc'),
+            'id__asc' => sc_language_render('filter_sort.id_asc'),
+            'name__desc' => sc_language_render('filter_sort.name_desc'),
+            'name__asc' => sc_language_render('filter_sort.name_asc'),
         ];
         $obj = new AdminRole;
         if ($sort_order && array_key_exists($sort_order, $arrSort)) {
@@ -79,9 +79,9 @@ class RoleController extends RootAdminController
                 'created_at' => $row['created_at'],
                 'updated_at' => $row['updated_at'],
                 'action' => ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '
-                    <a href="' . sc_route_admin('admin_role.edit', ['id' => $row['id']]) . '"><span title="' . trans('role.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_role.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
                     ') 
-                    . ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '<span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>')
+                    . ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '<span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>')
                 ,
             ];
         }
@@ -89,11 +89,11 @@ class RoleController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('role.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
 //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_role.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
 //=menuRight
 
@@ -117,9 +117,9 @@ class RoleController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => trans('role.admin.add_new_title'),
+            'title' => sc_language_render('admin.role.add_new_title'),
             'subTitle' => '',
-            'title_description' => trans('role.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.role.add_new_des'),
             'icon' => 'fa fa-plus',
             'role' => [],
             'permission' => (new AdminPermission)->pluck('name', 'id')->all(),
@@ -144,7 +144,7 @@ class RoleController extends RootAdminController
             'name' => 'required|string|max:50|unique:"'.AdminRole::class.'",name',
             'slug' => 'required|regex:/(^([0-9A-Za-z\._\-]+)$)/|unique:"'.AdminRole::class.'",slug|string|max:50|min:3',
         ], [
-            'slug.regex' => trans('role.slug_validate'),
+            'slug.regex' => sc_language_render('admin.role.slug_validate'),
         ]);
 
         if ($validator->fails()) {
@@ -169,7 +169,7 @@ class RoleController extends RootAdminController
         if ($administrators) {
             $role->administrators()->attach($administrators);
         }
-        return redirect()->route('admin_role.index')->with('success', trans('role.admin.create_success'));
+        return redirect()->route('admin_role.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -183,7 +183,7 @@ class RoleController extends RootAdminController
             return 'no data';
         }
         $data = [
-            'title' => trans('role.admin.edit'),
+            'title' => sc_language_render('action.edit'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -208,7 +208,7 @@ class RoleController extends RootAdminController
             'name' => 'required|string|max:50|unique:"'.AdminRole::class.'",name,' . $role->id . '',
             'slug' => 'required|regex:/(^([0-9A-Za-z\._\-]+)$)/|unique:"'.AdminRole::class.'",slug,' . $role->id . '|string|max:50|min:3',
         ], [
-            'slug.regex' => trans('role.slug_validate'),
+            'slug.regex' => sc_language_render('admin.role.slug_validate'),
         ]);
 
         if ($validator->fails()) {
@@ -236,7 +236,7 @@ class RoleController extends RootAdminController
             $role->administrators()->attach($administrators);
         }
 //
-        return redirect()->route('admin_role.index')->with('success', trans('role.admin.edit_success'));
+        return redirect()->route('admin_role.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -247,7 +247,7 @@ Need mothod destroy to boot deleting in model
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

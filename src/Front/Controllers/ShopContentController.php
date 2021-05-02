@@ -82,7 +82,7 @@ class ShopContentController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_home',
             array(
-                'title' => trans('front.shop'),
+                'title' => sc_language_render('front.shop'),
                 'keyword' => sc_store('keyword'),
                 'description' => sc_store('description'),
                 'products' => $products,
@@ -139,7 +139,7 @@ class ShopContentController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_product_list',
             array(
-                'title' => trans('front.search') . ': ' . $keyword,
+                'title' => sc_language_render('action.search') . ': ' . $keyword,
                 'products' => $products,
                 'layout_page' => 'shop_product_list',
                 'filter_sort' => $filter_sort,
@@ -188,7 +188,7 @@ class ShopContentController extends RootFrontController
         if(sc_captcha_method() && in_array('contact', sc_captcha_page())) {
             if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
                 $dataView = [
-                    'titleButton' => trans('front.contact_form.submit'),
+                    'titleButton' => sc_language_render('action.submit'),
                     'idForm' => 'form-process',
                     'idButtonForm' => 'button-form-process',
                 ];
@@ -199,7 +199,7 @@ class ShopContentController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_contact',
             array(
-                'title'       => trans('front.contact'),
+                'title'       => sc_language_render('contact.page_title'),
                 'description' => '',
                 'keyword'     => '',
                 'layout_page' => 'shop_contact',
@@ -226,13 +226,13 @@ class ShopContentController extends RootFrontController
             'phone' => 'required|regex:/^0[^0][0-9\-]{7,13}$/',
         ];
         $message = [
-            'name.required'    => trans('validation.required', ['attribute' => trans('front.contact_form.name')]),
-            'content.required' => trans('validation.required', ['attribute' => trans('front.contact_form.content')]),
-            'title.required'   => trans('validation.required', ['attribute' => trans('front.contact_form.title')]),
-            'email.required'   => trans('validation.required', ['attribute' => trans('front.contact_form.email')]),
-            'email.email'      => trans('validation.email', ['attribute' => trans('front.contact_form.email')]),
-            'phone.required'   => trans('validation.required', ['attribute' => trans('front.contact_form.phone')]),
-            'phone.regex'      => trans('customer.phone_regex'),
+            'name.required'    => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.name')]),
+            'content.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.content')]),
+            'title.required'   => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.subject')]),
+            'email.required'   => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.email')]),
+            'email.email'      => sc_language_render('validation.email', ['attribute' => sc_language_render('contact.email')]),
+            'phone.required'   => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.phone')]),
+            'phone.regex'      => sc_language_render('customer.phone_regex'),
         ];
 
         if(sc_captcha_method() && in_array('contact', sc_captcha_page())) {
@@ -287,7 +287,7 @@ class ShopContentController extends RootFrontController
         }
 
         return redirect(sc_route('contact'))
-            ->with('success', trans('front.thank_contact'));
+            ->with('success', sc_language_render('contact.thank_contact'));
     }
 
     /**
@@ -364,7 +364,7 @@ class ShopContentController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_news',
             array(
-                'title' => trans('front.blog'),
+                'title' => sc_language_render('front.blog'),
                 'description' => sc_store('description'),
                 'keyword' => sc_store('keyword'),
                 'news' => $news,
@@ -429,8 +429,8 @@ class ShopContentController extends RootFrontController
         $validator = $request->validate([
             'subscribe_email' => 'required|email',
             ], [
-            'email.required' => trans('validation.required'),
-            'email.email'    => trans('validation.email'),
+            'email.required' => sc_language_render('validation.required'),
+            'email.email'    => sc_language_render('validation.email'),
         ]);
         $data       = $request->all();
         $checkEmail = ShopSubscribe::where('email', $data['subscribe_email'])
@@ -439,7 +439,7 @@ class ShopContentController extends RootFrontController
             ShopSubscribe::insert(['email' => $data['subscribe_email']]);
         }
         return redirect()->back()
-            ->with(['success' => trans('subscribe.subscribe_success')]);
+            ->with(['success' => sc_language_render('subscribe.admin.success')]);
     }
 
 }

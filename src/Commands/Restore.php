@@ -42,7 +42,7 @@ class Restore extends Command
                 try {
                     DB::connection(SC_CONNECTION)->transaction(function () use($pathFull){
                         DB::connection(SC_CONNECTION)->unprepared(file_get_contents($pathFull));
-                        echo json_encode(['error' => 0, 'msg' => trans('backup.restore_success')]);
+                        echo json_encode(['error' => 0, 'msg' => sc_language_render('admin.backup.restore_success')]);
                         exit();
                     });
                 } catch (Throwable $e) {

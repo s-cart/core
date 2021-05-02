@@ -47,7 +47,7 @@ class AdminOrderController extends RootAdminController
     {
 
         $data = [
-            'title'         => trans('order.admin.list'),
+            'title'         => sc_language_render('order.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_order.delete'),
@@ -65,17 +65,17 @@ class AdminOrderController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'             => trans('order.admin.id'),
-            'email'          => trans('order.admin.email'),
-            'subtotal'       => trans('order.admin.subtotal'),
-            'shipping'       => trans('order.admin.shipping'),
-            'discount'       => trans('order.admin.discount'),
-            'total'          => trans('order.admin.total'),
-            'payment_method' => trans('order.admin.payment_method_short'),
-            'currency'       => trans('order.admin.currency'),
-            'status'         => trans('order.admin.status'),
-            'created_at'     => trans('order.admin.created_at'),
-            'action'         => trans('order.admin.action'),
+            'id'             => 'ID',
+            'email'          => sc_language_render('order.email'),
+            'subtotal'       => sc_language_render('order.subtotal'),
+            'shipping'       => sc_language_render('order.shipping'),
+            'discount'       => sc_language_render('order.discount'),
+            'total'          => sc_language_render('order.total'),
+            'payment_method' => sc_language_render('order.admin.payment_method_short'),
+            'currency'       => sc_language_render('order.currency'),
+            'status'         => sc_language_render('order.status'),
+            'created_at'     => sc_language_render('admin.created_at'),
+            'action'         => sc_language_render('action.title'),
         ];
         $sort_order   = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword      = sc_clean(request('keyword') ?? '');
@@ -84,12 +84,12 @@ class AdminOrderController extends RootAdminController
         $end_to       = sc_clean(request('end_to') ?? '');
         $order_status = sc_clean(request('order_status') ?? '');
         $arrSort = [
-            'id__desc'         => trans('order.admin.sort_order.id_desc'),
-            'id__asc'          => trans('order.admin.sort_order.id_asc'),
-            'email__desc'      => trans('order.admin.sort_order.email_desc'),
-            'email__asc'       => trans('order.admin.sort_order.email_asc'),
-            'created_at__desc' => trans('order.admin.sort_order.date_desc'),
-            'created_at__asc'  => trans('order.admin.sort_order.date_asc'),
+            'id__desc'         => sc_language_render('filter_sort.id_desc'),
+            'id__asc'          => sc_language_render('filter_sort.id_asc'),
+            'email__desc'      => sc_language_render('filter_sort.alpha_desc', ['alpha' => 'Email']),
+            'email__asc'       => sc_language_render('filter_sort.alpha_asc', ['alpha' => 'Email']),
+            'created_at__desc' => sc_language_render('filter_sort.value_desc', ['value' => 'Date']),
+            'created_at__asc'  => sc_language_render('filter_sort.value_asc', ['value' => 'Date']),
         ];
         $dataSearch = [
             'keyword'      => $keyword,
@@ -121,9 +121,9 @@ class AdminOrderController extends RootAdminController
                 'created_at'     => $row['created_at'],
                 'action'         => '
                                 <a href="' . sc_route_admin('admin_order.detail', ['id' => $row['id']]) . '">
-                                 <span title="' . trans('order.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span>
+                                 <span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span>
                                 </a>&nbsp;
-                                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
+                                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
                 ,
             ];
         }
@@ -131,12 +131,12 @@ class AdminOrderController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('order.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_order.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
         //=menuRight
 
@@ -162,12 +162,12 @@ class AdminOrderController extends RootAdminController
                         <input type="text" style="width: 120px;" name="end_to" class="form-control input-sm date_time rounded-0" placeholder="yyyy-mm-dd" /> &nbsp;
                         <div class="btn-group">
                             <select class="form-control rounded-0" name="order_status">
-                            <option value="">'.trans('order.admin.search_order_status').'</option>
+                            <option value="">'.sc_language_render('order.admin.search_order_status').'</option>
                             ' . $optionStatus . '
                             </select>
                         </div> &nbsp;
-                        <input type="text" name="email" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_email') . '" value="' . $email . '"> &nbsp;
-                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('order.admin.search_id') . '" value="' . $keyword . '">
+                        <input type="text" name="email" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('order.admin.search_email') . '" value="' . $email . '"> &nbsp;
+                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('order.admin.search_id') . '" value="' . $keyword . '">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
@@ -187,9 +187,9 @@ class AdminOrderController extends RootAdminController
     public function create()
     {
         $data = [
-            'title'             => trans('order.admin.add_new_title'),
+            'title'             => sc_language_render('order.admin.add_new_title'),
             'subTitle'          => '',
-            'title_description' => trans('order.admin.add_new_des'),
+            'title_description' => sc_language_render('order.admin.add_new_des'),
             'icon'              => 'fa fa-plus',
         ];
         $paymentMethodTmp = sc_get_plugin_installed('payment', $onlyActive = false);
@@ -198,7 +198,7 @@ class AdminOrderController extends RootAdminController
         }
         $shippingMethodTmp = sc_get_plugin_installed('shipping', $onlyActive = false);
         foreach ($shippingMethodTmp as $key => $value) {
-            $shippingMethod[$key] = trans($value->detail);
+            $shippingMethod[$key] = sc_language_render($value->detail);
         }
         $orderStatus            = $this->statusOrder;
         $currencies             = $this->currency;
@@ -256,32 +256,32 @@ class AdminOrderController extends RootAdminController
             $validate['company'] = 'required|min:3';
         }
         $messages = [
-            'last_name.required'       => trans('validation.required',['attribute'=> trans('cart.last_name')]),
-            'first_name.required'      => trans('validation.required',['attribute'=> trans('cart.first_name')]),
-            'email.required'           => trans('validation.required',['attribute'=> trans('cart.email')]),
-            'address1.required'        => trans('validation.required',['attribute'=> trans('cart.address1')]),
-            'address2.required'        => trans('validation.required',['attribute'=> trans('cart.address2')]),
-            'address3.required'        => trans('validation.required',['attribute'=> trans('cart.address3')]),
-            'phone.required'           => trans('validation.required',['attribute'=> trans('cart.phone')]),
-            'country.required'         => trans('validation.required',['attribute'=> trans('cart.country')]),
-            'postcode.required'        => trans('validation.required',['attribute'=> trans('cart.postcode')]),
-            'company.required'         => trans('validation.required',['attribute'=> trans('cart.company')]),
-            'sex.required'             => trans('validation.required',['attribute'=> trans('cart.sex')]),
-            'birthday.required'        => trans('validation.required',['attribute'=> trans('cart.birthday')]),
-            'email.email'              => trans('validation.email',['attribute'=> trans('cart.email')]),
-            'phone.regex'              => trans('customer.phone_regex'),
-            'postcode.min'             => trans('validation.min',['attribute'=> trans('cart.postcode')]),
-            'country.min'              => trans('validation.min',['attribute'=> trans('cart.country')]),
-            'first_name.max'           => trans('validation.max',['attribute'=> trans('cart.first_name')]),
-            'email.max'                => trans('validation.max',['attribute'=> trans('cart.email')]),
-            'address1.max'             => trans('validation.max',['attribute'=> trans('cart.address1')]),
-            'address2.max'             => trans('validation.max',['attribute'=> trans('cart.address2')]),
-            'address3.max'             => trans('validation.max',['attribute'=> trans('cart.address3')]),
-            'last_name.max'            => trans('validation.max',['attribute'=> trans('cart.last_name')]),
-            'birthday.date'            => trans('validation.date',['attribute'=> trans('cart.birthday')]),
-            'birthday.date_format'     => trans('validation.date_format',['attribute'=> trans('cart.birthday')]),
-            'shipping_method.required' => trans('cart.validation.shippingMethod_required'),
-            'payment_method.required'  => trans('cart.validation.paymentMethod_required'),
+            'last_name.required'       => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.last_name')]),
+            'first_name.required'      => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.first_name')]),
+            'email.required'           => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.email')]),
+            'address1.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.address1')]),
+            'address2.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.address2')]),
+            'address3.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.address3')]),
+            'phone.required'           => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.phone')]),
+            'country.required'         => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.country')]),
+            'postcode.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.postcode')]),
+            'company.required'         => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.company')]),
+            'sex.required'             => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.sex')]),
+            'birthday.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.birthday')]),
+            'email.email'              => sc_language_render('validation.email',['attribute'=> sc_language_render('cart.email')]),
+            'phone.regex'              => sc_language_render('customer.phone_regex'),
+            'postcode.min'             => sc_language_render('validation.min',['attribute'=> sc_language_render('cart.postcode')]),
+            'country.min'              => sc_language_render('validation.min',['attribute'=> sc_language_render('cart.country')]),
+            'first_name.max'           => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.first_name')]),
+            'email.max'                => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.email')]),
+            'address1.max'             => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.address1')]),
+            'address2.max'             => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.address2')]),
+            'address3.max'             => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.address3')]),
+            'last_name.max'            => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.last_name')]),
+            'birthday.date'            => sc_language_render('validation.date',['attribute'=> sc_language_render('cart.birthday')]),
+            'birthday.date_format'     => sc_language_render('validation.date_format',['attribute'=> sc_language_render('cart.birthday')]),
+            'shipping_method.required' => sc_language_render('cart.validation.shippingMethod_required'),
+            'payment_method.required'  => sc_language_render('cart.validation.paymentMethod_required'),
         ];
 
 
@@ -322,7 +322,7 @@ class AdminOrderController extends RootAdminController
             ['code' => 'received', 'value' => 0, 'title' => 'Received', 'sort' => 200, 'order_id' => $order->id],
         ]);
         //
-        return redirect()->route('admin_order.index')->with('success', trans('order.admin.create_success'));
+        return redirect()->route('admin_order.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -349,7 +349,7 @@ class AdminOrderController extends RootAdminController
         }
         return view($this->templatePathAdmin.'screen.order_edit')->with(
             [
-                "title" => trans('order.order_detail'),
+                "title" => sc_language_render('order.order_detail'),
                 "subTitle" => '',
                 'icon' => 'fa fa-file-text-o',
                 "order" => $order,
@@ -388,7 +388,7 @@ class AdminOrderController extends RootAdminController
         $oder = AdminOrder::getOrderAdmin($orderId);
         $product = AdminProduct::getProductAdmin($id);
         if (!$product) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.data_not_found_detail', ['msg' => '#product:'.$id]), 'detail' => '']);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.data_not_found_detail', ['msg' => '#product:'.$id]), 'detail' => '']);
         }
         $arrayReturn = $product->toArray();
         $arrayReturn['renderAttDetails'] = $product->renderAttributeDetailsAdmin($oder->currency, $oder->exchange_rate);
@@ -411,7 +411,7 @@ class AdminOrderController extends RootAdminController
             $oldValue = $orderTotalOrigin->value;
             $order = AdminOrder::getOrderAdmin($orderId);
             if (!$order) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.data_not_found_detail', ['msg' => 'order#'.$orderId]), 'detail' => '']);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.data_not_found_detail', ['msg' => 'order#'.$orderId]), 'detail' => '']);
             }
             $dataRowTotal = [
                 'id' => $id,
@@ -424,7 +424,7 @@ class AdminOrderController extends RootAdminController
             $orderId = $id;
             $order = AdminOrder::getOrderAdmin($orderId);
             if (!$order) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.data_not_found_detail', ['msg' => 'order#'.$orderId]), 'detail' => '']);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.data_not_found_detail', ['msg' => 'order#'.$orderId]), 'detail' => '']);
             }
             $oldValue = $order->{$code};
             $order->update([$code => $value]);
@@ -448,7 +448,7 @@ class AdminOrderController extends RootAdminController
         } else {
             $style = 'style="font-weight:bold;"';
         }
-        $blance = '<tr ' . $style . ' class="data-balance"><td>' . trans('order.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
+        $blance = '<tr ' . $style . ' class="data-balance"><td>' . sc_language_render('order.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
         return response()->json(['error' => 0, 'detail' => 
             [
                 'total' => sc_currency_format($orderUpdated->total),
@@ -459,7 +459,7 @@ class AdminOrderController extends RootAdminController
                 'received' => sc_currency_format($orderUpdated->received),
                 'balance' => $blance,
             ],
-            'msg' => trans('order.admin.update_success')
+            'msg' => sc_language_render('action.update_success')
         ]);
     }
 
@@ -485,7 +485,7 @@ class AdminOrderController extends RootAdminController
             if ($id && $add_qty[$key]) {
                 $product = AdminProduct::getProductAdmin($id);
                 if (!$product) {
-                    return response()->json(['error' => 1, 'msg' => trans('admin.data_not_found_detail', ['msg' => '#'.$id]), 'detail' => '']);
+                    return response()->json(['error' => 1, 'msg' => sc_language_render('admin.data_not_found_detail', ['msg' => '#'.$id]), 'detail' => '']);
                 }
                 $pAttr = json_encode($add_att[$id] ?? []);
                 $items[] = array(
@@ -519,13 +519,13 @@ class AdminOrderController extends RootAdminController
                 AdminOrder::updateSubTotal($orderId);
                 
                 //end update total price
-                return response()->json(['error' => 0, 'msg' => trans('order.admin.update_success')]);
+                return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
             } catch (\Throwable $e) {
                 return response()->json(['error' => 1, 'msg' => 'Error: ' . $e->getMessage()]);
             }
 
         }
-        return response()->json(['error' => 0, 'msg' => trans('order.admin.update_success')]);
+        return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
     }
 
     /**
@@ -548,12 +548,12 @@ class AdminOrderController extends RootAdminController
             $item = $item->fresh();
             $order = AdminOrder::getOrderAdmin($orderId);
             if (!$order) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.data_not_found_detail', ['msg' => '#order:'.$orderId]), 'detail' => '']);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.data_not_found_detail', ['msg' => '#order:'.$orderId]), 'detail' => '']);
             }
             //Add history
             $dataHistory = [
                 'order_id' => $orderId,
-                'content' => trans('product.edit_product') . ' #' . $id . ': ' . $field . ' from ' . $fieldOrg . ' -> ' . $value,
+                'content' => sc_language_render('product.edit_product') . ' #' . $id . ': ' . $field . ' from ' . $fieldOrg . ' -> ' . $value,
                 'admin_id' => Admin::user()->id,
                 'order_status_id' => $order->status,
             ];
@@ -581,7 +581,7 @@ class AdminOrderController extends RootAdminController
             } else {
                 $style = 'style="font-weight:bold;"';
             }
-            $blance = '<tr ' . $style . ' class="data-balance"><td>' . trans('order.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
+            $blance = '<tr ' . $style . ' class="data-balance"><td>' . sc_language_render('order.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
             $arrayReturn = ['error' => 0, 'detail' => [
                 'total'            => sc_currency_format($orderUpdated->total),
                 'subtotal'         => sc_currency_format($orderUpdated->subtotal),
@@ -592,7 +592,7 @@ class AdminOrderController extends RootAdminController
                 'item_total_price' => sc_currency_render_symbol($item->total_price, $item->currency),
                 'item_id'          => $id,
                 'balance'          => $blance,
-            ],'msg' => trans('order.admin.update_success')
+            ],'msg' => sc_language_render('action.update_success')
             ];
         } catch (\Throwable $e) {
             $arrayReturn = ['error' => 1, 'msg' => $e->getMessage()];
@@ -612,12 +612,12 @@ class AdminOrderController extends RootAdminController
             $pId = $data['pId'] ?? 0;
             $itemDetail = (new ShopOrderDetail)->where('id', $pId)->first();
             if (!$itemDetail) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.data_not_found_detail', ['msg' => 'detail#'.$pId]), 'detail' => '']);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.data_not_found_detail', ['msg' => 'detail#'.$pId]), 'detail' => '']);
             }
             $orderId = $itemDetail->order_id;
             $order = AdminOrder::getOrderAdmin($orderId);
             if (!$order) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.data_not_found_detail', ['msg' => 'order#'.$orderId]), 'detail' => '']);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.data_not_found_detail', ['msg' => 'order#'.$orderId]), 'detail' => '']);
             }
 
             $pId = $itemDetail->product_id;
@@ -636,7 +636,7 @@ class AdminOrderController extends RootAdminController
                 'order_status_id' => $order->status,
             ];
             (new AdminOrder)->addOrderHistory($dataHistory);
-            return response()->json(['error' => 0, 'msg' => trans('order.admin.update_success')]);
+            return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
         } catch (\Throwable $e) {
             return response()->json(['error' => 1, 'msg' => 'Error: ' . $e->getMessage()]);
 
@@ -650,7 +650,7 @@ class AdminOrderController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -661,10 +661,10 @@ class AdminOrderController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             } else {
                 AdminOrder::destroy($arrID);
-                return response()->json(['error' => 0, 'msg' => trans('order.admin.update_success')]);
+                return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
             }
         }
     }

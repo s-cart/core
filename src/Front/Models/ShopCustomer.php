@@ -65,12 +65,12 @@ class ShopCustomer extends Authenticatable
             ];
             $url = sc_route('password.reset', ['token' => $token]);
             $dataReplace = [
-                trans('email.forgot_password.title'),
-                trans('email.forgot_password.reason_sendmail'),
-                trans('email.forgot_password.note_sendmail', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]),
-                trans('email.forgot_password.note_access_link', ['reset_button' => trans('email.forgot_password.reset_button'), 'url' => $url]),
+                sc_language_render('email.forgot_password.title'),
+                sc_language_render('email.forgot_password.reason_sendmail'),
+                sc_language_render('email.forgot_password.note_sendmail', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]),
+                sc_language_render('email.forgot_password.note_access_link', ['reset_button' => sc_language_render('email.forgot_password.reset_button'), 'url' => $url]),
                 $url,
-                trans('email.forgot_password.reset_button'),
+                sc_language_render('email.forgot_password.reset_button'),
             ];
             $content = preg_replace($dataFind, $dataReplace, $content);
             $dataView = [
@@ -79,7 +79,7 @@ class ShopCustomer extends Authenticatable
 
             $config = [
                 'to' => $this->getEmailForPasswordReset(),
-                'subject' => trans('email.forgot_password.reset_button'),
+                'subject' => sc_language_render('email.forgot_password.reset_button'),
             ];
 
             sc_send_mail('templates.' . sc_store('template') . '.mail.forgot_password', $dataView, $config, $dataAtt = []);
@@ -219,12 +219,12 @@ class ShopCustomer extends Authenticatable
                     '/\{\{\$button\}\}/',
                 ];
                 $dataReplace = [
-                    trans('email.verification_content.title'),
-                    trans('email.verification_content.reason_sendmail'),
-                    trans('email.verification_content.note_sendmail', ['count' => config('auth.verification')]),
-                    trans('email.verification_content.note_access_link', ['button' => trans('email.verification_content.button'), 'url' => $url]),
+                    sc_language_render('email.verification_content.title'),
+                    sc_language_render('email.verification_content.reason_sendmail'),
+                    sc_language_render('email.verification_content.note_sendmail', ['count' => config('auth.verification')]),
+                    sc_language_render('email.verification_content.note_access_link', ['reset_button' => sc_language_render('email.verification_content.reset_button'), 'url' => $url]),
                     $url,
-                    trans('email.verification_content.button'),
+                    sc_language_render('email.verification_content.reset_button'),
                 ];
                 $content = preg_replace($dataFind, $dataReplace, $content);
                 $dataView = [
@@ -233,7 +233,7 @@ class ShopCustomer extends Authenticatable
     
                 $config = [
                     'to' => $this->email,
-                    'subject' => trans('email.verification_content.button'),
+                    'subject' => sc_language_render('email.verification_content.reset_button'),
                 ];
     
                 sc_send_mail('templates.' . sc_store('template') . '.mail.customer_verify', $dataView, $config, $dataAtt = []);

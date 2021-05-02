@@ -16,20 +16,20 @@ class AdminStoreLinkController extends RootAdminController
         parent::__construct();
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
         $this->arrGroup = [
-            'menu' => trans('link.link_position.menu'), 
-            'menu_left' => trans('link.link_position.menu_left'), 
-            'menu_right' => trans('link.link_position.menu_right'),
-            'footer' => trans('link.link_position.footer'),
-            'footer_right' => trans('link.link_position.footer_right'),
-            'footer_left' => trans('link.link_position.footer_left'),
-            'sidebar' => trans('link.link_position.sidebar'),
+            'menu' => sc_language_render('admin.linklink_position.menu'), 
+            'menu_left' => sc_language_render('admin.linklink_position.menu_left'), 
+            'menu_right' => sc_language_render('admin.linklink_position.menu_right'),
+            'footer' => sc_language_render('admin.linklink_position.footer'),
+            'footer_right' => sc_language_render('admin.linklink_position.footer_right'),
+            'footer_left' => sc_language_render('admin.linklink_position.footer_left'),
+            'sidebar' => sc_language_render('admin.linklink_position.sidebar'),
         ];
     }
     public function index()
     {
 
         $data = [
-            'title' => trans('link.admin.list'),
+            'title' => sc_language_render('admin.linklist'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_store_link.delete'),
@@ -47,13 +47,13 @@ class AdminStoreLinkController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'name' => trans('link.name'),
-            'url' => trans('link.url'),
-            'target' => trans('link.target'),
-            'group' => trans('link.group'),
-            'sort' => trans('link.sort'),
-            'status' => trans('link.status'),
-            'action' => trans('link.admin.action'),
+            'name' => sc_language_render('admin.linkname'),
+            'url' => sc_language_render('admin.linkurl'),
+            'target' => sc_language_render('admin.linktarget'),
+            'group' => sc_language_render('admin.linkgroup'),
+            'sort' => sc_language_render('admin.linksort'),
+            'status' => sc_language_render('admin.linkstatus'),
+            'action' => sc_language_render('action.title'),
         ];
         $dataTmp = AdminLink::getLinkListAdmin();
 
@@ -67,9 +67,9 @@ class AdminStoreLinkController extends RootAdminController
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_store_link.edit', ['id' => $row['id']]) . '"><span title="' . trans('link.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_store_link.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('link.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -77,11 +77,11 @@ class AdminStoreLinkController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('link.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_store_link.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="' . trans('link.admin.add_new') . '"></i>
+                           <i class="fa fa-plus" title="' . sc_language_render('admin.linkadd_new') . '"></i>
                            </a>';
         //=menuRight
 
@@ -96,9 +96,9 @@ class AdminStoreLinkController extends RootAdminController
     public function create()
     {
         $data = [
-            'title'             => trans('link.admin.add_new_title'),
+            'title'             => sc_language_render('admin.linkadd_new_title'),
             'subTitle'          => '',
-            'title_description' => trans('link.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.linkadd_new_des'),
             'icon'              => 'fa fa-plus',
             'link'              => [],
             'arrTarget'         => $this->arrTarget,
@@ -140,7 +140,7 @@ class AdminStoreLinkController extends RootAdminController
             'store_id' => session('adminStoreId'),
         ];
         AdminLink::createLinkAdmin($dataInsert);
-        return redirect()->route('admin_store_link.index')->with('success', trans('link.admin.create_success'));
+        return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -154,7 +154,7 @@ class AdminStoreLinkController extends RootAdminController
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
         $data = [
-            'title' => trans('link.admin.edit'),
+            'title' => sc_language_render('action.edit'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -203,7 +203,7 @@ class AdminStoreLinkController extends RootAdminController
         ];
         $link->update($dataUpdate);
 
-        return redirect()->route('admin_store_link.index')->with('success', trans('link.admin.edit_success'));
+        return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -214,7 +214,7 @@ class AdminStoreLinkController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -225,7 +225,7 @@ class AdminStoreLinkController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             }
             AdminLink::destroy($arrID);
             return response()->json(['error' => 0, 'msg' => '']);

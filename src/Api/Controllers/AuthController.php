@@ -119,7 +119,7 @@ class AuthController extends RootFrontController
                         '/\{\{\$country\}\}/',
                     ];
                     $dataReplace = [
-                        trans('email.welcome_customer.title'),
+                        sc_language_render('email.welcome'),
                         $dataMap['first_name'],
                         $dataMap['last_name'],
                         $dataMap['email'],
@@ -137,7 +137,7 @@ class AuthController extends RootFrontController
 
                     $config = [
                         'to' => $data['email'],
-                        'subject' => trans('email.welcome_customer.title'),
+                        'subject' => sc_language_render('email.welcome'),,
                     ];
 
                     sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);

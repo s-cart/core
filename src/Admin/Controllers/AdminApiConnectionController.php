@@ -14,8 +14,8 @@ class AdminApiConnectionController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('api_connection.admin.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . trans('api_connection.admin.add_new_title'),
+            'title' => sc_language_render('admin.api_connection.list'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('action.create'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_api_connection.delete'),
@@ -29,14 +29,14 @@ class AdminApiConnectionController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('api_connection.id'),
-            'description' => trans('api_connection.description'),
-            'apiconnection' => trans('api_connection.apiconnection'),
-            'apikey' => trans('api_connection.apikey'),
-            'expire' => trans('api_connection.expire'),
-            'last_active' => trans('api_connection.last_active'),
-            'status' => trans('api_connection.status'),
-            'action' => trans('api_connection.admin.action'),
+            'id' => 'ID',
+            'description' => sc_language_render('admin.api_connection.description'),
+            'apiconnection' => sc_language_render('admin.api_connection.connection'),
+            'apikey' => sc_language_render('admin.api_connection.apikey'),
+            'expire' => sc_language_render('admin.api_connection.expire'),
+            'last_active' => sc_language_render('admin.api_connection.last_active'),
+            'status' => sc_language_render('admin.api_connection.status'),
+            'action' => sc_language_render('action.title'),
         ];
 
         $obj = new ShopApiConnection;
@@ -54,9 +54,9 @@ class AdminApiConnectionController extends RootAdminController
                 'last_active' => $row['last_active'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_api_connection.edit', ['id' => $row['id']]) . '"><span title="' . trans('api_connection.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_api_connection.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('api_connection.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -64,7 +64,7 @@ class AdminApiConnectionController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('api_connection.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
     
         $optionSort = '';
         $data['urlSort'] = sc_route_admin('admin_api_connection.index', request()->except(['_token', '_pjax', 'sort_order']));
@@ -86,8 +86,8 @@ class AdminApiConnectionController extends RootAdminController
             'apiconnection' => 'string|required|regex:/(^([0-9a-z]+)$)/|unique:"'.ShopApiConnection::class.'",apiconnection',
             'apikey' => 'string|regex:/(^([0-9a-z]+)$)/',
         ], [
-            'apiconnection.regex' => trans('api_connection.validate_regex'),
-            'apikey.regex' => trans('api_connection.validate_regex'),
+            'apiconnection.regex' => sc_language_render('admin.api_connection.validate_regex'),
+            'apikey.regex' => sc_language_render('admin.api_connection.validate_regex'),
         ]);
 
         if ($validator->fails()) {
@@ -105,7 +105,7 @@ class AdminApiConnectionController extends RootAdminController
         ];
         $obj = ShopApiConnection::create($dataInsert);
 
-        return redirect()->route('admin_api_connection.index')->with('success', trans('api_connection.admin.create_success'));
+        return redirect()->route('admin_api_connection.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -120,8 +120,8 @@ public function edit($id)
         return 'no data';
     }
     $data = [
-        'title' => trans('api_connection.admin.list'),
-        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . trans('api_connection.admin.edit'),
+        'title' => sc_language_render('admin.api_connection.list'),
+        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
         'icon' => 'fa fa-indent',
         'urlDeleteItem' => sc_route_admin('admin_api_connection.delete'),
@@ -137,14 +137,14 @@ public function edit($id)
     ];
 
     $listTh = [
-        'id' => trans('api_connection.id'),
-        'description' => trans('api_connection.description'),
-        'apiconnection' => trans('api_connection.apiconnection'),
-        'apikey' => trans('api_connection.apikey'),
-        'expire' => trans('api_connection.expire'),
-        'last_active' => trans('api_connection.last_active'),
-        'status' => trans('api_connection.status'),
-        'action' => trans('api_connection.admin.action'),
+        'id' => 'ID',
+        'description' => sc_language_render('admin.api_connection.description'),
+        'apiconnection' => sc_language_render('admin.api_connection.connection'),
+        'apikey' => sc_language_render('admin.api_connection.apikey'),
+        'expire' => sc_language_render('admin.api_connection.expire'),
+        'last_active' => sc_language_render('admin.api_connection.last_active'),
+        'status' => sc_language_render('admin.api_connection.status'),
+        'action' => sc_language_render('action.title'),
     ];
 
     $obj = new ShopApiConnection;
@@ -162,9 +162,9 @@ public function edit($id)
             'last_active' => $row['last_active'],
             'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             'action' => '
-                <a href="' . sc_route_admin('admin_api_connection.edit', ['id' => $row['id']]) . '"><span title="' . trans('api_connection.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                <a href="' . sc_route_admin('admin_api_connection.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-              <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('api_connection.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+              <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
               ',
         ];
     }
@@ -172,9 +172,9 @@ public function edit($id)
     $data['listTh'] = $listTh;
     $data['dataTr'] = $dataTr;
     $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = trans('api_connection.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
     
-    $data['rightContentMain'] = '<input class="switch-data-config" data-store=0 name="api_connection_required" type="checkbox"  '.(sc_config_global('api_connection_required')?'checked':'').'><br> '.trans('api_connection.api_connection_required_help');
+    $data['rightContentMain'] = '<input class="switch-data-config" data-store=0 name="api_connection_required" type="checkbox"  '.(sc_config_global('api_connection_required')?'checked':'').'><br> '.sc_language_render('admin.api_connection.api_connection_required_help');
 
     $optionSort = '';
     $data['urlSort'] = sc_route_admin('admin_api_connection.index', request()->except(['_token', '_pjax', 'sort_order']));
@@ -197,8 +197,8 @@ public function edit($id)
             'apiconnection' => 'string|required|regex:/(^([0-9a-z]+)$)/|unique:"'.ShopApiConnection::class.'",apiconnection,' . $obj->id . ',id',
             'apikey' => 'string|regex:/(^([0-9a-z]+)$)/',
         ],[
-            'apiconnection.regex' => trans('api_connection.validate_regex'),
-            'apikey.regex' => trans('api_connection.validate_regex'),
+            'apiconnection.regex' => sc_language_render('admin.api_connection.validate_regex'),
+            'apikey.regex' => sc_language_render('admin.api_connection.validate_regex'),
         ]);
 
         if ($validator->fails()) {
@@ -219,7 +219,7 @@ public function edit($id)
         $obj->update($dataUpdate);
 
 //
-        return redirect()->back()->with('success', trans('api_connection.admin.edit_success'));
+        return redirect()->back()->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -230,7 +230,7 @@ Need mothod destroy to boot deleting in model
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

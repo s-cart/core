@@ -15,7 +15,7 @@ class AdminEnvConfigController extends RootAdminController
     {
 
         $data = [
-            'title'    => trans('env.title'),
+            'title'    => sc_language_render('admin.env.title'),
             'subTitle' => '',
             'icon'     => 'fa fa-indent',
         ];

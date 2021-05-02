@@ -16,8 +16,8 @@ class AdminSupplierController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('supplier.admin.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . trans('supplier.admin.add_new_title'),
+            'title' => sc_language_render('admin.supplier.list'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('admin.supplier.add_new_title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_supplier.delete'),
@@ -30,12 +30,12 @@ class AdminSupplierController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('supplier.id'),
-            'name' => trans('supplier.name'),
-            'image' => trans('supplier.image'),
-            'email' => trans('supplier.email'),
-            'sort' => trans('supplier.sort'),
-            'action' => trans('supplier.admin.action'),
+            'id' => 'ID',
+            'name' => sc_language_render('admin.supplier.name'),
+            'image' => sc_language_render('admin.supplier.image'),
+            'email' => sc_language_render('admin.supplier.email'),
+            'sort' => sc_language_render('admin.supplier.sort'),
+            'action' => sc_language_render('action.title'),
         ];
         $obj = new ShopSupplier;
         $obj = $obj->orderBy('id', 'desc');
@@ -50,9 +50,9 @@ class AdminSupplierController extends RootAdminController
                 'email' => $row['email'],
                 'sort' => $row['sort'],
                 'action' => '
-                    <a href="' . sc_route_admin('admin_supplier.edit', ['id' => $row['id']]) . '"><span title="' . trans('supplier.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_supplier.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('supplier.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -60,7 +60,7 @@ class AdminSupplierController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('supplier.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'index';
         return view($this->templatePathAdmin.'screen.supplier')
@@ -87,8 +87,8 @@ class AdminSupplierController extends RootAdminController
             'url' => 'url|nullable',
             'email' => 'email|nullable',
         ],[
-            'name.required' => trans('validation.required', ['attribute' => trans('supplier.name')]),
-            'alias.regex' => trans('supplier.alias_validate'),
+            'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.supplier.name')]),
+            'alias.regex' => sc_language_render('admin.supplier.alias_validate'),
         ]);
 
         if ($validator->fails()) {
@@ -109,7 +109,7 @@ class AdminSupplierController extends RootAdminController
         ];
         $obj = ShopSupplier::create($dataInsert);
 
-        return redirect()->route('admin_supplier.index')->with('success', trans('supplier.admin.create_success'));
+        return redirect()->route('admin_supplier.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -123,8 +123,8 @@ public function edit($id)
         return 'No data';
     }
     $data = [
-        'title' => trans('supplier.admin.list'),
-        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . trans('supplier.admin.edit'),
+        'title' => sc_language_render('admin.supplier.list'),
+        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
         'icon' => 'fa fa-indent',
         'urlDeleteItem' => sc_route_admin('admin_supplier.delete'),
@@ -139,12 +139,12 @@ public function edit($id)
     ];
 
     $listTh = [
-        'id' => trans('supplier.id'),
-        'name' => trans('supplier.name'),
-        'image' => trans('supplier.image'),
-        'email' => trans('supplier.email'),
-        'sort' => trans('supplier.sort'),
-        'action' => trans('supplier.admin.action'),
+        'id' => 'ID',
+        'name' => sc_language_render('admin.supplier.name'),
+        'image' => sc_language_render('admin.supplier.image'),
+        'email' => sc_language_render('admin.supplier.email'),
+        'sort' => sc_language_render('admin.supplier.sort'),
+        'action' => sc_language_render('action.title'),
     ];
 
     $obj = new ShopSupplier;
@@ -160,9 +160,9 @@ public function edit($id)
             'email' => $row['email'],
             'sort' => $row['sort'],
             'action' => '
-                <a href="' . sc_route_admin('admin_supplier.edit', ['id' => $row['id']]) . '"><span title="' . trans('supplier.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                <a href="' . sc_route_admin('admin_supplier.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('supplier.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                 ',
         ];
     }
@@ -170,7 +170,7 @@ public function edit($id)
     $data['listTh'] = $listTh;
     $data['dataTr'] = $dataTr;
     $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = trans('supplier.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
     $data['layout'] = 'edit';
     return view($this->templatePathAdmin.'screen.supplier')
@@ -197,8 +197,8 @@ public function edit($id)
             'url' => 'url|nullable',
             'email' => 'email|nullable',
         ],[
-            'name.required' => trans('validation.required', ['attribute' => trans('supplier.name')]),
-            'alias.regex' => trans('supplier.alias_validate'),
+            'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.supplier.name')]),
+            'alias.regex' => sc_language_render('admin.supplier.alias_validate'),
         ]);
 
         if ($validator->fails()) {
@@ -223,7 +223,7 @@ public function edit($id)
         $supplier->update($dataUpdate);
 
 //
-        return redirect()->back()->with('success', trans('supplier.admin.edit_success'));
+        return redirect()->back()->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -234,7 +234,7 @@ Need mothod destroy to boot deleting in model
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

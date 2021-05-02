@@ -39,9 +39,9 @@ class AdminProductController extends RootAdminController
         $this->listLength      = ShopLength::getListAll();
         $this->attributeGroup  = ShopAttributeGroup::getListAll();
         $this->kinds = [
-            SC_PRODUCT_SINGLE => trans('product.kinds.single'),
-            SC_PRODUCT_BUILD  => trans('product.kinds.build'),
-            SC_PRODUCT_GROUP  => trans('product.kinds.group'),
+            SC_PRODUCT_SINGLE => sc_language_render('product.kind_single'),
+            SC_PRODUCT_BUILD  => sc_language_render('product.kind_bundle'),
+            SC_PRODUCT_GROUP  => sc_language_render('product.kind_group'),
         ];
         $this->properties = (new ShopProductProperty)->pluck('name', 'code')->toArray();
         $this->categories =  (new AdminCategory)->getTreeCategoriesAdmin();
@@ -52,7 +52,7 @@ class AdminProductController extends RootAdminController
     {
         $categoriesTitle = AdminCategory::getListTitleAdmin();
         $data = [
-            'title'         => trans('product.admin.list'),
+            'title'         => sc_language_render('product.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_product.delete'),
@@ -70,36 +70,36 @@ class AdminProductController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'       => trans('product.id'),
-            'image'    => trans('product.image'),
-            'sku'      => trans('product.sku'),
-            'name'     => trans('product.name'),
-            'category' => trans('product.category'),
+            'id'       => 'ID',
+            'image'    => sc_language_render('product.image'),
+            'sku'      => sc_language_render('product.sku'),
+            'name'     => sc_language_render('product.name'),
+            'category' => sc_language_render('product.category'),
         ];
         if (sc_config_admin('product_cost')) {
-            $listTh['cost'] = trans('product.cost');
+            $listTh['cost'] = sc_language_render('product.cost');
         }
         if (sc_config_admin('product_price')) {
-            $listTh['price'] = trans('product.price');
+            $listTh['price'] = sc_language_render('product.price');
         }
         if (sc_config_admin('product_kind')) {
-            $listTh['kind'] = trans('product.kind');
+            $listTh['kind'] = sc_language_render('product.kind');
         }
         if (sc_config_admin('product_property')) {
-            $listTh['property'] = trans('product.property');
+            $listTh['property'] = sc_language_render('product.property');
         }
-        $listTh['status'] = trans('product.status');
-        $listTh['action'] = trans('product.admin.action');
+        $listTh['status'] = sc_language_render('product.status');
+        $listTh['action'] = sc_language_render('product.action.title');
 
         $keyword     = sc_clean(request('keyword') ?? '');
         $category_id = sc_clean(request('category_id') ?? '');
         $sort_order  = sc_clean(request('sort_order') ?? 'id_desc');
 
         $arrSort = [
-            'id__desc'   => trans('product.admin.sort_order.id_desc'),
-            'id__asc'    => trans('product.admin.sort_order.id_asc'),
-            'name__desc' => trans('product.admin.sort_order.name_desc'),
-            'name__asc'  => trans('product.admin.sort_order.name_asc'),
+            'id__desc'   => sc_language_render('filter_sort.id_desc'),
+            'id__asc'    => sc_language_render('filter_sort.id_asc'),
+            'name__desc' => sc_language_render('filter_sort.name_desc'),
+            'name__asc'  => sc_language_render('filter_sort.name_asc'),
         ];
         $dataSearch = [
             'keyword'     => $keyword,
@@ -145,12 +145,12 @@ class AdminProductController extends RootAdminController
             $dataMap['status'] = $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>';
             $dataMap['action'] = '
             <a href="' . sc_route_admin('admin_product.edit', ['id' => $row['id']]) . '">
-            <span title="' . trans('product.admin.edit') . '" type="button" class="btn btn-flat btn-primary">
+            <span title="' . sc_language_render('product.admin.edit') . '" type="button" class="btn btn-flat btn-primary">
             <i class="fa fa-edit"></i>
             </span>
             </a>&nbsp;
 
-            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger">
+            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('admin.delete') . '" class="btn btn-flat btn-danger">
             <i class="fas fa-trash-alt"></i>
             </span>';
             $dataTr[] = $dataMap;
@@ -159,17 +159,17 @@ class AdminProductController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('product.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         //menuRight
-        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title').'" id="button_create_new">
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.create') . '" class="btn btn-success btn-flat" title="'.sc_language_render('product.admin.add_new_title').'" id="button_create_new">
         <i class="fa fa-plus"></i>
         </a>';
         if (sc_config_admin('product_kind')) {
-            $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.build_create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title_build').'" id="button_create_new">
+            $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.build_create') . '" class="btn btn-success btn-flat" title="'.sc_language_render('product.admin.add_new_title_build').'" id="button_create_new">
             <i class="fas fa-puzzle-piece"></i>
             </a>';
-            $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.group_create') . '" class="btn btn-success btn-flat" title="'.trans('product.admin.add_new_title_group').'" id="button_create_new">
+            $data['menuRight'][] = '<a href="' . sc_route_admin('admin_product.group_create') . '" class="btn btn-success btn-flat" title="'.sc_language_render('product.admin.add_new_title_group').'" id="button_create_new">
             <i class="fas fa-network-wired"></i>
             </a>';
         }
@@ -197,10 +197,10 @@ class AdminProductController extends RootAdminController
                 <form action="' . sc_route_admin('admin_product.index') . '" id="button_search">
                 <div class="input-group input-group float-left">
                     <select class="form-control rounded-0 select2" name="category_id" id="category_id">
-                    <option value="">'.trans('product.admin.select_category').'</option>
+                    <option value="">'.sc_language_render('product.admin.select_category').'</option>
                     '.$optionCategory.'
                     </select> &nbsp;
-                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('product.admin.search_place') . '" value="' . $keyword . '">
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('product.admin.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -223,13 +223,13 @@ class AdminProductController extends RootAdminController
         //end add more images
 
         // html select attribute
-        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
+        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
         $data = [
-            'title'                => trans('product.admin.add_new_title'),
+            'title'                => sc_language_render('product.admin.add_new_title'),
             'subTitle'             => '',
-            'title_description'    => trans('product.admin.add_new_des'),
+            'title_description'    => sc_language_render('product.admin.add_new_des'),
             'icon'                 => 'fa fa-plus',
             'languages'            => $this->languages,
             'categories'           => $this->categories,
@@ -260,7 +260,7 @@ public function createProductBuild()
 
     // html select product build
     $htmlSelectBuild = '<div class="select-product">';
-    $htmlSelectBuild .= '<table width="100%"><tr><td width="70%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . trans('product.admin.select_product_in_build') . '" style="width: 100%;" name="productBuild[]" >';
+    $htmlSelectBuild .= '<table width="100%"><tr><td width="70%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . sc_language_render('product.admin.select_product_in_build') . '" style="width: 100%;" name="productBuild[]" >';
     $htmlSelectBuild .= '';
     foreach ($listProductSingle as $k => $v) {
         $htmlSelectBuild .= '<option value="' . $k . '">' . $v['name'] . '</option>';
@@ -270,7 +270,7 @@ public function createProductBuild()
     //end select product build
 
     // html select attribute
-    $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
+    $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
     //end select attribute
 
     // html add more images
@@ -279,9 +279,9 @@ public function createProductBuild()
 
 
     $data = [
-        'title'                => trans('product.admin.add_new_title_build'),
+        'title'                => sc_language_render('product.admin.add_new_title_build'),
         'subTitle'             => '',
-        'title_description'    => trans('product.admin.add_new_des'),
+        'title_description'    => sc_language_render('product.admin.add_new_des'),
         'icon'                 => 'fa fa-plus',
         'languages'            => $this->languages,
         'categories'           => $this->categories,
@@ -314,7 +314,7 @@ public function createProductGroup()
 
     // html select product group
     $htmlSelectGroup = '<div class="select-product">';
-    $htmlSelectGroup .= '<table width="100%"><tr><td width="80%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . trans('product.admin.select_product_in_group') . '" style="width: 100%;" name="productInGroup[]" >';
+    $htmlSelectGroup .= '<table width="100%"><tr><td width="80%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . sc_language_render('product.admin.select_product_in_group') . '" style="width: 100%;" name="productInGroup[]" >';
     $htmlSelectGroup .= '';
     foreach ($listProductSingle as $k => $v) {
         $htmlSelectGroup .= '<option value="' . $k . '">' . $v['name'] . '</option>';
@@ -325,9 +325,9 @@ public function createProductGroup()
 
 
     $data = [
-        'title'                => trans('product.admin.add_new_title_group'),
+        'title'                => sc_language_render('product.admin.add_new_title_group'),
         'subTitle'             => '',
-        'title_description'    => trans('product.admin.add_new_des'),
+        'title_description'    => sc_language_render('product.admin.add_new_des'),
         'icon'                 => 'fa fa-plus',
         'languages'            => $this->languages,
         'categories'           => $this->categories,
@@ -390,13 +390,13 @@ public function createProductGroup()
                 $arrValidation = $this->validateAttribute($arrValidation);
                 
                 $arrMsg = [
-                    'descriptions.*.name.required'    => trans('validation.required', ['attribute' => trans('product.name')]),
-                    'descriptions.*.content.required' => trans('validation.required', ['attribute' => trans('product.content')]),
-                    'category.required'               => trans('validation.required', ['attribute' => trans('product.category')]),
-                    'sku.regex'                       => trans('product.sku_validate'),
-                    'sku.product_sku_unique'          => trans('product.sku_unique'),
-                    'alias.regex'                     => trans('product.alias_validate'),
-                    'alias.product_alias_unique'      => trans('product.alias_unique'),
+                    'descriptions.*.name.required'    => sc_language_render('validation.required', ['attribute' => sc_language_render('product.name')]),
+                    'descriptions.*.content.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('product.content')]),
+                    'category.required'               => sc_language_render('validation.required', ['attribute' => sc_language_render('product.category')]),
+                    'sku.regex'                       => sc_language_render('product.sku_validate'),
+                    'sku.product_sku_unique'          => sc_language_render('product.sku_unique'),
+                    'alias.regex'                     => sc_language_render('product.alias_validate'),
+                    'alias.product_alias_unique'      => sc_language_render('product.alias_unique'),
                 ];
                 break;
 
@@ -418,12 +418,12 @@ public function createProductGroup()
                 $arrValidation = $this->validateAttribute($arrValidation);
 
                 $arrMsg = [
-                    'descriptions.*.name.required' => trans('validation.required', ['attribute' => trans('product.name')]),
-                    'category.required'            => trans('validation.required', ['attribute' => trans('product.category')]),
-                    'sku.regex'                    => trans('product.sku_validate'),
-                    'sku.product_sku_unique'       => trans('product.sku_unique'),
-                    'alias.regex'                  => trans('product.alias_validate'),
-                    'alias.product_alias_unique'   => trans('product.alias_unique'),
+                    'descriptions.*.name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('product.name')]),
+                    'category.required'            => sc_language_render('validation.required', ['attribute' => sc_language_render('product.category')]),
+                    'sku.regex'                    => sc_language_render('product.sku_validate'),
+                    'sku.product_sku_unique'       => sc_language_render('product.sku_unique'),
+                    'alias.regex'                  => sc_language_render('product.alias_validate'),
+                    'alias.product_alias_unique'   => sc_language_render('product.alias_unique'),
                 ];
                 break;
 
@@ -440,12 +440,12 @@ public function createProductGroup()
                     'descriptions.*.description' => 'nullable|string|max:300',
                 ];
                 $arrMsg = [
-                    'descriptions.*.name.required' => trans('validation.required', ['attribute' => trans('product.name')]),
-                    'sku.regex'                    => trans('product.sku_validate'),
-                    'category.required'            => trans('validation.required', ['attribute' => trans('product.category')]),
-                    'sku.product_sku_unique'       => trans('product.sku_unique'),
-                    'alias.regex'                  => trans('product.alias_validate'),
-                    'alias.product_alias_unique'   => trans('product.alias_unique'),
+                    'descriptions.*.name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('product.name')]),
+                    'sku.regex'                    => sc_language_render('product.sku_validate'),
+                    'category.required'            => sc_language_render('validation.required', ['attribute' => sc_language_render('product.category')]),
+                    'sku.product_sku_unique'       => sc_language_render('product.sku_unique'),
+                    'alias.regex'                  => sc_language_render('product.alias_validate'),
+                    'alias.product_alias_unique'   => sc_language_render('product.alias_unique'),
                 ];
                 break;
 
@@ -607,7 +607,7 @@ public function createProductGroup()
 
         sc_clear_cache('cache_product');
 
-        return redirect()->route('admin_product.index')->with('success', trans('product.admin.create_success'));
+        return redirect()->route('admin_product.index')->with('success', sc_language_render('product.admin.create_success'));
 
     }
 
@@ -626,7 +626,7 @@ public function createProductGroup()
 
         // html select product group
         $htmlSelectGroup = '<div class="select-product">';
-        $htmlSelectGroup .= '<table width="100%"><tr><td width="80%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . trans('product.admin.select_product_in_group') . '" style="width: 100%;" name="productInGroup[]" >';
+        $htmlSelectGroup .= '<table width="100%"><tr><td width="80%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . sc_language_render('product.admin.select_product_in_group') . '" style="width: 100%;" name="productInGroup[]" >';
         $htmlSelectGroup .= '';
         foreach ($listProductSingle as $k => $v) {
             $htmlSelectGroup .= '<option value="' . $k . '">' . $v['name'] . '</option>';
@@ -637,7 +637,7 @@ public function createProductGroup()
 
         // html select product build
         $htmlSelectBuild = '<div class="select-product">';
-        $htmlSelectBuild .= '<table width="100%"><tr><td width="70%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . trans('product.admin.select_product_in_build') . '" style="width: 100%;" name="productBuild[]" >';
+        $htmlSelectBuild .= '<table width="100%"><tr><td width="70%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . sc_language_render('product.admin.select_product_in_build') . '" style="width: 100%;" name="productBuild[]" >';
         $htmlSelectBuild .= '';
         foreach ($listProductSingle as $k => $v) {
             $htmlSelectBuild .= '<option value="' . $k . '">' . $v['name'] . '</option>';
@@ -647,12 +647,12 @@ public function createProductGroup()
         //end select product build
 
         // html select attribute
-        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . trans('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
+        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
 
         $data = [
-            'title'                => trans('product.admin.edit'),
+            'title'                => sc_language_render('product.admin.edit'),
             'subTitle'             => '',
             'title_description'    => '',
             'icon'                 => 'fa fa-edit',
@@ -726,13 +726,13 @@ public function createProductGroup()
                 $arrValidation = $this->validateAttribute($arrValidation);
 
                 $arrMsg = [
-                    'descriptions.*.name.required'    => trans('validation.required', ['attribute' => trans('product.name')]),
-                    'descriptions.*.content.required' => trans('validation.required', ['attribute' => trans('product.content')]),
-                    'category.required'               => trans('validation.required', ['attribute' => trans('product.category')]),
-                    'sku.regex'                       => trans('product.sku_validate'),
-                    'sku.product_sku_unique'          => trans('product.sku_unique'),
-                    'alias.regex'                     => trans('product.alias_validate'),
-                    'alias.product_alias_unique'      => trans('product.alias_unique'),
+                    'descriptions.*.name.required'    => sc_language_render('validation.required', ['attribute' => sc_language_render('product.name')]),
+                    'descriptions.*.content.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('product.content')]),
+                    'category.required'               => sc_language_render('validation.required', ['attribute' => sc_language_render('product.category')]),
+                    'sku.regex'                       => sc_language_render('product.sku_validate'),
+                    'sku.product_sku_unique'          => sc_language_render('product.sku_unique'),
+                    'alias.regex'                     => sc_language_render('product.alias_validate'),
+                    'alias.product_alias_unique'      => sc_language_render('product.alias_unique'),
                 ];
                 break;
             case SC_PRODUCT_BUILD: //product build
@@ -752,12 +752,12 @@ public function createProductGroup()
                 $arrValidation = $this->validateAttribute($arrValidation);
                 
                 $arrMsg = [
-                    'descriptions.*.name.required' => trans('validation.required', ['attribute' => trans('product.name')]),
-                    'category.required'            => trans('validation.required', ['attribute' => trans('product.category')]),
-                    'sku.regex'                    => trans('product.sku_validate'),
-                    'sku.product_sku_unique'       => trans('product.sku_unique'),
-                    'alias.regex'                  => trans('product.alias_validate'),
-                    'alias.product_alias_unique'   => trans('product.alias_unique'),
+                    'descriptions.*.name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('product.name')]),
+                    'category.required'            => sc_language_render('validation.required', ['attribute' => sc_language_render('product.category')]),
+                    'sku.regex'                    => sc_language_render('product.sku_validate'),
+                    'sku.product_sku_unique'       => sc_language_render('product.sku_unique'),
+                    'alias.regex'                  => sc_language_render('product.alias_validate'),
+                    'alias.product_alias_unique'   => sc_language_render('product.alias_unique'),
                 ];
                 break;
 
@@ -773,12 +773,12 @@ public function createProductGroup()
                     'descriptions.*.description' => 'nullable|string|max:300',
                 ];
                 $arrMsg = [
-                    'sku.regex'                    => trans('product.sku_validate'),
-                    'sku.product_sku_unique'       => trans('product.sku_unique'),
-                    'category.required'            => trans('validation.required', ['attribute' => trans('product.category')]),
-                    'alias.regex'                  => trans('product.alias_validate'),
-                    'alias.product_alias_unique'   => trans('product.alias_unique'),
-                    'descriptions.*.name.required' => trans('validation.required', ['attribute' => trans('product.name')]),
+                    'sku.regex'                    => sc_language_render('product.sku_validate'),
+                    'sku.product_sku_unique'       => sc_language_render('product.sku_unique'),
+                    'category.required'            => sc_language_render('validation.required', ['attribute' => sc_language_render('product.category')]),
+                    'alias.regex'                  => sc_language_render('product.alias_validate'),
+                    'alias.product_alias_unique'   => sc_language_render('product.alias_unique'),
+                    'descriptions.*.name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('product.name')]),
                 ];
                 break;
 
@@ -957,7 +957,7 @@ public function createProductGroup()
 
         sc_clear_cache('cache_product');
 
-        return redirect()->route('admin_product.index')->with('success', trans('product.admin.edit_success'));
+        return redirect()->route('admin_product.index')->with('success', sc_language_render('product.admin.edit_success'));
 
     }
 
@@ -968,7 +968,7 @@ public function createProductGroup()
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -983,9 +983,9 @@ public function createProductGroup()
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             } elseif (count($arrCantDelete)) {
-                return response()->json(['error' => 1, 'msg' => trans('product.admin.cant_remove_child') . ': ' . json_encode($arrCantDelete)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('product.admin.cant_remove_child') . ': ' . json_encode($arrCantDelete)]);
             }else {
                 AdminProduct::destroy($arrID);
 

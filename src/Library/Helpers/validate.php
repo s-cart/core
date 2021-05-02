@@ -12,7 +12,7 @@ if (!function_exists('sc_check_view')) {
     {
         if(!view()->exists($view)) {
             sc_report('View not found '.$view);
-            echo  trans('front.view_not_exist', ['view' => $view]);
+            echo  sc_language_render('front.view_not_exist', ['view' => $view]);
             exit();
         }
     }

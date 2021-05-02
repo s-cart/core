@@ -16,7 +16,7 @@ class AdminConfigGlobalController extends RootAdminController
     public function webhook()
     {
         $data = [
-            'title' => trans('config.admin.webhook'),
+            'title' => sc_language_render('config.webhook'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',  
         ];
@@ -38,7 +38,7 @@ class AdminConfigGlobalController extends RootAdminController
                 ->where('store_id', 0)
                 ->update(['value' => $value]);
             $error = 0;
-            $msg = trans('admin.update_success');
+            $msg = sc_language_render('action.update_success');
         } catch (\Throwable $e) {
             $error = 1;
             $msg = $e->getMessage();

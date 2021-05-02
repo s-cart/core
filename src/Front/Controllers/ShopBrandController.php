@@ -58,7 +58,7 @@ class ShopBrandController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_item_list',
             array(
-                'title' => trans('front.brands'),
+                'title' => sc_language_render('front.brands'),
                 'itemsList' => $itemsList,
                 'keyword' => '',
                 'description' => '',

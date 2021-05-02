@@ -143,12 +143,12 @@ class ShopOrder extends Model
                 
                 //Check product flash sale over stock
                 if (function_exists('sc_product_flash_check_over') && !sc_product_flash_check_over($pID, $cartDetail['qty'])) {
-                    return $return = ['error' => 1, 'msg' => trans('cart.over', ['item' => $product->sku])];
+                    return $return = ['error' => 1, 'msg' => sc_languages('cart.item_over_qty', ['sku' => $product->sku, 'qty' => $cartDetail['qty']])];
                 }
 
                 //If product out of stock
                 if (!sc_config('product_buy_out_of_stock') && $product->stock < $cartDetail['qty']) {
-                    return $return = ['error' => 1, 'msg' => trans('cart.over', ['item' => $product->sku])];
+                    return $return = ['error' => 1, 'msg' => sc_languages('cart.item_over_qty', ['sku' => $product->sku, 'qty' => $cartDetail['qty']])];
                 }
                 //
                 $tax = (sc_tax_price($cartDetail['price'], $product->getTaxValue()) - $cartDetail['price']) *  $cartDetail['qty'];
@@ -194,19 +194,19 @@ class ShopOrder extends Model
                     $arrReturnModuleDiscount = json_decode($returnModuleDiscount, true);
                     if ($arrReturnModuleDiscount['error'] == 1) {
                         if ($arrReturnModuleDiscount['msg'] == 'error_code_not_exist') {
-                            $msg = trans('promotion.process.invalid');
+                            $msg = sc_language_render('discount.process.invalid');
                         } elseif ($arrReturnModuleDiscount['msg'] == 'error_code_cant_use') {
-                            $msg = trans('promotion.process.over');
+                            $msg = sc_language_render('discount.process.over');
                         } elseif ($arrReturnModuleDiscount['msg'] == 'error_code_expired_disabled') {
-                            $msg = trans('promotion.process.expire');
+                            $msg = sc_language_render('discount.process.expire');
                         } elseif ($arrReturnModuleDiscount['msg'] == 'error_user_used') {
-                            $msg = trans('promotion.process.used');
+                            $msg = sc_language_render('discount.process.used');
                         } elseif ($arrReturnModuleDiscount['msg'] == 'error_uID_input') {
-                            $msg = trans('promotion.process.customer_id_invalid');
+                            $msg = sc_language_render('discount.process.customer_id_invalid');
                         } elseif ($arrReturnModuleDiscount['msg'] == 'error_login') {
-                            $msg = trans('promotion.process.must_login');
+                            $msg = sc_language_render('discount.process.must_login');
                         } else {
-                            $msg = trans('promotion.process.undefined');
+                            $msg = sc_language_render('discount.process.undefined');
                         }
                         return redirect(sc_route('cart'))->with(['error_discount' => $msg]);
                     }

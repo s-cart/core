@@ -20,8 +20,8 @@ class AdminBannerTypeController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('banner_type.admin.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . trans('banner_type.admin.add_new_title'),
+            'title' => sc_language_render('admin.banner_type.list'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('admin.banner_type.add_new_title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_banner_type.delete'),
@@ -34,10 +34,10 @@ class AdminBannerTypeController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('banner_type.admin.id'),
-            'code' => trans('banner_type.admin.code'),
-            'name' => trans('banner_type.admin.name'),
-            'action' => trans('banner_type.admin.action'),
+            'id' => 'ID',
+            'code' => sc_language_render('admin.banner_type.code'),
+            'name' => sc_language_render('admin.banner_type.name'),
+            'action' => sc_language_render('action.title'),
         ];
         $obj = new ShopBannerType;
         $obj = $obj->orderBy('id', 'desc');
@@ -50,9 +50,9 @@ class AdminBannerTypeController extends RootAdminController
                 'code' => $row['code'] ?? 'N/A',
                 'name' => $row['name'] ?? 'N/A',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_banner_type.edit', ['id' => $row['id']]) . '"><span title="' . trans('banner_type.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_banner_type.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('banner_type.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -60,7 +60,7 @@ class AdminBannerTypeController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('banner_type.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'index';
         return view($this->templatePathAdmin.'screen.banner_type')
@@ -79,7 +79,7 @@ class AdminBannerTypeController extends RootAdminController
             'name' => 'required',
             'code' => 'required|unique:"'.ShopBannerType::class.'",code',
         ], [
-            'name.required' => trans('validation.required'),
+            'name.required' => sc_language_render('validation.required'),
         ]);
 
         if ($validator->fails()) {
@@ -96,7 +96,7 @@ class AdminBannerTypeController extends RootAdminController
         ];
         $obj = ShopBannerType::create($dataInsert);
 //
-        return redirect()->route('admin_banner_type.index')->with('success', trans('banner_type.admin.create_success'));
+        return redirect()->route('admin_banner_type.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -110,8 +110,8 @@ public function edit($id)
         return 'No data';
     }
     $data = [
-        'title' => trans('banner_type.admin.list'),
-        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . trans('banner_type.admin.edit'),
+        'title' => sc_language_render('admin.banner_type.list'),
+        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
         'icon' => 'fa fa-indent',
         'urlDeleteItem' => sc_route_admin('admin_banner_type.delete'),
@@ -126,10 +126,10 @@ public function edit($id)
     ];
 
     $listTh = [
-        'id' => trans('banner_type.admin.id'),
-        'code' => trans('banner_type.admin.code'),
-        'name' => trans('banner_type.admin.name'),
-        'action' => trans('banner_type.admin.action'),
+        'id' => 'ID',
+        'code' => sc_language_render('admin.banner_type.code'),
+        'name' => sc_language_render('admin.banner_type.name'),
+        'action' => sc_language_render('action.title'),
     ];
     $obj = new ShopBannerType;
     $obj = $obj->orderBy('id', 'desc');
@@ -142,9 +142,9 @@ public function edit($id)
             'code' => $row['code'] ?? 'N/A',
             'name' => $row['name'] ?? 'N/A',
             'action' => '
-                <a href="' . sc_route_admin('admin_banner_type.edit', ['id' => $row['id']]) . '"><span title="' . trans('banner_type.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                <a href="' . sc_route_admin('admin_banner_type.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-              <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('banner_type.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+              <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
               ',
         ];
     }
@@ -152,7 +152,7 @@ public function edit($id)
     $data['listTh'] = $listTh;
     $data['dataTr'] = $dataTr;
     $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = trans('banner_type.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
     $data['layout'] = 'edit';
     return view($this->templatePathAdmin.'screen.banner_type')
@@ -171,7 +171,7 @@ public function edit($id)
             'code' => 'required|unique:"'.ShopBannerType::class.'",code,' . $obj->id . ',id',
             'name' => 'required',
         ], [
-            'name.required' => trans('validation.required'),
+            'name.required' => sc_language_render('validation.required'),
         ]);
 
         if ($validator->fails()) {
@@ -189,7 +189,7 @@ public function edit($id)
         ];
         $obj->update($dataUpdate);
 //
-        return redirect()->back()->with('success', trans('banner_type.admin.edit_success'));
+        return redirect()->back()->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -200,7 +200,7 @@ public function edit($id)
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

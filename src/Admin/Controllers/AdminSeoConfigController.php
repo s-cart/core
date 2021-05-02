@@ -15,7 +15,7 @@ class AdminSeoConfigController extends RootAdminController
     {
 
         $data = [
-            'title'    => trans('seo.seo_config'),
+            'title'    => sc_language_render('admin.seo.seo_config'),
             'subTitle' => '',
             'icon'     => 'fa fa-indent',
         ];

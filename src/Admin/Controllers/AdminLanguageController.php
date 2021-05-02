@@ -15,8 +15,8 @@ class AdminLanguageController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('language.admin.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . trans('language.admin.add_new_title'),
+            'title' => sc_language_render('language.list'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('language.add_new_title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_language.delete'),
@@ -29,14 +29,14 @@ class AdminLanguageController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('language.id'),
-            'name' => trans('language.name'),
-            'code' => trans('language.code'),
-            'icon' => trans('language.icon'),
-            'rtl' => trans('language.layout_rtl'),
-            'sort' => trans('language.sort'),
-            'status' => trans('language.status'),
-            'action' => trans('language.admin.action'),
+            'id' => 'ID',
+            'name' => sc_language_render('language.name'),
+            'code' => sc_language_render('language.code'),
+            'icon' => sc_language_render('language.icon'),
+            'rtl' => sc_language_render('language.layout_rtl'),
+            'sort' => sc_language_render('language.sort'),
+            'status' => sc_language_render('language.status'),
+            'action' => sc_language_render('action.title'),
         ];
 
         $obj = new ShopLanguage;
@@ -54,9 +54,9 @@ class AdminLanguageController extends RootAdminController
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_language.edit', ['id' => $row['id']]) . '"><span title="' . trans('language.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_language.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                  <span ' . (in_array($row['id'], SC_GUARD_LANGUAGE) ? "style='display:none'" : "") . ' onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('language.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span ' . (in_array($row['id'], SC_GUARD_LANGUAGE) ? "style='display:none'" : "") . ' onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -64,7 +64,7 @@ class AdminLanguageController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('language.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'index';
         return view($this->templatePathAdmin.'screen.language')
@@ -102,7 +102,7 @@ class AdminLanguageController extends RootAdminController
         ];
         $obj = ShopLanguage::create($dataInsert);
 
-        return redirect()->route('admin_language.edit', ['id' => $obj['id']])->with('success', trans('language.admin.create_success'));
+        return redirect()->route('admin_language.edit', ['id' => $obj['id']])->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -116,8 +116,8 @@ public function edit($id)
         return 'No data';
     }
     $data = [
-        'title' => trans('language.admin.list'),
-        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . trans('language.admin.edit'),
+        'title' => sc_language_render('language.list'),
+        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
         'icon' => 'fa fa-indent',
         'urlDeleteItem' => sc_route_admin('admin_language.delete'),
@@ -131,14 +131,14 @@ public function edit($id)
     ];
 
     $listTh = [
-        'id' => trans('language.id'),
-        'name' => trans('language.name'),
-        'code' => trans('language.code'),
-        'icon' => trans('language.icon'),
-        'rtl' => trans('language.layout_rtl'),
-        'sort' => trans('language.sort'),
-        'status' => trans('language.status'),
-        'action' => trans('language.admin.action'),
+        'id' => 'ID',
+        'name' => sc_language_render('language.name'),
+        'code' => sc_language_render('language.code'),
+        'icon' => sc_language_render('language.icon'),
+        'rtl' => sc_language_render('language.layout_rtl'),
+        'sort' => sc_language_render('language.sort'),
+        'status' => sc_language_render('language.status'),
+        'action' => sc_language_render('action.title'),
     ];
     $obj = new ShopLanguage;
     $obj = $obj->orderBy('id', 'desc');
@@ -155,9 +155,9 @@ public function edit($id)
             'sort' => $row['sort'],
             'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             'action' => '
-                <a href="' . sc_route_admin('admin_language.edit', ['id' => $row['id']]) . '"><span title="' . trans('language.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                <a href="' . sc_route_admin('admin_language.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-              <span ' . (in_array($row['id'], SC_GUARD_LANGUAGE) ? "style='display:none'" : "") . ' onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('language.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+              <span ' . (in_array($row['id'], SC_GUARD_LANGUAGE) ? "style='display:none'" : "") . ' onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
               ',
         ];
     }
@@ -165,7 +165,7 @@ public function edit($id)
     $data['listTh'] = $listTh;
     $data['dataTr'] = $dataTr;
     $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = trans('language.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
     $data['layout'] = 'edit';
     return view($this->templatePathAdmin.'screen.language')
@@ -213,7 +213,7 @@ public function edit($id)
         $obj->update($dataUpdate);
 
 //
-        return redirect()->back()->with('success', trans('language.admin.edit_success'));
+        return redirect()->back()->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -224,7 +224,7 @@ public function edit($id)
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

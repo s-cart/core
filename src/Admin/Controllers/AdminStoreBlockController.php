@@ -25,7 +25,7 @@ class AdminStoreBlockController extends RootAdminController
     {
 
         $data = [
-            'title'         => trans('store_block.admin.list'),
+            'title'         => sc_language_render('admin.store_block.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_store_block.delete'),
@@ -43,14 +43,14 @@ class AdminStoreBlockController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'       => trans('store_block.id'),
-            'name'     => trans('store_block.name'),
-            'type'     => trans('store_block.type'),
-            'position' => trans('store_block.position'),
-            'page'     => trans('store_block.page'),
-            'text'     => trans('store_block.text'),
-            'status'   => trans('store_block.status'),
-            'action'   => trans('store_block.admin.action'),
+            'id'       => 'ID',
+            'name'     => sc_language_render('admin.store_block.name'),
+            'type'     => sc_language_render('admin.store_block.type'),
+            'position' => sc_language_render('admin.store_block.position'),
+            'page'     => sc_language_render('admin.store_block.page'),
+            'text'     => sc_language_render('admin.store_block.text'),
+            'status'   => sc_language_render('admin.store_block.status'),
+            'action'   => sc_language_render('action.title'),
         ];
         $dataTmp = (new AdminStoreBlockContent)->getStoreBlockContentListAdmin();
 
@@ -85,9 +85,9 @@ class AdminStoreBlockController extends RootAdminController
                 'text' => htmlspecialchars($row['text']),
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_store_block.edit', ['id' => $row['id']]) . '"><span title="' . trans('store_block.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_store_block.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('store_block.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -95,12 +95,12 @@ class AdminStoreBlockController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('store_block.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         //menuRight
         $data['menuRight'][] = '
                            <a href="' . sc_route_admin('admin_store_block.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
         //=menuRight
 
@@ -116,9 +116,9 @@ class AdminStoreBlockController extends RootAdminController
     {
         $listViewBlock = $this->getListViewBlock();
         $data = [
-            'title'             => trans('store_block.admin.add_new_title'),
+            'title'             => sc_language_render('admin.store_block.add_new_title'),
             'subTitle'          => '',
-            'title_description' => trans('store_block.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.store_block.add_new_des'),
             'icon'              => 'fa fa-plus',
             'layoutPosition'    => $this->layoutPosition,
             'layoutPage'        => $this->layoutPage,
@@ -166,7 +166,7 @@ class AdminStoreBlockController extends RootAdminController
         ];
         AdminStoreBlockContent::createStoreBlockContentAdmin($dataInsert);
         //
-        return redirect()->route('admin_store_block.index')->with('success', trans('store_block.admin.create_success'));
+        return redirect()->route('admin_store_block.index')->with('success', sc_language_render('action.create_success'));
     }
 
     /**
@@ -182,7 +182,7 @@ class AdminStoreBlockController extends RootAdminController
         $listViewBlock = $this->getListViewBlock();
 
         $data = [
-            'title' => trans('store_block.admin.edit'),
+            'title' => sc_language_render('action.edit'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -211,7 +211,7 @@ class AdminStoreBlockController extends RootAdminController
         $validator = Validator::make($dataOrigin, [
             'name' => 'required',
         ], [
-            'name.required' => trans('validation.required'),
+            'name.required' => sc_language_render('validation.required'),
         ]);
 
         if ($validator->fails()) {
@@ -233,7 +233,7 @@ class AdminStoreBlockController extends RootAdminController
         ];
         $layout->update($dataUpdate);
         //
-        return redirect()->route('admin_store_block.index')->with('success', trans('store_block.admin.edit_success'));
+        return redirect()->route('admin_store_block.index')->with('success', sc_language_render('action.edit_success'));
     }
 
     /*
@@ -243,7 +243,7 @@ class AdminStoreBlockController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -254,7 +254,7 @@ class AdminStoreBlockController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             }
             AdminStoreBlockContent::destroy($arrID);
             return response()->json(['error' => 0, 'msg' => '']);

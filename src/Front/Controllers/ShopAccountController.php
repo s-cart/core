@@ -52,7 +52,7 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.index')
             ->with(
                 [
-                    'title' => trans('account.my_profile'),
+                    'title' => sc_language_render('customer.my_account'),
                     'customer' => $customer,
                     'layout_page' => 'shop_profile',
                 ]
@@ -86,7 +86,7 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.change_password')
         ->with(
             [
-                'title' => trans('account.change_password'),
+                'title' => sc_language_render('customer.change_password'),
                 'customer' => $customer,
                 'layout_page' => 'shop_profile',
             ]
@@ -109,7 +109,7 @@ class ShopAccountController extends RootFrontController
             return redirect()->back()
                 ->with(
                     [
-                        'password_old_error' => trans('account.password_old_required')
+                        'password_old_error' => sc_language_render('customer.password_old_required')
                     ]
                 );
         } else {
@@ -117,15 +117,15 @@ class ShopAccountController extends RootFrontController
                 return redirect()->back()
                     ->with(
                         [
-                            'password_old_error' => trans('account.password_old_notcorrect')
+                            'password_old_error' => sc_language_render('customer.password_old_notcorrect')
                         ]
                     );
             }
         }
         $messages = [
-            'password.required' => trans('validation.required', ['attribute'=> trans('account.password')]),
-            'password.confirmed' => trans('validation.confirmed', ['attribute'=> trans('account.password')]),
-            'password_old.required' => trans('validation.required', ['attribute'=> trans('account.password_old')]),
+            'password.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.password')]),
+            'password.confirmed' => sc_language_render('validation.confirmed', ['attribute'=> sc_language_render('customer.password')]),
+            'password_old.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.password_old')]),
         ];
         $v = Validator::make(
             $request->all(), 
@@ -142,7 +142,7 @@ class ShopAccountController extends RootFrontController
         $dataUser->save();
 
         return redirect(sc_route('customer.index'))
-            ->with(['success' => trans('account.update_success')]);
+            ->with(['success' => sc_language_render('customer.update_success')]);
     }
 
     /**
@@ -172,7 +172,7 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.change_infomation')
             ->with(
                 [
-                    'title' => trans('account.change_infomation'),
+                    'title' => sc_language_render('customer.change_infomation'),
                     'customer' => $customer,
                     'countries' => ShopCountry::getCodeAll(),
                     'layout_page' => 'shop_profile',
@@ -205,7 +205,7 @@ class ShopAccountController extends RootFrontController
         ShopCustomer::updateInfo($dataMapping['dataUpdate'], $id);
 
         return redirect(sc_route('customer.index'))
-            ->with(['success' => trans('account.update_success')]);
+            ->with(['success' => sc_language_render('customer.update_success')]);
     }
 
     /**
@@ -235,7 +235,7 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.order_list')
             ->with(
                 [
-                'title' => trans('account.order_list'),
+                'title' => sc_language_render('customer.order_history'),
                 'statusOrder' => $statusOrder,
                 'orders' => (new ShopOrder)->profile()->getData(),
                 'customer' => $customer,
@@ -274,9 +274,9 @@ class ShopAccountController extends RootFrontController
         $attributesGroup = ShopAttributeGroup::pluck('name', 'id')->all();
         $order = ShopOrder::where('id', $id) ->where('customer_id', $customer->id)->first();
         if ($order) {
-            $title = trans('account.order_detail').' #'.$order->id;
+            $title = sc_language_render('customer.order_detail').' #'.$order->id;
         } else {
-            $title = trans('account.order_detail_notfound');
+            return $this->pageNotFound();
         }
         sc_check_view($this->templatePath . '.account.order_detail');
         return view($this->templatePath . '.account.order_detail')
@@ -321,7 +321,7 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.address_list')
             ->with(
                 [
-                'title' => trans('account.address_list'),
+                'title' => sc_language_render('customer.address_list'),
                 'addresses' => $customer->addresses,
                 'countries' => ShopCountry::getCodeAll(),
                 'customer' => $customer,
@@ -359,9 +359,9 @@ class ShopAccountController extends RootFrontController
             ->where('id', $id)
             ->first();
         if ($address) {
-            $title = trans('account.address_detail').' #'.$address->id;
+            $title = sc_language_render('customer.address_detail').' #'.$address->id;
         } else {
-            $title = trans('account.address_detail_notfound');
+            return $this->pageNotFound();
         }
         sc_check_view($this->templatePath . '.account.update_address');
         return view($this->templatePath . '.account.update_address')
@@ -445,22 +445,22 @@ class ShopAccountController extends RootFrontController
         }
 
         $messages = [
-            'last_name.required'  => trans('validation.required', ['attribute'=> trans('account.last_name')]),
-            'first_name.required' => trans('validation.required', ['attribute'=> trans('account.first_name')]),
-            'address1.required'   => trans('validation.required', ['attribute'=> trans('account.address1')]),
-            'address2.required'   => trans('validation.required', ['attribute'=> trans('account.address2')]),
-            'address3.required'   => trans('validation.required', ['attribute'=> trans('account.address3')]),
-            'phone.required'      => trans('validation.required', ['attribute'=> trans('account.phone')]),
-            'country.required'    => trans('validation.required', ['attribute'=> trans('account.country')]),
-            'postcode.required'   => trans('validation.required', ['attribute'=> trans('account.postcode')]),
-            'phone.regex'         => trans('customer.phone_regex'),
-            'postcode.min'        => trans('validation.min', ['attribute'=> trans('account.postcode')]),
-            'country.min'         => trans('validation.min', ['attribute'=> trans('account.country')]),
-            'first_name.max'      => trans('validation.max', ['attribute'=> trans('account.first_name')]),
-            'address1.max'        => trans('validation.max', ['attribute'=> trans('account.address1')]),
-            'address2.max'        => trans('validation.max', ['attribute'=> trans('account.address2')]),
-            'address3.max'        => trans('validation.max', ['attribute'=> trans('account.address3')]),
-            'last_name.max'       => trans('validation.max', ['attribute'=> trans('account.last_name')]),
+            'last_name.required'  => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.last_name')]),
+            'first_name.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.first_name')]),
+            'address1.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address1')]),
+            'address2.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address2')]),
+            'address3.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address3')]),
+            'phone.required'      => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.phone')]),
+            'country.required'    => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.country')]),
+            'postcode.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.postcode')]),
+            'phone.regex'         => sc_language_render('customer.phone_regex'),
+            'postcode.min'        => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.postcode')]),
+            'country.min'         => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.country')]),
+            'first_name.max'      => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.first_name')]),
+            'address1.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address1')]),
+            'address2.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address2')]),
+            'address3.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address3')]),
+            'last_name.max'       => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.last_name')]),
         ];
 
         $v = Validator::make(
@@ -478,7 +478,7 @@ class ShopAccountController extends RootFrontController
             (new ShopCustomer)->find($customer->id)->update(['address_id' => $id]);
         }
         return redirect(sc_route('customer.address_list'))
-            ->with(['success' => sc_language_render('account.update_success')]);
+            ->with(['success' => sc_language_render('customer.update_success')]);
     }
 
     /**
@@ -495,7 +495,7 @@ class ShopAccountController extends RootFrontController
         if ($address) {
             return $address->toJson();
         } else {
-            return json_encode(['error' => 1, 'msg' => 'Address not found']);
+            return $this->pageNotFound();
         }
     }
 
@@ -510,7 +510,7 @@ class ShopAccountController extends RootFrontController
         (new ShopCustomerAddress)->where('customer_id', $customer->id)
             ->where('id', $id)
             ->delete();
-        return json_encode(['error' => 0, 'msg' => trans('account.delete_address_success')]);
+        return json_encode(['error' => 0, 'msg' => sc_language_render('customer.delete_address_success')]);
     }
 
     /**
@@ -542,7 +542,7 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.verify')
             ->with(
                 [
-                    'title' => trans('account.verify_email.title_page'),
+                    'title' => sc_language_render('customer.verify_email.title_page'),
                     'customer' => $customer,
                 ]
             );
@@ -582,17 +582,17 @@ class ShopAccountController extends RootFrontController
         if (!$customer) {
             $arrMsg = [
                 'error' => 1,
-                'msg' => trans('account.verify_email.link_invalid'),
+                'msg' => sc_language_render('customer.verify_email.link_invalid'),
             ];
         } else if ($customer->id != $id) {
             $arrMsg = [
                 'error' => 1,
-                'msg' => trans('account.verify_email.link_invalid'),
+                'msg' => sc_language_render('customer.verify_email.link_invalid'),
             ];
         } else if (sha1($customer->email) != $token) {
             $arrMsg = [
                 'error' => 1,
-                'msg' => trans('account.verify_email.link_invalid'),
+                'msg' => sc_language_render('customer.verify_email.link_invalid'),
             ];
         }
         if (! $request->hasValidSignature()) {
@@ -602,7 +602,7 @@ class ShopAccountController extends RootFrontController
             return redirect(route('home'))->with(['error' => $arrMsg['msg']]);
         } else {
             $customer->update(['email_verified_at' => \Carbon\Carbon::now()]);
-            return redirect(sc_route('customer.index'))->with(['message' => trans('account.verify_email.verify_success')]);
+            return redirect(sc_route('customer.index'))->with(['message' => sc_language_render('customer.verify_email.verify_success')]);
         }
     }
     

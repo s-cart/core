@@ -145,7 +145,7 @@ class ShopCartController extends RootFrontController
         if(sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
             if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
                 $dataView = [
-                    'titleButton' => trans('cart.checkout'),
+                    'titleButton' => sc_language_render('cart.checkout'),
                     'idForm' => 'form-process',
                     'idButtonForm' => 'button-form-process',
                 ];
@@ -157,7 +157,7 @@ class ShopCartController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_cart',
             [
-                'title'           => trans('front.cart_title'),
+                'title'           => sc_language_render('cart.cart_title'),
                 'description'     => '',
                 'keyword'         => '',
                 'cart'            => Cart::instance('default')->content(),
@@ -293,32 +293,32 @@ class ShopCartController extends RootFrontController
         }
 
         $messages = [
-            'last_name.required'      => trans('validation.required', ['attribute'=> trans('cart.last_name')]),
-            'first_name.required'     => trans('validation.required', ['attribute'=> trans('cart.first_name')]),
-            'email.required'          => trans('validation.required', ['attribute'=> trans('cart.email')]),
-            'address1.required'       => trans('validation.required', ['attribute'=> trans('cart.address1')]),
-            'address2.required'       => trans('validation.required', ['attribute'=> trans('cart.address2')]),
-            'address3.required'       => trans('validation.required', ['attribute'=> trans('cart.address3')]),
-            'phone.required'          => trans('validation.required', ['attribute'=> trans('cart.phone')]),
-            'country.required'        => trans('validation.required', ['attribute'=> trans('cart.country')]),
-            'postcode.required'       => trans('validation.required', ['attribute'=> trans('cart.postcode')]),
-            'company.required'        => trans('validation.required', ['attribute'=> trans('cart.company')]),
-            'sex.required'            => trans('validation.required', ['attribute'=> trans('cart.sex')]),
-            'birthday.required'       => trans('validation.required', ['attribute'=> trans('cart.birthday')]),
-            'email.email'             => trans('validation.email', ['attribute'=> trans('cart.email')]),
-            'phone.regex'             => trans('customer.phone_regex'),
-            'postcode.min'            => trans('validation.min', ['attribute'=> trans('cart.postcode')]),
-            'country.min'             => trans('validation.min', ['attribute'=> trans('cart.country')]),
-            'first_name.max'          => trans('validation.max', ['attribute'=> trans('cart.first_name')]),
-            'email.max'               => trans('validation.max', ['attribute'=> trans('cart.email')]),
-            'address1.max'            => trans('validation.max', ['attribute'=> trans('cart.address1')]),
-            'address2.max'            => trans('validation.max', ['attribute'=> trans('cart.address2')]),
-            'address3.max'            => trans('validation.max', ['attribute'=> trans('cart.address3')]),
-            'last_name.max'           => trans('validation.max', ['attribute'=> trans('cart.last_name')]),
-            'birthday.date'           => trans('validation.date', ['attribute'=> trans('cart.birthday')]),
-            'birthday.date_format'    => trans('validation.date_format', ['attribute'=> trans('cart.birthday')]),
-            'shippingMethod.required' => trans('cart.validation.shippingMethod_required'),
-            'paymentMethod.required'  => trans('cart.validation.paymentMethod_required'),
+            'last_name.required'      => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.last_name')]),
+            'first_name.required'     => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.first_name')]),
+            'email.required'          => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.email')]),
+            'address1.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address1')]),
+            'address2.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address2')]),
+            'address3.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address3')]),
+            'phone.required'          => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.phone')]),
+            'country.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.country')]),
+            'postcode.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.postcode')]),
+            'company.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.company')]),
+            'sex.required'            => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.sex')]),
+            'birthday.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.birthday')]),
+            'email.email'             => sc_language_render('validation.email', ['attribute'=> sc_language_render('cart.email')]),
+            'phone.regex'             => sc_language_render('customer.phone_regex'),
+            'postcode.min'            => sc_language_render('validation.min', ['attribute'=> sc_language_render('cart.postcode')]),
+            'country.min'             => sc_language_render('validation.min', ['attribute'=> sc_language_render('cart.country')]),
+            'first_name.max'          => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.first_name')]),
+            'email.max'               => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.email')]),
+            'address1.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address1')]),
+            'address2.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address2')]),
+            'address3.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address3')]),
+            'last_name.max'           => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.last_name')]),
+            'birthday.date'           => sc_language_render('validation.date', ['attribute'=> sc_language_render('cart.birthday')]),
+            'birthday.date_format'    => sc_language_render('validation.date_format', ['attribute'=> sc_language_render('cart.birthday')]),
+            'shippingMethod.required' => sc_language_render('cart.validation.shippingMethod_required'),
+            'paymentMethod.required'  => sc_language_render('cart.validation.paymentMethod_required'),
         ];
 
         if(sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
@@ -457,7 +457,7 @@ class ShopCartController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_checkout',
             [
-                'title'              => trans('front.checkout_title'),
+                'title'              => sc_language_render('checkout.page_title'),
                 'cart'               => Cart::instance('default')->content(),
                 'dataTotal'          => $dataTotal,
                 'paymentMethodData'  => $paymentMethodData,
@@ -501,7 +501,7 @@ class ShopCartController extends RootFrontController
             return response()->json(
                 [
                     'error' => 1,
-                    'msg' => trans('front.notfound'),
+                    'msg' => sc_language_render('front.data_notfound'),
                 ]
             );
         }
@@ -524,12 +524,12 @@ class ShopCartController extends RootFrontController
             Cart::instance('default')->add($dataCart);
             return redirect(sc_route('cart'))
                 ->with(
-                    ['success' => trans('cart.success', ['instance' => 'cart'])]
+                    ['success' => sc_language_render('cart.add_to_cart_success', ['instance' => 'cart'])]
                 );
         } else {
             return redirect(sc_route('cart'))
                 ->with(
-                    ['error' => trans('cart.dont_allow_sale')]
+                    ['error' => sc_language_render('product.dont_allow_sale', ['sku' => $product->sku])]
                 );
         }
 
@@ -704,7 +704,7 @@ class ShopCartController extends RootFrontController
             return response()->json(
                 [
                     'error' => 1,
-                    'msg' => trans('front.notfound'),
+                    'msg' => sc_language_render('front.data_notfound'),
                 ]
             );
         }
@@ -738,7 +738,7 @@ class ShopCartController extends RootFrontController
                     return response()->json(
                         [
                             'error' => 1,
-                            'msg' => trans('cart.dont_allow_sale'),
+                            'msg' => sc_language_render('product.dont_allow_sale', ['sku' => $product->sku]),
                         ]
                     );
                 }
@@ -772,7 +772,7 @@ class ShopCartController extends RootFrontController
                     return response()->json(
                         [
                             'error' => 1,
-                            'msg' => trans('cart.exist', ['instance' => $instance]),
+                            'msg' => sc_language_render('cart.item_exist_in_cart', ['instance' => $instance]),
                         ]
                     );
                 }
@@ -786,7 +786,7 @@ class ShopCartController extends RootFrontController
                 'count_cart' => $carts['count'],
                 'instance'   => $instance,
                 'subtotal'   => $carts['subtotal'],
-                'msg'        => trans('cart.success', ['instance' => ($instance == 'default') ? 'cart' : $instance]),
+                'msg'        => sc_language_render('cart.add_to_cart_success', ['instance' => ($instance == 'default') ? 'cart' : $instance]),
             ]
         );
 
@@ -813,7 +813,7 @@ class ShopCartController extends RootFrontController
             return response()->json(
                 [
                     'error' => 1,
-                    'msg' => trans('front.notfound'),
+                    'msg' => sc_language_render('front.data_notfound'),
                 ]
             );
         }
@@ -822,7 +822,7 @@ class ShopCartController extends RootFrontController
             return response()->json(
                 [
                     'error' => 1,
-                    'msg' => trans('cart.over', ['item' => $product->sku]),
+                    'msg' => sc_language_render('cart.item_over_qty', ['sku' => $product->sku, 'qty' => $new_qty]),
                 ]
             );
         } else {
@@ -863,7 +863,7 @@ class ShopCartController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_wishlist',
             array(
-                'title'       => trans('front.wishlist'),
+                'title'       => sc_language_render('cart.page_wishlist_title'),
                 'description' => '',
                 'keyword'     => '',
                 'wishlist'    => $wishlist,
@@ -899,7 +899,7 @@ class ShopCartController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_compare',
             array(
-                'title'       => trans('front.compare'),
+                'title'       => sc_language_render('cart.page_compare_title'),
                 'description' => '',
                 'keyword'     => '',
                 'compare'     => $compare,
@@ -1028,12 +1028,12 @@ class ShopCartController extends RootFrontController
 
                 $orderDetail = '';
                 $orderDetail .= '<tr>
-                                    <td>' . trans('email.order.sort') . '</td>
-                                    <td>' . trans('email.order.sku') . '</td>
-                                    <td>' . trans('email.order.name') . '</td>
-                                    <td>' . trans('email.order.price') . '</td>
-                                    <td>' . trans('email.order.qty') . '</td>
-                                    <td>' . trans('email.order.total') . '</td>
+                                    <td>' . sc_language_render('email.order.sort') . '</td>
+                                    <td>' . sc_language_render('email.order.sku') . '</td>
+                                    <td>' . sc_language_render('email.order.name') . '</td>
+                                    <td>' . sc_language_render('email.order.price') . '</td>
+                                    <td>' . sc_language_render('email.order.qty') . '</td>
+                                    <td>' . sc_language_render('email.order.total') . '</td>
                                 </tr>';
                 foreach ($data['details'] as $key => $detail) {
                     $product = (new ShopProduct)->getDetail($detail['product_id']);
@@ -1072,7 +1072,7 @@ class ShopCartController extends RootFrontController
                     '/\{\{\$total\}\}/',
                 ];
                 $dataReplace = [
-                    trans('order.send_mail.new_title') . '#' . $orderID,
+                    sc_language_render('email.order.email_subject_customer') . '#' . $orderID,
                     $orderID,
                     $data['first_name'],
                     $data['last_name'],
@@ -1092,7 +1092,7 @@ class ShopCartController extends RootFrontController
                 ];
 
                 // Send mail order success to admin 
-                if (sc_config('order_success_to_admin') && $checkContent) {
+                if (sc_config('order_success_to_admin', ['order_d' => $orderID]) && $checkContent) {
                     $content = $checkContent->text;
                     $content = preg_replace($dataFind, $dataReplace, $content);
                     $dataView = [
@@ -1100,7 +1100,7 @@ class ShopCartController extends RootFrontController
                     ];
                     $config = [
                         'to' => sc_store('email'),
-                        'subject' => trans('order.send_mail.new_title') . '#' . $orderID,
+                        'subject' => sc_language_render('email.order.email_subject_to_admin', ['order_id' => $orderID]),
                     ];
                     sc_send_mail($this->templatePath . '.mail.order_success_to_admin', $dataView, $config, []);
                 }
@@ -1115,7 +1115,7 @@ class ShopCartController extends RootFrontController
                     $config = [
                         'to' => $data['email'],
                         'replyTo' => sc_store('email'),
-                        'subject' => trans('order.send_mail.new_title'),
+                        'subject' => sc_language_render('email.order.email_subject_customer', ['order_id' => $orderID]),
                     ];
 
                     $attach = [];
@@ -1171,7 +1171,7 @@ class ShopCartController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_order_success',
             [
-                'title' => trans('order.success.title'),
+                'title' => sc_language_render('checkout.success_title'),
                 'dataTotal' => $dataTotal,
                 'layout_page' =>'shop_order_success',
             ]

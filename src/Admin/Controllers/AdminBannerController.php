@@ -24,7 +24,7 @@ class AdminBannerController extends RootAdminController
     public function index()
     {
         $data = [
-            'title'         => trans('banner.admin.list'),
+            'title'         => sc_language_render('admin.banner.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_banner.delete'),
@@ -42,22 +42,22 @@ class AdminBannerController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'image'  => trans('banner.image'),
-            'title'  => trans('banner.title'),
-            'url'    => trans('banner.url'),
-            'sort'   => trans('banner.sort'),
-            'status' => trans('banner.status'),
-            'click'  => trans('banner.click'),
-            'target' => trans('banner.target'),
-            'type'   => trans('banner.type'),
-            'action' => trans('banner.admin.action'),
+            'image'  => sc_language_render('admin.banner.image'),
+            'title'  => sc_language_render('admin.banner.title'),
+            'url'    => sc_language_render('admin.banner.url'),
+            'sort'   => sc_language_render('admin.banner.sort'),
+            'status' => sc_language_render('admin.banner.status'),
+            'click'  => sc_language_render('admin.banner.click'),
+            'target' => sc_language_render('admin.banner.target'),
+            'type'   => sc_language_render('admin.banner.type'),
+            'action' => sc_language_render('action.title'),
         ];
 
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
-            'id__desc' => trans('banner.admin.sort_order.id_desc'),
-            'id__asc' => trans('banner.admin.sort_order.id_asc'),
+            'id__desc' => sc_language_render('filter_sort.id_desc'),
+            'id__asc' => sc_language_render('filter_sort.id_asc'),
         ];
         
         $dataSearch = [
@@ -79,8 +79,8 @@ class AdminBannerController extends RootAdminController
                 'target' => $row['target'],
                 'type' => $this->dataType[$row['type']]??'N/A',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_banner.edit', ['id' => $row['id']]) . '"><span title="' . trans('banner.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('banner.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                    <a href="' . sc_route_admin('admin_banner.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -88,11 +88,11 @@ class AdminBannerController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('banner.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_banner.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-        <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+        <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>
                            <a href="' . sc_route_admin('admin_banner_type.index') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-search-plus" aria-hidden="true"></i>
@@ -102,8 +102,8 @@ class AdminBannerController extends RootAdminController
         //menuSearch        
         $data['topMenuRight'][] = '
         <form action="' . sc_route_admin('admin_banner.index') . '" id="button_search">
-        <div class="input-group input-group" style="width: 250px;">
-            <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('banner.admin.search_place') . '" value="' . $keyword . '">
+        <div class="input-group input-group" style="width: 350px;">
+            <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('search.placeholder') . '" value="' . $keyword . '">
             <div class="input-group-append">
                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
             </div>
@@ -132,9 +132,9 @@ class AdminBannerController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => trans('banner.admin.add_new_title'),
+            'title' => sc_language_render('admin.banner.add_new'),
             'subTitle' => '',
-            'title_description' => trans('banner.admin.add_new_des'),
+            'title_description' => '',
             'icon' => 'fa fa-plus',
             'banner' => [],
             'arrTarget' => $this->arrTarget,
@@ -175,7 +175,7 @@ class AdminBannerController extends RootAdminController
             'store_id' => session('adminStoreId'),
         ];
         AdminBanner::createBannerAdmin($dataInsert);
-        return redirect()->route('admin_banner.index')->with('success', trans('banner.admin.create_success'));
+        return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -191,7 +191,7 @@ class AdminBannerController extends RootAdminController
         }
 
         $data = [
-            'title'             => trans('banner.admin.edit'),
+            'title'             => sc_language_render('action.edit'),
             'subTitle'          => '',
             'title_description' => '',
             'icon'              => 'fa fa-edit',
@@ -241,7 +241,7 @@ class AdminBannerController extends RootAdminController
         ];
         $banner->update($dataUpdate);
 
-        return redirect()->route('admin_banner.index')->with('success', trans('banner.admin.edit_success'));
+        return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -252,7 +252,7 @@ class AdminBannerController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -263,7 +263,7 @@ class AdminBannerController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             }
 
             AdminBanner::destroy($arrID);

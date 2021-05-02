@@ -34,7 +34,7 @@ class Backup extends Command
         $includeTables = $this->option('includeTables');
         $excludeTables = $this->option('excludeTables');
         if (count(glob(storage_path() . "/backups/*.sql")) >= self::LIMIT) {
-            echo json_encode(['error' => 1, 'msg' => trans('backup.limit_backup')]);
+            echo json_encode(['error' => 1, 'msg' => sc_language_render('admin.backup.limit_backup')]);
             exit;
         }
         if ($path) {

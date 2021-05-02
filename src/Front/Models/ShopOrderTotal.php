@@ -34,7 +34,7 @@ class ShopOrderTotal extends Model
 
         //Set subtotal
         $arraySubtotal = [
-            'title' => trans('order.totals.sub_total'),
+            'title' => sc_language_render('order.totals.sub_total'),
             'code' => 'subtotal',
             'value' => $subtotal,
             'text' => sc_currency_render_symbol($subtotal),
@@ -43,7 +43,7 @@ class ShopOrderTotal extends Model
 
         //Set tax
         $arrayTax = [
-            'title' => trans('order.totals.tax'),
+            'title' => sc_language_render('order.totals.tax'),
             'code' => 'tax',
             'value' => $tax,
             'text' => sc_currency_render_symbol($tax),
@@ -62,7 +62,7 @@ class ShopOrderTotal extends Model
             }
         }
         $arrayTotal = array(
-            'title' => trans('order.totals.total'),
+            'title' => sc_language_render('order.totals.total'),
             'code' => 'total',
             'value' => $total,
             'text' => sc_currency_render_symbol($total),
@@ -164,7 +164,7 @@ class ShopOrderTotal extends Model
         }
         if (!count($totalMethod)) {
             $totalMethod[] = array(
-                'title' => trans('order.totals.discount'),
+                'title' => sc_language_render('order.totals.discount'),
                 'code' => 'discount',
                 'value' => 0,
                 'text' => 0,
@@ -180,7 +180,7 @@ class ShopOrderTotal extends Model
     public static function getReceived()
     {
         return array(
-            'title' => trans('order.totals.received'),
+            'title' => sc_language_render('order.totals.received'),
             'code' => 'received',
             'value' => 0,
             'text' => 0,

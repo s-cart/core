@@ -15,7 +15,7 @@ class AdminEmailTemplateController extends RootAdminController
     public function index()
     {
         $data = [
-            'title'         => trans('email_template.admin.list'),
+            'title'         => sc_language_render('admin.email_template.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_email_template.delete'),
@@ -33,11 +33,11 @@ class AdminEmailTemplateController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id' => trans('email_template.id'),
-            'name' => trans('email_template.name'),
-            'group' => trans('email_template.group'),
-            'status' => trans('email_template.status'),
-            'action' => trans('email_template.admin.action'),
+            'id' => 'ID',
+            'name' => sc_language_render('admin.email_template.name'),
+            'group' => sc_language_render('admin.email_template.group'),
+            'status' => sc_language_render('admin.email_template.status'),
+            'action' => sc_language_render('action.title'),
         ];
         $dataSearch = [];
         $dataTmp = AdminEmailTemplate::getEmailTemplateListAdmin($dataSearch);
@@ -50,9 +50,9 @@ class AdminEmailTemplateController extends RootAdminController
                 'group' => $row['group'] ?? 'N/A',
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_email_template.edit', ['id' => $row['id']]) . '"><span title="' . trans('email_template.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_email_template.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('email_template.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -60,11 +60,11 @@ class AdminEmailTemplateController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('email_template.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_email_template.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
         //=menuRight
         $data['urlSort'] = sc_route_admin('admin_email_template.index', request()->except(['_token', '_pjax', 'sort_order']));
@@ -80,9 +80,9 @@ class AdminEmailTemplateController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => trans('email_template.admin.add_new_title'),
+            'title' => sc_language_render('admin.email_template.add_new_title'),
             'subTitle' => '',
-            'title_description' => trans('email_template.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.email_template.add_new_des'),
             'icon' => 'fa fa-plus',
             'arrayGroup' => $this->arrayGroup(),
             'obj' => [],
@@ -121,7 +121,7 @@ class AdminEmailTemplateController extends RootAdminController
         ];
         ShopEmailTemplate::createEmailTemplateAdmin($dataInsert);
 
-        return redirect()->route('admin_email_template.index')->with('success', trans('email_template.admin.create_success'));
+        return redirect()->route('admin_email_template.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -135,7 +135,7 @@ class AdminEmailTemplateController extends RootAdminController
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
         $data = [
-            'title' => trans('email_template.admin.edit'),
+            'title' => sc_language_render('action.edit'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -179,7 +179,7 @@ class AdminEmailTemplateController extends RootAdminController
         ];
         $emailTemplate->update($dataUpdate);
 
-        return redirect()->route('admin_email_template.index')->with('success', trans('email_template.admin.edit_success'));
+        return redirect()->route('admin_email_template.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -190,7 +190,7 @@ class AdminEmailTemplateController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -201,7 +201,7 @@ class AdminEmailTemplateController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             }
             ShopEmailTemplate::destroy($arrID);
             return response()->json(['error' => 0, 'msg' => '']);
@@ -296,13 +296,13 @@ class AdminEmailTemplateController extends RootAdminController
     public function arrayGroup()
     {
         return  [
-            'order_success_to_admin' => trans('email.email_action.order_success_to_admin'),
-            'order_success_to_customer' => trans('email.email_action.order_success_to_cutomer'),
-            'forgot_password' => trans('email.email_action.forgot_password'),
-            'customer_verify' => trans('email.email_action.customer_verify'),
-            'welcome_customer' => trans('email.email_action.welcome_customer'),
-            'contact_to_admin' => trans('email.email_action.contact_to_admin'),
-            'other' => trans('email.email_action.other'),
+            'order_success_to_admin' => sc_language_render('email.admin.order_success_to_admin'),
+            'order_success_to_customer' => sc_language_render('email.admin.order_success_to_cutomer'),
+            'forgot_password' => sc_language_render('email.admin.forgot_password'),
+            'customer_verify' => sc_language_render('email.admin.customer_verify'),
+            'welcome_customer' => sc_language_render('email.admin.welcome_customer'),
+            'contact_to_admin' => sc_language_render('email.admin.contact_to_admin'),
+            'other' => sc_language_render('email.admin.other'),
         ];
     }
 

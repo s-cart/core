@@ -15,7 +15,7 @@ class AdminTemplateController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('template.admin.list'),
+            'title' => sc_language_render('admin.template.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',        ];
 
@@ -58,7 +58,7 @@ class AdminTemplateController extends RootAdminController
      */
     public function importTemplate() {
         $data =  [
-            'title' => trans('template.import')
+            'title' => sc_language_render('admin.template.import')
         ];
         return view($this->templatePathAdmin.'screen.template_upload')
         ->with($data);
@@ -98,13 +98,13 @@ class AdminTemplateController extends RootAdminController
                     $configKey = str_replace('.','-', $configKey);
                     if (!$configKey) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
-                        return redirect()->back()->with('error', trans('template.error_config'));
+                        return redirect()->back()->with('error', sc_language_render('admin.template.error_config'));
                     }
 
                     $arrTemplateLocal = sc_get_all_template();
                     if(array_key_exists($configKey, $arrTemplateLocal)) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
-                        return redirect()->back()->with('error', trans('template.error_exist'));
+                        return redirect()->back()->with('error', sc_language_render('admin.template.error_exist'));
                     }
                     try {
                         File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path('templates/'.$configKey));
@@ -117,14 +117,14 @@ class AdminTemplateController extends RootAdminController
 
                 } else {
                     File::deleteDirectory(storage_path('tmp/'.$pathTmp));
-                    return redirect()->back()->with('error', trans('template.error_check_config'));
+                    return redirect()->back()->with('error', sc_language_render('admin.template.error_check_config'));
                 }
             } else {
-                return redirect()->back()->with('error', trans('template.error_unzip'));
+                return redirect()->back()->with('error', sc_language_render('admin.template.error_unzip'));
             }
         } else {
-            return redirect()->back()->with('error', trans('template.error_upload'));
+            return redirect()->back()->with('error', sc_language_render('admin.template.error_upload'));
         }
-        return redirect()->route('admin_template.index')->with('success', trans('template.import_success')); 
+        return redirect()->route('admin_template.index')->with('success', sc_language_render('admin.template.import_success')); 
     }
 }

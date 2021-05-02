@@ -32,7 +32,7 @@ class AdminStoreConfigController extends RootAdminController
     public function index() {
         $id = session('adminStoreId');
         $data = [
-            'title' => trans('admin.menu_titles.config_store_default'),
+            'title' => sc_language_render('admin.menu_titles.config_store_default'),
             'subTitle' => '',
             'icon' => 'fas fa-cogs',        
         ];
@@ -55,7 +55,7 @@ class AdminStoreConfigController extends RootAdminController
 
         //Product config
         $taxs = ShopTax::pluck('name', 'id')->toArray();
-        $taxs[0] = trans('tax.admin.non_tax');
+        $taxs[0] = sc_language_render('admin.tax.non_tax');
 
         $productConfigQuery = [
             'code' => 'product_config',
@@ -119,11 +119,11 @@ class AdminStoreConfigController extends RootAdminController
         $data['emailConfig'] = $emailConfig;
         $data['smtp_method'] = ['' => 'None Secirity', 'TLS' => 'TLS', 'SSL' => 'SSL'];
         $data['captcha_page'] = [
-            'register' => trans('captcha.captcha_page_register'), 
-            'forgot'   => trans('captcha.captcha_page_forgot_password'), 
-            'checkout' => trans('captcha.captcha_page_checkout'), 
-            'contact'  => trans('captcha.captcha_page_contact'),
-            'review'   => trans('captcha.captcha_page_review'),
+            'register' => sc_language_render('admin.captcha.captcha_page_register'), 
+            'forgot'   => sc_language_render('admin.captcha.captcha_page_forgot_password'), 
+            'checkout' => sc_language_render('admin.captcha.captcha_page_checkout'), 
+            'contact'  => sc_language_render('admin.captcha.captcha_page_contact'),
+            'review'   => sc_language_render('admin.captcha.captcha_page_review'),
         ];
         //End email
         $data['customerConfigs']                = $customerConfigs;
@@ -173,7 +173,7 @@ class AdminStoreConfigController extends RootAdminController
                 ->where('store_id', $storeId)
                 ->update(['value' => $value]);
             $error = 0;
-            $msg = trans('admin.update_success');
+            $msg = sc_language_render('action.update_success');
         } catch (\Throwable $e) {
             $error = 1;
             $msg = $e->getMessage();

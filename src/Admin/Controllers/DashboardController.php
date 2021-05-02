@@ -28,12 +28,12 @@ class DashboardController extends RootAdminController
         //Check user allow view dasdboard
         if(!\Admin::user()->checkUrlAllowAccess(route('admin.home')))
         {
-            $data['title'] = trans('admin.dashboard');
+            $data['title'] = sc_language_render('admin.dashboard');
             return view($this->templatePathAdmin.'default', $data);
         }
 
         $data                   = [];
-        $data['title']          = trans('admin.dashboard');
+        $data['title']          = sc_language_render('admin.dashboard');
         $data['totalOrder']     = AdminOrder::getTotalOrder();
         $data['totalProduct']   = AdminProduct::getTotalProduct();
         $data['totalNews']      = AdminNews::getTotalNews();
@@ -110,7 +110,7 @@ class DashboardController extends RootAdminController
     public function dataNotFound()
     {
         $data = [
-            'title' => trans('admin.data_not_found'),
+            'title' => sc_language_render('admin.data_not_found'),
             'icon' => '',
             'url' => session('url'),
         ];
@@ -126,7 +126,7 @@ class DashboardController extends RootAdminController
     public function deny()
     {
         $data = [
-            'title' => trans('admin.deny'),
+            'title' => sc_language_render('admin.deny'),
             'icon' => '',
             'method' => session('method'),
             'url' => session('url'),

@@ -38,7 +38,7 @@ return [
     'order_detail'          => 'Chi tiết đơn hàng',
     'order_status'          => 'Trạng thái đơn hàng',
     'order_payment_status'  => 'Trạng thái thanh toán',
-    'order_shipping_status' => 'Trạng thái vận chuyển',
+    'shipping_status' => 'Trạng thái vận chuyển',
     'order_note'            => 'Ghi chú đơn hàng',
     'order_history'         => 'Lịch sử đơn hàng',
     'history_staff'         => 'Nhân viên',

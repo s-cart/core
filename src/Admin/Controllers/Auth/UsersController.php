@@ -24,7 +24,7 @@ class UsersController extends RootAdminController
     public function index()
     {
         $data = [
-            'title'         => trans('user.admin.list'),
+            'title'         => sc_language_render('admin.user.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_user.delete'),
@@ -43,23 +43,23 @@ class UsersController extends RootAdminController
         $data['stores']       = $this->stores;
 
         $listTh = [
-            'id'         => trans('user.id'),
-            'username'   => trans('user.user_name'),
-            'name'       => trans('user.name'),
-            'roles'      => trans('user.roles'),
-            'permission' => trans('user.permission'),
-            'created_at' => trans('user.created_at'),
-            'action'     => trans('user.admin.action'),
+            'id'         => 'ID',
+            'username'   => sc_language_render('admin.user.user_name'),
+            'name'       => sc_language_render('admin.user.name'),
+            'roles'      => sc_language_render('admin.user.roles'),
+            'permission' => sc_language_render('admin.user.permission'),
+            'created_at' => sc_language_render('admin.created_at'),
+            'action'     => sc_language_render('action.title'),
         ];
         $sort_order = request('sort_order') ?? 'id_desc';
         $keyword = request('keyword') ?? '';
         $arrSort = [
-            'id__desc'       => trans('user.admin.sort_order.id_desc'),
-            'id__asc'        => trans('user.admin.sort_order.id_asc'),
-            'username__desc' => trans('user.admin.sort_order.username_desc'),
-            'username__asc'  => trans('user.admin.sort_order.username_asc'),
-            'name__desc'     => trans('user.admin.sort_order.name_desc'),
-            'name__asc'      => trans('user.admin.sort_order.name_asc'),
+            'id__desc'       => sc_language_render('filter_sort.id_desc'),
+            'id__asc'        => sc_language_render('filter_sort.id_asc'),
+            'username__desc' => sc_language_render('filter_sort.alpha_desc', ['alpha' => 'username']),
+            'alpha__asc'  => sc_language_render('filter_sort.alpha_asc', ['alpha' => 'username']),
+            'name__desc'     => sc_language_render('filter_sort.name_desc'),
+            'name__asc'      => sc_language_render('filter_sort.name_asc'),
         ];
         $obj = new AdminUser;
 
@@ -98,8 +98,8 @@ class UsersController extends RootAdminController
                 'permission' => $showPermission,
                 'created_at' => $row['created_at'],
                 'action' => '
-                    <a href="' . sc_route_admin('admin_user.edit', ['id' => $row['id']]) . '"><span title="' . trans('user.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-                    ' . ((Admin::user()->id == $row['id'] || in_array($row['id'], SC_GUARD_ADMIN)) ? '' : '<span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>')
+                    <a href="' . sc_route_admin('admin_user.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('admin.user.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    ' . ((Admin::user()->id == $row['id'] || in_array($row['id'], SC_GUARD_ADMIN)) ? '' : '<span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>')
                 ,
             ];
         }
@@ -107,11 +107,11 @@ class UsersController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('user.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
 //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_user.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
 //=menuRight
 
@@ -129,8 +129,8 @@ class UsersController extends RootAdminController
 //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_user.index') . '" id="button_search">
-                <div class="input-group input-group" style="width: 250px;">
-                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('user.admin.search_place') . '" value="' . $keyword . '">
+                <div class="input-group input-group" style="width: 350px;">
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('admin.user.search_place') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -150,9 +150,9 @@ class UsersController extends RootAdminController
     public function create()
     {
         $data = [
-            'title'             => trans('user.admin.add_new_title'),
+            'title'             => sc_language_render('admin.user.add_new_title'),
             'subTitle'          => '',
-            'title_description' => trans('user.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.user.add_new_des'),
             'icon'              => 'fa fa-plus',
             'user'              => [],
             'roles'             => $this->roles,
@@ -182,7 +182,7 @@ class UsersController extends RootAdminController
             'password' => 'required|string|max:60|min:6|confirmed',
             'email'    => 'required|string|email|max:255|unique:"'.AdminUser::class.'",email',
         ], [
-            'username.regex' => trans('user.username_validate'),
+            'username.regex' => sc_language_render('admin.user.username_validate'),
         ]);
 
         if ($validator->fails()) {
@@ -229,7 +229,7 @@ class UsersController extends RootAdminController
         //Insert store
         $user->stores()->attach([$store]);
 
-        return redirect()->route('admin_user.index')->with('success', trans('user.admin.create_success'));
+        return redirect()->route('admin_user.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -243,7 +243,7 @@ class UsersController extends RootAdminController
             return 'no data';
         }
         $data = [
-            'title'             => trans('user.admin.edit'),
+            'title'             => sc_language_render('admin.user.edit'),
             'subTitle'          => '',
             'title_description' => '',
             'icon'              => 'fa fa-edit',
@@ -276,7 +276,7 @@ class UsersController extends RootAdminController
             'password' => 'nullable|string|max:60|min:6|confirmed',
             'email'    => 'required|string|email|max:255|unique:"'.AdminUser::class.'",email,' . $user->id,
         ], [
-            'username.regex' => trans('user.username_validate'),
+            'username.regex' => sc_language_render('admin.user.username_validate'),
         ]);
 
         if ($validator->fails()) {
@@ -318,7 +318,7 @@ class UsersController extends RootAdminController
         }
 
 //
-        return redirect()->route('admin_user.index')->with('success', trans('user.admin.edit_success'));
+        return redirect()->route('admin_user.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -329,7 +329,7 @@ Need mothod destroy to boot deleting in model
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

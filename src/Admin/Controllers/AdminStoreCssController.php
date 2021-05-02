@@ -23,7 +23,7 @@ class AdminStoreCssController extends RootAdminController
             return 'no data';
         }
         $data = [
-            'title' => trans('store.css'),
+            'title' => sc_language_render('store.css'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -43,7 +43,7 @@ class AdminStoreCssController extends RootAdminController
         $cssContent = ShopStoreCss::where('store_id', $id)->first();
         $cssContent->css = request('css');
         $cssContent->save();
-        return redirect()->route('admin_store_css.index')->with('success', trans('store_maintain.admin.edit_success'));
+        return redirect()->route('admin_store_css.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 }

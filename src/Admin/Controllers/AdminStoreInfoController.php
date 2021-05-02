@@ -52,21 +52,21 @@ class AdminStoreInfoController extends RootAdminController
                 if ($name == 'type') {
                     // Can not change type in here
                     $error = 1;
-                    $msg = trans('store.admin.value_cannot_change');
+                    $msg = sc_language_render('store.admin.value_cannot_change');
                 } else if ($name == 'domain') {
                     if ($storeId == SC_ID_ROOT || sc_store_is_partner($storeId)) {
                         // Only store root can edit domain
                         $domain = sc_process_domain_store($value);
                         if (AdminStore::where('domain', $domain)->where('id', '<>', $storeId)->first()) {
                             $error = 1;
-                            $msg = trans('store.admin.domain_exist');
+                            $msg = sc_language_render('store.admin.domain_exist');
                         } else {
                             AdminStore::where('id', $storeId)->update([$name => $domain]);
                             $error = 0;
                         }
                     } else {
                         $error = 1;
-                        $msg = trans('store.admin.value_cannot_change');
+                        $msg = sc_language_render('store.admin.value_cannot_change');
                     }
                 } else {
                     AdminStore::where('id', $storeId)->update([$name => $value]);
@@ -103,7 +103,7 @@ class AdminStoreInfoController extends RootAdminController
         $store = AdminStore::find($id);
         if (!$store) {
             $data = [
-                'title' => trans('store.admin.title'),
+                'title' => sc_language_render('store.admin.title'),
                 'subTitle' => '',
                 'icon' => 'fas fa-cogs',
                 'dataNotFound' => 1
@@ -112,7 +112,7 @@ class AdminStoreInfoController extends RootAdminController
             ->with($data);
         }
         $data = [
-            'title' => trans('store.admin.title'),
+            'title' => sc_language_render('store.admin.title'),
             'subTitle' => '',
             'icon' => 'fas fa-cogs',        
         ];
@@ -138,7 +138,7 @@ class AdminStoreInfoController extends RootAdminController
         $listStoreId = \Admin::user()->listStoreId();
         if(in_array($storeId, $listStoreId)) {
             session(['adminStoreId' => $storeId]);
-            return back()->with(['success' => trans('admin.store_swicth_success')]);
+            return back()->with(['success' => sc_language_render('admin.store_swicth_success')]);
         } else {
             return redirect()->route('admin.deny');
         }

@@ -17,7 +17,7 @@ class AdminLogController extends RootAdminController
     {
 
         $data = [
-            'title' => trans('log.admin.list'),
+            'title' => sc_language_render('admin.log.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_log.delete'),
@@ -35,31 +35,31 @@ class AdminLogController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
         
         $listTh = [
-            'id' => trans('log.id'),
-            'user' => trans('log.user'),
-            'method' => trans('log.method'),
-            'path' => trans('log.path'),
-            'ip' => trans('log.ip'),
-            'user_agent' => trans('log.user_agent'),
-            'input' => trans('log.input'),
-            'created_at' => trans('log.created_at'),
-            'action' => trans('log.admin.action'),
+            'id' => 'ID',
+            'user' => sc_language_render('admin.log.user'),
+            'method' => sc_language_render('admin.log.method'),
+            'path' => sc_language_render('admin.log.path'),
+            'ip' => sc_language_render('admin.log.ip'),
+            'user_agent' => sc_language_render('admin.log.user_agent'),
+            'input' => sc_language_render('admin.log.input'),
+            'created_at' => sc_language_render('admin.log.created_at'),
+            'action' => sc_language_render('action.title'),
         ];
 
         $sort_order = request('sort_order') ?? 'id_desc';
         $arrSort = [
-            'id__desc' => trans('log.admin.sort_order.id_desc'),
-            'id__asc' => trans('log.admin.sort_order.id_asc'),
-            'user_id__desc' => trans('log.admin.sort_order.user_id_desc'),
-            'user_id__asc' => trans('log.admin.sort_order.user_id_asc'),
-            'path__desc' => trans('log.admin.sort_order.path_desc'),
-            'path__asc' => trans('log.admin.sort_order.path_asc'),
-            'user_agent__desc' => trans('log.admin.sort_order.user_agent_desc'),
-            'user_agent__asc' => trans('log.admin.sort_order.user_agent_asc'),
-            'method__desc' => trans('log.admin.sort_order.method_desc'),
-            'method__asc' => trans('log.admin.sort_order.method_asc'),
-            'ip__desc' => trans('log.admin.sort_order.ip_desc'),
-            'ip__asc' => trans('log.admin.sort_order.ip_asc'),
+            'id__desc' => sc_language_render('filter_sort.id_desc'),
+            'id__asc' => sc_language_render('filter_sort.id_asc'),
+            'user_id__desc' => sc_language_render('filter_sort.value_desc', ['value' => 'ID']),
+            'user_id__asc' => sc_language_render('filter_sort.value_asc', ['value' => 'ID']),
+            'path__desc' => sc_language_render('filter_sort.alpha_desc', ['alpha' => 'path']),
+            'path__asc' => sc_language_render('filter_sort.alpha_asc', ['alpha' => 'path']),
+            'user_agent__desc' => sc_language_render('filter_sort.alpha_desc', ['alpha' => 'User agent']),
+            'user_agent__asc' => sc_language_render('filter_sort.alpha_asc', ['alpha' => 'User agent']),
+            'method__desc' => sc_language_render('filter_sort.alpha_desc', ['alpha' => 'Method']),
+            'method__asc' => sc_language_render('filter_sort.alpha_asc', ['alpha' => 'Method']),
+            'ip__desc' => sc_language_render('filter_sort.alpha_desc', ['alpha' => 'Ip']),
+            'ip__asc' => sc_language_render('filter_sort.alpha_asc', ['alpha' => 'Ip']),
 
         ];
         $obj = new AdminLog;
@@ -86,7 +86,7 @@ class AdminLogController extends RootAdminController
                 'input' => htmlspecialchars($row['input']),
                 'created_at' => $row['created_at'],
                 'action' => '
-                  <span  onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('log.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span  onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -94,7 +94,7 @@ class AdminLogController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('log.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
 //menuSearch        
         $optionSort = '';
@@ -116,7 +116,7 @@ Need mothod destroy to boot deleting in model
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

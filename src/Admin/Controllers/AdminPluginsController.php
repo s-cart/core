@@ -47,7 +47,7 @@ class AdminPluginsController extends RootAdminController
         }
         $pluginsInstalled = sc_get_plugin_installed($code, $onlyActive = false);
         $plugins = sc_get_all_plugin($code);
-        $title = trans('plugin.' . $code.'_plugin');
+        $title = sc_language_render('admin.plugin.' . $code.'_plugin');
         return $this->render($pluginsInstalled, $plugins,  $title, $code, $arrDefault);
     }
 
@@ -128,7 +128,7 @@ class AdminPluginsController extends RootAdminController
      */
     public function importPlugin() {
         $data =  [
-            'title' => trans('plugin.import')
+            'title' => sc_language_render('admin.plugin.import')
         ];
         return view($this->templatePathAdmin.'screen.plugin_upload')
         ->with($data);
@@ -171,13 +171,13 @@ class AdminPluginsController extends RootAdminController
 
                     if (!$configGroup || !$configCode || !$configKey) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
-                        return redirect()->back()->with('error', trans('plugin.error_config'));
+                        return redirect()->back()->with('error', sc_language_render('admin.plugin.error_config'));
                     }
 
                     $arrPluginLocal = sc_get_all_plugin($configCode);
                     if (array_key_exists($configKey, $arrPluginLocal)) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
-                        return redirect()->back()->with('error', trans('plugin.error_exist'));
+                        return redirect()->back()->with('error', sc_language_render('admin.plugin.error_exist'));
                     }
 
                     $pathPlugin = $configGroup.'/'.$configCode.'/'.$configKey;
@@ -198,18 +198,18 @@ class AdminPluginsController extends RootAdminController
 
                 } else {
                     File::deleteDirectory(storage_path('tmp/'.$pathTmp));
-                    return redirect()->back()->with('error', trans('plugin.error_check_config'));
+                    return redirect()->back()->with('error', sc_language_render('admin.plugin.error_check_config'));
                 }
             } else {
-                return redirect()->back()->with('error', trans('plugin.error_unzip'));
+                return redirect()->back()->with('error', sc_language_render('admin.plugin.error_unzip'));
             }
         } else {
-            return redirect()->back()->with('error', trans('plugin.error_upload'));
+            return redirect()->back()->with('error', sc_language_render('admin.plugin.error_upload'));
         }
         if ($linkRedirect) {
-            return redirect($linkRedirect)->with('success', trans('plugin.import_success')); 
+            return redirect($linkRedirect)->with('success', sc_language_render('admin.plugin.import_success')); 
         } else {
-            return redirect()->back()->with('success', trans('plugin.import_success')); 
+            return redirect()->back()->with('success', sc_language_render('admin.plugin.import_success')); 
         }
     }
 

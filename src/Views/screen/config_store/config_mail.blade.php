@@ -22,7 +22,7 @@
                @endforeach
                  @endif
                  <tr>
-                  <td>{{ sc_language_render('email.email_action.forgot_password') }}</td>
+                  <td>{{ sc_language_render('email.admin.forgot_password') }}</td>
                   <td><input class="check-data-config" data-store="{{ $storeId }}"  type="checkbox" checked disabled></td>
                 </tr>
 

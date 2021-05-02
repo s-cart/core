@@ -38,7 +38,7 @@ return [
     'order_detail'          => 'Order detail',
     'order_status'          => 'Order status',
     'order_payment_status'  => 'Payment status',
-    'order_shipping_status' => 'Shipping status',
+    'shipping_status' => 'Shipping status',
     'order_note'            => 'Order note',
     'order_history'         => 'Order history',
     'history_staff'         => 'Staff',

@@ -57,7 +57,7 @@ class ShopCategoryController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_item_list',
             array(
-                'title' => trans('front.categories'),
+                'title' => sc_language_render('front.categories'),
                 'itemsList' => $itemsList,
                 'keyword' => '',
                 'description' => '',

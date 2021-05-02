@@ -14,8 +14,8 @@ class AdminCustomFieldController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('custom_field.admin.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . trans('custom_field.admin.add_new_title'),
+            'title' => sc_language_render('admin.custom_field.list'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('admin.custom_field.add_new_title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_custom_field.delete'),
@@ -28,15 +28,15 @@ class AdminCustomFieldController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('custom_field.id'),
-            'type' => trans('custom_field.type'),
-            'code' => trans('custom_field.code'),
-            'name' => trans('custom_field.name'),
-            'required' => trans('custom_field.required'),
-            'option' => trans('custom_field.option'),
-            'default' => trans('custom_field.default'),
-            'status' => trans('custom_field.status'),
-            'action' => trans('custom_field.admin.action'),
+            'id' => 'ID',
+            'type' => sc_language_render('admin.custom_field.type'),
+            'code' => sc_language_render('admin.custom_field.code'),
+            'name' => sc_language_render('admin.custom_field.name'),
+            'required' => sc_language_render('admin.custom_field.required'),
+            'option' => sc_language_render('admin.custom_field.option'),
+            'default' => sc_language_render('admin.custom_field.default'),
+            'status' => sc_language_render('admin.custom_field.status'),
+            'action' => sc_language_render('action.title'),
         ];
         $obj = new ShopCustomField;
         $obj = $obj->orderBy('id', 'desc');
@@ -54,9 +54,9 @@ class AdminCustomFieldController extends RootAdminController
                 'default' => $row['default'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_custom_field.edit', ['id' => $row['id']]) . '"><span title="' . trans('custom_field.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_custom_field.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
     
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('custom_field.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -64,7 +64,7 @@ class AdminCustomFieldController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('custom_field.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'index';
         return view($this->templatePathAdmin.'screen.custom_field')
@@ -102,7 +102,7 @@ class AdminCustomFieldController extends RootAdminController
         ];
         $obj = ShopCustomField::create($dataInsert);
 
-        return redirect()->route('admin_custom_field.index')->with('success', trans('custom_field.admin.create_success'));
+        return redirect()->route('admin_custom_field.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -116,8 +116,8 @@ class AdminCustomFieldController extends RootAdminController
             return 'No data';
         }
         $data = [
-            'title' => trans('custom_field.admin.list'),
-            'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . trans('custom_field.admin.edit'),
+            'title' => sc_language_render('admin.custom_field.list'),
+            'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_custom_field.delete'),
@@ -132,15 +132,15 @@ class AdminCustomFieldController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('custom_field.id'),
-            'type' => trans('custom_field.type'),
-            'code' => trans('custom_field.code'),
-            'name' => trans('custom_field.name'),
-            'required' => trans('custom_field.required'),
-            'option' => trans('custom_field.option'),
-            'default' => trans('custom_field.default'),
-            'status' => trans('custom_field.status'),
-            'action' => trans('custom_field.admin.action'),
+            'id' => 'ID',
+            'type' => sc_language_render('admin.custom_field.type'),
+            'code' => sc_language_render('admin.custom_field.code'),
+            'name' => sc_language_render('admin.custom_field.name'),
+            'required' => sc_language_render('admin.custom_field.required'),
+            'option' => sc_language_render('admin.custom_field.option'),
+            'default' => sc_language_render('admin.custom_field.default'),
+            'status' => sc_language_render('admin.custom_field.status'),
+            'action' => sc_language_render('action.title'),
         ];
         $obj = new ShopCustomField;
         $obj = $obj->orderBy('id', 'desc');
@@ -158,9 +158,9 @@ class AdminCustomFieldController extends RootAdminController
                 'default' => $row['default'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_custom_field.edit', ['id' => $row['id']]) . '"><span title="' . trans('custom_field.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_custom_field.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('custom_field.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                 ',
             ];
         }
@@ -168,7 +168,7 @@ class AdminCustomFieldController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('custom_field.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'edit';
         return view($this->templatePathAdmin.'screen.custom_field')
@@ -209,7 +209,7 @@ class AdminCustomFieldController extends RootAdminController
         $customField->update($dataUpdate);
 
 //
-        return redirect()->back()->with('success', trans('custom_field.admin.edit_success'));
+        return redirect()->back()->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -220,7 +220,7 @@ class AdminCustomFieldController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

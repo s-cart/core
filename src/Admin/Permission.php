@@ -87,7 +87,7 @@ class Permission
         } else {
             return response()->json([
                 'error' => '1',
-                'msg' => trans('admin.access_denied'),
+                'msg' => sc_language_render('admin.access_denied'),
                 'detail' => [
                     'method' => $methodCurrent,
                     'url' => $uriCurrent

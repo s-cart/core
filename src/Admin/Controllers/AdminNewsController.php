@@ -19,7 +19,7 @@ class AdminNewsController extends RootAdminController
     public function index()
     {
         $data = [
-            'title'         => trans('news.admin.list'),
+            'title'         => sc_language_render('admin.news.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_news.delete'),
@@ -37,20 +37,20 @@ class AdminNewsController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'     => trans('news.id'),
-            'title'  => trans('news.title'),
-            'image'  => trans('news.image'),
-            'sort'   => trans('news.sort'),
-            'status' => trans('news.status'),
-            'action' => trans('news.admin.action'),
+            'id'     => 'ID',
+            'title'  => sc_language_render('admin.news.title'),
+            'image'  => sc_language_render('admin.news.image'),
+            'sort'   => sc_language_render('admin.news.sort'),
+            'status' => sc_language_render('admin.news.status'),
+            'action' => sc_language_render('action.title'),
         ];
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
-            'id__desc' => trans('news.admin.sort_order.id_desc'),
-            'id__asc' => trans('news.admin.sort_order.id_asc'),
-            'title__desc' => trans('news.admin.sort_order.title_desc'),
-            'title__asc' => trans('news.admin.sort_order.title_asc'),
+            'id__desc' => sc_language_render('filter_sort.id_desc'),
+            'id__asc' => sc_language_render('filter_sort.id_asc'),
+            'title__desc' => sc_language_render('filter_sort.title_desc'),
+            'title__asc' => sc_language_render('filter_sort.title_asc'),
         ];
 
         $dataSearch = [
@@ -68,9 +68,9 @@ class AdminNewsController extends RootAdminController
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_news.edit', ['id' => $row['id']]) . '"><span title="' . trans('news.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_news.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                    <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
+                    <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
                 ,
             ];
         }
@@ -78,12 +78,12 @@ class AdminNewsController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('news.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_news.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
         //=menuRight
 
@@ -99,8 +99,8 @@ class AdminNewsController extends RootAdminController
         //menuSearch        
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_news.index') . '" id="button_search">
-                    <div class="input-group input-group" style="width: 250px;">
-                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('news.admin.search_place') . '" value="' . $keyword . '">
+                    <div class="input-group input-group" style="width: 350px;">
+                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('admin.news.search_place') . '" value="' . $keyword . '">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
@@ -121,9 +121,9 @@ class AdminNewsController extends RootAdminController
     {
         $news = [];
         $data = [
-            'title'             => trans('news.admin.add_new_title'),
+            'title'             => sc_language_render('admin.news.add_new_title'),
             'subTitle'          => '',
-            'title_description' => trans('news.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.news.add_new_des'),
             'icon'              => 'fa fa-plus',
             'languages'         => $this->languages,
             'news'              => $news,
@@ -154,8 +154,8 @@ class AdminNewsController extends RootAdminController
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:300',
             ], [
-                'alias.regex' => trans('news.alias_validate'),
-                'descriptions.*.title.required' => trans('validation.required', ['attribute' => trans('news.title')]),
+                'alias.regex' => sc_language_render('admin.news.alias_validate'),
+                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.news.title')]),
             ]
         );
         if ($validator->fails()) {
@@ -188,7 +188,7 @@ class AdminNewsController extends RootAdminController
         AdminNews::insertDescriptionAdmin($dataDes);
         sc_clear_cache('cache_news');
 
-        return redirect()->route('admin_news.index')->with('success', trans('news.admin.create_success'));
+        return redirect()->route('admin_news.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -203,7 +203,7 @@ class AdminNewsController extends RootAdminController
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
         $data = [
-            'title'             => trans('news.admin.edit'),
+            'title'             => sc_language_render('admin.news.edit'),
             'subTitle'          => '',
             'title_description' => '',
             'icon'              => 'fa fa-edit',
@@ -237,8 +237,8 @@ class AdminNewsController extends RootAdminController
             'descriptions.*.description' => 'nullable|string|max:300',
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
             ], [
-                'alias.regex' => trans('news.alias_validate'),
-                'descriptions.*.title.required' => trans('validation.required', ['attribute' => trans('news.title')]),
+                'alias.regex' => sc_language_render('admin.news.alias_validate'),
+                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.news.title')]),
             ]
         );
 
@@ -272,7 +272,7 @@ class AdminNewsController extends RootAdminController
         AdminNews::insertDescriptionAdmin($dataDes);
         sc_clear_cache('cache_news');
 
-        return redirect()->route('admin_news.index')->with('success', trans('news.admin.edit_success'));
+        return redirect()->route('admin_news.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -283,7 +283,7 @@ class AdminNewsController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -294,7 +294,7 @@ class AdminNewsController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             }
             AdminNews::destroy($arrID);
             sc_clear_cache('cache_news');

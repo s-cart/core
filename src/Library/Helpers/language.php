@@ -1,6 +1,7 @@
 <?php
 
 use SCart\Core\Front\Models\ShopLanguage;
+use Illuminate\Support\Str;
 
 if (!function_exists('sc_language_all')) {
     //Get all language
@@ -10,18 +11,44 @@ if (!function_exists('sc_language_all')) {
     }
 }
 
+if (!function_exists('sc_languages')) {
+    /*
+    Render language
+     */
+    function sc_languages($locale)
+    {
+        $languages = \SCart\Core\Front\Models\Languages::getListAll($locale);
+        return $languages;
+    }
+}
+
+if (!function_exists('sc_language_replace')) {
+    /*
+    Replace language
+     */
+    function sc_language_replace($line, $replace)
+    {
+        foreach ($replace as $key => $value) {
+            $line = str_replace(
+                [':'.$key, ':'.Str::upper($key), ':'.Str::ucfirst($key)],
+                [$value, Str::upper($value), Str::ucfirst($value)],
+                $line
+            );
+        }
+        return $line;
+    }
+}
+
+
 if (!function_exists('sc_language_render')) {
     /*
     Render language
      */
-    function sc_language_render($string)
+    function sc_language_render($string, $replace = [], $locale = null)
     {
-        $arrCheck = explode('lang::', $string);
-        if (count($arrCheck) == 2) {
-            return trans($arrCheck[1]);
-        } else {
-            return trans($string);
-        }
+        $locale = $locale ? $locale : sc_get_locale();
+        $languages = sc_languages($locale);
+        return !empty($languages[$string]) ? sc_language_replace($languages[$string], $replace): trans($string, $replace);
     }
 }
 

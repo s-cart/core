@@ -94,7 +94,7 @@ class ForgotPasswordController extends RootFrontController
         if(sc_captcha_method() && in_array('forgot', sc_captcha_page())) {
             if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
                 $dataView = [
-                    'titleButton' => trans('front.submit_form'),
+                    'titleButton' => sc_language_render('action.submit'),
                     'idForm' => 'form-process',
                     'idButtonForm' => 'button-form-process',
                 ];
@@ -104,7 +104,7 @@ class ForgotPasswordController extends RootFrontController
         sc_check_view($this->templatePath . '.auth.forgot');
         return view($this->templatePath . '.auth.forgot',
             array(
-                'title' => trans('front.forgot_password'),
+                'title' => sc_language_render('customer.password_forgot'),
                 'layout_page' => 'shop_auth',
                 'viewCaptcha' => $viewCaptcha,
             )

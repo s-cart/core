@@ -98,7 +98,7 @@ class RegisterController extends RootFrontController
                         '/\{\{\$country\}\}/',
                     ];
                     $dataReplace = [
-                        trans('email.welcome_customer.title'),
+                        sc_language_render('email.welcome_customer.title'),
                         $dataMap['first_name'] ?? '',
                         $dataMap['last_name'] ?? '',
                         $dataMap['email'] ?? '',
@@ -116,7 +116,7 @@ class RegisterController extends RootFrontController
 
                     $config = [
                         'to' => $data['email'],
-                        'subject' => trans('email.welcome_customer.title'),
+                        'subject' => sc_language_render('email.welcome_customer.title'),
                     ];
 
                     sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
@@ -137,7 +137,7 @@ class RegisterController extends RootFrontController
 
     protected function registered(Request $request, $user)
     {
-        redirect()->route('home')->with(['message' => trans('account.register_success')]);
+        redirect()->route('home')->with(['message' => sc_language_render('customer.register_success')]);
     }
 
 
@@ -170,7 +170,7 @@ class RegisterController extends RootFrontController
         if(sc_captcha_method() && in_array('register', sc_captcha_page())) {
             if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
                 $dataView = [
-                    'titleButton' => trans('account.signup'),
+                    'titleButton' => sc_language_render('customer.signup'),
                     'idForm' => 'form-process',
                     'idButtonForm' => 'button-form-process',
                 ];
@@ -180,7 +180,7 @@ class RegisterController extends RootFrontController
         sc_check_view($this->templatePath . '.auth.register');
         return view($this->templatePath . '.auth.register',
             array(
-                'title'       => trans('account.title_register'),
+                'title'       => sc_language_render('customer.title_register'),
                 'countries'   => ShopCountry::getCodeAll(),
                 'layout_page' => 'shop_auth',
                 'viewCaptcha' => $viewCaptcha,
@@ -221,7 +221,7 @@ class RegisterController extends RootFrontController
                         '/\{\{\$country\}\}/',
                     ];
                     $dataReplace = [
-                        trans('email.welcome_customer.title'),
+                        sc_language_render('email.welcome_customer.title'),
                         $dataMap['first_name'] ?? '',
                         $dataMap['last_name'] ?? '',
                         $dataMap['email'] ?? '',
@@ -239,7 +239,7 @@ class RegisterController extends RootFrontController
 
                     $config = [
                         'to' => $data['email'],
-                        'subject' => trans('email.welcome_customer.title'),
+                        'subject' => sc_language_render('email.welcome_customer.title'),
                     ];
 
                     sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);

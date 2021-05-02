@@ -15,7 +15,7 @@ class AdminCurrencyController extends RootAdminController
     {
 
         $data = [
-            'title' => trans('currency.admin.list'),
+            'title' => sc_language_render('admin.currency.list'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_currency.delete'),
@@ -33,25 +33,25 @@ class AdminCurrencyController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'name' => trans('currency.name'),
-            'code' => trans('currency.code'),
-            'symbol' => trans('currency.symbol'),
-            'exchange_rate' => trans('currency.exchange_rate'),
-            'precision' => trans('currency.precision'),
-            'symbol_first' => trans('currency.symbol_first'),
-            'thousands' => trans('currency.thousands'),
-            'sort' => trans('currency.sort'),
-            'status' => trans('currency.status'),
-            'action' => trans('currency.admin.action'),
+            'name' => sc_language_render('admin.currency.name'),
+            'code' => sc_language_render('admin.currency.code'),
+            'symbol' => sc_language_render('admin.currency.symbol'),
+            'exchange_rate' => sc_language_render('admin.currency.exchange_rate'),
+            'precision' => sc_language_render('admin.currency.precision'),
+            'symbol_first' => sc_language_render('admin.currency.symbol_first'),
+            'thousands' => sc_language_render('admin.currency.thousands'),
+            'sort' => sc_language_render('admin.currency.sort'),
+            'status' => sc_language_render('admin.currency.status'),
+            'action' => sc_language_render('action.title'),
         ];
 
         $sort_order = request('sort_order') ?? 'id_desc';
         $keyword = request('keyword') ?? '';
         $arrSort = [
-            'id__desc' => trans('currency.admin.sort_order.id_desc'),
-            'id__asc' => trans('currency.admin.sort_order.id_asc'),
-            'name__desc' => trans('currency.admin.sort_order.name_desc'),
-            'name__asc' => trans('currency.admin.sort_order.name_asc'),
+            'id__desc' => sc_language_render('filter_sort.id_desc'),
+            'id__asc' => sc_language_render('filter_sort.id_asc'),
+            'name__desc' => sc_language_render('filter_sort.name_desc'),
+            'name__asc' => sc_language_render('filter_sort.name_asc'),
         ];
         $obj = new ShopCurrency;
         if ($keyword) {
@@ -81,9 +81,9 @@ class AdminCurrencyController extends RootAdminController
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
-                    <a href="' . sc_route_admin('admin_currency.edit', ['id' => $row['id']]) . '"><span title="' . trans('currency.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_currency.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                  <span ' . (in_array($row['id'], SC_GUARD_CURRENCY) ? "style='display:none'" : "") . ' onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('currency.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                  <span ' . (in_array($row['id'], SC_GUARD_CURRENCY) ? "style='display:none'" : "") . ' onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -91,11 +91,11 @@ class AdminCurrencyController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('currency.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
 //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_currency.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-        <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+        <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
 //=menuRight
 
@@ -113,8 +113,8 @@ class AdminCurrencyController extends RootAdminController
 //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_currency.index') . '" id="button_search">
-                <div class="input-group input-group" style="width: 250px;">
-                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('currency.admin.search_place') . '" value="' . $keyword . '">
+                <div class="input-group input-group" style="width: 350px;">
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('search.placeholder') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -133,9 +133,9 @@ class AdminCurrencyController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => trans('currency.admin.add_new_title'),
+            'title' => sc_language_render('admin.currency.add_new_title'),
             'subTitle' => '',
-            'title_description' => trans('currency.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.currency.add_new_des'),
             'icon' => 'fa fa-plus',
             'currency' => [],
             'url_action' => sc_route_admin('admin_currency.create'),
@@ -182,7 +182,7 @@ class AdminCurrencyController extends RootAdminController
         ];
         ShopCurrency::create($dataInsert);
 
-        return redirect()->route('admin_currency.index')->with('success', trans('currency.admin.create_success'));
+        return redirect()->route('admin_currency.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -196,7 +196,7 @@ class AdminCurrencyController extends RootAdminController
             return 'no data';
         }
         $data = [
-            'title' => trans('currency.admin.edit'),
+            'title' => sc_language_render('action.edit'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -258,7 +258,7 @@ class AdminCurrencyController extends RootAdminController
         $obj->update($dataUpdate);
 
 //
-        return redirect()->route('admin_currency.index')->with('success', trans('currency.admin.edit_success'));
+        return redirect()->route('admin_currency.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -269,7 +269,7 @@ Need mothod destroy to boot deleting in model
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

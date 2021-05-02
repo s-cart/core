@@ -26,7 +26,7 @@ class AdminCustomerController extends RootAdminController
     public function index()
     {
         $data = [
-            'title'         => trans('customer.admin.list'),
+            'title'         => sc_language_render('customer.admin.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_customer.delete'),
@@ -44,27 +44,27 @@ class AdminCustomerController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'         => trans('customer.id'),
-            'email'      => trans('customer.email'),
-            'name'       => trans('customer.name'),
-            'phone'      => trans('customer.phone'),
-            'address1'   => trans('customer.address1'),
-            'address2'   => trans('customer.address2'),
-            'address3'   => trans('customer.address3'),
-            'country'    => trans('customer.country'),
-            'status'     => trans('customer.status'),
-            'created_at' => trans('customer.created_at'),
-            'action'     => trans('customer.admin.action'),
+            'id'         => 'ID',
+            'email'      => sc_language_render('customer.email'),
+            'name'       => sc_language_render('customer.name'),
+            'phone'      => sc_language_render('customer.phone'),
+            'address1'   => sc_language_render('customer.address1'),
+            'address2'   => sc_language_render('customer.address2'),
+            'address3'   => sc_language_render('customer.address3'),
+            'country'    => sc_language_render('customer.country'),
+            'status'     => sc_language_render('customer.status'),
+            'created_at' => sc_language_render('admin.created_at'),
+            'action'     => sc_language_render('action.title'),
         ];
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
-            'id__desc' => trans('customer.admin.sort_order.id_desc'),
-            'id__asc' => trans('customer.admin.sort_order.id_asc'),
-            'first_name__desc' => trans('customer.admin.sort_order.first_name_desc'),
-            'first_name__asc' => trans('customer.admin.sort_order.first_name_asc'),
-            'last_name__desc' => trans('customer.admin.sort_order.last_name_desc'),
-            'last_name__asc' => trans('customer.admin.sort_order.last_name_asc'),
+            'id__desc' => sc_language_render('filter_sort.id_desc'),
+            'id__asc' => sc_language_render('filter_sort.id_asc'),
+            'first_name__desc' => sc_language_render('filter_sort.first_name_desc'),
+            'first_name__asc' => sc_language_render('filter_sort.first_name_asc'),
+            'last_name__desc' => sc_language_render('filter_sort.last_name_desc'),
+            'last_name__asc' => sc_language_render('filter_sort.last_name_asc'),
         ];
 
         $dataSearch = [
@@ -89,9 +89,9 @@ class AdminCustomerController extends RootAdminController
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'created_at' => $row['created_at'],
                 'action' => '
-                    <a href="' . sc_route_admin('admin_customer.edit', ['id' => $row['id']]) . '"><span title="' . trans('customer.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_customer.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                    <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
+                    <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
                 ,
             ];
         }
@@ -99,11 +99,11 @@ class AdminCustomerController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('customer.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_customer.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+                           <i class="fa fa-plus" title="'.sc_language_render('admin.add_new').'"></i>
                            </a>';
         //=menuRight
 
@@ -119,8 +119,8 @@ class AdminCustomerController extends RootAdminController
         //menuSearch        
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_customer.index') . '" id="button_search">
-                <div class="input-group input-group" style="width: 250px;">
-                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('customer.admin.search_place') . '" value="' . $keyword . '">
+                <div class="input-group input-group" style="width: 350px;">
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('search.placeholder') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -139,9 +139,9 @@ class AdminCustomerController extends RootAdminController
     public function create()
     {
         $data = [
-            'title'             => trans('customer.admin.add_new_title'),
+            'title'             => sc_language_render('customer.admin.add_new_title'),
             'subTitle'          => '',
-            'title_description' => trans('customer.admin.add_new_des'),
+            'title_description' => sc_language_render('customer.admin.add_new_des'),
             'icon'              => 'fa fa-plus',
             'countries'         => (new ShopCountry)->getCodeAll(),
             'customer'          => [],
@@ -190,7 +190,7 @@ class AdminCustomerController extends RootAdminController
             }
         }
 
-        return redirect()->route('admin_customer.index')->with('success', trans('customer.admin.create_success'));
+        return redirect()->route('admin_customer.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -204,7 +204,7 @@ class AdminCustomerController extends RootAdminController
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
         $data = [
-            'title' => trans('customer.admin.edit'),
+            'title' => sc_language_render('action.edit'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -268,7 +268,7 @@ class AdminCustomerController extends RootAdminController
             }
         }
 
-        return redirect()->route('admin_customer.index')->with('success', trans('customer.admin.edit_success'));
+        return redirect()->route('admin_customer.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -279,7 +279,7 @@ class AdminCustomerController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -290,7 +290,7 @@ class AdminCustomerController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             }
             AdminCustomer::destroy($arrID);
             return response()->json(['error' => 0, 'msg' => '']);
@@ -306,9 +306,9 @@ class AdminCustomerController extends RootAdminController
     {
         $address =  AdminCustomer::getAddress($id);
         if ($address) {
-            $title = trans('account.address_detail').' #'.$address->id;
+            $title = sc_language_render('customer.address_detail').' #'.$address->id;
         } else {
-            $title = trans('account.address_detail_notfound');
+            $title = sc_language_render('customer.address_detail_notfound');
         }
         return view($this->templatePathAdmin.'screen.customer_update_address')
         ->with(
@@ -420,22 +420,22 @@ class AdminCustomerController extends RootAdminController
         }
 
         $messages = [
-            'last_name.required'  => trans('validation.required',['attribute'=> trans('account.last_name')]),
-            'first_name.required' => trans('validation.required',['attribute'=> trans('account.first_name')]),
-            'address1.required'   => trans('validation.required',['attribute'=> trans('account.address1')]),
-            'address2.required'   => trans('validation.required',['attribute'=> trans('account.address2')]),
-            'address3.required'   => trans('validation.required',['attribute'=> trans('account.address3')]),
-            'phone.required'      => trans('validation.required',['attribute'=> trans('account.phone')]),
-            'country.required'    => trans('validation.required',['attribute'=> trans('account.country')]),
-            'postcode.required'   => trans('validation.required',['attribute'=> trans('account.postcode')]),
-            'phone.regex'         => trans('customer.phone_regex'),
-            'postcode.min'        => trans('validation.min',['attribute'=> trans('account.postcode')]),
-            'country.min'         => trans('validation.min',['attribute'=> trans('account.country')]),
-            'first_name.max'      => trans('validation.max',['attribute'=> trans('account.first_name')]),
-            'address1.max'        => trans('validation.max',['attribute'=> trans('account.address1')]),
-            'address2.max'        => trans('validation.max',['attribute'=> trans('account.address2')]),
-            'address3.max'        => trans('validation.max',['attribute'=> trans('account.address3')]),
-            'last_name.max'       => trans('validation.max',['attribute'=> trans('account.last_name')]),
+            'last_name.required'  => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.last_name')]),
+            'first_name.required' => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.first_name')]),
+            'address1.required'   => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.address1')]),
+            'address2.required'   => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.address2')]),
+            'address3.required'   => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.address3')]),
+            'phone.required'      => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.phone')]),
+            'country.required'    => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.country')]),
+            'postcode.required'   => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.postcode')]),
+            'phone.regex'         => sc_language_render('customer.phone_regex'),
+            'postcode.min'        => sc_language_render('validation.min',['attribute'=> sc_language_render('customer.postcode')]),
+            'country.min'         => sc_language_render('validation.min',['attribute'=> sc_language_render('customer.country')]),
+            'first_name.max'      => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.first_name')]),
+            'address1.max'        => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.address1')]),
+            'address2.max'        => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.address2')]),
+            'address3.max'        => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.address3')]),
+            'last_name.max'       => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.last_name')]),
         ];
 
         $v = Validator::make(
@@ -455,7 +455,7 @@ class AdminCustomerController extends RootAdminController
             $customer->save();
         }
         return redirect()->route('admin_customer.edit', ['id' => $address->customer_id])
-            ->with(['success' => trans('account.update_success')]);
+            ->with(['success' => sc_language_render('customer.update_success')]);
     }
 
     /**
@@ -466,7 +466,7 @@ class AdminCustomerController extends RootAdminController
     public function deleteAddress() {
         $id = request('id');
         AdminCustomer::deleteAddress($id);
-        return json_encode(['error' => 0, 'msg' => trans('account.delete_address_success')]);
+        return json_encode(['error' => 0, 'msg' => sc_language_render('customer.delete_address_success')]);
     }
 
     /**

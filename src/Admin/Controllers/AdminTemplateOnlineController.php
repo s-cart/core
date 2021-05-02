@@ -79,9 +79,9 @@ class AdminTemplateOnlineController extends RootAdminController
             }
         }
     
-            $resultItems = trans('product.admin.result_item', ['item_from' => $dataApi['from'] ?? 0, 'item_to' => $dataApi['to']??0, 'item_total' => $dataApi['total'] ?? 0]);
+            $resultItems = sc_language_render('product.admin.result_item', ['item_from' => $dataApi['from'] ?? 0, 'item_to' => $dataApi['to']??0, 'total' =>  $dataApi['total'] ?? 0]);
     
-            $title = trans('template.admin.list');
+            $title = sc_language_render('admin.template.list');
     
             return view($this->templatePathAdmin.'screen.template_online')->with(
                 [

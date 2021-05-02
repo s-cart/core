@@ -93,11 +93,11 @@ class AdminPluginsOnlineController extends RootAdminController
                 ];
             }
         }
-        $resultItems = trans('product.admin.result_item', ['item_from' => $dataApi['from'] ?? 0, 'item_to' => $dataApi['to']??0, 'item_total' => $dataApi['total'] ?? 0]);
+        $resultItems = sc_language_render('admin.result_item', ['item_from' => $dataApi['from'] ?? 0, 'item_to' => $dataApi['to']??0, 'total' =>  $dataApi['total'] ?? 0]);
         $code = sc_word_format_class($code);
 
         $arrPluginLocal = sc_get_all_plugin($code);
-        $title = trans('plugin.' . $code.'_plugin');
+        $title = sc_language_render('plugin.' . $code.'_plugin');
 
         return view($this->templatePathAdmin.'screen.plugin_online')->with(
             [

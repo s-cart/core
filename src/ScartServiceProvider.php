@@ -279,7 +279,6 @@ class ScartServiceProvider extends ServiceProvider
             $this->publishes([__DIR__.'/Views'  => resource_path('views/vendor/s-cart')], 'sc:view');
             $this->publishes([__DIR__.'/Config/admin.php' => config_path('admin.php')], 'sc:config-admin');
             $this->publishes([__DIR__.'/Config/validation.php' => config_path('validation.php')], 'sc:config-validation');
-            $this->publishes([__DIR__.'/Publishing/database' => base_path('database')], 'sc:migrate-database');
         }
     }
 }

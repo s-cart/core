@@ -27,7 +27,7 @@ class AdminStoreMaintainController extends RootAdminController
             return 'no data';
         }
         $data = [
-            'title' => trans('store_maintain.admin.title'),
+            'title' => sc_language_render('admin.store_maintain.title'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -75,7 +75,7 @@ class AdminStoreMaintainController extends RootAdminController
             AdminStore::updateDescription($dataUpdate);
         }
 //
-        return redirect()->route('admin_store_maintain.index')->with('success', trans('store_maintain.admin.edit_success'));
+        return redirect()->route('admin_store_maintain.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 }

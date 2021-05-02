@@ -91,7 +91,7 @@ class LoginController extends RootAdminController
             return 'no data';
         }
         $data = [
-            'title' => trans('admin.setting_account'),
+            'title' => sc_language_render('admin.setting_account'),
             'subTitle' => '',
             'title_description' => '',
             'icon' => 'fa fa-edit',
@@ -114,7 +114,7 @@ class LoginController extends RootAdminController
             'avatar' => 'nullable|string|max:255',
             'password' => 'nullable|string|max:60|min:6|confirmed',
         ], [
-            'username.regex' => trans('user.username_validate'),
+            'username.regex' => sc_language_render('admin.user.username_validate'),
         ]);
 
         if ($validator->fails()) {
@@ -133,7 +133,7 @@ class LoginController extends RootAdminController
         }
         $user->update($dataUpdate);
 //
-        return redirect()->route('admin.home')->with('success', trans('user.admin.edit_success'));
+        return redirect()->route('admin.home')->with('success', sc_language_render('action.edit_success'));
     }
 
     /**
@@ -142,7 +142,7 @@ class LoginController extends RootAdminController
     protected function getFailedLoginMessage()
     {
         return Lang::has('auth.failed')
-        ? trans('auth.failed')
+        ? sc_language_render('admin.failed')
         : 'These credentials do not match our records.';
     }
 
@@ -172,7 +172,7 @@ class LoginController extends RootAdminController
 
         $request->session()->regenerate();
 
-        return redirect()->intended($this->redirectPath())->with(['success' => trans('admin.login_successful')]);
+        return redirect()->intended($this->redirectPath())->with(['success' => sc_language_render('admin.login_successful')]);
     }
 
     /**

@@ -20,7 +20,7 @@ class AdminCategoryController extends RootAdminController
     {
         $categoriesTitle =  AdminCategory::getListTitleAdmin();
         $data = [
-            'title'         => trans('category.admin.list'),
+            'title'         => sc_language_render('admin.category.list'),
             'subTitle'      => '',
             'icon'          => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_category.delete'),
@@ -38,22 +38,22 @@ class AdminCategoryController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'     => trans('category.id'),
-            'image'  => trans('category.image'),
-            'title'  => trans('category.title'),
-            'parent' => trans('category.parent'),
-            'top'    => trans('category.top'),
-            'status' => trans('category.status'),
-            'sort'   => trans('category.sort'),
-            'action' => trans('category.admin.action'),
+            'id'     => sc_language_render('category.id'),
+            'image'  => sc_language_render('category.image'),
+            'title'  => sc_language_render('category.title'),
+            'parent' => sc_language_render('category.parent'),
+            'top'    => sc_language_render('category.top'),
+            'status' => sc_language_render('category.status'),
+            'sort'   => sc_language_render('category.sort'),
+            'action' => sc_language_render('action.title'),
         ];
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
-            'id__desc' => trans('category.admin.sort_order.id_desc'),
-            'id__asc' => trans('category.admin.sort_order.id_asc'),
-            'title__desc' => trans('category.admin.sort_order.title_desc'),
-            'title__asc' => trans('category.admin.sort_order.title_asc'),
+            'id__desc' => sc_language_render('filter_sort.id_desc'),
+            'id__asc' => sc_language_render('filter_sort.id_asc'),
+            'title__desc' => sc_language_render('filter_sort.title_desc'),
+            'title__asc' => sc_language_render('filter_sort.title_asc'),
         ];
         
         $dataSearch = [
@@ -74,9 +74,9 @@ class AdminCategoryController extends RootAdminController
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'sort' => $row['sort'],
                 'action' => '
-                    <a href="' . sc_route_admin('admin_category.edit', ['id' => $row['id']]) . '"><span title="' . trans('category.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_category.edit', ['id' => $row['id']]) . '"><span title="' .sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
 
-                    <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
+                    <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
                 ,
             ];
         }
@@ -84,12 +84,12 @@ class AdminCategoryController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('category.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_category.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-        <i class="fa fa-plus" title="'.trans('admin.add_new').'"></i>
+        <i class="fa fa-plus" title="'.sc_language_render('action.add_new').'"></i>
         </a>';
         //=menuRight
 
@@ -106,8 +106,8 @@ class AdminCategoryController extends RootAdminController
         //menuSearch        
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_category.index') . '" id="button_search">
-                <div class="input-group input-group" style="width: 250px;">
-                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . trans('category.admin.search_place') . '" value="' . $keyword . '">
+                <div class="input-group input-group" style="width: 350px;">
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('search.placeholder') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -126,9 +126,9 @@ class AdminCategoryController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => trans('category.admin.add_new_title'),
+            'title' => sc_language_render('category.admin.add_new_title'),
             'subTitle' => '',
-            'title_description' => trans('category.admin.add_new_des'),
+            'title_description' => sc_language_render('category.admin.add_new_des'),
             'icon' => 'fa fa-plus',
             'languages' => $this->languages,
             'category' => [],
@@ -161,8 +161,8 @@ class AdminCategoryController extends RootAdminController
                 'descriptions.*.keyword' => 'nullable|string|max:200',
                 'descriptions.*.description' => 'nullable|string|max:300',
             ], [
-                'descriptions.*.title.required' => trans('validation.required', ['attribute' => trans('category.title')]),
-                'alias.regex' => trans('category.alias_validate'),
+                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('category.title')]),
+                'alias.regex' => sc_language_render('category.alias_validate'),
             ]
         );
 
@@ -195,7 +195,7 @@ class AdminCategoryController extends RootAdminController
 
         sc_clear_cache('cache_category');
 
-        return redirect()->route('admin_category.index')->with('success', trans('category.admin.create_success'));
+        return redirect()->route('admin_category.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -211,7 +211,7 @@ class AdminCategoryController extends RootAdminController
         }
 
         $data = [
-            'title'             => trans('category.admin.edit'),
+            'title'             =>sc_language_render('action.edit'),
             'subTitle'          => '',
             'title_description' => '',
             'icon'              => 'fa fa-edit',
@@ -249,8 +249,8 @@ class AdminCategoryController extends RootAdminController
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:300',
             ], [
-                'descriptions.*.title.required' => trans('validation.required', ['attribute' => trans('category.title')]),
-                'alias.regex'                   => trans('category.alias_validate'),
+                'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('category.title')]),
+                'alias.regex'                   => sc_language_render('category.alias_validate'),
             ]
         );
 
@@ -286,7 +286,7 @@ class AdminCategoryController extends RootAdminController
         sc_clear_cache('cache_category');
 
     //
-        return redirect()->route('admin_category.index')->with('success', trans('category.admin.edit_success'));
+        return redirect()->route('admin_category.index')->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -297,7 +297,7 @@ class AdminCategoryController extends RootAdminController
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);
@@ -308,7 +308,7 @@ class AdminCategoryController extends RootAdminController
                 }
             }
             if (count($arrDontPermission)) {
-                return response()->json(['error' => 1, 'msg' => trans('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             }
             AdminCategory::destroy($arrID);
             sc_clear_cache('cache_category');

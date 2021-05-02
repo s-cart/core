@@ -58,7 +58,7 @@ class ShopProductController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_product_list',
             array(
-                'title' => trans('front.all_product'),
+                'title' => sc_language_render('front.all_product'),
                 'keyword' => '',
                 'description' => '',
                 'products' => $products,

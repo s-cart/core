@@ -16,8 +16,8 @@ class AdminTaxController extends RootAdminController
     public function index()
     {
         $data = [
-            'title' => trans('tax.admin.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . trans('tax.admin.add_new_title'),
+            'title' => sc_language_render('admin.tax.list'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('admin.tax.add_new_title'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_tax.delete'),
@@ -30,10 +30,10 @@ class AdminTaxController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('tax.id'),
-            'value' => trans('tax.value'),
-            'name' => trans('tax.name'),
-            'action' => trans('tax.admin.action'),
+            'id' => 'ID',
+            'value' => sc_language_render('admin.tax.value'),
+            'name' => sc_language_render('admin.tax.name'),
+            'action' => sc_language_render('action.title'),
         ];
         $obj = new ShopTax;
         $obj = $obj->orderBy('id', 'desc');
@@ -46,8 +46,8 @@ class AdminTaxController extends RootAdminController
                 'name' => $row['name'],
                 'value' => $row['value'],
                 'action' => '
-                    <a href="' . sc_route_admin('admin_tax.edit', ['id' => $row['id']]) . '"><span title="' . trans('tax.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('tax.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                    <a href="' . sc_route_admin('admin_tax.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                   ',
             ];
         }
@@ -55,7 +55,7 @@ class AdminTaxController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('tax.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'index';
         return view($this->templatePathAdmin.'screen.tax')
@@ -75,7 +75,7 @@ class AdminTaxController extends RootAdminController
             'name' => 'required',
             'value' => 'numeric|min:0',
         ],[
-            'name.required' => trans('validation.required', ['attribute' => trans('tax.name')]),
+            'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.tax.name')]),
         ]);
 
         if ($validator->fails()) {
@@ -90,7 +90,7 @@ class AdminTaxController extends RootAdminController
         ];
         $obj = ShopTax::create($dataInsert);
 
-        return redirect()->route('admin_tax.index')->with('success', trans('tax.admin.create_success'));
+        return redirect()->route('admin_tax.index')->with('success', sc_language_render('action.create_success'));
 
     }
 
@@ -104,8 +104,8 @@ class AdminTaxController extends RootAdminController
             return 'No data';
         }
         $data = [
-            'title' => trans('tax.admin.list'),
-            'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . trans('tax.admin.edit'),
+            'title' => sc_language_render('admin.tax.list'),
+            'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_tax.delete'),
@@ -120,10 +120,10 @@ class AdminTaxController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => trans('tax.id'),
-            'name' => trans('tax.name'),
-            'value' => trans('tax.value'),
-            'action' => trans('tax.admin.action'),
+            'id' => 'ID',
+            'name' => sc_language_render('admin.tax.name'),
+            'value' => sc_language_render('admin.tax.value'),
+            'action' => sc_language_render('action.title'),
         ];
         $obj = new ShopTax;
         $obj = $obj->orderBy('id', 'desc');
@@ -136,8 +136,8 @@ class AdminTaxController extends RootAdminController
                 'name' => $row['name'],
                 'value' => $row['value'],
                 'action' => '
-                    <a href="' . sc_route_admin('admin_tax.edit', ['id' => $row['id']]) . '"><span title="' . trans('tax.admin.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . trans('tax.admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                    <a href="' . sc_route_admin('admin_tax.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                 ',
             ];
         }
@@ -145,7 +145,7 @@ class AdminTaxController extends RootAdminController
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-        $data['resultItems'] = trans('tax.admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'item_total' => $dataTmp->total()]);
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'edit';
         return view($this->templatePathAdmin.'screen.tax')
@@ -164,7 +164,7 @@ class AdminTaxController extends RootAdminController
             'name' => 'required',
             'value' => 'numeric|min:0',
         ],[
-            'name.required' => trans('validation.required', ['attribute' => trans('tax.name')]),
+            'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.tax.name')]),
         ]);
 
         if ($validator->fails()) {
@@ -182,7 +182,7 @@ class AdminTaxController extends RootAdminController
         $tax->update($dataUpdate);
 
 //
-        return redirect()->back()->with('success', trans('tax.admin.edit_success'));
+        return redirect()->back()->with('success', sc_language_render('action.edit_success'));
 
     }
 
@@ -193,7 +193,7 @@ Need mothod destroy to boot deleting in model
     public function deleteList()
     {
         if (!request()->ajax()) {
-            return response()->json(['error' => 1, 'msg' => trans('admin.method_not_allow')]);
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
             $ids = request('ids');
             $arrID = explode(',', $ids);

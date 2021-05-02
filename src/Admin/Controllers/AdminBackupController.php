@@ -47,7 +47,7 @@ class AdminBackupController extends RootAdminController
         krsort($arrFiles);
         return view($this->templatePathAdmin.'screen.backup')->with(
             [
-                "title"    => trans('backup.title'),
+                "title"    => sc_language_render('backup.title'),
                 "arrFiles" => $arrFiles,
                 "tableInfo" => $tableInfo,
             ]
@@ -68,7 +68,7 @@ class AdminBackupController extends RootAdminController
         if ($action === 'remove') {
             try {
                 unlink($pathFull);
-                $return = ['error' => 0, 'msg' => trans('backup.remove_success')];
+                $return = ['error' => 0, 'msg' => sc_language_render('action.remove_success')];
             } catch (\Throwable $e) {
                 $return = ['error' => 1, 'msg' => $e->getMessage()];
             }
