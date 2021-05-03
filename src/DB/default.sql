@@ -162,14 +162,6 @@ INSERT INTO `__SC_DB_PREFIX__admin_store_description` (`store_id`, `lang`, `titl
 <h3><span style="color:#e74c3c;"><strong>Xin lỗi! Hiện tại website đang bảo trì!</strong></span></h3>
 </center>', 'Website đang trong chế độ bảo trì!');
 
-/*shop_banner_type*/
-INSERT INTO `__SC_DB_PREFIX__shop_banner_type` (`id`, `code`, `name`) VALUES 
-('1','banner','Banner website'),
-('2','background','Background website'),
-('3','breadcrumb','Breadcrumb website'),
-('4','banner-store','Banner store'),
-('5','other','Other');
-
 /*shop_language*/
 INSERT INTO `__SC_DB_PREFIX__shop_language` (`id`, `name`, `code`, `icon`, `status`, `rtl`, `sort`) VALUES 
 ('1','English','en', '/data/language/flag_uk.png','1','0','1'),
