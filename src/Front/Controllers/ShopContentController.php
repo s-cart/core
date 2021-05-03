@@ -439,7 +439,7 @@ class ShopContentController extends RootFrontController
             ShopSubscribe::insert(['email' => $data['subscribe_email']]);
         }
         return redirect()->back()
-            ->with(['success' => sc_language_render('subscribe.admin.success')]);
+            ->with(['success' => sc_language_render('subscribe.subscribe_success')]);
     }
 
 }

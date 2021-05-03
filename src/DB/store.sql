@@ -337,7 +337,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_store_css` (`css`, `store_id`) VALUES
   padding: 3px !important;
 }
 .sc-shipping-address textarea,
-.sc-shipping-address input[type=\"text\"),
+.sc-shipping-address input[type=\"text\"],
 .sc-shipping-address option{
   width: 100%;
   padding: 7px !important;
