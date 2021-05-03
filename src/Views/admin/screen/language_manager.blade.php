@@ -18,7 +18,7 @@
                       <td>
                         <div class="input-group float-left ml-1">
                           <div class="btn-group">
-                            <select class="form-control rounded-0" name="lang">
+                            <select class="form-control select2" name="lang">
                               <option value="">{{ sc_language_render('admin.language.select_lang') }}</option>
                               @foreach ($languages as $key => $itemLang)
                                   <option value="{{ $key }}" {{ ($key == $lang)? 'selected': '' }}>{{ $itemLang->name }}</option>
@@ -26,7 +26,7 @@
                             </select>
                           </div>
                           <div class="btn-group">
-                            <select class="form-control rounded-0" name="position">
+                            <select class="form-control select2" name="position">
                               <option value="">{{ sc_language_render('admin.language.select_position') }}</option>
                               @foreach ($positionLang as $itemPosition)
                                   <option value="{{ $itemPosition }}" {{ ($itemPosition == $position)? 'selected': '' }}>{{ $itemPosition }}</option>

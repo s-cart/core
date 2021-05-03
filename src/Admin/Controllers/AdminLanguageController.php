@@ -83,7 +83,7 @@ class AdminLanguageController extends RootAdminController
             'icon' => 'required',
             'sort' => 'numeric|min:0',
             'name' => 'required|string|max:100',
-            'code' => 'required|unique:"'.ShopLanguage::class.'",code',
+            'code' => 'required|string|max:10|unique:"'.ShopLanguage::class.'",code',
         ]);
 
         if ($validator->fails()) {
@@ -184,7 +184,7 @@ public function edit($id)
             'icon' => 'required',
             'name' => 'required',
             'sort' => 'numeric|min:0',
-            'code' => 'required|unique:"'.ShopLanguage::class.'",code,' . $language->id . ',id',
+            'code' => 'required|string|max:10|unique:"'.ShopLanguage::class.'",code,' . $language->id . ',id',
         ]);
 
         if ($validator->fails()) {
