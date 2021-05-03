@@ -27,6 +27,9 @@
             <li class="nav-item">
               <a class="nav-link" id="tab-admin-other-tab" data-toggle="pill" href="#tab-admin-other" role="tab" aria-controls="tab-admin-other" aria-selected="false">{{ sc_language_render('store.admin.config_admin_other') }}</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tab-admin-customize-tab" data-toggle="pill" href="#tab-admin-customize" role="tab" aria-controls="tab-admin-customize" aria-selected="false">{{ sc_language_render('store.admin.config_customize') }}</a>
+            </li>
           </ul>
         </div>
         <div class="card-body">
@@ -80,6 +83,11 @@
             </div>
             {{-- // admin config --}}
 
+            {{-- Tab admin config customize --}}
+            <div class="tab-pane fade" id="tab-admin-customize" role="tabpanel" aria-labelledby="tab-admin-customize-tab">
+              @include($templatePathAdmin.'screen.config_store.config_admin_customize')
+            </div>
+            {{-- // admin config customize --}}
 
           </div>
         </div>
