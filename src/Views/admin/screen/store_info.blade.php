@@ -103,8 +103,8 @@
 @if ($storeId == SC_ID_ROOT)
 {{-- Only the root domain can edit this information --}}
                     <tr>
-                      <td><i class="fab fa-chrome"></i> {{ sc_language_render('store.domain') }}</td>
-                      <td><a href="#" class="editable-required editable editable-click" data-name="domain" data-type="text" data-pk="" data-source="" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ sc_language_render('store.domain') }}" data-value="{{ $store->domain }}" data-original-title="" title="">{{$store->domain }}</a></td>
+                      <td><i class="fab fa-chrome"></i> {{ sc_language_render('store.admin.domain') }}</td>
+                      <td><a href="#" class="editable-required editable editable-click" data-name="domain" data-type="text" data-pk="" data-source="" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ sc_language_render('store.admin.domain') }}" data-value="{{ $store->domain }}" data-original-title="" title="">{{$store->domain }}</a></td>
                     </tr>
 @endif
 
@@ -134,9 +134,9 @@
                     </tr>
 @endif
                     <tr>
-                      <td><i class="nav-icon  fas fa-object-ungroup "></i>{{ sc_language_render('store.template') }}</td>
+                      <td><i class="nav-icon  fas fa-object-ungroup "></i>{{ sc_language_render('store.admin.template') }}</td>
                       <td>
-                        <a href="#" class="editable-required editable editable-click" data-name="template" data-type="select" data-pk="" data-source="{{ json_encode($templates) }}" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ sc_language_render('store.template') }}" data-value="{{ $store->template }}" data-original-title="" title=""></a>
+                        <a href="#" class="editable-required editable editable-click" data-name="template" data-type="select" data-pk="" data-source="{{ json_encode($templates) }}" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ sc_language_render('store.admin.template') }}" data-value="{{ $store->template }}" data-original-title="" title=""></a>
                        </td>
                     </tr>
           
