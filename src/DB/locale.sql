@@ -489,6 +489,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('store.logo', 'Logo', 'store', 'en'),
 ('store.icon', 'Icon', 'store', 'vi'),
 ('store.icon', 'Icon', 'store', 'en'),
+('store.maintenance', 'Bảo trì', 'store', 'vi'),
+('store.maintenance', 'Maintenance', 'store', 'en'),
 ('store.admin.code', 'Store code', 'store.admin', 'en'),
 ('store.admin.code', 'Mã cửa hàng', 'store.admin', 'vi'),
 ('store.admin.css', 'Edit CSS', 'store.admin', 'en'),

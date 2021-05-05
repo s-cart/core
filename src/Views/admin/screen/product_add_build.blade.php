@@ -111,6 +111,25 @@
                             </div>
                         </div>
 
+                        <div class="form-group row kind  {{ $errors->has('descriptions.'.$code.'.content') ? ' text-red' : '' }}">
+                            <label for="{{ $code }}__content" class="col-sm-2 col-form-label">
+                                {{ sc_language_render('product.content') }}
+                            </label>
+                            <div class="col-sm-8">
+                                <textarea id="{{ $code }}__content" class="editor"
+                                    name="descriptions[{{ $code }}][content]">
+                                        {!! old('descriptions.'.$code.'.content') !!}
+                                    </textarea>
+                                @if ($errors->has('descriptions.'.$code.'.content'))
+                                <span class="form-text">
+                                    <i class="fa fa-info-circle"></i>
+                                    {{ $errors->first('descriptions.'.$code.'.content') }}
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+
                             </div>
                         </div>
                         @endforeach

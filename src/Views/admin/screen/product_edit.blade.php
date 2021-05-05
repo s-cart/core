@@ -29,7 +29,7 @@
             <div class="d-flex d-flex justify-content-center mb-3"  id="start-add">
                 <div class="form-group">
                     <div style="width: 300px;text-align: center; z-index:999">
-                        <b>{{ sc_language_render('product.type') }}:</b> {!! $kinds[$product->kind]??'' !!}
+                        <b>{{ sc_language_render('product.kind') }}:</b> {!! $kinds[$product->kind]??'' !!}
                     </div>
                 </div>
             </div>    
@@ -128,7 +128,7 @@
                             </div>
                         </div>
 
-                        @if ($product->kind == SC_PRODUCT_SINGLE)
+                        @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
                         <div
                             class="form-group row {{ $errors->has('descriptions.'.$code.'.content') ? ' text-red' : '' }}">
                             <label for="{{ $code }}__content"
