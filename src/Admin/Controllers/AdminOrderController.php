@@ -407,7 +407,7 @@ class AdminOrderController extends RootAdminController
         $value = request('value');
         if ($code == 'shipping' || $code == 'discount' || $code == 'received') {
             $orderTotalOrigin = AdminOrder::getRowOrderTotal($id);
-            $orderId = $orderTotalOrigin->orderId;
+            $orderId = $orderTotalOrigin->order_id;
             $oldValue = $orderTotalOrigin->value;
             $order = AdminOrder::getOrderAdmin($orderId);
             if (!$order) {

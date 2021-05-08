@@ -160,7 +160,7 @@
                     <tr  id="add-item" class="not-print">
                       <td colspan="7">
                         <button  type="button" class="btn btn-flat btn-success" id="add-item-button"  title="{{sc_language_render('action.add') }}"><i class="fa fa-plus"></i> {{ sc_language_render('action.add') }}</button>
-                        &nbsp;&nbsp;&nbsp;<button style="display: none; margin-right: 50px" type="button" class="btn btn-flat btn-warning" id="add-item-button-save"  title="Save"><i class="fa fa-save"></i> {{ sc_language_render('admin.save') }}</button>
+                        &nbsp;&nbsp;&nbsp;<button style="display: none; margin-right: 50px" type="button" class="btn btn-flat btn-warning" id="add-item-button-save"  title="Save"><i class="fa fa-save"></i> {{ sc_language_render('action.save') }}</button>
                     </td>
                   </tr>
                 </tbody>
