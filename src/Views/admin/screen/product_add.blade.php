@@ -638,7 +638,7 @@
                                 </span>
                                 @endif
                                 <div style="margin-top: 10px; {{ (old('property') != SC_PROPERTY_DOWNLOAD) ? 'display:none':'' }}" id="download_path">
-                                    <input type="text"  name="download_path" value="{{ old('download_path') }}" class="form-control input-sm" placeholder="{{ sc_language_render('product.properties.download_path') }}" />
+                                    <input type="text"  name="download_path" value="{{ old('download_path') }}" class="form-control input-sm" placeholder="{{ sc_language_render('product.download_path') }}" />
                                 </div>
                             </div>
                         </div>
