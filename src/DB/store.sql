@@ -403,5 +403,7 @@ gtag(\"config\", \"UA-128658138-1\");
 ('Brands', 'left', '*','view','brands_left', '1', '3', '__storeId__'),
 ('Banner home', 'banner_top', 'home','view','banner_image', '1', '0', '__storeId__'),
 ('Categories', 'left', 'home,shop_home','view','categories', '1', '4', '__storeId__'),
-('Product last view', 'left', '*','view','product_lastview', '1', '0', '__storeId__');
+('Product last view', 'left', '*','view','product_lastview', '1', '0', '__storeId__'),
+('Products new', 'bottom', 'home','view','product_new', '1', '9', '__storeId__'),
+('Top news', 'bottom', 'home','view','top_news', '1', '10', '__storeId__');
   
