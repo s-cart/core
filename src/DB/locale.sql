@@ -357,8 +357,6 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('front.shop', 'Shop', 'front', 'en'),
 ('front.store', 'Cửa hàng', 'front', 'vi'),
 ('front.store', 'store', 'front', 'en'),
-('front.link_useful', 'Liên kết hữu ích', 'front', 'vi'),
-('front.link_useful', 'Link useful', 'front', 'en'),
 ('front.brands', 'Nhãn hàng', 'front', 'vi'),
 ('front.brands', 'Brands', 'front', 'en'),
 ('front.categories', 'Danh mục', 'front', 'vi'),
