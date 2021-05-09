@@ -10,6 +10,7 @@ Route::group(['prefix' => 'template'], function () {
     Route::get('/', 'AdminTemplateController@index')->name('admin_template.index');
     Route::post('changeTemplate', 'AdminTemplateController@changeTemplate')->name('admin_template.changeTemplate');
     Route::post('remove', 'AdminTemplateController@remove')->name('admin_template.remove');
+    Route::post('refresh', 'AdminTemplateController@refresh')->name('admin_template.refresh');
 
     if(config('admin.settings.api_template')) {
         Route::get('/online', 'AdminTemplateOnlineController@index')->name('admin_template_online.index');

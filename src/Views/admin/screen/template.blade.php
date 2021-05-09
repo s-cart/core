@@ -56,7 +56,8 @@
                       @if (!in_array($key, $templatesUsed))
                         <span onClick="removeTemplate($(this), '{{ $key }}');" title="{{ sc_language_render('admin.template.remove') }}" class="btn btn-flat btn-danger btn-sm"><i class="fa fa-trash"></i></span>
                       @else
-                      <span class="tn btn-flat btn-success btn-sm" title="{{ sc_language_render('admin.template.used') }}"><i class="fa fa-check" aria-hidden="true"></i></span>
+                      <span class="btn btn-flat btn-success btn-sm" title="{{ sc_language_render('admin.template.used') }}"><i class="fa fa-check" aria-hidden="true"></i></span>
+                      <span onClick="refreshTemplate($(this), '{{ $key }}');" class="btn btn-flat btn-warning btn-sm" title="{{ sc_language_render('action.refresh') }}"><i class="fa fa-recycle" aria-hidden="true"></i></span>
                       @endif
                     </td>
                   </tr>
@@ -81,45 +82,82 @@
 @push('scripts')
 
 
-    {{-- //End pjax --}}
-    <script type="text/javascript">
-      function removeTemplate(obj,key) {
+<script type="text/javascript">
+  function removeTemplate(obj,key) {
 
-        Swal.fire({
-          title: '{{ sc_language_render('action.action_confirm') }}',
-          text: '{{ sc_language_render('action.action_confirm_warning') }}',
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: '{{ sc_language_render('action.confirm_yes') }}',
-        }).then((result) => {
-          if (result.value) {
-              $('#loading').show()
-              obj.button('loading');
-              $.ajax({
-                type: 'POST',
-                dataType:'json',
-                url: '{{ sc_route_admin('admin_template.remove') }}',
-                data: {
-                  "_token": "{{ csrf_token() }}",
-                  "key":key,
-                },
-                success: function (response) {
-                  console.log(response);
-                if(parseInt(response.error) ==0){
-                  alertMsg('success', response.msg);
-                location.reload();
-                }else{
-                  alertMsg('error', response.msg);
-                }
-                $('#loading').hide();
-                obj.button('reset');
-                }
-              });
-          }
-        })
-    }
+    Swal.fire({
+      title: '{{ sc_language_render('action.action_confirm') }}',
+      text: '{{ sc_language_render('action.action_confirm_warning') }}',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '{{ sc_language_render('action.confirm_yes') }}',
+    }).then((result) => {
+      if (result.value) {
+          $('#loading').show()
+          obj.button('loading');
+          $.ajax({
+            type: 'POST',
+            dataType:'json',
+            url: '{{ sc_route_admin('admin_template.remove') }}',
+            data: {
+              "_token": "{{ csrf_token() }}",
+              "key":key,
+            },
+            success: function (response) {
+              console.log(response);
+            if(parseInt(response.error) ==0){
+              alertMsg('success', response.msg);
+            location.reload();
+            }else{
+              alertMsg('error', response.msg);
+            }
+            $('#loading').hide();
+            obj.button('reset');
+            }
+          });
+      }
+    })
+}
+
+function refreshTemplate(obj,key) {
+
+Swal.fire({
+  title: '{{ sc_language_render('action.action_confirm') }}',
+  text: '{{ sc_language_render('action.action_confirm_warning') }}',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: '{{ sc_language_render('action.confirm_yes') }}',
+}).then((result) => {
+  if (result.value) {
+      $('#loading').show()
+      obj.button('loading');
+      $.ajax({
+        type: 'POST',
+        dataType:'json',
+        url: '{{ sc_route_admin('admin_template.refresh') }}',
+        data: {
+          "_token": "{{ csrf_token() }}",
+          "key":key,
+        },
+        success: function (response) {
+          console.log(response);
+        if(parseInt(response.error) ==0){
+          alertMsg('success', response.msg);
+        location.reload();
+        }else{
+          alertMsg('error', response.msg);
+        }
+        $('#loading').hide();
+        obj.button('reset');
+        }
+      });
+  }
+})
+}
 
 function imagedemo(image) {
   Swal.fire({

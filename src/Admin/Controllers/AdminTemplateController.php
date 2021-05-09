@@ -37,9 +37,23 @@ class AdminTemplateController extends RootAdminController
         return response()->json($return);
     }
 
+    /**
+     * Remove template
+     *
+     * @return void
+     */
     public function remove()
     {
         $key = request('key');
+
+        //Run function process before remove template
+        if (file_exists($fileProcess = resource_path() . '/views/templates/'.$key.'/Provider.php')) {
+            include_once $fileProcess;
+            if (function_exists('sc_template_uninstall')) {
+                sc_template_uninstall();
+            }
+        }
+
         try {
             File::deleteDirectory(public_path('templates/'.$key));
             File::deleteDirectory(resource_path('views/templates/'.$key));
@@ -50,7 +64,28 @@ class AdminTemplateController extends RootAdminController
         return response()->json($response);
     }
 
+    /**
+     * Refresh action install template
+     *
+     * @return void
+     */
+    public function refresh()
+    {
+        $key = request('key');
 
+        //Run function process before remove template
+        if (file_exists($fileProcess = resource_path() . '/views/templates/'.$key.'/Provider.php')) {
+            include_once $fileProcess;
+            if (function_exists('sc_template_uninstall')) {
+                sc_template_uninstall();
+            }
+            if (function_exists('sc_template_install')) {
+                sc_template_install();
+            }
+        }
+        $response = ['error' => 0, 'msg' => 'Refresh template success'];
+        return response()->json($response);
+    }
 
     
     /**
@@ -110,6 +145,15 @@ class AdminTemplateController extends RootAdminController
                         File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path('templates/'.$configKey));
                         File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/src'), resource_path('views/templates/'.$configKey));
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
+
+                        //Run function process after install template
+                        if (file_exists($fileProcess = resource_path() . '/views/templates/'.$configKey.'/Provider.php')) {
+                            include_once $fileProcess;
+                            if (function_exists('sc_template_install')) {
+                                sc_template_install();
+                            }
+                        }
+
                     } catch(\Throwable $e) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         return redirect()->back()->with('error', $e->getMessage());
