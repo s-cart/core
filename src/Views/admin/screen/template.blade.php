@@ -56,7 +56,7 @@
                       @if (!in_array($key, $templatesUsed))
                         <span onClick="removeTemplate($(this), '{{ $key }}');" title="{{ sc_language_render('admin.template.remove') }}" class="btn btn-flat btn-danger btn-sm"><i class="fa fa-trash"></i></span>
                       @else
-                          {{ sc_language_render('admin.template.used') }}
+                      <span class="tn btn-flat btn-success btn-sm" title="{{ sc_language_render('admin.template.used') }}"><i class="fa fa-check" aria-hidden="true"></i></span>
                       @endif
                     </td>
                   </tr>
