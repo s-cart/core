@@ -76,11 +76,13 @@ class AdminTemplateController extends RootAdminController
         //Run function process before remove template
         if (file_exists($fileProcess = resource_path() . '/views/templates/'.$key.'/Provider.php')) {
             include_once $fileProcess;
-            if (function_exists('sc_template_uninstall')) {
-                sc_template_uninstall();
-            }
-            if (function_exists('sc_template_install')) {
-                sc_template_install();
+            if (function_exists('sc_template_refresh')) {
+                sc_template_refresh();
+            } else {
+                if (function_exists('sc_template_uninstall') && function_exists('sc_template_install')) {
+                    sc_template_uninstall();
+                    sc_template_install();
+                }
             }
         }
         $response = ['error' => 0, 'msg' => 'Refresh template success'];
