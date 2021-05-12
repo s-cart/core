@@ -104,7 +104,8 @@
 
     if (array_key_exists($plugin['key'], $arrPluginLocal)) 
     {
-      $pluginAction = '<span class="btn btn-flat btn-default" type="button">'.sc_language_render('admin.plugin.located').'</span>';
+      $pluginAction = '<span title="'.sc_language_render('admin.plugin.located').'" class="btn btn-flat btn-default"><i class="fa fa-check" aria-hidden="true"></i></span>';
+
     } elseif(!in_array(config('s-cart.core'), $scVersion)) {
       $pluginAction = '';
     } else {
@@ -165,7 +166,7 @@
                         <td>
                           {!! $pluginAction ?? '' !!}
                           <a href="{{ $plugin['link'] }}" title="Link home">
-                            <span class="btn btn-flat btn-default" type="button">
+                            <span class="btn btn-flat btn-primary" type="button">
                               <i class="fa fa-chain-broken" aria-hidden="true"></i> {!! sc_language_render('admin.plugin.link') !!}
                             </span>
                           </a>

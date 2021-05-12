@@ -107,7 +107,7 @@
   
   if (array_key_exists($template['key'], $arrTemplateLocal)) 
   {
-  $templateAction = sc_language_render('admin.template.located');
+  $templateAction = '<span title="'.sc_language_render('admin.template.located').'" class="btn btn-flat btn-default"><i class="fa fa-check" aria-hidden="true"></i></span>';
   } elseif(!in_array(config('s-cart.core'), $scVersion)) {
   $templateAction = '';
   } else {
@@ -169,7 +169,7 @@
                     <td>
                       {!! $templateAction ?? '' !!}
                       <a href="{{ $template['link'] }}" title="Link home">
-                        <span class="btn btn-flat btn-default" type="button">
+                        <span class="btn btn-flat btn-primary" type="button">
                         <i class="fa fa-chain-broken" aria-hidden="true"></i> {!! sc_language_render('admin.template.link') !!}
                         </span>
                       </a>
