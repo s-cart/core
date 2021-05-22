@@ -665,23 +665,24 @@ class ShopProduct extends Model
             $query = $query->whereIn($this->getTable().'.kind', $this->sc_kind);
         }
 
-        
+        //Filter with property
         if ($this->sc_property !== 'all') {
             $query = $query->where($this->getTable().'.property', $this->sc_property);
         }
-
+        //Filter with brand
         if (count($this->sc_brand)) {
             $query = $query->whereIn($this->getTable().'.brand_id', $this->sc_brand);
         }
-
+        //Filter with category store
+        //category_store_id use in version MultivendorPro and plugin MultiStore
         if ($this->sc_category_store !== 'all') {
             $query = $query->where($this->getTable().'.category_store_id', $this->sc_category_store);
         }
-
+        //Filter with supplier
         if (count($this->sc_supplier)) {
             $query = $query->whereIn($this->getTable().'.supplier_id', $this->sc_supplier);
         }
-
+        //Process with other condition
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
                 if (count($where)) {
@@ -694,13 +695,21 @@ class ShopProduct extends Model
             $query = $query->inRandomOrder();
         } else {
             $ckeckSort = false;
+            $ckeckId = false;
             if (is_array($this->sc_sort) && count($this->sc_sort)) {
                 foreach ($this->sc_sort as  $rowSort) {
                     if (is_array($rowSort) && count($rowSort) == 2) {
                         if ($rowSort[0] == 'sort') {
+                            //Process sort with sort value
+                            $query = $query->orderBy($this->getTable().'.sort', 'asc');
                             $ckeckSort = true;
+                        } else if ($rowSort[0] == 'id') {
+                            //Process sort with product id
+                            $query = $query->orderBy($this->getTable().'.id', 'desc');
+                            $ckeckId = true;
+                        } else {
+                            $query = $query->orderBy($rowSort[0], $rowSort[1]);
                         }
-                        $query = $query->orderBy($rowSort[0], $rowSort[1]);
                     }
                 }
             }
@@ -709,7 +718,9 @@ class ShopProduct extends Model
                 $query = $query->orderBy($this->getTable().'.sort', 'asc');
             }
             //Default, will sort id
-            $query = $query->orderBy($this->getTable().'.id', 'desc');
+            if (!$ckeckId) {
+                $query = $query->orderBy($this->getTable().'.id', 'desc');
+            }
         }
 
         //Hidden product out of stock
