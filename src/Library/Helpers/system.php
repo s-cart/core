@@ -121,22 +121,22 @@ if (!function_exists('sc_config_group')) {
 
 if (!function_exists('sc_store')) {
     /**
-     * Get info store, table shop_store
+     * Get info store_id, table shop_store
      *
      * @param   [string] $key      [$key description]
-     * @param   [null|int]  $store    store id
+     * @param   [null|int]  $store_id    store id
      *
      * @return  [mix] 
      */
-    function sc_store($key = null, $store = null, $default = null)
+    function sc_store($key = null, $store_id = null, $default = null)
     {
-        $store = ($store == null) ? config('app.storeId') : $store;
+        $store_id = ($store_id == null) ? config('app.storeId') : $store_id;
 
         //Update store info
         if (is_array($key)) {
             if (count($key) == 1) {
                 foreach ($key as $k => $v) {
-                    return AdminStore::where('id', $store)->update([$k => $v]);
+                    return AdminStore::where('id', $store_id)->update([$k => $v]);
                 }
             } else {
                 return false;
@@ -146,7 +146,7 @@ if (!function_exists('sc_store')) {
 
         $allStoreInfo = [];
         try {
-            $allStoreInfo = AdminStore::getListAll()[$store]->toArray() ?? [];
+            $allStoreInfo = AdminStore::getListAll()[$store_id]->toArray() ?? [];
         } catch(\Throwable $e) {
             //
         }

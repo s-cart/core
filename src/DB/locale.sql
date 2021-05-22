@@ -715,6 +715,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('product.tax', 'Thuế', 'product', 'vi'),
 ('product.price_group', 'Click view price', 'product', 'en'),
 ('product.price_group', 'Bấm xem giá', 'product', 'vi'),
+('product.price_group_chose', 'Click choose product', 'product', 'en'),
+('product.price_group_chose', 'Bấm chọn sản phẩm', 'product', 'vi'),
 ('product.subtotal', 'Subtotal', 'product', 'en'),
 ('product.subtotal', 'Giá sản phẩm', 'product', 'vi'),
 ('product.sub_total', 'Subtotal', 'product', 'en'),
