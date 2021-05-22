@@ -603,13 +603,21 @@ class ShopProduct extends Model
      * build Query
      */
     public function buildQuery() {
-
         $tableDescription = (new ShopProductDescription)->getTable();
         $tableStore = (new ShopStore)->getTable();
+        $storeId = $this->sc_store_id ? $this->sc_store_id : config('app.storeId');
+        
+        //Select field
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.name, '.$tableDescription.'.keyword, '.$tableDescription.'.description'; 
 
         //description
         $query = $this
+            ->selectRaw($dataSelect)
+            //join description
             ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
+            //join store
+            ->leftJoin($tableStore, $tableStore . '.id', $this->getTable().'.store_id')
+            ->where($tableStore . '.status', '1')
             ->where($tableDescription . '.lang', sc_get_locale());
         //search keyword
         if ($this->sc_keyword !='') {
@@ -645,7 +653,6 @@ class ShopProduct extends Model
             $query = $query->leftJoin($tablePTC, $tablePTC . '.product_id', $this->getTable() . '.id');
             $query = $query->whereIn($tablePTC . '.category_id', $this->sc_category);
         }
-        $storeId = $this->sc_store_id ? $this->sc_store_id : config('app.storeId');
 
         //Process store
         if (!empty($this->sc_store_id) || config('app.storeId') != 1) {
