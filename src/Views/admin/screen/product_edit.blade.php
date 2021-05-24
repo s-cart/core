@@ -1135,7 +1135,7 @@ $('#add_sub_image').click(function(event) {
 
 // Select product in group
 $('#add_product_in_group').click(function(event) {
-    var htmlSelectGroup = '{!! $htmlSelectGroup !!}';
+    var htmlSelectGroup = '{{ $htmlSelectGroup }}';
     $(this).before(htmlSelectGroup);
     $('.select2').select2();
     $('.removeproductInGroup').click(function(event) {
@@ -1149,7 +1149,7 @@ $('.removeproductInGroup').click(function(event) {
 
 // Select product in build
 $('#add_product_in_build').click(function(event) {
-    var htmlSelectBuild = '{!! $htmlSelectBuild !!}';
+    var htmlSelectBuild = '{{ $htmlSelectBuild }}';
     $(this).before(htmlSelectBuild);
     $('.select2').select2();
     $('.removeproductBuild').click(function(event) {
@@ -1164,7 +1164,7 @@ $('.removeproductBuild').click(function(event) {
 
 // Select product attributes
 $('.add_attribute').click(function(event) {
-    var htmlProductAtrribute = '{!! $htmlProductAtrribute ?? '' !!}';
+    var htmlProductAtrribute = '{{ $htmlProductAtrribute ?? '' }}';
     var attGroup = $(this).attr("data-id");
     htmlProductAtrribute = htmlProductAtrribute.replace(/attribute_group/gi, attGroup);
     htmlProductAtrribute = htmlProductAtrribute.replace("attribute_value", "");

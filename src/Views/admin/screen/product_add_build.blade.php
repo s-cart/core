@@ -859,7 +859,7 @@ $('#add_sub_image').click(function(event) {
 
 // Select product in build
 $('#add_product_in_build').click(function(event) {
-    var htmlSelectBuild = '{!! $htmlSelectBuild !!}';
+    var htmlSelectBuild = '{{ $htmlSelectBuild }}';
     $(this).before(htmlSelectBuild);
     $('.select2').select2();
     $('.removeproductBuild').click(function(event) {

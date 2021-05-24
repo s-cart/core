@@ -958,7 +958,7 @@ $('#add_sub_image').click(function(event) {
 
 // Select product attributes
 $('.add_attribute').click(function(event) {
-    var htmlProductAtrribute = '{!! $htmlProductAtrribute??'' !!}';
+    var htmlProductAtrribute = '{{ $htmlProductAtrribute??'' }}';
     var attGroup = $(this).attr("data-id");
     htmlProductAtrribute = htmlProductAtrribute.replace(/attribute_group/gi, attGroup);
     htmlProductAtrribute = htmlProductAtrribute.replace("attribute_value", "");
