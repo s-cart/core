@@ -143,12 +143,12 @@ class ShopOrder extends Model
                 
                 //Check product flash sale over stock
                 if (function_exists('sc_product_flash_check_over') && !sc_product_flash_check_over($pID, $cartDetail['qty'])) {
-                    return $return = ['error' => 1, 'msg' => sc_languages('cart.item_over_qty', ['sku' => $product->sku, 'qty' => $cartDetail['qty']])];
+                    return $return = ['error' => 1, 'msg' => sc_language_render('cart.item_over_qty', ['sku' => $product->sku, 'qty' => $cartDetail['qty']])];
                 }
 
                 //If product out of stock
                 if (!sc_config('product_buy_out_of_stock') && $product->stock < $cartDetail['qty']) {
-                    return $return = ['error' => 1, 'msg' => sc_languages('cart.item_over_qty', ['sku' => $product->sku, 'qty' => $cartDetail['qty']])];
+                    return $return = ['error' => 1, 'msg' => sc_language_render('cart.item_over_qty', ['sku' => $product->sku, 'qty' => $cartDetail['qty']])];
                 }
                 //
                 $tax = (sc_tax_price($cartDetail['price'], $product->getTaxValue()) - $cartDetail['price']) *  $cartDetail['qty'];
