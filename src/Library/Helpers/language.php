@@ -14,6 +14,7 @@ if (!function_exists('sc_language_all')) {
 if (!function_exists('sc_languages')) {
     /*
     Render language
+    WARNING: Dont call this function (or functions that call it) in __construct or midleware, it may cause the display language to be incorrect
      */
     function sc_languages($locale)
     {
@@ -43,6 +44,7 @@ if (!function_exists('sc_language_replace')) {
 if (!function_exists('sc_language_render')) {
     /*
     Render language
+    WARNING: Dont call this function (or functions that call it) in __construct or midleware, it may cause the display language to be incorrect
      */
     function sc_language_render($string, $replace = [], $locale = null)
     {
