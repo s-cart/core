@@ -51,9 +51,9 @@ if (!function_exists('sc_url_render')) {
         if (count($arrCheckRoute) == 2) {
             $arrRoute = explode('::', $string);
             if (isset($arrRoute[2])) {
-                return sc_route($arrRoute[1], [$arrRoute[2]]);
+                return sc_route_admin($arrRoute[1], [$arrRoute[2]]);
             } else {
-                return sc_route($arrRoute[1]);               
+                return sc_route_admin($arrRoute[1]);               
             }
         }
 
