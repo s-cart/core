@@ -15,7 +15,12 @@
                       <td>
                         <div class="input-group float-left ml-1">
                           <div class="btn-group">
-                            <input name="keyword" value="{{ $keyword }}" class="form-control" placeholder="{{ sc_language_render('search.placeholder') }}">
+                            <select class="form-control select2" name="position">
+                              <option value="">{{ sc_language_render('admin.language.select_position') }}</option>
+                              @foreach ($positionLang as $itemPosition)
+                                  <option value="{{ $itemPosition }}" {{ ($itemPosition == $position)? 'selected': '' }}>{{ $itemPosition }}</option>
+                              @endforeach
+                            </select>
                           </div>
                           <div class="btn-group">
                             <select class="form-control select2" name="lang">
@@ -26,12 +31,7 @@
                             </select>
                           </div>
                           <div class="btn-group">
-                            <select class="form-control select2" name="position">
-                              <option value="">{{ sc_language_render('admin.language.select_position') }}</option>
-                              @foreach ($positionLang as $itemPosition)
-                                  <option value="{{ $itemPosition }}" {{ ($itemPosition == $position)? 'selected': '' }}>{{ $itemPosition }}</option>
-                              @endforeach
-                            </select>
+                            <input name="keyword" value="{{ $keyword }}" class="form-control" placeholder="Input code">
                           </div>
                           <div class="input-group-append">
                               <button id="button_sort" type="submit" class="btn btn-primary"><i class="fa fa-filter"></i></button>
@@ -75,6 +75,7 @@
                         @if (!empty($arrayKeyDiff) && $languagesPosition !== -1)
                         @foreach ($arrayKeyDiff as $keyRow)
                             <tr>
+                              <td>{{ $languagesPositionEL[$keyRow]['position'] }}</td>
                               <td>{{ $keyRow }}</td>
                               @if ($lang != 'en')
                               <td>{{ $languagesPositionEL[$keyRow]['text'] ?? '' }}</td>
