@@ -37,17 +37,27 @@ class Languages extends Model
      * @param [type] $position
      * @return void
      */
-    public static function getLanguagesPosition($lang, $position) {
-        if (!empty($lang) && !empty($position)) {
+    public static function getLanguagesPosition($lang, $position, $keyword = null) {
+        if (!empty($lang)) {
             $languages = ShopLanguage::getCodeAll();
             if (!in_array($lang, array_keys($languages))) {
                 return  [];
             }
-            return self::where('location', $lang)
-            ->where('position', $position)
-            ->get()
+            $data =  self::where('location', $lang);
+            if (!empty($position)) {
+                $data = $data->where('position', $position);
+            }
+            if (!empty($keyword)) {
+                $data = $data->where(function($query) use($keyword){
+                    $query->where('code', 'like', '%'.$keyword.'%')
+                          ->orWhere('text', 'like', '%'.$keyword.'%')
+                          ->orWhere('position', 'like', '%'.$keyword.'%');
+                });
+            }
+            $data = $data->get()
             ->keyBy('code')
             ->toArray();
+            return $data;
         } else {
             return [];
         }

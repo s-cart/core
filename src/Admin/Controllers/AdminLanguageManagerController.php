@@ -2,7 +2,6 @@
 namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use SCart\Core\Front\Models\ShopApiConnection;
 use SCart\Core\Front\Models\Languages;
 use SCart\Core\Front\Models\ShopLanguage;
 use Validator;
@@ -17,15 +16,16 @@ class AdminLanguageManagerController extends RootAdminController
     {
         $lang = request('lang');
         $position = request('position');
+        $keyword = request('keyword');
         $languages = ShopLanguage::getListAll();
         $positionLang = Languages::getPosition();
-        $languagesPosition = Languages::getLanguagesPosition($lang, $position);
+        $languagesPosition = Languages::getLanguagesPosition($lang, $position,$keyword);
         
         $codeLanguages = ShopLanguage::getCodeAll();
         if (!in_array($lang, array_keys($codeLanguages))) {
             $languagesPositionEL =   [];
         } else {
-            $languagesPositionEL = Languages::getLanguagesPosition('en', $position);
+            $languagesPositionEL = Languages::getLanguagesPosition('en', $position, $keyword);
         }
         $arrayKeyLanguagesPosition = array_keys($languagesPosition);
         $arrayKeyLanguagesPositionEL = array_keys($languagesPositionEL);
@@ -36,6 +36,7 @@ class AdminLanguageManagerController extends RootAdminController
             'lang' => $lang,
             'positionLang' => $positionLang,
             'position' => $position,
+            'keyword' => $keyword,
             'languagesPosition' => $languagesPosition,
             'languagesPositionEL' => $languagesPositionEL,
             'arrayKeyDiff' => $arrayKeyDiff,
@@ -83,6 +84,52 @@ class AdminLanguageManagerController extends RootAdminController
         }
     }
 
+    /**
+     * Screen add new record language
+     *
+     * @return void
+     */
+    public function add() {
+        $languages = ShopLanguage::getListAll();
+        $positionLang = Languages::getPosition();
+        $data = [
+            'title' => sc_language_render('admin.language_manager.add'),
+            'positionLang' => $positionLang,
+            'languages' => $languages,
+        ];
+        return view($this->templatePathAdmin.'screen.language_manager_add')
+            ->with($data);
+    }
 
+    /**
+     * Add new record for language
+     *
+     * @return void
+     */
+    public function postAdd() {
+        $data = request()->all();
+        $validator = Validator::make($data, [
+                'text'         => 'required',
+                'position' => 'required_without:position_new',
+                'code'         => 'required|unique:"'.Languages::class.'",code|string|max:100',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput($data);
+        }
+
+        $dataInsert = [
+            'code' => trim($data['code']),
+            'text' => trim($data['text']),
+            'position' => trim(empty($data['position_new']) ? $data['position'] : $data['position_new']),
+            'location' => 'en',
+        ];
+        Languages::insert($dataInsert);
+
+        return redirect(sc_route_admin('admin_language_manager.index'))->with('success', sc_language_render('action.create_success'));
+    }
 
 }

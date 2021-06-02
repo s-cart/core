@@ -1,9 +1,6 @@
 @extends($templatePathAdmin.'layout')
 
 @section('main')
-@php
-    $id = empty($id) ? 0 : $id;
-@endphp
 
    <div class="row">
       <div class="col-md-12">
@@ -17,6 +14,9 @@
                     <tr>
                       <td>
                         <div class="input-group float-left ml-1">
+                          <div class="btn-group">
+                            <input name="keyword" value="{{ $keyword }}" class="form-control" placeholder="{{ sc_language_render('search.placeholder') }}">
+                          </div>
                           <div class="btn-group">
                             <select class="form-control select2" name="lang">
                               <option value="">{{ sc_language_render('admin.language.select_lang') }}</option>
@@ -36,6 +36,10 @@
                           <div class="input-group-append">
                               <button id="button_sort" type="submit" class="btn btn-primary"><i class="fa fa-filter"></i></button>
                           </div>
+                          &nbsp; 
+                          <div class="btn-group">
+                            <a href="{{ sc_route_admin('admin_language_manager.add') }}"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button></a>
+                        </div>
                         </div>
                       </td>
                     </tr>
@@ -45,7 +49,8 @@
                   <table class="table table-hover box-body text-wrap table-bordered">
                       <thead>
                          <tr>
-                           <th>Code</th>
+                           <th>{{ sc_language_render('admin.language_manager.position') }}</th>
+                           <th>{{ sc_language_render('admin.language_manager.code') }}</th>
                            @if ($lang != 'en')
                            <th>English</th>
                            @endif
@@ -57,6 +62,7 @@
                         @if (!empty($languagesPosition))
                         @foreach ($languagesPosition as $key => $itemRow)
                             <tr>
+                              <td>{{ $itemRow['position'] }}</td>
                               <td>{{ $itemRow['code'] }}</td>
                               @if ($lang != 'en')
                               <td>{{ $languagesPositionEL[$key]['text'] ?? '' }}</td>
