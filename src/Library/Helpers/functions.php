@@ -50,11 +50,20 @@ if (!function_exists('sc_url_render')) {
 
         if (count($arrCheckRoute) == 2) {
             $arrRoute = explode('::', $string);
-            if (isset($arrRoute[2])) {
-                return sc_route_admin($arrRoute[1], [$arrRoute[2]]);
+            if (Str::startsWith($string, 'route::admin')) {
+                if (isset($arrRoute[2])) {
+                    return sc_route_admin($arrRoute[1], [$arrRoute[2]]);
+                } else {
+                    return sc_route_admin($arrRoute[1]);               
+                }
             } else {
-                return sc_route_admin($arrRoute[1]);               
+                if (isset($arrRoute[2])) {
+                    return sc_route($arrRoute[1], [$arrRoute[2]]);
+                } else {
+                    return sc_route($arrRoute[1]);               
+                }
             }
+
         }
 
         if (count($arrCheckUrl) == 2) {
