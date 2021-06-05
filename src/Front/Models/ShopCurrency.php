@@ -203,7 +203,7 @@ class ShopCurrency extends Model
             return self::format($money) . $space_symbol . $symbol;
         }
     }
-    
+
     /**
      * Sum value of cart
      *
@@ -211,33 +211,24 @@ class ShopCurrency extends Model
      *
      * @return  [array]
      */
-    public static function sumCart(float $rate = null)
+    public static function sumCartCheckout(float $rate = null)
     {
-        $carts = Cart::instance('default')->getItemsGroupByStore();
+        $dataCheckout = session('dataCheckout') ?? [];
+        $rate = ($rate) ? $rate : self::$exchange_rate;
         $dataReturn = [];
-
         $sumSubtotal  = 0;
         $sumSubtotalWithTax  = 0;
-        $rate = ($rate) ? $rate : self::$exchange_rate;
-        foreach ($carts as $storeId => $cart) {
-            $sumSubtotalStore  = 0;
-            $sumSubtotalWithTaxStore  = 0;
-            foreach ($cart as $detail) {
-                $sumValue = $detail->qty * self::getValue($detail->price, $rate);
-                $sumValueWithTax = $detail->qty * self::getValue(sc_tax_price($detail->price, $detail->tax), $rate);
-                $sumSubtotal += $sumValue;
-                $sumSubtotalStore += $sumValue;
-                $sumSubtotalWithTax +=  $sumValueWithTax;
-                $sumSubtotalWithTaxStore+= $sumValueWithTax;
-            }
-            $dataReturn['store'][$storeId]['subTotal'] = $sumSubtotalStore;
-            $dataReturn['store'][$storeId]['subTotalWithTax'] = $sumSubtotalWithTaxStore;
-
+        foreach ($dataCheckout as $item) {
+            $sumValue = $item->qty * self::getValue($item->price, $rate);
+            $sumValueWithTax = $item->qty * self::getValue(sc_tax_price($item->price, $item->tax), $rate);
+            $sumSubtotal += $sumValue;
+            $sumSubtotalWithTax +=  $sumValueWithTax;
         }
         $dataReturn['subTotal'] = $sumSubtotal;
         $dataReturn['subTotalWithTax'] = $sumSubtotalWithTax;
         return $dataReturn;
     }
+
 
     public static function getListRate()
     {

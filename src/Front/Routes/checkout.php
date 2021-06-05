@@ -7,16 +7,24 @@ Route::group(
         $prefixCartCheckout = sc_config('PREFIX_CART_CHECKOUT') ?? 'checkout';
         $prefixOrderSuccess = sc_config('PREFIX_ORDER_SUCCESS') ?? 'order-success';
         
-        //Checkout prepare
-        $router->post('/checkout_prepare', 'ShopCartController@checkoutPrepareProcessFront')
+        //Checkout prepare, from screen cart to checkout
+        $router->post('/checkout-prepare', 'ShopCartController@prepareCheckout')
             ->name('checkout.prepare');
 
-        //Checkout
-        $router->get($prefixCartCheckout.$suffix, 'ShopCartController@getCheckoutProcessFront')
+        //Checkout screen
+        $router->get($prefixCartCheckout.$suffix, 'ShopCartController@getCheckoutFront')
             ->name('checkout');
 
+        //Checkout process, from screen checkout to checkout confirm
+        $router->post('/checkout-process', 'ShopCartController@processCheckout')
+            ->name('checkout.process');
+
+        //Checkout process, from screen checkout confirm to order
+        $router->get('/checkout-confirm'.$suffix, 'ShopCartController@getCheckoutConfirmFront')
+            ->name('checkout.confirm');
+
         //Add order
-        $router->post('/order_add', 'ShopCartController@addOrder')
+        $router->post('/order-add', 'ShopCartController@addOrder')
             ->name('order.add');
 
         //Order success

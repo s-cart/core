@@ -778,8 +778,33 @@ class ShopProduct extends Model
      *
      * @return  [type]  [return description]
      */
-    public function goToStore() {
-        return url('store/'.$this->store->code);
+    public function goToStore($code = null) {
+        if (!$code) {
+            $code = $this->store->code;
+        }
+        return url('vendor/'.$code);
+    }
+
+    /**
+     * Show link to vendor
+     *
+     * @return void
+     */
+    public function displayVendor() {
+        if (sc_config_global('MultiVendorPro') && config('app.storeId') == SC_ID_ROOT) {
+            $view = 'templates.'.sc_store('template'). '.store.display_vendor';
+            if(!view()->exists($view)) {
+                return;
+            }
+            $vendorCode = $this->store->code;
+            $vendorUrl = $this->goToStore($vendorCode);
+            return  view($view, 
+                [
+                    'vendorCode' => $vendorCode,
+                    'vendorUrl' => $vendorUrl,
+                ]
+            )->render();
+        }
     }
 
     /**

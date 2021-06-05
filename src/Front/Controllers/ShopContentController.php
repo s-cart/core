@@ -23,14 +23,24 @@ class ShopContentController extends RootFrontController
      */
     public function index()
     {
-        sc_check_view($this->templatePath . '.screen.home');
+        $viewHome = $this->templatePath . '.screen.home';
+        $layoutPage = 'home';
+
+        //If store <> root, 
+        if (config('app.storeId') != SC_ID_ROOT) {
+            $viewHome = $this->templatePath . '.store.store_home';
+            $layoutPage = 'vendor_home';
+        }
+
+        sc_check_view($viewHome);
         return view(
-            $this->templatePath . '.screen.home',
+            $viewHome,
             array(
-                'title' => sc_store('title'),
-                'keyword' => sc_store('keyword'),
+                'title'       => sc_store('title'),
+                'keyword'     => sc_store('keyword'),
                 'description' => sc_store('description'),
-                'layout_page' => 'home',
+                'storeId'     => config('app.storeId'),
+                'layout_page' => $layoutPage,
             )
         );
     }
