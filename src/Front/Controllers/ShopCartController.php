@@ -272,7 +272,7 @@ class ShopCartController extends RootFrontController
                 'title'           => sc_language_render('cart.checkout'),
                 'description'     => '',
                 'keyword'         => '',
-                'cart'            => $dataCheckout,
+                'cartItem'        => $dataCheckout,
                 'storeCheckout'   => $storeCheckout,
                 'shippingMethod'  => $shippingMethod,
                 'paymentMethod'   => $paymentMethod,
