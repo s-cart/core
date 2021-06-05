@@ -1,6 +1,6 @@
 <?php
 return [
-    'core'     => '6.2',
+    'core'     => '6.3',
     'homepage' => 'https://s-cart.org',
     'name'     => 'S-Cart',
     'github'   => 'https://github.com/s-cart/s-cart',
