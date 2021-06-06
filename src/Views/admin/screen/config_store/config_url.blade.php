@@ -102,6 +102,11 @@
       </tr> 
 
       <tr>
+        <td>{{ sc_language_render('admin.env.PREFIX_CART_CHECKOUT_CONFIRM') }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CART_CHECKOUT_CONFIRM" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CART_CHECKOUT_CONFIRM') }}" data-value="{{ sc_config('PREFIX_CART_CHECKOUT_CONFIRM', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+      </tr> 
+
+      <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_ORDER_SUCCESS') }}</td>
         <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_ORDER_SUCCESS" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_ORDER_SUCCESS') }}" data-value="{{ sc_config('PREFIX_ORDER_SUCCESS', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr> 

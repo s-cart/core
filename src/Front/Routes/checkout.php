@@ -5,6 +5,7 @@ Route::group(
     ], 
     function ($router) use ($suffix) {
         $prefixCartCheckout = sc_config('PREFIX_CART_CHECKOUT') ?? 'checkout';
+        $prefixCartCheckoutConfirm = sc_config('PREFIX_CART_CHECKOUT_CONFIRM') ?? 'checkout-confirm';
         $prefixOrderSuccess = sc_config('PREFIX_ORDER_SUCCESS') ?? 'order-success';
         
         //Checkout prepare, from screen cart to checkout
@@ -20,7 +21,7 @@ Route::group(
             ->name('checkout.process');
 
         //Checkout process, from screen checkout confirm to order
-        $router->get('/checkout-confirm'.$suffix, 'ShopCartController@getCheckoutConfirmFront')
+        $router->get($prefixCartCheckoutConfirm.$suffix, 'ShopCartController@getCheckoutConfirmFront')
             ->name('checkout.confirm');
 
         //Add order
