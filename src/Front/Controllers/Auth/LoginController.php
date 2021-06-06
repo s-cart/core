@@ -88,6 +88,9 @@ class LoginController extends RootFrontController
                 'title'       => sc_language_render('customer.login_title'),
                 'countries'   => ShopCountry::getCodeAll(),
                 'layout_page' => 'shop_auth',
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('customer.login_title')],
+                ],
             )
         );
     }

@@ -104,9 +104,12 @@ class ForgotPasswordController extends RootFrontController
         sc_check_view($this->templatePath . '.auth.forgot');
         return view($this->templatePath . '.auth.forgot',
             array(
-                'title' => sc_language_render('customer.password_forgot'),
+                'title'       => sc_language_render('customer.password_forgot'),
                 'layout_page' => 'shop_auth',
                 'viewCaptcha' => $viewCaptcha,
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('customer.password_forgot')],
+                ],
             )
         );
     }

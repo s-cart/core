@@ -52,9 +52,12 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.index')
             ->with(
                 [
-                    'title' => sc_language_render('customer.my_account'),
-                    'customer' => $customer,
+                    'title'       => sc_language_render('customer.my_account'),
+                    'customer'    => $customer,
                     'layout_page' => 'shop_profile',
+                    'breadcrumbs' => [
+                        ['url'    => '', 'title' => sc_language_render('customer.my_account')],
+                    ],
                 ]
             );
     }
@@ -86,9 +89,13 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.change_password')
         ->with(
             [
-                'title' => sc_language_render('customer.change_password'),
-                'customer' => $customer,
+                'title'       => sc_language_render('customer.change_password'),
+                'customer'    => $customer,
                 'layout_page' => 'shop_profile',
+                'breadcrumbs' => [
+                    ['url'    => sc_route('customer.index'), 'title' => sc_language_render('front.my_account')],
+                    ['url'    => '', 'title' => sc_language_render('customer.change_password')],
+                ],
             ]
         );
     }
@@ -172,10 +179,14 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.change_infomation')
             ->with(
                 [
-                    'title' => sc_language_render('customer.change_infomation'),
-                    'customer' => $customer,
-                    'countries' => ShopCountry::getCodeAll(),
+                    'title'       => sc_language_render('customer.change_infomation'),
+                    'customer'    => $customer,
+                    'countries'   => ShopCountry::getCodeAll(),
                     'layout_page' => 'shop_profile',
+                    'breadcrumbs' => [
+                        ['url'    => sc_route('customer.index'), 'title' => sc_language_render('front.my_account')],
+                        ['url'    => '', 'title' => sc_language_render('customer.change_infomation')],
+                    ],
                 ]
             );
     }
@@ -235,11 +246,15 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.order_list')
             ->with(
                 [
-                'title' => sc_language_render('customer.order_history'),
+                'title'       => sc_language_render('customer.order_history'),
                 'statusOrder' => $statusOrder,
-                'orders' => (new ShopOrder)->profile()->getData(),
-                'customer' => $customer,
+                'orders'      => (new ShopOrder)->profile()->getData(),
+                'customer'    => $customer,
                 'layout_page' => 'shop_profile',
+                'breadcrumbs' => [
+                    ['url'    => sc_route('customer.index'), 'title' => sc_language_render('front.my_account')],
+                    ['url'    => '', 'title' => sc_language_render('customer.order_history')],
+                ],
                 ]
             );
     }
@@ -282,14 +297,18 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.order_detail')
         ->with(
             [
-            'title' => $title,
-            'statusOrder' => $statusOrder,
-            'statusShipping' => $statusShipping,
-            'countries' => ShopCountry::getCodeAll(),
+            'title'           => $title,
+            'statusOrder'     => $statusOrder,
+            'statusShipping'  => $statusShipping,
+            'countries'       => ShopCountry::getCodeAll(),
             'attributesGroup' => $attributesGroup,
-            'order' => $order,
-            'customer' => $customer,
-            'layout_page' => 'shop_profile',
+            'order'           => $order,
+            'customer'        => $customer,
+            'layout_page'     => 'shop_profile',
+            'breadcrumbs'     => [
+                ['url'        => sc_route('customer.index'), 'title' => sc_language_render('front.my_account')],
+                ['url'        => '', 'title' => $title],
+            ],
             ]
         );
 
@@ -321,11 +340,15 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.address_list')
             ->with(
                 [
-                'title' => sc_language_render('customer.address_list'),
-                'addresses' => $customer->addresses,
-                'countries' => ShopCountry::getCodeAll(),
-                'customer' => $customer,
+                'title'       => sc_language_render('customer.address_list'),
+                'addresses'   => $customer->addresses,
+                'countries'   => ShopCountry::getCodeAll(),
+                'customer'    => $customer,
                 'layout_page' => 'shop_profile',
+                'breadcrumbs' => [
+                    ['url'    => sc_route('customer.index'), 'title' => sc_language_render('front.my_account')],
+                    ['url'    => '', 'title' => sc_language_render('customer.address_list')],
+                ],
                 ]
             );
     }
@@ -367,11 +390,15 @@ class ShopAccountController extends RootFrontController
         return view($this->templatePath . '.account.update_address')
         ->with(
             [
-            'title' => $title,
-            'address' => $address,
-            'customer' => $customer,
-            'countries' => ShopCountry::getCodeAll(),
+            'title'       => $title,
+            'address'     => $address,
+            'customer'    => $customer,
+            'countries'   => ShopCountry::getCodeAll(),
             'layout_page' => 'shop_profile',
+            'breadcrumbs' => [
+                ['url'    => sc_route('customer.index'), 'title' => sc_language_render('front.my_account')],
+                ['url'    => '', 'title' => $title],
+            ],
             ]
         );
 

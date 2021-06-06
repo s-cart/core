@@ -184,6 +184,9 @@ class RegisterController extends RootFrontController
                 'countries'   => ShopCountry::getCodeAll(),
                 'layout_page' => 'shop_auth',
                 'viewCaptcha' => $viewCaptcha,
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('customer.title_register')],
+                ],
             )
         );
     }

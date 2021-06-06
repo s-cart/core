@@ -92,12 +92,15 @@ class ShopContentController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_home',
             array(
-                'title' => sc_language_render('front.shop'),
-                'keyword' => sc_store('keyword'),
+                'title'       => sc_language_render('front.shop'),
+                'keyword'     => sc_store('keyword'),
                 'description' => sc_store('description'),
-                'products' => $products,
+                'products'    => $products,
                 'layout_page' => 'shop_home',
                 'filter_sort' => $filter_sort,
+                'breadcrumbs'        => [
+                    ['url'           => '', 'title' => sc_language_render('front.shop')],
+                ],
             )
         );
     }
@@ -128,11 +131,11 @@ class ShopContentController extends RootFrontController
         $filter_sort = request('filter_sort') ?? '';
         $filterArr = [
             'price_desc' => ['price', 'desc'],
-            'price_asc' => ['price', 'asc'],
-            'sort_desc' => ['sort', 'desc'],
-            'sort_asc' => ['sort', 'asc'],
-            'id_desc' => ['id', 'desc'],
-            'id_asc' => ['id', 'asc'],
+            'price_asc'  => ['price', 'asc'],
+            'sort_desc'  => ['sort', 'desc'],
+            'sort_asc'   => ['sort', 'asc'],
+            'id_desc'    => ['id', 'desc'],
+            'id_asc'     => ['id', 'asc'],
         ];
         if (array_key_exists($filter_sort, $filterArr)) {
             $sortBy = $filterArr[$filter_sort][0];
@@ -149,10 +152,13 @@ class ShopContentController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_product_list',
             array(
-                'title' => sc_language_render('action.search') . ': ' . $keyword,
-                'products' => $products,
+                'title'       => sc_language_render('action.search') . ': ' . $keyword,
+                'products'    => $products,
                 'layout_page' => 'shop_product_list',
                 'filter_sort' => $filter_sort,
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('action.search')],
+                ],
             )
         );
     }
@@ -215,6 +221,9 @@ class ShopContentController extends RootFrontController
                 'layout_page' => 'shop_contact',
                 'og_image'    => '',
                 'viewCaptcha' => $viewCaptcha,
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('contact.page_title')],
+                ],
             )
         );
     }
@@ -331,12 +340,15 @@ class ShopContentController extends RootFrontController
             return view(
                 $this->templatePath . '.screen.shop_page',
                 array(
-                    'title' => $page->title,
+                    'title'       => $page->title,
                     'description' => $page->description,
-                    'keyword' => $page->keyword,
-                    'page' => $page,
-                    'og_image' => sc_file($page->getImage()),
+                    'keyword'     => $page->keyword,
+                    'page'        => $page,
+                    'og_image'    => sc_file($page->getImage()),
                     'layout_page' => 'shop_page',
+                    'breadcrumbs' => [
+                        ['url'    => '', 'title' => $page->title],
+                    ],
                 )
             );
         } else {
@@ -374,11 +386,14 @@ class ShopContentController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_news',
             array(
-                'title' => sc_language_render('front.blog'),
+                'title'       => sc_language_render('front.blog'),
                 'description' => sc_store('description'),
-                'keyword' => sc_store('keyword'),
-                'news' => $news,
+                'keyword'     => sc_store('keyword'),
+                'news'        => $news,
                 'layout_page' => 'shop_news',
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('front.blog')],
+                ],
             )
         );
     }
@@ -416,12 +431,16 @@ class ShopContentController extends RootFrontController
             return view(
                 $this->templatePath . '.screen.shop_news_detail',
                 array(
-                    'title' => $news->title,
-                    'news' => $news,
+                    'title'       => $news->title,
+                    'news'        => $news,
                     'description' => $news->description,
-                    'keyword' => $news->keyword,
-                    'og_image' => sc_file($news->getImage()),
+                    'keyword'     => $news->keyword,
+                    'og_image'    => sc_file($news->getImage()),
                     'layout_page' => 'shop_news_detail',
+                    'breadcrumbs' => [
+                        ['url'    => sc_route('news'), 'title' => sc_language_render('front.blog')],
+                        ['url'    => '', 'title' => $news->title],
+                    ],
                 )
             );
         } else {

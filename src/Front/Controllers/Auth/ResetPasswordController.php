@@ -73,9 +73,12 @@ class ResetPasswordController extends RootFrontController
         sc_check_view($this->templatePath . '.auth.reset');
         return view($this->templatePath . '.auth.reset',
             [
-                'title' => sc_language_render('customer.password_reset'),
-                'token' => $token,
+                'title'       => sc_language_render('customer.password_reset'),
+                'token'       => $token,
                 'layout_page' => 'shop_auth',
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('customer.password_reset')],
+                ],
             ]
         );
     }

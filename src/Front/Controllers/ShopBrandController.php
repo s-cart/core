@@ -37,11 +37,11 @@ class ShopBrandController extends RootFrontController
         $filter_sort = request('filter_sort') ?? '';
         $filterArr = [
             'name_desc' => ['name', 'desc'],
-            'name_asc' => ['name', 'asc'],
+            'name_asc'  => ['name', 'asc'],
             'sort_desc' => ['sort', 'desc'],
-            'sort_asc' => ['sort', 'asc'],
-            'id_desc' => ['id', 'desc'],
-            'id_asc' => ['id', 'asc'],
+            'sort_asc'  => ['sort', 'asc'],
+            'id_desc'   => ['id', 'desc'],
+            'id_asc'    => ['id', 'asc'],
         ];
         if (array_key_exists($filter_sort, $filterArr)) {
             $sortBy = $filterArr[$filter_sort][0];
@@ -58,12 +58,15 @@ class ShopBrandController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_item_list',
             array(
-                'title' => sc_language_render('front.brands'),
-                'itemsList' => $itemsList,
-                'keyword' => '',
+                'title'       => sc_language_render('front.brands'),
+                'itemsList'   => $itemsList,
+                'keyword'     => '',
                 'description' => '',
                 'layout_page' => 'shop_item_list',
                 'filter_sort' => $filter_sort,
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('front.brands')],
+                ],
             )
         );
     }
@@ -97,11 +100,11 @@ class ShopBrandController extends RootFrontController
         $filter_sort = request('filter_sort') ?? '';
         $filterArr = [
             'price_desc' => ['price', 'desc'],
-            'price_asc' => ['price', 'asc'],
-            'sort_desc' => ['sort', 'desc'],
-            'sort_asc' => ['sort', 'asc'],
-            'id_desc' => ['id', 'desc'],
-            'id_asc' => ['id', 'asc'],
+            'price_asc'  => ['price', 'asc'],
+            'sort_desc'  => ['sort', 'desc'],
+            'sort_asc'   => ['sort', 'asc'],
+            'id_desc'    => ['id', 'desc'],
+            'id_asc'     => ['id', 'asc'],
         ];
         if (array_key_exists($filter_sort, $filterArr)) {
             $sortBy = $filterArr[$filter_sort][0];
@@ -121,13 +124,17 @@ class ShopBrandController extends RootFrontController
             return view(
                 $this->templatePath . '.screen.shop_product_list',
                 array(
-                    'title' => $brand->name,
+                    'title'       => $brand->name,
                     'description' => $brand->description,
-                    'keyword' => $brand->keyword,
-                    'layout_page' => 'shop_product_list',
-                    'products' => $products,
-                    'og_image' => sc_file($brand->getImage()),
+                    'keyword'     => $brand->keyword,
+                    'products'    => $products,
+                    'og_image'    => sc_file($brand->getImage()),
                     'filter_sort' => $filter_sort,
+                    'layout_page' => 'shop_product_list',
+                    'breadcrumbs' => [
+                        ['url'    => sc_route('brand.all'), 'title' => sc_language_render('front.brands')],
+                        ['url'    => '', 'title' => $brand->name],
+                    ],
                 )
             );
         } else {

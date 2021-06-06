@@ -64,6 +64,9 @@ class ShopCartController extends RootFrontController
                 'cart'            => $cart,
                 'attributesGroup' => ShopAttributeGroup::pluck('name', 'id')->all(),
                 'layout_page'     => 'shop_cart',
+                'breadcrumbs'  => [
+                    ['url' => '', 'title' => sc_language_render('cart.cart_title')],
+                ],
             ]
         );
     }
@@ -284,6 +287,9 @@ class ShopCartController extends RootFrontController
                 'attributesGroup' => ShopAttributeGroup::pluck('name', 'id')->all(),
                 'viewCaptcha'     => $viewCaptcha,
                 'layout_page'     => 'shop_checkout',
+                'breadcrumbs'     => [
+                    ['url'        => '', 'title' => sc_language_render('cart.checkout')],
+                ],
             ]
         );
     }
@@ -583,6 +589,9 @@ class ShopCartController extends RootFrontController
                 'shippingAddress'    => $shippingAddress,
                 'attributesGroup'    => ShopAttributeGroup::getListAll(),
                 'layout_page'        => 'shop_checkout_confirm',
+                'breadcrumbs'        => [
+                    ['url'           => '', 'title' => sc_language_render('checkout.page_title')],
+                ],
             ]
         );
     }
@@ -996,6 +1005,9 @@ class ShopCartController extends RootFrontController
                 'keyword'     => '',
                 'wishlist'    => $wishlist,
                 'layout_page' => 'shop_wishlist',
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('cart.page_wishlist_title')],
+                ],
             )
         );
     }
@@ -1032,6 +1044,9 @@ class ShopCartController extends RootFrontController
                 'keyword'     => '',
                 'compare'     => $compare,
                 'layout_page' => 'shop_compare',
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('cart.page_compare_title')],
+                ],
             )
         );
     }
@@ -1304,9 +1319,12 @@ class ShopCartController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_order_success',
             [
-                'title' => sc_language_render('checkout.success_title'),
-                'orderInfo' => $orderInfo,
-                'layout_page' =>'shop_order_success',
+                'title'       => sc_language_render('checkout.success_title'),
+                'orderInfo'   => $orderInfo,
+                'layout_page' => 'shop_order_success',
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('checkout.success_title')],
+                ],
             ]
         );
     }

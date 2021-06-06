@@ -57,12 +57,15 @@ class ShopCategoryController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_item_list',
             array(
-                'title' => sc_language_render('front.categories'),
-                'itemsList' => $itemsList,
-                'keyword' => '',
+                'title'       => sc_language_render('front.categories'),
+                'itemsList'   => $itemsList,
+                'keyword'     => '',
                 'description' => '',
                 'layout_page' => 'shop_item_list',
                 'filter_sort' => $filter_sort,
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('front.categories')],
+                ],
             )
         );
     }
@@ -127,14 +130,18 @@ class ShopCategoryController extends RootFrontController
             sc_check_view($this->templatePath . '.screen.shop_product_list');
             return view($this->templatePath . '.screen.shop_product_list',
                 array(
-                    'title' => $category->title,
+                    'title'       => $category->title,
                     'description' => $category->description,
-                    'keyword' => $category->keyword,
-                    'products' => $products,
+                    'keyword'     => $category->keyword,
+                    'products'    => $products,
                     'subCategory' => $subCategory,
                     'layout_page' => 'shop_product_list',
-                    'og_image' => sc_file($category->getImage()),
+                    'og_image'    => sc_file($category->getImage()),
                     'filter_sort' => $filter_sort,
+                    'breadcrumbs' => [
+                        ['url'    => sc_route('category.all'), 'title' => sc_language_render('front.categories')],
+                        ['url'    => '', 'title' => $category->title],
+                    ],
                 )
             );
         } else {

@@ -58,12 +58,15 @@ class ShopProductController extends RootFrontController
         return view(
             $this->templatePath . '.screen.shop_product_list',
             array(
-                'title' => sc_language_render('front.all_product'),
-                'keyword' => '',
+                'title'       => sc_language_render('front.all_product'),
+                'keyword'     => '',
                 'description' => '',
-                'products' => $products,
+                'products'    => $products,
                 'layout_page' => 'shop_product_list',
                 'filter_sort' => $filter_sort,
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('front.all_product')],
+                ],
             )
         );
     }
@@ -125,14 +128,16 @@ class ShopProductController extends RootFrontController
             sc_check_view($this->templatePath . '.screen.shop_product_detail');
             return view($this->templatePath . '.screen.shop_product_detail',
                 array(
-                    'title' => $product->name,
-                    'description' => $product->description,
-                    'keyword' => $product->keyword,
-                    'product' => $product,
+                    'title'           => $product->name,
+                    'description'     => $product->description,
+                    'keyword'         => $product->keyword,
+                    'product'         => $product,
                     'productRelation' => $productRelation,
-                    'goToStore' => $product->goToStore(),
-                    'og_image' => sc_file($product->getImage()),
-                    'layout_page' => 'shop_product_detail',
+                    'og_image'        => sc_file($product->getImage()),
+                    'layout_page'     => 'shop_product_detail',
+                    'breadcrumbs'     => [
+                        ['url'        => '', 'title' => $product->name],
+                    ],
                 )
             );
         } else {
