@@ -157,19 +157,43 @@ class AdminOrderController extends RootAdminController
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_order.index') . '" id="button_search">
                     <div class="input-group float-left">
-                        <input type="text" style="width: 120px;" name="from_to" id="from_to" class="form-control input-sm date_time rounded-0" placeholder="yyyy-mm-dd" /> &nbsp; 
-                        <label>To</label> &nbsp;
-                        <input type="text" style="width: 120px;" name="end_to" class="form-control input-sm date_time rounded-0" placeholder="yyyy-mm-dd" /> &nbsp;
-                        <div class="btn-group">
-                            <select class="form-control rounded-0" name="order_status">
-                            <option value="">'.sc_language_render('order.admin.search_order_status').'</option>
-                            ' . $optionStatus . '
-                            </select>
-                        </div> &nbsp;
-                        <input type="text" name="email" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('order.admin.search_email') . '" value="' . $email . '"> &nbsp;
-                        <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('order.admin.search_id') . '" value="' . $keyword . '">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>From:</label>
+                                <div class="input-group">
+                                <input type="text" name="from_to" id="from_to" class="form-control input-sm date_time rounded-0" placeholder="yyyy-mm-dd" /> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>To:</label>
+                                <div class="input-group">
+                                <input type="text" name="end_to" id="end_to" class="form-control input-sm date_time rounded-0" placeholder="yyyy-mm-dd" /> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>'.sc_language_render('order.admin.status').':</label>
+                                <div class="input-group">
+                                <select class="form-control rounded-0" name="order_status">
+                                <option value="">'.sc_language_render('order.admin.search_order_status').'</option>
+                                ' . $optionStatus . '
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>'.sc_language_render('order.admin.search_email').':</label>
+                                <div class="input-group">
+                                    <input type="text" name="email" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('order.admin.search_email') . '" value="' . $email . '">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-primary  btn-flat"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>';
