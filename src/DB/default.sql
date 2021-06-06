@@ -151,7 +151,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 
 /*admin_store*/
 INSERT INTO `__SC_DB_PREFIX__admin_store` (`logo`, `template`, `phone`, `long_phone`, `email`, `time_active`, `address`, `timezone`, `language`, `currency`, `code`, `domain`) VALUES  
-('data/logo/scart-mid.png', 's-cart-light', '0123456789', 'Support: 0987654321', '__adminEmail__', '', '123st - abc - xyz', '__timezone_default__', '__language_default__', 'USD', 'root', '__domain__');
+('data/logo/scart-mid.png', 's-cart-light', '0123456789', 'Support: 0987654321', '__adminEmail__', '', '123st - abc - xyz', '__timezone_default__', '__language_default__', 'USD', 'scart-ecommerce', '__domain__');
 
 /*admin_store_description*/
 INSERT INTO `__SC_DB_PREFIX__admin_store_description` (`store_id`, `lang`, `title`, `description`, `keyword`, `maintain_content`, `maintain_note`) VALUES  

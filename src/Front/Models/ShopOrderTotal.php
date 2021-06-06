@@ -28,7 +28,7 @@ class ShopOrderTotal extends Model
      */
     public static function processDataTotal(array $objects = [])
     {
-        $carts  = ShopCurrency::sumCart();
+        $carts  = ShopCurrency::sumCartCheckout();
         $subtotal = $carts['subTotal'];
         $tax = $carts['subTotalWithTax'] - $carts['subTotal'];
 

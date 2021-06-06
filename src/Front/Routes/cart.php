@@ -20,22 +20,27 @@ Route::group(
             ->name('compare');
 
         //Cart
-        $router->get($prefixCartDefault.$suffix, 'ShopCartController@getCartProcessFront')
+        $router->get($prefixCartDefault.$suffix, 'ShopCartController@getCartFront')
             ->name('cart');
 
+        //Add to cart
         $router->post('/cart_add', 'ShopCartController@addToCart')
             ->name('cart.add');
 
+        //Add to cart ajax
+        $router->post('/add_to_cart_ajax', 'ShopCartController@addToCartAjax')
+            ->name('cart.add_ajax');
+
+        //Update cart
+        $router->post('/update_to_cart', 'ShopCartController@updateToCart')
+            ->name('cart.update');
+
+        //Remove item from cart
         $router->get('/{instance}/remove/{id}', 'ShopCartController@removeItemProcessFront')
             ->name('cart.remove');
 
+        //Clear cart
         $router->get('/clear_cart/{instance}', 'ShopCartController@clearCartProcessFront')
             ->name('cart.clear');
-
-        $router->post('/add_to_cart_ajax', 'ShopCartController@addToCartAjax')
-            ->name('cart.add_ajax');
-            
-        $router->post('/update_to_cart', 'ShopCartController@updateToCart')
-            ->name('cart.update');
     }
 );

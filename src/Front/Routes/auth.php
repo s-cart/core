@@ -19,7 +19,7 @@ Route::group(
         $router->post('/register'.$suffix, 'RegisterController@register')
             ->name('postRegister');
 
-        $router->post('/logout', 'LoginController@logout')
+        $router->any('/logout', 'LoginController@logout')
             ->name('logout');
 
         $router->get('/forgot'.$suffix, 'ForgotPasswordController@showLinkRequestFormProcessFront')

@@ -171,11 +171,6 @@ class ShopOrder extends Model
             }
             //End order detail
 
-            //Add order store - MultiVendorPro
-            if (function_exists('sc_vendor_create_order')) {
-                sc_vendor_create_order($orderID);
-            }
-
             //Add history
             $dataHistory = [
                 'order_id' => $orderID,

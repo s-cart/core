@@ -26,7 +26,7 @@
                                             <option value="{{ $itemPosition }}"  {{ (old('position') == $itemPosition) ? 'selected':'' }} >{{ $itemPosition }}</option>
                                         @endforeach
                                       </select>
-                                        {{ sc_language_render('admin.language_manager.position') }}:
+                                        {{ sc_language_render('admin.language_manager.new_position') }}:
                                       @if ($errors->has('position'))
                                       <span class="form-text">
                                           <i class="fa fa-info-circle"></i>
@@ -34,7 +34,7 @@
                                       </span>
                                       @endif
 
-                                      <input name="position_new" value="{{ old('position_new') }}" class="form-control">
+                                      <input name="position_new" value="{{ old('position_new') }}" class="form-control" placeholder="{{ sc_language_render('admin.language_manager.position') }}">
                                       @if ($errors->has('position_new'))
                                       <span class="form-text">
                                           <i class="fa fa-info-circle"></i>
