@@ -99,7 +99,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('', 'url_config', 'PREFIX_CART_COMPARE', 'compare', '0', 'admin.env.PREFIX_CART_COMPARE', '__storeId__'),
 ('', 'url_config', 'PREFIX_CART_DEFAULT', 'cart', '0', 'admin.env.PREFIX_CART_DEFAULT', '__storeId__'),
 ('', 'url_config', 'PREFIX_CART_CHECKOUT', 'checkout', '0', 'admin.env.PREFIX_CART_CHECKOUT', '__storeId__'),
-('', 'url_config', 'PREFIX_CART_CHECKOUT_CONFIRM', 'checkout', '0', 'admin.env.PREFIX_CART_CHECKOUT_CONFIRM', '__storeId__'),
+('', 'url_config', 'PREFIX_CART_CHECKOUT_CONFIRM', 'checkout-confirm', '0', 'admin.env.PREFIX_CART_CHECKOUT_CONFIRM', '__storeId__'),
 ('', 'url_config', 'PREFIX_ORDER_SUCCESS', 'order-success', '0', 'admin.env.PREFIX_ORDER_SUCCESS', '__storeId__'),
 ('', 'captcha_config', 'captcha_mode', '0', '20', 'admin.captcha.captcha_mode', '__storeId__'),
 ('', 'captcha_config', 'captcha_page', '[]', '10', 'captcha.captcha_page', '__storeId__'),
