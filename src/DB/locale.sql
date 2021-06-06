@@ -661,6 +661,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('cart.have_error', 'Have an error. Please check again.', 'cart', 'en'),
 ('cart.cart_store_id_notfound', 'Không tìm thấy ID cửa hàng.', 'cart', 'vi'),
 ('cart.cart_store_id_notfound', 'Store ID not found', 'cart', 'en'),
+('cart.cart_empty', 'Giỏ hàng rỗng.', 'cart', 'vi'),
+('cart.cart_empty', 'The shopping cart is empty', 'cart', 'en'),
 ('cart.cart_store_empty', 'Giỏ hàng trong shop rỗng.', 'cart', 'vi'),
 ('cart.cart_store_empty', 'The shopping cart in the shop is empty', 'cart', 'en'),
 ('checkout.title', 'Checkout', 'checkout', 'en'),
