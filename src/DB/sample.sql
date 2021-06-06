@@ -3,7 +3,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_product` (`id`, `sku`, `alias`, `image`, `bran
 (1,'ABCZZ','demo-alias-name-product-1','/data/product/product-1.png','1','1','15000','10000','99','1',0,'auto', null, '1','0', 1),
 (2,'LEDFAN1','demo-alias-name-product-2','/data/product/product-2.png','1','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
 (3,'CLOCKFAN1','demo-alias-name-product-3','/data/product/product-3.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(4,'CLOCKFAN2','demo-alias-name-product-4','/data/product/product-4.png','3','1','15000','10000','100','1',0,'auto', null, '0','10', 1),
+(4,'CLOCKFAN2','demo-alias-name-product-4','/data/product/product-4.png','3','1','15000','10000','100','1',0,'auto', null, '0','5', 1),
 (5,'CLOCKFAN3','demo-alias-name-product-5','/data/product/product-5.png','1','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
 (6,'TMC2208','demo-alias-name-product-6','/data/product/product-6.png','1','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
 (7,'FILAMENT','demo-alias-name-product-7','/data/product/product-7.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
@@ -11,12 +11,12 @@ INSERT INTO `__SC_DB_PREFIX__shop_product` (`id`, `sku`, `alias`, `image`, `bran
 (9,'ANYCUBIC-P','demo-alias-name-product-9','/data/product/product-9.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
 (10,'3DHLFD-P','demo-alias-name-product-10','/data/product/product-10.png','4','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
 (11,'SS495A','demo-alias-name-product-11','/data/product/product-11.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(12,'3D-CARBON175','demo-alias-name-product-12','/data/product/product-12.png','2','1','15000','10000','100','1',0,'auto', null, '0','5', 1),
+(12,'3D-CARBON175','demo-alias-name-product-12','/data/product/product-12.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
 (13,'3D-GOLD175','demo-alias-name-product-13','/data/product/product-13.png','3','1','10000','5000','0','1',0,'auto', null, '0','0', 1),
 (14,'LCD12864-3D','demo-alias-name-product-14','/data/product/product-14.png','3','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(15,'LCD2004-3D','demo-alias-name-product-15','/data/product/product-15.png','3','1','15000','10000','100','1',1,'auto', null, '0','10', 1),
+(15,'LCD2004-3D','demo-alias-name-product-15','/data/product/product-15.png','3','1','15000','10000','100','1',1,'auto', null, '0','0', 1),
 (16,'RAMPS15-3D','demo-alias-name-product-16','/data/product/product-16.png','2','1','0','0','0','1',2,'auto', null, '0','0', 1),
-(17,'ALOKK1-AY','demo-alias-name-product-17','/data/product/product-10.png','3','1','15000','10000','100','1',0,'auto', null, '0','5', 1);
+(17,'ALOKK1-AY','demo-alias-name-product-17','/data/product/product-10.png','3','1','15000','10000','100','1',0,'auto', null, '0','0', 1);
 
 /*shop_product_description*/
 INSERT INTO `__SC_DB_PREFIX__shop_product_description` (`product_id`, `lang`, `name`, `keyword`, `description`, `content`) VALUES 
