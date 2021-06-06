@@ -137,7 +137,7 @@ class AuthController extends RootFrontController
 
                     $config = [
                         'to' => $data['email'],
-                        'subject' => sc_language_render('email.welcome'),,
+                        'subject' => sc_language_render('email.welcome'),
                     ];
 
                     sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
