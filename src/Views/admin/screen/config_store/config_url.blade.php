@@ -25,6 +25,11 @@
         <td>{{ sc_language_render('admin.env.PREFIX_CATEGORY') }}</td>
         <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CATEGORY" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CATEGORY') }}" data-value="{{ sc_config('PREFIX_CATEGORY', $storeId) }}" data-original-title="" title=""></a>/name-of-category{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr>
+
+      <tr>
+        <td>{{ sc_language_render('admin.env.PREFIX_CATEGORY_VENDOR') }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CATEGORY_VENDOR" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CATEGORY_VENDOR') }}" data-value="{{ sc_config('PREFIX_CATEGORY_VENDOR', $storeId) }}" data-original-title="" title=""></a>/name-of-category{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+      </tr>
       
       <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_SUB_CATEGORY') }}</td>
@@ -99,11 +104,6 @@
       <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_CART_CHECKOUT') }}</td>
         <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CART_CHECKOUT" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CART_CHECKOUT') }}" data-value="{{ sc_config('PREFIX_CART_CHECKOUT', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
-      </tr> 
-
-      <tr>
-        <td>{{ sc_language_render('admin.env.PREFIX_CART_CHECKOUT_CONFIRM') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CART_CHECKOUT_CONFIRM" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CART_CHECKOUT_CONFIRM') }}" data-value="{{ sc_config('PREFIX_CART_CHECKOUT_CONFIRM', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr> 
 
       <tr>
