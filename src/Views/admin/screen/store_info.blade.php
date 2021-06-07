@@ -30,7 +30,7 @@
       <div class="card card-primary card-outline card-outline-tabs">
         <div class="card-tools">
             <div class="btn-group">
-              <input class="switch-data-store" data-store="{{ $store->id }}" name="active" data-on-text="{{ sc_language_render('admin.maintain_enable') }}" data-off-text="{{ sc_language_render('admin.maintain_disable') }}" type="checkbox"  {{ ($store->active == '1'?'checked':'') }}>
+              <input data-handle-width="100" class="switch-data-store" data-store="{{ $store->id }}" name="active" data-on-text="{{ sc_language_render('admin.maintain_enable') }}" data-off-text="{{ sc_language_render('admin.maintain_disable') }}" type="checkbox"  {{ ($store->active == '1'?'checked':'') }}>
             </div>
         </div>
         <div class="card-body">

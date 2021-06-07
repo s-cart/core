@@ -447,6 +447,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('front.products_trending', 'Product best seller','front','en'),
 ('front.search_result', 'Kết quả tìm kiếm','front','vi'),
 ('front.search_result', 'Search result','front','en'),
+('front.view_not_exist', 'Không có view :view','front','vi'),
+('front.view_not_exist', 'View not found :view','front','en'),
 ('search.placeholder', 'Nhập từ khóa', 'search', 'vi'),
 ('search.placeholder', 'Input keyword', 'search', 'en'),
 ('store.deny_help_1', 'Sorry, this domain does not exist on the system!', 'store', 'en'),
