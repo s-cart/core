@@ -26,9 +26,9 @@ class ShopContentController extends RootFrontController
         $viewHome = $this->templatePath . '.screen.home';
         $layoutPage = 'home';
 
-        //If store <> root, 
+        //If vendor <> root, 
         if (config('app.storeId') != SC_ID_ROOT) {
-            $viewHome = $this->templatePath . '.store.store_home';
+            $viewHome = $this->templatePath . '.vendor.vendor_home';
             $layoutPage = 'vendor_home';
         }
 
