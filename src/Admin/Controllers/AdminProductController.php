@@ -29,7 +29,6 @@ class AdminProductController extends RootAdminController
     public $attributeGroup;
     public $listWeight;
     public $listLength;
-    public $categories;
 
     public function __construct()
     {
@@ -44,8 +43,6 @@ class AdminProductController extends RootAdminController
             SC_PRODUCT_GROUP  => sc_language_render('product.kind_group'),
         ];
         $this->properties = (new ShopProductProperty)->pluck('name', 'code')->toArray();
-        $this->categories =  (new AdminCategory)->getTreeCategoriesAdmin();
-
     }
 
     public function index()
@@ -186,8 +183,9 @@ class AdminProductController extends RootAdminController
 
         //Search with category
         $optionCategory = '';
-        if ($this->categories) {
-            foreach ($this->categories as $k => $v) {
+        $categories = (new AdminCategory)->getTreeCategoriesAdmin();
+        if ($categories) {
+            foreach ($categories as $k => $v) {
                 $optionCategory .= "<option value='{$k}' ".(($category_id == $k) ? 'selected' : '').">{$v}</option>";
             }
         }
@@ -218,6 +216,7 @@ class AdminProductController extends RootAdminController
  */
     public function create()
     {
+        $categories = (new AdminCategory)->getTreeCategoriesAdmin();
         // html add more images
         $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control rounded-0 input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
         //end add more images
@@ -232,7 +231,7 @@ class AdminProductController extends RootAdminController
             'title_description'    => sc_language_render('product.admin.add_new_des'),
             'icon'                 => 'fa fa-plus',
             'languages'            => $this->languages,
-            'categories'           => $this->categories,
+            'categories'           => $categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
@@ -256,6 +255,8 @@ class AdminProductController extends RootAdminController
  */
 public function createProductBuild()
 {
+    $categories = (new AdminCategory)->getTreeCategoriesAdmin();
+
     $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
 
     // html select product build
@@ -284,7 +285,7 @@ public function createProductBuild()
         'title_description'    => sc_language_render('product.admin.add_new_des'),
         'icon'                 => 'fa fa-plus',
         'languages'            => $this->languages,
-        'categories'           => $this->categories,
+        'categories'           => $categories,
         'brands'               => (new ShopBrand)->getListAll(),
         'suppliers'            => (new ShopSupplier)->getListAll(),
         'taxs'                 => (new ShopTax)->getListAll(),
@@ -310,6 +311,8 @@ public function createProductBuild()
  */
 public function createProductGroup()
 {
+    $categories = (new AdminCategory)->getTreeCategoriesAdmin();
+
     $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
 
     // html select product group
@@ -330,7 +333,7 @@ public function createProductGroup()
         'title_description'    => sc_language_render('product.admin.add_new_des'),
         'icon'                 => 'fa fa-plus',
         'languages'            => $this->languages,
-        'categories'           => $this->categories,
+        'categories'           => $categories,
         'brands'               => (new ShopBrand)->getListAll(),
         'suppliers'            => (new ShopSupplier)->getListAll(),
         'taxs'                 => (new ShopTax)->getListAll(),
@@ -617,6 +620,7 @@ public function createProductGroup()
     public function edit($id)
     {
         $product = (new AdminProduct)->getProductAdmin($id);
+        $categories = (new AdminCategory)->getTreeCategoriesAdmin();
 
         if ($product === null) {
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
@@ -658,7 +662,7 @@ public function createProductGroup()
             'icon'                 => 'fa fa-edit',
             'languages'            => $this->languages,
             'product'              => $product,
-            'categories'           => $this->categories,
+            'categories'           => $categories,
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
