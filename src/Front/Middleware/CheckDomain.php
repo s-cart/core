@@ -16,11 +16,14 @@ class CheckDomain
      */
     public function handle($request, Closure $next)
     {
-        if (sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
+        //Only apply for when plugin multi-vendor or multi-store active
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && sc_config_global('domain_strict')) {
             //Check domain exist
-            $domain = sc_process_domain_store(url('/'));
-            $arrDomain = ShopStore::getDomainPartner();
-            if (!in_array($domain, $arrDomain) && sc_config_global('domain_strict') && config('app.storeId') != SC_ID_ROOT) {
+            $domain = sc_process_domain_store(url('/')); //domain currently
+            $domainRoot = sc_process_domain_store(config('app.url')); //Domain root config in .env
+            $arrDomain = ShopStore::getDomainPartner(); // List domain is partner active
+
+            if (!in_array($domain, $arrDomain) && $domain != $domainRoot) {
                 echo view('deny_domain')->render();
                 exit();
             }
