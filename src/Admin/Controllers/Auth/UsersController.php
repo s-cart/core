@@ -51,8 +51,8 @@ class UsersController extends RootAdminController
             'created_at' => sc_language_render('admin.created_at'),
             'action'     => sc_language_render('action.title'),
         ];
-        $sort_order = request('sort_order') ?? 'id_desc';
-        $keyword = request('keyword') ?? '';
+        $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
+        $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
             'id__desc'       => sc_language_render('filter_sort.id_desc'),
             'id__asc'        => sc_language_render('filter_sort.id_asc'),

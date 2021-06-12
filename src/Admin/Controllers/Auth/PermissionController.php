@@ -72,7 +72,7 @@ class PermissionController extends RootAdminController
             'updated_at' => sc_language_render('admin.updated_at'),
             'action' => sc_language_render('action.title'),
         ];
-        $sort_order = request('sort_order') ?? 'id_desc';
+        $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $arrSort = [
             'id__desc' => sc_language_render('filter_sort.id_desc'),
             'id__asc' => sc_language_render('filter_sort.id_asc'),
