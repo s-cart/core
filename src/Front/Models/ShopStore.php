@@ -180,7 +180,7 @@ class ShopStore extends Model
      * Get list store ID
      */
     public static function getListStoreId() {
-        if (self::$listStoreId === 'null') {
+        if (self::$listStoreId === null) {
             self::$listStoreId = self::pluck('id', 'code')->all();
         }
         return self::$listStoreId;
@@ -190,7 +190,7 @@ class ShopStore extends Model
      * Get list store code
      */
     public static function getListStoreCode() {
-        if (self::$listStoreCode === 'null') {
+        if (self::$listStoreCode === null) {
             self::$listStoreCode = self::pluck('code', 'id')->all();
         }
         return self::$listStoreCode;
