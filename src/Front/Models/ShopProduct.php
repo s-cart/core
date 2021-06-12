@@ -792,7 +792,7 @@ class ShopProduct extends Model
      */
     public function displayVendor() {
         if (sc_config_global('MultiVendorPro') && config('app.storeId') == SC_ID_ROOT) {
-            $view = 'templates.'.sc_store('template'). '.store.display_vendor';
+            $view = 'templates.'.sc_store('template'). '.vendor.display_vendor';
             if(!view()->exists($view)) {
                 return;
             }
