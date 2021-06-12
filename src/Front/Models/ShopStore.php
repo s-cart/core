@@ -15,6 +15,8 @@ class ShopStore extends Model
     protected static $getDomainPartner = null;
     protected static $getListAllActive = null;
     protected static $arrayStoreId = null;
+    protected static $listStoreId = null;
+    protected static $listStoreCode = null;
     protected $connection = SC_CONNECTION;
     
     public function descriptions()
@@ -104,7 +106,8 @@ class ShopStore extends Model
     {
         if (self::$getDomainPartner === null) {
             self::$getDomainPartner = self::where('partner', 1)
-                ->whereNotNull('domain') 
+                ->whereNotNull('domain')
+                ->where('status', 1)
                 ->pluck('domain', 'id')
                 ->all();
         }
@@ -170,5 +173,27 @@ class ShopStore extends Model
         return $this->getText()->keyword;
     }
     //End  get text description
+
+    
+//===========Get infor store======
+    /**
+     * Get list store ID
+     */
+    public static function getListStoreId() {
+        if (self::$listStoreId === 'null') {
+            self::$listStoreId = self::pluck('id', 'code')->all();
+        }
+        return self::$listStoreId;
+    }
+
+    /**
+     * Get list store code
+     */
+    public static function getListStoreCode() {
+        if (self::$listStoreCode === 'null') {
+            self::$listStoreCode = self::pluck('code', 'id')->all();
+        }
+        return self::$listStoreCode;
+    }
 
 }
