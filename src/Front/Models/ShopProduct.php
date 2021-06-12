@@ -176,17 +176,23 @@ class ShopProduct extends Model
         if (empty($key)) {
             return null;
         }
-        $tableDescription = (new ShopProductDescription)->getTable();
-
-        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
-
         $storeId = empty($storeId) ? config('app.storeId') : $storeId;
+
+        //Check vendor status  = 1
+        $vendor = ShopStore::find($storeId);
+        if (!$vendor->status) {
+            return null;
+        }
 
         if (config('app.storeId') != SC_ID_ROOT) {
             //If the store is not the primary store
             //Cannot view the product in another store
             $storeId = config('app.storeId');
         }
+
+        $tableDescription = (new ShopProductDescription)->getTable();
+
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
 
         $product = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
