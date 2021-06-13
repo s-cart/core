@@ -211,11 +211,12 @@ INSERT INTO `__SC_DB_PREFIX__shop_layout_position` (`key`, `name`) VALUES
 
 /*shop_link*/
 INSERT INTO `__SC_DB_PREFIX__shop_link` (`name`, `url`, `target`, `module`, `group`, `status`, `sort`, `store_id`) VALUES 
-('front.contact', 'route::contact', '_self', '',  'menu', '1', '3',  1),
-('front.about', 'route::page.detail::about', '_self', '',  'menu', '1', '4',  1),
-('front.my_profile', 'route::login', '_self', '',  'footer', '1', '5',  1),
-('front.compare_page', 'route::compare', '_self', '',  'footer', '1', '4',  1),
-('front.wishlist_page', 'route::wishlist', '_self', '',  'footer', '1', '3',  1);
+('front.blog', 'route::news', '_self', '',  'menu', '1', '30',  1),
+('front.contact', 'route::contact', '_self', '',  'menu', '1', '40',  1),
+('front.about', 'route::page.detail::about', '_self', '',  'menu', '1', '50',  1),
+('front.my_profile', 'route::login', '_self', '',  'footer', '1', '60',  1),
+('front.compare_page', 'route::compare', '_self', '',  'footer', '1', '70',  1),
+('front.wishlist_page', 'route::wishlist', '_self', '',  'footer', '1', '80',  1);
 
 /*shop_shipping_standard*/
 INSERT INTO `__SC_DB_PREFIX__shop_shipping_standard` (`fee`, `shipping_free`) VALUES (20, 10000);
