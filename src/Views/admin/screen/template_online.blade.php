@@ -25,47 +25,27 @@
 
       <div class="card-header">
         <div class="float-right" >
-          <div class="filter-api">
-          <input name="sort_download" id="sort_download" data-name="sort_download" type="checkbox"  {{ $sort_download? 'checked':'' }} class="checkbox">
-          <label class="checkbox-inline form-check-label" for="sort_download">
-            {{ sc_language_render('admin.plugin.sort_download') }}
-          </label>
+          <div class="form-group">
+              <div class="input-group">
+              <select class="form-control" name="filter_free">
+                <option value="">All items</option>
+                <option value="1" {{ ($filter_free == 1) ? 'selected':''  }}>{{ sc_language_render('admin.plugin.only_free') }}</option>
+              </select>
+              <select class="form-control" name="filter_type">
+                <option value="">Choose filter</option>
+                <option value="download" {{ ($filter_type == 'download') ? 'selected':''  }}>{{ sc_language_render('admin.plugin.sort_download') }}</option>
+                <option value="rating" {{ ($filter_type == 'rating') ? 'selected':''  }}>{{ sc_language_render('admin.plugin.sort_rating') }}</option>
+                <option value="sort_price_asc" {{ ($filter_type == 'sort_price_asc') ? 'selected':''  }}>{{ sc_language_render('admin.plugin.sort_price_asc') }}</option>
+                <option value="sort_price_desc" {{ ($filter_type == 'sort_price_desc') ? 'selected':''  }}>{{ sc_language_render('admin.plugin.sort_price_desc') }}</option>
+              </select>
+                <input type="text" name="filter_keyword" class="form-control rounded-0 float-right" placeholder="{{ sc_language_render('admin.plugin.enter_search_keyword') }}" value="{{ $filter_keyword ?? '' }}">
+                <div class="input-group-append">
+                    <button id="filter-button" class="btn btn-primary  btn-flat"><i class="fas fa-filter"></i></button>
+                </div>
+              </div>
+              <a class="link-filter" href=""></a>
           </div>
-          <div class="filter-api">
-          <input name="sort_rating" id="sort_rating" data-name="sort_rating" type="checkbox"  {{ $sort_rating? 'checked':'' }} class="checkbox">
-          <label class="checkbox-inline form-check-label" for="sort_rating">
-            {{ sc_language_render('admin.plugin.sort_rating') }}
-          </label>
-          </div>
-          <div class="filter-api">
-          <input name="sort_price_asc" id="sort_price_asc" data-name="sort_price_asc" type="checkbox"  {{ $sort_price_asc? 'checked':'' }} class="checkbox">
-          <label class="checkbox-inline form-check-label" for="sort_price_asc">
-            {{ sc_language_render('admin.plugin.sort_price_asc') }}
-          </label>
-          </div>
-          <div class="filter-api">
-          <input name="sort_price_desc" id="sort_price_desc" data-name="sort_price_desc" type="checkbox"  {{ $sort_price_desc? 'checked':'' }} class="checkbox">
-          <label class="checkbox-inline form-check-label" for="sort_price_desc">
-            {{ sc_language_render('admin.plugin.sort_price_desc') }}
-          </label>
-          </div>
-
-          <div class="filter-api">
-          <input name="only_free" id="only_free" data-name="only_free" type="checkbox"  {{ $only_free? 'checked':'' }} class="checkbox">
-          <label class="checkbox-inline form-check-label" for="only_free">
-            {{ sc_language_render('admin.plugin.only_free') }}
-          </label> 
-          </div>
-          <div class="filter-api">
-          <input name="all_version" id="all_version" data-name="all_version" type="checkbox"  {{ $all_version? 'checked':'' }} class="checkbox">
-          <label class="checkbox-inline form-check-label" for="all_version">
-            {{ sc_language_render('admin.plugin.all_version') }}
-          </label>  
-          </div>  
-          <input class="form-control-sm filter-search" name="search_keyword" data-name="search_keyword" type="text" value="{{ $search_keyword ?? '' }}" placeholder="{{ sc_language_render('admin.plugin.enter_search_keyword') }}">
-          <button title="Filter" class="btn btn-flat filter-button"  id="filter-button"><i class="fa fa-filter" aria-hidden="true"></i></button>
-        </div>
-        <a class="link-filter" href=""></a>
+    </div>
       </div>
 
       <div class="card-body" id="pjax-container">
@@ -279,36 +259,18 @@
 <script>
   $('#filter-button').click(function(){
     var urlNext = '{{ url()->current() }}';
-    var all_version = $('[name="all_version"]:checked').val();
-    var only_free = $('[name="only_free"]:checked').val();
-    var sort_rating = $('[name="sort_rating"]:checked').val();
-    var sort_price_asc = $('[name="sort_price_asc"]:checked').val();
-    var sort_price_desc = $('[name="sort_price_desc"]:checked').val();
-    var sort_download = $('[name="sort_download"]:checked').val();
-    var search_keyword = $('[name="search_keyword"]').val();
-
+    var filter_free = $('[name="filter_free"] option:selected').val();
+    var filter_type = $('[name="filter_type"] option:selected').val();
+    var filter_keyword = $('[name="filter_keyword"]').val();
     var urlString = "";
-    if(all_version) {
-      urlString +="&all_version=1";
+    if(filter_free) {
+      urlString +="&filter_free=1";
     }
-    if(only_free) {
-      urlString +="&only_free=1";
+    if(filter_type) {
+      urlString +="&filter_type="+filter_type;
     }
-    if(sort_rating) {
-      urlString +="&sort_rating=1";
-    }
-    if(sort_price_asc) {
-      urlString +="&sort_price_asc=1";
-      $('[name="sort_price_desc"]').prop("checked", false);
-    }
-    if(sort_price_desc && !sort_price_asc) {
-      urlString +="&sort_price_desc=1";
-    }
-    if(sort_download) {
-      urlString +="&sort_download=1";
-    }
-    if(search_keyword){
-      urlString +="&search_keyword="+search_keyword;
+    if(filter_keyword){
+      urlString +="&filter_keyword="+filter_keyword;
     }
       urlString = urlString.substr(1);
       urlNext = urlNext+"?"+urlString;

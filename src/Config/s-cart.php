@@ -7,5 +7,5 @@ return [
     'facebook' => 'https://www.facebook.com/SCart.Ecommerce',
     'auth'     => 'Lanh Le',
     'email'    => 'lanhktc@gmail.com',
-    'api_link' => env('SC_API_LINK', 'https://api.s-cart.org/v2'),
+    'api_link' => env('SC_API_LINK', 'https://api.s-cart.org/v3'),
 ];
