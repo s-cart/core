@@ -42,8 +42,8 @@ class SendMail extends Mailable
         if (!empty($this->config['cc'])) {
             $this->cc($this->config['cc']);
         }
-        if (!empty($this->config['bbc'])) {
-            $this->bbc($this->config['bbc']);
+        if (!empty($this->config['bcc'])) {
+            $this->bcc($this->config['bcc']);
         }
         if (!empty($this->config['replyTo'])) {
             $this->replyTo($this->config['replyTo']);
