@@ -1020,7 +1020,7 @@ class ShopCartController extends RootFrontController
         session()->forget('arrCartDetail'); //destroy arrCartDetail
         session()->forget('orderID'); //destroy orderID
 
-        if (sc_config('order_success_to_admin') || sc_config('order_success_to_customer')) {
+        if ((sc_config('order_success_to_admin') || sc_config('order_success_to_customer')) && sc_config('email_action_mode')) {
             $data = ShopOrder::with('details')->find($orderID)->toArray();
             $checkContent = (new ShopEmailTemplate)->where('group', 'order_success_to_admin')->where('status', 1)->first();
             $checkContentCustomer = (new ShopEmailTemplate)->where('group', 'order_success_to_customer')->where('status', 1)->first();
@@ -1092,7 +1092,7 @@ class ShopCartController extends RootFrontController
                 ];
 
                 // Send mail order success to admin 
-                if (sc_config('order_success_to_admin', ['order_d' => $orderID]) && $checkContent) {
+                if (sc_config('order_success_to_admin') && $checkContent) {
                     $content = $checkContent->text;
                     $content = preg_replace($dataFind, $dataReplace, $content);
                     $dataView = [
