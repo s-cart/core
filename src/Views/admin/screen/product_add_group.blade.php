@@ -322,7 +322,7 @@
 
 // Select product in group
 $('#add_product_in_group').click(function(event) {
-    var htmlSelectGroup = '{{ $htmlSelectGroup }}';
+    var htmlSelectGroup = '{!! $htmlSelectGroup !!}';
     $(this).before(htmlSelectGroup);
     $('.select2').select2();
     $('.removeproductInGroup').click(function(event) {

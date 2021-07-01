@@ -112,7 +112,16 @@ class AdminProduct extends ShopProduct
             $productList = $productList->limit($limit);
         }
         $productList->groupBy($tableProduct.'.id');
-        return $productList->get()->keyBy('id');
+        $dataTmp = $productList->get()->keyBy('id');
+        $data = [];
+        foreach ($dataTmp as $key => $row) {
+            $data[$key] = [
+                'id' => $row['id'],
+                'sku' => $row['sku'],
+                'name' => addslashes($row['name']),
+            ];
+        }
+        return $data;
     }
 
 
