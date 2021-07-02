@@ -47,7 +47,7 @@
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
                                     <input type="text" id="{{ $code }}__name" name="descriptions[{{ $code }}][name]"
-                                        value="{!! old('descriptions.'.$code.'.name') !!}"
+                                        value="{{ old('descriptions.'.$code.'.name') }}"
                                         class="form-control input-sm {{ $code.'__name' }}" placeholder="" />
                                 </div>
                                 @if ($errors->has('descriptions.'.$code.'.name'))
@@ -74,7 +74,7 @@
                                     </div>
                                     <input type="text" id="{{ $code }}__keyword"
                                         name="descriptions[{{ $code }}][keyword]"
-                                        value="{!! old('descriptions.'.$code.'.keyword') !!}"
+                                        value="{{  old('descriptions.'.$code.'.keyword') }}"
                                         class="form-control input-sm {{ $code.'__keyword' }}" placeholder="" />
                                 </div>
                                 @if ($errors->has('descriptions.'.$code.'.keyword'))

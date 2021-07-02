@@ -45,7 +45,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="first_name" name="first_name" value="{!! old('first_name') !!}" class="form-control first_name" placeholder="" />
+                                        <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" class="form-control first_name" placeholder="" />
                                     </div>
                                         @if ($errors->has('first_name'))
                                             <span class="text-sm">
@@ -63,7 +63,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="last_name" name="last_name" value="{!! old('last_name') !!}" class="form-control last_name" placeholder="" />
+                                        <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" class="form-control last_name" placeholder="" />
                                     </div>
                                         @if ($errors->has('last_name'))
                                             <span class="text-sm">
@@ -82,7 +82,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="first_name_kana" name="first_name_kana" value="{!! old('first_name_kana') !!}" class="form-control first_name_kana" placeholder="" />
+                                        <input type="text" id="first_name_kana" name="first_name_kana" value="{{ old('first_name_kana') }}" class="form-control first_name_kana" placeholder="" />
                                     </div>
                                         @if ($errors->has('first_name_kana'))
                                             <span class="text-sm">
@@ -99,7 +99,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="last_name_kana" name="last_name_kana" value="{!! old('last_name_kana') !!}" class="form-control last_name_kana" placeholder="" />
+                                        <input type="text" id="last_name_kana" name="last_name_kana" value="{{ old('last_name_kana') }}" class="form-control last_name_kana" placeholder="" />
                                     </div>
                                         @if ($errors->has('last_name_kana'))
                                             <span class="text-sm">
@@ -119,7 +119,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="company" name="company" value="{!! old('company') !!}" class="form-control company" placeholder="" />
+                                        <input type="text" id="company" name="company" value="{{ old('company') }}" class="form-control company" placeholder="" />
                                     </div>
                                         @if ($errors->has('company'))
                                             <span class="text-sm">
@@ -138,7 +138,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="postcode" name="postcode" value="{!! old('postcode') !!}" class="form-control postcode" placeholder="" />
+                                        <input type="text" id="postcode" name="postcode" value="{{ old('postcode') }}" class="form-control postcode" placeholder="" />
                                     </div>
                                         @if ($errors->has('postcode'))
                                             <span class="text-sm">
@@ -156,7 +156,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="address1" name="address1" value="{!! old('address1') !!}" class="form-control address1" placeholder="" />
+                                        <input type="text" id="address1" name="address1" value="{{ old('address1') }}" class="form-control address1" placeholder="" />
                                     </div>
                                     @if ($errors->has('address1'))
                                         <span class="text-sm">
@@ -174,7 +174,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="address2" name="address2" value="{!! old('address2') !!}" class="form-control address2" placeholder="" />
+                                        <input type="text" id="address2" name="address2" value="{{ old('address2') }}" class="form-control address2" placeholder="" />
                                     </div>
                                         @if ($errors->has('address2'))
                                             <span class="text-sm">
@@ -194,7 +194,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="text" id="address3" name="address3" value="{!! old('address3') !!}" class="form-control address3" placeholder="" />
+                                    <input type="text" id="address3" name="address3" value="{{ old('address3') }}" class="form-control address3" placeholder="" />
                                 </div>
                                     @if ($errors->has('address3'))
                                         <span class="text-sm">
@@ -233,7 +233,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-phone fa-fw"></i></span>
                                         </div>
-                                        <input style="width: 150px" type="text" id="phone" name="phone" value="{!! old('phone') !!}" class="form-control phone" placeholder="Input Phone" />
+                                        <input style="width: 150px" type="text" id="phone" name="phone" value="{{ old('phone') }}" class="form-control phone" placeholder="Input Phone" />
                                     </div>
                                         @if ($errors->has('phone'))
                                             <span class="text-sm">
@@ -268,7 +268,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-money fw" aria-hidden="true"></i></span>
                                         </div>
-                                        <input style="width: 150px" type="text" id="exchange_rate" name="exchange_rate" value="{!! old('exchange_rate') !!}" class="form-control exchange_rate" placeholder="Input Exchange rate" />
+                                        <input style="width: 150px" type="text" id="exchange_rate" name="exchange_rate" value="{{ old('exchange_rate') }}" class="form-control exchange_rate" placeholder="Input Exchange rate" />
                                     </div>
                                         @if ($errors->has('exchange_rate'))
                                             <span class="text-sm">

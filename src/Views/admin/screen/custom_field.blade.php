@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="name" name="name" value="{!! old('name', ($customField['name']??'')) !!}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
+                <input type="text" id="name" name="name" value="{{ old('name', ($customField['name']??'')) }}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('name'))
@@ -47,7 +47,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="code" name="code" value="{!! old('code', ($customField['code']??'')) !!}" class="form-control code {{ $errors->has('code') ? ' is-invalid' : '' }}">
+                <input type="text" id="code" name="code" value="{{ old('code', ($customField['code']??'')) }}" class="form-control code {{ $errors->has('code') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('code'))

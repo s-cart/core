@@ -26,7 +26,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="name" name="name" value="{!! old()?old('name'):$link['name']??'' !!}" class="form-control" placeholder="" />
+                                        <input type="text" id="name" name="name" value="{{ old()?old('name'):$link['name']??'' }}" class="form-control" placeholder="" />
                                     </div>
                                         @if ($errors->has('name'))
                                             <span class="form-text">
@@ -43,7 +43,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="url" name="url" value="{!! old()?old('url'):$link['url']??'' !!}" class="form-control" placeholder="" />
+                                        <input type="text" id="url" name="url" value="{{ old()?old('url'):$link['url']??'' }}" class="form-control" placeholder="" />
                                     </div>
                                         @if ($errors->has('url'))
                                             <span class="form-text">

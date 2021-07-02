@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="name" name="name" value="{!! old()?old('name'):$supplier['name']??'' !!}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
+                <input type="text" id="name" name="name" value="{{ old()?old('name'):$supplier['name']??'' }}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('name'))
@@ -47,7 +47,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="alias" name="alias" value="{!! old()?old('alias'):$supplier['alias']??'' !!}" class="form-control alias {{ $errors->has('alias') ? ' is-invalid' : '' }}">
+                <input type="text" id="alias" name="alias" value="{{ old()?old('alias'):$supplier['alias']??'' }}" class="form-control alias {{ $errors->has('alias') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('alias'))
@@ -66,7 +66,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="phone" id="phone" name="phone" value="{!! old()?old('phone'):$supplier['phone']??'' !!}" class="form-control phone {{ $errors->has('phone') ? ' is-invalid' : '' }}">
+                <input type="phone" id="phone" name="phone" value="{{ old()?old('phone'):$supplier['phone']??'' }}" class="form-control phone {{ $errors->has('phone') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('phone'))
@@ -85,7 +85,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="url" name="url" value="{!! old()?old('url'):$supplier['url']??'' !!}" class="form-control url {{ $errors->has('url') ? ' is-invalid' : '' }}">
+                <input type="text" id="url" name="url" value="{{ old()?old('url'):$supplier['url']??'' }}" class="form-control url {{ $errors->has('url') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('url'))
@@ -104,7 +104,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="email" id="email" name="email" value="{!! old()?old('email'):$supplier['email']??'' !!}" class="form-control email {{ $errors->has('email') ? ' is-invalid' : '' }}">
+                <input type="email" id="email" name="email" value="{{ old()?old('email'):$supplier['email']??'' }}" class="form-control email {{ $errors->has('email') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('email'))
@@ -123,7 +123,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="address" name="address" value="{!! old()?old('address'):$supplier['address']??'' !!}" class="form-control address {{ $errors->has('address') ? ' is-invalid' : '' }}">
+                <input type="text" id="address" name="address" value="{{ old()?old('address'):$supplier['address']??'' }}" class="form-control address {{ $errors->has('address') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('address'))
@@ -142,7 +142,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="image" name="image" value="{!! old()?old('image'):$supplier['image']??'' !!}" class="form-control image {{ $errors->has('image') ? ' is-invalid' : '' }}">
+                <input type="text" id="image" name="image" value="{{ old()?old('image'):$supplier['image']??'' }}" class="form-control image {{ $errors->has('image') ? ' is-invalid' : '' }}">
                 <div class="input-group-append">
                   <span data-input="image" data-preview="preview_image" data-type="supplier"
                       class="btn btn-primary lfm"><i class="fa fa-image"></i>  {{sc_language_render('product.admin.choose_image')}}</span>
@@ -167,7 +167,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="number" id="sort" name="sort" min=0 value="{!! old()?old('sort'):$supplier['sort']??0 !!}" class="form-control sort {{ $errors->has('sort') ? ' is-invalid' : '' }}">
+                <input type="number" id="sort" name="sort" min=0 value="{{ old()?old('sort'):$supplier['sort']??0 }}" class="form-control sort {{ $errors->has('sort') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('sort'))

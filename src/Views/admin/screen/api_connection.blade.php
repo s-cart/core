@@ -30,7 +30,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                     </div>
-                    <input type="text" id="description" name="description" value="{!! old()?old('description'):$api_connection['description']??'' !!}" class="form-control description {{ $errors->has('description') ? ' is-invalid' : '' }}">
+                    <input type="text" id="description" name="description" value="{{ old()?old('description'):$api_connection['description']??'' }}" class="form-control description {{ $errors->has('description') ? ' is-invalid' : '' }}">
                   </div>
     
                   @if ($errors->has('description'))
@@ -48,7 +48,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                     </div>
-                    <input type="text" id="apiconnection" name="apiconnection" value="{!! old()?old('apiconnection'):$api_connection['apiconnection']??'' !!}" class="form-control apiconnection {{ $errors->has('apiconnection') ? ' is-invalid' : '' }}">
+                    <input type="text" id="apiconnection" name="apiconnection" value="{{ old()?old('apiconnection'):$api_connection['apiconnection']??'' }}" class="form-control apiconnection {{ $errors->has('apiconnection') ? ' is-invalid' : '' }}">
                   </div>
     
                   @if ($errors->has('apiconnection'))
@@ -67,7 +67,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                     </div>
-                    <input type="text" id="apikey" name="apikey" value="{!! old()?old('apikey'):$api_connection['apikey']??'' !!}" class="form-control apikey {{ $errors->has('apikey') ? ' is-invalid' : '' }}">
+                    <input type="text" id="apikey" name="apikey" value="{{ old()?old('apikey'):$api_connection['apikey']??'' }}" class="form-control apikey {{ $errors->has('apikey') ? ' is-invalid' : '' }}">
                     <div class="input-group-append">
                         <button class="btn btn-default" id="refreshkey" type="button">
                             <i class="fas fa-sync-alt fa-fw"></i>
@@ -91,7 +91,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
                     </div>
-                    <input type="text" id="expire" name="expire" value="{!! old()?old('expire'):$api_connection['expire']??'' !!}" class="form-control expire date_time {{ $errors->has('expire') ? ' is-invalid' : '' }}">
+                    <input type="text" id="expire" name="expire" value="{{ old()?old('expire'):$api_connection['expire']??'' }}" class="form-control expire date_time {{ $errors->has('expire') ? ' is-invalid' : '' }}">
                   </div>
     
                   @if ($errors->has('expire'))

@@ -47,7 +47,7 @@
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
                                     <input type="text" id="{{ $code }}__name" name="descriptions[{{ $code }}][name]"
-                                        value="{!! old('descriptions.'.$code.'.name') !!}"
+                                        value="{{ old('descriptions.'.$code.'.name') }}"
                                         class="form-control input-sm {{ $code.'__name' }}" placeholder="" />
                                 </div>
                                 @if ($errors->has('descriptions.'.$code.'.name'))
@@ -74,7 +74,7 @@
                                     </div>
                                     <input type="text" id="{{ $code }}__keyword"
                                         name="descriptions[{{ $code }}][keyword]"
-                                        value="{!! old('descriptions.'.$code.'.keyword') !!}"
+                                        value="{{ old('descriptions.'.$code.'.keyword') }}"
                                         class="form-control input-sm {{ $code.'__keyword' }}" placeholder="" />
                                 </div>
                                 @if ($errors->has('descriptions.'.$code.'.keyword'))
@@ -498,7 +498,7 @@
                             <div class="col-sm-8">
                                 <select class="form-control input-sm weight_class select2" style="width: 100%;"
                                     name="weight_class">
-                                    <option value="">{{ sc_language_render('product.select_weight') }}<option>
+                                    <option value="">{{ sc_language_render('product.admin.select_weight') }}<option>
                                     @foreach ($listWeight as $k => $v)
                                     <option value="{{ $k }}"
                                         {{ (old('weight_class') == $k || (!old()) ) ? 'selected':'' }}>
@@ -543,7 +543,7 @@
                             <div class="col-sm-8">
                                 <select class="form-control input-sm length_class select2" style="width: 100%;"
                                     name="length_class">
-                                    <option value="">{{ sc_language_render('product.select_length') }}<option>
+                                    <option value="">{{ sc_language_render('product.admin.select_length') }}<option>
                                     @foreach ($listLength as $k => $v)
                                     <option value="{{ $k }}"
                                         {{ (old('length_class') == $k || (!old()) ) ? 'selected':'' }}>

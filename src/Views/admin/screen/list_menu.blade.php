@@ -179,7 +179,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                             </div>
-                            <input type="text" id="title" name="title" value="{!! old()?old('title'):$menu['title']??'' !!}" class="form-control title {{ $errors->has('title') ? ' is-invalid' : '' }}">
+                            <input type="text" id="title" name="title" value="{{ old()?old('title'):$menu['title']??'' }}" class="form-control title {{ $errors->has('title') ? ' is-invalid' : '' }}">
                           </div>
             
                           @if ($errors->has('title'))
@@ -202,7 +202,7 @@
                               </span>
                               </span>
                             </div>
-                            <input required="1" style="width: 140px" type="text" id="icon" name="icon" value="{!! old()?old('icon'):$menu['icon']??'fas fa-bars' !!}" class="form-control icon {{ $errors->has('icon') ? ' is-invalid' : '' }} " placeholder="Input Icon">
+                            <input required="1" style="width: 140px" type="text" id="icon" name="icon" value="{{ old()?old('icon'):$menu['icon']??'fas fa-bars' }}" class="form-control icon {{ $errors->has('icon') ? ' is-invalid' : '' }} " placeholder="Input Icon">
                           </div>
                           
             
@@ -222,7 +222,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                             </div>
-                            <input type="text" id="uri" name="uri" value="{!! old()?old('uri'):$menu['uri']??'' !!}" class="form-control uri {{ $errors->has('uri') ? ' is-invalid' : '' }}" placeholder="Input uri">
+                            <input type="text" id="uri" name="uri" value="{{ old()?old('uri'):$menu['uri']??'' }}" class="form-control uri {{ $errors->has('uri') ? ' is-invalid' : '' }}" placeholder="Input uri">
                           </div>
             
                           @if ($errors->has('uri'))
@@ -241,7 +241,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                             </div>
-                            <input type="number" style="width: 100px;" id="sort" name="sort" value="{!! old()?old('sort'):$menu['sort']??'' !!}" class="form-control sort {{ $errors->has('sort') ? ' is-invalid' : '' }}" placeholder="Input sort">
+                            <input type="number" style="width: 100px;" id="sort" name="sort" value="{{ old()?old('sort'):$menu['sort']??'' }}" class="form-control sort {{ $errors->has('sort') ? ' is-invalid' : '' }}" placeholder="Input sort">
                           </div>
             
                           @if ($errors->has('sort'))

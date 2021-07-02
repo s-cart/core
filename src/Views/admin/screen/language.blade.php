@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="name" name="name" value="{!! old()?old('name'):$language['name']??'' !!}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
+                <input type="text" id="name" name="name" value="{{ old()?old('name'):$language['name']??'' }}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('name'))
@@ -48,13 +48,13 @@
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
                 @if (!empty($language['code']) && in_array($language['code'], ['vi','en']))
-                <input type="hidden" id="code" name="code" value="{!! $language['code'] !!}"
+                <input type="hidden" id="code" name="code" value="{{ $language['code'] }}"
                     placeholder="" />
-                <input type="text" disabled="disabled" value="{!! $language['code'] !!}"
+                <input type="text" disabled="disabled" value="{{ $language['code'] }}"
                     class="form-control" placeholder="" />
                 @else
                 <input type="text" id="code" name="code"
-                    value="{!! old()?old('code'):$language['code']??'' !!}"
+                    value="{{ old()?old('code'):$language['code']??'' }}"
                     class="form-control {{ $errors->has('code') ? ' is-invalid' : '' }}" placeholder="" />
                 @endif
               </div>
@@ -76,7 +76,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="icon" name="icon" value="{!! old()?old('icon'):$language['icon']??'' !!}" class="form-control icon {{ $errors->has('icon') ? ' is-invalid' : '' }}">
+                <input type="text" id="icon" name="icon" value="{{ old()?old('icon'):$language['icon']??'' }}" class="form-control icon {{ $errors->has('icon') ? ' is-invalid' : '' }}">
                 <div class="input-group-append">
                   <span data-input="icon" data-preview="preview_icon" data-type="language"
                       class="btn btn-primary lfm"><i class="fa fa-icon"></i>  {{sc_language_render('admin.choose_icon')}}</span>
@@ -118,7 +118,7 @@
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <input type="number" id="sort" name="sort"
-                    value="{!! old()?old('sort'):$language['sort']??'' !!}"
+                    value="{{ old()?old('sort'):$language['sort']??'' }}"
                     class="form-control {{ $errors->has('sort') ? ' is-invalid' : '' }}" placeholder=""/>
               </div>
 

@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="name" name="name" value="{!! old()?old('name'):$length['name']??'' !!}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
+                <input type="text" id="name" name="name" value="{{ old()?old('name'):$length['name']??'' }}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('name'))
@@ -47,7 +47,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="description" name="description" value="{!! old()?old('description'):$length['description']??'' !!}" class="form-control description {{ $errors->has('description') ? ' is-invalid' : '' }}">
+                <input type="text" id="description" name="description" value="{{ old()?old('description'):$length['description']??'' }}" class="form-control description {{ $errors->has('description') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('description'))

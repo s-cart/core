@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="name" name="name" value="{!! old()?old('name'):$attribute_group['name']??'' !!}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
+                <input type="text" id="name" name="name" value="{{ old()?old('name'):$attribute_group['name']??'' }}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('name'))
@@ -44,7 +44,7 @@
             <label for="type" class="col-sm-2 col-form-label">{{ sc_language_render('admin.attribute_group.type') }}</label>
             <div class="form-group clearfix">
               <div class="icheck-primary d-inline">
-                <input type="radio" id="radioPrimary1" name="type" value="radio" {{ (old('type',($attribute_group['type']??'')) =='radio')?'checked':'' }}>
+                <input type="radio" id="radioPrimary1" name="type" value="radio" {{ (old('type', ($attribute_group['type']??'')) =='radio')?'checked':'' }}>
                 <label for="radioPrimary1">
                   Radio
                 </label>

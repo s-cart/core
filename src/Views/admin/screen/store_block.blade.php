@@ -26,7 +26,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="name" name="name" value="{!! old('name',$layout['name']??'') !!}" class="form-control" placeholder="" />
+                                        <input type="text" id="name" name="name" value="{{ old('name',$layout['name']??'') }}" class="form-control" placeholder="" />
                                     </div>
                                         @if ($errors->has('name'))
                                             <span class="form-text">
@@ -132,7 +132,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="number" style="width: 100px;"  id="sort" name="sort" value="{!! old()?old('sort'):$layout['sort']??0 !!}" class="form-control sort" placeholder="" />
+                                        <input type="number" style="width: 100px;"  id="sort" name="sort" value="{{ old()?old('sort'):$layout['sort']??0 }}" class="form-control sort" placeholder="" />
                                     </div>
                                         @if ($errors->has('sort'))
                                             <span class="form-text">

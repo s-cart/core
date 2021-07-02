@@ -48,7 +48,7 @@
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
                                     <input type="text" id="{{ $code }}__title" name="descriptions[{{ $code }}][title]"
-                                        value="{!! old()? old('descriptions.'.$code.'.title'):($descriptions[$code]['title']??'') !!}"
+                                        value="{{ old()? old('descriptions.'.$code.'.title'):($descriptions[$code]['title']??'') }}"
                                         class="form-control {{ $code.'__title' }}" placeholder="" />
                                 </div>
                                 @if ($errors->has('descriptions.'.$code.'.title'))
@@ -74,7 +74,7 @@
                                     </div>
                                     <input type="text" id="{{ $code }}__keyword"
                                         name="descriptions[{{ $code }}][keyword]"
-                                        value="{!! old()?old('descriptions.'.$code.'.keyword'):($descriptions[$code]['keyword']??'') !!}"
+                                        value="{{ old()?old('descriptions.'.$code.'.keyword'):($descriptions[$code]['keyword']??'') }}"
                                         class="form-control {{ $code.'__keyword' }}" placeholder="" />
                                 </div>
                                 @if ($errors->has('descriptions.'.$code.'.keyword'))
@@ -143,7 +143,7 @@
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
                                     <input type="text" id="alias" name="alias"
-                                        value="{!! old('alias',($category['alias']??'')) !!}" class="form-control"
+                                        value="{{ old('alias',($category['alias']??'')) }}" class="form-control"
                                         placeholder="" />
                                 </div>
                                 @if ($errors->has('alias'))
@@ -159,7 +159,7 @@
                             <div class="col-sm-8">
                                 <div class="input-group">
                                     <input type="text" id="image" name="image"
-                                        value="{!! old('image',$category['image']??'') !!}"
+                                        value="{{ old('image',$category['image']??'') }}"
                                         class="form-control input image" placeholder="" />
                                     <div class="input-group-append">
                                         <a data-input="image" data-preview="preview_image" data-type="category"

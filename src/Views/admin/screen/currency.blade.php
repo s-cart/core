@@ -28,7 +28,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="name" name="name" value="{!! old()?old('name'):$currency['name']??'' !!}" class="form-control" placeholder="" />
+                                        <input type="text" id="name" name="name" value="{{ old()?old('name'):$currency['name']??'' }}" class="form-control" placeholder="" />
                                     </div>
                                         @if ($errors->has('name'))
                                             <span class="form-text">
@@ -70,7 +70,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="text" id="symbol" name="symbol" value="{!! old()?old('symbol'):$currency['symbol']??'' !!}" class="form-control" placeholder="" />
+                                        <input type="text" id="symbol" name="symbol" value="{{ old()?old('symbol'):$currency['symbol']??'' }}" class="form-control" placeholder="" />
                                     </div>
                                         @if ($errors->has('symbol'))
                                             <span class="form-text">
@@ -87,7 +87,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="number" step="0.01" id="exchange_rate" name="exchange_rate" value="{!! old()?old('exchange_rate'):$currency['exchange_rate']??1 !!}" class="form-control" placeholder="" />
+                                        <input type="number" step="0.01" id="exchange_rate" name="exchange_rate" value="{{ old()?old('exchange_rate'):$currency['exchange_rate']??1 }}" class="form-control" placeholder="" />
                                     </div>
                                         @if ($errors->has('exchange_rate'))
                                             <span class="form-text">
@@ -104,7 +104,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="number" id="precision" name="precision" type="" value="{!! old()?old('precision'):$currency['precision']??0 !!}" class="form-control" placeholder="" min = 0 />
+                                        <input type="number" id="precision" name="precision" type="" value="{{ old()?old('precision'):$currency['precision']??0 }}" class="form-control" placeholder="" min = 0 />
                                     </div>
                                         @if ($errors->has('precision'))
                                             <span class="form-text">

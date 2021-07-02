@@ -28,7 +28,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="email" id="email" name="email" value="{!! old()?old('email'):$subscribe['email']??'' !!}" class="form-control" placeholder="" />
+                                        <input type="email" id="email" name="email" value="{{ old()?old('email'):$subscribe['email']??'' }}" class="form-control" placeholder="" />
                                     </div>
                                         @if ($errors->has('email'))
                                             <span class="form-text">

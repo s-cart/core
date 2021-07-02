@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="name" name="name" value="{!! old()?old('name'):$brand['name']??'' !!}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
+                <input type="text" id="name" name="name" value="{{ old()?old('name'):$brand['name']??'' }}" class="form-control name {{ $errors->has('name') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('name'))
@@ -47,7 +47,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="alias" name="alias" value="{!! old()?old('alias'):$brand['alias']??'' !!}" class="form-control alias {{ $errors->has('alias') ? ' is-invalid' : '' }}">
+                <input type="text" id="alias" name="alias" value="{{ old()?old('alias'):$brand['alias']??'' }}" class="form-control alias {{ $errors->has('alias') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('alias'))
@@ -66,7 +66,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                 </div>
-                <input type="text" id="url" name="url" value="{!! old()?old('url'):$brand['url']??'' !!}" class="form-control url {{ $errors->has('url') ? ' is-invalid' : '' }}">
+                <input type="text" id="url" name="url" value="{{ old()?old('url'):$brand['url']??'' }}" class="form-control url {{ $errors->has('url') ? ' is-invalid' : '' }}">
               </div>
 
               @if ($errors->has('url'))
