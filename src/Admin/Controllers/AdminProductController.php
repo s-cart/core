@@ -978,23 +978,26 @@ public function createProductGroup()
             $arrID = explode(',', $ids);
             $arrCantDelete = [];
             $arrDontPermission = [];
+            $arrDelete = [];
             foreach ($arrID as $key => $id) {
                 if(!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
-                }
-                if (ShopProductBuild::where('product_id', $id)->first() || ShopProductGroup::where('product_id', $id)->first()) {
+                } elseif (ShopProductBuild::where('product_id', $id)->first() || ShopProductGroup::where('product_id', $id)->first()) {
                     $arrCantDelete[] = $id;
+                } else {
+                    $arrDelete[] = $id;
                 }
             }
+            if ($arrDelete) {
+                AdminProduct::destroy($arrDelete);
+                sc_clear_cache('cache_product');
+            }
+            
             if (count($arrDontPermission)) {
                 return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             } elseif (count($arrCantDelete)) {
                 return response()->json(['error' => 1, 'msg' => sc_language_render('product.admin.cant_remove_child') . ': ' . json_encode($arrCantDelete)]);
-            }else {
-                AdminProduct::destroy($arrID);
-
-                sc_clear_cache('cache_product');
-
+            } else {
                 return response()->json(['error' => 0, 'msg' => '']);
             }
 
