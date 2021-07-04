@@ -2158,6 +2158,7 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('admin.store_block.text', 'Text', 'admin.store_block', 'en'),
 ('admin.store_block.status', 'Status', 'admin.store_block', 'en'),
 ('admin.store_block.sort', 'Sort', 'admin.store_block', 'en'),
+('admin.store_block.sort', 'Sắp xếp', 'admin.store_block', 'vi'),
 ('admin.store_block.add_new_title', 'Add layout', 'admin.store_block', 'en'),
 ('admin.store_block.add_new_des', 'Create a new layout', 'admin.store_block', 'en'),
 ('admin.store_block.select_position', 'Select position', 'admin.store_block', 'en'),

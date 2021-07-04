@@ -72,9 +72,11 @@ class AdminCategoryController extends RootAdminController
         
         if (sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
-            $arrCategoryId = $dataTmp->pluck('id')->toArray();
+            $arrId = $dataTmp->pluck('id')->toArray();
             if (function_exists('sc_get_list_store_of_category')) {
-                $dataStores = sc_get_list_store_of_category($arrCategoryId);
+                $dataStores = sc_get_list_store_of_category($arrId);
+            } else {
+                $dataStores = [];
             }
         }
 

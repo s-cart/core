@@ -66,7 +66,12 @@ class AdminStoreLinkController extends RootAdminController
         if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
             $arrId = $dataTmp->pluck('id')->toArray();
             // Only show store info if store is root
-            $dataStores =  sc_get_list_store_of_link($arrId);
+
+            if (function_exists('sc_get_list_store_of_link')) {
+                $dataStores = sc_get_list_store_of_link($arrId);
+            } else {
+                $dataStores = [];
+            }
         }
 
         $dataTr = [];

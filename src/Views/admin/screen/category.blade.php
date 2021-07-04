@@ -141,7 +141,13 @@
                         {{-- select shop_store --}}
                         @php
                         $listStore = [];
-                        $shop_store = old('shop_store', sc_get_list_store_of_category_detail($category['id'] ?? ''));
+                        if (function_exists('sc_get_list_store_of_category_detail')) {
+                                $oldData = sc_get_list_store_of_category_detail($category['id'] ?? '');
+                            } else {
+                                $oldData = null;
+                            }
+                        $shop_store = old('shop_store', $oldData);
+
                         if(is_array($shop_store)){
                             foreach($shop_store as $value){
                                 $listStore[] = (int)$value;
