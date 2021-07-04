@@ -19,6 +19,7 @@ class ShopStore extends Model
     protected static $arrayStoreId = null;
     protected static $listStoreId = null;
     protected static $listStoreCode = null;
+    protected static $getStoreDomainByCode = null;
     protected $connection = SC_CONNECTION;
     
     public function descriptions()
@@ -230,6 +231,21 @@ class ShopStore extends Model
             self::$listStoreCode = self::pluck('code', 'id')->all();
         }
         return self::$listStoreCode;
+    }
+
+    /**
+     * Get all domain and code store active
+     *
+     * @return  [array]  [return description]
+     */
+    public static function getStoreDomainByCode()
+    {
+        if (self::$getStoreDomainByCode === null) {
+            self::$getStoreDomainByCode = self::whereNotNull('domain')
+                ->pluck('domain', 'code')
+                ->all();
+        }
+        return self::$getStoreDomainByCode;
     }
 
 }

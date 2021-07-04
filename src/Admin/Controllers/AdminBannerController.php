@@ -94,6 +94,9 @@ class AdminBannerController extends RootAdminController
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
+                    $storeTmp = array_map(function($code) {
+                        return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
+                    }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
                 } else {
                     $dataMap['shop_store'] = '';
