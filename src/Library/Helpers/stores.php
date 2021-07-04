@@ -238,6 +238,7 @@ if (!function_exists('sc_get_list_store_of_order') ) {
             ->whereIn($tableOrder.'.id', $arrOrderId)
             ->get()
             ->groupBy('id');
+    }
 }
 
 /**
