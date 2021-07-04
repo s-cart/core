@@ -18,7 +18,8 @@
       "phpoffice/phpspreadsheet": "^1.16",
       "spatie/laravel-json-api-paginate": "^1.10",
       "spatie/db-dumper": "^2.18",
-      "google/apiclient": "^2.0"
+      "google/apiclient": "^2.0",
+      "jenssegers/agent": "^2.6"
   },
   "autoload": {
       "psr-4": {

@@ -67,16 +67,21 @@ class AdminOrderController extends RootAdminController
         $listTh = [
             'id'             => 'ID',
             'email'          => sc_language_render('order.email'),
-            'subtotal'       => sc_language_render('order.subtotal'),
-            'shipping'       => sc_language_render('order.shipping'),
-            'discount'       => sc_language_render('order.discount'),
+            'subtotal'       => '<i class="fa fa-shopping-cart" aria-hidden="true" title="'.sc_language_render('order.subtotal').'"></i>',
+            'shipping'       => '<i class="fa fa-truck" aria-hidden="true" title="'.sc_language_render('order.shipping').'"></i>',
+            'discount'       => '<i class="fa fa-tags" aria-hidden="true" title="'.sc_language_render('order.discount').'"></i>',
+            'tax'            => sc_language_render('order.tax'),
             'total'          => sc_language_render('order.total'),
-            'payment_method' => sc_language_render('order.admin.payment_method_short'),
-            'currency'       => sc_language_render('order.currency'),
-            'status'         => sc_language_render('order.status'),
-            'created_at'     => sc_language_render('admin.created_at'),
-            'action'         => sc_language_render('action.title'),
+            'payment_method' => '<i class="fa fa-credit-card" aria-hidden="true" title="'.sc_language_render('order.admin.payment_method_short').'"></i>',
+            'status'         => sc_language_render('order.admin.status'),
         ];
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            // Only show store info if store is root
+            $listTh['shop_store'] = sc_language_render('front.store_list');
+        }
+        $listTh['created_at'] = sc_language_render('admin.created_at');
+        $listTh['action'] = sc_language_render('action.title');
+
         $sort_order   = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword      = sc_clean(request('keyword') ?? '');
         $email        = sc_clean(request('email') ?? '');
@@ -101,6 +106,11 @@ class AdminOrderController extends RootAdminController
             'order_status' => $order_status,
         ];
         $dataTmp = (new AdminOrder)->getOrderListAdmin($dataSearch);
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            $arrId = $dataTmp->pluck('id')->toArray();
+            // Only show store info if store is root
+            $dataStores =  sc_get_list_store_of_order($arrId);
+        }
 
         $styleStatus = $this->statusOrder;
         array_walk($styleStatus, function (&$v, $k) {
@@ -108,24 +118,31 @@ class AdminOrderController extends RootAdminController
         });
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataMap = [
                 'id'             => $row['id'],
                 'email'          => $row['email'] ?? 'N/A',
                 'subtotal'       => sc_currency_render_symbol($row['subtotal'] ?? 0, $row['currency']),
                 'shipping'       => sc_currency_render_symbol($row['shipping'] ?? 0, $row['currency']),
                 'discount'       => sc_currency_render_symbol($row['discount'] ?? 0, $row['currency']),
+                'tax'            => sc_currency_render_symbol($row['tax'] ?? 0, $row['currency']),
                 'total'          => sc_currency_render_symbol($row['total'] ?? 0, $row['currency']),
-                'payment_method' => $row['payment_method'],
-                'currency'       => $row['currency'] . '/' . $row['exchange_rate'],
+                'payment_method' => $row['payment_method'].'<br>('.$row['currency'] . '/' . $row['exchange_rate'].')',
                 'status'         => $styleStatus[$row['status']],
-                'created_at'     => $row['created_at'],
-                'action'         => '
-                                <a href="' . sc_route_admin('admin_order.detail', ['id' => $row['id']]) . '">
-                                 <span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span>
-                                </a>&nbsp;
-                                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
-                ,
             ];
+            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+                // Only show store info if store is root
+                if (!empty($dataStores[$row['id']])) {
+                    $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
+                    $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
+                } else {
+                    $dataMap['shop_store'] = '';
+                }
+            }
+            $dataMap['created_at'] = $row['created_at'];
+            $dataMap['action'] = '<a href="' . sc_route_admin('admin_order.detail', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+            ';
+            $dataTr[] = $dataMap;
         }
 
         $data['listTh'] = $listTh;
