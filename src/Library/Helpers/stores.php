@@ -229,6 +229,20 @@ if (!function_exists('sc_get_list_store_of_link_detail') ) {
 /**
  * Get store list of order
  */
+if (!function_exists('sc_get_list_store_of_order') ) {
+    function sc_get_list_store_of_order($arrOrderId) {
+        $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
+        $tableOrder = (new \SCart\Core\Front\Models\ShopOrder)->getTable();
+        return \SCart\Core\Front\Models\ShopOrder::select($tableStore.'.code', $tableOrder.'.id')
+            ->leftJoin($tableStore, $tableStore.'.id', $tableOrder.'.store_id')
+            ->whereIn($tableOrder.'.id', $arrOrderId)
+            ->get()
+            ->groupBy('id');
+}
+
+/**
+ * Get domain from code
+ */
 if (!function_exists('sc_get_domain_from_code') ) {
     function sc_get_domain_from_code($code) {
         $domainList = \SCart\Core\Front\Models\ShopStore::getStoreDomainByCode();
