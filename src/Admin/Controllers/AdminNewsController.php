@@ -42,8 +42,14 @@ class AdminNewsController extends RootAdminController
             'image'  => sc_language_render('admin.news.image'),
             'sort'   => sc_language_render('admin.news.sort'),
             'status' => sc_language_render('admin.news.status'),
-            'action' => sc_language_render('action.title'),
         ];
+
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            // Only show store info if store is root
+            $listTh['shop_store'] = sc_language_render('front.store_list');
+        }
+        $listTh['action'] = sc_language_render('action.title');
+
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword    = sc_clean(request('keyword') ?? '');
         $arrSort = [
@@ -59,20 +65,36 @@ class AdminNewsController extends RootAdminController
             'arrSort'    => $arrSort,
         ];
         $dataTmp = AdminNews::getNewsListAdmin($dataSearch);
+
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            $arrId = $dataTmp->pluck('id')->toArray();
+            // Only show store info if store is root
+            $dataStores =  sc_get_list_store_of_news($arrId);
+        }
+
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataMap = [
                 'id' => $row['id'],
                 'title' => $row['title'],
                 'image' => sc_image_render($row['image'], '50px',null,$row['title']),
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
-                'action' => '
-                    <a href="' . sc_route_admin('admin_news.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-
-                    <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('admin.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>'
-                ,
             ];
+
+            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+                // Only show store info if store is root
+                if (!empty($dataStores[$row['id']])) {
+                    $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
+                    $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
+                } else {
+                    $dataMap['shop_store'] = '';
+                }
+            }
+            $dataMap['action'] = '<a href="' . sc_route_admin('admin_news.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+            ';
+            $dataTr[] = $dataMap;
         }
 
         $data['listTh'] = $listTh;
@@ -169,7 +191,6 @@ class AdminNewsController extends RootAdminController
             'sort'     => $data['sort'],
             'alias'    => $data['alias'],
             'status'   => !empty($data['status']) ? 1 : 0,
-            'store_id' => session('adminStoreId'),
         ];
         $news = AdminNews::createNewsAdmin($dataInsert);
         $id = $news->id;
@@ -186,6 +207,16 @@ class AdminNewsController extends RootAdminController
             ];
         }
         AdminNews::insertDescriptionAdmin($dataDes);
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $news->stores()->detach();
+            if ($shopStore) {
+                $news->stores()->attach($shopStore);
+            }
+        }
+
         sc_clear_cache('cache_news');
 
         return redirect()->route('admin_news.index')->with('success', sc_language_render('action.create_success'));
@@ -253,7 +284,6 @@ class AdminNewsController extends RootAdminController
             'alias' => $data['alias'],
             'sort' => $data['sort'],
             'status' => !empty($data['status']) ? 1 : 0,
-            'store_id'    => session('adminStoreId'),
         ];
 
         $news->update($dataUpdate);
@@ -270,6 +300,16 @@ class AdminNewsController extends RootAdminController
             ];
         }
         AdminNews::insertDescriptionAdmin($dataDes);
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $news->stores()->detach();
+            if ($shopStore) {
+                $news->stores()->attach($shopStore);
+            }
+        }
+
         sc_clear_cache('cache_news');
 
         return redirect()->route('admin_news.index')->with('success', sc_language_render('action.edit_success'));

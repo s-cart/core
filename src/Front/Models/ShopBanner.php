@@ -2,6 +2,7 @@
 namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Front\Models\ModelTrait;
 class ShopBanner extends Model
 {
@@ -13,6 +14,12 @@ class ShopBanner extends Model
 
     protected  $sc_type = 'all'; // all or interger
     protected  $sc_store = 0; // 1: only produc promotion,
+
+    public function stores()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopBannerStore::class, 'banner_id', 'store_id');
+    }
+
     /*
     Get thumb
     */
@@ -29,7 +36,7 @@ class ShopBanner extends Model
         return sc_image_get_path($this->image);
 
     }
-    //Scort
+    
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'sort';
@@ -45,9 +52,18 @@ class ShopBanner extends Model
      */
     public function getDetail($id) {
 
-        return $this->where('id', (int)$id)->where('status', 1)
-        ->where('store_id', config('app.storeId'))
-        ->first();
+        $storeId = config('app.storeId');
+        $data =  $this->where('id', (int)$id)->where($this->getTable() .'.status', 1);
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $tableBannerStore = (new ShopBannerStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $data = $data->join($tableBannerStore, $tableBannerStore.'.banner_id', $this->getTable() . '.id');
+            $data = $data->join($tableStore, $tableStore . '.id', $tableBannerStore.'.store_id');
+            $data = $data->where($tableStore . '.status', '1');
+            $data = $data->where($tableBannerStore.'.store_id', $storeId);
+        }
+        $data = $data->first();
+        return $data;
     }
 
     protected static function boot()
@@ -55,6 +71,7 @@ class ShopBanner extends Model
         parent::boot();
         // before delete() method call this
         static::deleting(function ($banner) {
+            $banner->stores()->detach();
         });
     }
 
@@ -141,9 +158,24 @@ class ShopBanner extends Model
      * build Query
      */
     public function buildQuery() {
-        $query = $this;
 
-        $query = $query->where('status', 1);
+        $query = $this->where($this->getTable() .'.status', 1);
+
+        $storeId = config('app.storeId');
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            //Get product active for store
+            if (!empty($this->sc_store)) {
+                //If sepcify store id
+                $storeId = $this->sc_store;
+            }
+            $tableBannerStore = (new ShopBannerStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $query = $query->join($tableBannerStore, $tableBannerStore.'.banner_id', $this->getTable() . '.id');
+            $query = $query->join($tableStore, $tableStore . '.id', $tableBannerStore.'.store_id');
+            $query = $query->where($tableStore . '.status', '1');
+            $query = $query->where($tableBannerStore.'.store_id', $storeId);
+        }
 
         if ($this->sc_type !== 'all') {
             $query = $query->where('type', $this->sc_type);
@@ -156,16 +188,6 @@ class ShopBanner extends Model
                 }
             }
         }
-
-        //Get product active for store
-        if (!empty($this->sc_store)) {
-            //If sepcify store id
-            $query = $query->where($this->getTable().'.store_id', $this->sc_store);
-        } else {
-            // If stor ID is 1, will get product of all stores
-            $query = $query->where($this->getTable().'.store_id', config('app.storeId'));
-        }
-        //End store
 
         if ($this->sc_random) {
             $query = $query->inRandomOrder();

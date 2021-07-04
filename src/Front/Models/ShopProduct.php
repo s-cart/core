@@ -9,6 +9,7 @@ use SCart\Core\Front\Models\ShopProductGroup;
 use SCart\Core\Front\Models\ShopProductPromotion;
 use SCart\Core\Front\Models\ShopTax;
 use SCart\Core\Front\Models\ShopStore;
+use SCart\Core\Front\Models\ShopProductStore;
 use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ModelTrait;
@@ -24,7 +25,6 @@ class ShopProduct extends Model
     protected  $sc_property = 'all'; // 0:physical, 1:download, 2:only view, 3: Service
     protected  $sc_promotion = 0; // 1: only produc promotion,
     protected  $sc_store_id = 0; 
-    protected  $sc_category_store = 'all'; 
     protected  $sc_array_ID = []; // array ID product
     protected  $sc_category = []; // array category id
     protected  $sc_brand = []; // array brand id
@@ -46,13 +46,13 @@ class ShopProduct extends Model
     {
         return $this->belongsToMany(ShopCategory::class, ShopProductCategory::class, 'product_id', 'category_id');
     }
-    public function store()
-    {
-        return $this->belongsTo(ShopStore::class, 'store_id', 'id');
-    }
     public function groups()
     {
         return $this->hasMany(ShopProductGroup::class, 'group_id', 'id');
+    }
+    public function stores()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopProductStore::class, 'product_id', 'store_id');
     }
     public function builds()
     {
@@ -127,7 +127,7 @@ class ShopProduct extends Model
      */
     public function showPrice()
     {
-        if (!sc_config('product_price', $this->store_id)) {
+        if (!sc_config('product_price', config('app.storeId'))) {
             return false;
         }
         $price = $this->price;
@@ -150,7 +150,7 @@ class ShopProduct extends Model
      */
     public function showPriceDetail()
     {
-        if (!sc_config('product_price', $this->store_id)) {
+        if (!sc_config('product_price', config('app.storeId'))) {
             return false;
         }
         $price = $this->price;
@@ -177,10 +177,12 @@ class ShopProduct extends Model
             return null;
         }
         $storeId = empty($storeId) ? config('app.storeId') : $storeId;
+        $tableStore = (new ShopStore)->getTable();
+        $tableProductStore = (new ShopProductStore)->getTable();
 
-        //Check vendor status  = 1
-        $vendor = ShopStore::find($storeId);
-        if (!$vendor->status) {
+        // Check store status  = 1
+        $store = ShopStore::find($storeId);
+        if (!$store || !$store->status) {
             return null;
         }
 
@@ -195,9 +197,22 @@ class ShopProduct extends Model
         $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
 
         $product = $this->selectRaw($dataSelect)
-            ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
-            ->where($this->getTable() . '.store_id', $storeId)
-            ->where($tableDescription . '.lang', sc_get_locale());
+            ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id');
+        
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $product = $product->join($tableProductStore, $tableProductStore.'.product_id', $this->getTable() . '.id');
+            $product = $product->join($tableStore, $tableStore . '.id', $tableProductStore.'.store_id');
+            $product = $product->where($tableStore . '.status', '1');
+
+            if (sc_config_global('MultiStorePro')  || 
+                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != 1) )
+            ) {
+                //store of vendor
+                $product = $product->where($tableProductStore.'.store_id', $storeId);
+            }
+        }
+
+        $product = $product->where($tableDescription . '.lang', sc_get_locale());
 
         if (empty($type)) {
             $product = $product->where($this->getTable().'.id', (int)$key);  
@@ -213,7 +228,7 @@ class ShopProduct extends Model
         
         $product = $product
             ->with('images')
-            ->with('store')
+            ->with('stores')
             ->with('promotionPrice');
         $product = $product->first();
         return $product;
@@ -232,6 +247,7 @@ class ShopProduct extends Model
             $product->downloadPath()->delete();
             $product->builds()->delete();
             $product->categories()->detach();
+            $product->stores()->detach();
 
             //Delete custom field
             (new ShopCustomFieldDetail)
@@ -240,8 +256,6 @@ class ShopProduct extends Model
                 ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $product->id)
                 ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
                 ->delete();
-
-
             }
         );
     }
@@ -269,7 +283,7 @@ class ShopProduct extends Model
      */
     public function getUrl()
     {
-        return sc_route('product.detail', ['alias' => $this->alias, 'storeId' => $this->store_id]);
+        return sc_route('product.detail', ['alias' => $this->alias]);
     }
 
     /**
@@ -292,14 +306,14 @@ class ShopProduct extends Model
     }
 
 
-    //Scort
+    
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'id';
         return $query->orderBy($sortBy, $sortOrder);
     }
 
-    /**
+    /*
     *Condition:
     * -Active
     * -In of stock or allow order out of stock
@@ -308,12 +322,12 @@ class ShopProduct extends Model
     */
     public function allowSale()
     {
-        if (!sc_config('product_price', $this->store_id)) {
+        if (!sc_config('product_price', config('app.storeId'))) {
             return false;
         }
         if ($this->status &&
-            (sc_config('product_preorder', $this->store_id) == 1 || $this->date_available === null || date('Y-m-d H:i:s') >= $this->date_available) 
-            && (sc_config('product_buy_out_of_stock', $this->store_id) || $this->stock || empty(sc_config('product_stock', $this->store_id))) 
+            (sc_config('product_preorder', config('app.storeId')) == 1 || $this->date_available === null || date('Y-m-d H:i:s') >= $this->date_available) 
+            && (sc_config('product_buy_out_of_stock', config('app.storeId')) || $this->stock || empty(sc_config('product_stock', config('app.storeId')))) 
             && $this->kind != SC_PRODUCT_GROUP
         ) {
             return true;
@@ -341,7 +355,7 @@ class ShopProduct extends Model
 
     /*
     Upate stock, sold
-     */
+    */
     public static function updateStock($product_id, $qty_change)
     {
         $item = self::find($product_id);
@@ -413,16 +427,6 @@ class ShopProduct extends Model
         return $this;
     }
 
-    /**
-     * Set sub category 
-     *
-     * @param   [int]  $category 
-     *
-     */
-    private function setCategoryStore($category) {
-        $this->sc_category_store = (int)$category;
-        return $this;
-    }
     /**
      * Set array brand 
      *
@@ -611,8 +615,8 @@ class ShopProduct extends Model
     public function buildQuery() {
         $tableDescription = (new ShopProductDescription)->getTable();
         $tableStore = (new ShopStore)->getTable();
+        $tableProductStore = (new ShopProductStore)->getTable();
         $storeId = $this->sc_store_id ? $this->sc_store_id : config('app.storeId');
-        
         //Select field
         $dataSelect = $this->getTable().'.*, '.$tableDescription.'.name, '.$tableDescription.'.keyword, '.$tableDescription.'.description'; 
 
@@ -621,10 +625,21 @@ class ShopProduct extends Model
             ->selectRaw($dataSelect)
             //join description
             ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
-            //join store
-            ->leftJoin($tableStore, $tableStore . '.id', $this->getTable().'.store_id')
-            ->where($tableStore . '.status', '1')
             ->where($tableDescription . '.lang', sc_get_locale());
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $query = $query->join($tableProductStore, $tableProductStore.'.product_id', $this->getTable() . '.id');
+            $query = $query->join($tableStore, $tableStore . '.id', $tableProductStore.'.store_id');
+            $query = $query->where($tableStore . '.status', '1');
+
+            if (sc_config_global('MultiStorePro')  || 
+                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != 1) )
+            ) {
+                //store of vendor
+                $query = $query->where($tableProductStore.'.store_id', $storeId);
+            }
+        }
+
         //search keyword
         if ($this->sc_keyword !='') {
             $query = $query->where(function ($sql) use ($tableDescription) {
@@ -651,7 +666,7 @@ class ShopProduct extends Model
         }
 
         $query = $query->with('promotionPrice');
-        $query = $query->with('store');
+        $query = $query->with('stores');
             
 
         if (count($this->sc_category)) {
@@ -660,13 +675,6 @@ class ShopProduct extends Model
             $query = $query->whereIn($tablePTC . '.category_id', $this->sc_category);
         }
 
-        //Process store
-        if (!empty($this->sc_store_id) || config('app.storeId') != 1) {
-            //If the store is specified or the default is not the primary store
-            //Only get products from eligible stores
-            $query = $query->where($this->getTable().'.store_id', $storeId);
-        }
-        //End store
 
         if (count($this->sc_array_ID)) {
             $query = $query->whereIn($this->getTable().'.id', $this->sc_array_ID);
@@ -685,11 +693,6 @@ class ShopProduct extends Model
         //Filter with brand
         if (count($this->sc_brand)) {
             $query = $query->whereIn($this->getTable().'.brand_id', $this->sc_brand);
-        }
-        //Filter with category store
-        //category_store_id use in version MultivendorPro and plugin MultiStore
-        if ($this->sc_category_store !== 'all') {
-            $query = $query->where($this->getTable().'.category_store_id', $this->sc_category_store);
         }
         //Filter with supplier
         if (count($this->sc_supplier)) {
@@ -780,13 +783,13 @@ class ShopProduct extends Model
     }
 
     /**
-     * Go to shop
+     * Go to shop vendor
      *
      * @return  [type]  [return description]
      */
-    public function goToStore($code = null) {
+    public function goToShop($code = null) {
         if (!$code) {
-            $code = $this->store->code;
+            $code = $this->stores()->first()->code;
         }
         return url('vendor/'.$code);
     }
@@ -803,7 +806,7 @@ class ShopProduct extends Model
                 return;
             }
             $vendorCode = $this->store->code;
-            $vendorUrl = $this->goToStore($vendorCode);
+            $vendorUrl = $this->goToShop($vendorCode);
             return  view($view, 
                 [
                     'vendorCode' => $vendorCode,

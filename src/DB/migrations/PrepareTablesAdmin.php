@@ -125,13 +125,13 @@ class PrepareTablesAdmin extends Migration
             $table->string('office', 300)->nullable();
             $table->string('warehouse', 300)->nullable();
             $table->string('template', 100)->nullable();
-            $table->string('domain', 100)->nullable()->index();
-            $table->string('partner', 10)->default(0)->index();
+            $table->string('domain', 100)->nullable()->index()->comment('Use for multi-store, multi-vendor');
+            $table->string('partner', 10)->default(0)->index()->comment('Use for multi-vendor');
             $table->string('code', 20)->nullable()->unique();
             $table->string('language', 10);
             $table->string('timezone', 50);
             $table->string('currency', 10);
-            $table->integer('status')->default(1)->comment('0:Lock, 1: unlock');
+            $table->integer('status')->default(1)->comment('0:Lock, 1: unlock')->comment('Use for multi-store, multi-vendor');
             $table->integer('active')->default(1)->comment('0:Maintain, 1: Active');
         });
 

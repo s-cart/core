@@ -68,6 +68,14 @@ class AdminStoreInfoController extends RootAdminController
                         $error = 1;
                         $msg = sc_language_render('store.admin.value_cannot_change');
                     }
+                } else if ($name == 'code') {
+                    if (AdminStore::where('code', $value)->where('id', '<>', $storeId)->first()) {
+                        $error = 1;
+                        $msg = sc_language_render('store.admin.code_exist');
+                    } else {
+                        AdminStore::where('id', $storeId)->update([$name => $value]);
+                        $error = 0;
+                    }
                 } else {
                     AdminStore::where('id', $storeId)->update([$name => $value]);
                     $error = 0;

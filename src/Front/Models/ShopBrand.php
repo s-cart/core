@@ -3,6 +3,7 @@ namespace SCart\Core\Front\Models;
 
 use SCart\Core\Front\Models\ShopProduct;
 use Illuminate\Database\Eloquent\Model;
+use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Front\Models\ModelTrait;
 
 
@@ -30,11 +31,17 @@ class ShopBrand extends Model
         return $this->hasMany(ShopProduct::class, 'brand_id', 'id');
     }
 
+    public function stores()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopBrandStore::class, 'brand_id', 'store_id');
+    }
+
     protected static function boot()
     {
         parent::boot();
         // before delete() method call this
         static::deleting(function ($brand) {
+            $brand->stores()->detach();
         });
     }
 
@@ -64,7 +71,7 @@ class ShopBrand extends Model
 
     }
 
-//Scort
+
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'sort';
@@ -84,12 +91,22 @@ class ShopBrand extends Model
         if(empty($key)) {
             return null;
         }
+        $storeId = config('app.storeId');
         if ($type === null) {
-            $data = $this->where('id', (int) $key);
+            $data = $this->where($this->getTable().'.id', (int) $key);
         } else {
             $data = $this->where($type, $key);
         }
-            $data = $data->where('status', 1);
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $tableBrandStore = (new ShopBrandStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $data = $data->join($tableBrandStore, $tableBrandStore.'.brand_id', $this->getTable() . '.id');
+            $data = $data->join($tableStore, $tableStore . '.id', $tableBrandStore.'.store_id');
+            $data = $data->where($tableStore . '.status', '1');
+            $data = $data->where($tableBrandStore.'.store_id', $storeId);
+        }
+
+            $data = $data->where($this->getTable().'.status', 1);
         return $data->first();
     }
 
@@ -107,8 +124,18 @@ class ShopBrand extends Model
      * build Query
      */
     public function buildQuery() {
-        $query = $this->where('status', 1);
-        
+        $storeId = config('app.storeId');
+        $query = $this->where($this->getTable().'.status', 1);
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $tableBrandStore = (new ShopBrandStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $query = $query->join($tableBrandStore, $tableBrandStore.'.brand_id', $this->getTable() . '.id');
+            $query = $query->join($tableStore, $tableStore . '.id', $tableBrandStore.'.store_id');
+            $query = $query->where($tableStore . '.status', '1');
+            $query = $query->where($tableBrandStore.'.store_id', $storeId);
+        }
+
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
                 if(count($where)) {

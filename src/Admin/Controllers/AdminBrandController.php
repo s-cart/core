@@ -31,29 +31,49 @@ class AdminBrandController extends RootAdminController
             'id' => 'ID',
             'name' => sc_language_render('admin.brand.name'),
             'image' => sc_language_render('admin.brand.image'),
-            'sort' => sc_language_render('admin.brand.sort'),
             'status' => sc_language_render('admin.brand.status'),
-            'action' => sc_language_render('action.title'),
         ];
+
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            // Only show store info if store is root
+            $listTh['shop_store'] = sc_language_render('front.store_list');
+        }
+        $listTh['action'] = sc_language_render('action.title');
+
         $obj = new ShopBrand;
         $obj = $obj->orderBy('id', 'desc');
         $dataTmp = $obj->paginate(20);
 
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            $arrId = $dataTmp->pluck('id')->toArray();
+            // Only show store info if store is root
+            $dataStores =  sc_get_list_store_of_brand($arrId);
+        }
+
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataMap = [
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'image' => sc_image_render($row->getThumb(), '50px','',$row['name']),
-                'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
-                'action' => '
-                    <a href="' . sc_route_admin('admin_brand.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
-                  ',
             ];
+            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+                // Only show store info if store is root
+                if (!empty($dataStores[$row['id']])) {
+                    $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
+                    $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
+                } else {
+                    $dataMap['shop_store'] = '';
+                }
+            }
+            $dataMap['action'] = '<a href="' . sc_route_admin('admin_brand.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                                <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+                                ';
+            $dataTr[] = $dataMap;
         }
+
+
 
         $data['listTh'] = $listTh;
         $data['dataTr'] = $dataTr;
@@ -103,6 +123,15 @@ class AdminBrandController extends RootAdminController
             'status' => (!empty($data['status']) ? 1 : 0),
         ];
         $obj = ShopBrand::create($dataInsert);
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $obj->stores()->detach();
+            if ($shopStore) {
+                $obj->stores()->attach($shopStore);
+            }
+        }
 
         return redirect()->route('admin_brand.index')->with('success', sc_language_render('action.create_success'));
 
@@ -212,15 +241,23 @@ public function edit($id)
 
         $brand->update($dataUpdate);
 
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $brand->stores()->detach();
+            if ($shopStore) {
+                $brand->stores()->attach($shopStore);
+            }
+        }
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
 
     }
 
-/*
-Delete list item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list item
+    Need mothod destroy to boot deleting in model
+    */
     public function deleteList()
     {
         if (!request()->ajax()) {

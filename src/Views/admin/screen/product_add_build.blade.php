@@ -169,6 +169,41 @@
                         </div>
                         {{-- //select category --}}
 
+@if (sc_config_global('MultiStorePro'))
+                        {{-- select shop_store --}}
+                        <div class="form-group row kind  {{ $errors->has('shop_store') ? ' text-red' : '' }}">
+                            @php
+                            $listStore = [];
+                            if (is_array(old('shop_store'))) {
+                                foreach(old('shop_store') as $value){
+                                    $listStore[] = (int)$value;
+                                }
+                            }
+                            @endphp
+                            <label for="shop_store" class="col-sm-2 col-form-label">
+                                {{ sc_language_render('multi_store.select_store') }}
+                            </label>
+                            <div class="col-sm-8">
+                                <select class="form-control input-sm shop_store select2" multiple="multiple"
+                                    data-placeholder="{{ sc_language_render('multi_store.select_store') }}" style="width: 100%;"
+                                    name="shop_store[]">
+                                    <option value=""></option>
+                                    @foreach (sc_get_list_code_store() as $k => $v)
+                                    <option value="{{ $k }}"
+                                        {{ (count($listStore) && in_array($k, $listStore))?'selected':'' }}>{{ $v }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('shop_store'))
+                                <span class="form-text">
+                                    <i class="fa fa-info-circle"></i> {{ $errors->first('shop_store') }}
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        {{-- //select shop_store --}}
+@endif
+
 
                         {{-- images --}}
                         <div class="form-group row kind kind0 kind1 {{ $errors->has('image') ? ' text-red' : '' }}">

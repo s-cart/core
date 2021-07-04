@@ -3,7 +3,7 @@
 namespace SCart\Core\Admin\Models;
 
 use SCart\Core\Front\Models\ShopBanner;
-
+use SCart\Core\Front\Models\ShopBannerStore;
 class AdminBanner extends ShopBanner
 {
     /**
@@ -14,9 +14,17 @@ class AdminBanner extends ShopBanner
      * @return  [type]       [return description]
      */
     public static function getBannerAdmin($id) {
-        return self::where('id', $id)
-        ->where('store_id', session('adminStoreId'))
-        ->first();
+        $data = self::where('id', $id);
+        if (sc_config_global('MultiVendorPro')) {
+            if (session('adminStoreId') != SC_ID_ROOT) {
+                $tableBannerStore = (new ShopBannerStore)->getTable();
+                $tableBanner = (new ShopBanner)->getTable();
+                $data = $data->leftJoin($tableBannerStore, $tableBannerStore . '.banner_id', $tableBanner . '.id');
+                $data = $data->where($tableBannerStore, $tableBannerStore . '.store_id', session('adminStoreId'));
+            }
+        }
+        $data = $data->first();
+        return $data;
     }
 
     /**
@@ -30,17 +38,24 @@ class AdminBanner extends ShopBanner
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
         $keyword          = $dataSearch['keyword'] ?? '';
-        $bannerList = (new AdminBanner)
-            ->where('store_id', session('adminStoreId'));
+        $bannerList = (new ShopBanner);
+        $tableBanner = $bannerList->getTable();
+        if (sc_config_global('MultiVendorPro')) {
+            if (session('adminStoreId') != SC_ID_ROOT) {
+                $tableBannerStore = (new ShopBannerStore)->getTable();
+                $bannerList = $bannerList->leftJoin($tableBannerStore, $tableBannerStore . '.banner_id', $tableBanner . '.id');
+                $bannerList = $bannerList->where($tableBannerStore, $tableBannerStore . '.store_id', session('adminStoreId'));
+            }
+        }
         if ($keyword) {
-            $bannerList->where('title', 'like', '%'.$keyword.'%');
+            $bannerList->where($tableBanner.'.title', 'like', '%'.$keyword.'%');
         }
         if ($sort_order && array_key_exists($sort_order, $arrSort)) {
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];
             $bannerList = $bannerList->sort($field, $sort_field);
         } else {
-            $bannerList = $bannerList->sort('id', 'desc');
+            $bannerList = $bannerList->sort($tableBanner.'.id', 'desc');
         }
         $bannerList = $bannerList->paginate(20);
 

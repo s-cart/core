@@ -13,11 +13,13 @@ use SCart\Core\Front\Models\ShopProductBuild;
 use SCart\Core\Front\Models\ShopProductGroup;
 use SCart\Core\Front\Models\ShopProductImage;
 use SCart\Core\Front\Models\ShopSupplier;
+use SCart\Core\Front\Models\ShopProductStore;
 use SCart\Core\Front\Models\ShopProductDownload;
 use SCart\Core\Front\Models\ShopProductProperty;
 use SCart\Core\Front\Models\ShopCustomField;
 use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use SCart\Core\Admin\Models\AdminProduct;
+use SCart\Core\Admin\Models\AdminStore;
 use SCart\Core\Admin\Models\AdminCategory;
 use Illuminate\Support\Facades\Validator;
 
@@ -68,8 +70,7 @@ class AdminProductController extends RootAdminController
 
         $listTh = [
             'id'       => 'ID',
-            'image'    => sc_language_render('product.image'),
-            'sku'      => sc_language_render('product.sku'),
+            'image'     => sc_language_render('product.image'),
             'name'     => sc_language_render('product.name'),
             'category' => sc_language_render('product.category'),
         ];
@@ -82,10 +83,14 @@ class AdminProductController extends RootAdminController
         if (sc_config_admin('product_kind')) {
             $listTh['kind'] = sc_language_render('product.kind');
         }
-        if (sc_config_admin('product_property')) {
-            $listTh['property'] = sc_language_render('product.property');
-        }
+
         $listTh['status'] = sc_language_render('product.status');
+
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT)) {
+                // Only show store info if store is root
+                $listTh['shop_store'] = sc_language_render('front.store_list');
+        }
+
         $listTh['action'] = sc_language_render('action.title');
 
         $keyword     = sc_clean(request('keyword') ?? '');
@@ -106,6 +111,19 @@ class AdminProductController extends RootAdminController
         ];
 
         $dataTmp = (new AdminProduct)->getProductListAdmin($dataSearch);
+        $arrProductId = $dataTmp->pluck('id')->toArray();
+        $categoriesTmp = (new AdminProduct)->getListCategoryIdFromProductId($arrProductId);
+
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            // Only show store info if store is root
+            $tableStore = (new AdminStore)->getTable();
+            $tableProductStore = (new ShopProductStore)->getTable();
+            $dataStores =  ShopProductStore::select($tableStore.'.code', $tableStore.'.id', 'product_id')
+                ->join($tableStore, $tableStore.'.id', $tableProductStore.'.store_id')
+                ->whereIn('product_id', $arrProductId)
+                ->get()
+                ->groupBy('product_id');
+        }
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
@@ -116,14 +134,18 @@ class AdminProductController extends RootAdminController
                 $kind = '<span class="badge badge-danger">' . $kind . '</span>';
             }
             $arrName = [];
-            foreach ($row->categories as $category) {
-                $arrName[] = $categoriesTitle[$category->id] ?? '';
+            $categoriesTmpRow = $categoriesTmp[$row['id']] ?? [];
+            if ($categoriesTmpRow) {
+
             }
+            foreach ($categoriesTmpRow as $category) {
+                $arrName[] = $categoriesTitle[$category->category_id] ?? '';
+            }
+
             $dataMap = [
                 'id' => $row['id'],
                 'image' => sc_image_render($row->getThumb(), '50px', '50px', $row['name']),
-                'sku' => $row['sku'],
-                'name' => $row['name'],
+                'name' => $row['name'].'<br><b>SKU:</b> '.$row['sku'],
                 'category' => implode(';<br>', $arrName),
                 
             ];
@@ -136,10 +158,18 @@ class AdminProductController extends RootAdminController
             if (sc_config_admin('product_kind')) {
                 $dataMap['kind'] = $kind;
             }
-            if (sc_config_admin('product_property')) {
-                $dataMap['property'] = $this->properties[$row['property']] ?? $row['property'];
-            }
+
             $dataMap['status'] = $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>';
+
+            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+                // Only show store info if store is root
+                if (!empty($dataStores[$row['id']])) {
+                    $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
+                    $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
+                } else {
+                    $dataMap['shop_store'] = '';
+                }
+            }
             $dataMap['action'] = '
             <a href="' . sc_route_admin('admin_product.edit', ['id' => $row['id']]) . '">
             <span title="' . sc_language_render('product.admin.edit') . '" type="button" class="btn btn-flat btn-primary">
@@ -147,7 +177,7 @@ class AdminProductController extends RootAdminController
             </span>
             </a>&nbsp;
 
-            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('admin.delete') . '" class="btn btn-flat btn-danger">
+            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger">
             <i class="fas fa-trash-alt"></i>
             </span>';
             $dataTr[] = $dataMap;
@@ -478,7 +508,6 @@ public function createProductGroup()
         $dataInsert = [
             'brand_id'       => $data['brand_id'] ?? 0,
             'supplier_id'    => $data['supplier_id'] ?? 0,
-            'category_store_id' => $data['category_store_id'] ?? 0,
             'price'          => $data['price'] ?? 0,
             'sku'            => $data['sku'],
             'cost'           => $data['cost'] ?? 0,
@@ -497,7 +526,6 @@ public function createProductGroup()
             'status'         => (!empty($data['status']) ? 1 : 0),
             'sort'           => (int) $data['sort'],
             'minimum'        => (int) ($data['minimum'] ?? 0),
-            'store_id'       => session('adminStoreId'),
         ];
 
         if(!empty($data['date_available'])) {
@@ -517,6 +545,15 @@ public function createProductGroup()
         //Insert category
         if ($category) {
             $product->categories()->attach($category);
+        }
+
+        if (sc_config_global('MultiStorePro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $product->stores()->detach();
+            if ($shopStore) {
+                $product->stores()->attach($shopStore);
+            }
         }
 
         //Insert group
@@ -620,12 +657,13 @@ public function createProductGroup()
     public function edit($id)
     {
         $product = (new AdminProduct)->getProductAdmin($id);
-        $categories = (new AdminCategory)->getTreeCategoriesAdmin();
-
+        
         if ($product === null) {
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
-
+        
+        $categories = (new AdminCategory)->getTreeCategoriesAdmin();
+        
         $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [SC_PRODUCT_SINGLE]]);
 
         // html select product group
@@ -811,7 +849,6 @@ public function createProductGroup()
             'tax_id'       => $data['tax_id'] ?? 0,
             'brand_id'     => $data['brand_id'] ?? 0,
             'supplier_id'  => $data['supplier_id'] ?? 0,
-            'category_store_id'     => $data['category_store_id'] ?? 0,
             'price'        => $data['price'] ?? 0,
             'cost'         => $data['cost'] ?? 0,
             'stock'        => $data['stock'] ?? 0,
@@ -826,14 +863,21 @@ public function createProductGroup()
             'alias'        => $data['alias'],
             'status'       => (!empty($data['status']) ? 1 : 0),
             'sort'         => (int) $data['sort'],
-            'minimum'      => (int) ($data['minimum'] ?? 0),
-            'store_id'     => session('adminStoreId'),
+            'minimum'      => (int) ($data['minimum'] ?? 0)
         ];
         if (!empty($data['date_available'])) {
             $dataUpdate['date_available'] = $data['date_available'];
         }
         $product->update($dataUpdate);
 
+        if (sc_config_global('MultiStorePro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $product->stores()->detach();
+            if ($shopStore) {
+                $product->stores()->attach($shopStore);
+            }
+        }
 
         //Update custom field
         if (!empty($data['fields'])) {
@@ -992,7 +1036,7 @@ public function createProductGroup()
                 AdminProduct::destroy($arrDelete);
                 sc_clear_cache('cache_product');
             }
-            
+
             if (count($arrDontPermission)) {
                 return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': ' . json_encode($arrDontPermission)]);
             } elseif (count($arrCantDelete)) {

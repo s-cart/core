@@ -21,11 +21,21 @@ class CheckDomain
             //Check domain exist
             $domain = sc_process_domain_store(url('/')); //domain currently
             $domainRoot = sc_process_domain_store(config('app.url')); //Domain root config in .env
-            $arrDomain = ShopStore::getDomainPartner(); // List domain is partner active
+            $arrDomainPartner = ShopStore::getDomainPartner(); // List domain is partner active
+            $arrDomainActive = ShopStore::getDomainStore(); // List domain is unlock domain
 
-            if (!in_array($domain, $arrDomain) && $domain != $domainRoot) {
-                echo view('deny_domain')->render();
-                exit();
+            if (sc_config_global('MultiVendorPro')) {
+                if (!in_array($domain, $arrDomainPartner) && $domain != $domainRoot) {
+                    echo view('deny_domain')->render();
+                    exit();
+                }
+            }
+
+            if (sc_config_global('MultiStorePro')) {
+                if (!in_array($domain, $arrDomainActive) && $domain != $domainRoot) {
+                    echo view('deny_domain')->render();
+                    exit();
+                }
             }
         }
         return $next($request);

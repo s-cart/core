@@ -3,6 +3,7 @@
 namespace SCart\Core\Admin\Models;
 
 use SCart\Core\Front\Models\ShopLink;
+use SCart\Core\Front\Models\ShopLinkStore;
 
 class AdminLink extends ShopLink
 {
@@ -14,9 +15,17 @@ class AdminLink extends ShopLink
      * @return  [type]       [return description]
      */
     public static function getLinkAdmin($id) {
-        return self::where('id', $id)
-        ->where('store_id', session('adminStoreId'))
-        ->first();
+        $data = self::where('id', $id);
+        if (sc_config_global('MultiVendorPro')) {
+            if (session('adminStoreId') != SC_ID_ROOT) {
+                $tableLinkStore = (new ShopLinkStore)->getTable();
+                $tableLink = (new ShopLink)->getTable();
+                $data = $data->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
+                $data = $data->where($tableLinkStore, $tableLinkStore . '.store_id', session('adminStoreId'));
+            }
+        }
+        $data = $data->first();
+        return $data;
     }
 
     /**
@@ -27,9 +36,17 @@ class AdminLink extends ShopLink
      * @return  [type]               [return description]
      */
     public static function getLinkListAdmin() {
-        $linkList = (new AdminLink)
-            ->where('store_id', session('adminStoreId'))
-            ->orderBy('id', 'desc');
+        $linkList = (new AdminLink);
+        $tableLink = $linkList->getTable();
+        if (sc_config_global('MultiVendorPro')) {
+            if (session('adminStoreId') != SC_ID_ROOT) {
+                $tableLinkStore = (new ShopLinkStore)->getTable();
+                $linkList = $linkList->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
+                $linkList = $linkList->where($tableLinkStore, $tableLinkStore . '.store_id', session('adminStoreId'));
+            }
+        }
+        $linkList = $linkList->orderBy($tableLink.'.id', 'desc');
+
         $linkList = $linkList->paginate(20);
 
         return $linkList;

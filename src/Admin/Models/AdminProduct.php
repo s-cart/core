@@ -3,6 +3,7 @@
 namespace SCart\Core\Admin\Models;
 
 use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopProductStore;
 use SCart\Core\Front\Models\ShopProductDescription;
 use SCart\Core\Front\Models\ShopAttributeGroup;
 use SCart\Core\Front\Models\ShopProductCategory;
@@ -17,12 +18,22 @@ class AdminProduct extends ShopProduct
      * @return  [type]       [return description]
      */
     public static function getProductAdmin($id) {
-        $tableDescription = (new ShopProductDescription())->getTable();
-        $tableProduct = (new ShopProduct())->getTable();
-        return self::where('id', $id)
-        ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
-        ->where($tableProduct . '.store_id', session('adminStoreId'))
-        ->first();
+
+        $tableDescription = (new ShopProductDescription)->getTable();
+        $tableProduct = (new ShopProduct)->getTable();
+        $data =  self::where('id', $id)
+        ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id');
+
+        if (sc_config_global('MultiVendorPro')) {
+            if (session('adminStoreId') != SC_ID_ROOT) {
+                $tableProductStore = (new ShopProductStore)->getTable();
+                $data = $data->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id');
+                $data = $data->where($tableProductStore, $tableProductStore . '.store_id', session('adminStoreId'));
+            }
+        }
+
+        $data = $data->first();
+        return $data;
     }
 
     /**
@@ -40,22 +51,37 @@ class AdminProduct extends ShopProduct
         $tableDescription = (new ShopProductDescription)->getTable();
         $tablePTC         = (new ShopProductCategory)->getTable();
         $tableProduct     = (new ShopProduct)->getTable();
+        $tableProductStore = (new ShopProductStore)->getTable();
+        //Select field
+        $dataSelect = $tableProduct.'.*, '.$tableDescription.'.name, '.$tableDescription.'.keyword, '.$tableDescription.'.description'; 
+
         if ($category_id) {
             $productList = (new ShopProduct)
+                ->selectRaw($dataSelect)
                 ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
                 ->join($tablePTC, $tablePTC . '.product_id', $tableProduct . '.id')
                 ->where($tablePTC . '.category_id', $category_id)
-                ->where($tableProduct . '.store_id', session('adminStoreId'))
                 ->where($tableDescription . '.lang', sc_get_locale());
         } else {
             $productList = (new ShopProduct)
+                ->selectRaw($dataSelect)
                 ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
-                ->where($tableProduct . '.store_id', session('adminStoreId'))
+                ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id')
                 ->where($tableDescription . '.lang', sc_get_locale());
         }
 
+        if (sc_config_global('MultiVendorPro')) {
+            // If multi-vendor
+            // Only get products if store active
+            if (session('adminStoreId') != SC_ID_ROOT) {
+                // Only get products of store if store <> root or store is specified
+                $productList = $productList->where($tableProductStore, $tableProductStore . '.store_id', session('adminStoreId'));
+
+            }
+        }
+
         if ($keyword) {
-            $productList = $productList->where(function ($sql) use($tableDescription, $tableProduct, $keyword){
+            $productList = $productList->where(function ($sql) use ($tableDescription, $tableProduct, $keyword) {
                 $sql->where($tableDescription . '.name', 'like', '%' . $keyword . '%')
                     ->orWhere($tableDescription . '.keyword', 'like', '%' . $keyword . '%')
                     ->orWhere($tableDescription . '.description', 'like', '%' . $keyword . '%')
@@ -69,7 +95,7 @@ class AdminProduct extends ShopProduct
             $sort_field = explode('__', $sort_order)[1];
             $productList = $productList->sort($field, $sort_field);
         } else {
-            $productList = $productList->sort('id', 'desc');
+            $productList = $productList->sort($tableProduct.'.id', 'desc');
         }
         $productList = $productList->paginate(20);
 
@@ -89,6 +115,7 @@ class AdminProduct extends ShopProduct
         $kind             = $dataFilter['kind'] ?? [];
         $tableDescription = (new ShopProductDescription)->getTable();
         $tableProduct     = $this->getTable();
+        $tableProductStore = (new ShopProductStore)->getTable();
         $colSelect = [
             'id',
             'sku',
@@ -96,13 +123,24 @@ class AdminProduct extends ShopProduct
         ];
         $productList = (new ShopProduct)->select($colSelect)
             ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
-            ->where($tableProduct . '.store_id', session('adminStoreId'))
+            ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
+
+        if (sc_config_global('MultiVendorPro')) {
+            // If multi-vendor
+            // Only get products if store active
+            if (session('adminStoreId') != SC_ID_ROOT) {
+                // Only get products of store if store <> root or store is specified
+                $productList = $productList->where($tableProductStore, $tableProductStore . '.store_id', session('adminStoreId'));
+
+            }
+        }
+
         if(is_array($kind) && $kind) {
             $productList = $productList->whereIn('kind', $kind);
         }
         if ($keyword) {
-            $productList = $productList->where(function ($sql) use($tableDescription, $tableProduct, $keyword){
+            $productList = $productList->where(function ($sql) use ($tableDescription, $tableProduct, $keyword) {
                 $sql->where($tableDescription . '.name', 'like', '%' . $keyword . '%')
                     ->orWhere($tableProduct . '.sku', 'like', '%' . $keyword . '%');
             });
@@ -149,7 +187,7 @@ class AdminProduct extends ShopProduct
     }
 
     /**
-     * [checkProductValidationAdmin description]
+     * Validate product
      *
      * @param   [type]$type     [$type description]
      * @param   null  $fieldValue    [$field description]
@@ -160,15 +198,17 @@ class AdminProduct extends ShopProduct
      * @return  [type]          [return description]
      */
     public function checkProductValidationAdmin($type = null, $fieldValue = null, $pId = null, $storeId = null) {
+        $tableProductStore = (new ShopProductStore)->getTable();
         $storeId = $storeId ? sc_clean($storeId) : session('adminStoreId');
         $type = $type ? sc_clean($type) : 'sku';
         $fieldValue = sc_clean($fieldValue);
         $pId = sc_clean($pId);
         $check =  $this
-        ->where($type, $fieldValue)
-        ->where($this->getTable() . '.store_id', $storeId);
+        ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $this->getTable() . '.id')
+        ->where($type, $fieldValue);
+        $check = $check->where($tableProductStore . '.store_id', $storeId);
         if($pId) {
-            $check = $check->where('id', '<>', $pId);
+            $check = $check->where($this->getTable().'.id', '<>', $pId);
         }
         $check = $check->first();
 
@@ -198,7 +238,7 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]           [return description]
      */
-    public function renderAttributeDetailsAdmin($currency = nul, $rate = null)
+    public function renderAttributeDetailsAdmin($currency = null, $rate = null)
     {
         $html = '';
         $details = $this->attributes()->get()->groupBy('attribute_group_id');
@@ -211,6 +251,16 @@ class AdminProduct extends ShopProduct
             }
         }
         return $html;
-    }    
+    }
+
+    /**
+     * Get list category id from product id
+     *
+     * @param [array] $arrProductId
+     * @return collection
+     */
+    public function getListCategoryIdFromProductId($arrProductId) {
+        return (new ShopProductCategory)->whereIn('product_id', $arrProductId)->get()->groupBy('product_id');
+    }
 
 }

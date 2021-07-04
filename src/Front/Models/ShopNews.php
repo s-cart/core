@@ -4,6 +4,7 @@ namespace SCart\Core\Front\Models;
 
 use SCart\Core\Front\Models\ShopNewsDescription;
 use Illuminate\Database\Eloquent\Model;
+use SCart\Core\Front\Models\ShopStore;
 use Cache;
 use SCart\Core\Front\Models\ModelTrait;
 class ShopNews extends Model
@@ -19,6 +20,10 @@ class ShopNews extends Model
         return $this->hasMany(ShopNewsDescription::class, 'news_id', 'id');
     }
 
+    public function stores()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopNewsStore::class, 'news_id', 'store_id');
+    }
     //Function get text description 
     public function getText() {
         return $this->descriptions()->where('lang', sc_get_locale())->first();
@@ -62,7 +67,7 @@ class ShopNews extends Model
         return sc_route('news.detail', ['alias' => $this->alias]);
     }
 
-    //Scort
+    
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'sort';
@@ -87,13 +92,22 @@ class ShopNews extends Model
             ->leftJoin($tableDescription, $tableDescription . '.news_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
+        $storeId = config('app.storeId');
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $tableNewsStore = (new ShopNewsStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $news = $news->join($tableNewsStore, $tableNewsStore.'.news_id', $this->getTable() . '.id');
+            $news = $news->join($tableStore, $tableStore . '.id', $tableNewsStore.'.store_id');
+            $news = $news->where($tableStore . '.status', '1');
+            $news = $news->where($tableNewsStore.'.store_id', $storeId);
+        }
+
         if ($type === null) {
-            $news = $news->where('id', (int) $key);
+            $news = $news->where($this->getTable() .'.id', (int) $key);
         } else {
             $news = $news->where($type, $key);
         }
-        $news = $news->where('status', 1)
-            ->where('store_id', config('app.storeId'))
+        $news = $news->where($this->getTable() .'.status', 1)
             ->first();
         return $news;
     }
@@ -104,6 +118,7 @@ class ShopNews extends Model
         // before delete() method call this
         static::deleting(function ($news) {
             $news->descriptions()->delete();
+            $news->stores()->detach();
             }
         );
     }
@@ -135,9 +150,18 @@ class ShopNews extends Model
                 ->orWhere($tableDescription . '.description', 'like', '%' . $this->sc_keyword . '%');
             });
         }
+        
+        $storeId = config('app.storeId');
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $tableNewsStore = (new ShopNewsStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $query = $query->join($tableNewsStore, $tableNewsStore.'.news_id', $this->getTable() . '.id');
+            $query = $query->join($tableStore, $tableStore . '.id', $tableNewsStore.'.store_id');
+            $query = $query->where($tableStore . '.status', '1');
+            $query = $query->where($tableNewsStore.'.store_id', $storeId);
+        }
 
-        $query = $query->where('status', 1)
-        ->where('store_id', config('app.storeId'));
+        $query = $query->where($this->getTable() .'.status', 1);
 
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {

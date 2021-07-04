@@ -53,25 +53,47 @@ class AdminStoreLinkController extends RootAdminController
             'group' => sc_language_render('admin.link.group'),
             'sort' => sc_language_render('admin.link.sort'),
             'status' => sc_language_render('admin.link.status'),
-            'action' => sc_language_render('action.title'),
         ];
+
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            // Only show store info if store is root
+            $listTh['shop_store'] = sc_language_render('front.store_list');
+        }
+        $listTh['action'] = sc_language_render('action.title');
+
         $dataTmp = AdminLink::getLinkListAdmin();
+
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            $arrId = $dataTmp->pluck('id')->toArray();
+            // Only show store info if store is root
+            $dataStores =  sc_get_list_store_of_link($arrId);
+        }
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataMap = [
                 'name' => sc_language_render($row['name']),
                 'url' => $row['url'],
                 'target' => $this->arrTarget[$row['target']] ?? '',
                 'group' => $this->arrGroup[$row['group']] ?? '',
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
-                'action' => '
-                    <a href="' . sc_route_admin('admin_store_link.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
-                  ',
             ];
+
+            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+                // Only show store info if store is root
+                if (!empty($dataStores[$row['id']])) {
+                    $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
+                    $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
+                } else {
+                    $dataMap['shop_store'] = '';
+                }
+            }
+            $dataMap['action'] = '<a href="' . sc_route_admin('admin_store_link.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+            ';
+            $dataTr[] = $dataMap;
+
         }
 
         $data['listTh'] = $listTh;
@@ -137,9 +159,18 @@ class AdminStoreLinkController extends RootAdminController
             'group'    => $data['group'],
             'sort'     => $data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
-            'store_id' => session('adminStoreId'),
         ];
-        AdminLink::createLinkAdmin($dataInsert);
+        $link = AdminLink::createLinkAdmin($dataInsert);
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $link->stores()->detach();
+            if ($shopStore) {
+                $link->stores()->attach($shopStore);
+            }
+        }
+
         return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.create_success'));
 
     }
@@ -199,9 +230,17 @@ class AdminStoreLinkController extends RootAdminController
             'group'    => $data['group'],
             'sort'     => $data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
-            'store_id' => session('adminStoreId'),
         ];
         $link->update($dataUpdate);
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $link->stores()->detach();
+            if ($shopStore) {
+                $link->stores()->attach($shopStore);
+            }
+        }
 
         return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.edit_success'));
 

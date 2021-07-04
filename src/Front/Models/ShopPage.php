@@ -4,6 +4,7 @@ namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cache;
+use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Front\Models\ModelTrait;
 class ShopPage extends Model
 {
@@ -13,6 +14,11 @@ class ShopPage extends Model
     public $table          = SC_DB_PREFIX.'shop_page';
     protected $connection  = SC_CONNECTION;
     protected $guarded     = [];
+
+    public function stores()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopPageStore::class, 'page_id', 'store_id');
+    }
 
     public function descriptions()
     {
@@ -77,13 +83,22 @@ class ShopPage extends Model
             ->leftJoin($tableDescription, $tableDescription . '.page_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
+        $storeId = config('app.storeId');
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $tablePageStore = (new ShopPageStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $page = $page->join($tablePageStore, $tablePageStore.'.page_id', $this->getTable() . '.id');
+            $page = $page->join($tableStore, $tableStore . '.id', $tablePageStore.'.store_id');
+            $page = $page->where($tableStore . '.status', '1');
+            $page = $page->where($tablePageStore.'.store_id', $storeId);
+        }
+
         if ($type === null) {
-            $page = $page->where('id', (int) $key);
+            $page = $page->where($this->getTable() .'.id', (int) $key);
         } else {
             $page = $page->where($type, $key);
         }
-        $page = $page->where('status', 1)
-        ->where('store_id', config('app.storeId'));
+        $page = $page->where($this->getTable() .'.status', 1);
 
         return $page->first();
     }
@@ -94,6 +109,7 @@ class ShopPage extends Model
         // before delete() method call this
         static::deleting(function ($page) {
             $page->descriptions()->delete();
+            $page->stores()->detach();
         }
         );
     }
@@ -118,6 +134,17 @@ class ShopPage extends Model
         $query = $this
             ->leftJoin($tableDescription, $tableDescription . '.page_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
+
+        $storeId = config('app.storeId');
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $tablePageStore = (new ShopPageStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $query = $query->join($tablePageStore, $tablePageStore.'.page_id', $this->getTable() . '.id');
+            $query = $query->join($tableStore, $tableStore . '.id', $tablePageStore.'.store_id');
+            $query = $query->where($tableStore . '.status', '1');
+            $query = $query->where($tablePageStore.'.store_id', $storeId);
+        }
+
         //search keyword
         if ($this->sc_keyword !='') {
             $query = $query->where(function ($sql) use($tableDescription){
@@ -127,8 +154,7 @@ class ShopPage extends Model
             });
         }
 
-        $query = $query->where('status', 1)
-            ->where('store_id', config('app.storeId'));
+        $query = $query->where($this->getTable() .'status', 1);
 
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {

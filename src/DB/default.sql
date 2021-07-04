@@ -151,7 +151,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 
 /*admin_store*/
 INSERT INTO `__SC_DB_PREFIX__admin_store` (`logo`, `template`, `phone`, `long_phone`, `email`, `time_active`, `address`, `timezone`, `language`, `currency`, `code`, `domain`) VALUES  
-('data/logo/scart-mid.png', 's-cart-light', '0123456789', 'Support: 0987654321', '__adminEmail__', '', '123st - abc - xyz', '__timezone_default__', '__language_default__', 'USD', 'scart-ecommerce', '__domain__');
+('data/logo/scart-mid.png', 's-cart-light', '0123456789', 'Support: 0987654321', '__adminEmail__', '', '123st - abc - xyz', '__timezone_default__', '__language_default__', 'USD', 's-cart', '__domain__');
 
 /*admin_store_description*/
 INSERT INTO `__SC_DB_PREFIX__admin_store_description` (`store_id`, `lang`, `title`, `description`, `keyword`, `maintain_content`, `maintain_note`) VALUES  
@@ -210,13 +210,22 @@ INSERT INTO `__SC_DB_PREFIX__shop_layout_position` (`key`, `name`) VALUES
 ('banner_top', 'admin.layout_page_block.banner_top');
 
 /*shop_link*/
-INSERT INTO `__SC_DB_PREFIX__shop_link` (`name`, `url`, `target`, `module`, `group`, `status`, `sort`, `store_id`) VALUES 
-('front.blog', 'route::news', '_self', '',  'menu', '1', '30',  1),
-('front.contact', 'route::contact', '_self', '',  'menu', '1', '40',  1),
-('front.about', 'route::page.detail::about', '_self', '',  'menu', '1', '50',  1),
-('front.my_profile', 'route::login', '_self', '',  'footer', '1', '60',  1),
-('front.compare_page', 'route::compare', '_self', '',  'footer', '1', '70',  1),
-('front.wishlist_page', 'route::wishlist', '_self', '',  'footer', '1', '80',  1);
+INSERT INTO `__SC_DB_PREFIX__shop_link` (`name`, `url`, `target`, `module`, `group`, `status`, `sort`) VALUES 
+('front.blog', 'route::news', '_self', '',  'menu', '1', '30'),
+('front.contact', 'route::contact', '_self', '',  'menu', '1', '40'),
+('front.about', 'route::page.detail::about', '_self', '',  'menu', '1', '50'),
+('front.my_profile', 'route::login', '_self', '',  'footer', '1', '60'),
+('front.compare_page', 'route::compare', '_self', '',  'footer', '1', '70'),
+('front.wishlist_page', 'route::wishlist', '_self', '',  'footer', '1', '80');
+
+/*shop_link_store*/
+INSERT INTO `__SC_DB_PREFIX__shop_link_store` (`link_id`, `store_id`) VALUES 
+(1,'1'),
+(2,'1'),
+(3,'1'),
+(4,'1'),
+(5,'1'),
+(6,'1');
 
 /*shop_shipping_standard*/
 INSERT INTO `__SC_DB_PREFIX__shop_shipping_standard` (`fee`, `shipping_free`) VALUES (20, 10000);
@@ -242,8 +251,12 @@ INSERT INTO `__SC_DB_PREFIX__shop_order_status` (`id`, `name`) VALUES
 ('6','Failed');
 
 /*shop_page*/
-INSERT INTO `__SC_DB_PREFIX__shop_page` (`id`, `image`,  `alias`, `status`, `store_id`) VALUES 
-('1', '', 'about', '1', 1);
+INSERT INTO `__SC_DB_PREFIX__shop_page` (`id`, `image`,  `alias`, `status`) VALUES 
+('1', '', 'about', '1');
+
+/*shop_page_store*/
+INSERT INTO `__SC_DB_PREFIX__shop_page_store` (`page_id`, `store_id`) VALUES 
+(1,'1');
 
 /*shop_page_description*/
 INSERT INTO `__SC_DB_PREFIX__shop_page_description` (`page_id`, `lang`,  `title`, `keyword`, `description`, `content`) VALUES 

@@ -1,22 +1,43 @@
 /*shop_product*/
-INSERT INTO `__SC_DB_PREFIX__shop_product` (`id`, `sku`, `alias`, `image`, `brand_id`, `supplier_id`, `price`, `cost`, `stock`, `status`, `kind`, `tax_id`, `date_available`, `sold`, `minimum`, `store_id`) VALUES 
-(1,'ABCZZ','demo-alias-name-product-1','/data/product/product-1.png','1','1','15000','10000','99','1',0,'auto', null, '1','0', 1),
-(2,'LEDFAN1','demo-alias-name-product-2','/data/product/product-2.png','1','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(3,'CLOCKFAN1','demo-alias-name-product-3','/data/product/product-3.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(4,'CLOCKFAN2','demo-alias-name-product-4','/data/product/product-4.png','3','1','15000','10000','100','1',0,'auto', null, '0','5', 1),
-(5,'CLOCKFAN3','demo-alias-name-product-5','/data/product/product-5.png','1','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(6,'TMC2208','demo-alias-name-product-6','/data/product/product-6.png','1','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(7,'FILAMENT','demo-alias-name-product-7','/data/product/product-7.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(8,'A4988','demo-alias-name-product-8','/data/product/product-8.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(9,'ANYCUBIC-P','demo-alias-name-product-9','/data/product/product-9.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(10,'3DHLFD-P','demo-alias-name-product-10','/data/product/product-10.png','4','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(11,'SS495A','demo-alias-name-product-11','/data/product/product-11.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(12,'3D-CARBON175','demo-alias-name-product-12','/data/product/product-12.png','2','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(13,'3D-GOLD175','demo-alias-name-product-13','/data/product/product-13.png','3','1','10000','5000','0','1',0,'auto', null, '0','0', 1),
-(14,'LCD12864-3D','demo-alias-name-product-14','/data/product/product-14.png','3','1','15000','10000','100','1',0,'auto', null, '0','0', 1),
-(15,'LCD2004-3D','demo-alias-name-product-15','/data/product/product-15.png','3','1','15000','10000','100','1',1,'auto', null, '0','0', 1),
-(16,'RAMPS15-3D','demo-alias-name-product-16','/data/product/product-16.png','2','1','0','0','0','1',2,'auto', null, '0','0', 1),
-(17,'ALOKK1-AY','demo-alias-name-product-17','/data/product/product-10.png','3','1','15000','10000','100','1',0,'auto', null, '0','0', 1);
+INSERT INTO `__SC_DB_PREFIX__shop_product` (`id`, `sku`, `alias`, `image`, `brand_id`, `supplier_id`, `price`, `cost`, `stock`, `status`, `kind`, `tax_id`, `date_available`, `sold`, `minimum`) VALUES 
+(1,'ABCZZ','demo-alias-name-product-1','/data/product/product-1.png','1','1','15000','10000','99','1',0,'auto', null, '1','0'),
+(2,'LEDFAN1','demo-alias-name-product-2','/data/product/product-2.png','1','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(3,'CLOCKFAN1','demo-alias-name-product-3','/data/product/product-3.png','2','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(4,'CLOCKFAN2','demo-alias-name-product-4','/data/product/product-4.png','3','1','15000','10000','100','1',0,'auto', null, '0','5'),
+(5,'CLOCKFAN3','demo-alias-name-product-5','/data/product/product-5.png','1','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(6,'TMC2208','demo-alias-name-product-6','/data/product/product-6.png','1','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(7,'FILAMENT','demo-alias-name-product-7','/data/product/product-7.png','2','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(8,'A4988','demo-alias-name-product-8','/data/product/product-8.png','2','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(9,'ANYCUBIC-P','demo-alias-name-product-9','/data/product/product-9.png','2','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(10,'3DHLFD-P','demo-alias-name-product-10','/data/product/product-10.png','4','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(11,'SS495A','demo-alias-name-product-11','/data/product/product-11.png','2','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(12,'3D-CARBON175','demo-alias-name-product-12','/data/product/product-12.png','2','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(13,'3D-GOLD175','demo-alias-name-product-13','/data/product/product-13.png','3','1','10000','5000','0','1',0,'auto', null, '0','0'),
+(14,'LCD12864-3D','demo-alias-name-product-14','/data/product/product-14.png','3','1','15000','10000','100','1',0,'auto', null, '0','0'),
+(15,'LCD2004-3D','demo-alias-name-product-15','/data/product/product-15.png','3','1','15000','10000','100','1',1,'auto', null, '0','0'),
+(16,'RAMPS15-3D','demo-alias-name-product-16','/data/product/product-16.png','2','1','0','0','0','1',2,'auto', null, '0','0'),
+(17,'ALOKK1-AY','demo-alias-name-product-17','/data/product/product-10.png','3','1','15000','10000','100','1',0,'auto', null, '0','0');
+
+
+/*shop_product_store*/
+INSERT INTO `__SC_DB_PREFIX__shop_product_store` (`product_id`, `store_id`) VALUES 
+(1,'1'),
+(2,'1'),
+(3,'1'),
+(4,'1'),
+(5,'1'),
+(6,'1'),
+(7,'1'),
+(8,'1'),
+(9,'1'),
+(10,'1'),
+(11,'1'),
+(12,'1'),
+(13,'1'),
+(14,'1'),
+(15,'1'),
+(16,'1'),
+(17,'1');
 
 /*shop_product_description*/
 INSERT INTO `__SC_DB_PREFIX__shop_product_description` (`product_id`, `lang`, `name`, `keyword`, `description`, `content`) VALUES 
@@ -169,11 +190,19 @@ INSERT INTO `__SC_DB_PREFIX__shop_product_promotion` (`product_id`, `price_promo
 ('11', '600');
 
 /*shop_banner*/
-INSERT INTO `__SC_DB_PREFIX__shop_banner` (`title`, `image`, `html`, `target`, `status`, `type`, `store_id`) VALUES 
-('Banner 1', '/data/banner/Main-banner-1-1903x600.jpg', '<h1 class=\"swiper-title-1\" data-caption-animate=\"fadeScale\" data-caption-delay=\"100\">Top-notch Furniture</h1><p class=\"biggest text-white-70\" data-caption-animate=\"fadeScale\" data-caption-delay=\"200\">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class=\"button-wrap\" data-caption-animate=\"fadeInUp\" data-caption-delay=\"300\"> <span class=\"button button-zachem-tak-delat button-white button-zakaria\"> Shop now</span> </div>',  '_self',  1,  'banner',  1),
-('Banner 2','/data/banner/Main-banner-3-1903x600.jpg', '<h1 class=\"swiper-title-1\" data-caption-animate=\"fadeScale\" data-caption-delay=\"100\">Top-notch Furniture</h1><p class=\"biggest text-white-70\" data-caption-animate=\"fadeScale\" data-caption-delay=\"200\">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class=\"button-wrap\" data-caption-animate=\"fadeInUp\" data-caption-delay=\"300\"> <span class=\"button button-zachem-tak-delat button-white button-zakaria\"> Shop now</span> </div>',  '_self',  1,  'banner',  1),
-('Banner 3','/data/banner/bgbr.jpg', '',  '_self',  1,  'breadcrumb',  1),
-('Banner 4','/data/banner/store-1.jpg', '',  '_self',  1,  'banner-store',  1);
+INSERT INTO `__SC_DB_PREFIX__shop_banner` (`title`, `image`, `html`, `target`, `status`, `type`) VALUES 
+('Banner 1', '/data/banner/Main-banner-1-1903x600.jpg', '<h1 class=\"swiper-title-1\" data-caption-animate=\"fadeScale\" data-caption-delay=\"100\">Top-notch Furniture</h1><p class=\"biggest text-white-70\" data-caption-animate=\"fadeScale\" data-caption-delay=\"200\">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class=\"button-wrap\" data-caption-animate=\"fadeInUp\" data-caption-delay=\"300\"> <span class=\"button button-zachem-tak-delat button-white button-zakaria\"> Shop now</span> </div>',  '_self',  1,  'banner'),
+('Banner 2','/data/banner/Main-banner-3-1903x600.jpg', '<h1 class=\"swiper-title-1\" data-caption-animate=\"fadeScale\" data-caption-delay=\"100\">Top-notch Furniture</h1><p class=\"biggest text-white-70\" data-caption-animate=\"fadeScale\" data-caption-delay=\"200\">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class=\"button-wrap\" data-caption-animate=\"fadeInUp\" data-caption-delay=\"300\"> <span class=\"button button-zachem-tak-delat button-white button-zakaria\"> Shop now</span> </div>',  '_self',  1,  'banner'),
+('Banner 3','/data/banner/bgbr.jpg', '',  '_self',  1,  'breadcrumb'),
+('Banner 4','/data/banner/store-1.jpg', '',  '_self',  1,  'banner-store');
+
+
+/*shop_banner_store*/
+INSERT INTO `__SC_DB_PREFIX__shop_banner_store` (`banner_id`, `store_id`) VALUES 
+(1,'1'),
+(2,'1'),
+(3,'1'),
+(4,'1');
 
 
 /*shop_brand*/
@@ -186,6 +215,18 @@ INSERT INTO `__SC_DB_PREFIX__shop_brand` (`name`, `alias`, `image`, `url`, `stat
 ('Metabo', 'metabo', '/data/brand/06-181x52.png',  '', '1', '0'),
 ('Avatar', 'avatar', '/data/brand/07-181x52.png',  '', '1', '0'),
 ('Brand KA', 'brand-ka', '/data/brand/08-181x52.png',  '', '1', '0');
+
+/*shop_brand_store*/
+INSERT INTO `__SC_DB_PREFIX__shop_brand_store` (`brand_id`, `store_id`) VALUES 
+(1,'1'),
+(2,'1'),
+(3,'1'),
+(4,'1'),
+(5,'1'),
+(6,'1'),
+(7,'1'),
+(8,'1');
+
 
 /*shop_supplier*/
 INSERT INTO `__SC_DB_PREFIX__shop_supplier` (`id`, `alias`, `name`, `email`, `phone`, `image`, `address`, `url`, `sort`, `store_id`) VALUES 
@@ -209,6 +250,21 @@ INSERT INTO `__SC_DB_PREFIX__shop_category` (`id`, `alias`, `image`, `parent`, `
 ('12', 'women-accessaries', '/data/category/img-42.jpg', '4',  '0', '3','1'),
 ('13', 'men-accessaries', '/data/category/img-40.jpg', '4',  '0', '3','1');
 
+/*shop_category_store*/
+INSERT INTO `__SC_DB_PREFIX__shop_category_store` (`category_id`, `store_id`) VALUES 
+(1,'1'),
+(2,'1'),
+(3,'1'),
+(4,'1'),
+(5,'1'),
+(6,'1'),
+(7,'1'),
+(8,'1'),
+(9,'1'),
+(10,'1'),
+(11,'1'),
+(12,'1'),
+(13,'1');
 
 /*shop_category_description*/
 INSERT INTO `__SC_DB_PREFIX__shop_category_description` (`category_id`, `lang`, `title`, `keyword`, `description`) VALUES 
@@ -240,13 +296,13 @@ INSERT INTO `__SC_DB_PREFIX__shop_category_description` (`category_id`, `lang`, 
 ('13', 'vi', 'Phụ kiện nam', '', '');
 
 /*shop_news*/
-INSERT INTO `__SC_DB_PREFIX__shop_news` (`id`, `alias`, `image`, `sort`, `status`, `created_at`, `store_id`) VALUES 
-(1, 'demo-alias-blog-1', '/data/content/blog-1.jpg',  0, '1', now(), 1),
-(2, 'demo-alias-blog-2', '/data/content/blog-2.jpg',  0, '1', now(), 1),
-(3, 'demo-alias-blog-3', '/data/content/blog-3.jpg',  0, '1', now(), 1),
-(4, 'demo-alias-blog-4', '/data/content/blog-4.jpg',  0, '1', now(), 1),
-(5, 'demo-alias-blog-5', '/data/content/blog-5.jpg',  0, '1', now(), 1),
-(6, 'demo-alias-blog-6', '/data/content/blog-6.jpg',  0, '1', now(), 1);
+INSERT INTO `__SC_DB_PREFIX__shop_news` (`id`, `alias`, `image`, `sort`, `status`, `created_at`) VALUES 
+(1, 'demo-alias-blog-1', '/data/content/blog-1.jpg',  0, '1', now()),
+(2, 'demo-alias-blog-2', '/data/content/blog-2.jpg',  0, '1', now()),
+(3, 'demo-alias-blog-3', '/data/content/blog-3.jpg',  0, '1', now()),
+(4, 'demo-alias-blog-4', '/data/content/blog-4.jpg',  0, '1', now()),
+(5, 'demo-alias-blog-5', '/data/content/blog-5.jpg',  0, '1', now()),
+(6, 'demo-alias-blog-6', '/data/content/blog-6.jpg',  0, '1', now());
 
 /*shop_news_description*/
 INSERT INTO `__SC_DB_PREFIX__shop_news_description` (`news_id`, `lang`, `title`, `keyword`, `description`, `content`) VALUES 

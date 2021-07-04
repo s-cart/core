@@ -90,7 +90,7 @@ class ShopOrder extends Model
         }
     }
 
-//Scort
+
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'sort';

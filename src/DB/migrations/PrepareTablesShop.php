@@ -99,7 +99,6 @@ class PrepareTablesShop extends Migration
             $table->string('module', 100)->nullable();
             $table->tinyInteger('status')->default(0);
             $table->integer('sort')->default(0);
-            $table->integer('store_id')->default(1)->index();
             }
         );
 
@@ -256,7 +255,6 @@ class PrepareTablesShop extends Migration
             $table->string('image', 255)->nullable();
             $table->string('alias', 120)->index();
             $table->integer('status')->default(0);
-            $table->integer('store_id')->default(1)->index();
             }
         );
 
@@ -307,8 +305,6 @@ class PrepareTablesShop extends Migration
             $table->integer('sort')->default(0);
             $table->integer('view')->default(0);
             $table->string('alias', 120)->index();
-            $table->integer('category_store_id')->default(1)->nullable()->index();
-            $table->integer('store_id')->default(1)->index();
             $table->dateTime('date_lastview')->nullable();
             $table->date('date_available')->nullable();
             $table->timestamps();
@@ -488,7 +484,6 @@ class PrepareTablesShop extends Migration
             $table->string('alias', 120)->index();
             $table->integer('sort')->default(0);
             $table->tinyInteger('status')->default(0);
-            $table->integer('store_id')->default(1)->index();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             }
@@ -678,6 +673,55 @@ class PrepareTablesShop extends Migration
             }
         );
 
+        //Multi store
+        Schema::create(SC_DB_PREFIX.'shop_product_store', function (Blueprint $table) {
+            $table->integer('product_id');
+            $table->integer('store_id');
+            $table->primary(['product_id', 'store_id']);
+            }
+        );
+
+        Schema::create(SC_DB_PREFIX.'shop_category_store', function (Blueprint $table) {
+            $table->integer('category_id');
+            $table->integer('store_id');
+            $table->primary(['category_id', 'store_id']);
+            }
+        );
+
+        Schema::create(SC_DB_PREFIX.'shop_brand_store', function (Blueprint $table) {
+            $table->integer('brand_id');
+            $table->integer('store_id');
+            $table->primary(['brand_id', 'store_id']);
+            }
+        );
+
+        Schema::create(SC_DB_PREFIX.'shop_banner_store', function (Blueprint $table) {
+            $table->integer('banner_id');
+            $table->integer('store_id');
+            $table->primary(['banner_id', 'store_id']);
+            }
+        );
+
+        Schema::create(SC_DB_PREFIX.'shop_news_store', function (Blueprint $table) {
+            $table->integer('news_id');
+            $table->integer('store_id');
+            $table->primary(['news_id', 'store_id']);
+            }
+        );
+
+        Schema::create(SC_DB_PREFIX.'shop_page_store', function (Blueprint $table) {
+            $table->integer('page_id');
+            $table->integer('store_id');
+            $table->primary(['page_id', 'store_id']);
+            }
+        );
+
+        Schema::create(SC_DB_PREFIX.'shop_link_store', function (Blueprint $table) {
+            $table->integer('link_id');
+            $table->integer('store_id');
+            $table->primary(['link_id', 'store_id']);
+            }
+        );
     }
 
     /**
@@ -752,6 +796,14 @@ class PrepareTablesShop extends Migration
         Schema::dropIfExists(SC_DB_PREFIX.'shop_custom_field_detail');
         //Languages
         Schema::dropIfExists(SC_DB_PREFIX.'languages');
+        //Multi store
+        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_store');
+        Schema::dropIfExists(SC_DB_PREFIX.'shop_category_store');       
+        Schema::dropIfExists(SC_DB_PREFIX.'shop_brand_store');       
+        Schema::dropIfExists(SC_DB_PREFIX.'shop_banner_store');       
+        Schema::dropIfExists(SC_DB_PREFIX.'shop_news_store');       
+        Schema::dropIfExists(SC_DB_PREFIX.'shop_page_store');       
+        Schema::dropIfExists(SC_DB_PREFIX.'shop_link_store');       
     }
 
 }

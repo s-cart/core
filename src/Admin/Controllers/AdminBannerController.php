@@ -50,8 +50,12 @@ class AdminBannerController extends RootAdminController
             'click'  => sc_language_render('admin.banner.click'),
             'target' => sc_language_render('admin.banner.target'),
             'type'   => sc_language_render('admin.banner.type'),
-            'action' => sc_language_render('action.title'),
         ];
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            // Only show store info if store is root
+            $listTh['shop_store'] = sc_language_render('front.store_list');
+        }
+        $listTh['action'] = sc_language_render('action.title');
 
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $keyword    = sc_clean(request('keyword') ?? '');
@@ -67,9 +71,15 @@ class AdminBannerController extends RootAdminController
         ];
         $dataTmp = AdminBanner::getBannerListAdmin($dataSearch);
 
+        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            $arrId = $dataTmp->pluck('id')->toArray();
+            // Only show store info if store is root
+            $dataStores =  sc_get_list_store_of_banner($arrId);
+        }
+
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataMap = [
                 'image' => sc_image_render($row->getThumb(), '', '50px', 'Banner'),
                 'title' => $row['title'],
                 'url' => $row['url'],
@@ -78,11 +88,22 @@ class AdminBannerController extends RootAdminController
                 'click' => number_format($row['click']),
                 'target' => $row['target'],
                 'type' => $this->dataType[$row['type']]??'N/A',
-                'action' => '
-                    <a href="' . sc_route_admin('admin_banner.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
-                  ',
             ];
+
+            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+                // Only show store info if store is root
+                if (!empty($dataStores[$row['id']])) {
+                    $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
+                    $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
+                } else {
+                    $dataMap['shop_store'] = '';
+                }
+            }
+            $dataMap['action'] = '<a href="' . sc_route_admin('admin_banner.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+            ';
+            $dataTr[] = $dataMap;
+
         }
 
         $data['listTh'] = $listTh;
@@ -172,9 +193,18 @@ class AdminBannerController extends RootAdminController
             'target'   => $data['target'],
             'status'   => empty($data['status']) ? 0 : 1,
             'sort'     => (int) $data['sort'],
-            'store_id' => session('adminStoreId'),
         ];
-        AdminBanner::createBannerAdmin($dataInsert);
+        $banner = AdminBanner::createBannerAdmin($dataInsert);
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $banner->stores()->detach();
+            if ($shopStore) {
+                $banner->stores()->attach($shopStore);
+            }
+        }
+
         return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.create_success'));
 
     }
@@ -236,10 +266,17 @@ class AdminBannerController extends RootAdminController
             'target'   => $data['target'],
             'status'   => empty($data['status']) ? 0 : 1,
             'sort'     => (int) $data['sort'],
-            'store_id' => session('adminStoreId'),
-
         ];
         $banner->update($dataUpdate);
+
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            // If multi-store
+            $shopStore        = $data['shop_store'] ?? [];
+            $banner->stores()->detach();
+            if ($shopStore) {
+                $banner->stores()->attach($shopStore);
+            }
+        }
 
         return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.edit_success'));
 

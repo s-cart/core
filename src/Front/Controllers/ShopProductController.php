@@ -82,25 +82,23 @@ class ShopProductController extends RootFrontController
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             $alias = $params[1] ?? '';
-            $storeId = $params[2] ?? '';
             sc_lang_switch($lang);
         } else {
             $alias = $params[0] ?? '';
-            $storeId = $params[1] ?? '';
         }
-        return $this->_productDetail($alias, $storeId);
+        return $this->_productDetail($alias);
     }
 
     /**
      * Get product detail
      *
      * @param   [string]  $alias      [$alias description]
-     * @param   [string]  $storeId  [$storeCode description]
      *
      * @return  [mix]
      */
-    private function _productDetail($alias, $storeId)
+    private function _productDetail($alias)
     {
+        $storeId = config('app.storeId');
         $product = (new ShopProduct)->getDetail($alias, $type = 'alias', $storeId);
         if ($product && $product->status && (!sc_config('product_stock', $storeId) || sc_config('product_display_out_of_stock', $storeId) || $product->stock > 0)) {
             //Update last view

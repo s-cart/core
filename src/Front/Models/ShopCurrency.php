@@ -241,7 +241,7 @@ class ShopCurrency extends Model
             ->sort()
             ->get();
     }
-    //Scort
+    
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'sort';

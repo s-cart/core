@@ -31,7 +31,7 @@ class AdminApiConnectionController extends RootAdminController
         $listTh = [
             'id' => 'ID',
             'description' => sc_language_render('admin.api_connection.description'),
-            'apiconnection' => sc_language_render('admin.api_connection.apikey'),
+            'apiconnection' => sc_language_render('admin.api_connection.connection'),
             'apikey' => sc_language_render('admin.api_connection.apikey'),
             'expire' => sc_language_render('admin.api_connection.expire'),
             'last_active' => sc_language_render('admin.api_connection.last_active'),

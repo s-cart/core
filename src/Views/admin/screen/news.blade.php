@@ -197,6 +197,43 @@
                             </div>
                         </div>
 
+@if (sc_config_global('MultiStorePro'))
+                        {{-- select shop_store --}}
+                        @php
+                        $listStore = [];
+                        $shop_store = old('shop_store', sc_get_list_store_of_news_detail($news['id'] ?? ''));
+                        if(is_array($shop_store)){
+                            foreach($shop_store as $value){
+                                $listStore[] = (int)$value;
+                            }
+                        }
+                        @endphp
+              
+                        <div class="form-group row {{ $errors->has('shop_store') ? ' text-red' : '' }}">
+                            <label for="shop_store"
+                                class="col-sm-2 col-form-label">{{ sc_language_render('multi_store.select_store') }}</label>
+                            <div class="col-sm-8">
+                                <select class="form-control shop_store select2" multiple="multiple"
+                                    data-placeholder="{{ sc_language_render('multi_store.select_store') }}" style="width: 100%;"
+                                    name="shop_store[]">
+                                    <option value=""></option>
+                                    @foreach (sc_get_list_code_store() as $k => $v)
+                                    <option value="{{ $k }}"
+                                        {{ (count($listStore) && in_array($k, $listStore))?'selected':'' }}>{{ $v }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('shop_store'))
+                                <span class="form-text">
+                                    <i class="fa fa-info-circle"></i> {{ $errors->first('shop_store') }}
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                        {{-- //select shop_store --}}
+@endif
+
+
                         <div class="form-group  row">
                             <label for="status" class="col-sm-2 col-form-label">{{ sc_language_render('admin.news.status') }}</label>
                             <div class="col-sm-8">

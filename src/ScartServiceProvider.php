@@ -110,13 +110,17 @@ class ScartServiceProvider extends ServiceProvider
         //Process for multi store
         if(sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
             $domain = sc_process_domain_store(url('/'));
-            $arrDomain = ShopStore::getDomainPartner();
+            if (sc_config_global('MultiVendorPro')) {
+                $arrDomain = ShopStore::getDomainPartner();
+            }
+            if (sc_config_global('MultiStorePro')) {
+                $arrDomain = ShopStore::getDomainStore();
+            }
             if (in_array($domain, $arrDomain)) {
                 $storeId =  array_search($domain, $arrDomain);
             }
         }
         //End process multi store
-
         config(['app.storeId' => $storeId]);
         // end set store Id
 

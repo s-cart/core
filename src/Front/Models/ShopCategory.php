@@ -3,6 +3,7 @@ namespace SCart\Core\Front\Models;
 
 use SCart\Core\Front\Models\ShopCategoryDescription;
 use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopStore;
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ModelTrait;
 
@@ -21,6 +22,10 @@ class ShopCategory extends Model
     public function products()
     {
         return $this->belongsToMany(ShopProduct::class, SC_DB_PREFIX . 'shop_product_category', 'category_id', 'product_id');
+    }
+    public function stores()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopCategoryStore::class, 'category_id', 'store_id');
     }
 
     public function descriptions()
@@ -58,6 +63,7 @@ class ShopCategory extends Model
             //Delete category descrition
             $category->descriptions()->delete();
             $category->products()->detach();
+            $category->stores()->detach();
         });
     }
 
@@ -82,7 +88,7 @@ class ShopCategory extends Model
         return sc_route('category.detail', ['alias' => $this->alias]);
     }
 
-    //Scort
+    
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
     {
         $sortBy = $sortBy ?? 'sort';
@@ -101,17 +107,27 @@ class ShopCategory extends Model
         if(empty($key)) {
             return null;
         }
+        $storeId = config('app.storeId');
         $tableDescription = (new ShopCategoryDescription)->getTable();
         $category = $this
             ->leftJoin($tableDescription, $tableDescription . '.category_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
+        if (sc_config_global('MultiStorePro')) {
+            $tableCategoryStore = (new ShopCategoryStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $category = $category->join($tableCategoryStore, $tableCategoryStore.'.category_id', $this->getTable() . '.id');
+            $category = $category->join($tableStore, $tableStore . '.id', $tableCategoryStore.'.store_id');
+            $category = $category->where($tableStore . '.status', '1');
+            $category = $category->where($tableCategoryStore.'.store_id', $storeId);
+        }
+
         if ($type === null) {
-            $category = $category->where('id', (int) $key);
+            $category = $category->where($this->getTable().'.id', (int) $key);
         } else {
             $category = $category->where($type, $key);
         }
-        $category = $category->where('status', 1);
+        $category = $category->where($this->getTable().'.status', 1);
         return $category->first();
     }
     
@@ -166,6 +182,7 @@ class ShopCategory extends Model
      * build Query
      */
     public function buildQuery() {
+        $storeId = config('app.storeId');
         $tableDescription = (new ShopCategoryDescription)->getTable();
 
         //description
@@ -181,14 +198,23 @@ class ShopCategory extends Model
             });
         }
 
-        $query = $query->where('status', 1);
+        if (sc_config_global('MultiStorePro')) {
+            $tableCategoryStore = (new ShopCategoryStore)->getTable();
+            $tableStore = (new ShopStore)->getTable();
+            $query = $query->join($tableCategoryStore, $tableCategoryStore.'.category_id', $this->getTable() . '.id');
+            $query = $query->join($tableStore, $tableStore . '.id', $tableCategoryStore.'.store_id');
+            $query = $query->where($tableStore . '.status', '1');
+            $query = $query->where($tableCategoryStore.'.store_id', $storeId);
+        }
+
+        $query = $query->where($this->getTable().'.status', 1);
 
         if ($this->sc_parent !== '') {
-            $query = $query->where('parent', $this->sc_parent);
+            $query = $query->where($this->getTable().'.parent', $this->sc_parent);
         }
 
         if ($this->sc_top !== 'all') {
-            $query = $query->where('top', $this->sc_top);
+            $query = $query->where($this->getTable().'.top', $this->sc_top);
         }
 
         if (count($this->sc_moreWhere)) {

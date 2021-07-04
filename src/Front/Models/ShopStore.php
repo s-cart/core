@@ -3,6 +3,7 @@ namespace SCart\Core\Front\Models;
 
 use SCart\Core\Admin\Models\AdminConfig;
 use SCart\Core\Admin\Models\AdminUserStore;
+use SCart\Core\Front\Models\ShopProductStore;
 use Illuminate\Database\Eloquent\Model;
 class ShopStore extends Model
 {
@@ -13,6 +14,7 @@ class ShopStore extends Model
     protected static $getStoreActive = null;
     protected static $getCodeActive = null;
     protected static $getDomainPartner = null;
+    protected static $getDomainStore = null;
     protected static $getListAllActive = null;
     protected static $arrayStoreId = null;
     protected static $listStoreId = null;
@@ -26,7 +28,12 @@ class ShopStore extends Model
 
     public function products()
     {
-        return $this->hasMany(ShopProduct::class, 'store_id', 'id');
+        return $this->belongsToMany(ShopStore::class, ShopProductStore::class, 'store_id', 'product_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopCategoryStore::class, 'store_id', 'category_id');
     }
 
     public function banners()
@@ -59,6 +66,8 @@ class ShopStore extends Model
             $store->news()->delete();
             $store->banners()->delete();
             $store->pages()->delete();
+            $store->products()->detach();
+            $store->categories()->detach();
             AdminConfig::where('store_id', $store->id)->delete();
             AdminUserStore::where('store_id', $store->id)->delete();
         });
@@ -98,7 +107,7 @@ class ShopStore extends Model
 
 
     /**
-     * Get all domain and id store unlock domain
+     * Get all domain and id store is vendor unlock domain
      *
      * @return  [array]  [return description]
      */
@@ -114,6 +123,22 @@ class ShopStore extends Model
         return self::$getDomainPartner;
     }
     
+
+    /**
+     * Get all domain and id store unlock domain
+     *
+     * @return  [array]  [return description]
+     */
+    public static function getDomainStore()
+    {
+        if (self::$getDomainStore === null) {
+            self::$getDomainStore = self::whereNotNull('domain')
+                ->where('status', 1)
+                ->pluck('domain', 'id')
+                ->all();
+        }
+        return self::$getDomainStore;
+    }
 
     /**
      * Get all domain and id store active
