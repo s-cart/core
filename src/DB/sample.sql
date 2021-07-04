@@ -304,6 +304,15 @@ INSERT INTO `__SC_DB_PREFIX__shop_news` (`id`, `alias`, `image`, `sort`, `status
 (5, 'demo-alias-blog-5', '/data/content/blog-5.jpg',  0, '1', now()),
 (6, 'demo-alias-blog-6', '/data/content/blog-6.jpg',  0, '1', now());
 
+/*shop_news_store*/
+INSERT INTO `__SC_DB_PREFIX__shop_news_store` (`news_id`, `store_id`) VALUES 
+(1,'1'),
+(2,'1'),
+(3,'1'),
+(4,'1'),
+(5,'1'),
+(6,'1');
+
 /*shop_news_description*/
 INSERT INTO `__SC_DB_PREFIX__shop_news_description` (`news_id`, `lang`, `title`, `keyword`, `description`, `content`) VALUES 
 ('1', 'en', 'Easy Polo Black Edition 1', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt=\"\" src=\"/data/product/product-10.png\" style=\"width: 262px; height: 262px; float: right; margin: 10px;\" /></p>

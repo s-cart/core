@@ -79,7 +79,9 @@ class ShopPage extends Model
             return null;
         }
         $tableDescription = (new ShopPageDescription)->getTable();
-        $page = $this
+
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';
+        $page = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.page_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
@@ -130,8 +132,8 @@ class ShopPage extends Model
     public function buildQuery() {
         $tableDescription = (new ShopPageDescription)->getTable();
 
-        //description
-        $query = $this
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';
+        $query = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.page_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
@@ -147,7 +149,7 @@ class ShopPage extends Model
 
         //search keyword
         if ($this->sc_keyword !='') {
-            $query = $query->where(function ($sql) use($tableDescription){
+            $query = $query->where(function ($sql) use ($tableDescription) {
                 $sql->where($tableDescription . '.title', 'like', '%' . $this->sc_keyword . '%')
                 ->orWhere($tableDescription . '.keyword', 'like', '%' . $this->sc_keyword . '%')
                 ->orWhere($tableDescription . '.description', 'like', '%' . $this->sc_keyword . '%');

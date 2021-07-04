@@ -38,19 +38,28 @@ class ShopStore extends Model
 
     public function banners()
     {
-        return $this->hasMany(ShopBanner::class, 'store_id', 'id');
+        return $this->belongsToMany(ShopStore::class, ShopBannerStore::class, 'store_id', 'banner_id');
+    }
+
+    public function brands()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopBrandStore::class, 'store_id', 'brand_id');
     }
 
     public function news()
     {
-        return $this->hasMany(ShopNews::class, 'store_id', 'id');
+        return $this->belongsToMany(ShopStore::class, ShopNewsStore::class, 'store_id', 'news_id');
     }
 
     public function pages()
     {
-        return $this->hasMany(ShopPage::class, 'store_id', 'id');
+        return $this->belongsToMany(ShopStore::class, ShopPageStore::class, 'store_id', 'page_id');
     }
 
+    public function links()
+    {
+        return $this->belongsToMany(ShopStore::class, ShopLinkStore::class, 'store_id', 'links_id');
+    }
 
     protected static function boot()
     {
@@ -63,11 +72,13 @@ class ShopStore extends Model
             }
             //Delete store descrition
             $store->descriptions()->delete();
-            $store->news()->delete();
-            $store->banners()->delete();
-            $store->pages()->delete();
+            $store->news()->detach();
+            $store->banners()->detach();
+            $store->brands()->detach();
+            $store->pages()->detach();
             $store->products()->detach();
             $store->categories()->detach();
+            $store->links()->detach();
             AdminConfig::where('store_id', $store->id)->delete();
             AdminUserStore::where('store_id', $store->id)->delete();
         });

@@ -88,7 +88,8 @@ class ShopNews extends Model
             return null;
         }
         $tableDescription = (new ShopNewsDescription)->getTable();
-        $news = $this
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';
+        $news = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.news_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
@@ -138,8 +139,8 @@ class ShopNews extends Model
     public function buildQuery() {
         $tableDescription = (new ShopNewsDescription)->getTable();
 
-        //description
-        $query = $this
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';
+        $query = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.news_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
         //search keyword

@@ -92,10 +92,12 @@ class ShopBrand extends Model
             return null;
         }
         $storeId = config('app.storeId');
+        $dataSelect = $this->getTable().'.*';
+        $data = $this->selectRaw($dataSelect);
         if ($type === null) {
-            $data = $this->where($this->getTable().'.id', (int) $key);
+            $data = $data->where($this->getTable().'.id', (int) $key);
         } else {
-            $data = $this->where($type, $key);
+            $data = $data->where($type, $key);
         }
         if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
             $tableBrandStore = (new ShopBrandStore)->getTable();
@@ -106,7 +108,7 @@ class ShopBrand extends Model
             $data = $data->where($tableBrandStore.'.store_id', $storeId);
         }
 
-            $data = $data->where($this->getTable().'.status', 1);
+        $data = $data->where($this->getTable().'.status', 1);
         return $data->first();
     }
 
@@ -125,7 +127,9 @@ class ShopBrand extends Model
      */
     public function buildQuery() {
         $storeId = config('app.storeId');
-        $query = $this->where($this->getTable().'.status', 1);
+        $dataSelect = $this->getTable().'.*';
+        $query = $this->selectRaw($dataSelect)
+            ->where($this->getTable().'.status', 1);
 
         if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
             $tableBrandStore = (new ShopBrandStore)->getTable();

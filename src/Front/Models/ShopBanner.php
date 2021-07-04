@@ -53,7 +53,9 @@ class ShopBanner extends Model
     public function getDetail($id) {
 
         $storeId = config('app.storeId');
-        $data =  $this->where('id', (int)$id)->where($this->getTable() .'.status', 1);
+        $dataSelect = $this->getTable().'.*';
+        $data =  $this->selectRaw($dataSelect)
+            ->where('id', (int)$id)->where($this->getTable() .'.status', 1);
         if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
             $tableBannerStore = (new ShopBannerStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
@@ -159,7 +161,9 @@ class ShopBanner extends Model
      */
     public function buildQuery() {
 
-        $query = $this->where($this->getTable() .'.status', 1);
+        $dataSelect = $this->getTable().'.*';
+        $query =  $this->selectRaw($dataSelect)
+            ->where($this->getTable() .'.status', 1);
 
         $storeId = config('app.storeId');
 

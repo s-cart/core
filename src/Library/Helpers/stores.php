@@ -87,7 +87,7 @@ if (!function_exists('sc_get_list_store_of_category') ) {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableCategoryStore = (new \SCart\Core\Front\Models\ShopCategoryStore)->getTable();
         return \SCart\Core\Front\Models\ShopCategoryStore::select($tableStore.'.code', $tableStore.'.id', 'category_id')
-            ->join($tableStore, $tableStore.'.id', $tableCategoryStore.'.store_id')
+            ->leftJoin($tableStore, $tableStore.'.id', $tableCategoryStore.'.store_id')
             ->whereIn('category_id', $arrCategoryId)
             ->get()
             ->groupBy('category_id');
@@ -103,7 +103,7 @@ if (!function_exists('sc_get_list_store_of_brand') ) {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableBrandStore = (new \SCart\Core\Front\Models\ShopBrandStore)->getTable();
         return \SCart\Core\Front\Models\ShopBrandStore::select($tableStore.'.code', $tableStore.'.id', 'brand_id')
-            ->join($tableStore, $tableStore.'.id', $tableBrandStore.'.store_id')
+            ->leftJoin($tableStore, $tableStore.'.id', $tableBrandStore.'.store_id')
             ->whereIn('brand_id', $arrBrandId)
             ->get()
             ->groupBy('brand_id');
@@ -130,7 +130,7 @@ if (!function_exists('sc_get_list_store_of_banner') ) {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableBannerStore = (new \SCart\Core\Front\Models\ShopBannerStore)->getTable();
         return \SCart\Core\Front\Models\ShopBannerStore::select($tableStore.'.code', $tableStore.'.id', 'banner_id')
-            ->join($tableStore, $tableStore.'.id', $tableBannerStore.'.store_id')
+            ->leftJoin($tableStore, $tableStore.'.id', $tableBannerStore.'.store_id')
             ->whereIn('banner_id', $arrBannerId)
             ->get()
             ->groupBy('banner_id');
@@ -156,7 +156,7 @@ if (!function_exists('sc_get_list_store_of_news') ) {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableNewsStore = (new \SCart\Core\Front\Models\ShopNewsStore)->getTable();
         return \SCart\Core\Front\Models\ShopNewsStore::select($tableStore.'.code', $tableStore.'.id', 'news_id')
-            ->join($tableStore, $tableStore.'.id', $tableNewsStore.'.store_id')
+            ->leftJoin($tableStore, $tableStore.'.id', $tableNewsStore.'.store_id')
             ->whereIn('news_id', $arrNewsId)
             ->get()
             ->groupBy('news_id');
@@ -182,7 +182,7 @@ if (!function_exists('sc_get_list_store_of_page') ) {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tablePageStore = (new \SCart\Core\Front\Models\ShopPageStore)->getTable();
         return \SCart\Core\Front\Models\ShopPageStore::select($tableStore.'.code', $tableStore.'.id', 'page_id')
-            ->join($tableStore, $tableStore.'.id', $tablePageStore.'.store_id')
+            ->leftJoin($tableStore, $tableStore.'.id', $tablePageStore.'.store_id')
             ->whereIn('page_id', $arrPageId)
             ->get()
             ->groupBy('page_id');
@@ -208,7 +208,7 @@ if (!function_exists('sc_get_list_store_of_link') ) {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableLinkStore = (new \SCart\Core\Front\Models\ShopLinkStore)->getTable();
         return \SCart\Core\Front\Models\ShopLinkStore::select($tableStore.'.code', $tableStore.'.id', 'link_id')
-            ->join($tableStore, $tableStore.'.id', $tableLinkStore.'.store_id')
+            ->leftJoin($tableStore, $tableStore.'.id', $tableLinkStore.'.store_id')
             ->whereIn('link_id', $arrLinkId)
             ->get()
             ->groupBy('link_id');
@@ -234,7 +234,7 @@ if (!function_exists('sc_get_list_store_of_order') ) {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableOrder = (new \SCart\Core\Front\Models\ShopOrder)->getTable();
         return \SCart\Core\Front\Models\ShopOrder::select($tableStore.'.code', $tableOrder.'.id')
-            ->join($tableStore, $tableStore.'.id', $tableOrder.'.store_id')
+            ->leftJoin($tableStore, $tableStore.'.id', $tableOrder.'.store_id')
             ->whereIn($tableOrder.'.id', $arrOrderId)
             ->get()
             ->groupBy('id');

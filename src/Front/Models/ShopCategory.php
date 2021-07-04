@@ -109,7 +109,8 @@ class ShopCategory extends Model
         }
         $storeId = config('app.storeId');
         $tableDescription = (new ShopCategoryDescription)->getTable();
-        $category = $this
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
+        $category = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.category_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
@@ -184,9 +185,9 @@ class ShopCategory extends Model
     public function buildQuery() {
         $storeId = config('app.storeId');
         $tableDescription = (new ShopCategoryDescription)->getTable();
-
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';
         //description
-        $query = $this
+        $query = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.category_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
         //search keyword

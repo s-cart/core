@@ -22,7 +22,10 @@ class ShopLink extends Model
     {
         if (!self::$getGroup) {
             $tableLink = (new ShopLink)->getTable();
-            $links = self::where($tableLink.'.status', 1);
+
+            $dataSelect = $tableLink.'.*';
+            $links = self::selectRaw($dataSelect)
+                ->where($tableLink.'.status', 1);
             $storeId = config('app.storeId');
             if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
                 $tableLinkStore = (new ShopLinkStore)->getTable();
