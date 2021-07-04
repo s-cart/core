@@ -195,6 +195,7 @@ class PrepareTablesShop extends Migration
             $table->string('payment_method', 100)->nullable();
             $table->string('shipping_method', 100)->nullable();
             $table->string('user_agent', 255)->nullable();
+            $table->string('device_type', 20)->nullable()->default('other')->index();
             $table->string('ip', 100)->nullable();
             $table->string('transaction', 100)->nullable();
             $table->integer('store_id')->nullable()->default(1)->index();

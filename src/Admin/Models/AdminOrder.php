@@ -265,6 +265,19 @@ class AdminOrder extends ShopOrder
         ->orderBy('count', 'desc')
         ->get();
     }
+
+    /**
+     * Get device order in year
+     *
+     * @return  [type]  [return description]
+    */
+    public static function getDeviceInYear() {
+        return self::selectRaw('device_type, count(id) as count')
+        ->whereRaw('DATE(created_at) >=  DATE_SUB(DATE(NOW()), INTERVAL 12 MONTH)')
+        ->groupBy('device_type')
+        ->orderBy('count', 'desc')
+        ->get();
+    }
     
     /**
      * Get Sum order total In Year

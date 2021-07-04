@@ -605,6 +605,7 @@ class ShopCartController extends RootFrontController
      */
     public function addOrder(Request $request)
     {
+        $agent = new \Jenssegers\Agent\Agent();
         $customer = auth()->user();
         $uID = $customer->id ?? 0;
 
@@ -658,6 +659,7 @@ class ShopCartController extends RootFrontController
         $dataOrder['payment_method']  = $paymentMethod;
         $dataOrder['shipping_method'] = $shippingMethod;
         $dataOrder['user_agent']      = $request->header('User-Agent');
+        $dataOrder['device_type']      = $agent->deviceType();
         $dataOrder['ip']              = $request->ip();
         $dataOrder['created_at']      = date('Y-m-d H:i:s');
 

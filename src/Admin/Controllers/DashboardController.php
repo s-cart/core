@@ -42,31 +42,19 @@ class DashboardController extends RootAdminController
         $data['topOrder']       = AdminOrder::getTopOrder();
         $data['mapStyleStatus'] = AdminOrder::$mapStyleStatus;
 
-        //Country statistics
-        $dataCountries = AdminOrder::getCountryInYear();
-        $arrCountryMap   = [];
-        $ctTotal = 0;
-        $ctTop = 0;
-        foreach ($dataCountries as $key => $country) {
-            $ctTotal +=$country->count;
-            if($key <= 3) {
-                $ctTop +=$country->count;
-                $countryName = $country->country ?? $key ;
-                if($key == 0) {
-                    $arrCountryMap[] =  [
-                        'name' => $countryName,
-                        'y' => $country->count,
-                        'sliced' => true,
-                        'selected' => true,
-                    ];
-                } else {
-                    $arrCountryMap[] =  [$countryName, $country->count];
-                }
-            }
+        //Device statistics
+        $dataCountries = AdminOrder::getDeviceInYear();
+        $arrDevice   = [];
+        foreach ($dataCountries as $key => $row) {
+            $arrDevice[] =  [
+                'name' => ucfirst($row->device_type),
+                'y' => $row->count,
+                'sliced' => true,
+                'selected' => ($key == 0) ? true : false,
+            ];
         }
-        $arrCountryMap[] = ['Other', ($ctTotal - $ctTop)];
-        $data['dataPie'] = json_encode($arrCountryMap);
-        //End country statistics
+        $data['dataPie'] = json_encode($arrDevice);
+        //End Device statistics
 
 
         //Order in 30 days

@@ -455,7 +455,7 @@ showValues();
               enabled: false
           },
     title: {
-        text: '{{ sc_language_render('admin.chart.static_country') }}'
+        text: '{{ sc_language_render('admin.chart.static_device') }}'
     },
     accessibility: {
         point: {
@@ -478,7 +478,7 @@ showValues();
     },
     series: [{
         type: 'pie',
-        name: '{{ sc_language_render('admin.chart.country') }}',
+        name: '{{ sc_language_render('admin.chart.device') }}',
         data: {!! $dataPie !!},
     }]
 });
