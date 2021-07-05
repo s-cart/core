@@ -550,7 +550,7 @@ public function createProductGroup()
             $product->categories()->attach($category);
         }
 
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
             // If multi-store
             $shopStore        = $data['shop_store'] ?? [];
             $product->stores()->detach();
@@ -873,7 +873,7 @@ public function createProductGroup()
         }
         $product->update($dataUpdate);
 
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
             // If multi-store
             $shopStore        = $data['shop_store'] ?? [];
             $product->stores()->detach();

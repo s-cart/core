@@ -1534,6 +1534,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('admin.position_all', 'Tất cả các trang', 'admin', 'vi'),
 ('admin.theme', 'Theme', 'admin', 'en'),
 ('admin.theme', 'Mẫu', 'admin', 'vi'),
+('admin.select_store', 'Select store', 'admin', 'en'),
+('admin.select_store', 'Chọn cửa hàng', 'admin', 'vi'),
 ('admin.welcome_dasdboard', 'Welcome to admin system!', 'admin', 'en'),
 ('admin.welcome_dasdboard', 'Chào mừng đến với hệ thống!', 'admin', 'vi'),
 ('admin.deny_msg', 'You need permission to access the system!', 'admin', 'en'),

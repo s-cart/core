@@ -186,7 +186,7 @@
                         {{-- //Category --}}
 
 
- @if (sc_config_global('MultiStorePro'))
+ @if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro'))
                         {{-- select shop_store --}}
                         @php
                         if (function_exists('sc_get_list_store_of_product_detail')) {
@@ -205,11 +205,14 @@
 
                         <div class="form-group row {{ $errors->has('shop_store') ? ' text-red' : '' }}">
                             <label for="shop_store"
-                                class="col-sm-2 col-form-label">{{ sc_language_render('multi_store.select_store') }}</label>
+                                class="col-sm-2 col-form-label">{{ sc_language_render('admin.select_store') }}</label>
                             <div class="col-sm-8">
-                                <select class="form-control shop_store select2" multiple="multiple"
-                                    data-placeholder="{{ sc_language_render('multi_store.select_store') }}" style="width: 100%;"
-                                    name="shop_store[]">
+                                <select class="form-control shop_store select2" 
+                                @if (sc_config_global('MultiStorePro'))
+                                    multiple="multiple"
+                                @endif
+                                data-placeholder="{{ sc_language_render('admin.select_store') }}" style="width: 100%;"
+                                name="shop_store[]">
                                     <option value=""></option>
                                     @foreach (sc_get_list_code_store() as $k => $v)
                                     <option value="{{ $k }}"
