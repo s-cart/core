@@ -805,7 +805,7 @@ class ShopProduct extends Model
             if(!view()->exists($view)) {
                 return;
             }
-            $vendorCode = $this->store->code;
+            $vendorCode = $this->stores()->first()->code;
             $vendorUrl = $this->goToShop($vendorCode);
             return  view($view, 
                 [
