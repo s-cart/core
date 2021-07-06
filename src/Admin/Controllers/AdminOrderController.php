@@ -342,7 +342,7 @@ class AdminOrderController extends RootAdminController
         }
         //Create new order
         $dataInsert = [
-            'customer_id'         => $data['customer_id'],
+            'customer_id'     => $data['customer_id'] ?? 0,
             'first_name'      => $data['first_name'],
             'last_name'       => $data['last_name'] ?? '',
             'status'          => $data['status'],
@@ -357,9 +357,10 @@ class AdminOrderController extends RootAdminController
             'payment_method'  => $data['payment_method'],
             'shipping_method' => $data['shipping_method'],
             'exchange_rate'   => $data['exchange_rate'],
-            'email'           => $users[$data['customer_id']]['email'],
+            'email'           => $data['email'],
             'comment'         => $data['comment'],
         ];
+
         $order = AdminOrder::create($dataInsert);
         AdminOrder::insertOrderTotal([
             ['code' => 'subtotal', 'value' => 0, 'title' => 'Subtotal', 'sort' => 1, 'order_id' => $order->id],

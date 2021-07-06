@@ -20,10 +20,9 @@
                     <div class="card-body">
 
                             <div class="form-group row {{ $errors->has('customer_id') ? ' text-red' : '' }}">
-                                <label for="customer_id" class="col-sm-2 asterisk col-form-label">{{ sc_language_render('order.select_customer') }}</label>
+                                <label for="customer_id" class="col-sm-2 asterisk col-form-label">{{ sc_language_render('order.admin.select_customer') }}</label>
                                 <div class="col-sm-8">
                                     <select class="form-control customer_id " style="width: 100%;" name="customer_id" >
-                                        <option value=""></option>
                                         @foreach ($users as $k => $v)
                                             <option value="{{ $k }}" {{ (old('customer_id') ==$k) ? 'selected':'' }}>{{ $v->name.'<'.$v->email.'>' }}</option>
                                         @endforeach
@@ -36,7 +35,22 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="email">
+                            <div class="form-group row {{ $errors->has('email') ? ' text-red' : '' }}" id="email">
+                                <label for="email" class="col-sm-2 col-form-label">{{ sc_language_render('order.email') }}</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                                        </div>
+                                        <input type="email" id="email" name="email" required value="{{ old('email') }}" class="form-control email" placeholder="" />
+                                    </div>
+                                        @if ($errors->has('email'))
+                                            <span class="text-sm">
+                                                {{ $errors->first('email') }}
+                                            </span>
+                                        @endif
+                                </div>
+                            </div>
 
                             <div class="form-group row {{ $errors->has('first_name') ? ' text-red' : '' }}">
                                 <label for="first_name" class="col-sm-2 col-form-label">{{ sc_language_render('order.first_name') }}</label>
@@ -402,6 +416,7 @@ function addInfo(){
             },
             success: function(result){
                 var returnedData = JSON.parse(result);
+                $('[name="email"]').val(returnedData.email);
                 $('[name="first_name"]').val(returnedData.first_name);
                 $('[name="last_name"]').val(returnedData.last_name);
                 $('[name="first_name_kana"]').val(returnedData.first_name_kana);

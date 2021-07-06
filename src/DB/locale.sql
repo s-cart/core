@@ -1224,6 +1224,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('order.admin.product_preorder', 'Cho phép đặt hàng trước', 'order.admin', 'vi'),
 ('order.admin.shop_allow_guest', 'Allow buy no need login', 'order.admin', 'en'),
 ('order.admin.shop_allow_guest', 'Cho phép mua không cần đăng nhập', 'order.admin', 'vi'),
+('order.admin.select_customer', 'Select customer', 'order.admin', 'en'),
+('order.admin.select_customer', 'Chọn khách hàng', 'order.admin', 'vi'),
 ('contact.name', 'Tên', 'contact', 'vi'),
 ('contact.name', 'Name', 'contact', 'en'),
 ('contact.email', 'Email', 'contact', 'vi'),

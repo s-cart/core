@@ -170,6 +170,10 @@ class AdminCustomerController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
+
+        $data = request()->all();
+        $data['status'] = empty($data['status']) ? 0 : 1;
+        $data['store_id'] = session('adminStoreId');
         $customer = AdminCustomer::createCustomer($dataMapping['dataInsert']);
 
         //Insert custom fields
