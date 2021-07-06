@@ -85,9 +85,9 @@ trait AuthTrait
 
         if (sc_config('customer_phone')) {
             if (sc_config('customer_phone_required')) {
-                $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^[0-9\-]{8,14}$/');
+                $validate['phone'] = config('validation.customer.phone_required', 'regex:/^0[^0][0-9\-]{6,12}$/');
             } else {
-                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^[0-9\-]{8,14}$/');
+                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^0[^0][0-9\-]{6,12}$/');
             }
             if (!empty($data['phone'])) {
                 $dataUpdate['phone'] = $data['phone'];
@@ -269,9 +269,9 @@ trait AuthTrait
 
         if (sc_config('customer_phone')) {
             if (sc_config('customer_phone_required')) {
-                $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^[0-9\-]{8,14}$/');
+                $validate['phone'] = config('validation.customer.phone_required', 'regex:/^0[^0][0-9\-]{6,12}$/');
             } else {
-                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^[0-9\-]{8,14}$/');
+                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^0[^0][0-9\-]{6,12}$/');
             }
         }
         if (sc_config('customer_country')) {

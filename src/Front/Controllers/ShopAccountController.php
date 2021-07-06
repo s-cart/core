@@ -459,7 +459,7 @@ class ShopAccountController extends RootFrontController
             $dataUpdate['address3'] = $data['address3']??'';
         }
         if (sc_config('customer_phone')) {
-            $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{7,13}$/');
+            $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{6,12}$/');
             $dataUpdate['phone'] = $data['phone']??'';
         }
         if (sc_config('customer_country')) {

@@ -242,7 +242,7 @@ class ShopContentController extends RootFrontController
             'title' => 'required',
             'content' => 'required',
             'email' => 'required|email',
-            'phone' => 'required|regex:/^0[^0][0-9\-]{7,13}$/',
+            'phone' => config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{6,12}$/'),
         ];
         $message = [
             'name.required'    => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.name')]),

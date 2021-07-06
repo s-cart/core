@@ -292,7 +292,7 @@ class AdminOrderController extends RootAdminController
             $validate['address3'] = 'required|max:100';
         }
         if(sc_config_admin('customer_phone')) {
-            $validate['phone'] = 'required|regex:/^0[^0][0-9\-]{7,13}$/';
+            $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{6,12}$/');
         }
         if(sc_config_admin('customer_country')) {
             $validate['country'] = 'required|min:2';
