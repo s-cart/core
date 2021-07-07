@@ -75,7 +75,7 @@ class AdminProduct extends ShopProduct
             // Only get products if store active
             if (session('adminStoreId') != SC_ID_ROOT) {
                 // Only get products of store if store <> root or store is specified
-                $productList = $productList->where($tableProductStore, $tableProductStore . '.store_id', session('adminStoreId'));
+                $productList = $productList->where( $tableProductStore . '.store_id', session('adminStoreId'));
 
             }
         }
@@ -131,7 +131,7 @@ class AdminProduct extends ShopProduct
             // Only get products if store active
             if (session('adminStoreId') != SC_ID_ROOT) {
                 // Only get products of store if store <> root or store is specified
-                $productList = $productList->where($tableProductStore, $tableProductStore . '.store_id', session('adminStoreId'));
+                $productList = $productList->where( $tableProductStore . '.store_id', session('adminStoreId'));
 
             }
         }
