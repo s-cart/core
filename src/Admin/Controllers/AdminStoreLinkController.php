@@ -9,13 +9,15 @@ class AdminStoreLinkController extends RootAdminController
 {
 
     protected $arrTarget;
-    protected $arrGroup;
 
     public function __construct()
     {
         parent::__construct();
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
-        $this->arrGroup = [
+    }
+
+    public function arrGroup() {
+        return   [
             'menu' => sc_language_render('admin.link_position.menu'), 
             'menu_left' => sc_language_render('admin.link_position.menu_left'), 
             'menu_right' => sc_language_render('admin.link_position.menu_right'),
@@ -80,7 +82,7 @@ class AdminStoreLinkController extends RootAdminController
                 'name' => sc_language_render($row['name']),
                 'url' => $row['url'],
                 'target' => $this->arrTarget[$row['target']] ?? '',
-                'group' => $this->arrGroup[$row['group']] ?? '',
+                'group' => $this->arrGroup()[$row['group']] ?? '',
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             ];
@@ -132,7 +134,7 @@ class AdminStoreLinkController extends RootAdminController
             'icon'              => 'fa fa-plus',
             'link'              => [],
             'arrTarget'         => $this->arrTarget,
-            'arrGroup'          => $this->arrGroup,
+            'arrGroup'          => $this->arrGroup(),
             'url_action'        => sc_route_admin('admin_store_link.create'),
         ];
         return view($this->templatePathAdmin.'screen.store_link')
@@ -199,7 +201,7 @@ class AdminStoreLinkController extends RootAdminController
             'icon' => 'fa fa-edit',
             'link' => $link,
             'arrTarget' => $this->arrTarget,
-            'arrGroup' => $this->arrGroup,
+            'arrGroup' => $this->arrGroup(),
             'url_action' => sc_route_admin('admin_store_link.edit', ['id' => $link['id']]),
         ];
         return view($this->templatePathAdmin.'screen.store_link')

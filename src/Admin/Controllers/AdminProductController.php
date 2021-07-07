@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Validator;
 class AdminProductController extends RootAdminController
 {
     public $languages;
-    public $kinds;
     public $properties;
     public $attributeGroup;
     public $listWeight;
@@ -39,12 +38,15 @@ class AdminProductController extends RootAdminController
         $this->listWeight      = ShopWeight::getListAll();
         $this->listLength      = ShopLength::getListAll();
         $this->attributeGroup  = ShopAttributeGroup::getListAll();
-        $this->kinds = [
+        $this->properties = (new ShopProductProperty)->pluck('name', 'code')->toArray();
+    }
+
+    public function kinds() {
+        return [
             SC_PRODUCT_SINGLE => sc_language_render('product.kind_single'),
             SC_PRODUCT_BUILD  => sc_language_render('product.kind_bundle'),
             SC_PRODUCT_GROUP  => sc_language_render('product.kind_group'),
         ];
-        $this->properties = (new ShopProductProperty)->pluck('name', 'code')->toArray();
     }
 
     public function index()
@@ -127,7 +129,7 @@ class AdminProductController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $kind = $this->kinds[$row['kind']] ?? $row['kind'];
+            $kind = $this->kinds()[$row['kind']] ?? $row['kind'];
             if ($row['kind'] == SC_PRODUCT_BUILD) {
                 $kind = '<span class="badge badge-success">' . $kind . '</span>';
             } elseif ($row['kind'] == SC_PRODUCT_GROUP) {
@@ -269,7 +271,7 @@ class AdminProductController extends RootAdminController
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
             'properties'            => $this->properties,
-            'kinds'                => $this->kinds,
+            'kinds'                => $this->kinds(),
             'attributeGroup'       => $this->attributeGroup,
             'htmlMoreImage'        => $htmlMoreImage,
             'htmlProductAtrribute' => $htmlProductAtrribute,
@@ -323,7 +325,7 @@ public function createProductBuild()
         'suppliers'            => (new ShopSupplier)->getListAll(),
         'taxs'                 => (new ShopTax)->getListAll(),
         'properties'            => $this->properties,
-        'kinds'                => $this->kinds,
+        'kinds'                => $this->kinds(),
         'attributeGroup'       => $this->attributeGroup,
         'htmlSelectBuild'      => $htmlSelectBuild,
         'listProductSingle'    => $listProductSingle,
@@ -371,7 +373,7 @@ public function createProductGroup()
         'suppliers'            => (new ShopSupplier)->getListAll(),
         'taxs'                 => (new ShopTax)->getListAll(),
         'properties'            => $this->properties,
-        'kinds'                => $this->kinds,
+        'kinds'                => $this->kinds(),
         'attributeGroup'       => $this->attributeGroup,
         'listProductSingle'    => $listProductSingle,
         'htmlSelectGroup'      => $htmlSelectGroup,
@@ -708,7 +710,7 @@ public function createProductGroup()
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
             'properties'            => $this->properties,
-            'kinds'                => $this->kinds,
+            'kinds'                => $this->kinds(),
             'attributeGroup'       => $this->attributeGroup,
             'htmlSelectGroup'      => $htmlSelectGroup,
             'htmlSelectBuild'      => $htmlSelectBuild,
