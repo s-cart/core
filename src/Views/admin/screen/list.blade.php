@@ -132,9 +132,7 @@
               <th></th>
               @endif
               @foreach ($listTh as $key => $th)
-                @if ($key != 'id')
                 <th>{!! $th !!}</th>
-                @endif
               @endforeach
              </tr>
           </thead>
@@ -147,9 +145,7 @@
                 </td>
                 @endif
                 @foreach ($tr as $key => $trtd)
-                    @if ($key != 'id')
                     <td>{!! $trtd !!}</td>
-                    @endif
                 @endforeach
             </tr>
             @endforeach
