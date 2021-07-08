@@ -24,7 +24,7 @@ class AdminNews extends ShopNews
                 $tableNewsStore = (new ShopNewsStore)->getTable();
                 $tableNews = (new ShopNews)->getTable();
                 $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $tableNews . '.id');
-                $data = $data->where($tableNewsStore, $tableNewsStore . '.store_id', session('adminStoreId'));
+                $data = $data->where($tableNewsStore . '.store_id', session('adminStoreId'));
             }
         }
         $data = $data->first();
@@ -54,7 +54,7 @@ class AdminNews extends ShopNews
             if (session('adminStoreId') != SC_ID_ROOT) {
                 $tableNewsStore = (new ShopNewsStore)->getTable();
                 $newsList = $newsList->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $tableNews . '.id');
-                $newsList = $newsList->where($tableNewsStore, $tableNewsStore . '.store_id', session('adminStoreId'));
+                $newsList = $newsList->where($tableNewsStore . '.store_id', session('adminStoreId'));
             }
         }
 
@@ -96,7 +96,7 @@ class AdminNews extends ShopNews
                         if (session('adminStoreId') != SC_ID_ROOT) {
                             $tableNewsStore = (new ShopNewsStore)->getTable();
                             $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $table . '.id');
-                            $data = $data->where($tableNewsStore, $tableNewsStore . '.store_id', session('adminStoreId'));
+                            $data = $data->where($tableNewsStore . '.store_id', session('adminStoreId'));
                         }
                     }
                     $data = $data->pluck('title', 'id')->toArray();
@@ -113,7 +113,7 @@ class AdminNews extends ShopNews
                     if (session('adminStoreId') != SC_ID_ROOT) {
                         $tableNewsStore = (new ShopNewsStore)->getTable();
                         $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $table . '.id');
-                        $data = $data->where($tableNewsStore, $tableNewsStore . '.store_id', session('adminStoreId'));
+                        $data = $data->where($tableNewsStore . '.store_id', session('adminStoreId'));
                     }
                 }
                 $data = $data->pluck('title', 'id')->toArray();

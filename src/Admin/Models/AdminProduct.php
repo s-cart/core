@@ -28,7 +28,7 @@ class AdminProduct extends ShopProduct
             if (session('adminStoreId') != SC_ID_ROOT) {
                 $tableProductStore = (new ShopProductStore)->getTable();
                 $data = $data->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id');
-                $data = $data->where($tableProductStore, $tableProductStore . '.store_id', session('adminStoreId'));
+                $data = $data->where($tableProductStore . '.store_id', session('adminStoreId'));
             }
         }
 

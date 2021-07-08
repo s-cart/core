@@ -20,7 +20,7 @@ class AdminBanner extends ShopBanner
                 $tableBannerStore = (new ShopBannerStore)->getTable();
                 $tableBanner = (new ShopBanner)->getTable();
                 $data = $data->leftJoin($tableBannerStore, $tableBannerStore . '.banner_id', $tableBanner . '.id');
-                $data = $data->where($tableBannerStore, $tableBannerStore . '.store_id', session('adminStoreId'));
+                $data = $data->where($tableBannerStore . '.store_id', session('adminStoreId'));
             }
         }
         $data = $data->first();
@@ -44,7 +44,7 @@ class AdminBanner extends ShopBanner
             if (session('adminStoreId') != SC_ID_ROOT) {
                 $tableBannerStore = (new ShopBannerStore)->getTable();
                 $bannerList = $bannerList->leftJoin($tableBannerStore, $tableBannerStore . '.banner_id', $tableBanner . '.id');
-                $bannerList = $bannerList->where($tableBannerStore, $tableBannerStore . '.store_id', session('adminStoreId'));
+                $bannerList = $bannerList->where($tableBannerStore . '.store_id', session('adminStoreId'));
             }
         }
         if ($keyword) {

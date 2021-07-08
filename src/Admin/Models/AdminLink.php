@@ -21,7 +21,7 @@ class AdminLink extends ShopLink
                 $tableLinkStore = (new ShopLinkStore)->getTable();
                 $tableLink = (new ShopLink)->getTable();
                 $data = $data->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
-                $data = $data->where($tableLinkStore, $tableLinkStore . '.store_id', session('adminStoreId'));
+                $data = $data->where($tableLinkStore . '.store_id', session('adminStoreId'));
             }
         }
         $data = $data->first();
@@ -42,7 +42,7 @@ class AdminLink extends ShopLink
             if (session('adminStoreId') != SC_ID_ROOT) {
                 $tableLinkStore = (new ShopLinkStore)->getTable();
                 $linkList = $linkList->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
-                $linkList = $linkList->where($tableLinkStore, $tableLinkStore . '.store_id', session('adminStoreId'));
+                $linkList = $linkList->where($tableLinkStore . '.store_id', session('adminStoreId'));
             }
         }
         $linkList = $linkList->orderBy($tableLink.'.id', 'desc');

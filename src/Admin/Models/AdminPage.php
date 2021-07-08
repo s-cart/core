@@ -25,7 +25,7 @@ class AdminPage extends ShopPage
                 $tablePageStore = (new ShopPageStore)->getTable();
                 $tablePage = (new ShopPage)->getTable();
                 $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
-                $data = $data->where($tablePageStore, $tablePageStore . '.store_id', session('adminStoreId'));
+                $data = $data->where($tablePageStore . '.store_id', session('adminStoreId'));
             }
         }
         $data = $data->first();
@@ -55,7 +55,7 @@ class AdminPage extends ShopPage
             if (session('adminStoreId') != SC_ID_ROOT) {
                 $tablePageStore = (new ShopPageStore)->getTable();
                 $pageList = $pageList->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
-                $pageList = $pageList->where($tablePageStore, $tablePageStore . '.store_id', session('adminStoreId'));
+                $pageList = $pageList->where($tablePageStore . '.store_id', session('adminStoreId'));
             }
         }
 
@@ -97,7 +97,7 @@ class AdminPage extends ShopPage
                         if (session('adminStoreId') != SC_ID_ROOT) {
                             $tablePageStore = (new ShopPageStore)->getTable();
                             $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $table . '.id');
-                            $data = $data->where($tablePageStore, $tablePageStore . '.store_id', session('adminStoreId'));
+                            $data = $data->where($tablePageStore . '.store_id', session('adminStoreId'));
                         }
                     }
                     $data = $data->pluck('title', 'id')->toArray();
@@ -114,7 +114,7 @@ class AdminPage extends ShopPage
                     if (session('adminStoreId') != SC_ID_ROOT) {
                         $tablePageStore = (new ShopPageStore)->getTable();
                         $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $table . '.id');
-                        $data = $data->where($tablePageStore, $tablePageStore . '.store_id', session('adminStoreId'));
+                        $data = $data->where($tablePageStore . '.store_id', session('adminStoreId'));
                     }
                 }
                 $data = $data->pluck('title', 'id')->toArray();
