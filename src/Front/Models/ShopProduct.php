@@ -27,6 +27,7 @@ class ShopProduct extends Model
     protected  $sc_store_id = 0; 
     protected  $sc_array_ID = []; // array ID product
     protected  $sc_category = []; // array category id
+    protected  $sc_category_vendor = []; // array category id
     protected  $sc_brand = []; // array brand id
     protected  $sc_supplier = []; // array supplier id
     protected static $storeCode = null;
@@ -428,6 +429,21 @@ class ShopProduct extends Model
     }
 
     /**
+     * Set array category store
+     *
+     * @param   [array|int]  $category 
+     *
+     */
+    private function setCategoryVendor($category) {
+        if (is_array($category)) {
+            $this->sc_category_vendor = $category;
+        } else {
+            $this->sc_category_vendor = array((int)$category);
+        }
+        return $this;
+    }
+
+    /**
      * Set array brand 
      *
      * @param   [array|int]  $brand 
@@ -536,7 +552,7 @@ class ShopProduct extends Model
      * @param   [int]  $category 
      */
     public function getProductToCategoryStore($category) {
-        $this->setCategoryStore($category);
+        $this->setCategoryVendor($category);
         return $this;
     }
 
@@ -637,6 +653,12 @@ class ShopProduct extends Model
             ) {
                 //store of vendor
                 $query = $query->where($tableProductStore.'.store_id', $storeId);
+            }
+
+            if (count($this->sc_category_vendor)) {
+                $tablePTC = (new \App\Plugins\Other\MultiVendorPro\Models\ProductCategoryVendor)->getTable();
+                $query = $query->leftJoin($tablePTC, $tablePTC . '.product_id', $this->getTable() . '.id');
+                $query = $query->whereIn($tablePTC . '.category_vendor_id', $this->sc_category_vendor);
             }
         }
 

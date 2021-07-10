@@ -55,27 +55,26 @@ class AdminProduct extends ShopProduct
         //Select field
         $dataSelect = $tableProduct.'.*, '.$tableDescription.'.name, '.$tableDescription.'.keyword, '.$tableDescription.'.description'; 
 
+        $productList = (new ShopProduct)
+            ->selectRaw($dataSelect)
+            ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
+            ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id');
+
         if ($category_id) {
-            $productList = (new ShopProduct)
-                ->selectRaw($dataSelect)
-                ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
+            $productList = $productList
                 ->join($tablePTC, $tablePTC . '.product_id', $tableProduct . '.id')
-                ->where($tablePTC . '.category_id', $category_id)
-                ->where($tableDescription . '.lang', sc_get_locale());
-        } else {
-            $productList = (new ShopProduct)
-                ->selectRaw($dataSelect)
-                ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
-                ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id')
-                ->where($tableDescription . '.lang', sc_get_locale());
+                ->where($tablePTC . '.category_id', $category_id);
         }
+        
+        $productList = $productList
+            ->where($tableDescription . '.lang', sc_get_locale());
 
         if (sc_config_global('MultiVendorPro')) {
             // If multi-vendor
             // Only get products if store active
             if (session('adminStoreId') != SC_ID_ROOT) {
                 // Only get products of store if store <> root or store is specified
-                $productList = $productList->where( $tableProductStore . '.store_id', session('adminStoreId'));
+                $productList = $productList->where($tableProductStore . '.store_id', session('adminStoreId'));
 
             }
         }
