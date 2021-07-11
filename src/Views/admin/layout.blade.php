@@ -59,10 +59,6 @@
     @yield('main')
   @else
 
-  @section('block_component_exception')
-    @include($templatePathAdmin.'component.exception')
-  @show
-
   @section('block_header')
     @include($templatePathAdmin.'header')
   @show

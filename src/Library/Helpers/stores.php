@@ -22,3 +22,13 @@ if (!function_exists('sc_get_domain_from_code') ) {
         }
     }
 }
+
+/**
+ * Get domain root
+ */
+if (!function_exists('sc_get_domain_root') ) {
+    function sc_get_domain_root() {
+        $store = \SCart\Core\Front\Models\ShopStore::find(SC_ID_ROOT);
+        return $store->domain;
+    }
+}
