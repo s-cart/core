@@ -191,6 +191,6 @@ function sc_image_get_path_thumb($pathFile)
             return sc_image_get_path($pathFile);
         }
     } else {
-        return $pathFile;
+        return sc_image_get_path($pathFile);
     }
 }
