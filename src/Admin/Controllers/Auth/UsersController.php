@@ -12,11 +12,10 @@ use Validator;
 
 class UsersController extends RootAdminController
 {
-    public $stores, $permissions, $roles;
+    public $permissions, $roles;
     public function __construct()
     {
         parent::__construct();
-        $this->stores      = AdminStore::getListAll();
         $this->permissions = AdminPermission::pluck('name', 'id')->all();
         $this->roles       = AdminRole::pluck('name', 'id')->all();
     }
@@ -40,7 +39,6 @@ class UsersController extends RootAdminController
         $data['topMenuRight'] = sc_config_group('topMenuRight', \Request::route()->getName());
         $data['topMenuLeft']  = sc_config_group('topMenuLeft', \Request::route()->getName());
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
-        $data['stores']       = $this->stores;
 
         $listTh = [
             'id'         => 'ID',
@@ -158,8 +156,6 @@ class UsersController extends RootAdminController
             'roles'             => $this->roles,
             'permissions'       => $this->permissions,
             'url_action'        => sc_route_admin('admin_user.create'),
-            'stores'            => $this->stores,
-
         ];
 
         return view($this->templatePathAdmin.'auth.user')
@@ -176,7 +172,6 @@ class UsersController extends RootAdminController
         $dataOrigin = request()->all();
         $validator = Validator::make($dataOrigin, [
             'name'     => 'required|string|max:100',
-            'store'    => 'required',
             'username' => 'required|regex:/(^([0-9A-Za-z@\._]+)$)/|unique:"'.AdminUser::class.'",username|string|max:100|min:3',
             'avatar'   => 'nullable|string|max:255',
             'password' => 'required|string|max:60|min:6|confirmed',
@@ -190,8 +185,6 @@ class UsersController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $store = $data['store'] ?? 1;
-
         $dataInsert = [
             'name'     => $data['name'],
             'username' => strtolower($data['username']),
@@ -226,9 +219,6 @@ class UsersController extends RootAdminController
             $user->permissions()->attach($permission);
         }
 
-        //Insert store
-        $user->stores()->attach([$store]);
-
         return redirect()->route('admin_user.index')->with('success', sc_language_render('action.create_success'));
 
     }
@@ -250,9 +240,7 @@ class UsersController extends RootAdminController
             'user'              => $user,
             'roles'             => $this->roles,
             'permissions'       => $this->permissions,
-            'stores'            => $this->stores,
             'url_action'        => sc_route_admin('admin_user.edit', ['id' => $user['id']]),
-            'storesPivot'       => AdminUserStore::where('user_id', $id)->pluck('store_id')->all(),
             'isAllStore'        => ($user->isAdministrator() || $user->isViewAll()) ? 1: 0,
 
         ];
@@ -270,7 +258,6 @@ class UsersController extends RootAdminController
         $dataOrigin = request()->all();
         $validator = Validator::make($dataOrigin, [
             'name'     => 'required|string|max:100',
-            'store'    => 'required',
             'username' => 'required|regex:/(^([0-9A-Za-z@\._]+)$)/|unique:"'.AdminUser::class.'",username,' . $user->id . '|string|max:100|min:3',
             'avatar'   => 'nullable|string|max:255',
             'password' => 'nullable|string|max:60|min:6|confirmed',
@@ -285,7 +272,6 @@ class UsersController extends RootAdminController
                 ->withInput();
         }
 //Edit
-        $store = $data['store'] ?? 1;
         $dataUpdate = [
             'name' => $data['name'],
             'username' => strtolower($data['username']),
@@ -310,10 +296,6 @@ class UsersController extends RootAdminController
             if ($permission) {
                 $user->permissions()->attach($permission);
             }
-
-            //Update store
-            $user->stores()->detach();
-            $user->stores()->attach([$store]);
 
         }
 

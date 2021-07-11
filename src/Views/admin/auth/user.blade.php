@@ -213,55 +213,7 @@
                                 </div>
                             </div>
                         {{-- //select permission --}}
-
-
-                        {{-- select store --}}
-                        @if (sc_config_global('MultiVendorPro'))
-                            @if (!empty($isAllStore))
-                            <label for="store" class="col-sm-2 col-form-label">
-                                {{ sc_language_render('admin.user.select_store') }}
-                            </label>
-                            <span class="badge badge-primary">{{ sc_language_render('store.all_stories') }}</span>
-                            @else
-                                <div class="form-group row {{ $errors->has('store') ? ' text-red' : '' }}">
-                                    @php
-                                    $listStore = [];
-                                    $store = old('store', ($storesPivot ?? []));
-                                    if(is_array($store)){
-                                        foreach($store as $value){
-                                            $listStore[] = (int)$value;
-                                        }
-                                    }
-                                    @endphp
-                                    <label for="store" class="col-sm-2 col-form-label">
-                                        {{ sc_language_render('admin.user.select_store') }}
-                                    </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control input-sm store" data-placeholder="{{ sc_language_render('admin.user.select_store') }}" style="width: 100%;"
-                                            name="store">
-                                            @foreach ($stores as $id => $store)
-                                            <option value="{{ $id }}" {{ (count($listStore) && in_array($id, $listStore))?'selected':'' }}>
-                                                {{ sc_store('title', $id) }}
-                                            </option>
-                                            @endforeach
-                                        </select>
-                                        @if ($errors->has('store'))
-                                        <span class="form-text">
-                                            <i class="fa fa-info-circle"></i> {{ $errors->first('store') }}
-                                        </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endif
-                        @else
-                            <input type="hidden" name="store" value="1">
-                        @endif
-                        {{-- //select store --}}
-
-
-
                     </div>
-
 
 
                     <!-- /.card-body -->

@@ -29,7 +29,7 @@ class LoginController extends RootAdminController
             return redirect($this->redirectPath());
         }
 
-        return view($this->templatePathAdmin.'auth.login',['title'=>'Login']);
+        return view($this->templatePathAdmin.'auth.login', ['title'=>'Login']);
     }
 
     /**
@@ -47,7 +47,6 @@ class LoginController extends RootAdminController
         $remember = $request->get('remember', false);
 
         if ($this->guard()->attempt($credentials, $remember)) {
-            // session(['admin' => Admin::user()]);
             return $this->sendLoginResponse($request);
         }
         return back()->withInput()->withErrors([

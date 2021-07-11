@@ -656,9 +656,9 @@ class ShopProduct extends Model
             }
 
             if (count($this->sc_category_vendor)) {
-                $tablePTC = (new \App\Plugins\Other\MultiVendorPro\Models\ProductCategoryVendor)->getTable();
+                $tablePTC = (new \App\Plugins\Other\MultiVendorPro\Models\VendorProductCategory)->getTable();
                 $query = $query->leftJoin($tablePTC, $tablePTC . '.product_id', $this->getTable() . '.id');
-                $query = $query->whereIn($tablePTC . '.category_vendor_id', $this->sc_category_vendor);
+                $query = $query->whereIn($tablePTC . '.vendor_category_id', $this->sc_category_vendor);
             }
         }
 

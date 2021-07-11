@@ -43,16 +43,6 @@ class AdminUser extends Model implements AuthenticatableContract
     }
 
     /**
-     * A user has and belongs to many stores.
-     *
-     * @return BelongsToMany
-     */
-    public function stores()
-    {
-        return $this->belongsToMany(ShopStore::class, SC_DB_PREFIX.'admin_user_store', 'user_id', 'store_id');
-    }
-
-    /**
      * Update info customer
      * @param  [array] $dataUpdate
      * @param  [int] $id
@@ -79,7 +69,6 @@ class AdminUser extends Model implements AuthenticatableContract
             }
             $model->roles()->detach();
             $model->permissions()->detach();
-            $model->stores()->detach();
         });
     }
 
