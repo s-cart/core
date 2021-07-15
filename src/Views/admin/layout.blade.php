@@ -26,7 +26,6 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/iCheck/square/blue.css')}}">
   <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
-  @if (!Admin::isLoginPage() && !Admin::isLogoutPage())
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/select2/css/select2.min.css')}}">
   <!-- Daterange picker -->
@@ -42,7 +41,6 @@
     @include($templatePathAdmin.'component.css')
   @show
 
-  @endif
 
   <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/jquery-ui/jquery-ui.min.css')}}">
 
@@ -55,9 +53,6 @@
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed {{ config($styleDefine.'.body') }}">
 
 <div class="wrapper">
-  @if ((Admin::isLoginPage() || Admin::isLogoutPage()))
-    @yield('main')
-  @else
 
   @section('block_header')
     @include($templatePathAdmin.'header')
@@ -120,7 +115,7 @@
   <div id="loading">
         <div id="overlay" class="overlay"><i class="fa fa-spinner fa-pulse fa-5x fa-fw "></i></div>
  </div>
-@endif
+
 
 </div>
 <!-- ./wrapper -->
@@ -150,8 +145,6 @@
 <!-- overlayScrollbars -->
 <script src="{{ sc_file('admin/LTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 
-
-@if (!Admin::isLoginPage() && !Admin::isLogoutPage())
 {{-- <script src="{{ sc_file('admin/AdminLTE/bower_components/raphael/raphael.min.js')}}"></script>
 <script src="{{ sc_file('admin/AdminLTE/bower_components/morris.js/morris.min.js')}}"></script> --}}
 <!-- Sparkline -->
@@ -169,7 +162,7 @@
 <script src="{{ sc_file('admin/plugin/bootstrap-switch.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="{{ sc_file('admin/LTE/dist/js/demo.js')}}"></script> --}}
-@endif
+
 <script src="{{ sc_file('admin/LTE/plugins/iCheck/icheck.min.js')}}"></script>
 
 @stack('scripts')

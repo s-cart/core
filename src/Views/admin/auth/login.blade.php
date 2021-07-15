@@ -1,9 +1,7 @@
-@extends($templatePathAdmin.'layout')
+@extends($templatePathAdmin.'layout_portable')
 
 @section('main')
 @include($templatePathAdmin.'component.css_login')
-<body class="hold-transition login-page">
-  <div class="limiter">
     <div class="container-login100">
       <div class="wrap-login100 main-login">
         <form action="{{ sc_route_admin('admin.login') }}" method="post">

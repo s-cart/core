@@ -1,5 +1,5 @@
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand {{ (Admin::isLoginPage() || Admin::isLogoutPage())?'login-page':'' }} {{ config($styleDefine.'.main-header') }}">
+  <nav class="main-header navbar navbar-expand {{ config($styleDefine.'.main-header') }}">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
