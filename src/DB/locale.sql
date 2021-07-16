@@ -2091,6 +2091,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('email.config_smtp.smtp_from', 'Địa chỉ email gửi', 'email.admin', 'vi'),
 ('email.welcome','Chào mừng!', 'email', 'vi'),
 ('email.welcome','Welcome!', 'email', 'en'),
+('email.msg_goodbye','Trân trọng!', 'email', 'vi'),
+('email.msg_goodbye','Best regards!', 'email', 'en'),
 ('email.forgot_password.title', 'Hello!', 'email.forgot_password', 'en'),
 ('email.forgot_password.reset_button', 'Reset password', 'email.forgot_password', 'en'),
 ('email.forgot_password.reason_sendmail', 'You are receiving this email because we received a password reset request for your account.', 'email.forgot_password', 'en'),
