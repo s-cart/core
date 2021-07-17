@@ -2,7 +2,6 @@
 namespace SCart\Core\Front\Models;
 
 use SCart\Core\Admin\Models\AdminConfig;
-use SCart\Core\Admin\Models\AdminUserStore;
 use SCart\Core\Front\Models\ShopProductStore;
 use Illuminate\Database\Eloquent\Model;
 class ShopStore extends Model
@@ -81,7 +80,6 @@ class ShopStore extends Model
             $store->categories()->detach();
             $store->links()->detach();
             AdminConfig::where('store_id', $store->id)->delete();
-            AdminUserStore::where('store_id', $store->id)->delete();
         });
     }
 
