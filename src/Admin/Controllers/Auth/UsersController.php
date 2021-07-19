@@ -5,9 +5,7 @@ use SCart\Core\Admin\Admin;
 use SCart\Core\Admin\Models\AdminPermission;
 use SCart\Core\Admin\Models\AdminRole;
 use SCart\Core\Admin\Models\AdminUser;
-use SCart\Core\Admin\Models\AdminUserStore;
 use App\Http\Controllers\RootAdminController;
-use SCart\Core\Admin\Models\AdminStore;
 use Validator;
 
 class UsersController extends RootAdminController
