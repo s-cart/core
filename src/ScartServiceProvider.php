@@ -34,53 +34,134 @@ class ScartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__.'/Config/admin.php', 'admin');
-        $this->mergeConfigFrom(__DIR__.'/Config/validation.php', 'validation');
-        $this->mergeConfigFrom(__DIR__.'/Config/lfm.php', 'lfm');
-        $this->mergeConfigFrom(__DIR__.'/Config/s-cart.php', 's-cart');
-        $this->loadViewsFrom(__DIR__.'/Views/admin', 's-cart-admin');
-        $this->loadViewsFrom(__DIR__.'/Views/front', 's-cart-front');
-
-        $this->registerPublishing();
-        
+       
         if (!file_exists(public_path('install.php')) && file_exists(base_path('.env'))) {
-            foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
-                require_once $filename;
-            }
-            foreach (glob(app_path() . '/Library/Helpers/*.php') as $filename) {
-                require_once $filename;
-            }
-
-            foreach (glob(app_path() . '/Plugins/*/*/Provider.php') as $filename) {
-                require_once $filename;
-            }
-
-            $this->bootScart();
-
-            //Route Admin
-            if (file_exists($routes = __DIR__.'/Admin/routes.php')) {
-                $this->loadRoutesFrom($routes);
+            //Load helper from front
+            try {
+                foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
+                    require_once $filename;
+                }
+            } catch(\Throwable $e) {
+                $msg = '#SC001::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+                // sc_report($msg);
+                echo $msg;
+                exit;
             }
 
-            //Route Api
-            if (file_exists($routes = __DIR__.'/Api/routes.php')) {
-                $this->loadRoutesFrom($routes);
+            //Load helper from vendor
+            try {
+                foreach (glob(app_path() . '/Library/Helpers/*.php') as $filename) {
+                    require_once $filename;
+                }
+            } catch(\Throwable $e) {
+                $msg = '#SC002::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+                sc_report($msg);
+                echo $msg;
+                exit;
             }
-
-            //Route Front
-            if (file_exists($routes = __DIR__.'/Front/routes.php')) {
-                $this->loadRoutesFrom($routes);
-            }
-
+            //Check connection
             try {
                 DB::connection(SC_CONNECTION)->getPdo();
             } catch(\Throwable $e) {
-                sc_report($e->getMessage());
-                return;
+                $msg = '#SC003::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+                sc_report($msg);
+                echo $msg;
+                exit;
+            }
+            //Load Plugin Provider
+            try {
+                foreach (glob(app_path() . '/Plugins/*/*/Provider.php') as $filename) {
+                    require_once $filename;
+                }
+            } catch(\Throwable $e) {
+                $msg = '#SC004::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+                sc_report($msg);
+                echo $msg;
+                exit;
+            }
+
+            //Boot process S-Cart
+            try {
+                $this->bootScart();
+            } catch(\Throwable $e) {
+                $msg = '#SC005::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+                sc_report($msg);
+                echo $msg;
+                exit;
+            }
+
+            //Route Admin
+            try {
+                if (file_exists($routes = __DIR__.'/Admin/routes.php')) {
+                    $this->loadRoutesFrom($routes);
+                }
+            } catch(\Throwable $e) {
+                $msg = '#SC006::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+                sc_report($msg);
+                echo $msg;
+                exit;
+            }
+
+            //Route Api
+            try {
+                if (file_exists($routes = __DIR__.'/Api/routes.php')) {
+                    $this->loadRoutesFrom($routes);
+                }
+            } catch(\Throwable $e) {
+                $msg = '#SC007::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+                sc_report($msg);
+                echo $msg;
+                exit;
+            }
+
+            //Route Front
+            try {
+                if (file_exists($routes = __DIR__.'/Front/routes.php')) {
+                    $this->loadRoutesFrom($routes);
+                }
+            } catch(\Throwable $e) {
+                $msg = '#SC008::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+                sc_report($msg);
+                echo $msg;
+                exit;
             }
         }
 
-        $this->validationExtend();
+        try {
+            $this->registerPublishing();
+        } catch(\Throwable $e) {
+            $msg = '#SC009::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+            sc_report($msg);
+            echo $msg;
+            exit;
+        }
+        
+        try {
+            $this->registerRouteMiddleware();
+        } catch(\Throwable $e) {
+            $msg = '#SC010::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+            sc_report($msg);
+            echo $msg;
+            exit;
+        }
+        
+        try {
+            $this->commands($this->commands);
+        } catch(\Throwable $e) {
+            $msg = '#SC011::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+            sc_report($msg);
+            echo $msg;
+            exit;
+        }
+        
+        try {
+            $this->validationExtend();
+        } catch(\Throwable $e) {
+            $msg = '#SC012::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+            sc_report($msg);
+            echo $msg;
+            exit;
+        }
 
     }
 
@@ -96,9 +177,14 @@ class ScartServiceProvider extends ServiceProvider
         }
         $this->app->bind('cart', '\SCart\Core\Library\ShoppingCart\Cart');
         
-        $this->registerRouteMiddleware();
+        $this->mergeConfigFrom(__DIR__.'/Config/admin.php', 'admin');
+        $this->mergeConfigFrom(__DIR__.'/Config/validation.php', 'validation');
+        $this->mergeConfigFrom(__DIR__.'/Config/lfm.php', 'lfm');
+        $this->mergeConfigFrom(__DIR__.'/Config/s-cart.php', 's-cart');
+        $this->mergeConfigFrom(__DIR__.'/Config/middleware.php', 'middleware');
+        $this->loadViewsFrom(__DIR__.'/Views/admin', 's-cart-admin');
+        $this->loadViewsFrom(__DIR__.'/Views/front', 's-cart-front');
 
-        $this->commands($this->commands);
     }
 
     public function bootScart()
@@ -213,26 +299,17 @@ class ScartServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $middlewareGroups = [
-        'admin' => [
-            'admin.auth',
-            'admin.permission',
-            'admin.log',
-            'admin.storeId',
-            'admin.theme',
-            'localization',
-        ],
-        'front' => [
-            'localization',
-            'currency',
-            'checkdomain',
-        ],
-        'api.extent' => [
-            'json.response',
-            'api.connection',
-            'throttle:1000',
-        ],
-    ];
+    protected function middlewareGroups() {
+        return [
+            'admin' => config('middleware.admin'),
+            'front' => config('middleware.front'),
+            'api.extent' => [
+                'json.response',
+                'api.connection',
+                'throttle:1000',
+            ],
+        ];
+    }
 
     /**
      * Register the route middleware.
@@ -247,8 +324,8 @@ class ScartServiceProvider extends ServiceProvider
         }
 
         // register middleware group.
-        foreach ($this->middlewareGroups as $key => $middleware) {
-            app('router')->middlewareGroup($key, $middleware);
+        foreach ($this->middlewareGroups() as $key => $middleware) {
+            app('router')->middlewareGroup($key, array_values($middleware));
         }
     }
 
