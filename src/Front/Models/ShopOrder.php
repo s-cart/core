@@ -181,29 +181,16 @@ class ShopOrder extends Model
             $this->addOrderHistory($dataHistory);
 
             //Process Discount
-            $codeDiscount = session('Discount') ?? '';
-            if ($codeDiscount) {
-                if (!empty(sc_config('Discount'))) {
-                    $moduleClass = sc_get_class_plugin_controller($code = 'Total', $key = 'Discount');
-                    $returnModuleDiscount = (new $moduleClass)->apply($codeDiscount, $uID, $msg = 'Order #' . $orderID);
-                    $arrReturnModuleDiscount = json_decode($returnModuleDiscount, true);
+            $totalMethod = session('totalMethod') ?? [];
+            foreach ($totalMethod as $keyPlugin => $codeApply) {
+                if ($codeApply) {
+                    $moduleClass = sc_get_class_plugin_controller($code = 'Total', $key = $keyPlugin);
+                    $arrReturnModuleDiscount = (new $moduleClass)->apply($codeApply, $uID, $msg = 'Order #' . $orderID);
                     if ($arrReturnModuleDiscount['error'] == 1) {
-                        if ($arrReturnModuleDiscount['msg'] == 'error_code_not_exist') {
-                            $msg = sc_language_render('discount.process.invalid');
-                        } elseif ($arrReturnModuleDiscount['msg'] == 'error_code_cant_use') {
-                            $msg = sc_language_render('discount.process.over');
-                        } elseif ($arrReturnModuleDiscount['msg'] == 'error_code_expired_disabled') {
-                            $msg = sc_language_render('discount.process.expire');
-                        } elseif ($arrReturnModuleDiscount['msg'] == 'error_user_used') {
-                            $msg = sc_language_render('discount.process.used');
-                        } elseif ($arrReturnModuleDiscount['msg'] == 'error_uID_input') {
-                            $msg = sc_language_render('discount.process.customer_id_invalid');
-                        } elseif ($arrReturnModuleDiscount['msg'] == 'error_login') {
-                            $msg = sc_language_render('discount.process.must_login');
-                        } else {
-                            $msg = sc_language_render('discount.process.undefined');
-                        }
-                        return redirect(sc_route('cart'))->with(['error_discount' => $msg]);
+                        $msg = $arrReturnModuleDiscount['msg'];
+                        DB::connection(SC_CONNECTION)->rollBack();
+                        $return = ['error' => 1, 'msg' => $msg];
+                        return $return;
                     }
                 }
             }
