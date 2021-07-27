@@ -131,7 +131,7 @@ class AdminOrderController extends RootAdminController
                 'tax'            => sc_currency_render_symbol($row['tax'] ?? 0, $row['currency']),
                 'total'          => sc_currency_render_symbol($row['total'] ?? 0, $row['currency']),
                 'payment_method' => $row['payment_method'].'<br>('.$row['currency'] . '/' . $row['exchange_rate'].')',
-                'status'         => $styleStatus[$row['status']],
+                'status'         => $styleStatus[$row['status']] ?? $row['status'],
             ];
             if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
                 // Only show store info if store is root
