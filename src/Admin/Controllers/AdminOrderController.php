@@ -592,7 +592,9 @@ class AdminOrderController extends RootAdminController
             $fieldOrg = $item->{$field};
             $orderId = $item->order_id;
             $item->{$field} = $value;
-            $item->total_price = $value * (($field == 'qty') ? $item->price : $item->qty);
+            if ($field == 'qty' || $field == 'price') {
+                $item->total_price = $value * (($field == 'qty') ? $item->price : $item->qty);
+            }
             $item->save();
             $item = $item->fresh();
             $order = AdminOrder::getOrderAdmin($orderId);
