@@ -21,7 +21,7 @@ define('SC_GUARD_ROLES', ['1', '2']); // admin, only view
  */
 define('SC_ADMIN_MIDDLEWARE', ['web', 'admin']);
 define('SC_FRONT_MIDDLEWARE', ['web', 'front']);
-define('SC_API_MIDDLEWARE', ['api', 'api.extent']);
+define('SC_API_MIDDLEWARE', ['api', 'api.extend']);
 define('SC_CONNECTION', 'mysql');
 define('SC_CONNECTION_LOG', 'mysql');
 //Prefix url admin
