@@ -704,7 +704,7 @@ class ShopCartController extends RootFrontController
             $arrDetail['price']       = sc_currency_value($cartItem->price);
             $arrDetail['qty']         = $cartItem->qty;
             $arrDetail['store_id']    = $cartItem->storeId;
-            $arrDetail['attribute']   = ($cartItem->options) ? json_encode($cartItem->options) : null;
+            $arrDetail['attribute']   = ($cartItem->options) ? $cartItem->options->toArray() : null;
             $arrDetail['total_price'] = sc_currency_value($cartItem->price) * $cartItem->qty;
             $arrCartDetail[]          = $arrDetail;
         }
