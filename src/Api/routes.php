@@ -24,12 +24,34 @@ Route::group(
         });
     });
     
-    Route::get('categories', 'ShopFront@allCategory');
-    Route::get('categories/{id}', 'ShopFront@categoryDetail');
-    Route::get('products', 'ShopFront@allProduct');
-    Route::get('products/{id}', 'ShopFront@productDetail');
-    Route::get('brands', 'ShopFront@allBrand');
-    Route::get('brands/{id}', 'ShopFront@brandDetail');
-    Route::get('supplieres', 'ShopFront@allSupplier');
-    Route::get('supplieres/{id}', 'ShopFront@brandDetail');
+});
+
+//Route api
+Route::group(
+    [
+        'middleware' => SC_API_MIDDLEWARE,
+        'prefix' => 'admin-api',
+        'namespace' => '\SCart\Core\Api\Controllers',
+    ]
+    , function () {
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('login', 'AdminAuthController@login');
+        Route::post('create', 'AdminAuthController@create');
+      
+        Route::group([
+          'middleware' => 'auth:admin-api'
+        ], function() {
+            Route::get('logout', 'AdminAuthController@logout');        
+            Route::get('info', 'AdminAuthController@getInfo');        
+        });
+    });
+    
+    // Route::get('categories', 'ShopFront@allCategory');
+    // Route::get('categories/{id}', 'ShopFront@categoryDetail');
+    // Route::get('products', 'ShopFront@allProduct');
+    // Route::get('products/{id}', 'ShopFront@productDetail');
+    // Route::get('brands', 'ShopFront@allBrand');
+    // Route::get('brands/{id}', 'ShopFront@brandDetail');
+    // Route::get('supplieres', 'ShopFront@allSupplier');
+    // Route::get('supplieres/{id}', 'ShopFront@brandDetail');
 });

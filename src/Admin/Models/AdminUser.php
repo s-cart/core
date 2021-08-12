@@ -1,16 +1,17 @@
 <?php
 namespace SCart\Core\Admin\Models;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
 use SCart\Core\Front\Models\ShopStore;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AdminUser extends Model implements AuthenticatableContract
+class AdminUser extends Authenticatable
 {
-    use Authenticatable;
+    use  Notifiable, HasApiTokens;
     public $table      = SC_DB_PREFIX.'admin_user';
     protected $guarded = [];
     protected $hidden  = [
@@ -183,7 +184,7 @@ class AdminUser extends Model implements AuthenticatableContract
      *
      * @return bool
      */
-    public function cannot(string $permission): bool
+    public function cannot($permission, $arguments = []): bool
     {
         return !$this->can($permission);
     }
