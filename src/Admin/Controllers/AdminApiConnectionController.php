@@ -83,8 +83,8 @@ class AdminApiConnectionController extends RootAdminController
         $dataOrigin = request()->all();
         $validator = Validator::make($dataOrigin, [
             'description' => 'string|required',
-            'apiconnection' => 'string|required|regex:/(^([0-9a-z]+)$)/|unique:"'.ShopApiConnection::class.'",apiconnection',
-            'apikey' => 'string|regex:/(^([0-9a-z]+)$)/',
+            'apiconnection' => 'string|required|regex:/(^([0-9a-z\-_]+)$)/|unique:"'.ShopApiConnection::class.'",apiconnection',
+            'apikey' => 'string|regex:/(^([0-9a-z\-_]+)$)/',
         ], [
             'apiconnection.regex' => sc_language_render('admin.api_connection.validate_regex'),
             'apikey.regex' => sc_language_render('admin.api_connection.validate_regex'),
@@ -194,8 +194,8 @@ public function edit($id)
         $obj = ShopApiConnection::find($id);
         $validator = Validator::make($dataOrigin, [
             'description' => 'string|required',
-            'apiconnection' => 'string|required|regex:/(^([0-9a-z]+)$)/|unique:"'.ShopApiConnection::class.'",apiconnection,' . $obj->id . ',id',
-            'apikey' => 'string|regex:/(^([0-9a-z]+)$)/',
+            'apiconnection' => 'string|required|regex:/(^([0-9a-z\-_]+)$)/|unique:"'.ShopApiConnection::class.'",apiconnection,' . $obj->id . ',id',
+            'apikey' => 'string|regex:/(^([0-9a-z\-_]+)$)/',
         ],[
             'apiconnection.regex' => sc_language_render('admin.api_connection.validate_regex'),
             'apikey.regex' => sc_language_render('admin.api_connection.validate_regex'),
