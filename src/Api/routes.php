@@ -15,7 +15,7 @@ Route::group(
         Route::post('create', 'AuthController@create');
       
         Route::group([
-          'middleware' => 'auth:api'
+            'middleware' => ['auth:api', 'scope:user, user-guest']
         ], function() {
             Route::get('logout', 'AuthController@logout');
             Route::get('user', 'AccountController@user');
@@ -39,7 +39,7 @@ Route::group(
         Route::post('create', 'AdminAuthController@create');
       
         Route::group([
-          'middleware' => 'auth:admin-api'
+          'middleware' => ['auth:admin-api', 'scopes:admin']
         ], function() {
             Route::get('logout', 'AdminAuthController@logout');        
             Route::get('info', 'AdminAuthController@getInfo');        

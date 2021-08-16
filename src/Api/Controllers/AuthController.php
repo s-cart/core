@@ -42,8 +42,14 @@ class AuthController extends RootFrontController
         }
 
         $user = $this->guard()->user();
+
+        if ($user->status == 0) {
+            $scope = ['user-guest'];
+        } else {
+            $scope = ['user'];
+        }
         
-        $tokenResult = $user->createToken('Client:'.$user->email.'- '.now());
+        $tokenResult = $user->createToken('Client:'.$user->email.'- '.now(), $scope);
         $token = $tokenResult->token;
 
         if ($request->remember_me){

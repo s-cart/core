@@ -40,8 +40,11 @@ class AdminAuthController extends RootFrontController
         }
 
         $user = $this->guard()->user();
+
+        $scope = ['admin-supper'];
         
-        $tokenResult = $user->createToken('Admin:'.$user->username.'- '.now());
+        $tokenResult = $user->createToken('Admin:'.$user->username.'- '.now(), $scope);
+
         $token = $tokenResult->token;
 
         if ($request->remember_me){
