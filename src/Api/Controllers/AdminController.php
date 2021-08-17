@@ -6,7 +6,7 @@ use App\Http\Controllers\RootFrontController;
 use Illuminate\Http\Request;
 use SCart\Core\Front\Models\ShopOrder;
 
-class AccountController extends RootFrontController
+class AdminController extends RootFrontController
 {
 
     /**
@@ -14,7 +14,7 @@ class AccountController extends RootFrontController
      *
      * @return [json] user object
      */
-    public function user(Request $request)
+    public function getInfo(Request $request)
     {
         return response()->json($request->user());
     }
@@ -42,7 +42,7 @@ class AccountController extends RootFrontController
                 ->with('details')
                 -> where('customer_id', $user->id)
                 ->first();
-        if($order) {
+        if ($order) {
             $dataReturn = $order;
         } else {
             $dataReturn = [
