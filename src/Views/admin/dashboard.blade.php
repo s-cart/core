@@ -190,7 +190,7 @@
                             <tr>
                               <td><a href="{{ route('admin_order.detail',['id'=>$order->id]) }}">Order#{{ $order->id }}</a></td>
                               <td>{{ $order->email }}</td>
-                              <td><span class="badge badge-{{ $mapStyleStatus[$order->status]??'' }}">{{ $order->orderStatus->name }}</span></td>
+                              <td><span class="badge badge-{{ $mapStyleStatus[$order->status]??'' }}">{{ $order->orderStatus ? $order->orderStatus->name : $order->status }}</span></td>
                               <td>{{ $order->created_at }}</td>
                             </tr>
                       @endforeach
