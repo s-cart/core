@@ -159,6 +159,7 @@ class ShopOrder extends Model
                 $cartDetail['sku'] = $product->sku;
                 $cartDetail['tax'] = $tax;
                 $cartDetail['store_id'] = $cartDetail['store_id'];
+                $cartDetail['attribute'] = json_encode($cartDetail['attribute']);
                 $this->addOrderDetail($cartDetail);
 
                 //Update stock flash sale
@@ -197,7 +198,7 @@ class ShopOrder extends Model
             // End process Discount
 
             DB::connection(SC_CONNECTION)->commit();
-            $return = ['error' => 0, 'orderID' => $orderID, 'msg' => ""];
+            $return = ['error' => 0, 'orderID' => $orderID, 'msg' => "", 'detail' => $order];
         } catch (\Throwable $e) {
             DB::connection(SC_CONNECTION)->rollBack();
             $return = ['error' => 1, 'msg' => $e->getMessage()];
