@@ -717,6 +717,7 @@ class ShopCartController extends RootFrontController
         $newOrder = (new ShopOrder)->createOrder($dataOrder, $dataTotal, $arrCartDetail);
 
         if ($newOrder['error'] == 1) {
+            sc_report($newOrder['msg']);
             return redirect(sc_route('cart'))->with(['error' => $newOrder['msg']]);
         }
         //Set session orderID
