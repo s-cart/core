@@ -46,4 +46,20 @@ class MemberOrderController extends RootFrontController
         return response()->json($dataReturn, 200);
     }
 
+    /**
+     * Create new order
+     *
+     * @return void
+     */
+    public function createOrder() {
+        $data = request()->all();
+        $user = request()->user();
+        $dataOrder = $data['dataOrder'];
+        $dataTotal = $data['dataTotal'];
+        $itemDetail = $data['itemDetail'];
+        $dataOrder['customer_id'] = $user->id;
+        $dataReturn = (new ShopOrder)->createOrder($dataOrder, $dataTotal, $itemDetail);
+        return response()->json($dataReturn, 200);
+    }
+
 }
