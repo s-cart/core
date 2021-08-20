@@ -34,15 +34,22 @@ class AuthController extends RootFrontController
 
         $credentials = request(['email', 'password']);
 
-        if(!Auth::attempt($credentials)){
+        if (!$this->guard()->attempt($credentials)) {
             return response()->json([
                 'error' => 1,
                 'msg' => 'Unauthorized'
             ], 401);
         }
 
-        $user = $request->user();
-        $tokenResult = $user->createToken('Personal Access Token');
+        $user = $this->guard()->user();
+
+        if ($user->status == 0) {
+            $scope = ['user-guest'];
+        } else {
+            $scope = ['user'];
+        }
+        
+        $tokenResult = $user->createToken('Client:'.$user->email.'- '.now(), $scope);
         $token = $tokenResult->token;
 
         if ($request->remember_me){
@@ -163,4 +170,8 @@ class AuthController extends RootFrontController
         ]);
     }
   
+    protected function guard()
+    {
+        return Auth::guard();
+    }
 }

@@ -12,7 +12,6 @@
   ],
   "require": {
       "php": "^7.4|^8.0",
-      "laravel/framework": "^8.0",
       "unisharp/laravel-filemanager": "^2.2",
       "spatie/laravel-pjax": "^2.1",
       "phpoffice/phpspreadsheet": "^1.16",
@@ -31,8 +30,7 @@
           "dont-discover": [
           ],
           "providers": [
-            "SCart\\Core\\ScartServiceProvider",
-            "UniSharp\\LaravelFilemanager\\LaravelFilemanagerServiceProvider"
+            "SCart\\Core\\ScartServiceProvider"
           ],
           "aliases": {
             "Export" : "SCart\\Core\\Library\\ProcessData\\Export",

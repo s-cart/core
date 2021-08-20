@@ -17,6 +17,10 @@ use SCart\Core\Commands\Backup;
 use SCart\Core\Commands\Restore;
 use SCart\Core\Commands\MakePlugin;
 use SCart\Core\Commands\Infomation;
+use Laravel\Passport\Passport;
+use Laravel\Passport\Console\ClientCommand;
+use Laravel\Passport\Console\InstallCommand;
+use Laravel\Passport\Console\KeysCommand;
 class ScartServiceProvider extends ServiceProvider
 {
     protected $commands = [
@@ -163,6 +167,33 @@ class ScartServiceProvider extends ServiceProvider
             exit;
         }
 
+        //===========Laravel Passport====================
+        //https://laravel.com/docs/8.x/passport
+        Passport::routes();
+        Passport::tokensExpireIn(now()->addDays(config('passport.config.tokensExpireIn', 15)));
+        Passport::refreshTokensExpireIn(now()->addDays(config('passport.config.refreshTokensExpireIn', 30)));
+        Passport::personalAccessTokensExpireIn(now()->addMonths(config('passport.config.personalAccessTokensExpireIn', 6)));
+
+        /**
+         * Run command line passport outside console
+         */
+        $this->commands([
+            InstallCommand::class,
+            ClientCommand::class,
+            KeysCommand::class,
+        ]);
+
+        Passport::tokensCan([
+            'user' => 'User default',
+            'user-guest' => 'User guest',
+            'admin' => 'Admin shop',
+            'admin-supper' => 'Admin supper',
+        ]);
+
+        Passport::setDefaultScope([
+            'user-guest',
+        ]);
+
     }
 
     /**
@@ -184,6 +215,9 @@ class ScartServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/Config/middleware.php', 'middleware');
         $this->loadViewsFrom(__DIR__.'/Views/admin', 's-cart-admin');
         $this->loadViewsFrom(__DIR__.'/Views/front', 's-cart-front');
+
+        //Dont use migrate from library passport
+        Passport::ignoreMigrations();
 
     }
 
@@ -292,6 +326,9 @@ class ScartServiceProvider extends ServiceProvider
         'admin.permission' => Admin\Middleware\PermissionMiddleware::class,
         'admin.storeId'    => Admin\Middleware\AdminStoreId::class,
         'admin.theme'      => Admin\Middleware\AdminTheme::class,
+        //Passport
+        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
     ];
 
     /**
