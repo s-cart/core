@@ -7,7 +7,7 @@ use SCart\Core\Front\Models\ShopCategory;
 use SCart\Core\Front\Models\ShopProduct;
 use SCart\Core\Front\Models\ShopSupplier;
 
-class OrderFront extends RootFrontController
+class AdminShopFront extends RootFrontController
 {
     /**
      * display list category root (parent = 0)

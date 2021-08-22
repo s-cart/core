@@ -10,7 +10,7 @@ use SCart\Core\Front\Models\ShopCustomer;
 use Illuminate\Support\Facades\Validator;
 use SCart\Core\Front\Models\ShopEmailTemplate;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
-class AuthController extends RootFrontController
+class MemberAuthController extends RootFrontController
 {
     use AuthTrait;
 

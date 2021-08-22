@@ -116,7 +116,9 @@ class ShopOrder extends Model
         try {
             DB::connection(SC_CONNECTION)->beginTransaction();
             $dataOrder['domain'] = url('/');
-            $uID = $dataOrder['customer_id'];
+            $uID = $dataOrder['customer_id'] ?? 0;
+            $adminID = $dataOrder['admin_id'] ?? 0;
+            unset($dataOrder['admin_id']);
             $currency = $dataOrder['currency'];
             $exchange_rate = $dataOrder['exchange_rate'];
 
@@ -179,6 +181,7 @@ class ShopOrder extends Model
                 'order_id' => $orderID,
                 'content' => 'New order',
                 'customer_id' => $uID,
+                'admin_id' => $adminID,
                 'order_status_id' => $order->status,
             ];
             $this->addOrderHistory($dataHistory);

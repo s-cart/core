@@ -13,15 +13,15 @@ Route::group(
 
     //Customer
     Route::group(['prefix' => 'member'], function () {
-        Route::post('login', 'AuthController@login');
-        Route::post('create', 'AuthController@create');
+        Route::post('login', 'MemberAuthController@login');
+        Route::post('create', 'MemberAuthController@create');
         Route::group([
             'middleware' => ['auth:api', 'scope:user, user-guest']
         ], function() {
-            Route::get('logout', 'AuthController@logout');
+            Route::get('logout', 'MemberAuthController@logout');
             Route::get('info', 'MemberController@getInfo');
             Route::get('orders', 'MemberOrderController@orders');
-            Route::get('order/{id}', 'MemberOrderController@orderDetail');
+            Route::get('orders/{id}', 'MemberOrderController@orderDetail');
         });
 
         Route::group([
@@ -39,18 +39,21 @@ Route::group(
           'middleware' => ['auth:admin-api', 'scope:admin-supper']
         ], function() {
             Route::get('logout', 'AdminAuthController@logout');
-            Route::get('info', 'AdminController@getInfo'); 
-            
-            // Route::post('order', 'MemberController@createOrder');
-            // Route::post('cancel_order/{id}', 'MemberController@cancelOrder');
-                // Route::get('categories', 'ShopFront@allCategory');
-                // Route::get('categories/{id}', 'ShopFront@categoryDetail');
-                // Route::get('products', 'ShopFront@allProduct');
-                // Route::get('products/{id}', 'ShopFront@productDetail');
-                // Route::get('brands', 'ShopFront@allBrand');
-                // Route::get('brands/{id}', 'ShopFront@brandDetail');
-                // Route::get('supplieres', 'ShopFront@allSupplier');
-                // Route::get('supplieres/{id}', 'ShopFront@brandDetail');
+            Route::get('info', 'AdminController@getInfo');
+
+            Route::get('orders', 'AdminOrderController@orders');
+            Route::get('orders/{id}', 'AdminOrderController@orderDetail');
+            Route::post('create_order', 'AdminOrderController@createOrder');
+            Route::post('cancel_order/{id}', 'AdminOrderController@cancelOrder');
+
+            Route::get('categories', 'AdminShopFront@allCategory');
+            Route::get('categories/{id}', 'AdminShopFront@categoryDetail');
+            Route::get('products', 'AdminShopFront@allProduct');
+            Route::get('products/{id}', 'AdminShopFront@productDetail');
+            Route::get('brands', 'AdminShopFront@allBrand');
+            Route::get('brands/{id}', 'AdminShopFront@brandDetail');
+            Route::get('supplieres', 'AdminShopFront@allSupplier');
+            Route::get('supplieres/{id}', 'AdminShopFront@brandDetail');
         });
     });
     
