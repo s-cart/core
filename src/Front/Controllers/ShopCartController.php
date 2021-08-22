@@ -1142,6 +1142,9 @@ class ShopCartController extends RootFrontController
             return redirect()->route('home', ['error' => 'Error Order ID!']);
         }
 
+        // Process event success
+        sc_event_order_success($order = ShopOrder::find($orderID));
+
         $classPaymentConfig = sc_get_class_plugin_config('Payment', $paymentMethod);
         if (method_exists($classPaymentConfig, 'endApp')) {
             (new $classPaymentConfig)->endApp();

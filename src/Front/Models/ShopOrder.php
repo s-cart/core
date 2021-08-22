@@ -203,6 +203,10 @@ class ShopOrder extends Model
             // End process Discount
 
             DB::connection(SC_CONNECTION)->commit();
+
+            // Process event created
+            sc_event_order_created($order);
+
             $return = ['error' => 0, 'orderID' => $orderID, 'msg' => "", 'detail' => $order];
         } catch (\Throwable $e) {
             DB::connection(SC_CONNECTION)->rollBack();

@@ -151,6 +151,10 @@ class ShopCustomer extends Authenticatable
         $address = $user->addresses()->save(new ShopCustomerAddress($dataAddress));
         $user->address_id = $address->id;
         $user->save();
+        
+        // Process event customer created
+        sc_event_customer_created($user);
+        
         return $user;
     }
 
