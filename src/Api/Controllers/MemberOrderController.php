@@ -65,4 +65,34 @@ class MemberOrderController extends RootFrontController
         return response()->json($dataReturn, 200);
     }
 
+    /**
+     * Cancel order
+     *
+     * @param [type] $orderId
+     * @return void
+     */
+    public function cancelOrder($orderId) {
+        $user = request()->user();
+        $order = (new ShopOrder)->where('id', $orderId)->where('customer_id', $user->id)->first();
+        if ($order) {
+            $history = [
+                'user_id' => $user->id,
+                'content' => 'API cancel order',
+            ];
+            (new ShopOrder)->updateStatus($orderId, $status = 4, $history);
+            $dataReturn = [
+                'status' => 0,
+                'msg' => 'Cancel order success',
+                'detail' => 'Order #'.$orderId. ' canceled',
+            ];
+        } else {
+            $dataReturn = [
+                'status' => 1,
+                'msg' => 'Order not found',
+                'detail' => 'Order #'.$orderId. ' not found',
+            ];
+        }
+        return response()->json($dataReturn, 200);
+    }
+
 }

@@ -21,7 +21,7 @@ Route::group(
             Route::get('logout', 'AuthController@logout');
             Route::get('info', 'MemberController@getInfo');
             Route::get('orders', 'MemberOrderController@orders');
-            Route::get('orders/{id}', 'MemberOrderController@orderDetail');
+            Route::get('order/{id}', 'MemberOrderController@orderDetail');
         });
 
         Route::group([
