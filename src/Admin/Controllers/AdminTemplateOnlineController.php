@@ -22,7 +22,6 @@ class AdminTemplateOnlineController extends RootAdminController
         $page = request('page') ?? 1;
         $url = config('s-cart.api_link').'/templates/?page[size]=20&page[number]='.$page;
         $url .='&version='.$sc_version;
-        $url .='&version='.$sc_version;
         $url .='&filter_free='.$filter_free;
         $url .='&filter_type='.$filter_type;
         $url .='&filter_keyword='.$filter_keyword;

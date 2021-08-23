@@ -46,6 +46,14 @@ Route::group(
             Route::post('create_order', 'AdminOrderController@createOrder');
             Route::post('cancel_order/{id}', 'AdminOrderController@cancelOrder');
 
+            Route::get('countries', 'AdminShopFront@allCountry');
+            Route::get('countries/{id}', 'AdminShopFront@countryDetail');
+            Route::get('currencies', 'AdminShopFront@allCurrency');
+            Route::get('currencies/{id}', 'AdminShopFront@CurrencyDetail');
+            Route::get('languages', 'AdminShopFront@allLanguage');
+            Route::get('languages/{id}', 'AdminShopFront@LanguageDetail');
+
+
             Route::get('categories', 'AdminShopFront@allCategory');
             Route::get('categories/{id}', 'AdminShopFront@categoryDetail');
             Route::get('products', 'AdminShopFront@allProduct');
@@ -53,7 +61,7 @@ Route::group(
             Route::get('brands', 'AdminShopFront@allBrand');
             Route::get('brands/{id}', 'AdminShopFront@brandDetail');
             Route::get('supplieres', 'AdminShopFront@allSupplier');
-            Route::get('supplieres/{id}', 'AdminShopFront@brandDetail');
+            Route::get('supplieres/{id}', 'AdminShopFront@supplierDetail');
         });
     });
     

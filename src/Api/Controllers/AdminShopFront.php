@@ -6,6 +6,9 @@ use SCart\Core\Front\Models\ShopBrand;
 use SCart\Core\Front\Models\ShopCategory;
 use SCart\Core\Front\Models\ShopProduct;
 use SCart\Core\Front\Models\ShopSupplier;
+use SCart\Core\Front\Models\ShopCountry;
+use SCart\Core\Front\Models\ShopCurrency;
+use SCart\Core\Front\Models\ShopLanguage;
 
 class AdminShopFront extends RootFrontController
 {
@@ -105,4 +108,53 @@ class AdminShopFront extends RootFrontController
             return response()->json('Not found', 404);
         }
     }
+
+    public function allCountry()
+    {
+        $itemsList = (new ShopCountry)->jsonPaginate();
+        return response()->json($itemsList, 200);
+    }
+
+    public function countryDetail($id)
+    {
+        $country = (new ShopCountry)->find($id);
+        if ($country) {
+            return response()->json($country, 200);
+        } else {
+            return response()->json('Not found', 404);
+        }
+    }
+
+    public function allCurrency()
+    {
+        $itemsList = (new ShopCurrency)->jsonPaginate();
+        return response()->json($itemsList, 200);
+    }
+
+    public function currencyDetail($id)
+    {
+        $currency = (new ShopCurrency)->find($id);
+        if ($currency) {
+            return response()->json($currency, 200);
+        } else {
+            return response()->json('Not found', 404);
+        }
+    }
+
+    public function allLanguage()
+    {
+        $itemsList = (new ShopLanguage)->jsonPaginate();
+        return response()->json($itemsList, 200);
+    }
+
+    public function languageDetail($id)
+    {
+        $language = (new ShopLanguage)->find($id);
+        if ($language) {
+            return response()->json($language, 200);
+        } else {
+            return response()->json('Not found', 404);
+        }
+    }
+
 }
