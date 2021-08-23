@@ -468,7 +468,7 @@
                                                 <input type="text" style="width: 100px;" id="price_promotion_start"
                                                     name="price_promotion_start"
                                                     value="{!!old('price_promotion_start')!!}"
-                                                    class="form-control input-sm price_promotion_start date_time"
+                                                    class="form-control input-sm price_promotion_start date_time" data-date-format="yyyy-mm-dd"
                                                     placeholder="yyyy-mm-dd" />
                                             </div>
 
@@ -479,7 +479,7 @@
                                                 </div>
                                                 <input type="text" style="width: 100px;" id="price_promotion_end"
                                                     name="price_promotion_end" value="{!!old('price_promotion_end')!!}"
-                                                    class="form-control input-sm price_promotion_end date_time"
+                                                    class="form-control input-sm price_promotion_end date_time" data-date-format="yyyy-mm-dd"
                                                     placeholder="yyyy-mm-dd" />
                                             </div>
                                     </div>
@@ -669,7 +669,7 @@
                                     </div>
                                     <input type="text" data-date-format="yyyy-mm-dd" style="width: 100px;" id="date_available" name="date_available"
                                         value="{!!old('date_available')!!}"
-                                        class="form-control input-sm date_available date_time" placeholder="yyyy-mm-dd" />
+                                        class="form-control input-sm date_available date_time" placeholder="yyyy-mm-dd" data-date-format="yyyy-mm-dd" />
                                 </div>
                                 @if ($errors->has('date_available'))
                                 <span class="form-text">
@@ -842,12 +842,12 @@
         +'      <label>{{ sc_language_render('product.price_promotion_start') }}</label>'
         +'      <div class="input-group">'
         +'          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span></div>'
-        +'          <input type="text" style="width: 150px;"  id="price_promotion_start" name="price_promotion_start" value="" class="form-control input-sm price_promotion_start date_time" placeholder="yyyy-mm-dd" />'
+        +'          <input type="text" style="width: 150px;"  id="price_promotion_start" name="price_promotion_start" value="" class="form-control input-sm price_promotion_start date_time" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" />'
         +'      </div>'
         +'      <label>{{ sc_language_render('product.price_promotion_end') }}</label>'
         +'      <div class="input-group">'
         +'          <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span></div>'
-        +'          <input type="text" style="width: 150px;"  id="price_promotion_end" name="price_promotion_end" value="" class="form-control input-sm price_promotion_end date_time" placeholder="yyyy-mm-dd" />'
+        +'          <input type="text" style="width: 150px;"  id="price_promotion_end" name="price_promotion_end" value="" class="form-control input-sm price_promotion_end date_time" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" />'
         +'      </div>'
         +'  </div>'
         +'</div>');
@@ -857,8 +857,7 @@
         $('#add_product_promotion').show();
     });
     $('.date_time').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
+      format: 'yy-mm-dd'
     }) 
 });
 $('.removePromotion').click(function(event) {

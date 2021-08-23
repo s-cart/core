@@ -91,7 +91,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-calendar fa-fw"></i></span>
                     </div>
-                    <input type="text" id="expire" name="expire" value="{{ old()?old('expire'):$api_connection['expire']??'' }}" class="form-control expire date_time {{ $errors->has('expire') ? ' is-invalid' : '' }}">
+                    <input type="text" id="expire" name="expire" value="{{ old()?old('expire'):$api_connection['expire']??'' }}" data-date-format="yyyy-mm-dd" class="form-control expire date_time {{ $errors->has('expire') ? ' is-invalid' : '' }}">
                   </div>
     
                   @if ($errors->has('expire'))
@@ -209,11 +209,6 @@
 
 @push('scripts')
 <script type="text/javascript">
-//Date picker
-$('.date_time').datepicker({
-    autoclose: true,
-    format: 'yyyy-mm-dd'
-  })
 
 $(document).ready(function() {
     $('#refreshkey').click(function(){
