@@ -2,6 +2,7 @@
 use SCart\Core\Events\OrderSuccess;
 use SCart\Core\Events\OrderCreated;
 use SCart\Core\Events\CustomerCreated;
+use SCart\Core\Events\OrderUpdateStatus;
 
 if (!function_exists('sc_event_order_success')) {
     /**
@@ -36,5 +37,17 @@ if (!function_exists('sc_event_customer_created')) {
     function sc_event_customer_created($customer)
     {
         CustomerCreated::dispatch($customer);
+    }
+}
+
+if (!function_exists('sc_event_order_update_status')) {
+    /**
+     * Process customer event
+     *
+     * @return  [type]          [return description]
+     */
+    function sc_event_order_update_status($customer)
+    {
+        OrderUpdateStatus::dispatch($customer);
     }
 }

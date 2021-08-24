@@ -89,6 +89,9 @@ class ShopOrder extends Model
                 'order_status_id' => $status,
             ];
             $this->addOrderHistory($dataHistory);
+
+            //Process event update status order
+            sc_event_order_update_status($order);
         }
     }
 
