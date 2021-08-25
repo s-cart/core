@@ -1554,6 +1554,10 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('admin.notice_new_order', 'You have :total new orders', 'admin', 'en'),
 ('admin.gt_numeric_0', 'Giá trị  phải lớn hơn 0!', 'admin', 'vi'),
 ('admin.gt_numeric_0', 'Value must greater zero!', 'admin', 'en'),
+('admin.api_connection.api_mode_help', 'ON/OFF API', 'admin.api_connection', 'en'),
+('admin.api_connection.api_mode_help', 'TẮT/MỞ API', 'admin.api_connection', 'vi'),
+('admin.api_connection.api_mode', 'ON/OFF API', 'admin.api_connection', 'en'),
+('admin.api_connection.api_mode', 'TẮT/MỞ API', 'admin.api_connection', 'vi'),
 ('admin.api_connection.list', 'API connection list', 'admin.api_connection', 'en'),
 ('admin.api_connection.list', 'Danh sách API connection', 'admin.api_connection', 'vi'),
 ('admin.api_connection.description', 'Mô tả', 'admin.api_connection', 'vi'),
@@ -1570,46 +1574,18 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('admin.api_connection.status', 'Status', 'admin.api_connection', 'en'),
 ('admin.api_connection.validate_regex', 'Chỉ sử dụng các kí tự : a-z0-9', 'admin.api_connection', 'vi'),
 ('admin.api_connection.validate_regex', 'Only use characters : a-z0-9', 'admin.api_connection', 'en'),
-('admin.api_connection.api_connection_required_help', '<i class="fa fa-warning text-red" aria-hidden="true"></i> Phải có tài khoản connection để kết nối API.<br>
-    <a href="https://s-cart.org/vi/docs/master/api-shop-info.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true">Xem chi tiết ở đây</i></a>
-    <hr>
-    <b>Danh sách API hỗ trợ:</b><br>
-    <i>
-    your-domain.com/api/auth/login<br>
-    your-domain.com/api/auth/create<br>
-    your-domain.com/api/auth/logout<br>
-    your-domain.com/api/auth/user<br>
-    your-domain.com/api/auth/orders<br>
-    your-domain.com/api/auth/orders/{id}<br>
-    your-domain.com/api/categories<br>
-    your-domain.com/api/categories/{id}<br>
-    your-domain.com/api/products<br>
-    your-domain.com/api/products/{id}<br>
-    your-domain.com/api/brands<br>
-    your-domain.com/api/brands/{id}<br>
-    your-domain.com/api/supplieres<br>
-    your-domain.com/api/supplieres/{id}<br>
-    </i>', 'admin.api_connection', 'vi'),
-('admin.api_connection.api_connection_required_help', '<i class="fa fa-warning text-red" aria-hidden="true"></i> Connection account is required to use the API<br>
-    <a href="https://s-cart.org/docs/master/api-shop-info.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true"></i>See full infomation</a>
+('admin.api_connection.create', 'Tạo mới connection', 'admin.api_connection', 'vi'),
+('admin.api_connection.create', 'Creat new connection', 'admin.api_connection', 'en'),
+('admin.api_connection.edit', 'Chỉnh sửa connection', 'admin.api_connection', 'vi'),
+('admin.api_connection.edit', 'Edit connection', 'admin.api_connection', 'en'),
+('admin.api_connection.api_connection_required_help', '<ul><li>Nếu không sử dụng API, hãy hãy chuyển sang trạng thái "OFF API"</li><li>Nếu không sử dụng apikey và apiconnection, hãy chuyển sang trạng thái "OFF CONNECTION"</li></ul><br>
+    <a href="https://s-cart.org/vi/docs/developer/api.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true">Xem chi tiết ở đây</i></a>
+    ', 'admin.api_connection', 'vi'),
+('admin.api_connection.api_connection_required_help', '<ul><li>If not using API, please switch to "OFF API" state</li><li>If apikey and apiconnection are not used, switch to "OFF CONNECTION" state</li></ul><br>
+    <a href="https://s-cart.org/docs/developer/api.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true"></i>See full infomation</a>
     <hr>
     <b>API list support:</b><br>
-    <i>
-    your-domain.com/api/auth/login<br>
-    your-domain.com/api/auth/create<br>
-    your-domain.com/api/auth/logout<br>
-    your-domain.com/api/auth/user<br>
-    your-domain.com/api/auth/orders<br>
-    your-domain.com/api/auth/orders/{id}<br>
-    your-domain.com/api/categories<br>
-    your-domain.com/api/categories/{id}<br>
-    your-domain.com/api/products<br>
-    your-domain.com/api/products/{id}<br>
-    your-domain.com/api/brands<br>
-    your-domain.com/api/brands/{id}<br>
-    your-domain.com/api/supplieres<br>
-    your-domain.com/api/supplieres/{id}<br>
-    </i>', 'admin.api_connection', 'en'),
+    ', 'admin.api_connection', 'en'),
 ('admin.result_item', 'Showing <b>:item_from</b>-<b>:item_to</b> of <b>:total</b> results</b>', 'admin', 'en'),
 ('admin.result_item', 'Hiển thị <b>:item_from</b>-<b>:item_to</b> của <b>:total</b> kết quả</b>', 'admin', 'vi'),
 ('admin.method_not_allow', 'Method not allow', 'admin', 'en'),

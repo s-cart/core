@@ -15,7 +15,7 @@ class AdminApiConnectionController extends RootAdminController
     {
         $data = [
             'title' => sc_language_render('admin.api_connection.list'),
-            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('action.create'),
+            'title_action' => '<i class="fa fa-plus" aria-hidden="true"></i> ' . sc_language_render('admin.api_connection.create'),
             'subTitle' => '',
             'icon' => 'fa fa-indent',
             'urlDeleteItem' => sc_route_admin('admin_api_connection.delete'),
@@ -121,7 +121,7 @@ public function edit($id)
     }
     $data = [
         'title' => sc_language_render('admin.api_connection.list'),
-        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
+        'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('admin.api_connection.edit'),
         'subTitle' => '',
         'icon' => 'fa fa-indent',
         'urlDeleteItem' => sc_route_admin('admin_api_connection.delete'),

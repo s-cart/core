@@ -138,6 +138,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('global', 'webhook_config', 'GOOGLE_CHAT_WEBHOOK_URL', '', '0', 'admin.config.GOOGLE_CHAT_WEBHOOK_URL', 0),
 ('global', 'webhook_config', 'CHATWORK_CHAT_WEBHOOK_URL', '', '0', 'admin.config.CHATWORK_CHAT_WEBHOOK_URL', 0),
 ('global', 'api_config', 'api_connection_required', '1', '1', 'api_connection.api_connection_required', 0),
+('global', 'api_config', 'api_mode', '0', '1', 'api_connection.api_mode', 0),
 ('global', 'cache', 'cache_status', '0', '0', 'admin.cache.cache_status', 0),
 ('global', 'cache', 'cache_time', '600', '0', 'admin.cache.cache_time', 0),
 ('global', 'cache', 'cache_category', '0', '3', 'admin.cache.cache_category', 0),

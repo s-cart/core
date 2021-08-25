@@ -108,8 +108,10 @@ class ScartServiceProvider extends ServiceProvider
 
             //Route Api
             try {
-                if (file_exists($routes = __DIR__.'/Api/routes.php')) {
-                    $this->loadRoutesFrom($routes);
+                if (sc_config_global('api_mode')) {
+                    if (file_exists($routes = __DIR__.'/Api/routes.php')) {
+                        $this->loadRoutesFrom($routes);
+                    }
                 }
             } catch(\Throwable $e) {
                 $msg = '#SC007::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();

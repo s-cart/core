@@ -141,7 +141,8 @@
           <div class="card-body p-0">   
             <div class="row">
                 <div class="col-md-12 m-2">
-                  <input class="switch-data-config" name="api_connection_required" type="checkbox"  {{ (sc_config_global('api_connection_required')?'checked':'') }}><br> {!! sc_language_render('admin.api_connection.api_connection_required_help') !!}
+                  <input class="switch-data-config" data-on-text="ON API"  data-off-text="OFF API" name="api_mode" type="checkbox"  {{ (sc_config_global('api_mode')?'checked':'') }}>
+                  <br> {!! sc_language_render('admin.api_connection.api_connection_required_help') !!}
                 </div>
             </div>
         </div>
@@ -153,7 +154,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header with-border">
-            <h3 class="card-title">{!! $title ?? '' !!}</h3>
+            <h3 class="card-title">{!! $title ?? '' !!}  | <input class="switch-data-config" data-on-text="ON CONNECTION"  data-off-text="OFF CONNECTION" name="api_connection_required" type="checkbox"  {{ (sc_config_global('api_connection_required')?'checked':'') }}></h3>
           </div>
     
           <div class="box-body table-responsive">
