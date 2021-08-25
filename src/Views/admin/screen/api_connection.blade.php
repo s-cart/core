@@ -142,7 +142,7 @@
             <div class="row">
                 <div class="col-md-12 m-2">
                   <input class="switch-data-config" data-on-text="ON API"  data-off-text="OFF API" name="api_mode" type="checkbox"  {{ (sc_config_global('api_mode')?'checked':'') }}>
-                  <br> {!! sc_language_render('admin.api_connection.api_connection_required_help') !!}
+                  <br>&nbsp; {!! sc_language_render('admin.api_connection.api_connection_required_help') !!}
                 </div>
             </div>
         </div>
