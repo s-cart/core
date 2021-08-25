@@ -10,7 +10,7 @@ class AdminOrderController extends RootFrontController
 {
 
     /**
-     * Get the authenticated User
+     * Get the order list
      *
      * @return [json] user object
      */
