@@ -1579,10 +1579,10 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('admin.api_connection.edit', 'Chỉnh sửa connection', 'admin.api_connection', 'vi'),
 ('admin.api_connection.edit', 'Edit connection', 'admin.api_connection', 'en'),
 ('admin.api_connection.api_connection_required_help', '<ul><li>Nếu không sử dụng API, hãy hãy chuyển sang trạng thái "OFF API"</li><li>Nếu không sử dụng apikey và apiconnection, hãy chuyển sang trạng thái "OFF CONNECTION"</li></ul><br>
-    <a href="https://s-cart.org/vi/docs/developer/api.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true">Xem chi tiết ở đây</i></a>
+    <a href="https://s-cart.org/vi/docs/developer/about-api-scart.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true">Xem chi tiết ở đây</i></a>
     ', 'admin.api_connection', 'vi'),
 ('admin.api_connection.api_connection_required_help', '<ul><li>If not using API, please switch to "OFF API" state</li><li>If apikey and apiconnection are not used, switch to "OFF CONNECTION" state</li></ul><br>
-    <a href="https://s-cart.org/docs/developer/api.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true"></i>See full infomation</a>
+    <a href="https://s-cart.org/docs/developer/about-api-scart.html" target="_new"><i class="fa fa-info-circle" aria-hidden="true"></i>See full infomation</a>
     ', 'admin.api_connection', 'en'),
 ('admin.result_item', 'Showing <b>:item_from</b>-<b>:item_to</b> of <b>:total</b> results</b>', 'admin', 'en'),
 ('admin.result_item', 'Hiển thị <b>:item_from</b>-<b>:item_to</b> của <b>:total</b> kết quả</b>', 'admin', 'vi'),

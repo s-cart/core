@@ -46,8 +46,8 @@ class AdminApiConnectionController extends RootAdminController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataTr[] = [
-                'description' => $row['description'],
                 'id' => $row['id'],
+                'description' => $row['description'],
                 'apiconnection' => $row['apiconnection'],
                 'apikey' => $row['apikey'],
                 'expire' => $row['expire'],
