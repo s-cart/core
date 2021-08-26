@@ -73,7 +73,7 @@ class MemberAuthController extends RootFrontController
     public function create(Request $request)
     {
         $data = $request->all();
-        $data['reg_country'] = strtoupper($data['reg_country'] ?? '');
+        $data['country'] = strtoupper($data['country'] ?? '');
         $v = $this->validator($data);
         if ($v->fails()) {
             $msg = '';

@@ -41,6 +41,11 @@ Route::group(
             Route::get('logout', 'AdminAuthController@logout');
             Route::get('info', 'AdminController@getInfo');
 
+            // Management customer
+            Route::post('create_customer', 'AdminCustomerController@create');
+            Route::get('customers', 'AdminCustomerController@customers');
+            Route::get('customers/{id}', 'AdminCustomerController@customerDetail');
+
             Route::get('orders', 'AdminOrderController@orders');
             Route::get('orders/{id}', 'AdminOrderController@orderDetail');
             Route::post('create_order', 'AdminOrderController@createOrder');
