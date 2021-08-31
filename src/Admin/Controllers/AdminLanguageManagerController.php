@@ -76,10 +76,15 @@ class AdminLanguageManagerController extends RootAdminController
             if (!in_array($lang, array_keys($languages))) {
                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
             }
-            Languages::updateOrCreate(
-                ['location' => $lang, 'code' => $name],
-                ['text' => $value, 'position' => $position],
-            );
+            if ($position) {
+                Languages::updateOrCreate(
+                    ['location' => $lang, 'code' => $name],
+                    ['text' => $value, 'position' => $position],
+                );
+            } else {
+                Languages::where('location', $lang)->where('code', $name)->update(['text' => $value]);
+            }
+
             return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
         }
     }
