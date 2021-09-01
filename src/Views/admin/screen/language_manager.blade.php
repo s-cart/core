@@ -18,7 +18,7 @@
                             <select class="form-control select2" name="position">
                               <option value="">{{ sc_language_render('admin.language.select_position') }}</option>
                               @foreach ($positionLang as $itemPosition)
-                                  <option value="{{ $itemPosition }}" {{ ($itemPosition == $position)? 'selected': '' }}>{{ $itemPosition }}</option>
+                                  <option value="{{ $itemPosition }}" {{ ($itemPosition === $position)? 'selected': '' }}>{{ $itemPosition }}</option>
                               @endforeach
                             </select>
                           </div>
@@ -67,7 +67,7 @@
                               @if ($lang != 'en')
                               <td>{{ $languagesPositionEL[$key]['text'] ?? '' }}</td>
                               @endif
-                              <td><a href="#" class="editable-required" data-name="{{ $itemRow['code'] }}" data-type="textarea" data-pk="" data-source="" data-url="{{ $urlUpdateData }}" data-title="{{ $itemRow['code'] }}" data-value="{{ $itemRow['text'] }}" data-original-title="" title=""></a></td>
+                              <td><a href="#" class="editable-required" data-name="{{ $itemRow['code'] }}" data-type="textarea" data-pk="{{ $itemRow['position'] }}" data-source="" data-url="{{ $urlUpdateData }}" data-title="{{ $itemRow['code'] }}" data-value="{{ $itemRow['text'] }}" data-original-title="" title=""></a></td>
                             </tr>
                         @endforeach
                         @endif
@@ -80,7 +80,7 @@
                               @if ($lang != 'en')
                               <td>{{ $languagesPositionEL[$keyRow]['text'] ?? '' }}</td>
                               @endif
-                              <td><a href="#" class="editable-required" data-name="{{ $keyRow }}" data-type="textarea" data-pk="" data-source="" data-url="{{ $urlUpdateData }}" data-title="{{ $keyRow }}" data-value="" data-original-title="" title=""></a></td>
+                              <td><a href="#" class="editable-required" data-name="{{ $keyRow }}" data-type="textarea" data-pk="{{ $languagesPositionEL[$keyRow]['position'] }}" data-source="" data-url="{{ $urlUpdateData }}" data-title="{{ $keyRow }}" data-value="" data-original-title="" title=""></a></td>
                             </tr>
                         @endforeach
                         @endif
@@ -111,7 +111,6 @@
 $.fn.editable.defaults.params = function (params) {
   params._token = "{{ csrf_token() }}";
   params.lang = "{{ $lang }}";
-  params.position = "{{ $position }}";
   return params;
 };
 
