@@ -70,8 +70,7 @@ class AdminLanguageManagerController extends RootAdminController
             $lang = sc_clean($data['lang']);
             $name = sc_clean($data['name']);
             $value = sc_clean($data['value']);
-            $position = sc_clean($data['position']);
-
+            $position = sc_clean($data['pk']);
             $languages = ShopLanguage::getCodeAll();
             if (!in_array($lang, array_keys($languages))) {
                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
@@ -82,7 +81,10 @@ class AdminLanguageManagerController extends RootAdminController
                     ['text' => $value, 'position' => $position],
                 );
             } else {
-                Languages::where('location', $lang)->where('code', $name)->update(['text' => $value]);
+                Languages::updateOrCreate(
+                    ['location' => $lang, 'code' => $name],
+                    ['text' => $value],
+                );
             }
 
             return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
