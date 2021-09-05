@@ -264,6 +264,7 @@ return [
         'template_layout'      => 'Giao diện',
         'layout'               => 'Bố cục website',
         'localisation'         => 'Địa phương hóa',
+        'localization'         => 'Địa phương hóa',
         'supplier'             => 'Nhà cung cấp',
         'report_analytics'     => 'Báo cáo và phân tích',
         'report_manager'       => 'Báo cáo và phân tích',

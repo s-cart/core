@@ -266,6 +266,7 @@ return [
             'template_layout'      => 'Template',
             'layout'               => 'Layout website',
             'localisation'         => 'Localisation',
+            'localization'         => 'Localization',
             'supplier'             => 'Supplier',
             'report_analytics'     => 'Report & Analytics',
             'report_manager'       => 'Report & Analytics',
