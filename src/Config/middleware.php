@@ -14,4 +14,9 @@ return [
         2 => 'currency',
         3 => 'checkdomain',
     ],
+    'api_extend' => [
+        1 => 'json.response',
+        2 => 'api.connection',
+        3 => 'throttle:1000',
+    ],
 ];

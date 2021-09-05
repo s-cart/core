@@ -342,11 +342,7 @@ class ScartServiceProvider extends ServiceProvider
         return [
             'admin' => config('middleware.admin'),
             'front' => config('middleware.front'),
-            'api.extend' => [
-                'json.response',
-                'api.connection',
-                'throttle:1000',
-            ],
+            'api.extend' => config('middleware.api_extend'),
         ];
     }
 
