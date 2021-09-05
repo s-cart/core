@@ -226,9 +226,9 @@ class ShopCustomer extends Authenticatable
                     sc_language_render('email.verification_content.title'),
                     sc_language_render('email.verification_content.reason_sendmail'),
                     sc_language_render('email.verification_content.note_sendmail', ['count' => config('auth.verification')]),
-                    sc_language_render('email.verification_content.note_access_link', ['reset_button' => sc_language_render('email.verification_content.reset_button'), 'url' => $url]),
+                    sc_language_render('email.verification_content.note_access_link', ['reset_button' => sc_language_render('customer.verify_email.button_verify'), 'url' => $url]),
                     $url,
-                    sc_language_render('email.verification_content.reset_button'),
+                    sc_language_render('customer.verify_email.button_verify'),
                 ];
                 $content = preg_replace($dataFind, $dataReplace, $content);
                 $dataView = [
@@ -237,7 +237,7 @@ class ShopCustomer extends Authenticatable
     
                 $config = [
                     'to' => $this->email,
-                    'subject' => sc_language_render('email.verification_content.reset_button'),
+                    'subject' => sc_language_render('customer.verify_email.button_verify'),
                 ];
     
                 sc_send_mail('templates.' . sc_store('template') . '.mail.customer_verify', $dataView, $config, $dataAtt = []);

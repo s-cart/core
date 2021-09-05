@@ -940,6 +940,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('customer.address_set_default', 'Đặt địa chỉ mặc định', 'customer', 'vi'),
 ('customer.delete_address_success', 'Delete address success', 'customer', 'en'),
 ('customer.delete_address_success', 'Xóa địa chỉ thành công', 'customer', 'vi'),
+('customer.verify_email.button_verify', 'Email verification', 'customer', 'en'),
+('customer.verify_email.button_verify', 'Xác thực email', 'customer', 'vi'),
 ('customer.verify_email.title_page', 'Email verification', 'customer', 'en'),
 ('customer.verify_email.title_page', 'Xác thực email', 'customer', 'vi'),
 ('customer.verify_email.link_invalid', 'Link invalid', 'customer', 'en'),
