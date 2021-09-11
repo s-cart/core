@@ -40,6 +40,10 @@ class Customize extends Command
                 $this->call('vendor:publish', ['--tag' => 'sc:config-validation']);
                 break;
 
+            case 'cart':
+                $this->call('vendor:publish', ['--tag' => 'sc:config-cart']);
+                break;
+
             default:
                 $this->info('Nothing');
                 break;

@@ -17,6 +17,7 @@ use SCart\Core\Commands\Backup;
 use SCart\Core\Commands\Restore;
 use SCart\Core\Commands\MakePlugin;
 use SCart\Core\Commands\Infomation;
+use SCart\Core\Commands\ClearCart;
 use Laravel\Passport\Passport;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\InstallCommand;
@@ -29,6 +30,7 @@ class ScartServiceProvider extends ServiceProvider
         Restore::class,
         MakePlugin::class,
         Infomation::class,
+        ClearCart::class,
     ];
 
     /**
@@ -214,6 +216,7 @@ class ScartServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/Config/validation.php', 'validation');
         $this->mergeConfigFrom(__DIR__.'/Config/lfm.php', 'lfm');
         $this->mergeConfigFrom(__DIR__.'/Config/s-cart.php', 's-cart');
+        $this->mergeConfigFrom(__DIR__.'/Config/cart.php', 'cart');
         $this->mergeConfigFrom(__DIR__.'/Config/middleware.php', 'middleware');
         $this->loadViewsFrom(__DIR__.'/Views/admin', 's-cart-admin');
         $this->loadViewsFrom(__DIR__.'/Views/front', 's-cart-front');
@@ -397,6 +400,7 @@ class ScartServiceProvider extends ServiceProvider
             $this->publishes([__DIR__.'/Views/front'  => resource_path('views/vendor/s-cart-front')], 'sc:view-front');
             $this->publishes([__DIR__.'/Config/admin.php' => config_path('admin.php')], 'sc:config-admin');
             $this->publishes([__DIR__.'/Config/validation.php' => config_path('validation.php')], 'sc:config-validation');
+            $this->publishes([__DIR__.'/Config/cart.php' => config_path('cart.php')], 'sc:config-cart');
         }
     }
 }
