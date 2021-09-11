@@ -360,3 +360,36 @@ if (!function_exists('admin')) {
         return auth()->guard('admin');
     }
 }
+
+if (!function_exists('sc_sync_cart')) {
+    /**
+     * Sync data cart 
+     */
+    function sc_sync_cart($userId)
+    {
+        //Process sync cart data and session
+        $cartDB = \SCart\Core\Library\ShoppingCart\CartModel::where('identifier', $userId)
+            ->where('store_id', config('app.storeId'))
+            ->get()->keyBy('instance');
+        $arrayInstance = ['default', 'wishlist', 'compare'];
+        if ($cartDB) {
+            foreach ($cartDB as $instance => $cartInstance) {
+                $arrayInstance = array_diff($arrayInstance, [$instance]);
+                $content = json_decode($cartInstance->content, true);
+                if ($content) {
+                    foreach ($content as $key => $dataItem) {
+                        \Cart::instance($instance)->add($dataItem);
+                    }
+                }
+            }
+        }
+
+        if ($arrayInstance) {
+            foreach ($arrayInstance as  $instance) {
+                if (\Cart::instance($instance)->content()->count()) {
+                    \Cart::instance($instance)->saveDatabase($userId);
+                }
+            }
+        }
+    }
+}
