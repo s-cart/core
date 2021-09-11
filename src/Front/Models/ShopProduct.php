@@ -197,16 +197,16 @@ class ShopProduct extends Model
 
         $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
 
-        $product = $this->selectRaw($dataSelect)
-            ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id');
+        $product = $this->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id');
         
         if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $dataSelect .= ', '.$tableProductStore.'.store_id';
             $product = $product->join($tableProductStore, $tableProductStore.'.product_id', $this->getTable() . '.id');
             $product = $product->join($tableStore, $tableStore . '.id', $tableProductStore.'.store_id');
             $product = $product->where($tableStore . '.status', '1');
 
             if (sc_config_global('MultiStorePro')  || 
-                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != 1) )
+                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != SC_ID_ROOT) )
             ) {
                 //store of vendor
                 $product = $product->where($tableProductStore.'.store_id', $storeId);
@@ -226,7 +226,7 @@ class ShopProduct extends Model
         }
 
         $product = $product->where($this->getTable().'.status', 1);
-        
+        $product = $product->selectRaw($dataSelect);
         $product = $product
             ->with('images')
             ->with('stores')
