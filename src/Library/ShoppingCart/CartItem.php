@@ -161,25 +161,6 @@ class CartItem implements Arrayable, Jsonable
 
 
     /**
-     * Update the cart item from an array.
-     *
-     * @param array $attributes
-     * @return void
-     */
-    public function updateFromArray(array $attributes)
-    {
-        $this->id      = array_get($attributes, 'id', $this->id);
-        $this->qty     = array_get($attributes, 'qty', $this->qty);
-        $this->name    = array_get($attributes, 'name', $this->name);
-        $this->price   = array_get($attributes, 'price', $this->price);
-        $this->tax     = array_get($attributes, 'tax', $this->tax);
-        $this->storeId = array_get($attributes, 'storeId', $this->storeId);
-        $this->options = new CartItemOptions(array_get($attributes, 'options', $this->options));
-
-        $this->rowId   = $this->generateRowId($this->id, $this->options->all());
-    }
-
-    /**
      * Associate the cart item with the given model.
      *
      * @param mixed $model
@@ -232,21 +213,6 @@ class CartItem implements Arrayable, Jsonable
         $options = array_get($attributes, 'options', []);
 
         return new self($attributes['id'], $attributes['name'], $attributes['price'], $options, $attributes['tax'], $attributes['storeId']);
-    }
-
-    /**
-     * Create a new instance from the given attributes.
-     *
-     * @param int|string $id
-     * @param string     $name
-     * @param float      $price
-     * @param array      $options
-     * @return \SCart\Core\Library\ShoppingCart\CartItem
-     */
-    public static function fromAttributes($id, $name, $price, array $options = [], $tax = 0, $storeId = null)
-    {
-        $storeId = empty($storeId) ? config('app.storeId') : $storeId;
-        return new self($id, $name, $price, $options, $tax, $storeId);
     }
 
     /**

@@ -6,9 +6,9 @@ use SCart\Core\Library\ShoppingCart\Exceptions\CartAlreadyStoredException;
 use SCart\Core\Library\ShoppingCart\Exceptions\UnknownModelException;
 use Closure;
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
 class Cart
 {
@@ -78,16 +78,12 @@ class Cart
     /**
      * Add an item to the cart.
      *
-     * @param mixed     $id
-     * @param mixed     $name
-     * @param int|float $qty
-     * @param float     $price
-     * @param array     $options
+     * @param array     $dataCart
      * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
-    public function add($id, $name = null, $qty = null, $price = null, array $options = [], $tax = 0, $storeId = null)
+    public function add($dataCart)
     {
-        $cartItem = $this->createCartItem($id, $name, $qty, $price, $options, $tax, $storeId);
+        $cartItem = $this->createCartItem($dataCart);
 
         $content = $this->getContent();
 
@@ -100,6 +96,11 @@ class Cart
         $this->events->dispatch('cart.added', $cartItem);
 
         $this->session->put($this->instance, $content);
+
+        if (auth()->user()) {
+            $userId = auth()->user()->id;
+            $this->_updateDatabase($userId);
+        }
 
         return $cartItem;
     }
@@ -118,11 +119,7 @@ class Cart
             return;
         }
         
-       if (is_array($qty)) {
-            $cartItem->updateFromArray($qty);
-        } else {
-            $cartItem->qty = $qty;
-        }
+        $cartItem->qty = $qty;
 
         $content = $this->getContent();
 
@@ -146,6 +143,11 @@ class Cart
 
         $this->session->put($this->instance, $content);
 
+        if (auth()->user()) {
+            $userId = auth()->user()->id;
+            $this->_updateDatabase($userId);
+        }
+
         return $cartItem;
     }
 
@@ -166,6 +168,11 @@ class Cart
         $this->events->dispatch('cart.removed', $cartItem);
 
         $this->session->put($this->instance, $content);
+
+        if (auth()->user()) {
+            $userId = auth()->user()->id;
+            $this->_updateDatabase($userId);
+        }
     }
 
     /**
@@ -193,6 +200,10 @@ class Cart
     public function destroy()
     {
         $this->session->remove($this->instance);
+        if (auth()->user()) {
+            $userId = auth()->user()->id;
+            $this->_updateDatabase($userId);
+        }
     }
 
     /**
@@ -304,19 +315,27 @@ class Cart
      * @param mixed $identifier
      * @return void
      */
-    public function store($identifier)
+    public function saveDatabase($identifier)
     {
         $content = $this->getContent();
+        $currentInstance = $this->currentInstance();
 
-        if ($this->storedCartWithIdentifierExists($identifier)) {
-            throw new CartAlreadyStoredException("A cart with identifier {$identifier} was already stored.");
+        if ($this->storedCartWithIdentifierExists($identifier, $currentInstance)) {
+            throw new CartAlreadyStoredException("A cart with identifier {$identifier}_{$currentInstance} was already stored.");
         }
 
-        $this->getConnection()->table($this->getTableName())->insert([
-            'identifier' => $identifier,
-            'instance' => $this->currentInstance(),
-            'content' => serialize($content),
-        ]);
+        $storeId = config('app.storeId');
+
+        CartModel::insert(
+            [
+                'identifier' => $identifier,
+                'instance' => $currentInstance,
+                'content' => $content->toJson(),
+                'store_id' => $storeId,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
+        );
 
         $this->events->dispatch('cart.stored');
     }
@@ -327,35 +346,14 @@ class Cart
      * @param mixed $identifier
      * @return void
      */
-    public function restore($identifier)
+    public function removeDatabase($identifier)
     {
-        if (!$this->storedCartWithIdentifierExists($identifier)) {
-            return;
-        }
-
-        $stored = $this->getConnection()->table($this->getTableName())
-            ->where('identifier', $identifier)->first();
-
-        $storedContent = unserialize($stored->content);
-
         $currentInstance = $this->currentInstance();
-
-        $this->instance($stored->instance);
-
-        $content = $this->getContent();
-
-        foreach ($storedContent as $cartItem) {
-            $content->put($cartItem->rowId, $cartItem);
-        }
-
-        $this->events->dispatch('cart.restored');
-
-        $this->session->put($this->instance, $content);
-
-        $this->instance($currentInstance);
-
-        $this->getConnection()->table($this->getTableName())
-            ->where('identifier', $identifier)->delete();
+        return (new CartModel)
+            ->where('identifier', $identifier)
+            ->where('instance', $currentInstance)
+            ->where('store_id', config('app.storeId'))
+            ->delete();
     }
 
     /**
@@ -394,66 +392,29 @@ class Cart
     /**
      * Create a new CartItem from the supplied attributes.
      *
-     * @param mixed     $id
-     * @param mixed     $name
-     * @param int|float $qty
-     * @param float     $price
-     * @param array     $options
+     * @param array     $dataCart
      * @return \SCart\Core\Library\ShoppingCart\CartItem
      */
-    private function createCartItem($id, $name, $qty, $price, array $options, $tax = 0, $storeId = null)
+    private function createCartItem($dataCart)
     {
-        if (is_array($id)) {
-            $cartItem = CartItem::fromArray($id);
-            $cartItem->setQuantity($id['qty']);
-        } else {
-            $cartItem = CartItem::fromAttributes($id, $name, $price, $options, $tax, $storeId);
-            $cartItem->setQuantity($qty);
-        }
+        $cartItem = CartItem::fromArray($dataCart);
+        $cartItem->setQuantity($dataCart['qty']);
 
         return $cartItem;
     }
 
     /**
      * @param $identifier
+     * @param $instance
      * @return bool
      */
-    private function storedCartWithIdentifierExists($identifier)
+    private function storedCartWithIdentifierExists($identifier, $instance)
     {
-        return $this->getConnection()->table($this->getTableName())->where('identifier', $identifier)->exists();
-    }
-
-    /**
-     * Get the database connection.
-     *
-     * @return \Illuminate\Database\Connection
-     */
-    private function getConnection()
-    {
-        $connectionName = $this->getConnectionName();
-
-        return app(DatabaseManager::class)->connection($connectionName);
-    }
-
-    /**
-     * Get the database table name.
-     *
-     * @return string
-     */
-    private function getTableName()
-    {
-        return SC_DB_PREFIX.'shop_shoppingcart';
-    }
-
-
-    /**
-     * Get the database connection name.
-     *
-     * @return string
-     */
-    private function getConnectionName()
-    {
-        return SC_CONNECTION;
+        return (new CartModel)
+            ->where('identifier', $identifier)
+            ->where('instance', $instance)
+            ->where('store_id', config('app.storeId'))
+            ->exists();
     }
 
     /*
@@ -501,6 +462,15 @@ class Cart
         }
         return $arraySubtotal;
     }
-    
 
+    /**
+     * Update database cart
+     *
+     * @param [type] $identifier
+     * @return void
+     */
+    private function _updateDatabase($identifier) {
+            $this->removeDatabase($identifier);
+            $this->saveDatabase($identifier);
+    }    
 }

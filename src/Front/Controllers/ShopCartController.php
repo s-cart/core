@@ -52,7 +52,7 @@ class ShopCartController extends RootFrontController
         //Clear session
         $this->clearSession();
         
-        $cart = Cart::instance('default')->content();
+        $cart = Cart::content();
 
         sc_check_view($this->templatePath . '.screen.shop_cart');
         return view(
@@ -773,14 +773,14 @@ class ShopCartController extends RootFrontController
         $storeId   = $data['storeId'] ?? config('app.storeId');
 
         //Process attribute price
-        $formAttr = $data['form_attr'] ?? null;
+        $formAttr = $data['form_attr'] ?? [];
         $optionPrice  = 0;
         if ($formAttr) {
             foreach ($formAttr as $key => $attr) {
                 $optionPrice += explode('__', $attr)[1] ??0;
             }
         }
-        //End addtribute price
+        //End attribute price
 
         $product = (new ShopProduct)->getDetail($productId, null, $storeId);
 
@@ -795,7 +795,6 @@ class ShopCartController extends RootFrontController
         
 
         if ($product->allowSale()) {
-            $options = array();
             $options = $formAttr;
             $dataCart = array(
                 'id'      => $productId,
@@ -805,10 +804,8 @@ class ShopCartController extends RootFrontController
                 'tax'     => $product->getTaxValue(),
                 'storeId' => $storeId,
             );
-            if ($options) {
-                $dataCart['options'] = $options;
-            }
-            Cart::instance('default')->add($dataCart);
+            $dataCart['options'] = $options;
+            Cart::add($dataCart);
             return redirect(sc_route('cart'))
                 ->with(
                     ['success' => sc_language_render('cart.add_to_cart_success', ['instance' => 'cart'])]
@@ -966,7 +963,7 @@ class ShopCartController extends RootFrontController
                 ]
             );
         } else {
-            Cart::instance('default')->update($rowId, ($new_qty) ? $new_qty : 0);
+            Cart::update($rowId, ($new_qty) ? $new_qty : 0);
             return response()->json(
                 [
                     'error' => 0,

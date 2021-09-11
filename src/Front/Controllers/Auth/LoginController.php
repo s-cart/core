@@ -7,6 +7,7 @@ use SCart\Core\Front\Models\ShopCountry;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Cart;
 
 class LoginController extends RootFrontController
 {
@@ -108,6 +109,24 @@ class LoginController extends RootFrontController
     protected function authenticated(Request $request, $user)
     {
         if (auth()->user()) {
+
+            //Process sync cart data and session
+            $userId = auth()->user()->id;
+            $cartDB = \SCart\Core\Library\ShoppingCart\CartModel::where('identifier', $userId)
+                ->where('store_id', config('app.storeId'))
+                ->get()->keyBy('instance');
+            if ($cartDB) {
+                foreach ($cartDB as $instance => $cartInstance) {
+                    $content = json_decode($cartInstance->content, true);
+                    if ($content) {
+                        foreach ($content as $key => $dataItem) {
+                            Cart::instance($instance)->add($dataItem);
+                        }
+                    }
+                }
+            }
+            //End process sync cart
+
             session(['customer' => auth()->user()->toJson()]);
         } else {
             session(['customer' => []]);
