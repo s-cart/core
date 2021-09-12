@@ -638,12 +638,12 @@ class ShopProduct extends Model
 
         //description
         $query = $this
-            ->selectRaw($dataSelect)
             //join description
             ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
         if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            $dataSelect .= ', '.$tableProductStore.'.store_id';
             $query = $query->join($tableProductStore, $tableProductStore.'.product_id', $this->getTable() . '.id');
             $query = $query->join($tableStore, $tableStore . '.id', $tableProductStore.'.store_id');
             $query = $query->where($tableStore . '.status', '1');
@@ -686,7 +686,7 @@ class ShopProduct extends Model
                         ->orWhereNull($tablePromotion . '.date_start');
                 });
         }
-
+        $query = $query->selectRaw($dataSelect);
         $query = $query->with('promotionPrice');
         $query = $query->with('stores');
             
