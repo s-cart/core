@@ -610,7 +610,7 @@ class ShopCartController extends RootFrontController
         $uID = $customer->id ?? 0;
 
         //if cart empty
-        if (count(session('dataCheckout')) == 0) {
+        if (count(session('dataCheckout', [])) == 0) {
             return redirect()->route('home');
         }
         //Not allow for guest
