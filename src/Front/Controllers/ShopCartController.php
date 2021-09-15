@@ -565,6 +565,17 @@ class ShopCartController extends RootFrontController
             $classPaymentMethod = sc_get_class_plugin_config('Payment', $paymentMethod);
             $paymentMethodData = (new $classPaymentMethod)->getData();
         }
+
+
+        //Check plugin invalid
+        if (!sc_config(session('shippingMethod'))) {
+            return redirect(sc_route('cart'))->with(['error' => 'Plugin shipping invalid!']);
+        }
+        if (!sc_config(session('paymentMethod'))) {
+            return redirect(sc_route('cart'))->with(['error' => 'Plugin payment invalid!']);
+        }
+        //End check plugin invalid
+
         
         //Screen confirm only active if submit from screen checkout
         if (session('step', '') != 'checkout.confirm') {
