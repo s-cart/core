@@ -1490,6 +1490,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('admin.menu_titles.custom_field', 'Custom field data', 'admin.menu_titles', 'en'),
 ('admin.menu_titles.localization', 'Địa phương hóa', 'admin.menu_titles', 'vi'),
 ('admin.menu_titles.localization', 'Localization', 'admin.menu_titles', 'en'),
+('admin.menu_titles.localisation', 'Địa phương hóa', 'admin.menu_titles', 'vi'),
+('admin.menu_titles.localisation', 'Localisation', 'admin.menu_titles', 'en'),
 ('admin.menu_titles.menu', 'Menu', 'admin.menu_titles', 'vi'),
 ('admin.menu_titles.menu', 'Menu', 'admin.menu_titles', 'en'),
 ('admin.menu_titles.config_store_default', 'Cấu hình mặc định', 'admin.menu_titles', 'vi'),
