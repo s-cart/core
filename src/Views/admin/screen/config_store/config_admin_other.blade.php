@@ -20,6 +20,20 @@
         <td><a href="#" class="editable-required editable editable-click" data-name="ADMIN_LOGO" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.ADMIN_LOGO') }}" data-value="{{ sc_config('ADMIN_LOGO', $storeId) }}" data-original-title="" title=""></a></td>
       </tr>
 
+      <tr>
+        <td>{{ sc_language_render('admin.env.hidden_copyright_footer_admin') }}</td>
+        <td>
+          <input class="check-data-config"  data-store="{{ $storeId }}" type="checkbox" name="hidden_copyright_footer_admin" {{ sc_config('hidden_copyright_footer_admin')?"checked":"" }}>
+        </td>
+      </tr>
+
+      <tr>
+        <td>{{ sc_language_render('admin.env.hidden_copyright_footer') }}</td>
+        <td>
+          <input class="check-data-config"  data-store="{{ $storeId }}" type="checkbox" name="hidden_copyright_footer" {{ sc_config('hidden_copyright_footer')?"checked":"" }}>
+        </td>
+      </tr>
+
      </tbody>
    </table>
   </div>

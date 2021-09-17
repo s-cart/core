@@ -1,5 +1,5 @@
 <footer class="main-footer">
-  @if (!sc_config_global('ADMIN_FOOTER_OFF'))
+  @if (!sc_config('hidden_copyright_footer'))
     <div class="float-right d-none d-sm-inline-block">
       <strong>Env</strong>
       {{ config('app.env') }}

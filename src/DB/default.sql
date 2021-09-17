@@ -132,7 +132,6 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('Plugins', 'Payment', 'Cash', '1', '0', 'Plugins/Payment/Cash::lang.title', 0),
 ('Plugins', 'Shipping', 'ShippingStandard', '1', '0', 'Shipping Standard', 0),
 ('global', 'env_global', 'ADMIN_LOG', 'on', '0', 'admin.env.ADMIN_LOG', 0),
-('global', 'env_global', 'ADMIN_FOOTER_OFF', '0', '0', 'admin.env.ADMIN_FOOTER_OFF', 0),
 ('global', 'seo_config', 'url_seo_lang', '0', '1', 'seo.url_seo_lang', 0),
 ('global', 'webhook_config', 'LOG_SLACK_WEBHOOK_URL', '', '0', 'admin.config.LOG_SLACK_WEBHOOK_URL', 0),
 ('global', 'webhook_config', 'GOOGLE_CHAT_WEBHOOK_URL', '', '0', 'admin.config.GOOGLE_CHAT_WEBHOOK_URL', 0),

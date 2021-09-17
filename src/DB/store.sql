@@ -50,9 +50,11 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('', 'customer_config_attribute_required', 'customer_phone_required', '1', '1', '', '__storeId__'),
 ('', 'customer_config_attribute', 'customer_name_kana', '0', '0', 'customer.config_manager.name_kana', '__storeId__'),
 ('', 'customer_config_attribute_required', 'customer_name_kana_required', '0', '1', '', '__storeId__'),
-('', 'admin_config', 'ADMIN_NAME', 'S-Cart System', '0', 'env.ADMIN_NAME', '__storeId__'),
-('', 'admin_config', 'ADMIN_TITLE', 'S-Cart Admin', '0', 'env.ADMIN_TITLE', '__storeId__'),
-('', 'admin_config', 'ADMIN_LOGO', 'S-Cart <span class=\"brand-text font-weight-light\">Admin</span>', '0', 'env.ADMIN_LOGO', '__storeId__'),
+('', 'admin_config', 'ADMIN_NAME', 'S-Cart System', '0', 'admin.env.ADMIN_NAME', '__storeId__'),
+('', 'admin_config', 'ADMIN_TITLE', 'S-Cart Admin', '0', 'admin.env.ADMIN_TITLE', '__storeId__'),
+('', 'admin_config', 'ADMIN_LOGO', 'S-Cart <span class=\"brand-text font-weight-light\">Admin</span>', '0', 'admin.env.ADMIN_LOGO', '__storeId__'),
+('', 'admin_config', 'hidden_copyright_footer', '0', '0', 'admin.env.hidden_copyright_footer', '__storeId__'),
+('', 'admin_config', 'hidden_copyright_footer_admin', '0', '0', 'admin.env.hidden_copyright_footer_admin', '__storeId__'),
 ('', 'display_config', 'product_top', '8', '0', 'store.display.product_top', '__storeId__'),
 ('', 'display_config', 'product_list', '12', '0', 'store.display.list_product', '__storeId__'),
 ('', 'display_config', 'product_relation', '4', '0', 'store.display.relation_product', '__storeId__'),
@@ -103,7 +105,12 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('', 'url_config', 'PREFIX_ORDER_SUCCESS', 'order-success', '0', 'admin.env.PREFIX_ORDER_SUCCESS', '__storeId__'),
 ('', 'captcha_config', 'captcha_mode', '0', '20', 'admin.captcha.captcha_mode', '__storeId__'),
 ('', 'captcha_config', 'captcha_page', '[]', '10', 'captcha.captcha_page', '__storeId__'),
-('', 'captcha_config', 'captcha_method', '', '0', 'admin.captcha.captcha_method', '__storeId__');
+('', 'captcha_config', 'captcha_method', '', '0', 'admin.captcha.captcha_method', '__storeId__'),
+('', 'admin_custom_config', 'facebook_url', 'https://www.facebook.com/SCart.Ecommerce/', '0', 'admin.admin_custom_config.facebook_url', '__storeId__'),
+('', 'admin_custom_config', 'fanpage_url', 'https://www.facebook.com/groups/scart.opensource', '0', 'admin.admin_custom_config.fanpage_url', '__storeId__'),
+('', 'admin_custom_config', 'twitter_url', 'https://twitter.com/ecommercescart', '0', 'admin.admin_custom_config.twitter_url', '__storeId__'),
+('', 'admin_custom_config', 'instagram_url', '#', '0', 'admin.admin_custom_config.instagram_url', '__storeId__'),
+('', 'admin_custom_config', 'youtube_url', 'https://www.youtube.com/channel/UCR8kitefby3N6KvvawQVqdg/videos', '0', 'admin.admin_custom_config.youtube_url', '__storeId__');
             
 /*shop_email_template*/
 INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`name`, `group`, `text`, `status`, `store_id`) VALUES 
