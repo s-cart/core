@@ -49,6 +49,7 @@ class AdminStoreBlockController extends RootAdminController
             'position' => sc_language_render('admin.store_block.position'),
             'page'     => sc_language_render('admin.store_block.page'),
             'text'     => sc_language_render('admin.store_block.text'),
+            'sort'     => sc_language_render('admin.store_block.sort'),
             'status'   => sc_language_render('admin.store_block.status'),
             'action'   => sc_language_render('action.title'),
         ];
@@ -83,6 +84,7 @@ class AdminStoreBlockController extends RootAdminController
                 'position' => htmlspecialchars(sc_language_render($this->layoutPosition[$row['position']]) ?? ''),
                 'page' => $htmlPage,
                 'text' => htmlspecialchars($row['text']),
+                'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '
                     <a href="' . sc_route_admin('admin_store_block.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
