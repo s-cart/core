@@ -50,6 +50,7 @@
                                             </span>
                                         @endif
                                 </div>
+                                <span style="cursor: pointer;" onclick="imagedemo('https://sc-shared.s3.ap-southeast-1.amazonaws.com/file/block-template.jpg');"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
                             </div>
 
                             <div class="form-group row {{ $errors->has('page') ? ' text-red' : '' }}">
@@ -204,6 +205,18 @@ $(function () {
     }
     });
 });
+
+function imagedemo(image) {
+      Swal.fire({
+        title: '{{  sc_language_render('admin.template.image_demo') }}',
+        text: '',
+        imageUrl: image,
+        imageWidth: 600,
+        imageHeight: 600,
+        imageAlt: 'Image demo',
+      })
+}
+
 </script>
 
 @endpush

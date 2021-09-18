@@ -203,11 +203,11 @@ INSERT INTO `__SC_DB_PREFIX__shop_layout_page` (`key`, `name`) VALUES
 /*shop_layout_position*/
 INSERT INTO `__SC_DB_PREFIX__shop_layout_position` (`key`, `name`) VALUES 
 ('header', 'admin.layout_page_block.header'),
+('banner_top', 'admin.layout_page_block.banner_top'),
 ('top', 'admin.layout_page_block.top'),
-('bottom', 'admin.layout_page_block.bottom'),
 ('left', 'admin.layout_page_block.left'),
 ('right', 'admin.layout_page_block.right'),
-('banner_top', 'admin.layout_page_block.banner_top');
+('bottom', 'admin.layout_page_block.bottom');
 
 /*shop_link*/
 INSERT INTO `__SC_DB_PREFIX__shop_link` (`name`, `url`, `target`, `module`, `group`, `status`, `sort`) VALUES 
