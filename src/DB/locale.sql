@@ -441,6 +441,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('front.page_notfound', 'Page not found!', 'front', 'en'),
 ('front.page_not_found', 'Không tìm thấy trang!', 'front', 'vi'),
 ('front.page_not_found', 'Page not found!', 'front', 'en'),
+('front.page_not_found_title', 'Không tìm thấy trang!', 'front', 'vi'),
+('front.page_not_found_title', 'Page not found!', 'front', 'en'),
 ('front.flash_stock', 'Available','front','en'),
 ('front.flash_sold', 'Already Sold','front','en'),
 ('front.flash_title', 'Flash sale','front','en'),
