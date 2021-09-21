@@ -166,22 +166,7 @@
           <div class="ml-3 float-left">
             {!! $resultItems??'' !!}
           </div>
-          <ul class="pagination pagination-sm mr-3 float-right">
-            <!-- Previous Page Link -->
-            @if ($dataApi['current_page'] > 1)
-            <li class="page-item"><a class="page-link pjax-container" href="{{ sc_route_admin('admin_template_online') }}?page={{ $dataApi['current_page'] - 1}}" rel="prev">«</a></li>
-            @endif
-            @for ($i = 1; $i < $dataApi['last_page']; $i++)
-                @if ( $dataApi['current_page'] == $i)
-                <li class="page-item active"><span class="page-link pjax-container">{{ $i }}</span></li>
-                @else
-                <li class="page-item"><a class="page-link" href="{{ sc_route_admin('admin_template_online') }}?page={{ $i }}">{{ $i }}</a></li>
-                @endif
-            @endfor
-            @if ($dataApi['current_page'] < $dataApi['last_page'])
-            <li class="page-item"><a class="page-link pjax-container" href="{{ sc_route_admin('admin_template_online') }}?page={{ $dataApi['current_page'] + 1}}" rel="next">»</a></li>
-            @endif
-          </ul>
+          {!! $htmlPaging !!}
         </div>
 
       </div>
