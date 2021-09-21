@@ -142,11 +142,15 @@ class ShopContentController extends RootFrontController
             $sortOrder = $filterArr[$filter_sort][1];
         }
         $keyword = request('keyword') ?? '';
-        $products = (new ShopProduct)->setKeyword($keyword)
-                    ->setSort([$sortBy, $sortOrder])
-                    ->setPaginate()
-                    ->setLimit(sc_config('product_list'))
-                    ->getData();
+        $cid = request('cid') ?? '';
+        $products = (new ShopProduct)->setKeyword($keyword);
+        if ($cid) {
+            $products = $products->getProductToCategory($cid);
+        }
+        $products = $products->setSort([$sortBy, $sortOrder])
+            ->setPaginate()
+            ->setLimit(sc_config('product_list'))
+            ->getData();
 
         sc_check_view($this->templatePath . '.screen.shop_product_list');          
         return view(
