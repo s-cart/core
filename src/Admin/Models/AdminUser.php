@@ -260,45 +260,4 @@ class AdminUser extends Authenticatable
             return self::$canChangeConfig;
         }
     }
-
-    /**
-     * Get list store id of user admin
-     *
-     * @return  [type]  [return description]
-     */
-    public static function listStoreId() {
-        if (self::$listStoreId === null) {
-            $admin = \Admin::user();
-            $allStore = ShopStore::pluck('id')->all();
-            if($admin->isAdministrator() || $admin->isViewAll()) {
-                $arrStore =  $allStore;
-            } else {
-                $arrStore = AdminUserStore::where('user_id', $admin->id)->pluck('store_id')->all();
-                //id 0: all store
-                if(in_array(0, $arrStore)) {
-                    $arrStore =  $allStore;
-                }
-            }
-            asort($arrStore);
-            self::$listStoreId = $arrStore;
-        }
-        return self::$listStoreId;
-    }
-
-    /**
-     * All store of user
-     *
-     * @return  [type]  [return description]
-     */
-    public static function listStore()
-    {
-        if (self::$listStore === null) {
-            self::$listStore = ShopStore::with('descriptions')
-                ->whereIn('id', self::listStoreId())
-                ->get()
-                ->keyBy('id');
-        }
-        return self::$listStore;
-    }
-
 }
