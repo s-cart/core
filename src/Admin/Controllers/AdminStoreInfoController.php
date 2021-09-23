@@ -135,22 +135,4 @@ class AdminStoreInfoController extends RootAdminController
         ->with($data);
     }
 
-    /**
-     * Switch store
-     *
-     * @param   [type]  $storeId  [$storeId description]
-     *
-     * @return  [type]            [return description]
-     */
-    public function switchStore($storeId) {
-        $listStoreId = \Admin::user()->listStoreId();
-        if(in_array($storeId, $listStoreId)) {
-            session(['adminStoreId' => $storeId]);
-            return back()->with(['success' => sc_language_render('admin.store_swicth_success')]);
-        } else {
-            return redirect()->route('admin.deny');
-        }
-
-    }
-
 }

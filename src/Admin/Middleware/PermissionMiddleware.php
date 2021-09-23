@@ -126,7 +126,7 @@ class PermissionMiddleware
     public function routeDefaultPass($request)
     {
         $routeName = $request->route()->getName();
-        $allowRoute = ['admin.deny', 'admin.deny_single', 'admin.locale', 'admin.home', 'admin.theme','admin_store.switch', 'admin.data_not_found'];
+        $allowRoute = ['admin.deny', 'admin.deny_single', 'admin.locale', 'admin.home', 'admin.theme','admin.data_not_found'];
         return in_array($routeName, $allowRoute);
     }
 
