@@ -30,6 +30,7 @@ class ShopProduct extends Model
     protected  $sc_category_vendor = []; // array category id
     protected  $sc_brand = []; // array brand id
     protected  $sc_supplier = []; // array supplier id
+    protected  $sc_range_price = null; // min__max
     protected static $storeCode = null;
 
     
@@ -477,6 +478,17 @@ class ShopProduct extends Model
     }
 
     /**
+     * Set range price
+     *
+     */
+    public function setRangePrice($price) {
+        if ($price) {
+            $this->sc_range_price = $price;
+        }
+        return $this;
+    }
+
+    /**
      * Set array ID product 
      *
      * @param   [array|int]  $arrID 
@@ -564,7 +576,7 @@ class ShopProduct extends Model
         $this->setBrand($arrBrand);
         return $this;
     }
-    
+
     /**
      * Get product to array Supplier
      * @param   [array|int]  $arrSupplier 
@@ -715,6 +727,15 @@ class ShopProduct extends Model
         //Filter with brand
         if (count($this->sc_brand)) {
             $query = $query->whereIn($this->getTable().'.brand_id', $this->sc_brand);
+        }
+        //Filter with range price
+        if ($this->sc_range_price) {
+            $price = explode('__', $this->sc_range_price);
+            $rangePrice['min'] = (int)$price[0] ?? 0;
+            $rangePrice['max'] = (int)$price[1] ?? 0;
+            if ($rangePrice['max']) {
+                $query = $query->whereBetween($this->getTable().'.price', $rangePrice);
+            }
         }
         //Filter with supplier
         if (count($this->sc_supplier)) {

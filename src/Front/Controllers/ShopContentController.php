@@ -81,8 +81,25 @@ class ShopContentController extends RootFrontController
             $sortBy = $filterArr[$filter_sort][0];
             $sortOrder = $filterArr[$filter_sort][1];
         }
+        $keyword = request('keyword') ?? '';
+        $cid = request('cid') ?? '';
+        $bid = request('bid') ?? '';
+        $price = request('price') ?? '';
+        $products = (new ShopProduct)->setKeyword($keyword);
+        //Filter category
+        if ($cid) {
+            $products = $products->getProductToCategory($cid);
+        }
+        //filter brand
+        if ($bid) {
+            $products = $products->getProductToBrand($bid);
+        }
+        //Filter price
+        if ($price) {
+            $products = $products->setRangePrice($price);
+        }
 
-        $products = (new ShopProduct)
+        $products = $products
             ->setLimit(sc_config('product_list'))
             ->setPaginate()
             ->setSort([$sortBy, $sortOrder])
@@ -143,22 +160,38 @@ class ShopContentController extends RootFrontController
         }
         $keyword = request('keyword') ?? '';
         $cid = request('cid') ?? '';
+        $bid = request('bid') ?? '';
+        $price = request('price') ?? '';
         $products = (new ShopProduct)->setKeyword($keyword);
+        //Filter category
         if ($cid) {
             $products = $products->getProductToCategory($cid);
+        }
+        //filter brand
+        if ($bid) {
+            $products = $products->getProductToBrand($bid);
+        }
+        //Filter price
+        if ($price) {
+            $products = $products->setRangePrice($price);
         }
         $products = $products->setSort([$sortBy, $sortOrder])
             ->setPaginate()
             ->setLimit(sc_config('product_list'))
             ->getData();
 
-        sc_check_view($this->templatePath . '.screen.shop_product_list');          
+        $view = $this->templatePath . '.screen.shop_product_list';
+
+        if (view()->exists($this->templatePath . '.screen.shop_search')) {
+            $view = $this->templatePath . '.screen.shop_search';
+        }
+        sc_check_view($view);          
         return view(
-            $this->templatePath . '.screen.shop_product_list',
+            $view,
             array(
                 'title'       => sc_language_render('action.search') . ': ' . $keyword,
                 'products'    => $products,
-                'layout_page' => 'shop_product_list',
+                'layout_page' => 'shop_search',
                 'filter_sort' => $filter_sort,
                 'breadcrumbs' => [
                     ['url'    => '', 'title' => sc_language_render('action.search')],
