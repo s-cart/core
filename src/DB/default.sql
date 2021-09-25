@@ -184,6 +184,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_shipping_status` (`id`, `name`) VALUES
 INSERT INTO `__SC_DB_PREFIX__shop_layout_page` (`key`, `name`) VALUES 
 ('home', 'admin.layout_page_position.home'),
 ('shop_home', 'admin.layout_page_position.shop_home'),
+('shop_search', 'admin.layout_page_position.shop_search'),
 ('shop_product_list', 'admin.layout_page_position.product_list'),
 ('product_detail', 'admin.layout_page_position.product_detail'),
 ('shop_cart', 'admin.layout_page_position.shop_cart'),
