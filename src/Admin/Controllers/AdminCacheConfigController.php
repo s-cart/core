@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminConfig;
+
 class AdminCacheConfigController extends RootAdminController
 {
     public function __construct()
@@ -27,7 +28,8 @@ class AdminCacheConfigController extends RootAdminController
      *
      * @return  json
      */
-    public function clearCache() {
+    public function clearCache()
+    {
         $action = request('action');
         $response = sc_clear_cache($action);
         return response()->json(

@@ -2,6 +2,7 @@
 namespace SCart\Core\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 class AdminConfig extends Model
 {
     public $timestamps = false;
@@ -21,7 +22,7 @@ class AdminConfig extends Model
      */
     public static function getPluginCode($code = null, $onlyActive = true)
     {
-        if($code === null) {
+        if ($code === null) {
             $query =  self::where('group', 'Plugins');
         } else {
             $code = sc_word_format_class($code);
@@ -69,7 +70,7 @@ class AdminConfig extends Model
         if ($suffix) {
             $return = $return->orWhere('group', $group.'__'.$suffix);
         }
-        $return = $return->orderBy('sort','desc')->pluck('value')->all();
+        $return = $return->orderBy('sort', 'desc')->pluck('value')->all();
         if ($return) {
             return $return;
         } else {
@@ -77,13 +78,13 @@ class AdminConfig extends Model
         }
     }
 
-/**
- * [getAll description]
- *
- * @param[int] $store  [$store description]
- *
- * @return [type]          [return description]
- */
+    /**
+     * [getAll description]
+     *
+     * @param[int] $store  [$store description]
+     *
+     * @return [type]          [return description]
+     */
     public static function getListAll()
     {
         if (self::$getAll === null) {
@@ -100,7 +101,6 @@ class AdminConfig extends Model
      * @return  [type]  [return description]
      */
     public static function getAllGlobal()
-
     {
         if (self::$getAllGlobal === null) {
             self::$getAllGlobal = self::where('store_id', 0)
@@ -117,13 +117,14 @@ class AdminConfig extends Model
      *
      * @return  [type]            [return description]
      */
-    public static function getAllConfigOfStore($storeId) {
+    public static function getAllConfigOfStore($storeId)
+    {
         if (self::$getAllConfigOfStore === null) {
             self::$getAllConfigOfStore = self::get()
                 ->groupBy('store_id');
         }
         $data =  self::$getAllConfigOfStore[$storeId] ?? '';
-        if($data) {
+        if ($data) {
             return $data->pluck('value', 'key');
         } else {
             return null;
@@ -137,11 +138,12 @@ class AdminConfig extends Model
      *
      * @return  [type]         [return description]
      */
-    public static function getListConfigByCode(array $dataQuery) {
-        if(empty($dataQuery['code'])) {
+    public static function getListConfigByCode(array $dataQuery)
+    {
+        if (empty($dataQuery['code'])) {
             return null;
         }
-        if(is_array($dataQuery['code'])) {
+        if (is_array($dataQuery['code'])) {
             $data = self::whereIn('code', $dataQuery['code']);
         } else {
             $data = self::where('code', $dataQuery['code']);

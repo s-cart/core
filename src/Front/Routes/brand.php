@@ -4,7 +4,7 @@ $prefixBrand = sc_config('PREFIX_BRAND')??'brand';
 Route::group(
     [
         'prefix' => $langUrl.$prefixBrand
-    ], 
+    ],
     function ($router) use ($suffix) {
         $router->get('/', 'ShopBrandController@allBrandsProcessFront')
             ->name('brand.all');

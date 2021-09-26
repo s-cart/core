@@ -9,7 +9,10 @@ use SCart\Core\Admin\Models\AdminProduct;
 
 class AdminReportController extends RootAdminController
 {
-    public $languages, $kinds, $properties, $attributeGroup;
+    public $languages;
+    public $kinds;
+    public $properties;
+    public $attributeGroup;
 
     public function __construct()
     {
@@ -22,7 +25,6 @@ class AdminReportController extends RootAdminController
             SC_PRODUCT_GROUP => sc_language_render('product.kind_group'),
         ];
         $this->properties = (new ShopProductProperty)->pluck('name', 'code')->toArray();
-
     }
 
     public function product()
@@ -35,7 +37,7 @@ class AdminReportController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 1, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
         ];
         //Process add content
@@ -88,7 +90,7 @@ class AdminReportController extends RootAdminController
 
             $dataTr[] = [
                 'id' => $row['id'],
-                'image' => sc_image_render($row['image'], '50px','', $row['name']),
+                'image' => sc_image_render($row['image'], '50px', '', $row['name']),
                 'sku' => $row['sku'],
                 'name' => $row['name'],
                 'price' => $row['price'],
@@ -137,5 +139,4 @@ class AdminReportController extends RootAdminController
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);
     }
-
 }

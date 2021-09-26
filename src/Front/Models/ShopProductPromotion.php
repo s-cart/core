@@ -4,6 +4,7 @@ namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ShopProduct;
+
 class ShopProductPromotion extends Model
 {
     public $table = SC_DB_PREFIX.'shop_product_promotion';
@@ -16,5 +17,4 @@ class ShopProductPromotion extends Model
     {
         return $this->belongsTo(ShopProduct::class, 'product_id', 'id');
     }
-
 }

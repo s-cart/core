@@ -125,7 +125,6 @@ class ShopCurrency extends Model
         } else {
             return $money * self::$exchange_rate;
         }
-
     }
 
     /**
@@ -198,7 +197,6 @@ class ShopCurrency extends Model
             } else {
                 return $symbol . $space_symbol . self::format($money);
             }
-
         } else {
             return self::format($money) . $space_symbol . $symbol;
         }
@@ -248,13 +246,13 @@ class ShopCurrency extends Model
         return $query->orderBy($sortBy, $sortOrder);
     }
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
         static::deleting(function ($model) {
-            if(in_array($model->id, SC_GUARD_CURRENCY)){
+            if (in_array($model->id, SC_GUARD_CURRENCY)) {
                 return false;
             }
         });
     }
-
 }

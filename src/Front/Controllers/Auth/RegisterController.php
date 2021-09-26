@@ -60,7 +60,7 @@ class RegisterController extends RootFrontController
     protected function validator(array $data)
     {
         $dataMapping = $this->mappingValidator($data);
-        if(sc_captcha_method() && in_array('register', sc_captcha_page())) {
+        if (sc_captcha_method() && in_array('register', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
             $dataMapping['validate']['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
@@ -81,7 +81,6 @@ class RegisterController extends RootFrontController
         $user = ShopCustomer::createCustomer($dataMap);
         if ($user) {
             if (sc_config('welcome_customer')) {
-
                 $checkContent = (new ShopEmailTemplate)->where('group', 'welcome_customer')->where('status', 1)->first();
                 if ($checkContent) {
                     $content = $checkContent->text;
@@ -121,10 +120,8 @@ class RegisterController extends RootFrontController
 
                     sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
                 }
-
             }
         } else {
-
         }
         return $user;
     }
@@ -147,7 +144,8 @@ class RegisterController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function showRegisterFormProcessFront(...$params) {
+    public function showRegisterFormProcessFront(...$params)
+    {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             sc_lang_switch($lang);
@@ -167,8 +165,8 @@ class RegisterController extends RootFrontController
             return redirect()->route('home');
         }
         $viewCaptcha = '';
-        if(sc_captcha_method() && in_array('register', sc_captcha_page())) {
-            if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
+        if (sc_captcha_method() && in_array('register', sc_captcha_page())) {
+            if (view()->exists(sc_captcha_method()->pathPlugin.'::render')) {
                 $dataView = [
                     'titleButton' => sc_language_render('customer.signup'),
                     'idForm' => 'form-process',
@@ -178,7 +176,8 @@ class RegisterController extends RootFrontController
             }
         }
         sc_check_view($this->templatePath . '.auth.register');
-        return view($this->templatePath . '.auth.register',
+        return view(
+            $this->templatePath . '.auth.register',
             array(
                 'title'       => sc_language_render('customer.title_register'),
                 'countries'   => ShopCountry::getCodeAll(),
@@ -207,7 +206,6 @@ class RegisterController extends RootFrontController
         $dataMap = $this->mappDataInsert($data);
         if ($user) {
             if (sc_config('welcome_customer')) {
-
                 $checkContent = (new ShopEmailTemplate)->where('group', 'welcome_customer')->where('status', 1)->first();
                 if ($checkContent) {
                     $content = $checkContent->text;
@@ -247,7 +245,6 @@ class RegisterController extends RootFrontController
 
                     sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
                 }
-
             }
 
             //Send email verify
@@ -259,7 +256,6 @@ class RegisterController extends RootFrontController
             if ($response = $this->registered($request, $user)) {
                 return $response;
             }
-
         } else {
             return back()->withInput();
         }
@@ -268,6 +264,4 @@ class RegisterController extends RootFrontController
                     ? new JsonResponse([], 201)
                     : redirect($this->redirectPath());
     }
-
-
 }

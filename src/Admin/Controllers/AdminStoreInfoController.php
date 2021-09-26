@@ -9,7 +9,10 @@ use SCart\Core\Front\Models\ShopCurrency;
 
 class AdminStoreInfoController extends RootAdminController
 {
-    public $templates, $currencies, $languages, $timezones;
+    public $templates;
+    public $currencies;
+    public $languages;
+    public $timezones;
 
     public function __construct()
     {
@@ -21,7 +24,6 @@ class AdminStoreInfoController extends RootAdminController
         $this->currencies = ShopCurrency::getCodeActive();
         $this->languages = ShopLanguage::getListActive();
         $this->timezones = $timezones;
-
     }
 
     /*
@@ -49,7 +51,7 @@ class AdminStoreInfoController extends RootAdminController
                     // Can not change type in here
                     $error = 1;
                     $msg = sc_language_render('store.admin.value_cannot_change');
-                } else if ($name == 'domain') {
+                } elseif ($name == 'domain') {
                     if ($storeId == SC_ID_ROOT || (sc_config_global('MultiVendorPro') && sc_store_is_partner($storeId)) || sc_config_global('MultiStorePro')) {
                         // Only store root can edit domain
                         $domain = sc_process_domain_store($value);
@@ -64,7 +66,7 @@ class AdminStoreInfoController extends RootAdminController
                         $error = 1;
                         $msg = sc_language_render('store.admin.value_cannot_change');
                     }
-                } else if ($name == 'code') {
+                } elseif ($name == 'code') {
                     if (AdminStore::where('code', $value)->where('id', '<>', $storeId)->first()) {
                         $error = 1;
                         $msg = sc_language_render('store.admin.code_exist');
@@ -76,7 +78,6 @@ class AdminStoreInfoController extends RootAdminController
                     AdminStore::where('id', $storeId)->update([$name => $value]);
                     $error = 0;
                 }
-
             } catch (\Throwable $e) {
                 $error = 1;
                 $msg = $e->getMessage();
@@ -96,13 +97,12 @@ class AdminStoreInfoController extends RootAdminController
                 $error = 1;
                 $msg = $e->getMessage();
             }
-            
         }
         return response()->json(['error' => $error, 'msg' => $msg]);
-
     }
 
-    public function index() {
+    public function index()
+    {
         $id = session('adminStoreId');
         $store = AdminStore::find($id);
         if (!$store) {
@@ -118,7 +118,7 @@ class AdminStoreInfoController extends RootAdminController
         $data = [
             'title' => sc_language_render('store.admin.title'),
             'subTitle' => '',
-            'icon' => 'fas fa-cogs',        
+            'icon' => 'fas fa-cogs',
         ];
         $data['store'] = $store;
         $data['templates'] = $this->templates;

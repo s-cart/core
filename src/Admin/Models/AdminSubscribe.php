@@ -13,7 +13,8 @@ class AdminSubscribe extends ShopSubscribe
      *
      * @return  [type]       [return description]
      */
-    public static function getSubscribeAdmin($id) {
+    public static function getSubscribeAdmin($id)
+    {
         return self::where('id', $id)
         ->where('store_id', session('adminStoreId'))
         ->first();
@@ -26,7 +27,8 @@ class AdminSubscribe extends ShopSubscribe
      *
      * @return  [type]               [return description]
      */
-    public static function getSubscribeListAdmin(array $dataSearch) {
+    public static function getSubscribeListAdmin(array $dataSearch)
+    {
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
         $subcribeList = (new AdminSubscribe)
@@ -51,9 +53,9 @@ class AdminSubscribe extends ShopSubscribe
      *
      * @return  [type]              [return description]
      */
-    public static function createSubscribeAdmin(array $dataInsert) {
+    public static function createSubscribeAdmin(array $dataInsert)
+    {
         $dataInsert = sc_clean($dataInsert);
         return self::create($dataInsert);
     }
-
 }

@@ -61,7 +61,7 @@ class AdminTemplateController extends RootAdminController
             File::deleteDirectory(public_path('templates/'.$key));
             File::deleteDirectory(resource_path('views/templates/'.$key));
             $response = ['error' => 0, 'msg' => 'Remove template success'];
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             $response = ['error' => 0, 'msg' => $e->getMessage()];
         }
         return response()->json($response);
@@ -131,7 +131,8 @@ class AdminTemplateController extends RootAdminController
     /**
      * Import template
      */
-    public function importTemplate() {
+    public function importTemplate()
+    {
         $data =  [
             'title' => sc_language_render('admin.template.import')
         ];
@@ -144,7 +145,8 @@ class AdminTemplateController extends RootAdminController
      *
      * @return  [type]  [return description]
      */
-    public function processImport() {
+    public function processImport()
+    {
         $config = [];
         $data = request()->all();
         $validator = \Validator::make(
@@ -160,25 +162,25 @@ class AdminTemplateController extends RootAdminController
                 ->withInput();
         }
         $pathTmp = time();
-        $pathFile = sc_file_upload($data['file'],'tmp', $pathFolder = $pathTmp)['pathFile'] ?? '';
-        if($pathFile) {
+        $pathFile = sc_file_upload($data['file'], 'tmp', $pathFolder = $pathTmp)['pathFile'] ?? '';
+        if ($pathFile) {
             $unzip = sc_unzip(storage_path('tmp/'.$pathFile), storage_path('tmp/'.$pathTmp));
-            if($unzip) {
+            if ($unzip) {
                 $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
-                if($checkConfig) {
-                    $folderName = explode('/src',$checkConfig[0]);
+                if ($checkConfig) {
+                    $folderName = explode('/src', $checkConfig[0]);
                     $folderName = explode('/', $folderName[0]);
                     $folderName = end($folderName);
                     $config = json_decode(file_get_contents($checkConfig[0]), true);
                     $configKey = $config['configKey'] ?? '';
-                    $configKey = str_replace('.','-', $configKey);
+                    $configKey = str_replace('.', '-', $configKey);
                     if (!$configKey) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         return redirect()->back()->with('error', sc_language_render('admin.template.error_config'));
                     }
 
                     $arrTemplateLocal = sc_get_all_template();
-                    if(array_key_exists($configKey, $arrTemplateLocal)) {
+                    if (array_key_exists($configKey, $arrTemplateLocal)) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         return redirect()->back()->with('error', sc_language_render('admin.template.error_exist'));
                     }
@@ -194,12 +196,10 @@ class AdminTemplateController extends RootAdminController
                                 sc_template_install();
                             }
                         }
-
-                    } catch(\Throwable $e) {
+                    } catch (\Throwable $e) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         return redirect()->back()->with('error', $e->getMessage());
                     }
-
                 } else {
                     File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                     return redirect()->back()->with('error', sc_language_render('admin.template.error_check_config'));

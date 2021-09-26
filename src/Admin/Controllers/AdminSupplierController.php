@@ -7,7 +7,6 @@ use Validator;
 
 class AdminSupplierController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -24,7 +23,7 @@ class AdminSupplierController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_supplier.create'),
         ];
@@ -67,10 +66,10 @@ class AdminSupplierController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -86,7 +85,7 @@ class AdminSupplierController extends RootAdminController
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|unique:"'.ShopSupplier::class.'",alias|string|max:100',
             'url' => 'url|nullable',
             'email' => 'email|nullable',
-        ],[
+        ], [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.supplier.name')]),
             'alias.regex' => sc_language_render('admin.supplier.alias_validate'),
         ]);
@@ -110,19 +109,18 @@ class AdminSupplierController extends RootAdminController
         $obj = ShopSupplier::create($dataInsert);
 
         return redirect()->route('admin_supplier.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
-public function edit($id)
-{
-    $supplier = ShopSupplier::find($id);
-    if(!$supplier) {
-        return 'No data';
-    }
-    $data = [
+    /**
+     * Form edit
+     */
+    public function edit($id)
+    {
+        $supplier = ShopSupplier::find($id);
+        if (!$supplier) {
+            return 'No data';
+        }
+        $data = [
         'title' => sc_language_render('admin.supplier.list'),
         'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
@@ -131,14 +129,14 @@ public function edit($id)
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
         'buttonSort' => 0, // 1 - Enable button sort
-        'css' => '', 
+        'css' => '',
         'js' => '',
         'url_action' => sc_route_admin('admin_supplier.edit', ['id' => $supplier['id']]),
         'supplier' => $supplier,
         'id' => $id,
     ];
 
-    $listTh = [
+        $listTh = [
         'id' => 'ID',
         'name' => sc_language_render('admin.supplier.name'),
         'image' => sc_language_render('admin.supplier.image'),
@@ -147,13 +145,13 @@ public function edit($id)
         'action' => sc_language_render('action.title'),
     ];
 
-    $obj = new ShopSupplier;
-    $obj = $obj->orderBy('id', 'desc');
-    $dataTmp = $obj->paginate(20);
+        $obj = new ShopSupplier;
+        $obj = $obj->orderBy('id', 'desc');
+        $dataTmp = $obj->paginate(20);
 
-    $dataTr = [];
-    foreach ($dataTmp as $key => $row) {
-        $dataTr[] = [
+        $dataTr = [];
+        foreach ($dataTmp as $key => $row) {
+            $dataTr[] = [
             'id' => $row['id'],
             'name' => $row['name'],
             'image' => sc_image_render($row->getThumb(), '50px', '50px', $row['name']),
@@ -165,21 +163,21 @@ public function edit($id)
                 <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
                 ',
         ];
+        }
+
+        $data['listTh'] = $listTh;
+        $data['dataTr'] = $dataTr;
+        $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
+
+        $data['layout'] = 'edit';
+        return view($this->templatePathAdmin.'screen.supplier')
+        ->with($data);
     }
 
-    $data['listTh'] = $listTh;
-    $data['dataTr'] = $dataTr;
-    $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
-
-    $data['layout'] = 'edit';
-    return view($this->templatePathAdmin.'screen.supplier')
-        ->with($data);
-}
-
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $supplier = ShopSupplier::find($id);
@@ -196,7 +194,7 @@ public function edit($id)
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|unique:"'.ShopSupplier::class.'",alias,' . $supplier->id . ',id|string|max:100',
             'url' => 'url|nullable',
             'email' => 'email|nullable',
-        ],[
+        ], [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.supplier.name')]),
             'alias.regex' => sc_language_render('admin.supplier.alias_validate'),
         ]);
@@ -206,7 +204,7 @@ public function edit($id)
                 ->withErrors($validator)
                 ->withInput($data);
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'image' => $data['image'],
@@ -224,13 +222,12 @@ public function edit($id)
 
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -242,5 +239,4 @@ Need mothod destroy to boot deleting in model
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

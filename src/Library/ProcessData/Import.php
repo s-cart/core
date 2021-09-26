@@ -10,13 +10,12 @@ use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
 class Import
 {
-    public function readFile($path = '', $type = 'csv', $opt = []) {
-        if(file_exists($path)) {
-
-            if($type == 'xls') {
+    public function readFile($path = '', $type = 'csv', $opt = [])
+    {
+        if (file_exists($path)) {
+            if ($type == 'xls') {
                 $reader = new Xls;
-            }
-            else if($type == 'xlsx') {
+            } elseif ($type == 'xlsx') {
                 $reader = new Xlsx;
             } else {
                 $reader = new Csv;
@@ -28,10 +27,8 @@ class Import
             } catch (\Exception $e) {
                 return ['error' => 1, 'msg' => $e->getMessage()];
             }
-
         } else {
             return ['error' => 1, 'msg' => 'File not exist'];
         }
-
     }
 }

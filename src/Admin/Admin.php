@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
  */
 class Admin
 {
-
     public static function user()
     {
         return Auth::guard('admin')->user();
@@ -32,10 +31,9 @@ class Admin
     public static function getMenuVisible()
     {
         return AdminMenu::getListVisible();
-    }   
+    }
     public static function checkUrlIsChild($urlParent, $urlChild)
     {
         return AdminMenu::checkUrlIsChild($urlParent, $urlChild);
-    }   
-    
+    }
 }

@@ -54,7 +54,6 @@ class ShopSupplier extends Model
     public function getImage()
     {
         return sc_image_get_path($this->image);
-
     }
 
     
@@ -73,7 +72,7 @@ class ShopSupplier extends Model
      */
     public function getDetail($key, $type = null)
     {
-        if(empty($key)) {
+        if (empty($key)) {
             return null;
         }
         if ($type === null) {
@@ -94,7 +93,8 @@ class ShopSupplier extends Model
      *
      * @return  new model
      */
-    public function start() {
+    public function start()
+    {
         return new ShopSupplier;
     }
 
@@ -102,13 +102,14 @@ class ShopSupplier extends Model
     /**
      * build Query
      */
-    public function buildQuery() {
+    public function buildQuery()
+    {
         $query = $this->where('status', 1)
         ->where('store_id', config('app.storeId'));
 
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
-                if(count($where)) {
+                if (count($where)) {
                     $query = $query->where($where[0], $where[1], $where[2]);
                 }
             }
@@ -119,7 +120,7 @@ class ShopSupplier extends Model
         } else {
             if (is_array($this->sc_sort) && count($this->sc_sort)) {
                 foreach ($this->sc_sort as  $rowSort) {
-                    if(is_array($rowSort) && count($rowSort) == 2) {
+                    if (is_array($rowSort) && count($rowSort) == 2) {
                         $query = $query->sort($rowSort[0], $rowSort[1]);
                     }
                 }

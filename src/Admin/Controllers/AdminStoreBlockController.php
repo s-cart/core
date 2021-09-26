@@ -9,7 +9,6 @@ use Validator;
 
 class AdminStoreBlockController extends RootAdminController
 {
-
     public $layoutType;
     public $layoutPage;
     public $layoutPosition;
@@ -23,7 +22,6 @@ class AdminStoreBlockController extends RootAdminController
 
     public function index()
     {
-
         $data = [
             'title'         => sc_language_render('admin.store_block.list'),
             'subTitle'      => '',
@@ -32,7 +30,7 @@ class AdminStoreBlockController extends RootAdminController
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 0, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -61,8 +59,7 @@ class AdminStoreBlockController extends RootAdminController
             $htmlPage = '';
             if (!$row['page']) {
                 $htmlPage .= '';
-            } else
-            if (strpos($row['page'], '*') !== false) {
+            } elseif (strpos($row['page'], '*') !== false) {
                 $htmlPage .= sc_language_render('admin.layout_page_position.all');
             } else {
                 $arrPage = explode(',', $row['page']);
@@ -251,7 +248,7 @@ class AdminStoreBlockController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -284,8 +281,8 @@ class AdminStoreBlockController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return (new AdminStoreBlockContent)->getStoreBlockContentAdmin($id);
     }
-
 }

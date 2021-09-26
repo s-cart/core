@@ -7,21 +7,21 @@ namespace SCart\Core\Front\Models;
  */
 trait ModelTrait
 {
-
-    protected  $sc_limit = 'all'; // all or interger
-    protected  $sc_paginate = 0; // 0: dont paginate,
-    protected  $sc_sort = [];
-    protected  $sc_moreWhere = []; // more wehere
-    protected  $sc_random = 0; // 0: no random, 1: random
-    protected  $sc_keyword = ''; // search search product
+    protected $sc_limit = 'all'; // all or interger
+    protected $sc_paginate = 0; // 0: dont paginate,
+    protected $sc_sort = [];
+    protected $sc_moreWhere = []; // more wehere
+    protected $sc_random = 0; // 0: no random, 1: random
+    protected $sc_keyword = ''; // search search product
  
 
     
     /**
      * Set value limit
-     * @param   [string]  $limit 
+     * @param   [string]  $limit
      */
-    public function setLimit($limit) {
+    public function setLimit($limit)
+    {
         if ($limit === 'all') {
             $this->sc_limit = $limit;
         } else {
@@ -34,7 +34,8 @@ trait ModelTrait
      * Set value sort
      * @param   [array]  $sort ['field', 'asc|desc']
      */
-    public function setSort(array $sort) {
+    public function setSort(array $sort)
+    {
         if (is_array($sort)) {
             $this->sc_sort[] = $sort;
         }
@@ -43,9 +44,10 @@ trait ModelTrait
 
     /**
      * Add more where
-     * @param   [array]  $moreWhere 
+     * @param   [array]  $moreWhere
      */
-    public function setMoreWhere(array $moreWhere) {
+    public function setMoreWhere(array $moreWhere)
+    {
         if (is_array($moreWhere)) {
             if (count($moreWhere) == 2) {
                 $where[0] = $moreWhere[0];
@@ -65,7 +67,8 @@ trait ModelTrait
      * Enable paginate mode
      *  0 - no paginate
      */
-    public function setPaginate() {
+    public function setPaginate()
+    {
         $this->sc_paginate = 1;
         return $this;
     }
@@ -73,16 +76,18 @@ trait ModelTrait
     /**
      * Set random mode
      */
-    public function setRandom() {
+    public function setRandom()
+    {
         $this->sc_random = 1;
         return $this;
     }
     
     /**
      * Set keyword search
-     * @param   [string]  $keyword 
+     * @param   [string]  $keyword
      */
-    public function setKeyword($keyword) {
+    public function setKeyword($keyword)
+    {
         if (trim($keyword)) {
             $this->sc_keyword = trim($keyword);
         }
@@ -90,24 +95,26 @@ trait ModelTrait
     }
 
 
-     /**
-     * Get Sql
-     */
-    public function getSql() {
+    /**
+    * Get Sql
+    */
+    public function getSql()
+    {
         $query = $this->buildQuery();
         if (!$this->sc_paginate) {
             if ($this->sc_limit !== 'all') {
                 $query = $query->limit($this->sc_limit);
             }
         }
-		return $query = $query->toSql();
+        return $query = $query->toSql();
     }
 
-     /**
-     * Get data
-     * @param   [array]  $action 
-     */
-    public function getData(array $action = []) {
+    /**
+    * Get data
+    * @param   [array]  $action
+    */
+    public function getData(array $action = [])
+    {
         $query = $this->buildQuery();
         if (!empty($action['query'])) {
             return $query;
@@ -126,7 +133,6 @@ trait ModelTrait
             if (!empty($action['groupBy'])) {
                 $data = $data->groupBy($action['groupBy']);
             }
-
         }
         return $data;
     }
@@ -136,13 +142,12 @@ trait ModelTrait
      *
      * @return  [type]  [return description]
      */
-    public function getFull() {
+    public function getFull()
+    {
         if (method_exists($this, 'getDetail')) {
             return $this->getDetail($this->id);
         } else {
             return $this;
         }
-
     }
-
 }

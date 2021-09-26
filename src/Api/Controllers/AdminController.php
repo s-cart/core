@@ -53,5 +53,4 @@ class AdminController extends RootFrontController
         }
         return response()->json($dataReturn);
     }
-
 }

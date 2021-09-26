@@ -19,7 +19,7 @@ class AdminLanguageManagerController extends RootAdminController
         $keyword = request('keyword');
         $languages = ShopLanguage::getListAll();
         $positionLang = Languages::getPosition();
-        $languagesPosition = Languages::getLanguagesPosition($lang, $position,$keyword);
+        $languagesPosition = Languages::getLanguagesPosition($lang, $position, $keyword);
         
         $codeLanguages = ShopLanguage::getCodeAll();
         if (!in_array($lang, array_keys($codeLanguages))) {
@@ -47,7 +47,7 @@ class AdminLanguageManagerController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'layout' => 'index',
         ];
@@ -62,7 +62,8 @@ class AdminLanguageManagerController extends RootAdminController
      *
      * @return void
      */
-    public function postUpdate() {
+    public function postUpdate()
+    {
         if (!request()->ajax()) {
             return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
         } else {
@@ -73,7 +74,7 @@ class AdminLanguageManagerController extends RootAdminController
             $position = sc_clean($data['pk']);
             $languages = ShopLanguage::getCodeAll();
             if (!in_array($lang, array_keys($languages))) {
-               return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
+                return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
             }
             if ($position) {
                 Languages::updateOrCreate(
@@ -96,7 +97,8 @@ class AdminLanguageManagerController extends RootAdminController
      *
      * @return void
      */
-    public function add() {
+    public function add()
+    {
         $languages = ShopLanguage::getListAll();
         $positionLang = Languages::getPosition();
         $data = [
@@ -113,9 +115,12 @@ class AdminLanguageManagerController extends RootAdminController
      *
      * @return void
      */
-    public function postAdd() {
+    public function postAdd()
+    {
         $data = request()->all();
-        $validator = Validator::make($data, [
+        $validator = Validator::make(
+            $data,
+            [
                 'text'         => 'required',
                 'position' => 'required_without:position_new',
                 'code'         => 'required|unique:"'.Languages::class.'",code|string|max:100',
@@ -138,5 +143,4 @@ class AdminLanguageManagerController extends RootAdminController
 
         return redirect(sc_route_admin('admin_language_manager.index'))->with('success', sc_language_render('action.create_success'));
     }
-
 }

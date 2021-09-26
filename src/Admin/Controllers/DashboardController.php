@@ -19,8 +19,7 @@ class DashboardController extends RootAdminController
     public function index(Request $request)
     {
         //Check user allow view dasdboard
-        if(!\Admin::user()->checkUrlAllowAccess(route('admin.home')))
-        {
+        if (!\Admin::user()->checkUrlAllowAccess(route('admin.home'))) {
             $data['title'] = sc_language_render('admin.dashboard');
             return view($this->templatePathAdmin.'default', $data);
         }

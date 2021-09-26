@@ -5,7 +5,7 @@
 Route::group(
     [
         'prefix' => $langUrl
-    ], 
+    ],
     function ($router) use ($suffix) {
         $prefixCartWishlist = sc_config('PREFIX_CART_WISHLIST') ?? 'wishlist';
         $prefixCartCompare = sc_config('PREFIX_CART_COMPARE') ?? 'compare';

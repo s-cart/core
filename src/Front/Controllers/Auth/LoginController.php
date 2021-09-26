@@ -47,9 +47,9 @@ class LoginController extends RootFrontController
     protected function validateLogin(Request $request)
     {
         $messages = [
-            'email.email'       => sc_language_render('validation.email',['attribute'=> sc_language_render('customer.email')]),
-            'email.required'    => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.email')]),
-            'password.required' => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.password')]),
+            'email.email'       => sc_language_render('validation.email', ['attribute'=> sc_language_render('customer.email')]),
+            'email.required'    => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.email')]),
+            'password.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.password')]),
             ];
         $this->validate($request, [
             'email'    => 'required|string|email',
@@ -63,7 +63,8 @@ class LoginController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function showLoginFormProcessFront(...$params) {
+    public function showLoginFormProcessFront(...$params)
+    {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             sc_lang_switch($lang);
@@ -83,7 +84,8 @@ class LoginController extends RootFrontController
             return redirect()->route('home');
         }
         sc_check_view($this->templatePath . '.auth.login');
-        return view($this->templatePath . '.auth.login',
+        return view(
+            $this->templatePath . '.auth.login',
             array(
                 'title'       => sc_language_render('customer.login_title'),
                 'countries'   => ShopCountry::getCodeAll(),
@@ -113,5 +115,4 @@ class LoginController extends RootFrontController
             session(['customer' => []]);
         }
     }
-
 }

@@ -191,7 +191,8 @@ class ShopOrderTotal extends Model
     /**
      * Get object total for order
      */
-    public static function getObjectOrderTotal(){
+    public static function getObjectOrderTotal()
+    {
         $objects = array();
         $objects[] = self::getShippingMethod();
         foreach (self::getTotal() as  $totalMethod) {

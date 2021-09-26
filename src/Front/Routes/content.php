@@ -2,7 +2,7 @@
 Route::group(
     [
         'prefix' => $langUrl
-    ], 
+    ],
     function ($router) use ($suffix) {
         $prefixSearch = sc_config('PREFIX_SEARCH')??'search';
         $prefixContact = sc_config('PREFIX_CONTACT')??'contact';

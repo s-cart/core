@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'domain_strict'                => 'Strict domain name censorship',

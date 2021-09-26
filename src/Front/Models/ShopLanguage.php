@@ -52,7 +52,8 @@ class ShopLanguage extends Model
         return self::$getArrayLanguages;
     }
     
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
         static::deleting(function ($model) {
             if (in_array($model->id, SC_GUARD_LANGUAGE)) {

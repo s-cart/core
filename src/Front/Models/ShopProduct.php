@@ -13,6 +13,7 @@ use SCart\Core\Front\Models\ShopProductStore;
 use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ModelTrait;
+
 class ShopProduct extends Model
 {
     use ModelTrait;
@@ -21,16 +22,16 @@ class ShopProduct extends Model
 
     protected $connection = SC_CONNECTION;
 
-    protected  $sc_kind = []; // 0:single, 1:bundle, 2:group
-    protected  $sc_property = 'all'; // 0:physical, 1:download, 2:only view, 3: Service
-    protected  $sc_promotion = 0; // 1: only produc promotion,
-    protected  $sc_store_id = 0; 
-    protected  $sc_array_ID = []; // array ID product
-    protected  $sc_category = []; // array category id
-    protected  $sc_category_vendor = []; // array category id
-    protected  $sc_brand = []; // array brand id
-    protected  $sc_supplier = []; // array supplier id
-    protected  $sc_range_price = null; // min__max
+    protected $sc_kind = []; // 0:single, 1:bundle, 2:group
+    protected $sc_property = 'all'; // 0:physical, 1:download, 2:only view, 3: Service
+    protected $sc_promotion = 0; // 1: only produc promotion,
+    protected $sc_store_id = 0;
+    protected $sc_array_ID = []; // array ID product
+    protected $sc_category = []; // array category id
+    protected $sc_category_vendor = []; // array category id
+    protected $sc_brand = []; // array brand id
+    protected $sc_supplier = []; // array supplier id
+    protected $sc_range_price = null; // min__max
     protected static $storeCode = null;
 
     
@@ -83,20 +84,25 @@ class ShopProduct extends Model
         return $this->hasOne(ShopProductDownload::class, 'product_id', 'id');
     }
 
-    //Function get text description 
-    public function getText() {
+    //Function get text description
+    public function getText()
+    {
         return $this->descriptions()->where('lang', sc_get_locale())->first();
     }
-    public function getName() {
+    public function getName()
+    {
         return $this->getText()->name;
     }
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->getText()->description;
     }
-    public function getKeyword() {
+    public function getKeyword()
+    {
         return $this->getText()->keyword;
     }
-    public function getContent() {
+    public function getContent()
+    {
         return $this->getText()->content;
     }
     //End  get text description
@@ -135,7 +141,8 @@ class ShopProduct extends Model
         $price = $this->price;
         $priceFinal = $this->getFinalPrice();
         // Process with tax
-        return  view('templates.'.sc_store('template').'.common.show_price', 
+        return  view(
+            'templates.'.sc_store('template').'.common.show_price',
             [
                 'price' => $price,
                 'priceFinal' => $priceFinal,
@@ -158,7 +165,8 @@ class ShopProduct extends Model
         $price = $this->price;
         $priceFinal = $this->getFinalPrice();
         // Process with tax
-        return  view('templates.'.sc_store('template').'.common.show_price_detail', 
+        return  view(
+            'templates.'.sc_store('template').'.common.show_price_detail',
             [
                 'price' => $price,
                 'priceFinal' => $priceFinal,
@@ -196,7 +204,7 @@ class ShopProduct extends Model
 
         $tableDescription = (new ShopProductDescription)->getTable();
 
-        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';
 
         $product = $this->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id');
         
@@ -206,8 +214,8 @@ class ShopProduct extends Model
             $product = $product->join($tableStore, $tableStore . '.id', $tableProductStore.'.store_id');
             $product = $product->where($tableStore . '.status', '1');
 
-            if (sc_config_global('MultiStorePro')  || 
-                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != SC_ID_ROOT) )
+            if (sc_config_global('MultiStorePro')  ||
+                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != SC_ID_ROOT))
             ) {
                 //store of vendor
                 $product = $product->where($tableProductStore.'.store_id', $storeId);
@@ -217,7 +225,7 @@ class ShopProduct extends Model
         $product = $product->where($tableDescription . '.lang', sc_get_locale());
 
         if (empty($type)) {
-            $product = $product->where($this->getTable().'.id', (int)$key);  
+            $product = $product->where($this->getTable().'.id', (int)$key);
         } elseif ($type == 'alias') {
             $product = $product->where($this->getTable().'.alias', $key);
         } elseif ($type == 'sku') {
@@ -240,19 +248,20 @@ class ShopProduct extends Model
     {
         parent::boot();
         // before delete() method call this
-        static::deleting(function ($product) {
-            $product->images()->delete();
-            $product->descriptions()->delete();
-            $product->promotionPrice()->delete();
-            $product->groups()->delete();
-            $product->attributes()->delete();
-            $product->downloadPath()->delete();
-            $product->builds()->delete();
-            $product->categories()->detach();
-            $product->stores()->detach();
+        static::deleting(
+            function ($product) {
+                $product->images()->delete();
+                $product->descriptions()->delete();
+                $product->promotionPrice()->delete();
+                $product->groups()->delete();
+                $product->attributes()->delete();
+                $product->downloadPath()->delete();
+                $product->builds()->delete();
+                $product->categories()->detach();
+                $product->stores()->detach();
 
-            //Delete custom field
-            (new ShopCustomFieldDetail)
+                //Delete custom field
+                (new ShopCustomFieldDetail)
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
                 ->select('code', 'name', 'text')
                 ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $product->id)
@@ -276,7 +285,6 @@ class ShopProduct extends Model
     public function getImage()
     {
         return sc_image_get_path($this->image);
-
     }
 
     /**
@@ -299,7 +307,8 @@ class ShopProduct extends Model
 
     public function renderAttributeDetails()
     {
-        return  view('templates.'.sc_store('template').'.common.render_attribute', 
+        return  view(
+            'templates.'.sc_store('template').'.common.render_attribute',
             [
                 'details' => $this->attributes()->get()->groupBy('attribute_group_id'),
                 'groups' => ShopAttributeGroup::getListAll(),
@@ -328,8 +337,8 @@ class ShopProduct extends Model
             return false;
         }
         if ($this->status &&
-            (sc_config('product_preorder', config('app.storeId')) == 1 || $this->date_available === null || date('Y-m-d H:i:s') >= $this->date_available) 
-            && (sc_config('product_buy_out_of_stock', config('app.storeId')) || $this->stock || empty(sc_config('product_stock', config('app.storeId')))) 
+            (sc_config('product_preorder', config('app.storeId')) == 1 || $this->date_available === null || date('Y-m-d H:i:s') >= $this->date_available)
+            && (sc_config('product_buy_out_of_stock', config('app.storeId')) || $this->stock || empty(sc_config('product_stock', config('app.storeId'))))
             && $this->kind != SC_PRODUCT_GROUP
         ) {
             return true;
@@ -376,9 +385,7 @@ class ShopProduct extends Model
                     $productBuild->save();
                 }
             }
-
         }
-
     }
 
     /**
@@ -386,14 +393,16 @@ class ShopProduct extends Model
      *
      * @return  new model
      */
-    public function start() {
+    public function start()
+    {
         return new ShopProduct;
     }
     
     /**
      * Set product kind
      */
-    private function setKind($kind) {
+    private function setKind($kind)
+    {
         if (is_array($kind)) {
             $this->sc_kind = $kind;
         } else {
@@ -405,7 +414,8 @@ class ShopProduct extends Model
     /**
      * Set property product
      */
-    private function setVirtual($property) {
+    private function setVirtual($property)
+    {
         if ($property === 'all') {
             $this->sc_property = $property;
         } else {
@@ -415,12 +425,13 @@ class ShopProduct extends Model
     }
 
     /**
-     * Set array category 
+     * Set array category
      *
-     * @param   [array|int]  $category 
+     * @param   [array|int]  $category
      *
      */
-    private function setCategory($category) {
+    private function setCategory($category)
+    {
         if (is_array($category)) {
             $this->sc_category = $category;
         } else {
@@ -432,10 +443,11 @@ class ShopProduct extends Model
     /**
      * Set array category store
      *
-     * @param   [array|int]  $category 
+     * @param   [array|int]  $category
      *
      */
-    private function setCategoryVendor($category) {
+    private function setCategoryVendor($category)
+    {
         if (is_array($category)) {
             $this->sc_category_vendor = $category;
         } else {
@@ -445,12 +457,13 @@ class ShopProduct extends Model
     }
 
     /**
-     * Set array brand 
+     * Set array brand
      *
-     * @param   [array|int]  $brand 
+     * @param   [array|int]  $brand
      *
      */
-    private function setBrand($brand) {
+    private function setBrand($brand)
+    {
         if (is_array($brand)) {
             $this->sc_brand = $brand;
         } else {
@@ -460,10 +473,11 @@ class ShopProduct extends Model
     }
 
     /**
-     * Set product promotion 
+     * Set product promotion
      *
      */
-    private function setPromotion() {
+    private function setPromotion()
+    {
         $this->sc_promotion = 1;
         return $this;
     }
@@ -472,7 +486,8 @@ class ShopProduct extends Model
      * Set store id
      *
      */
-    public function setStore($id) {
+    public function setStore($id)
+    {
         $this->sc_store_id = (int)$id;
         return $this;
     }
@@ -481,7 +496,8 @@ class ShopProduct extends Model
      * Set range price
      *
      */
-    public function setRangePrice($price) {
+    public function setRangePrice($price)
+    {
         if ($price) {
             $this->sc_range_price = $price;
         }
@@ -489,12 +505,13 @@ class ShopProduct extends Model
     }
 
     /**
-     * Set array ID product 
+     * Set array ID product
      *
-     * @param   [array|int]  $arrID 
+     * @param   [array|int]  $arrID
      *
      */
-    private function setArrayID($arrID) {
+    private function setArrayID($arrID)
+    {
         if (is_array($arrID)) {
             $this->sc_array_ID = $arrID;
         } else {
@@ -505,12 +522,13 @@ class ShopProduct extends Model
 
     
     /**
-     * Set array supplier 
+     * Set array supplier
      *
-     * @param   [array|int]  $supplier 
+     * @param   [array|int]  $supplier
      *
      */
-    private function setSupplier($supplier) {
+    private function setSupplier($supplier)
+    {
         if (is_array($supplier)) {
             $this->sc_supplier = $supplier;
         } else {
@@ -522,14 +540,16 @@ class ShopProduct extends Model
     /**
      * Product hot
      */
-    public function getProductHot() {
+    public function getProductHot()
+    {
         return $this->getProductPromotion();
     }
 
     /**
      * Product build
      */
-    public function getProductBuild() {
+    public function getProductBuild()
+    {
         $this->setKind(SC_PRODUCT_BUILD);
         return $this;
     }
@@ -537,7 +557,8 @@ class ShopProduct extends Model
     /**
      * Product group
      */
-    public function getProductGroup() {
+    public function getProductGroup()
+    {
         $this->setKind(SC_PRODUCT_GROUP);
         return $this;
     }
@@ -545,43 +566,48 @@ class ShopProduct extends Model
     /**
      * Product single
      */
-    public function getProductSingle() {
+    public function getProductSingle()
+    {
         $this->setKind(SC_PRODUCT_SINGLE);
         return $this;
     }
 
     /**
      * Get product to array Catgory
-     * @param   [array|int]  $arrCategory 
+     * @param   [array|int]  $arrCategory
      */
-    public function getProductToCategory($arrCategory) {
+    public function getProductToCategory($arrCategory)
+    {
         $this->setCategory($arrCategory);
         return $this;
     }
 
     /**
      * Get product to  Catgory store
-     * @param   [int]  $category 
+     * @param   [int]  $category
      */
-    public function getProductToCategoryStore($category) {
+    public function getProductToCategoryStore($category)
+    {
         $this->setCategoryVendor($category);
         return $this;
     }
 
     /**
      * Get product to array Brand
-     * @param   [array|int]  $arrBrand 
+     * @param   [array|int]  $arrBrand
      */
-    public function getProductToBrand($arrBrand) {
+    public function getProductToBrand($arrBrand)
+    {
         $this->setBrand($arrBrand);
         return $this;
     }
 
     /**
      * Get product to array Supplier
-     * @param   [array|int]  $arrSupplier 
+     * @param   [array|int]  $arrSupplier
      */
-    private function getProductToSupplier($arrSupplier) {
+    private function getProductToSupplier($arrSupplier)
+    {
         $this->setSupplier($arrSupplier);
         return $this;
     }
@@ -590,7 +616,8 @@ class ShopProduct extends Model
     /**
      * Get product latest
      */
-    public function getProductLatest() {
+    public function getProductLatest()
+    {
         $this->setLimit(10);
         $this->setSort(['id', 'desc']);
         return $this;
@@ -599,7 +626,8 @@ class ShopProduct extends Model
     /**
      * Get product last view
      */
-    public function getProductLastView() {
+    public function getProductLastView()
+    {
         $this->setLimit(10);
         $this->setSort(['date_available', 'desc']);
         return $this;
@@ -608,7 +636,8 @@ class ShopProduct extends Model
     /**
      * Get product best sell
      */
-    public function getProductBestSell() {
+    public function getProductBestSell()
+    {
         $this->setLimit(10);
         $this->setSort(['sold', 'desc']);
         return $this;
@@ -617,7 +646,8 @@ class ShopProduct extends Model
     /**
      * Get product promotion
      */
-    public function getProductPromotion() {
+    public function getProductPromotion()
+    {
         $this->setLimit(10);
         $this->setPromotion();
         return $this;
@@ -630,7 +660,8 @@ class ShopProduct extends Model
      *
      * @return  [type]          [return description]
      */
-    public function getProductFromListID($arrID) {
+    public function getProductFromListID($arrID)
+    {
         if (is_array($arrID)) {
             $this->setArrayID($arrID);
         }
@@ -640,13 +671,14 @@ class ShopProduct extends Model
     /**
      * build Query
      */
-    public function buildQuery() {
+    public function buildQuery()
+    {
         $tableDescription = (new ShopProductDescription)->getTable();
         $tableStore = (new ShopStore)->getTable();
         $tableProductStore = (new ShopProductStore)->getTable();
         $storeId = $this->sc_store_id ? $this->sc_store_id : config('app.storeId');
         //Select field
-        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.name, '.$tableDescription.'.keyword, '.$tableDescription.'.description'; 
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.name, '.$tableDescription.'.keyword, '.$tableDescription.'.description';
 
         //description
         $query = $this
@@ -660,8 +692,8 @@ class ShopProduct extends Model
             $query = $query->join($tableStore, $tableStore . '.id', $tableProductStore.'.store_id');
             $query = $query->where($tableStore . '.status', '1');
 
-            if (sc_config_global('MultiStorePro')  || 
-                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != 1) )
+            if (sc_config_global('MultiStorePro')  ||
+                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != 1))
             ) {
                 //store of vendor
                 $query = $query->where($tableProductStore.'.store_id', $storeId);
@@ -762,7 +794,7 @@ class ShopProduct extends Model
                             //Process sort with sort value
                             $query = $query->orderBy($this->getTable().'.sort', 'asc');
                             $ckeckSort = true;
-                        } else if ($rowSort[0] == 'id') {
+                        } elseif ($rowSort[0] == 'id') {
                             //Process sort with product id
                             $query = $query->orderBy($this->getTable().'.id', 'desc');
                             $ckeckId = true;
@@ -795,7 +827,8 @@ class ShopProduct extends Model
      *
      * @return  [type]  [return description]
      */
-    public function getTaxId() {
+    public function getTaxId()
+    {
         if (!ShopTax::checkStatus()) {
             return 0;
         }
@@ -815,7 +848,8 @@ class ShopProduct extends Model
      *
      * @return  [type]  [return description]
      */
-    public function getTaxValue() {
+    public function getTaxValue()
+    {
         $taxId = $this->getTaxId();
         if ($taxId) {
             $arrValue = ShopTax::getArrayValue();
@@ -830,7 +864,8 @@ class ShopProduct extends Model
      *
      * @return  [type]  [return description]
      */
-    public function goToShop($code = null) {
+    public function goToShop($code = null)
+    {
         if (!$code) {
             $code = $this->stores()->first()->code;
         }
@@ -842,15 +877,17 @@ class ShopProduct extends Model
      *
      * @return void
      */
-    public function displayVendor() {
+    public function displayVendor()
+    {
         if (sc_config_global('MultiVendorPro') && config('app.storeId') == SC_ID_ROOT) {
             $view = 'templates.'.sc_store('template'). '.vendor.display_vendor';
-            if(!view()->exists($view)) {
+            if (!view()->exists($view)) {
                 return;
             }
             $vendorCode = $this->stores()->first()->code;
             $vendorUrl = $this->goToShop($vendorCode);
-            return  view($view, 
+            return  view(
+                $view,
                 [
                     'vendorCode' => $vendorCode,
                     'vendorUrl' => $vendorUrl,
@@ -864,7 +901,8 @@ class ShopProduct extends Model
      *
      * @return void
      */
-    public function getCustomFields() {
+    public function getCustomFields()
+    {
         $data =  (new ShopCustomFieldDetail)
             ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
             ->select('code', 'name', 'text')
@@ -881,7 +919,8 @@ class ShopProduct extends Model
      *
      * @return void
      */
-    public function getCustomField($code = null) {
+    public function getCustomField($code = null)
+    {
         $data =  (new ShopCustomFieldDetail)
             ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
             ->select('code', 'name', 'text')

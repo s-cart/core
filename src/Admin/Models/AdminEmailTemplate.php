@@ -15,7 +15,8 @@ class AdminEmailTemplate extends ShopEmailTemplate
      *
      * @return  [type]       [return description]
      */
-    public static function getEmailTemplateAdmin($id) {
+    public static function getEmailTemplateAdmin($id)
+    {
         return self::where('id', $id)
         ->where('store_id', session('adminStoreId'))
         ->first();
@@ -28,7 +29,8 @@ class AdminEmailTemplate extends ShopEmailTemplate
      *
      * @return  [type]               [return description]
      */
-    public static function getEmailTemplateListAdmin(array $dataSearch) {
+    public static function getEmailTemplateListAdmin(array $dataSearch)
+    {
         $keyword          = $dataSearch['keyword'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
@@ -37,7 +39,7 @@ class AdminEmailTemplate extends ShopEmailTemplate
             ->where('store_id', session('adminStoreId'));
 
         if ($keyword) {
-            $newsList = $newsList->where(function ($sql){
+            $newsList = $newsList->where(function ($sql) {
                 $sql->where('name', 'like', '%' . $keyword . '%');
             });
         }
@@ -61,8 +63,8 @@ class AdminEmailTemplate extends ShopEmailTemplate
      *
      * @return  [type]              [return description]
      */
-    public static function createEmailTemplateAdmin(array $dataInsert) {
-
+    public static function createEmailTemplateAdmin(array $dataInsert)
+    {
         return self::create($dataInsert);
     }
 }

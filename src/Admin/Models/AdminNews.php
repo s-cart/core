@@ -6,6 +6,7 @@ use SCart\Core\Front\Models\ShopNews;
 use Cache;
 use SCart\Core\Front\Models\ShopNewsDescription;
 use SCart\Core\Front\Models\ShopNewsStore;
+
 class AdminNews extends ShopNews
 {
     protected static $getListTitleAdmin = null;
@@ -17,7 +18,8 @@ class AdminNews extends ShopNews
      *
      * @return  [type]       [return description]
      */
-    public static function getNewsAdmin($id) {
+    public static function getNewsAdmin($id)
+    {
         $data = self::where('id', $id);
         if (sc_config_global('MultiVendorPro')) {
             if (session('adminStoreId') != SC_ID_ROOT) {
@@ -38,7 +40,8 @@ class AdminNews extends ShopNews
      *
      * @return  [type]               [return description]
      */
-    public static function getNewsListAdmin(array $dataSearch) {
+    public static function getNewsListAdmin(array $dataSearch)
+    {
         $keyword          = $dataSearch['keyword'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
@@ -59,7 +62,7 @@ class AdminNews extends ShopNews
         }
 
         if ($keyword) {
-            $newsList = $newsList->where(function ($sql) use($tableDescription, $keyword){
+            $newsList = $newsList->where(function ($sql) use ($tableDescription, $keyword) {
                 $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%');
             });
         }
@@ -79,7 +82,7 @@ class AdminNews extends ShopNews
 
     /**
      * Get array title news
-     * user for admin 
+     * user for admin
      *
      * @return  [type]  [return description]
      */
@@ -131,8 +134,8 @@ class AdminNews extends ShopNews
      *
      * @return  [type]              [return description]
      */
-    public static function createNewsAdmin(array $dataInsert) {
-
+    public static function createNewsAdmin(array $dataInsert)
+    {
         return self::create($dataInsert);
     }
 
@@ -144,17 +147,18 @@ class AdminNews extends ShopNews
      *
      * @return  [type]              [return description]
      */
-    public static function insertDescriptionAdmin(array $dataInsert) {
-
+    public static function insertDescriptionAdmin(array $dataInsert)
+    {
         return ShopNewsDescription::create($dataInsert);
     }
 
-     /**
-     * Get total news of system
-     *
-     * @return  [type]  [return description]
-     */
-    public static function getTotalNews() {
+    /**
+    * Get total news of system
+    *
+    * @return  [type]  [return description]
+    */
+    public static function getTotalNews()
+    {
         return self::count();
     }
 }

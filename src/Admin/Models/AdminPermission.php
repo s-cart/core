@@ -31,7 +31,6 @@ class AdminPermission extends Model
      */
     public function passRequest(Request $request): bool
     {
-
         if (empty($this->http_uri)) {
             return false;
         }
@@ -67,11 +66,11 @@ class AdminPermission extends Model
         });
     }
 
-/**
- * Update info
- * @param  [array] $dataUpdate
- * @param  [int] $id
- */
+    /**
+     * Update info
+     * @param  [array] $dataUpdate
+     * @param  [int] $id
+     */
     public static function updateInfo($dataUpdate, $id)
     {
         $dataUpdate = $dataUpdate;
@@ -88,5 +87,4 @@ class AdminPermission extends Model
         $dataUpdate = $dataInsert;
         return self::create($dataUpdate);
     }
-
 }

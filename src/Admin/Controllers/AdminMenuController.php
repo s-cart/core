@@ -7,7 +7,7 @@ use Validator;
 
 class AdminMenuController extends RootAdminController
 {
-        public function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
@@ -17,7 +17,7 @@ class AdminMenuController extends RootAdminController
         $data = [
             'title' => sc_language_render('admin.menu.list'),
             'subTitle' => '',
-            'icon' => 'fa fa-indent',            
+            'icon' => 'fa fa-indent',
             'menu' => [],
             'treeMenu' => (new AdminMenu)->getTree(),
             'url_action' => sc_route_admin('admin_menu.create'),
@@ -29,10 +29,10 @@ class AdminMenuController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -57,12 +57,11 @@ class AdminMenuController extends RootAdminController
 
         AdminMenu::createMenu($dataInsert);
         return redirect()->route('admin_menu.index')->with('success', sc_language_render('admin.menu.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function edit($id)
     {
         $menu = AdminMenu::find($id);
@@ -86,9 +85,9 @@ class AdminMenuController extends RootAdminController
             ->with($data);
     }
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $menu = AdminMenu::find($id);
@@ -103,7 +102,7 @@ class AdminMenuController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'title' => $data['title'],
@@ -115,13 +114,12 @@ class AdminMenuController extends RootAdminController
 
         AdminMenu::updateInfo($dataUpdate, $id);
         return redirect()->back()->with('success', sc_language_render('admin.menu.edit_success'));
-
     }
 
-/*
-Delete list Item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list Item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -138,9 +136,9 @@ Need mothod destroy to boot deleting in model
         }
     }
 
-/*
-Update menu resort
- */
+    /*
+    Update menu resort
+     */
     public function updateSort()
     {
         $data = request('menu') ?? [];

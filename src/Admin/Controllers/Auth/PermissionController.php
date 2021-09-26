@@ -8,7 +8,6 @@ use Validator;
 
 class PermissionController extends RootAdminController
 {
-
     public $routeAdmin;
 
     public function __construct()
@@ -19,7 +18,7 @@ class PermissionController extends RootAdminController
 
         foreach ($routes as $route) {
             if (Str::startsWith($route->uri(), SC_ADMIN_PREFIX)) {
-                $prefix = SC_ADMIN_PREFIX?$route->getPrefix():ltrim($route->getPrefix(),'/');
+                $prefix = SC_ADMIN_PREFIX?$route->getPrefix():ltrim($route->getPrefix(), '/');
                 $routeAdmin[$prefix] = [
                     'uri'    => 'ANY::' . $prefix . '/*',
                     'name'   => $prefix . '/*',
@@ -35,10 +34,8 @@ class PermissionController extends RootAdminController
                             'method' => $method,
                         ];
                     }
-
                 }
             }
-
         }
 
         $this->routeAdmin = $routeAdmin;
@@ -54,7 +51,7 @@ class PermissionController extends RootAdminController
             'removeList' => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort' => 1, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
         ];
         //Process add content
@@ -84,7 +81,6 @@ class PermissionController extends RootAdminController
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];
             $obj = $obj->orderBy($field, $sort_field);
-
         } else {
             $obj = $obj->orderBy('id', 'desc');
         }
@@ -99,8 +95,7 @@ class PermissionController extends RootAdminController
                     $methodStyle = '';
                     if ($route[0] == 'ANY') {
                         $methodStyle = '<span class="badge badge-info">' . $route[0] . '</span>';
-                    } else
-                    if ($route[0] == 'POST') {
+                    } elseif ($route[0] == 'POST') {
                         $methodStyle = '<span class="badge badge-warning">' . $route[0] . '</span>';
                     } else {
                         $methodStyle = '<span class="badge badge-primary">' . $route[0] . '</span>';
@@ -127,29 +122,29 @@ class PermissionController extends RootAdminController
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
-//menuRight
+        //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_permission.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
-//=menuRight
+        //=menuRight
 
-//menuSort
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
         $data['urlSort'] = sc_route_admin('admin_permission.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
-//=menuSort
+        //=menuSort
 
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
     public function create()
     {
         $data = [
@@ -167,10 +162,10 @@ class PermissionController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -197,12 +192,11 @@ class PermissionController extends RootAdminController
         $permission = AdminPermission::createPermission($dataInsert);
 
         return redirect()->route('admin_permission.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function edit($id)
     {
         $permission = AdminPermission::find($id);
@@ -222,9 +216,9 @@ class PermissionController extends RootAdminController
             ->with($data);
     }
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $permission = AdminPermission::find($id);
@@ -242,7 +236,7 @@ class PermissionController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'name' => $data['name'],
@@ -252,13 +246,12 @@ class PermissionController extends RootAdminController
         $permission->update($dataUpdate);
 //
         return redirect()->route('admin_permission.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list Item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list Item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -283,5 +276,4 @@ Need mothod destroy to boot deleting in model
             $prefix . 'uploads',
         ];
     }
-
 }

@@ -7,7 +7,6 @@ use Validator;
 
 class AdminLengthController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -28,7 +27,7 @@ class AdminLengthController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_length_unit.create'),
         ];
@@ -67,10 +66,10 @@ class AdminLengthController extends RootAdminController
     }
 
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -88,7 +87,7 @@ class AdminLengthController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-//Create new order
+        //Create new order
         $dataInsert = [
             'name' => $data['name'],
             'description' => $data['description'],
@@ -96,7 +95,6 @@ class AdminLengthController extends RootAdminController
         $obj = ShopLength::create($dataInsert);
 //
         return redirect()->route('admin_length_unit.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /**
@@ -106,7 +104,7 @@ class AdminLengthController extends RootAdminController
     public function edit($id)
     {
         $length = ShopLength::find($id);
-        if(!$length) {
+        if (!$length) {
             return 'No data';
         }
         $data = [
@@ -118,7 +116,7 @@ class AdminLengthController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_length_unit.edit', ['id' => $length['id']]),
             'length' => $length,
@@ -159,9 +157,9 @@ class AdminLengthController extends RootAdminController
     }
 
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $data = request()->all();
@@ -180,7 +178,7 @@ class AdminLengthController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
         $dataUpdate = [
             'name' => $data['name'],
             'description' => $data['description'],
@@ -189,13 +187,12 @@ class AdminLengthController extends RootAdminController
 
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -207,5 +204,4 @@ Need mothod destroy to boot deleting in model
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

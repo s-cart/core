@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Front\Models\ModelTrait;
 
-
 class ShopBrand extends Model
 {
     use ModelTrait;
@@ -68,7 +67,6 @@ class ShopBrand extends Model
     public function getImage()
     {
         return sc_image_get_path($this->image);
-
     }
 
 
@@ -88,7 +86,7 @@ class ShopBrand extends Model
      */
     public function getDetail($key, $type = null)
     {
-        if(empty($key)) {
+        if (empty($key)) {
             return null;
         }
         $storeId = config('app.storeId');
@@ -118,14 +116,16 @@ class ShopBrand extends Model
      *
      * @return  new model
      */
-    public function start() {
+    public function start()
+    {
         return new ShopBrand;
     }
 
     /**
      * build Query
      */
-    public function buildQuery() {
+    public function buildQuery()
+    {
         $storeId = config('app.storeId');
         $dataSelect = $this->getTable().'.*';
         $query = $this->selectRaw($dataSelect)
@@ -142,7 +142,7 @@ class ShopBrand extends Model
 
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
-                if(count($where)) {
+                if (count($where)) {
                     $query = $query->where($where[0], $where[1], $where[2]);
                 }
             }

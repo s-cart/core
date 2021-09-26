@@ -41,6 +41,5 @@ class Infomation extends Command
         $this->info('Github: '.config('s-cart.github'));
         $this->info('Facebook: '.config('s-cart.facebook'));
         $this->info('API: '.config('s-cart.api_link'));
-
     }
 }

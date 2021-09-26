@@ -10,5 +10,4 @@ class ShopEmailTemplate extends Model
     public $table = SC_DB_PREFIX.'shop_email_template';
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
-
 }

@@ -4,6 +4,7 @@ namespace SCart\Core\Front\Models;
 use SCart\Core\Admin\Models\AdminConfig;
 use SCart\Core\Front\Models\ShopProductStore;
 use Illuminate\Database\Eloquent\Model;
+
 class ShopStore extends Model
 {
     public $timestamps = false;
@@ -194,27 +195,32 @@ class ShopStore extends Model
         return self::$arrayStoreId;
     }
 
-    //Function get text description 
-    public function getText() {
+    //Function get text description
+    public function getText()
+    {
         return $this->descriptions()->where('lang', sc_get_locale())->first();
     }
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->getText()->title;
     }
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->getText()->description;
     }
-    public function getKeyword() {
+    public function getKeyword()
+    {
         return $this->getText()->keyword;
     }
     //End  get text description
 
     
-//===========Get infor store======
+    //===========Get infor store======
     /**
      * Get list store ID
      */
-    public static function getListStoreId() {
+    public static function getListStoreId()
+    {
         if (self::$listStoreId === null) {
             self::$listStoreId = self::pluck('id', 'code')->all();
         }
@@ -224,7 +230,8 @@ class ShopStore extends Model
     /**
      * Get list store code
      */
-    public static function getListStoreCode() {
+    public static function getListStoreCode()
+    {
         if (self::$listStoreCode === null) {
             self::$listStoreCode = self::pluck('code', 'id')->all();
         }
@@ -245,5 +252,4 @@ class ShopStore extends Model
         }
         return self::$getStoreDomainByCode;
     }
-
 }

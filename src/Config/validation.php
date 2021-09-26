@@ -31,5 +31,5 @@ return [
         'group_null'         => 'nullable|integer|max:10',
         'name_kana_required' => 'required|string|max:100',
         'name_kana_null'     => 'nullable|string|max:100',
-    ], 
+    ],
 ];

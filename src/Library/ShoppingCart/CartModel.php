@@ -10,5 +10,4 @@ class CartModel extends Model
     public $table = SC_DB_PREFIX.'shop_shoppingcart';
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
-
 }

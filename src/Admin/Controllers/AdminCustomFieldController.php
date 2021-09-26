@@ -22,7 +22,7 @@ class AdminCustomFieldController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_custom_field.create'),
         ];
@@ -103,7 +103,6 @@ class AdminCustomFieldController extends RootAdminController
         $obj = ShopCustomField::create($dataInsert);
 
         return redirect()->route('admin_custom_field.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /**
@@ -112,7 +111,7 @@ class AdminCustomFieldController extends RootAdminController
     public function edit($id)
     {
         $customField = ShopCustomField::find($id);
-        if(!$customField) {
+        if (!$customField) {
             return 'No data';
         }
         $data = [
@@ -124,7 +123,7 @@ class AdminCustomFieldController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_custom_field.edit', ['id' => $customField['id']]),
             'customField' => $customField,
@@ -194,7 +193,7 @@ class AdminCustomFieldController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput($data);
         }
-    //Edit
+        //Edit
 
         $dataUpdate = [
             'type' => $data['type'],
@@ -210,7 +209,6 @@ class AdminCustomFieldController extends RootAdminController
 
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -228,5 +226,4 @@ class AdminCustomFieldController extends RootAdminController
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

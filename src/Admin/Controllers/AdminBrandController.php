@@ -22,7 +22,7 @@ class AdminBrandController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_brand.create'),
         ];
@@ -59,14 +59,14 @@ class AdminBrandController extends RootAdminController
             $dataMap = [
                 'id' => $row['id'],
                 'name' => $row['name'],
-                'image' => sc_image_render($row->getThumb(), '50px','',$row['name']),
+                'image' => sc_image_render($row->getThumb(), '50px', '', $row['name']),
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             ];
             if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
-                    $storeTmp = array_map(function($code) {
+                    $storeTmp = array_map(function ($code) {
                         return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
                     }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
@@ -93,10 +93,10 @@ class AdminBrandController extends RootAdminController
     }
 
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -111,7 +111,7 @@ class AdminBrandController extends RootAdminController
             'image' => 'required',
             'sort' => 'numeric|min:0',
             'url' => 'url|nullable',
-        ],[
+        ], [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.brand.name')]),
             'alias.regex' => sc_language_render('admin.brand.alias_validate'),
         ]);
@@ -141,19 +141,18 @@ class AdminBrandController extends RootAdminController
         }
 
         return redirect()->route('admin_brand.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
-public function edit($id)
-{
-    $brand = ShopBrand::find($id);
-    if(!$brand) {
-        return 'No data';
-    }
-    $data = [
+    /**
+     * Form edit
+     */
+    public function edit($id)
+    {
+        $brand = ShopBrand::find($id);
+        if (!$brand) {
+            return 'No data';
+        }
+        $data = [
         'title' => sc_language_render('admin.brand.list'),
         'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
@@ -162,14 +161,14 @@ public function edit($id)
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
         'buttonSort' => 0, // 1 - Enable button sort
-        'css' => '', 
+        'css' => '',
         'js' => '',
         'url_action' => sc_route_admin('admin_brand.edit', ['id' => $brand['id']]),
         'brand' => $brand,
         'id' => $id,
     ];
 
-    $listTh = [
+        $listTh = [
         'id' => 'ID',
         'name' => sc_language_render('admin.brand.name'),
         'image' => sc_language_render('admin.brand.image'),
@@ -177,16 +176,16 @@ public function edit($id)
         'status' => sc_language_render('admin.brand.status'),
         'action' => sc_language_render('action.title'),
     ];
-    $obj = new ShopBrand;
-    $obj = $obj->orderBy('id', 'desc');
-    $dataTmp = $obj->paginate(20);
+        $obj = new ShopBrand;
+        $obj = $obj->orderBy('id', 'desc');
+        $dataTmp = $obj->paginate(20);
 
-    $dataTr = [];
-    foreach ($dataTmp as $key => $row) {
-        $dataTr[] = [
+        $dataTr = [];
+        foreach ($dataTmp as $key => $row) {
+            $dataTr[] = [
             'id' => $row['id'],
             'name' => $row['name'],
-            'image' => sc_image_render($row->getThumb(), '50px','',$row['name']),
+            'image' => sc_image_render($row->getThumb(), '50px', '', $row['name']),
             'sort' => $row['sort'],
             'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             'action' => '
@@ -195,22 +194,22 @@ public function edit($id)
               <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
               ',
         ];
+        }
+
+        $data['listTh'] = $listTh;
+        $data['dataTr'] = $dataTr;
+        $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
+
+        $data['layout'] = 'edit';
+        return view($this->templatePathAdmin.'screen.brand')
+        ->with($data);
     }
 
-    $data['listTh'] = $listTh;
-    $data['dataTr'] = $dataTr;
-    $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
-    $data['layout'] = 'edit';
-    return view($this->templatePathAdmin.'screen.brand')
-        ->with($data);
-}
-
-
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $brand = ShopBrand::find($id);
@@ -234,7 +233,7 @@ public function edit($id)
                 ->withErrors($validator)
                 ->withInput($data);
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'image' => $data['image'],
@@ -258,7 +257,6 @@ public function edit($id)
         }
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -276,5 +274,4 @@ public function edit($id)
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

@@ -121,7 +121,7 @@ class LoginController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'name' => $data['name'],
@@ -168,7 +168,6 @@ class LoginController extends RootAdminController
      */
     protected function sendLoginResponse(Request $request)
     {
-
         $request->session()->regenerate();
 
         return redirect()->intended($this->redirectPath())->with(['success' => sc_language_render('admin.login_successful')]);

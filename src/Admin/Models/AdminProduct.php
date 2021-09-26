@@ -17,8 +17,8 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]       [return description]
      */
-    public static function getProductAdmin($id) {
-
+    public static function getProductAdmin($id)
+    {
         $tableDescription = (new ShopProductDescription)->getTable();
         $tableProduct = (new ShopProduct)->getTable();
         $data =  self::where('id', $id)
@@ -43,7 +43,8 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]               [return description]
      */
-    public static function getProductListAdmin(array $dataSearch) {
+    public static function getProductListAdmin(array $dataSearch)
+    {
         $keyword          = $dataSearch['keyword'] ?? '';
         $category_id      = $dataSearch['category_id'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
@@ -53,7 +54,7 @@ class AdminProduct extends ShopProduct
         $tableProduct     = (new ShopProduct)->getTable();
         $tableProductStore = (new ShopProductStore)->getTable();
         //Select field
-        $dataSelect = $tableProduct.'.*, '.$tableDescription.'.name, '.$tableDescription.'.keyword, '.$tableDescription.'.description'; 
+        $dataSelect = $tableProduct.'.*, '.$tableDescription.'.name, '.$tableDescription.'.keyword, '.$tableDescription.'.description';
 
         $productList = (new ShopProduct)
             ->selectRaw($dataSelect)
@@ -75,7 +76,6 @@ class AdminProduct extends ShopProduct
             if (session('adminStoreId') != SC_ID_ROOT) {
                 // Only get products of store if store <> root or store is specified
                 $productList = $productList->where($tableProductStore . '.store_id', session('adminStoreId'));
-
             }
         }
 
@@ -108,7 +108,8 @@ class AdminProduct extends ShopProduct
      *
      * @return  []                  [return description]
      */
-    public function getProductSelectAdmin(array $dataFilter = []) {
+    public function getProductSelectAdmin(array $dataFilter = [])
+    {
         $keyword          = $dataFilter['keyword'] ?? '';
         $limit            = $dataFilter['limit'] ?? '';
         $kind             = $dataFilter['kind'] ?? [];
@@ -130,12 +131,11 @@ class AdminProduct extends ShopProduct
             // Only get products if store active
             if (session('adminStoreId') != SC_ID_ROOT) {
                 // Only get products of store if store <> root or store is specified
-                $productList = $productList->where( $tableProductStore . '.store_id', session('adminStoreId'));
-
+                $productList = $productList->where($tableProductStore . '.store_id', session('adminStoreId'));
             }
         }
 
-        if(is_array($kind) && $kind) {
+        if (is_array($kind) && $kind) {
             $productList = $productList->whereIn('kind', $kind);
         }
         if ($keyword) {
@@ -145,7 +145,7 @@ class AdminProduct extends ShopProduct
             });
         }
 
-        if($limit) {
+        if ($limit) {
             $productList = $productList->limit($limit);
         }
         $productList->groupBy($tableProduct.'.id');
@@ -169,7 +169,8 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]              [return description]
      */
-    public static function createProductAdmin(array $dataInsert) {
+    public static function createProductAdmin(array $dataInsert)
+    {
         return self::create($dataInsert);
     }
 
@@ -181,7 +182,8 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]              [return description]
      */
-    public static function insertDescriptionAdmin(array $dataInsert) {
+    public static function insertDescriptionAdmin(array $dataInsert)
+    {
         return ShopProductDescription::create($dataInsert);
     }
 
@@ -196,7 +198,8 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]          [return description]
      */
-    public function checkProductValidationAdmin($type = null, $fieldValue = null, $pId = null, $storeId = null) {
+    public function checkProductValidationAdmin($type = null, $fieldValue = null, $pId = null, $storeId = null)
+    {
         $tableProductStore = (new ShopProductStore)->getTable();
         $storeId = $storeId ? sc_clean($storeId) : session('adminStoreId');
         $type = $type ? sc_clean($type) : 'sku';
@@ -206,12 +209,12 @@ class AdminProduct extends ShopProduct
         ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $this->getTable() . '.id')
         ->where($type, $fieldValue);
         $check = $check->where($tableProductStore . '.store_id', $storeId);
-        if($pId) {
+        if ($pId) {
             $check = $check->where($this->getTable().'.id', '<>', $pId);
         }
         $check = $check->first();
 
-        if($check) {
+        if ($check) {
             return false;
         } else {
             return true;
@@ -223,7 +226,8 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]  [return description]
      */
-    public static function getTotalProduct() {
+    public static function getTotalProduct()
+    {
         return self::count();
     }
     
@@ -258,8 +262,8 @@ class AdminProduct extends ShopProduct
      * @param [array] $arrProductId
      * @return collection
      */
-    public function getListCategoryIdFromProductId($arrProductId) {
+    public function getListCategoryIdFromProductId($arrProductId)
+    {
         return (new ShopProductCategory)->whereIn('product_id', $arrProductId)->get()->groupBy('product_id');
     }
-
 }

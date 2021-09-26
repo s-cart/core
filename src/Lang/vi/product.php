@@ -102,7 +102,7 @@ return [
             'view_desc'                     => 'Lượt xem giảm',
             'view_asc'                      => 'Lượt xem tăng',
             'sold_desc'                     => 'Bán ra giảm',
-            'sold_asc'                      => 'Bán ra tăng',                         
+            'sold_asc'                      => 'Bán ra tăng',
         ],
         'search'                            => 'Tìm kiếm',
         'search_place'                      => 'Tìm tên, SKU hoặc ID sản phẩm',

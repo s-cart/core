@@ -8,36 +8,36 @@ Route::group(
         'middleware' => SC_API_MIDDLEWARE,
         'prefix' => 'api',
         'namespace' => '\SCart\Core\Api\Controllers',
-    ]
-    , function () {
+    ],
+    function () {
 
     //Customer
-    Route::group(['prefix' => 'member'], function () {
-        Route::post('login', 'MemberAuthController@login');
-        Route::post('create', 'MemberAuthController@create');
-        Route::group([
+        Route::group(['prefix' => 'member'], function () {
+            Route::post('login', 'MemberAuthController@login');
+            Route::post('create', 'MemberAuthController@create');
+            Route::group([
             'middleware' => ['auth:api', 'scope:user, user-guest']
-        ], function() {
+        ], function () {
             Route::get('logout', 'MemberAuthController@logout');
             Route::get('info', 'MemberController@getInfo');
             Route::get('orders', 'MemberOrderController@orders');
             Route::get('orders/{id}', 'MemberOrderController@orderDetail');
         });
 
-        Route::group([
+            Route::group([
             'middleware' => ['auth:api', 'scope:user']
-        ], function() {
+        ], function () {
             Route::post('create_order', 'MemberOrderController@createOrder');
             Route::post('cancel_order/{id}', 'MemberOrderController@cancelOrder');
         });
-    });
+        });
 
-    //Admin
-    Route::group(['prefix' => 'admin'], function () {
-        Route::post('login', 'AdminAuthController@login');     
-        Route::group([
+        //Admin
+        Route::group(['prefix' => 'admin'], function () {
+            Route::post('login', 'AdminAuthController@login');
+            Route::group([
           'middleware' => ['auth:admin-api', 'scope:admin-supper']
-        ], function() {
+        ], function () {
             Route::get('logout', 'AdminAuthController@logout');
             Route::get('info', 'AdminController@getInfo');
 
@@ -68,6 +68,6 @@ Route::group(
             Route::get('supplieres', 'AdminShopFront@allSupplier');
             Route::get('supplieres/{id}', 'AdminShopFront@supplierDetail');
         });
-    });
-    
-});
+        });
+    }
+);

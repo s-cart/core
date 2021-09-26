@@ -24,7 +24,7 @@ class RoleController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort' => 1, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
         ];
         //Process add content
@@ -55,7 +55,6 @@ class RoleController extends RootAdminController
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];
             $obj = $obj->orderBy($field, $sort_field);
-
         } else {
             $obj = $obj->orderBy('id', 'desc');
         }
@@ -79,7 +78,7 @@ class RoleController extends RootAdminController
                 'updated_at' => $row['updated_at'],
                 'action' => ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '
                     <a href="' . sc_route_admin('admin_role.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-                    ') 
+                    ')
                     . ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '<span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>')
                 ,
             ];
@@ -90,29 +89,29 @@ class RoleController extends RootAdminController
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
-//menuRight
+        //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_role.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
-//=menuRight
+        //=menuRight
 
-//menuSort
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
         $data['urlSort'] = sc_route_admin('admin_role.index', request()->except(['_token', '_pjax', 'sort_order']));
         $data['optionSort'] = $optionSort;
-//=menuSort
+        //=menuSort
 
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
     public function create()
     {
         $data = [
@@ -131,10 +130,10 @@ class RoleController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -169,12 +168,11 @@ class RoleController extends RootAdminController
             $role->administrators()->attach($administrators);
         }
         return redirect()->route('admin_role.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function edit($id)
     {
         $role = AdminRole::find($id);
@@ -195,9 +193,9 @@ class RoleController extends RootAdminController
             ->with($data);
     }
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $role = AdminRole::find($id);
@@ -215,7 +213,7 @@ class RoleController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'name' => $data['name'],
@@ -236,13 +234,12 @@ class RoleController extends RootAdminController
         }
 //
         return redirect()->route('admin_role.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list Item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list Item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -255,5 +252,4 @@ Need mothod destroy to boot deleting in model
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

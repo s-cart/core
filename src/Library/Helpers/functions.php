@@ -54,16 +54,15 @@ if (!function_exists('sc_url_render')) {
                 if (isset($arrRoute[2])) {
                     return sc_route_admin($arrRoute[1], [$arrRoute[2]]);
                 } else {
-                    return sc_route_admin($arrRoute[1]);               
+                    return sc_route_admin($arrRoute[1]);
                 }
             } else {
                 if (isset($arrRoute[2])) {
                     return sc_route($arrRoute[1], [$arrRoute[2]]);
                 } else {
-                    return sc_route($arrRoute[1]);               
+                    return sc_route($arrRoute[1]);
                 }
             }
-
         }
 
         if (count($arrCheckUrl) == 2) {
@@ -128,12 +127,12 @@ if (!function_exists('sc_report')) {
     function sc_report($msg, array $ext = [])
     {
         $msg = date('Y-m-d H:i:s').':'.PHP_EOL.$msg.PHP_EOL;
-        if(!in_array('slack', $ext)) {
+        if (!in_array('slack', $ext)) {
             if (config('logging.channels.slack.url')) {
                 try {
                     \Log::channel('slack')->error($msg);
-                } catch(\Throwable $e) {
-                    $msg .= $e->getFile().'- Line: '.$e->getLine().PHP_EOL.$e->getMessage().PHP_EOL; 
+                } catch (\Throwable $e) {
+                    $msg .= $e->getFile().'- Line: '.$e->getLine().PHP_EOL.$e->getMessage().PHP_EOL;
                 }
             }
         }
@@ -155,18 +154,18 @@ if (!function_exists('sc_zip')) {
                     $source = str_replace('\\', '/', realpath($source));
                     if (is_dir($source)) {
                         $iterator = new \RecursiveDirectoryIterator($source);
-                        // skip dot files while iterating 
+                        // skip dot files while iterating
                         $iterator->setFlags(\RecursiveDirectoryIterator::SKIP_DOTS);
                         $files = new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::SELF_FIRST);
                         foreach ($files as $file) {
                             $file = str_replace('\\', '/', realpath($file));
                             if (is_dir($file)) {
                                 $zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
-                            } else if (is_file($file)) {
+                            } elseif (is_file($file)) {
                                 $zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
                             }
                         }
-                    } else if (is_file($source)) {
+                    } elseif (is_file($source)) {
                         $zip->addFromString(basename($source), file_get_contents($source));
                     }
                 }
@@ -334,7 +333,8 @@ if (!function_exists('sc_path_download_render')) {
  * convert datetime to date
  */
 if (!function_exists('sc_datetime_to_date')) {
-    function sc_datetime_to_date($datetime, $format = 'Y-m-d') {
+    function sc_datetime_to_date($datetime, $format = 'Y-m-d')
+    {
         if (empty($datetime)) {
             return null;
         }
@@ -346,7 +346,8 @@ if (!function_exists('sc_datetime_to_date')) {
  * Process path file
  */
 if (!function_exists('sc_file')) {
-    function sc_file($pathFile = null, $security = null) {
+    function sc_file($pathFile = null, $security = null)
+    {
         return asset($pathFile, $security);
     }
 }
@@ -363,7 +364,7 @@ if (!function_exists('admin')) {
 
 if (!function_exists('sc_sync_cart')) {
     /**
-     * Sync data cart 
+     * Sync data cart
      */
     function sc_sync_cart($userId)
     {

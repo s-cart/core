@@ -18,7 +18,8 @@ class ShopCategoryController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function allCategoriesProcessFront(...$params) {
+    public function allCategoriesProcessFront(...$params)
+    {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             sc_lang_switch($lang);
@@ -28,7 +29,7 @@ class ShopCategoryController extends RootFrontController
 
     /**
      * display list category root (parent = 0)
-     * @return [view]  
+     * @return [view]
      */
     private function _allCategories()
     {
@@ -76,7 +77,8 @@ class ShopCategoryController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function categoryDetailProcessFront(...$params) {
+    public function categoryDetailProcessFront(...$params)
+    {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             $alias = $params[1] ?? '';
@@ -128,7 +130,8 @@ class ShopCategoryController extends RootFrontController
                 ->getData();
 
             sc_check_view($this->templatePath . '.screen.shop_product_list');
-            return view($this->templatePath . '.screen.shop_product_list',
+            return view(
+                $this->templatePath . '.screen.shop_product_list',
                 array(
                     'title'       => $category->title,
                     'description' => $category->description,
@@ -147,7 +150,5 @@ class ShopCategoryController extends RootFrontController
         } else {
             return $this->itemNotFound();
         }
-
     }
-
 }

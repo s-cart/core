@@ -13,7 +13,8 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
      *
      * @return  [type]       [return description]
      */
-    public function getStoreBlockContentAdmin($id) {
+    public function getStoreBlockContentAdmin($id)
+    {
         return $this->where('id', $id)
         ->where('store_id', session('adminStoreId'))
         ->first();
@@ -26,7 +27,8 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
      *
      * @return  [type]               [return description]
      */
-    public static function getStoreBlockContentListAdmin() {
+    public static function getStoreBlockContentListAdmin()
+    {
         $blockContentList = self::where('store_id', session('adminStoreId'))
             ->orderBy('id', 'desc');
         $blockContentList = $blockContentList->paginate(20);
@@ -41,9 +43,8 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
      *
      * @return  [type]              [return description]
      */
-    public static function createStoreBlockContentAdmin(array $dataInsert) {
-
+    public static function createStoreBlockContentAdmin(array $dataInsert)
+    {
         return self::insert($dataInsert);
     }
-
 }

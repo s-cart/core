@@ -11,20 +11,19 @@ class ShopProductImage extends Model
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
 
-/*
-Get thumb
- */
+    /*
+    Get thumb
+     */
     public function getThumb()
     {
         return sc_image_get_path_thumb($this->image);
     }
 
-/*
-Get image
- */
+    /*
+    Get image
+     */
     public function getImage()
     {
         return sc_image_get_path($this->image);
-
     }
 }

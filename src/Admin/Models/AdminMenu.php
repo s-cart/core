@@ -70,7 +70,7 @@ class AdminMenu extends Model
      *
      * @return  [type]              [return description]
      */
-    public static function  checkUrlIsChild($urlParent, $urlChild)
+    public static function checkUrlIsChild($urlParent, $urlChild)
     {
         $check = false;
         $urlParent = strtolower($urlParent);
@@ -119,9 +119,9 @@ class AdminMenu extends Model
         });
     }
 
-/*
-Re-sort menu
- */
+    /*
+    Re-sort menu
+     */
     public function reSort(array $data)
     {
         try {
@@ -155,5 +155,4 @@ Re-sort menu
         $dataUpdate = $dataInsert;
         return self::create($dataUpdate);
     }
-
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopLanguage;
 use Validator;
 use SCart\Core\Admin\Models\AdminCategory;
+
 class AdminCategoryController extends RootAdminController
 {
     public $languages;
@@ -13,7 +14,6 @@ class AdminCategoryController extends RootAdminController
     {
         parent::__construct();
         $this->languages = ShopLanguage::getListActive();
-
     }
 
     public function index()
@@ -27,7 +27,7 @@ class AdminCategoryController extends RootAdminController
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -96,7 +96,7 @@ class AdminCategoryController extends RootAdminController
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
-                    $storeTmp = array_map(function($code) {
+                    $storeTmp = array_map(function ($code) {
                         return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
                     }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
@@ -120,7 +120,7 @@ class AdminCategoryController extends RootAdminController
         </a>';
         //=menuRight
 
-        //menuSort        
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $sort) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $sort . '</option>';
@@ -130,7 +130,7 @@ class AdminCategoryController extends RootAdminController
         $data['optionSort'] = $optionSort;
         //=menuSort
 
-        //menuSearch        
+        //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_category.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 350px;">
@@ -180,14 +180,17 @@ class AdminCategoryController extends RootAdminController
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
 
-        $validator = Validator::make($data, [
+        $validator = Validator::make(
+            $data,
+            [
                 'parent'                 => 'required',
                 'sort'                   => 'numeric|min:0',
                 'alias'                  => 'required|unique:"'.AdminCategory::class.'",alias|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
                 'descriptions.*.title'   => 'required|string|max:200',
                 'descriptions.*.keyword' => 'nullable|string|max:200',
                 'descriptions.*.description' => 'nullable|string|max:300',
-            ], [
+            ],
+            [
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.category.title')]),
                 'alias.regex' => sc_language_render('admin.category.alias_validate'),
             ]
@@ -232,7 +235,6 @@ class AdminCategoryController extends RootAdminController
         sc_clear_cache('cache_category');
 
         return redirect()->route('admin_category.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /*
@@ -277,14 +279,17 @@ class AdminCategoryController extends RootAdminController
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
 
-        $validator = Validator::make($data, [
+        $validator = Validator::make(
+            $data,
+            [
             'parent'                 => 'required',
             'sort'                   => 'numeric|min:0',
             'alias'                  => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100|unique:"'.AdminCategory::class.'",alias,' . $id . '',
             'descriptions.*.title'   => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:300',
-            ], [
+            ],
+            [
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.category.title')]),
                 'alias.regex'                   => sc_language_render('admin.category.alias_validate'),
             ]
@@ -330,9 +335,8 @@ class AdminCategoryController extends RootAdminController
         
         sc_clear_cache('cache_category');
 
-    //
+        //
         return redirect()->route('admin_category.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -348,7 +352,7 @@ class AdminCategoryController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -364,8 +368,8 @@ class AdminCategoryController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return AdminCategory::getCategoryAdmin($id);
     }
-
 }

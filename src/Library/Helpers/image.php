@@ -95,12 +95,13 @@ function sc_file_upload($fileContent, $disk = 'public', $path = null, $name = nu
 /**
  * Remove file
  *
- * @param   [string]  $disk  
- * @param   [string]  $path  
+ * @param   [string]  $disk
+ * @param   [string]  $path
  * @param   [string]  $prefix  will remove
  *
  */
-function sc_remove_file($pathFile, $disk = null) {
+function sc_remove_file($pathFile, $disk = null)
+{
     if ($disk) {
         return Storage::disk($disk)->delete($pathFile);
     } else {

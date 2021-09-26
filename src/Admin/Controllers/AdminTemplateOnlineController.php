@@ -4,6 +4,7 @@ namespace SCart\Core\Admin\Controllers;
 use App\Http\Controllers\RootAdminController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+
 class AdminTemplateOnlineController extends RootAdminController
 {
     public function __construct()
@@ -33,7 +34,7 @@ class AdminTemplateOnlineController extends RootAdminController
         $dataApi   = curl_exec($ch);
         curl_close($ch);
         $dataApi = json_decode($dataApi, true);
-        if(!empty($dataApi['data'])) {
+        if (!empty($dataApi['data'])) {
             foreach ($dataApi['data'] as $key => $data) {
                 $arrTemplateLibrary[] = [
                     'sku' => $data['sku'] ?? '',
@@ -64,7 +65,7 @@ class AdminTemplateOnlineController extends RootAdminController
             if ($dataApi['current_page'] > 1) {
                 $htmlPaging .= '<li class="page-item"><a class="page-link pjax-container" href="'.sc_route_admin('admin_template_online').'?page='.($dataApi['current_page'] - 1).'" rel="prev">«</a></li>';
             } else {
-                for ($i = 1; $i < $dataApi['last_page']; $i++) { 
+                for ($i = 1; $i < $dataApi['last_page']; $i++) {
                     if ($dataApi['current_page'] == $i) {
                         $htmlPaging .= '<li class="page-item active"><span class="page-link pjax-container">'.$i.'</span></li>';
                     } else {
@@ -79,10 +80,10 @@ class AdminTemplateOnlineController extends RootAdminController
         }
     
     
-            $title = sc_language_render('admin.template.list');
+        $title = sc_language_render('admin.template.list');
     
-            return view($this->templatePathAdmin.'screen.template_online')->with(
-                [
+        return view($this->templatePathAdmin.'screen.template_online')->with(
+            [
                     "title" => $title,
                     "arrTemplateLocal" => sc_get_all_template(),
                     "arrTemplateLibrary" => $arrTemplateLibrary,
@@ -92,32 +93,32 @@ class AdminTemplateOnlineController extends RootAdminController
                     "resultItems" => $resultItems,
                     "htmlPaging" => $htmlPaging,
                     "dataApi" => $dataApi,
-                ]);
-
+                ]
+        );
     }
 
     public function install()
     {
         $response = ['error' => 0, 'msg' => 'Install success'];
         $key = request('key');
-        $key = str_replace('.','-', $key);
+        $key = str_replace('.', '-', $key);
         $path = request('path');
         try {
             $data = file_get_contents($path);
             $pathTmp = $key.'_'.time();
             $fileTmp = $pathTmp.'.zip';
             Storage::disk('tmp')->put($pathTmp.'/'.$fileTmp, $data);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $response = ['error' => 1, 'msg' => $e->getMessage()];
         }
 
         $unzip = sc_unzip(storage_path('tmp/'.$pathTmp.'/'.$fileTmp), storage_path('tmp/'.$pathTmp));
-        if($unzip) {
+        if ($unzip) {
             $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
-            if(!$checkConfig) {
+            if (!$checkConfig) {
                 return $response = ['error' => 1, 'msg' => 'Cannot found file config.json'];
             }
-            $folderName = explode('/src',$checkConfig[0]);
+            $folderName = explode('/src', $checkConfig[0]);
             $folderName = explode('/', $folderName[0]);
             $folderName = end($folderName);
             
@@ -129,5 +130,4 @@ class AdminTemplateOnlineController extends RootAdminController
         }
         return response()->json($response);
     }
-
 }

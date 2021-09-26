@@ -13,14 +13,14 @@ use Validator;
 class AdminCustomerController extends RootAdminController
 {
     use AuthTrait;
-    public $languages, $countries;
+    public $languages;
+    public $countries;
 
     public function __construct()
     {
         parent::__construct();
         $this->languages = ShopLanguage::getListActive();
         $this->countries = ShopCountry::getListAll();
-
     }
 
     public function index()
@@ -33,7 +33,7 @@ class AdminCustomerController extends RootAdminController
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -107,7 +107,7 @@ class AdminCustomerController extends RootAdminController
                            </a>';
         //=menuRight
 
-        //menuSort        
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -116,7 +116,7 @@ class AdminCustomerController extends RootAdminController
         $data['optionSort'] = $optionSort;
         //=menuSort
 
-        //menuSearch        
+        //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_customer.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 350px;">
@@ -132,10 +132,10 @@ class AdminCustomerController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
     public function create()
     {
         $data = [
@@ -154,10 +154,10 @@ class AdminCustomerController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -195,12 +195,11 @@ class AdminCustomerController extends RootAdminController
         }
 
         return redirect()->route('admin_customer.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function edit($id)
     {
         $customer = (new AdminCustomer)->getCustomerAdmin($id);
@@ -273,7 +272,6 @@ class AdminCustomerController extends RootAdminController
         }
 
         return redirect()->route('admin_customer.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -289,7 +287,7 @@ class AdminCustomerController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -325,14 +323,13 @@ class AdminCustomerController extends RootAdminController
             'url_action'  => sc_route_admin('admin_customer.update_address', ['id' => $id]),
             ]
         );
-
     }
 
     /**
      * Process update address
      *
      *
-     * @return  [redirect] 
+     * @return  [redirect]
      */
     public function postUpdateAddress($id)
     {
@@ -424,27 +421,27 @@ class AdminCustomerController extends RootAdminController
         }
 
         $messages = [
-            'last_name.required'  => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.last_name')]),
-            'first_name.required' => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.first_name')]),
-            'address1.required'   => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.address1')]),
-            'address2.required'   => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.address2')]),
-            'address3.required'   => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.address3')]),
-            'phone.required'      => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.phone')]),
-            'country.required'    => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.country')]),
-            'postcode.required'   => sc_language_render('validation.required',['attribute'=> sc_language_render('customer.postcode')]),
+            'last_name.required'  => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.last_name')]),
+            'first_name.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.first_name')]),
+            'address1.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address1')]),
+            'address2.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address2')]),
+            'address3.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address3')]),
+            'phone.required'      => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.phone')]),
+            'country.required'    => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.country')]),
+            'postcode.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.postcode')]),
             'phone.regex'         => sc_language_render('customer.phone_regex'),
-            'postcode.min'        => sc_language_render('validation.min',['attribute'=> sc_language_render('customer.postcode')]),
-            'country.min'         => sc_language_render('validation.min',['attribute'=> sc_language_render('customer.country')]),
-            'first_name.max'      => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.first_name')]),
-            'address1.max'        => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.address1')]),
-            'address2.max'        => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.address2')]),
-            'address3.max'        => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.address3')]),
-            'last_name.max'       => sc_language_render('validation.max',['attribute'=> sc_language_render('customer.last_name')]),
+            'postcode.min'        => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.postcode')]),
+            'country.min'         => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.country')]),
+            'first_name.max'      => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.first_name')]),
+            'address1.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address1')]),
+            'address2.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address2')]),
+            'address3.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address3')]),
+            'last_name.max'       => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.last_name')]),
         ];
 
         $v = Validator::make(
-            $dataUpdate, 
-            $validate, 
+            $dataUpdate,
+            $validate,
             $messages
         );
         if ($v->fails()) {
@@ -463,11 +460,12 @@ class AdminCustomerController extends RootAdminController
     }
 
     /**
-     * Get address detail 
+     * Get address detail
      *
-     * @return  [json] 
+     * @return  [json]
      */
-    public function deleteAddress() {
+    public function deleteAddress()
+    {
         $id = request('id');
         AdminCustomer::deleteAddress($id);
         return json_encode(['error' => 0, 'msg' => sc_language_render('customer.delete_address_success')]);
@@ -476,8 +474,8 @@ class AdminCustomerController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return (new AdminCustomer)->getCustomerAdmin($id);
     }
-
 }

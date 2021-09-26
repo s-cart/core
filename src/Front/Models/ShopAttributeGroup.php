@@ -31,5 +31,4 @@ class ShopAttributeGroup extends Model
             $group->attributeDetails()->delete();
         });
     }
-
 }

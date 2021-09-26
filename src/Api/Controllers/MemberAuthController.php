@@ -10,6 +10,7 @@ use SCart\Core\Front\Models\ShopCustomer;
 use Illuminate\Support\Facades\Validator;
 use SCart\Core\Front\Models\ShopEmailTemplate;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
+
 class MemberAuthController extends RootFrontController
 {
     use AuthTrait;
@@ -52,7 +53,7 @@ class MemberAuthController extends RootFrontController
         $tokenResult = $user->createToken('Client:'.$user->email.'- '.now(), $scope);
         $token = $tokenResult->token;
 
-        if ($request->remember_me){
+        if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
         }
 
@@ -109,7 +110,6 @@ class MemberAuthController extends RootFrontController
         $user = ShopCustomer::createCustomer($dataMap);
         if ($user) {
             if (sc_config('welcome_customer')) {
-
                 $checkContent = (new ShopEmailTemplate)->where('group', 'welcome_customer')->where('status', 1)->first();
                 if ($checkContent) {
                     $content = $checkContent->text;
@@ -149,7 +149,6 @@ class MemberAuthController extends RootFrontController
 
                     sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
                 }
-
             }
         }
         return $user;

@@ -2,10 +2,10 @@
 namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
-use Illuminate\Support\Facades\File;  
+use Illuminate\Support\Facades\File;
+
 class AdminPluginsController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -50,7 +50,7 @@ class AdminPluginsController extends RootAdminController
         $pluginsInstalled = sc_get_plugin_installed($code, $onlyActive = false);
         $plugins = sc_get_all_plugin($code);
         $title = sc_language_render('admin.plugin.' . $code.'_plugin');
-        return $this->render($pluginsInstalled, $plugins,  $title, $code, $arrDefault);
+        return $this->render($pluginsInstalled, $plugins, $title, $code, $arrDefault);
     }
 
     public function render($pluginsInstalled, $plugins, $title, $code, $arrDefault)
@@ -128,7 +128,8 @@ class AdminPluginsController extends RootAdminController
     /**
      * Import plugin
      */
-    public function importPlugin() {
+    public function importPlugin()
+    {
         $data =  [
             'title' => sc_language_render('admin.plugin.import')
         ];
@@ -141,7 +142,8 @@ class AdminPluginsController extends RootAdminController
      *
      * @return  [type]  [return description]
      */
-    public function processImport() {
+    public function processImport()
+    {
         $data = request()->all();
         $validator = \Validator::make(
             $data,
@@ -157,13 +159,13 @@ class AdminPluginsController extends RootAdminController
         }
         $pathTmp = time();
         $linkRedirect = '';
-        $pathFile = sc_file_upload($data['file'],'tmp', $pathFolder = $pathTmp)['pathFile'] ?? '';
+        $pathFile = sc_file_upload($data['file'], 'tmp', $pathFolder = $pathTmp)['pathFile'] ?? '';
         if ($pathFile) {
             $unzip = sc_unzip(storage_path('tmp/'.$pathFile), storage_path('tmp/'.$pathTmp));
             if ($unzip) {
                 $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
                 if ($checkConfig) {
-                    $folderName = explode('/src',$checkConfig[0]);
+                    $folderName = explode('/src', $checkConfig[0]);
                     $folderName = explode('/', $folderName[0]);
                     $folderName = end($folderName);
                     $config = json_decode(file_get_contents($checkConfig[0]), true);
@@ -193,11 +195,10 @@ class AdminPluginsController extends RootAdminController
                             return redirect()->back()->with('error', $response['msg']);
                         }
                         $linkRedirect = route('admin_plugin', ['code' => (new $namespace)->configCode]);
-                    } catch(\Exception $e) {
+                    } catch (\Exception $e) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         return redirect()->back()->with('error', $e->getMessage());
                     }
-
                 } else {
                     File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                     return redirect()->back()->with('error', sc_language_render('admin.plugin.error_check_config'));
@@ -209,10 +210,9 @@ class AdminPluginsController extends RootAdminController
             return redirect()->back()->with('error', sc_language_render('admin.plugin.error_upload'));
         }
         if ($linkRedirect) {
-            return redirect($linkRedirect)->with('success', sc_language_render('admin.plugin.import_success')); 
+            return redirect($linkRedirect)->with('success', sc_language_render('admin.plugin.import_success'));
         } else {
-            return redirect()->back()->with('success', sc_language_render('admin.plugin.import_success')); 
+            return redirect()->back()->with('success', sc_language_render('admin.plugin.import_success'));
         }
     }
-
 }

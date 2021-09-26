@@ -16,7 +16,7 @@ class AdminStoreId
      */
     public function handle($request, Closure $next)
     {
-        if(\Admin::user()) {
+        if (\Admin::user()) {
             session(['adminStoreId' => 1]);
         } else {
             session()->forget('adminStoreId');

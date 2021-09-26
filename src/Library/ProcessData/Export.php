@@ -68,7 +68,7 @@ class Export
         $worksheet->getCell('E2')->setValue(date('Y-m-d'));
         $worksheet->getCell('F1')->setValue(sc_language_render('order.id'));
         $worksheet->getCell('F2')->setValue($dataExport['id']);
-//logo
+        //logo
         $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooterDrawing();
         $drawing->setName('Store logo');
         $drawing->setPath(public_path(sc_store('logo')));
@@ -80,7 +80,7 @@ class Export
         $drawing->getShadow()->setVisible(true);
         $drawing->getShadow()->setDirection(45);
         $drawing->setWorksheet($worksheet);
-//End logo
+        //End logo
 
         $indexRow = 2;
         $worksheet->getCell('A' . $indexRow)->setValue(sc_language_render('order.customer_name') . ':')

@@ -26,7 +26,7 @@ class ShopContentController extends RootFrontController
         $viewHome = $this->templatePath . '.screen.home';
         $layoutPage = 'home';
 
-        //If domain <> root, 
+        //If domain <> root,
         if (config('app.storeId') != SC_ID_ROOT) {
             $viewHome = $this->templatePath . '.vendor.vendor_home';
             $layoutPage = 'vendor_home';
@@ -51,7 +51,7 @@ class ShopContentController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function shopProcessFront(...$params) 
+    public function shopProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -128,7 +128,7 @@ class ShopContentController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function searchProcessFront(...$params) 
+    public function searchProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -142,7 +142,7 @@ class ShopContentController extends RootFrontController
      * @return [view]
      */
     private function _search()
-    {       
+    {
         $sortBy = 'sort';
         $sortOrder = 'asc';
         $filter_sort = request('filter_sort') ?? '';
@@ -185,7 +185,7 @@ class ShopContentController extends RootFrontController
         if (view()->exists($this->templatePath . '.screen.shop_search')) {
             $view = $this->templatePath . '.screen.shop_search';
         }
-        sc_check_view($view);          
+        sc_check_view($view);
         return view(
             $view,
             array(
@@ -203,10 +203,11 @@ class ShopContentController extends RootFrontController
     /**
      * Process click banner
      *
-     * @param   [int]  $id  
+     * @param   [int]  $id
      *
      */
-    public function clickBanner($id = 0) {
+    public function clickBanner($id = 0)
+    {
         $banner = ShopBanner::find($id);
         if ($banner) {
             $banner->click +=1;
@@ -222,7 +223,7 @@ class ShopContentController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function getContactProcessFront(...$params) 
+    public function getContactProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -238,8 +239,8 @@ class ShopContentController extends RootFrontController
     private function _getContact()
     {
         $viewCaptcha = '';
-        if(sc_captcha_method() && in_array('contact', sc_captcha_page())) {
-            if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
+        if (sc_captcha_method() && in_array('contact', sc_captcha_page())) {
+            if (view()->exists(sc_captcha_method()->pathPlugin.'::render')) {
                 $dataView = [
                     'titleButton' => sc_language_render('action.submit'),
                     'idForm' => 'form-process',
@@ -291,7 +292,7 @@ class ShopContentController extends RootFrontController
             'phone.regex'      => sc_language_render('customer.phone_regex'),
         ];
 
-        if(sc_captcha_method() && in_array('contact', sc_captcha_page())) {
+        if (sc_captcha_method() && in_array('contact', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
             $validate['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
@@ -352,7 +353,7 @@ class ShopContentController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function pageDetailProcessFront(...$params) 
+    public function pageDetailProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -372,7 +373,6 @@ class ShopContentController extends RootFrontController
     {
         $page = (new ShopPage)->getDetail($alias, $type = 'alias');
         if ($page) {
-
             sc_check_view($this->templatePath . '.screen.shop_page');
             return view(
                 $this->templatePath . '.screen.shop_page',
@@ -399,7 +399,7 @@ class ShopContentController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function newsProcessFront(...$params) 
+    public function newsProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -441,7 +441,7 @@ class ShopContentController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function newsDetailProcessFront(...$params) 
+    public function newsDetailProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -456,7 +456,7 @@ class ShopContentController extends RootFrontController
     /**
      * News detail
      *
-     * @param   [string]  $alias 
+     * @param   [string]  $alias
      *
      * @return  view
      */
@@ -507,5 +507,4 @@ class ShopContentController extends RootFrontController
         return redirect()->back()
             ->with(['success' => sc_language_render('subscribe.subscribe_success')]);
     }
-
 }

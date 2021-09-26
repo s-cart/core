@@ -4,6 +4,7 @@ namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ShopCustomFieldDetail;
+
 class ShopCustomField extends Model
 {
     public $timestamps     = false;
@@ -21,21 +22,22 @@ class ShopCustomField extends Model
     /**
      * Get custom fields
      */
-    public function getCustomField($type) {
+    public function getCustomField($type)
+    {
         return $this->where('type', $type)
             ->where('status', 1)
             ->get();
     }
 
-    //Function get text description 
+    //Function get text description
     protected static function boot()
     {
         parent::boot();
         // before delete() method call this
-        static::deleting(function ($obj) {
-            //
-        }
+        static::deleting(
+            function ($obj) {
+                //
+            }
         );
     }
-
 }

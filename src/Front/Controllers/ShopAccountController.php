@@ -30,7 +30,7 @@ class ShopAccountController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function indexProcessFront(...$params) 
+    public function indexProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -68,7 +68,7 @@ class ShopAccountController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function changePasswordProcessFront(...$params) 
+    public function changePasswordProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -135,7 +135,7 @@ class ShopAccountController extends RootFrontController
             'password_old.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.password_old')]),
         ];
         $v = Validator::make(
-            $request->all(), 
+            $request->all(),
             [
                 'password_old' => 'required',
                 'password' => config('validation.customer.password_confirm', 'required|string|min:6|confirmed'),
@@ -158,7 +158,7 @@ class ShopAccountController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function changeInfomationProcessFront(...$params) 
+    public function changeInfomationProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -196,7 +196,7 @@ class ShopAccountController extends RootFrontController
      *
      * @param   Request  $request  [$request description]
      *
-     * @return  [redirect] 
+     * @return  [redirect]
      */
     public function postChangeInfomation(Request $request)
     {
@@ -225,7 +225,7 @@ class ShopAccountController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function orderListProcessFront(...$params) 
+    public function orderListProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -265,7 +265,7 @@ class ShopAccountController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function orderDetailProcessFront(...$params) 
+    public function orderDetailProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -311,7 +311,6 @@ class ShopAccountController extends RootFrontController
             ],
             ]
         );
-
     }
 
     /**
@@ -320,7 +319,7 @@ class ShopAccountController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function addressListProcessFront(...$params) 
+    public function addressListProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -359,7 +358,7 @@ class ShopAccountController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function updateAddressProcessFront(...$params) 
+    public function updateAddressProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -401,7 +400,6 @@ class ShopAccountController extends RootFrontController
             ],
             ]
         );
-
     }
 
     /**
@@ -409,9 +407,9 @@ class ShopAccountController extends RootFrontController
      *
      * @param   Request  $request  [$request description]
      *
-     * @return  [redirect] 
+     * @return  [redirect]
      */
-    public function postUpdateAddressFront(...$params) 
+    public function postUpdateAddressFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -428,7 +426,7 @@ class ShopAccountController extends RootFrontController
      *
      * @param   Request  $request  [$request description]
      *
-     * @return  [redirect] 
+     * @return  [redirect]
      */
     private function _postUpdateAddress($id)
     {
@@ -491,8 +489,8 @@ class ShopAccountController extends RootFrontController
         ];
 
         $v = Validator::make(
-            $dataUpdate, 
-            $validate, 
+            $dataUpdate,
+            $validate,
             $messages
         );
         if ($v->fails()) {
@@ -509,11 +507,12 @@ class ShopAccountController extends RootFrontController
     }
 
     /**
-     * Get address detail 
+     * Get address detail
      *
-     * @return  [json] 
+     * @return  [json]
      */
-    public function getAddress() {
+    public function getAddress()
+    {
         $customer = auth()->user();
         $id = request('id');
         $address =  (new ShopCustomerAddress)->where('customer_id', $customer->id)
@@ -527,11 +526,12 @@ class ShopAccountController extends RootFrontController
     }
 
     /**
-     * Get address detail 
+     * Get address detail
      *
-     * @return  [json] 
+     * @return  [json]
      */
-    public function deleteAddress() {
+    public function deleteAddress()
+    {
         $customer = auth()->user();
         $id = request('id');
         (new ShopCustomerAddress)->where('customer_id', $customer->id)
@@ -546,7 +546,7 @@ class ShopAccountController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function verificationProcessFront(...$params) 
+    public function verificationProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -560,7 +560,8 @@ class ShopAccountController extends RootFrontController
      *
      * @return void
      */
-    private function _verification() {
+    private function _verification()
+    {
         $customer = auth()->user();
         if (!$customer->hasVerifiedEmail()) {
             return redirect(sc_route('customer.index'));
@@ -580,7 +581,8 @@ class ShopAccountController extends RootFrontController
      *
      * @return void
      */
-    public function resendVerification() {
+    public function resendVerification()
+    {
         $customer = auth()->user();
         if (!$customer->hasVerifiedEmail()) {
             return redirect(sc_route('customer.index'));
@@ -599,7 +601,8 @@ class ShopAccountController extends RootFrontController
      * @param [type] $token
      * @return void
      */
-    public function verificationProcessData(Request $request, $id = null, $token = null) {
+    public function verificationProcessData(Request $request, $id = null, $token = null)
+    {
         $arrMsg = [
             'error' => 0,
             'msg' => '',
@@ -611,12 +614,12 @@ class ShopAccountController extends RootFrontController
                 'error' => 1,
                 'msg' => sc_language_render('customer.verify_email.link_invalid'),
             ];
-        } else if ($customer->id != $id) {
+        } elseif ($customer->id != $id) {
             $arrMsg = [
                 'error' => 1,
                 'msg' => sc_language_render('customer.verify_email.link_invalid'),
             ];
-        } else if (sha1($customer->email) != $token) {
+        } elseif (sha1($customer->email) != $token) {
             $arrMsg = [
                 'error' => 1,
                 'msg' => sc_language_render('customer.verify_email.link_invalid'),
@@ -632,5 +635,4 @@ class ShopAccountController extends RootFrontController
             return redirect(sc_route('customer.index'))->with(['message' => sc_language_render('customer.verify_email.verify_success')]);
         }
     }
-    
 }
