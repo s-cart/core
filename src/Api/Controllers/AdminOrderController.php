@@ -49,7 +49,8 @@ class AdminOrderController extends RootFrontController
      *
      * @return void
      */
-    public function createOrder() {
+    public function createOrder()
+    {
         $data = request()->all();
         $user = request()->user();
         $dataOrder = $data['dataOrder'];
@@ -69,7 +70,8 @@ class AdminOrderController extends RootFrontController
      * @param [type] $orderId
      * @return void
      */
-    public function cancelOrder($orderId) {
+    public function cancelOrder($orderId)
+    {
         $user = request()->user();
         $order = (new ShopOrder)->where('id', $orderId)->first();
         if ($order) {
@@ -92,5 +94,4 @@ class AdminOrderController extends RootFrontController
         }
         return response()->json($dataReturn, 200);
     }
-
 }

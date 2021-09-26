@@ -50,9 +50,10 @@ class ShopLink extends Model
     {
         parent::boot();
         // before delete() method call this
-        static::deleting(function ($link) {
-            $link->stores()->detach();
-        }
+        static::deleting(
+            function ($link) {
+                $link->stores()->detach();
+            }
         );
     }
 }

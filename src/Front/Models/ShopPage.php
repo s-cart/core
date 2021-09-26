@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cache;
 use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Front\Models\ModelTrait;
+
 class ShopPage extends Model
 {
     use ModelTrait;
@@ -25,20 +26,25 @@ class ShopPage extends Model
         return $this->hasMany(ShopPageDescription::class, 'page_id', 'id');
     }
 
-    //Function get text description 
-    public function getText() {
+    //Function get text description
+    public function getText()
+    {
         return $this->descriptions()->where('lang', sc_get_locale())->first();
     }
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->getText()->title;
     }
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->getText()->description;
     }
-    public function getKeyword() {
+    public function getKeyword()
+    {
         return $this->getText()->keyword;
     }
-    public function getContent() {
+    public function getContent()
+    {
         return $this->getText()->content;
     }
     //End  get text description
@@ -58,7 +64,6 @@ class ShopPage extends Model
     public function getImage()
     {
         return sc_image_get_path($this->image);
-
     }
 
     public function getUrl()
@@ -109,10 +114,11 @@ class ShopPage extends Model
     {
         parent::boot();
         // before delete() method call this
-        static::deleting(function ($page) {
-            $page->descriptions()->delete();
-            $page->stores()->detach();
-        }
+        static::deleting(
+            function ($page) {
+                $page->descriptions()->delete();
+                $page->stores()->detach();
+            }
         );
     }
 
@@ -122,14 +128,16 @@ class ShopPage extends Model
      *
      * @return  new model
      */
-    public function start() {
+    public function start()
+    {
         return new ShopPage;
     }
 
     /**
      * build Query
      */
-    public function buildQuery() {
+    public function buildQuery()
+    {
         $tableDescription = (new ShopPageDescription)->getTable();
 
         $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';

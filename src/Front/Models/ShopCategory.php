@@ -16,8 +16,8 @@ class ShopCategory extends Model
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
 
-    protected  $sc_parent = ''; // category id parent
-    protected  $sc_top = 'all'; // 1 - category display top, 0 -non top, all - all
+    protected $sc_parent = ''; // category id parent
+    protected $sc_top = 'all'; // 1 - category display top, 0 -non top, all - all
 
     public function products()
     {
@@ -32,17 +32,21 @@ class ShopCategory extends Model
     {
         return $this->hasMany(ShopCategoryDescription::class, 'category_id', 'id');
     }
-    //Function get text description 
-    public function getText() {
+    //Function get text description
+    public function getText()
+    {
         return $this->descriptions()->where('lang', sc_get_locale())->first();
     }
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->getText()->title;
     }
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->getText()->description;
     }
-    public function getKeyword() {
+    public function getKeyword()
+    {
         return $this->getText()->keyword;
     }
     //End  get text description
@@ -104,12 +108,12 @@ class ShopCategory extends Model
      */
     public function getDetail($key, $type = null)
     {
-        if(empty($key)) {
+        if (empty($key)) {
             return null;
         }
         $storeId = config('app.storeId');
         $tableDescription = (new ShopCategoryDescription)->getTable();
-        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*'; 
+        $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';
         $category = $this->selectRaw($dataSelect)
             ->leftJoin($tableDescription, $tableDescription . '.category_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
@@ -139,14 +143,16 @@ class ShopCategory extends Model
      *
      * @return  new model
      */
-    public function start() {
+    public function start()
+    {
         return new ShopCategory;
     }
 
     /**
      * Set category parent
      */
-    public function setParent($parent) {
+    public function setParent($parent)
+    {
         $this->sc_parent = (int)$parent;
         return $this;
     }
@@ -154,7 +160,8 @@ class ShopCategory extends Model
     /**
      * Set top value
      */
-    private function setTop($top) {
+    private function setTop($top)
+    {
         if ($top === 'all') {
             $this->sc_top = $top;
         } else {
@@ -166,7 +173,8 @@ class ShopCategory extends Model
     /**
      * Category root
      */
-    public function getCategoryRoot() {
+    public function getCategoryRoot()
+    {
         $this->setParent(0);
         return $this;
     }
@@ -174,7 +182,8 @@ class ShopCategory extends Model
     /**
      * Category top
      */
-    public function getCategoryTop() {
+    public function getCategoryTop()
+    {
         $this->setTop(1);
         return $this;
     }
@@ -182,7 +191,8 @@ class ShopCategory extends Model
     /**
      * build Query
      */
-    public function buildQuery() {
+    public function buildQuery()
+    {
         $storeId = config('app.storeId');
         $tableDescription = (new ShopCategoryDescription)->getTable();
         $dataSelect = $this->getTable().'.*, '.$tableDescription.'.*';
@@ -192,7 +202,7 @@ class ShopCategory extends Model
             ->where($tableDescription . '.lang', sc_get_locale());
         //search keyword
         if ($this->sc_keyword !='') {
-            $query = $query->where(function ($sql) use($tableDescription){
+            $query = $query->where(function ($sql) use ($tableDescription) {
                 $sql->where($tableDescription . '.title', 'like', '%' . $this->sc_keyword . '%')
                 ->orWhere($tableDescription . '.keyword', 'like', '%' . $this->sc_keyword . '%')
                 ->orWhere($tableDescription . '.description', 'like', '%' . $this->sc_keyword . '%');
@@ -220,7 +230,7 @@ class ShopCategory extends Model
 
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
-                if(count($where)) {
+                if (count($where)) {
                     $query = $query->where($where[0], $where[1], $where[2]);
                 }
             }

@@ -6,7 +6,6 @@ use SCart\Core\Front\Models\ShopStoreCss;
 
 class AdminStoreCssController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -17,7 +16,8 @@ class AdminStoreCssController extends RootAdminController
      */
     public function index()
     {
-        $id = session('adminStoreId');;
+        $id = session('adminStoreId');
+        ;
         $cssContent = ShopStoreCss::where('store_id', $id)->first();
         if (!$cssContent) {
             return 'no data';
@@ -34,16 +34,16 @@ class AdminStoreCssController extends RootAdminController
             ->with($data);
     }
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit()
     {
-        $id = session('adminStoreId');;
+        $id = session('adminStoreId');
+        ;
         $cssContent = ShopStoreCss::where('store_id', $id)->first();
         $cssContent->css = request('css');
         $cssContent->save();
         return redirect()->route('admin_store_css.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 }

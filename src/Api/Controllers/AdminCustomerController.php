@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminCustomerController extends RootFrontController
 {
-
     use AuthTrait;
     /**
      * Get the customer list

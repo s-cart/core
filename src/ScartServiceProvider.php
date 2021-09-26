@@ -22,6 +22,7 @@ use Laravel\Passport\Passport;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\InstallCommand;
 use Laravel\Passport\Console\KeysCommand;
+
 class ScartServiceProvider extends ServiceProvider
 {
     protected $commands = [
@@ -40,14 +41,13 @@ class ScartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       
         if (!file_exists(public_path('install.php')) && file_exists(base_path('.env'))) {
             //Load helper from front
             try {
                 foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
                     require_once $filename;
                 }
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 $msg = '#SC001::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
                 // sc_report($msg);
                 echo $msg;
@@ -59,7 +59,7 @@ class ScartServiceProvider extends ServiceProvider
                 foreach (glob(app_path() . '/Library/Helpers/*.php') as $filename) {
                     require_once $filename;
                 }
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 $msg = '#SC002::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
                 sc_report($msg);
                 echo $msg;
@@ -68,7 +68,7 @@ class ScartServiceProvider extends ServiceProvider
             //Check connection
             try {
                 DB::connection(SC_CONNECTION)->getPdo();
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 $msg = '#SC003::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
                 sc_report($msg);
                 echo $msg;
@@ -79,7 +79,7 @@ class ScartServiceProvider extends ServiceProvider
                 foreach (glob(app_path() . '/Plugins/*/*/Provider.php') as $filename) {
                     require_once $filename;
                 }
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 $msg = '#SC004::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
                 sc_report($msg);
                 echo $msg;
@@ -89,7 +89,7 @@ class ScartServiceProvider extends ServiceProvider
             //Boot process S-Cart
             try {
                 $this->bootScart();
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 $msg = '#SC005::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
                 sc_report($msg);
                 echo $msg;
@@ -101,7 +101,7 @@ class ScartServiceProvider extends ServiceProvider
                 if (file_exists($routes = __DIR__.'/Admin/routes.php')) {
                     $this->loadRoutesFrom($routes);
                 }
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 $msg = '#SC006::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
                 sc_report($msg);
                 echo $msg;
@@ -115,7 +115,7 @@ class ScartServiceProvider extends ServiceProvider
                         $this->loadRoutesFrom($routes);
                     }
                 }
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 $msg = '#SC007::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
                 sc_report($msg);
                 echo $msg;
@@ -127,7 +127,7 @@ class ScartServiceProvider extends ServiceProvider
                 if (file_exists($routes = __DIR__.'/Front/routes.php')) {
                     $this->loadRoutesFrom($routes);
                 }
-            } catch(\Throwable $e) {
+            } catch (\Throwable $e) {
                 $msg = '#SC008::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
                 sc_report($msg);
                 echo $msg;
@@ -137,7 +137,7 @@ class ScartServiceProvider extends ServiceProvider
 
         try {
             $this->registerPublishing();
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             $msg = '#SC009::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
             sc_report($msg);
             echo $msg;
@@ -146,7 +146,7 @@ class ScartServiceProvider extends ServiceProvider
         
         try {
             $this->registerRouteMiddleware();
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             $msg = '#SC010::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
             sc_report($msg);
             echo $msg;
@@ -155,7 +155,7 @@ class ScartServiceProvider extends ServiceProvider
         
         try {
             $this->commands($this->commands);
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             $msg = '#SC011::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
             sc_report($msg);
             echo $msg;
@@ -164,7 +164,7 @@ class ScartServiceProvider extends ServiceProvider
         
         try {
             $this->validationExtend();
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             $msg = '#SC012::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
             sc_report($msg);
             echo $msg;
@@ -197,7 +197,6 @@ class ScartServiceProvider extends ServiceProvider
         Passport::setDefaultScope([
             'user-guest',
         ]);
-
     }
 
     /**
@@ -208,7 +207,7 @@ class ScartServiceProvider extends ServiceProvider
     public function register()
     {
         if (file_exists(__DIR__.'/Library/Const.php')) {
-            require_once (__DIR__.'/Library/Const.php');
+            require_once(__DIR__.'/Library/Const.php');
         }
         $this->app->bind('cart', '\SCart\Core\Library\ShoppingCart\Cart');
         
@@ -223,7 +222,6 @@ class ScartServiceProvider extends ServiceProvider
 
         //Dont use migrate from library passport
         Passport::ignoreMigrations();
-
     }
 
     public function bootScart()
@@ -233,7 +231,7 @@ class ScartServiceProvider extends ServiceProvider
         $storeId = SC_ID_ROOT;
 
         //Process for multi store
-        if(sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
+        if (sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
             $domain = sc_process_domain_store(url('/'));
             if (sc_config_global('MultiVendorPro')) {
                 $arrDomain = ShopStore::getDomainPartner();
@@ -309,8 +307,6 @@ class ScartServiceProvider extends ServiceProvider
         view()->share('modelPage', (new ShopPage));
         //
         view()->share('templatePathAdmin', config('admin.path_view'));
-
-
     }
 
     /**
@@ -341,7 +337,8 @@ class ScartServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected function middlewareGroups() {
+    protected function middlewareGroups()
+    {
         return [
             'admin' => config('middleware.admin'),
             'front' => config('middleware.front'),
@@ -373,7 +370,8 @@ class ScartServiceProvider extends ServiceProvider
      *
      * @return  [type]  [return description]
      */
-    protected function validationExtend() {
+    protected function validationExtend()
+    {
         Validator::extend('product_sku_unique', function ($attribute, $value, $parameters, $validator) {
             $productId = $parameters[0] ?? '';
             return (new Admin\Models\AdminProduct)
@@ -385,7 +383,6 @@ class ScartServiceProvider extends ServiceProvider
             return (new Admin\Models\AdminProduct)
                 ->checkProductValidationAdmin('alias', $value, $productId, session('adminStoreId'));
         });
-
     }
 
     /**

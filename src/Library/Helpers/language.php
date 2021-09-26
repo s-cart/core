@@ -87,6 +87,5 @@ if (!function_exists('sc_lang_switch')) {
         } else {
             return abort(404);
         }
-
     }
 }

@@ -84,7 +84,6 @@ class ShopCustomer extends Authenticatable
 
             sc_send_mail('templates.' . sc_store('template') . '.mail.forgot_password', $dataView, $config, $dataAtt = []);
         }
-
     }
 
     /*
@@ -93,7 +92,6 @@ class ShopCustomer extends Authenticatable
     public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
-
     }
 
 
@@ -102,10 +100,11 @@ class ShopCustomer extends Authenticatable
     {
         parent::boot();
         // before delete() method call this
-        static::deleting(function ($customer) {
+        static::deleting(
+            function ($customer) {
 
             //Delete custom field
-            (new ShopCustomFieldDetail)
+                (new ShopCustomFieldDetail)
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
                 ->select('code', 'name', 'text')
                 ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $customer->id)
@@ -163,13 +162,15 @@ class ShopCustomer extends Authenticatable
      *
      * @return  [collect]
      */
-    public function getAddressDefault() {
+    public function getAddressDefault()
+    {
         return (new ShopCustomerAddress)->where('customer_id', $this->id)
             ->where('id', $this->address_id)
             ->first();
     }
 
-    public function profile() {
+    public function profile()
+    {
         if (self::$profile === null) {
             self::$profile = Auth::user();
         }
@@ -181,7 +182,8 @@ class ShopCustomer extends Authenticatable
      *
      * @return boolean
      */
-    public function isVerified() {
+    public function isVerified()
+    {
         return ! is_null($this->email_verified_at)  || $this->provider_id ;
     }
 
@@ -190,7 +192,8 @@ class ShopCustomer extends Authenticatable
      *
      * @return boolean
      */
-    public function hasVerifiedEmail() {
+    public function hasVerifiedEmail()
+    {
         return !$this->isVerified() && sc_config('customer_verify');
     }
     /**
@@ -198,10 +201,9 @@ class ShopCustomer extends Authenticatable
      *
      * @return void
      */
-    public function sendEmailVerify() {
-
+    public function sendEmailVerify()
+    {
         if ($this->hasVerifiedEmail()) {
-            
             $url = \Illuminate\Support\Facades\URL::temporarySignedRoute(
                 'customer.verify_process',
                 \Carbon\Carbon::now()->addMinutes(config('auth.verification', 60)),
@@ -243,7 +245,7 @@ class ShopCustomer extends Authenticatable
                 sc_send_mail('templates.' . sc_store('template') . '.mail.customer_verify', $dataView, $config, $dataAtt = []);
                 return true;
             }
-        } 
+        }
         return false;
     }
 
@@ -252,7 +254,8 @@ class ShopCustomer extends Authenticatable
      *
      * @return void
      */
-    public function getCustomFields() {
+    public function getCustomFields()
+    {
         $data =  (new ShopCustomFieldDetail)
             ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
             ->select('code', 'name', 'text')
@@ -269,7 +272,8 @@ class ShopCustomer extends Authenticatable
      *
      * @return void
      */
-    public function getCustomField($code = null) {
+    public function getCustomField($code = null)
+    {
         $data =  (new ShopCustomFieldDetail)
             ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
             ->select('code', 'name', 'text')

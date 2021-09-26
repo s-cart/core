@@ -4,6 +4,7 @@ namespace SCart\Core\Front\Models;
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Front\Models\ModelTrait;
+
 class ShopBanner extends Model
 {
     use ModelTrait;
@@ -12,8 +13,8 @@ class ShopBanner extends Model
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
 
-    protected  $sc_type = 'all'; // all or interger
-    protected  $sc_store = 0; // 1: only produc promotion,
+    protected $sc_type = 'all'; // all or interger
+    protected $sc_store = 0; // 1: only produc promotion,
 
     public function stores()
     {
@@ -34,7 +35,6 @@ class ShopBanner extends Model
     public function getImage()
     {
         return sc_image_get_path($this->image);
-
     }
     
     public function scopeSort($query, $sortBy = null, $sortOrder = 'asc')
@@ -46,12 +46,12 @@ class ShopBanner extends Model
     /**
      * Get info detail
      *
-     * @param   [int]  $id     
-     * @param   [int]  $status 
+     * @param   [int]  $id
+     * @param   [int]  $status
      *
      */
-    public function getDetail($id) {
-
+    public function getDetail($id)
+    {
         $storeId = config('app.storeId');
         $dataSelect = $this->getTable().'.*';
         $data =  $this->selectRaw($dataSelect)
@@ -83,14 +83,16 @@ class ShopBanner extends Model
      *
      * @return  new model
      */
-    public function start() {
+    public function start()
+    {
         return new ShopBanner;
     }
 
     /**
      * Set type
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->sc_type = $type;
         return $this;
     }
@@ -98,7 +100,8 @@ class ShopBanner extends Model
     /**
      * Get banner
      */
-    public function getBanner() {
+    public function getBanner()
+    {
         $this->setType('banner');
         return $this;
     }
@@ -106,7 +109,8 @@ class ShopBanner extends Model
     /**
      * Get banner
      */
-    public function getBannerStore() {
+    public function getBannerStore()
+    {
         $this->setType('banner-store');
         return $this;
     }
@@ -114,7 +118,8 @@ class ShopBanner extends Model
     /**
      * Get background
      */
-    public function getBackground() {
+    public function getBackground()
+    {
         $this->setType('background');
         $this->setLimit(1);
         return $this;
@@ -123,7 +128,8 @@ class ShopBanner extends Model
     /**
      * Get background
      */
-    public function getBackgroundStore() {
+    public function getBackgroundStore()
+    {
         $this->setType('background-store');
         $this->setLimit(1);
         return $this;
@@ -132,7 +138,8 @@ class ShopBanner extends Model
     /**
      * Get banner
      */
-    public function getBreadcrumb() {
+    public function getBreadcrumb()
+    {
         $this->setType('breadcrumb');
         $this->setLimit(1);
         return $this;
@@ -141,7 +148,8 @@ class ShopBanner extends Model
     /**
      * Get banner
      */
-    public function getBreadcrumbStore() {
+    public function getBreadcrumbStore()
+    {
         $this->setType('breadcrumb-store');
         $this->setLimit(1);
         return $this;
@@ -151,7 +159,8 @@ class ShopBanner extends Model
      * Set store id
      *
      */
-    public function setStore($id) {
+    public function setStore($id)
+    {
         $this->sc_store = (int)$id;
         return $this;
     }
@@ -159,8 +168,8 @@ class ShopBanner extends Model
     /**
      * build Query
      */
-    public function buildQuery() {
-
+    public function buildQuery()
+    {
         $dataSelect = $this->getTable().'.*';
         $query =  $this->selectRaw($dataSelect)
             ->where($this->getTable() .'.status', 1);
@@ -187,7 +196,7 @@ class ShopBanner extends Model
 
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
-                if(count($where)) {
+                if (count($where)) {
                     $query = $query->where($where[0], $where[1], $where[2]);
                 }
             }
@@ -217,5 +226,4 @@ class ShopBanner extends Model
 
         return $query;
     }
-
 }

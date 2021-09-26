@@ -3,7 +3,8 @@ namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;  
+use Illuminate\Support\Facades\File;
+
 class AdminPluginsOnlineController extends RootAdminController
 {
     public function __construct()
@@ -48,7 +49,7 @@ class AdminPluginsOnlineController extends RootAdminController
         $dataApi   = curl_exec($ch);
         curl_close($ch);
         $dataApi = json_decode($dataApi, true);
-        if(!empty($dataApi['data'])) {
+        if (!empty($dataApi['data'])) {
             foreach ($dataApi['data'] as $key => $data) {
                 $arrPluginLibrary[] = [
                     'sku' => $data['sku'] ?? '',
@@ -74,20 +75,20 @@ class AdminPluginsOnlineController extends RootAdminController
             }
             $resultItems = sc_language_render('admin.result_item', ['item_from' => $dataApi['from'] ?? 0, 'item_to' => $dataApi['to']??0, 'total' =>  $dataApi['total'] ?? 0]);
             $htmlPaging .= '<ul class="pagination pagination-sm no-margin pull-right">';
-                if ($dataApi['current_page'] > 1) {
-                    $htmlPaging .= '<li class="page-item"><a class="page-link pjax-container" href="'.sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]).'?page='.($dataApi['current_page'] - 1).'" rel="prev">«</a></li>';
-                } else {
-                    for ($i = 1; $i < $dataApi['last_page']; $i++) { 
-                        if ($dataApi['current_page'] == $i) {
-                            $htmlPaging .= '<li class="page-item active"><span class="page-link pjax-container">'.$i.'</span></li>';
-                        } else {
-                            $htmlPaging .= '<li class="page-item"><a class="page-link" href="'.sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]).'?page='.$i.'">'.$i.'</a></li>';
-                        }
+            if ($dataApi['current_page'] > 1) {
+                $htmlPaging .= '<li class="page-item"><a class="page-link pjax-container" href="'.sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]).'?page='.($dataApi['current_page'] - 1).'" rel="prev">«</a></li>';
+            } else {
+                for ($i = 1; $i < $dataApi['last_page']; $i++) {
+                    if ($dataApi['current_page'] == $i) {
+                        $htmlPaging .= '<li class="page-item active"><span class="page-link pjax-container">'.$i.'</span></li>';
+                    } else {
+                        $htmlPaging .= '<li class="page-item"><a class="page-link" href="'.sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]).'?page='.$i.'">'.$i.'</a></li>';
                     }
                 }
-                if ($dataApi['current_page'] < $dataApi['last_page']) {
-                    $htmlPaging .= '<li class="page-item"><a class="page-link pjax-container" href="'.sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]).'?page='.($dataApi['current_page'] + 1).'" rel="next">»</a></li>';
-                }
+            }
+            if ($dataApi['current_page'] < $dataApi['last_page']) {
+                $htmlPaging .= '<li class="page-item"><a class="page-link pjax-container" href="'.sc_route_admin('admin_plugin_online', ['code' => strtolower($code)]).'?page='.($dataApi['current_page'] + 1).'" rel="next">»</a></li>';
+            }
             $htmlPaging .= '</ul>';
         }
         $code = sc_word_format_class($code);
@@ -107,7 +108,8 @@ class AdminPluginsOnlineController extends RootAdminController
                 "resultItems" => $resultItems,
                 "htmlPaging" => $htmlPaging,
                 "dataApi" => $dataApi,
-            ]);
+            ]
+        );
     }
 
     public function install()
@@ -122,12 +124,12 @@ class AdminPluginsOnlineController extends RootAdminController
             $fileTmp = $pathTmp.'.zip';
             Storage::disk('tmp')->put($pathTmp.'/'.$fileTmp, $data);
             $unzip = sc_unzip(storage_path('tmp/'.$pathTmp.'/'.$fileTmp), storage_path('tmp/'.$pathTmp));
-            if($unzip) {
+            if ($unzip) {
                 $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
-                if(!$checkConfig) {
+                if (!$checkConfig) {
                     return $response = ['error' => 1, 'msg' => 'Cannot found file config.json'];
                 }
-                $folderName = explode('/src',$checkConfig[0]);
+                $folderName = explode('/src', $checkConfig[0]);
                 $folderName = explode('/', $folderName[0]);
                 $folderName = end($folderName);
                 File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path($pathPlugin));
@@ -138,7 +140,7 @@ class AdminPluginsOnlineController extends RootAdminController
             } else {
                 $response = ['error' => 1, 'msg' => 'error while unzip'];
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $response = ['error' => 1, 'msg' => $e->getMessage()];
         }
         return response()->json($response);

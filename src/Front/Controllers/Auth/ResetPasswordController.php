@@ -6,6 +6,7 @@ use App\Http\Controllers\RootFrontController;
 use Auth;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
+
 class ResetPasswordController extends RootFrontController
 {
     /*
@@ -46,7 +47,8 @@ class ResetPasswordController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function showResetFormProcessFront(...$params) {
+    public function showResetFormProcessFront(...$params)
+    {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             $token = $params[1] ?? '';
@@ -71,7 +73,8 @@ class ResetPasswordController extends RootFrontController
             return redirect()->route('home');
         }
         sc_check_view($this->templatePath . '.auth.reset');
-        return view($this->templatePath . '.auth.reset',
+        return view(
+            $this->templatePath . '.auth.reset',
             [
                 'title'       => sc_language_render('customer.password_reset'),
                 'token'       => $token,

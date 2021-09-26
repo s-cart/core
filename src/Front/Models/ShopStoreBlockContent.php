@@ -23,5 +23,4 @@ class ShopStoreBlockContent extends Model
         }
         return self::$getLayout;
     }
-
 }

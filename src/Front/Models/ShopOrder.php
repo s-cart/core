@@ -18,7 +18,7 @@ class ShopOrder extends Model
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
 
-    protected  $sc_order_profile = 0; // 0: all, 1: only user's order
+    protected $sc_order_profile = 0; // 0: all, 1: only user's order
     public $sc_status = 1;
     
     public function details()
@@ -55,24 +55,22 @@ class ShopOrder extends Model
                 $item = ShopProduct::find($orderDetail->product_id);
                 //Update stock, sold
                 ShopProduct::updateStock($orderDetail->product_id, -$orderDetail->qty);
-
             }
             $order->details()->delete(); //delete order details
             $order->orderTotal()->delete(); //delete order total
             $order->history()->delete(); //delete history
-
         });
     }
 
 
-/**
- * Update status order
- *
- * @param [type] $orderId
- * @param integer $status
- * @param array $history
- * @return void
- */
+    /**
+     * Update status order
+     *
+     * @param [type] $orderId
+     * @param integer $status
+     * @param array $history
+     * @return void
+     */
     public function updateStatus($orderId, $status = 0, $history = [])
     {
         $order = $this->find($orderId);
@@ -132,8 +130,10 @@ class ShopOrder extends Model
 
             //Insert order total
             foreach ($dataTotal as $key => $row) {
-                array_walk($row, function (&$v, $k) {
-                    return $v = sc_clean($v);
+                array_walk(
+                    $row,
+                    function (&$v, $k) {
+                        return $v = sc_clean($v);
                     }
                 );
                 $row['order_id'] = $orderID;
@@ -218,19 +218,19 @@ class ShopOrder extends Model
         return $return;
     }
 
-/**
- * Add order history
- * @param [array] $dataHistory
- */
+    /**
+     * Add order history
+     * @param [array] $dataHistory
+     */
     public function addOrderHistory($dataHistory)
     {
         return ShopOrderHistory::create($dataHistory);
     }
 
-/**
- * Add order detail
- * @param [type] $dataDetail [description]
- */
+    /**
+     * Add order detail
+     * @param [type] $dataDetail [description]
+     */
     public function addOrderDetail($dataDetail)
     {
         return ShopOrderDetail::create($dataDetail);
@@ -242,8 +242,9 @@ class ShopOrder extends Model
      *
      * @return  new model
      */
-    public function start() {
-        if($this->sc_order_profile) {
+    public function start()
+    {
+        if ($this->sc_order_profile) {
             $obj = (new ShopOrder);
             $obj->sc_order_profile = 1;
             return $obj;
@@ -255,12 +256,12 @@ class ShopOrder extends Model
     /**
      * Get order detail
      *
-     * @param   [int]  $orderID 
+     * @param   [int]  $orderID
      *
      */
     public function getDetail($orderID)
     {
-        if(empty($orderID)) {
+        if (empty($orderID)) {
             return null;
         }
         $customer = auth()->user();
@@ -271,19 +272,20 @@ class ShopOrder extends Model
         } else {
             return null;
         }
-
     }
 
     /**
      * Disable only user's order mode
      */
-    public function setOrderProfile() {
+    public function setOrderProfile()
+    {
         $this->sc_order_profile = 1;
         $this->sc_status = 'all' ;
         return $this;
     }
 
-    public function profile() {
+    public function profile()
+    {
         $this->setOrderProfile();
         return $this;
     }
@@ -291,7 +293,8 @@ class ShopOrder extends Model
     /**
      * Get list order new
      */
-    public function getOrderNew() {
+    public function getOrderNew()
+    {
         $this->sc_status = 1;
         return $this;
     }
@@ -299,7 +302,8 @@ class ShopOrder extends Model
     /**
      * Get list order processing
      */
-    public function getOrderProcessing() {
+    public function getOrderProcessing()
+    {
         $this->sc_status = 2;
         return $this;
     }
@@ -307,7 +311,8 @@ class ShopOrder extends Model
     /**
      * Get list order hold
      */
-    public function getOrderHold() {
+    public function getOrderHold()
+    {
         $this->sc_status = 3;
         return $this;
     }
@@ -315,7 +320,8 @@ class ShopOrder extends Model
     /**
      * Get list order canceld
      */
-    public function getOrderCanceled() {
+    public function getOrderCanceled()
+    {
         $this->sc_status = 4;
         return $this;
     }
@@ -323,7 +329,8 @@ class ShopOrder extends Model
     /**
      * Get list order done
      */
-    public function getOrderDone() {
+    public function getOrderDone()
+    {
         $this->sc_status = 5;
         return $this;
     }
@@ -331,7 +338,8 @@ class ShopOrder extends Model
     /**
      * Get list order failed
      */
-    public function getOrderFailed() {
+    public function getOrderFailed()
+    {
         $this->sc_status = 6;
         return $this;
     }
@@ -339,10 +347,11 @@ class ShopOrder extends Model
     /**
      * build Query
      */
-    public function buildQuery() {
+    public function buildQuery()
+    {
         $customer = auth()->user();
         if ($this->sc_order_profile == 1) {
-            if(!$customer) {
+            if (!$customer) {
                 return null;
             }
             $uID = $customer->id;
@@ -357,7 +366,7 @@ class ShopOrder extends Model
 
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
-                if(count($where)) {
+                if (count($where)) {
                     $query = $query->where($where[0], $where[1], $where[2]);
                 }
             }
@@ -368,7 +377,7 @@ class ShopOrder extends Model
         } else {
             if (is_array($this->sc_sort) && count($this->sc_sort)) {
                 foreach ($this->sc_sort as  $rowSort) {
-                    if(is_array($rowSort) && count($rowSort) == 2) {
+                    if (is_array($rowSort) && count($rowSort) == 2) {
                         $query = $query->sort($rowSort[0], $rowSort[1]);
                     }
                 }
@@ -383,7 +392,8 @@ class ShopOrder extends Model
      *
      * @return  [type]  [return description]
      */
-    public function processPaymentPaid() {
+    public function processPaymentPaid()
+    {
         $total = $this->total;
         $this->balance = 0;
         $this->received = -$total;

@@ -5,7 +5,7 @@ $langUrl = config('app.seoLang');
 //--Auth
 Route::group(
     [
-        'namespace' => 'Auth', 
+        'namespace' => 'Auth',
         'prefix' => $langUrl.$prefixCustomer,
     ],
     function ($router) use ($suffix) {

@@ -17,7 +17,8 @@ class AdminCategory extends ShopCategory
      *
      * @return  [type]       [return description]
      */
-    public static function getCategoryAdmin($id) {
+    public static function getCategoryAdmin($id)
+    {
         return self::where('id', $id)
         ->first();
     }
@@ -29,7 +30,8 @@ class AdminCategory extends ShopCategory
      *
      * @return  [type]               [return description]
      */
-    public static function getCategoryListAdmin(array $dataSearch) {
+    public static function getCategoryListAdmin(array $dataSearch)
+    {
         $keyword          = $dataSearch['keyword'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
@@ -40,7 +42,7 @@ class AdminCategory extends ShopCategory
             ->leftJoin($tableDescription, $tableDescription . '.category_id', $tableCategory . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
         if ($keyword) {
-            $categoryList = $categoryList->where(function ($sql) use($tableDescription, $keyword){
+            $categoryList = $categoryList->where(function ($sql) use ($tableDescription, $keyword) {
                 $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%');
             });
         }
@@ -91,7 +93,7 @@ class AdminCategory extends ShopCategory
 
     /**
      * Get array title category
-     * user for admin 
+     * user for admin
      *
      * @return  [type]  [return description]
      */
@@ -124,7 +126,7 @@ class AdminCategory extends ShopCategory
 
     /**
      * Get array title category
-     * user for admin 
+     * user for admin
      *
      * @return  [type]  [return description]
      */
@@ -147,7 +149,8 @@ class AdminCategory extends ShopCategory
      *
      * @return  [type]              [return description]
      */
-    public static function createCategoryAdmin(array $dataInsert) {
+    public static function createCategoryAdmin(array $dataInsert)
+    {
         return self::create($dataInsert);
     }
 
@@ -159,8 +162,8 @@ class AdminCategory extends ShopCategory
      *
      * @return  [type]              [return description]
      */
-    public static function insertDescriptionAdmin(array $dataInsert) {
+    public static function insertDescriptionAdmin(array $dataInsert)
+    {
         return ShopCategoryDescription::create($dataInsert);
     }
-
 }

@@ -12,7 +12,6 @@ class AdminRole extends Model
 
     public function administrators()
     {
-
         return $this->belongsToMany(AdminUser::class, SC_DB_PREFIX.'admin_role_user', 'role_id', 'user_id');
     }
 
@@ -33,7 +32,6 @@ class AdminRole extends Model
      */
     public function menus()
     {
-
         return $this->belongsToMany(AdminMenu::class, SC_DB_PREFIX.'admin_role_menu', 'role_id', 'menu_id');
     }
 
@@ -98,5 +96,4 @@ class AdminRole extends Model
         $dataUpdate = sc_clean($dataInsert, 'password');
         return self::create($dataUpdate);
     }
-
 }

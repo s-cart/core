@@ -10,7 +10,10 @@ use SCart\Core\Front\Models\ShopTax;
 
 class AdminStoreConfigController extends RootAdminController
 {
-    public $templates, $currencies, $languages, $timezones;
+    public $templates;
+    public $currencies;
+    public $languages;
+    public $timezones;
 
     public function __construct()
     {
@@ -22,15 +25,15 @@ class AdminStoreConfigController extends RootAdminController
         $this->currencies = ShopCurrency::getCodeActive();
         $this->languages = ShopLanguage::getListActive();
         $this->timezones = $timezones;
-
     }
 
-    public function index() {
+    public function index()
+    {
         $id = session('adminStoreId');
         $data = [
             'title' => sc_language_render('admin.menu_titles.config_store_default'),
             'subTitle' => '',
-            'icon' => 'fas fa-cogs',        
+            'icon' => 'fas fa-cogs',
         ];
 
         // Customer config
@@ -115,9 +118,9 @@ class AdminStoreConfigController extends RootAdminController
         $data['emailConfig'] = $emailConfig;
         $data['smtp_method'] = ['' => 'None Secirity', 'TLS' => 'TLS', 'SSL' => 'SSL'];
         $data['captcha_page'] = [
-            'register' => sc_language_render('admin.captcha.captcha_page_register'), 
-            'forgot'   => sc_language_render('admin.captcha.captcha_page_forgot_password'), 
-            'checkout' => sc_language_render('admin.captcha.captcha_page_checkout'), 
+            'register' => sc_language_render('admin.captcha.captcha_page_register'),
+            'forgot'   => sc_language_render('admin.captcha.captcha_page_forgot_password'),
+            'checkout' => sc_language_render('admin.captcha.captcha_page_checkout'),
             'contact'  => sc_language_render('admin.captcha.captcha_page_contact'),
             'review'   => sc_language_render('admin.captcha.captcha_page_review'),
         ];
@@ -155,7 +158,8 @@ class AdminStoreConfigController extends RootAdminController
         $value = $data['value'];
         $storeId = $data['storeId'] ?? '';
         if (!$storeId) {
-            return response()->json([
+            return response()->json(
+                [
                 'error' => 1,
                 'field' => 'storeId',
                 'value' => $storeId,
@@ -174,14 +178,13 @@ class AdminStoreConfigController extends RootAdminController
             $error = 1;
             $msg = $e->getMessage();
         }
-        return response()->json([
+        return response()->json(
+            [
             'error' => $error,
             'field' => $name,
             'value' => $value,
             'msg'   => $msg,
             ]
         );
-
     }
-
 }

@@ -3,7 +3,7 @@
 namespace SCart\Core\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;  
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class MakePlugin extends Command
@@ -33,7 +33,7 @@ class MakePlugin extends Command
         $function = $this->argument('function') ?? '';
         $name = $this->option('name') ?? '';
         $download = $this->option('download') ?? 0;
-        if(empty($function) || empty($name)) {
+        if (empty($function) || empty($name)) {
             echo json_encode([
                 'error' => '1',
                 'msg' => 'Command error'
@@ -43,7 +43,7 @@ class MakePlugin extends Command
         switch ($function) {
             case 'plugin':
                 $arrOpt = explode('/', $name);
-                if(empty($arrOpt[1])) {
+                if (empty($arrOpt[1])) {
                     $code = '';
                     $key = $arrOpt[0];
                 } else {
@@ -57,18 +57,18 @@ class MakePlugin extends Command
                 # code...
                 break;
         }
-        
     }
 
     //Create format plugin
-    public function plugin($code = 'Other', $key = '', $download = 0) {
+    public function plugin($code = 'Other', $key = '', $download = 0)
+    {
         $error = 0;
         $msg = '';
 
         $arrcodePlugin = ['Cms', 'Other', 'Payment', 'Shipping', 'Total'];
         $pluginKey = sc_word_format_class($key);
         $pluginCode = sc_word_format_class($code);
-        if(!in_array($pluginCode, $arrcodePlugin)) {
+        if (!in_array($pluginCode, $arrcodePlugin)) {
             $pluginCode = 'Other';
         }
         $pluginUrlKey = sc_word_format_url($key);
@@ -135,15 +135,13 @@ class MakePlugin extends Command
             $route      = str_replace('Plugin_Key', $pluginKey, $route);
             $route          = str_replace('PluginUrlKey', $pluginUrlKey, $route);
             file_put_contents(storage_path($tmp.'/Route.php'), $route);
-
         } catch (\Exception $e) {
             $msg = $e->getMessage();
             $error = 1;
         }
 
         try {
-            
-            if($download) {
+            if ($download) {
                 sc_zip(storage_path($this->tmpFolder."/".$sID), storage_path($this->tmpFolder.'/'.$sID.'.zip'));
                 $path = $sID;
             } else {
@@ -151,7 +149,7 @@ class MakePlugin extends Command
                 File::copyDirectory(storage_path($tmpPublic), public_path($description));
             }
             File::deleteDirectory(storage_path($this->tmpFolder.'/'.$sID));
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $msg = $e->getMessage();
             $error = 1;
         }
@@ -161,6 +159,5 @@ class MakePlugin extends Command
             'path' => $path ?? '',
             'msg' => $msg
         ]);
-
     }
 }

@@ -7,7 +7,6 @@ use App\Http\Controllers\RootAdminController;
 
 class AdminLogController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -15,7 +14,6 @@ class AdminLogController extends RootAdminController
     
     public function index()
     {
-
         $data = [
             'title' => sc_language_render('admin.log.list'),
             'subTitle' => '',
@@ -24,7 +22,7 @@ class AdminLogController extends RootAdminController
             'removeList' => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort' => 1, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
         ];
         //Process add content
@@ -68,7 +66,6 @@ class AdminLogController extends RootAdminController
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];
             $obj = $obj->orderBy($field, $sort_field);
-
         } else {
             $obj = $obj->orderBy('id', 'desc');
         }
@@ -96,23 +93,23 @@ class AdminLogController extends RootAdminController
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
-//menuSearch        
+        //menuSearch
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
         $data['optionSort'] = $optionSort;
         $data['urlSort'] = sc_route_admin('admin_log.index', request()->except(['_token', '_pjax', 'sort_order']));
-//=menuSort
+        //=menuSort
 
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);
     }
 
-/*
-Delete list item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -124,5 +121,4 @@ Need mothod destroy to boot deleting in model
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

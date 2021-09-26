@@ -15,7 +15,7 @@ if (!function_exists('sc_clear_cache')) {
     {
         try {
             $storeI = $storeId ?? session('adminStoreId');
-            if($typeCache == 'cache_all') {
+            if ($typeCache == 'cache_all') {
                 Cache::flush();
             } else {
                 $arrCacheLocal = [];
@@ -37,28 +37,27 @@ if (!function_exists('sc_clear_cache')) {
                 }
             }
             $response = ['error' => 0, 'msg' => 'Clear success!', 'action' => $typeCache];
-        }  catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             $response = ['error' => 1, 'msg' => $e->getMessage(), 'action' => $typeCache];
         }
         return $response;
-
     }
 }
 
 if (!function_exists('sc_set_cache')) {
-/**
- * [sc_set_cache description]
- *
- * @param   [string]$cacheIndex  [$cacheIndex description]
- * @param   [type]$value       [$value description]
- * @param   [seconds]$time        [$time description]
- * @param   null               [ description]
- *
- * @return  [type]             [return description]
- */
-    function sc_set_cache($cacheIndex , $value, $time = null)
+    /**
+     * [sc_set_cache description]
+     *
+     * @param   [string]$cacheIndex  [$cacheIndex description]
+     * @param   [type]$value       [$value description]
+     * @param   [seconds]$time        [$time description]
+     * @param   null               [ description]
+     *
+     * @return  [type]             [return description]
+     */
+    function sc_set_cache($cacheIndex, $value, $time = null)
     {
-        if(empty($cacheIndex)) {
+        if (empty($cacheIndex)) {
             return ;
         }
         $seconds = $time ?? (sc_config_global('cache_time') ?? 600);

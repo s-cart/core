@@ -17,7 +17,8 @@ class AdminCustomer extends ShopCustomer
      *
      * @return  [type]       [return description]
      */
-    public static function getCustomerAdmin($id) {
+    public static function getCustomerAdmin($id)
+    {
         return self::with('addresses')
         ->where('id', $id)
         ->where('store_id', session('adminStoreId'))
@@ -31,7 +32,8 @@ class AdminCustomer extends ShopCustomer
      *
      * @return  [type]       [return description]
      */
-    public static function getCustomerAdminJson($id) {
+    public static function getCustomerAdminJson($id)
+    {
         return self::getCustomerAdmin($id)
         ->toJson();
     }
@@ -43,7 +45,8 @@ class AdminCustomer extends ShopCustomer
      *
      * @return  [type]               [return description]
      */
-    public static function getCustomerListAdmin(array $dataSearch) {
+    public static function getCustomerListAdmin(array $dataSearch)
+    {
         $keyword          = $dataSearch['keyword'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
@@ -76,7 +79,8 @@ class AdminCustomer extends ShopCustomer
      *
      * @return  [type]       [return description]
      */
-    public static function getAddress($id) {
+    public static function getAddress($id)
+    {
         return ShopCustomerAddress::find($id);
     }
 
@@ -85,7 +89,8 @@ class AdminCustomer extends ShopCustomer
      *
      * @return  [type]  [return description]
      */
-    public static function deleteAddress($id) {
+    public static function deleteAddress($id)
+    {
         return ShopCustomerAddress::where('id', $id)->delete();
     }
 
@@ -94,7 +99,8 @@ class AdminCustomer extends ShopCustomer
      *
      * @return  [type]  [return description]
      */
-    public static function getTotalCustomer() {
+    public static function getTotalCustomer()
+    {
         return self::count();
     }
 
@@ -104,7 +110,8 @@ class AdminCustomer extends ShopCustomer
      *
      * @return  [type]  [return description]
      */
-    public static function getTopCustomer() {
+    public static function getTopCustomer()
+    {
         return self::orderBy('id', 'desc')
             ->limit(10)
             ->get();
@@ -124,5 +131,4 @@ class AdminCustomer extends ShopCustomer
         }
         return self::$getList;
     }
-
 }

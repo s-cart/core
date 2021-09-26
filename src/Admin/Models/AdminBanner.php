@@ -4,6 +4,7 @@ namespace SCart\Core\Admin\Models;
 
 use SCart\Core\Front\Models\ShopBanner;
 use SCart\Core\Front\Models\ShopBannerStore;
+
 class AdminBanner extends ShopBanner
 {
     /**
@@ -13,7 +14,8 @@ class AdminBanner extends ShopBanner
      *
      * @return  [type]       [return description]
      */
-    public static function getBannerAdmin($id) {
+    public static function getBannerAdmin($id)
+    {
         $data = self::where('id', $id);
         if (sc_config_global('MultiVendorPro')) {
             if (session('adminStoreId') != SC_ID_ROOT) {
@@ -34,7 +36,8 @@ class AdminBanner extends ShopBanner
      *
      * @return  [type]               [return description]
      */
-    public static function getBannerListAdmin(array $dataSearch) {
+    public static function getBannerListAdmin(array $dataSearch)
+    {
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
         $keyword          = $dataSearch['keyword'] ?? '';
@@ -69,9 +72,8 @@ class AdminBanner extends ShopBanner
      *
      * @return  [type]              [return description]
      */
-    public static function createBannerAdmin(array $dataInsert) {
-
+    public static function createBannerAdmin(array $dataInsert)
+    {
         return self::create($dataInsert);
     }
-
 }

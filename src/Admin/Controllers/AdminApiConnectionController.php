@@ -22,7 +22,7 @@ class AdminApiConnectionController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_api_connection.create'),
             'layout' => 'index',
@@ -73,10 +73,10 @@ class AdminApiConnectionController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -106,20 +106,19 @@ class AdminApiConnectionController extends RootAdminController
         $obj = ShopApiConnection::create($dataInsert);
 
         return redirect()->route('admin_api_connection.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
 
-public function edit($id)
-{
-    $api_connection = ShopApiConnection::find($id);
-    if ($api_connection === null) {
-        return 'no data';
-    }
-    $data = [
+    public function edit($id)
+    {
+        $api_connection = ShopApiConnection::find($id);
+        if ($api_connection === null) {
+            return 'no data';
+        }
+        $data = [
         'title' => sc_language_render('admin.api_connection.list'),
         'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('admin.api_connection.edit'),
         'subTitle' => '',
@@ -128,7 +127,7 @@ public function edit($id)
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
         'buttonSort' => 0, // 1 - Enable button sort
-        'css' => '', 
+        'css' => '',
         'js' => '',
         'api_connection' => $api_connection,
         'url_action' => sc_route_admin('admin_api_connection.edit', ['id' => $api_connection['id']]),
@@ -136,7 +135,7 @@ public function edit($id)
         'id' => $id,
     ];
 
-    $listTh = [
+        $listTh = [
         'id' => 'ID',
         'description' => sc_language_render('admin.api_connection.description'),
         'apiconnection' => sc_language_render('admin.api_connection.apikey'),
@@ -147,13 +146,13 @@ public function edit($id)
         'action' => sc_language_render('action.title'),
     ];
 
-    $obj = new ShopApiConnection;
-    $obj = $obj->orderBy('id', 'desc');
-    $dataTmp = $obj->paginate(20);
+        $obj = new ShopApiConnection;
+        $obj = $obj->orderBy('id', 'desc');
+        $dataTmp = $obj->paginate(20);
 
-    $dataTr = [];
-    foreach ($dataTmp as $key => $row) {
-        $dataTr[] = [
+        $dataTr = [];
+        foreach ($dataTmp as $key => $row) {
+            $dataTr[] = [
             'id' => $row['id'],
             'description' => $row['description'],
             'apiconnection' => $row['apiconnection'],
@@ -167,26 +166,26 @@ public function edit($id)
               <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
               ',
         ];
+        }
+
+        $data['listTh'] = $listTh;
+        $data['dataTr'] = $dataTr;
+        $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
+    
+        $data['rightContentMain'] = '<input class="switch-data-config" data-store=0 name="api_connection_required" type="checkbox"  '.(sc_config_global('api_connection_required')?'checked':'').'><br> '.sc_language_render('admin.api_connection.api_connection_required_help');
+
+        $optionSort = '';
+        $data['urlSort'] = sc_route_admin('admin_api_connection.index', request()->except(['_token', '_pjax', 'sort_order']));
+        $data['optionSort'] = $optionSort;
+        return view($this->templatePathAdmin.'screen.api_connection')
+        ->with($data);
     }
 
-    $data['listTh'] = $listTh;
-    $data['dataTr'] = $dataTr;
-    $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
-    
-    $data['rightContentMain'] = '<input class="switch-data-config" data-store=0 name="api_connection_required" type="checkbox"  '.(sc_config_global('api_connection_required')?'checked':'').'><br> '.sc_language_render('admin.api_connection.api_connection_required_help');
 
-    $optionSort = '';
-    $data['urlSort'] = sc_route_admin('admin_api_connection.index', request()->except(['_token', '_pjax', 'sort_order']));
-    $data['optionSort'] = $optionSort;
-    return view($this->templatePathAdmin.'screen.api_connection')
-        ->with($data);
-}
-
-
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $data = request()->all();
@@ -196,7 +195,7 @@ public function edit($id)
             'description' => 'string|required',
             'apiconnection' => 'string|required|regex:/(^([0-9a-z\-_]+)$)/|unique:"'.ShopApiConnection::class.'",apiconnection,' . $obj->id . ',id',
             'apikey' => 'string|regex:/(^([0-9a-z\-_]+)$)/',
-        ],[
+        ], [
             'apiconnection.regex' => sc_language_render('admin.api_connection.validate_regex'),
             'apikey.regex' => sc_language_render('admin.api_connection.validate_regex'),
         ]);
@@ -206,7 +205,7 @@ public function edit($id)
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'description' => $data['description'],
@@ -220,13 +219,12 @@ public function edit($id)
 
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -239,10 +237,8 @@ Need mothod destroy to boot deleting in model
         }
     }
 
-    public function generateKey(){
-
+    public function generateKey()
+    {
         return response()->json(['data' => md5(time())]);
     }
-
-
 }

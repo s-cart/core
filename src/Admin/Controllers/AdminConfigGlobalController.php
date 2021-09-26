@@ -6,7 +6,10 @@ use SCart\Core\Admin\Models\AdminConfig;
 
 class AdminConfigGlobalController extends RootAdminController
 {
-    public $templates, $currencies, $languages, $timezones;
+    public $templates;
+    public $currencies;
+    public $languages;
+    public $timezones;
 
     public function __construct()
     {
@@ -18,7 +21,7 @@ class AdminConfigGlobalController extends RootAdminController
         $data = [
             'title' => sc_language_render('admin.config.webhook'),
             'subTitle' => '',
-            'icon' => 'fa fa-indent',  
+            'icon' => 'fa fa-indent',
         ];
         return view($this->templatePathAdmin.'screen.webhook')
             ->with($data);
@@ -29,7 +32,8 @@ class AdminConfigGlobalController extends RootAdminController
      *
      * @return  [type]  [return description]
      */
-    public function update() {
+    public function update()
+    {
         $data = request()->all();
         $name = $data['name'];
         $value = $data['value'];
@@ -43,7 +47,8 @@ class AdminConfigGlobalController extends RootAdminController
             $error = 1;
             $msg = $e->getMessage();
         }
-        return response()->json([
+        return response()->json(
+            [
             'error' => $error,
             'field' => $name,
             'value' => $value,
@@ -51,5 +56,4 @@ class AdminConfigGlobalController extends RootAdminController
             ]
         );
     }
-
 }

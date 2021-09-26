@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
     Return price with tax
@@ -27,7 +27,7 @@ if (!function_exists('sc_render_option_price')) {
         $tmpAtt = explode('__', $arrtribute);
         $add_price = $tmpAtt[1] ?? 0;
         if ($add_price) {
-            $html = $tmpAtt[0].'<span class="option_price">(+'.sc_currency_render($add_price,$currency, $rate).')</span>';
+            $html = $tmpAtt[0].'<span class="option_price">(+'.sc_currency_render($add_price, $currency, $rate).')</span>';
         } else {
             $html = $tmpAtt[0];
         }

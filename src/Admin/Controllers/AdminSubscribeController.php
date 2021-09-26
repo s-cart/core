@@ -19,7 +19,6 @@ class AdminSubscribeController extends RootAdminController
      */
     public function index()
     {
-
         $data = [
             'title'         => sc_language_render('subscribe.admin.list'),
             'subTitle'      => '',
@@ -28,7 +27,7 @@ class AdminSubscribeController extends RootAdminController
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -87,7 +86,7 @@ class AdminSubscribeController extends RootAdminController
                            </a>';
         //=menuRight
 
-        //menuSort        
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -96,7 +95,7 @@ class AdminSubscribeController extends RootAdminController
         $data['optionSort'] = $optionSort;
         //=menuSort
 
-        //menuSearch        
+        //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_subscribe.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 350px;">
@@ -112,10 +111,10 @@ class AdminSubscribeController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
     public function create()
     {
         $data = [
@@ -130,10 +129,10 @@ class AdminSubscribeController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -156,7 +155,6 @@ class AdminSubscribeController extends RootAdminController
         AdminSubscribe::createSubscribeAdmin($dataInsert);
 
         return redirect()->route('admin_subscribe.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /**
@@ -202,7 +200,7 @@ class AdminSubscribeController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-    //Edit
+        //Edit
 
         $dataUpdate = [
             'email' => $data['email'],
@@ -214,7 +212,6 @@ class AdminSubscribeController extends RootAdminController
 
         return redirect()->route('admin_subscribe.index')
                 ->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -230,7 +227,7 @@ class AdminSubscribeController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -245,8 +242,8 @@ class AdminSubscribeController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return AdminSubscribe::getSubscribeAdmin($id);
     }
-
 }

@@ -7,7 +7,6 @@ use Validator;
 
 class AdminProductPropertyController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -28,7 +27,7 @@ class AdminProductPropertyController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_product_property.create'),
         ];
@@ -67,10 +66,10 @@ class AdminProductPropertyController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -97,19 +96,18 @@ class AdminProductPropertyController extends RootAdminController
         $obj = ShopProductProperty::create($dataInsert);
 //
         return redirect()->route('admin_product_property.edit', ['id' => $obj['id']])->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
-public function edit($id)
-{
-    $product_property = ShopProductProperty::find($id);
-    if(!$product_property) {
-        return 'No data';
-    }
-    $data = [
+    /**
+     * Form edit
+     */
+    public function edit($id)
+    {
+        $product_property = ShopProductProperty::find($id);
+        if (!$product_property) {
+            return 'No data';
+        }
+        $data = [
         'title' => sc_language_render('admin.product_property.list'),
         'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
@@ -118,26 +116,26 @@ public function edit($id)
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
         'buttonSort' => 0, // 1 - Enable button sort
-        'css' => '', 
+        'css' => '',
         'js' => '',
         'url_action' => sc_route_admin('admin_product_property.edit', ['id' => $product_property['id']]),
         'product_property' => $product_property,
         'id' => $id,
     ];
 
-    $listTh = [
+        $listTh = [
         'id' => 'ID',
         'code' => sc_language_render('admin.product_property.code'),
         'name' => sc_language_render('admin.product_property.name'),
         'action' => sc_language_render('action.title'),
     ];
-    $obj = new ShopProductProperty;
-    $obj = $obj->orderBy('id', 'desc');
-    $dataTmp = $obj->paginate(20);
+        $obj = new ShopProductProperty;
+        $obj = $obj->orderBy('id', 'desc');
+        $dataTmp = $obj->paginate(20);
 
-    $dataTr = [];
-    foreach ($dataTmp as $key => $row) {
-        $dataTr[] = [
+        $dataTr = [];
+        foreach ($dataTmp as $key => $row) {
+            $dataTr[] = [
             'id' => $row['id'],
             'code' => $row['code'] ?? 'N/A',
             'name' => $row['name'] ?? 'N/A',
@@ -147,21 +145,21 @@ public function edit($id)
               <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
               ',
         ];
+        }
+
+        $data['listTh'] = $listTh;
+        $data['dataTr'] = $dataTr;
+        $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
+
+        $data['layout'] = 'edit';
+        return view($this->templatePathAdmin.'screen.product_property')
+        ->with($data);
     }
 
-    $data['listTh'] = $listTh;
-    $data['dataTr'] = $dataTr;
-    $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
-
-    $data['layout'] = 'edit';
-    return view($this->templatePathAdmin.'screen.product_property')
-        ->with($data);
-}
-
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $data = request()->all();
@@ -190,13 +188,12 @@ public function edit($id)
         $obj->update($dataUpdate);
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-    Delete list item
-    Need mothod destroy to boot deleting in model
- */
+    /*
+        Delete list item
+        Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -208,5 +205,4 @@ public function edit($id)
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

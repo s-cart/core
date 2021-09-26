@@ -156,5 +156,4 @@ class PermissionMiddleware
             SC_ADMIN_PREFIX . '/uploads/move',
         ];
     }
-
 }

@@ -26,7 +26,7 @@ class AdminNewsController extends RootAdminController
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -77,7 +77,7 @@ class AdminNewsController extends RootAdminController
             $dataMap = [
                 'id' => $row['id'],
                 'title' => $row['title'],
-                'image' => sc_image_render($row['image'], '50px',null,$row['title']),
+                'image' => sc_image_render($row['image'], '50px', null, $row['title']),
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             ];
@@ -86,7 +86,7 @@ class AdminNewsController extends RootAdminController
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
-                    $storeTmp = array_map(function($code) {
+                    $storeTmp = array_map(function ($code) {
                         return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
                     }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
@@ -112,7 +112,7 @@ class AdminNewsController extends RootAdminController
                            </a>';
         //=menuRight
 
-        //menuSort       
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -121,7 +121,7 @@ class AdminNewsController extends RootAdminController
         $data['optionSort'] = $optionSort;
         //=menuSort
 
-        //menuSearch        
+        //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_news.index') . '" id="button_search">
                     <div class="input-group input-group" style="width: 350px;">
@@ -159,13 +159,12 @@ class AdminNewsController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
-
         $data = request()->all();
 
         $langFirst = array_key_first(sc_language_all()->toArray()); //get first code language active
@@ -173,12 +172,15 @@ class AdminNewsController extends RootAdminController
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
 
-        $validator = Validator::make($data, [
+        $validator = Validator::make(
+            $data,
+            [
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
             'descriptions.*.title' => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:300',
-            ], [
+            ],
+            [
                 'alias.regex' => sc_language_render('admin.news.alias_validate'),
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.news.title')]),
             ]
@@ -223,7 +225,6 @@ class AdminNewsController extends RootAdminController
         sc_clear_cache('cache_news');
 
         return redirect()->route('admin_news.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /**
@@ -231,7 +232,6 @@ class AdminNewsController extends RootAdminController
      */
     public function edit($id)
     {
-
         $news = AdminNews::getNewsAdmin($id);
         if (!$news) {
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
@@ -265,12 +265,15 @@ class AdminNewsController extends RootAdminController
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
 
-        $validator = Validator::make($data, [
+        $validator = Validator::make(
+            $data,
+            [
             'descriptions.*.title' => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:300',
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
-            ], [
+            ],
+            [
                 'alias.regex' => sc_language_render('admin.news.alias_validate'),
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.news.title')]),
             ]
@@ -281,7 +284,7 @@ class AdminNewsController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput($data);
         }
-    //Edit
+        //Edit
         $dataUpdate = [
             'image' => $data['image'],
             'alias' => $data['alias'],
@@ -316,7 +319,6 @@ class AdminNewsController extends RootAdminController
         sc_clear_cache('cache_news');
 
         return redirect()->route('admin_news.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -332,7 +334,7 @@ class AdminNewsController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -349,7 +351,8 @@ class AdminNewsController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return AdminNews::getNewsAdmin($id);
     }
 }

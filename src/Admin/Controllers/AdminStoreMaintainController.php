@@ -16,9 +16,9 @@ class AdminStoreMaintainController extends RootAdminController
         $this->languages = ShopLanguage::getListActive();
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function index()
     {
         $id = session('adminStoreId');
@@ -39,9 +39,9 @@ class AdminStoreMaintainController extends RootAdminController
             ->with($data);
     }
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit()
     {
         $id = session('adminStoreId');
@@ -76,6 +76,5 @@ class AdminStoreMaintainController extends RootAdminController
         }
 //
         return redirect()->route('admin_store_maintain.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 }

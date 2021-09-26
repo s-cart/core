@@ -26,18 +26,20 @@ class Languages extends Model
      *
      * @return void
      */
-    public static function getPosition() {
+    public static function getPosition()
+    {
         return self::groupBy('position')->pluck('position')->all();
     }
 
     /**
-     * Get all 
+     * Get all
      *
      * @param [type] $lang
      * @param [type] $position
      * @return void
      */
-    public static function getLanguagesPosition($lang, $position, $keyword = null) {
+    public static function getLanguagesPosition($lang, $position, $keyword = null)
+    {
         if (!empty($lang)) {
             $languages = ShopLanguage::getCodeAll();
             if (!in_array($lang, array_keys($languages))) {

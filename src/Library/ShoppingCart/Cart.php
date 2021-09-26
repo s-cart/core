@@ -225,8 +225,8 @@ class Cart
      *
      * @return  [type]  [return description]
      */
-    public function getItemsGroupByStore() {
-
+    public function getItemsGroupByStore()
+    {
         return $this->content()->groupBy('storeId');
     }
 
@@ -451,13 +451,14 @@ class Cart
     /**
      * Get subtotal group by store
      */
-    public function getSubtotalGroupByStore() {
+    public function getSubtotalGroupByStore()
+    {
         $arraySubtotal = [];
         $carts = $this->getItemsGroupByStore();
         foreach ($carts as $storeId => $cart) {
             $subTotal = $cart->reduce(function ($subTotal, $item) {
                 return $subTotal + ($item->qty * $item->price);
-            }, 0 );
+            }, 0);
             $arraySubtotal[$storeId] = $subTotal;
         }
         return $arraySubtotal;
@@ -469,8 +470,9 @@ class Cart
      * @param [type] $identifier
      * @return void
      */
-    private function _updateDatabase($identifier) {
-            $this->removeDatabase($identifier);
-            $this->saveDatabase($identifier);
-    }    
+    private function _updateDatabase($identifier)
+    {
+        $this->removeDatabase($identifier);
+        $this->saveDatabase($identifier);
+    }
 }

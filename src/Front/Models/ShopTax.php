@@ -61,14 +61,15 @@ class ShopTax extends Model
      *
      * @return  [type]  [return description]
      */
-    public static function checkStatus() {
+    public static function checkStatus()
+    {
         $arrTaxId = self::getArrayId();
         if (self::$status === null) {
-            if(!sc_config('product_tax')) {
+            if (!sc_config('product_tax')) {
                 $status = 0;
             } else {
-                if(!in_array(sc_config('product_tax'), $arrTaxId)) {
-                    $status = 0; 
+                if (!in_array(sc_config('product_tax'), $arrTaxId)) {
+                    $status = 0;
                 } else {
                     $status = sc_config('product_tax');
                 }
@@ -77,5 +78,4 @@ class ShopTax extends Model
         }
         return self::$status;
     }
-
 }

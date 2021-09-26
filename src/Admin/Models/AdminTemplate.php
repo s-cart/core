@@ -14,7 +14,8 @@ class AdminTemplate extends Model
      *
      * @return void
      */
-    public function getListTemplate() {
+    public function getListTemplate()
+    {
         return $this->pluck('name', 'key')
             ->all();
     }
@@ -25,7 +26,8 @@ class AdminTemplate extends Model
      *
      * @return void
      */
-    public function getListTemplateActive() {
+    public function getListTemplateActive()
+    {
         $arrTemplate =  $this->where('status', 1)
             ->pluck('name', 'key')
             ->all();

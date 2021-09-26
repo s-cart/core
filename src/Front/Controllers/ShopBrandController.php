@@ -18,7 +18,8 @@ class ShopBrandController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function allBrandsProcessFront(...$params) {
+    public function allBrandsProcessFront(...$params)
+    {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             sc_lang_switch($lang);
@@ -77,7 +78,8 @@ class ShopBrandController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function brandDetailProcessFront(...$params) {
+    public function brandDetailProcessFront(...$params)
+    {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             $alias = $params[1] ?? '';
@@ -91,7 +93,7 @@ class ShopBrandController extends RootFrontController
     /**
      * brand detail
      * @param  [string] $alias
-     * @return [view] 
+     * @return [view]
      */
     private function _brandDetail($alias)
     {
@@ -112,7 +114,7 @@ class ShopBrandController extends RootFrontController
         }
 
         $brand = (new ShopBrand)->getDetail($alias, $type = 'alias');
-        if($brand) {
+        if ($brand) {
             $products = (new ShopProduct)
             ->getProductToBrand($brand->id)
             ->setPaginate()

@@ -24,7 +24,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]       [return description]
      */
-    public static function getOrderAdmin($id) {
+    public static function getOrderAdmin($id)
+    {
         return self::with(['details', 'orderTotal'])
         ->where('id', $id)
         ->first();
@@ -37,7 +38,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]               [return description]
      */
-    public static function getOrderListAdmin(array $dataSearch) {
+    public static function getOrderListAdmin(array $dataSearch)
+    {
         $keyword      = $dataSearch['keyword'] ?? '';
         $email        = $dataSearch['email'] ?? '';
         $from_to      = $dataSearch['from_to'] ?? '';
@@ -53,30 +55,30 @@ class AdminOrder extends ShopOrder
             $orderList = $orderList->where('store_id', $storeId);
         }
 
-        if($order_status) {
+        if ($order_status) {
             $orderList = $orderList->where('status', $order_status);
         }
         if ($keyword) {
-            $orderList = $orderList->where(function ($sql) use($keyword){
-                $sql->Where('id', $keyword );
+            $orderList = $orderList->where(function ($sql) use ($keyword) {
+                $sql->Where('id', $keyword);
             });
         }
 
         if ($email) {
-            $orderList = $orderList->where(function ($sql) use($email){
-                $sql->Where('email', 'like' , '%'.$email.'%' );
+            $orderList = $orderList->where(function ($sql) use ($email) {
+                $sql->Where('email', 'like', '%'.$email.'%');
             });
         }
 
         if ($from_to) {
-            $orderList = $orderList->where(function ($sql) use($from_to){
-                $sql->Where('created_at', '>=' , $from_to);
+            $orderList = $orderList->where(function ($sql) use ($from_to) {
+                $sql->Where('created_at', '>=', $from_to);
             });
         }
 
         if ($end_to) {
-            $orderList = $orderList->where(function ($sql) use($end_to){
-                $sql->Where('created_at', '<=' , $end_to);
+            $orderList = $orderList->where(function ($sql) use ($end_to) {
+                $sql->Where('created_at', '<=', $end_to);
             });
         }
 
@@ -99,7 +101,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]               [return description]
      */
-    public static function insertOrderTotal($dataInsert) {
+    public static function insertOrderTotal($dataInsert)
+    {
         $dataInsert = sc_clean($dataInsert);
         return ShopOrderTotal::insert($dataInsert);
     }
@@ -129,7 +132,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]          [return description]
      */
-    public static function getRowOrderTotal($rowId) {
+    public static function getRowOrderTotal($rowId)
+    {
         return ShopOrderTotal::find($rowId);
     }
 
@@ -200,7 +204,7 @@ class AdminOrder extends ShopOrder
             $order = self::getOrderAdmin($orderId);
             $details = $order->details;
             $tax = $subTotal = 0;
-            if($details->count()) {
+            if ($details->count()) {
                 foreach ($details as $detail) {
                     $tax +=$detail->tax;
                     $subTotal +=$detail->total_price;
@@ -258,7 +262,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]  [return description]
     */
-    public static function getCountryInYear() {
+    public static function getCountryInYear()
+    {
         return self::selectRaw('country, count(id) as count')
         ->whereRaw('DATE(created_at) >=  DATE_SUB(DATE(NOW()), INTERVAL 12 MONTH)')
         ->groupBy('country')
@@ -271,7 +276,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]  [return description]
     */
-    public static function getDeviceInYear() {
+    public static function getDeviceInYear()
+    {
         return self::selectRaw('device_type, count(id) as count')
         ->whereRaw('DATE(created_at) >=  DATE_SUB(DATE(NOW()), INTERVAL 12 MONTH)')
         ->groupBy('device_type')
@@ -284,8 +290,9 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]  [return description]
      */
-    public static function getSumOrderTotalInYear() {
-            return self::selectRaw('DATE_FORMAT(created_at, "%Y-%m") AS ym, SUM(total/exchange_rate) AS total_amount')
+    public static function getSumOrderTotalInYear()
+    {
+        return self::selectRaw('DATE_FORMAT(created_at, "%Y-%m") AS ym, SUM(total/exchange_rate) AS total_amount')
             ->whereRaw('DATE_FORMAT(created_at, "%Y-%m") >=  DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH), "%Y-%m")')
             ->groupBy('ym')->get();
     }
@@ -295,7 +302,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]  [return description]
      */
-    public static function getSumOrderTotalInMonth() {
+    public static function getSumOrderTotalInMonth()
+    {
         return self::selectRaw('DATE_FORMAT(created_at, "%m-%d") AS md,
         SUM(total/exchange_rate) AS total_amount, count(id) AS total_order')
             ->whereRaw('created_at >=  DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH), "%Y-%m-%d")')
@@ -308,7 +316,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]  [return description]
      */
-    public static function getTotalOrder() {
+    public static function getTotalOrder()
+    {
         return self::count();
     }
 
@@ -318,7 +327,8 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]  [return description]
      */
-    public static function getCountOrderNew() {
+    public static function getCountOrderNew()
+    {
         return self::where('status', 1)
         ->count();
     }
@@ -328,11 +338,11 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]  [return description]
      */
-    public static function getTopOrder() {
+    public static function getTopOrder()
+    {
         return self::with('orderStatus')
             ->orderBy('id', 'desc')
             ->limit(10)
             ->get();
     }
-    
 }

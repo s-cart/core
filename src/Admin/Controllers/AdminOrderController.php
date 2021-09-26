@@ -17,15 +17,15 @@ use Validator;
 
 class AdminOrderController extends RootAdminController
 {
-    public $statusPayment, 
-    $statusOrder, 
-    $statusShipping, 
-    $statusOrderMap, 
-    $statusShippingMap, 
-    $statusPaymentMap, 
-    $currency, 
-    $country, 
-    $countryMap;
+    public $statusPayment;
+    public $statusOrder;
+    public $statusShipping;
+    public $statusOrderMap;
+    public $statusShippingMap;
+    public $statusPaymentMap;
+    public $currency;
+    public $country;
+    public $countryMap;
 
     public function __construct()
     {
@@ -35,7 +35,6 @@ class AdminOrderController extends RootAdminController
         $this->country        = ShopCountry::getCodeAll();
         $this->statusPayment  = ShopPaymentStatus::getIdAll();
         $this->statusShipping = ShopShippingStatus::getIdAll();
-
     }
 
     /**
@@ -45,7 +44,6 @@ class AdminOrderController extends RootAdminController
      */
     public function index()
     {
-
         $data = [
             'title'         => sc_language_render('order.admin.list'),
             'subTitle'      => '',
@@ -54,7 +52,7 @@ class AdminOrderController extends RootAdminController
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -137,7 +135,7 @@ class AdminOrderController extends RootAdminController
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
-                    $storeTmp = array_map(function($code) {
+                    $storeTmp = array_map(function ($code) {
                         return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
                     }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
@@ -164,7 +162,7 @@ class AdminOrderController extends RootAdminController
                            </a>';
         //=menuRight
 
-        //menuSort        
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $sort) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $sort . '</option>';
@@ -173,7 +171,7 @@ class AdminOrderController extends RootAdminController
         $data['urlSort'] = sc_route_admin('admin_order.index', request()->except(['_token', '_pjax', 'sort_order']));
         //=menuSort
 
-        //menuSearch        
+        //menuSearch
         $optionStatus = '';
         foreach ($this->statusOrder as $key => $status) {
             $optionStatus .= '<option  ' . (($order_status == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -221,7 +219,7 @@ class AdminOrderController extends RootAdminController
                         </div>
                     </div>
                 </form>';
-    //=menuSearch
+        //=menuSearch
 
 
         return view($this->templatePathAdmin.'screen.list')
@@ -282,52 +280,52 @@ class AdminOrderController extends RootAdminController
             'payment_method'  => 'required',
             'shipping_method' => 'required',
         ];
-        if(sc_config_admin('customer_lastname')) {
+        if (sc_config_admin('customer_lastname')) {
             $validate['last_name'] = 'required|max:100';
         }
-        if(sc_config_admin('customer_address2')) {
+        if (sc_config_admin('customer_address2')) {
             $validate['address2'] = 'required|max:100';
         }
-        if(sc_config_admin('customer_address3')) {
+        if (sc_config_admin('customer_address3')) {
             $validate['address3'] = 'required|max:100';
         }
-        if(sc_config_admin('customer_phone')) {
+        if (sc_config_admin('customer_phone')) {
             $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{6,12}$/');
         }
-        if(sc_config_admin('customer_country')) {
+        if (sc_config_admin('customer_country')) {
             $validate['country'] = 'required|min:2';
         }
-        if(sc_config_admin('customer_postcode')) {
+        if (sc_config_admin('customer_postcode')) {
             $validate['postcode'] = 'required|min:5';
         }
-        if(sc_config_admin('customer_company')) {
+        if (sc_config_admin('customer_company')) {
             $validate['company'] = 'required|min:3';
         }
         $messages = [
-            'last_name.required'       => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.last_name')]),
-            'first_name.required'      => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.first_name')]),
-            'email.required'           => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.email')]),
-            'address1.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.address1')]),
-            'address2.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.address2')]),
-            'address3.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.address3')]),
-            'phone.required'           => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.phone')]),
-            'country.required'         => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.country')]),
-            'postcode.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.postcode')]),
-            'company.required'         => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.company')]),
-            'sex.required'             => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.sex')]),
-            'birthday.required'        => sc_language_render('validation.required',['attribute'=> sc_language_render('cart.birthday')]),
-            'email.email'              => sc_language_render('validation.email',['attribute'=> sc_language_render('cart.email')]),
+            'last_name.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.last_name')]),
+            'first_name.required'      => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.first_name')]),
+            'email.required'           => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.email')]),
+            'address1.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address1')]),
+            'address2.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address2')]),
+            'address3.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address3')]),
+            'phone.required'           => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.phone')]),
+            'country.required'         => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.country')]),
+            'postcode.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.postcode')]),
+            'company.required'         => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.company')]),
+            'sex.required'             => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.sex')]),
+            'birthday.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.birthday')]),
+            'email.email'              => sc_language_render('validation.email', ['attribute'=> sc_language_render('cart.email')]),
             'phone.regex'              => sc_language_render('customer.phone_regex'),
-            'postcode.min'             => sc_language_render('validation.min',['attribute'=> sc_language_render('cart.postcode')]),
-            'country.min'              => sc_language_render('validation.min',['attribute'=> sc_language_render('cart.country')]),
-            'first_name.max'           => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.first_name')]),
-            'email.max'                => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.email')]),
-            'address1.max'             => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.address1')]),
-            'address2.max'             => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.address2')]),
-            'address3.max'             => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.address3')]),
-            'last_name.max'            => sc_language_render('validation.max',['attribute'=> sc_language_render('cart.last_name')]),
-            'birthday.date'            => sc_language_render('validation.date',['attribute'=> sc_language_render('cart.birthday')]),
-            'birthday.date_format'     => sc_language_render('validation.date_format',['attribute'=> sc_language_render('cart.birthday')]),
+            'postcode.min'             => sc_language_render('validation.min', ['attribute'=> sc_language_render('cart.postcode')]),
+            'country.min'              => sc_language_render('validation.min', ['attribute'=> sc_language_render('cart.country')]),
+            'first_name.max'           => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.first_name')]),
+            'email.max'                => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.email')]),
+            'address1.max'             => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address1')]),
+            'address2.max'             => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address2')]),
+            'address3.max'             => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address3')]),
+            'last_name.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.last_name')]),
+            'birthday.date'            => sc_language_render('validation.date', ['attribute'=> sc_language_render('cart.birthday')]),
+            'birthday.date_format'     => sc_language_render('validation.date_format', ['attribute'=> sc_language_render('cart.birthday')]),
             'shipping_method.required' => sc_language_render('cart.validation.shippingMethod_required'),
             'payment_method.required'  => sc_language_render('cart.validation.paymentMethod_required'),
         ];
@@ -372,7 +370,6 @@ class AdminOrderController extends RootAdminController
         ]);
         //
         return redirect()->route('admin_order.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /**
@@ -411,7 +408,8 @@ class AdminOrderController extends RootAdminController
                 'paymentMethod' => $paymentMethod,
                 'shippingMethod' => $shippingMethod,
                 'country' => $this->country,
-            ]);
+            ]
+        );
     }
 
     /**
@@ -491,14 +489,13 @@ class AdminOrderController extends RootAdminController
         $orderUpdated = AdminOrder::getOrderAdmin($orderId);
         if ($orderUpdated->balance == 0 && $orderUpdated->total != 0) {
             $style = 'style="color:#0e9e33;font-weight:bold;"';
-        } else
-        if ($orderUpdated->balance < 0) {
+        } elseif ($orderUpdated->balance < 0) {
             $style = 'style="color:#ff2f00;font-weight:bold;"';
         } else {
             $style = 'style="font-weight:bold;"';
         }
         $blance = '<tr ' . $style . ' class="data-balance"><td>' . sc_language_render('order.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
-        return response()->json(['error' => 0, 'detail' => 
+        return response()->json(['error' => 0, 'detail' =>
             [
                 'total' => sc_currency_format($orderUpdated->total),
                 'subtotal' => sc_currency_format($orderUpdated->subtotal),
@@ -572,7 +569,6 @@ class AdminOrderController extends RootAdminController
             } catch (\Throwable $e) {
                 return response()->json(['error' => 1, 'msg' => 'Error: ' . $e->getMessage()]);
             }
-
         }
         return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
     }
@@ -626,8 +622,7 @@ class AdminOrderController extends RootAdminController
 
             if ($orderUpdated->balance == 0 && $orderUpdated->total != 0) {
                 $style = 'style="color:#0e9e33;font-weight:bold;"';
-            } else
-            if ($orderUpdated->balance < 0) {
+            } elseif ($orderUpdated->balance < 0) {
                 $style = 'style="color:#ff2f00;font-weight:bold;"';
             } else {
                 $style = 'style="font-weight:bold;"';
@@ -690,7 +685,6 @@ class AdminOrderController extends RootAdminController
             return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
         } catch (\Throwable $e) {
             return response()->json(['error' => 1, 'msg' => 'Error: ' . $e->getMessage()]);
-
         }
     }
 
@@ -707,7 +701,7 @@ class AdminOrderController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -755,7 +749,7 @@ class AdminOrderController extends RootAdminController
             if ($order->details) {
                 foreach ($order->details as $key => $detail) {
                     $arrAtt = json_decode($detail->attribute, true);
-                    if($arrAtt) {
+                    if ($arrAtt) {
                         $htmlAtt = '';
                         foreach ($arrAtt as $groupAtt => $att) {
                             $htmlAtt .= $attributesGroup[$groupAtt] .':'.sc_render_option_price($att, $order['currency'], $order['exchange_rate']);
@@ -771,7 +765,6 @@ class AdminOrderController extends RootAdminController
             }
             $options = ['filename' => 'Order ' . $orderId];
             return \Export::export($type, $data, $options);
-
         } else {
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
@@ -780,8 +773,8 @@ class AdminOrderController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return AdminOrder::getOrderAdmin($id);
     }
-
 }

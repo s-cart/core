@@ -16,16 +16,16 @@ class ApiConnection
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!sc_config('api_connection_required')) {
+        if (!sc_config('api_connection_required')) {
             return $next($request);
         }
         $apiconnection = $request->header('apiconnection');
         $apikey = $request->header('apikey');
-        if(!$apiconnection || !$apikey) {
+        if (!$apiconnection || !$apikey) {
             return  response()->json(['error' => 1, 'msg' => 'apiconnection or apikey not found']);
         }
         $check = \SCart\Core\Front\Models\ShopApiConnection::check($apiconnection, $apikey);
-        if($check) {
+        if ($check) {
             $check->update(['last_active' => date('Y-m-d H:i:s')]);
             return $next($request);
         } else {

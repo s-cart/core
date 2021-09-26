@@ -34,13 +34,11 @@ class Authenticate
      */
     protected function shouldPassThrough($request)
     {
-
         $routeName = $request->path();
         $excepts = [
             SC_ADMIN_PREFIX . '/auth/login',
             SC_ADMIN_PREFIX . '/auth/logout',
         ];
         return in_array($routeName, $excepts);
-
     }
 }

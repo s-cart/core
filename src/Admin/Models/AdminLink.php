@@ -14,7 +14,8 @@ class AdminLink extends ShopLink
      *
      * @return  [type]       [return description]
      */
-    public static function getLinkAdmin($id) {
+    public static function getLinkAdmin($id)
+    {
         $data = self::where('id', $id);
         if (sc_config_global('MultiVendorPro')) {
             if (session('adminStoreId') != SC_ID_ROOT) {
@@ -35,7 +36,8 @@ class AdminLink extends ShopLink
      *
      * @return  [type]               [return description]
      */
-    public static function getLinkListAdmin() {
+    public static function getLinkListAdmin()
+    {
         $linkList = (new AdminLink);
         $tableLink = $linkList->getTable();
         if (sc_config_global('MultiVendorPro')) {
@@ -59,9 +61,9 @@ class AdminLink extends ShopLink
      *
      * @return  [type]              [return description]
      */
-    public static function createLinkAdmin(array $dataInsert) {
+    public static function createLinkAdmin(array $dataInsert)
+    {
         $dataInsert = sc_clean($dataInsert);
         return self::create($dataInsert);
     }
-
 }

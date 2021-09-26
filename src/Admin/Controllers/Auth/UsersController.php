@@ -10,7 +10,8 @@ use Validator;
 
 class UsersController extends RootAdminController
 {
-    public $permissions, $roles;
+    public $permissions;
+    public $roles;
     public function __construct()
     {
         parent::__construct();
@@ -28,7 +29,7 @@ class UsersController extends RootAdminController
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -66,7 +67,6 @@ class UsersController extends RootAdminController
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];
             $obj = $obj->orderBy($field, $sort_field);
-
         } else {
             $obj = $obj->orderBy('id', 'desc');
         }
@@ -105,13 +105,13 @@ class UsersController extends RootAdminController
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
-//menuRight
+        //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_user.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
                            <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
-//=menuRight
+        //=menuRight
 
-//menuSort
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -120,9 +120,9 @@ class UsersController extends RootAdminController
         $data['urlSort'] = sc_route_admin('admin_user.index', request()->except(['_token', '_pjax', 'sort_order']));
 
         $data['optionSort'] = $optionSort;
-//=menuSort
+        //=menuSort
 
-//menuSearch
+        //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_user.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 350px;">
@@ -132,17 +132,17 @@ class UsersController extends RootAdminController
                     </div>
                 </div>
                 </form>';
-//=menuSearch
+        //=menuSearch
 
 
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
     public function create()
     {
         $data = [
@@ -160,10 +160,10 @@ class UsersController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -197,11 +197,11 @@ class UsersController extends RootAdminController
         $permission = $data['permission'] ?? [];
 
         //Process role special
-        if(in_array(1, $roles)) {
+        if (in_array(1, $roles)) {
             // If group admin
             $roles = [1];
             $permission = [];
-        } else if(in_array(2, $roles)) {
+        } elseif (in_array(2, $roles)) {
             // If group onlyview
             $roles = [2];
             $permission = [];
@@ -218,12 +218,11 @@ class UsersController extends RootAdminController
         }
 
         return redirect()->route('admin_user.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function edit($id)
     {
         $user = AdminUser::find($id);
@@ -246,9 +245,9 @@ class UsersController extends RootAdminController
             ->with($data);
     }
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $user = AdminUser::find($id);
@@ -269,7 +268,7 @@ class UsersController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
         $dataUpdate = [
             'name' => $data['name'],
             'username' => strtolower($data['username']),
@@ -281,9 +280,9 @@ class UsersController extends RootAdminController
         }
         AdminUser::updateInfo($dataUpdate, $id);
 
-        if(!in_array($user->id, SC_GUARD_ADMIN)) {
+        if (!in_array($user->id, SC_GUARD_ADMIN)) {
             $roles = $data['roles'] ?? [];
-            $permission = $data['permission'] ?? []; 
+            $permission = $data['permission'] ?? [];
             $user->roles()->detach();
             $user->permissions()->detach();
             //Insert roles
@@ -294,18 +293,16 @@ class UsersController extends RootAdminController
             if ($permission) {
                 $user->permissions()->attach($permission);
             }
-
         }
 
 //
         return redirect()->route('admin_user.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list Item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list Item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -318,5 +315,4 @@ Need mothod destroy to boot deleting in model
             return response()->json(['error' => 1, 'msg' => '']);
         }
     }
-
 }

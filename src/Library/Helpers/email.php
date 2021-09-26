@@ -18,9 +18,9 @@ function sc_send_mail($view, array $dataView = [], array $emailConfig = [], arra
 {
     if (!empty(sc_config('email_action_mode'))) {
         if (!empty(sc_config('email_action_queue'))) {
-            dispatch(new SendEmailJob($view, $dataView,  $emailConfig, $attach));
+            dispatch(new SendEmailJob($view, $dataView, $emailConfig, $attach));
         } else {
-            sc_process_send_mail($view, $dataView,  $emailConfig, $attach);
+            sc_process_send_mail($view, $dataView, $emailConfig, $attach);
         }
     } else {
         return false;
@@ -37,7 +37,8 @@ function sc_send_mail($view, array $dataView = [], array $emailConfig = [], arra
  *
  * @return  [][][]                [return description]
  */
-function sc_process_send_mail($view, array $dataView = [], array $emailConfig = [], array $attach = []) {
+function sc_process_send_mail($view, array $dataView = [], array $emailConfig = [], array $attach = [])
+{
     try {
         Mail::send(new SendMail($view, $dataView, $emailConfig, $attach));
     } catch (\Throwable $e) {

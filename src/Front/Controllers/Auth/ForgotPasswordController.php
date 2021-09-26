@@ -30,7 +30,6 @@ class ForgotPasswordController extends RootFrontController
     {
         parent::__construct();
         $this->middleware('guest');
-
     }
 
     /**
@@ -43,7 +42,7 @@ class ForgotPasswordController extends RootFrontController
     {
         $data = $request->all();
         $dataMapping['email'] = 'required|string|email';
-        if(sc_captcha_method() && in_array('forgot', sc_captcha_page())) {
+        if (sc_captcha_method() && in_array('forgot', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
             $dataMapping['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
@@ -73,7 +72,8 @@ class ForgotPasswordController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function showLinkRequestFormProcessFront(...$params) {
+    public function showLinkRequestFormProcessFront(...$params)
+    {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
             sc_lang_switch($lang);
@@ -83,7 +83,7 @@ class ForgotPasswordController extends RootFrontController
 
     /**
      * Form forgot password
-     * @return [view] 
+     * @return [view]
      */
     private function _showLinkRequestForm()
     {
@@ -91,8 +91,8 @@ class ForgotPasswordController extends RootFrontController
             return redirect()->route('home');
         }
         $viewCaptcha = '';
-        if(sc_captcha_method() && in_array('forgot', sc_captcha_page())) {
-            if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
+        if (sc_captcha_method() && in_array('forgot', sc_captcha_page())) {
+            if (view()->exists(sc_captcha_method()->pathPlugin.'::render')) {
                 $dataView = [
                     'titleButton' => sc_language_render('action.submit'),
                     'idForm' => 'form-process',
@@ -102,7 +102,8 @@ class ForgotPasswordController extends RootFrontController
             }
         }
         sc_check_view($this->templatePath . '.auth.forgot');
-        return view($this->templatePath . '.auth.forgot',
+        return view(
+            $this->templatePath . '.auth.forgot',
             array(
                 'title'       => sc_language_render('customer.password_forgot'),
                 'layout_page' => 'shop_auth',

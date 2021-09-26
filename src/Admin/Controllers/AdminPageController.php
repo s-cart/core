@@ -26,7 +26,7 @@ class AdminPageController extends RootAdminController
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -78,7 +78,7 @@ class AdminPageController extends RootAdminController
         foreach ($dataTmp as $key => $row) {
             $dataMap = [
                 'title' => $row['title'],
-                'image' => sc_image_render($row['image'], '50px','',$row['title']),
+                'image' => sc_image_render($row['image'], '50px', '', $row['title']),
                 'alias' => $row['alias'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             ];
@@ -87,7 +87,7 @@ class AdminPageController extends RootAdminController
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
-                    $storeTmp = array_map(function($code) {
+                    $storeTmp = array_map(function ($code) {
                         return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
                     }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
@@ -113,7 +113,7 @@ class AdminPageController extends RootAdminController
                            </a>';
         //=menuRight
 
-        //menuSort        
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -123,7 +123,7 @@ class AdminPageController extends RootAdminController
         $data['optionSort'] = $optionSort;
         //=menuSort
 
-        //menuSearch        
+        //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_page.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 350px;">
@@ -166,18 +166,20 @@ class AdminPageController extends RootAdminController
      */
     public function postCreate()
     {
-
         $data = request()->all();
         $langFirst = array_key_first(sc_language_all()->toArray()); //get first code language active
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['descriptions'][$langFirst]['title'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-        $validator = Validator::make($data, [
+        $validator = Validator::make(
+            $data,
+            [
                 'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
                 'descriptions.*.title' => 'required|string|max:200',
                 'descriptions.*.keyword' => 'nullable|string|max:200',
                 'descriptions.*.description' => 'nullable|string|max:300',
-            ], [
+            ],
+            [
                 'alias.regex' => sc_language_render('admin.page.alias_validate'),
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.page.title')]),
             ]
@@ -219,7 +221,6 @@ class AdminPageController extends RootAdminController
 
         sc_clear_cache('cache_page');
         return redirect()->route('admin_page.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /*
@@ -261,12 +262,15 @@ class AdminPageController extends RootAdminController
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
 
-        $validator = Validator::make($data, [
+        $validator = Validator::make(
+            $data,
+            [
                 'descriptions.*.title' => 'required|string|max:200',
                 'descriptions.*.keyword' => 'nullable|string|max:200',
                 'descriptions.*.description' => 'nullable|string|max:300',
                 'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
-            ], [
+            ],
+            [
                 'alias.regex' => sc_language_render('admin.page.alias_validate'),
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.page.title')]),
             ]
@@ -311,7 +315,6 @@ class AdminPageController extends RootAdminController
 
         sc_clear_cache('cache_page');
         return redirect()->route('admin_page.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -327,7 +330,7 @@ class AdminPageController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -343,8 +346,8 @@ class AdminPageController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return AdminPage::getPageAdmin($id);
     }
-
 }

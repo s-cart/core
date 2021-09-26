@@ -7,7 +7,6 @@ use Validator;
 
 class AdminStoreLinkController extends RootAdminController
 {
-
     protected $arrTarget;
 
     public function __construct()
@@ -16,10 +15,11 @@ class AdminStoreLinkController extends RootAdminController
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
     }
 
-    public function arrGroup() {
+    public function arrGroup()
+    {
         return   [
-            'menu' => sc_language_render('admin.link_position.menu'), 
-            'menu_left' => sc_language_render('admin.link_position.menu_left'), 
+            'menu' => sc_language_render('admin.link_position.menu'),
+            'menu_left' => sc_language_render('admin.link_position.menu_left'),
             'menu_right' => sc_language_render('admin.link_position.menu_right'),
             'footer' => sc_language_render('admin.link_position.footer'),
             'footer_right' => sc_language_render('admin.link_position.footer_right'),
@@ -29,7 +29,6 @@ class AdminStoreLinkController extends RootAdminController
     }
     public function index()
     {
-
         $data = [
             'title' => sc_language_render('admin.link.list'),
             'subTitle' => '',
@@ -38,7 +37,7 @@ class AdminStoreLinkController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
         ];
         //Process add content
@@ -91,7 +90,7 @@ class AdminStoreLinkController extends RootAdminController
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
-                    $storeTmp = array_map(function($code) {
+                    $storeTmp = array_map(function ($code) {
                         return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
                     }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
@@ -103,7 +102,6 @@ class AdminStoreLinkController extends RootAdminController
             <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
             ';
             $dataTr[] = $dataMap;
-
         }
 
         $data['listTh'] = $listTh;
@@ -182,12 +180,11 @@ class AdminStoreLinkController extends RootAdminController
         }
 
         return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function edit($id)
     {
         $link = AdminLink::getLinkAdmin($id);
@@ -253,7 +250,6 @@ class AdminStoreLinkController extends RootAdminController
         }
 
         return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -269,7 +265,7 @@ class AdminStoreLinkController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -284,9 +280,8 @@ class AdminStoreLinkController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return AdminLink::getLinkAdmin($id);
     }
-
-
 }

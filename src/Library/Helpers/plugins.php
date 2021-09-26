@@ -1,4 +1,4 @@
-<?php  
+<?php
 
 if (!function_exists('sc_get_all_plugin')) {
     /**
@@ -6,7 +6,7 @@ if (!function_exists('sc_get_all_plugin')) {
      *
      * @param   [string]  $code  Payment, Shipping
      *
-     * @return  [array] 
+     * @return  [array]
      */
     function sc_get_all_plugin($code)
     {
@@ -49,7 +49,7 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      *
      * @param   [string]  $code  Payment, Shipping
      *
-     * @return  [array] 
+     * @return  [array]
      */
     function sc_get_all_plugin_actived($code)
     {
@@ -57,9 +57,9 @@ if (!function_exists('sc_get_all_plugin_actived')) {
         
         $pluginsActived = [];
         $allPlugins = sc_get_all_plugin($code);
-        if(count($allPlugins)){
+        if (count($allPlugins)) {
             foreach ($allPlugins as $keyPlugin => $plugin) {
-                if(sc_config($keyPlugin) && sc_config($keyPlugin)['value'] == 1){
+                if (sc_config($keyPlugin) && sc_config($keyPlugin)['value'] == 1) {
                     $pluginsActived[$keyPlugin] = $plugin;
                 }
             }
@@ -75,11 +75,12 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      * @param   [string]  $code  Shipping, Payment,..
      * @param   [string]  $key  Paypal,..
      *
-     * @return  [array] 
+     * @return  [array]
      */
 
     if (!function_exists('sc_get_class_plugin_controller')) {
-        function sc_get_class_plugin_controller($code, $key = null){
+        function sc_get_class_plugin_controller($code, $key = null)
+        {
             if ($key == null) {
                 return null;
             }
@@ -101,11 +102,11 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      * @param   [string]  $code  Shipping, Payment,..
      * @param   [string]  $key  Paypal,..
      *
-     * @return  [array] 
+     * @return  [array]
      */
     if (!function_exists('sc_get_class_plugin_config')) {
-        function sc_get_class_plugin_config($code, $key){
-
+        function sc_get_class_plugin_config($code, $key)
+        {
             $code = sc_word_format_class($code);
             $key = sc_word_format_class($key);
 
@@ -122,7 +123,7 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      * @param   [string]  $code  Block, Cms, Payment, shipping..
      * @param   [string]  $key  Content,Paypal, Cash..
      *
-     * @return  [array] 
+     * @return  [array]
      */
     if (!function_exists('sc_get_plugin_namespace')) {
         function sc_get_plugin_namespace($code, $key)

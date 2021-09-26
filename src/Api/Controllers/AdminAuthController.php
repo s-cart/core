@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
+
 class AdminAuthController extends RootFrontController
 {
     use AuthTrait;
@@ -23,7 +24,6 @@ class AdminAuthController extends RootFrontController
      */
     public function login(Request $request)
     {
-
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
@@ -47,7 +47,7 @@ class AdminAuthController extends RootFrontController
 
         $token = $tokenResult->token;
 
-        if ($request->remember_me){
+        if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
         }
 
@@ -81,10 +81,9 @@ class AdminAuthController extends RootFrontController
         return Auth::guard('admin');
     }
 
-    public function getInfo() {
-
+    public function getInfo()
+    {
         $user = request()->user();
         return response()->json($user);
-    } 
-  
+    }
 }

@@ -7,7 +7,6 @@ use Validator;
 
 class AdminTaxController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -24,7 +23,7 @@ class AdminTaxController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_tax.create'),
         ];
@@ -63,10 +62,10 @@ class AdminTaxController extends RootAdminController
     }
 
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -74,7 +73,7 @@ class AdminTaxController extends RootAdminController
         $validator = Validator::make($data, [
             'name' => 'required',
             'value' => 'numeric|min:0',
-        ],[
+        ], [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.tax.name')]),
         ]);
 
@@ -91,7 +90,6 @@ class AdminTaxController extends RootAdminController
         $obj = ShopTax::create($dataInsert);
 
         return redirect()->route('admin_tax.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /**
@@ -100,7 +98,7 @@ class AdminTaxController extends RootAdminController
     public function edit($id)
     {
         $tax = ShopTax::find($id);
-        if(!$tax) {
+        if (!$tax) {
             return 'No data';
         }
         $data = [
@@ -112,7 +110,7 @@ class AdminTaxController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_tax.edit', ['id' => $tax['id']]),
             'tax' => $tax,
@@ -153,9 +151,9 @@ class AdminTaxController extends RootAdminController
     }
 
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $tax = ShopTax::find($id);
@@ -163,7 +161,7 @@ class AdminTaxController extends RootAdminController
         $validator = Validator::make($data, [
             'name' => 'required',
             'value' => 'numeric|min:0',
-        ],[
+        ], [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.tax.name')]),
         ]);
 
@@ -172,7 +170,7 @@ class AdminTaxController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput($data);
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'value' => (int)$data['value'],
@@ -183,13 +181,12 @@ class AdminTaxController extends RootAdminController
 
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -201,5 +198,4 @@ Need mothod destroy to boot deleting in model
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

@@ -12,11 +12,13 @@ class AdminStore extends ShopStore
      *
      * @return  [type]  [return description]
      */
-    public static function getAllTemplateUsed() {
+    public static function getAllTemplateUsed()
+    {
         return self::pluck('template')->all();
     }
 
-    public static function insertDescription(array $data) {
+    public static function insertDescription(array $data)
+    {
         return ShopStoreDescription::insert($data);
     }
 
@@ -27,11 +29,12 @@ class AdminStore extends ShopStore
      *
      * @return  [type]        [return description]
      */
-    public static function updateDescription(array $data) {
+    public static function updateDescription(array $data)
+    {
         $checkDes = ShopStoreDescription::where('store_id', $data['storeId'])
         ->where('lang', $data['lang'])
         ->first();
-        if($checkDes) {
+        if ($checkDes) {
             return ShopStoreDescription::where('store_id', $data['storeId'])
             ->where('lang', $data['lang'])
             ->update([$data['name'] => $data['value']]);
@@ -44,6 +47,5 @@ class AdminStore extends ShopStore
                 ]
             );
         }
-
     }
 }

@@ -27,13 +27,13 @@ class ShopCartController extends RootFrontController
 
     /**
      * Process front get cart
-     * 
+     *
      * Step 01.1
      *
      * @param [type] ...$params
      * @return void
      */
-    public function getCartFront(...$params) 
+    public function getCartFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -132,11 +132,11 @@ class ShopCartController extends RootFrontController
      * Process front checkout screen
      *
      * Step 03.1
-     * 
+     *
      * @param [type] ...$params
      * @return void
      */
-    public function getCheckoutFront(...$params) 
+    public function getCheckoutFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -148,9 +148,9 @@ class ShopCartController extends RootFrontController
 
     /**
      * Screen checkout
-     * 
+     *
      * Step 03.2
-     * 
+     *
      * @return [type] [description]
      */
     private function _getCheckout()
@@ -182,7 +182,7 @@ class ShopCartController extends RootFrontController
                 $moduleClass = $sourcesPayment[$module['key']].'\AppConfig';
                 $paymentMethod[$module['key']] = (new $moduleClass)->getData();
             }
-        }        
+        }
 
         //Total
         $moduleTotal = sc_get_plugin_installed('total');
@@ -193,7 +193,7 @@ class ShopCartController extends RootFrontController
                 $moduleClass = $sourcesTotal[$module['key']].'\AppConfig';
                 $totalMethod[$module['key']] = (new $moduleClass)->getData();
             }
-        } 
+        }
 
         // Shipping address
         $customer = auth()->user();
@@ -232,7 +232,6 @@ class ShopCartController extends RootFrontController
                     'comment'         => '',
                 ];
             }
-
         } else {
             $addressDefaul = [
                 'first_name'      => '',
@@ -255,8 +254,8 @@ class ShopCartController extends RootFrontController
 
         //Process captcha
         $viewCaptcha = '';
-        if(sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
-            if (view()->exists(sc_captcha_method()->pathPlugin.'::render')){
+        if (sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
+            if (view()->exists(sc_captcha_method()->pathPlugin.'::render')) {
                 $dataView = [
                     'titleButton' => sc_language_render('cart.checkout'),
                     'idForm' => 'form-process',
@@ -297,9 +296,9 @@ class ShopCartController extends RootFrontController
 
     /**
      * Checkout process, from screen checkout to checkout confirm
-     * 
+     *
      * Step 04
-     * 
+     *
      */
     public function processCheckout()
     {
@@ -392,7 +391,7 @@ class ShopCartController extends RootFrontController
             } else {
                 $validate['company'] = config('validation.customer.company_null', 'nullable|string|max:100');
             }
-        } 
+        }
 
         if (sc_config('customer_name_kana')) {
             if (sc_config('customer_name_kana_required')) {
@@ -433,15 +432,15 @@ class ShopCartController extends RootFrontController
             'paymentMethod.required'  => sc_language_render('cart.validation.paymentMethod_required'),
         ];
 
-        if(sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
+        if (sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
             $validate['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
 
 
         $v = Validator::make(
-            $data, 
-            $validate, 
+            $data,
+            $validate,
             $messages
         );
         if ($v->fails()) {
@@ -509,13 +508,13 @@ class ShopCartController extends RootFrontController
 
     /**
      * Process front checkout confirm screen
-     * 
+     *
      * Step 05.1
      *
      * @param [type] ...$params
      * @return void
      */
-    public function getCheckoutConfirmFront(...$params) 
+    public function getCheckoutConfirmFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -526,9 +525,9 @@ class ShopCartController extends RootFrontController
 
     /**
      * Checkout screen
-     * 
+     *
      * Step 05.2
-     * 
+     *
      * @return [view]
      */
     private function _getCheckoutConfirm()
@@ -607,9 +606,9 @@ class ShopCartController extends RootFrontController
 
     /**
      * Create new order
-     * 
+     *
      * Step 06
-     * 
+     *
      * @return [redirect]
      */
     public function addOrder(Request $request)
@@ -767,7 +766,7 @@ class ShopCartController extends RootFrontController
 
     /**
      * Add to cart by method post, always use in the product page detail
-     * 
+     *
      * @return [redirect]
      */
     public function addToCart()
@@ -825,7 +824,6 @@ class ShopCartController extends RootFrontController
                     ['error' => sc_language_render('product.dont_allow_sale', ['sku' => $product->sku])]
                 );
         }
-
     }
 
 
@@ -913,7 +911,6 @@ class ShopCartController extends RootFrontController
                             ]
                         );
                     }
-
                 } else {
                     return response()->json(
                         [
@@ -935,7 +932,6 @@ class ShopCartController extends RootFrontController
                 'msg'        => sc_language_render('cart.add_to_cart_success', ['instance' => ($instance == 'default') ? 'cart' : $instance]),
             ]
         );
-
     }
 
     /**
@@ -979,7 +975,6 @@ class ShopCartController extends RootFrontController
                 ]
             );
         }
-
     }
 
     /**
@@ -988,7 +983,7 @@ class ShopCartController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function wishlistProcessFront(...$params) 
+    public function wishlistProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -1003,7 +998,6 @@ class ShopCartController extends RootFrontController
      */
     private function _wishlist()
     {
-
         $wishlist = Cart::instance('wishlist')->content();
         sc_check_view($this->templatePath . '.screen.shop_wishlist');
         return view(
@@ -1027,7 +1021,7 @@ class ShopCartController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function compareProcessFront(...$params) 
+    public function compareProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -1067,7 +1061,7 @@ class ShopCartController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function clearCartProcessFront(...$params) 
+    public function clearCartProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -1096,7 +1090,7 @@ class ShopCartController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function removeItemProcessFront(...$params) 
+    public function removeItemProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -1129,7 +1123,7 @@ class ShopCartController extends RootFrontController
     
     /**
      * Complete order
-     * 
+     *
      * Step 07
      *
      * @return [redirect]
@@ -1144,7 +1138,7 @@ class ShopCartController extends RootFrontController
         $shippingMethod = session('shippingMethod');
         $totalMethod    = session('totalMethod', []);
 
-        if ($orderID == 0){
+        if ($orderID == 0) {
             return redirect()->route('home', ['error' => 'Error Order ID!']);
         }
 
@@ -1178,7 +1172,6 @@ class ShopCartController extends RootFrontController
             $checkContent = (new ShopEmailTemplate)->where('group', 'order_success_to_admin')->where('status', 1)->first();
             $checkContentCustomer = (new ShopEmailTemplate)->where('group', 'order_success_to_customer')->where('status', 1)->first();
             if ($checkContent || $checkContentCustomer) {
-
                 $orderDetail = '';
                 $orderDetail .= '<tr>
                                     <td>' . sc_language_render('email.order.sort') . '</td>
@@ -1244,9 +1237,8 @@ class ShopCartController extends RootFrontController
                     sc_currency_render($data['total'], '', '', '', false),
                 ];
 
-                // Send mail order success to admin 
+                // Send mail order success to admin
                 if (sc_config('order_success_to_admin') && $checkContent) {
-
                     $content = $checkContent->text;
                     $content = preg_replace($dataFind, $dataReplace, $content);
                     $dataView = [
@@ -1288,7 +1280,6 @@ class ShopCartController extends RootFrontController
                     sc_send_mail($this->templatePath . '.mail.order_success_to_customer', $dataView, $config, $attach);
                 }
             }
-
         }
 
         $dataResponse = [
@@ -1302,11 +1293,11 @@ class ShopCartController extends RootFrontController
      * Process front page order success
      *
      * Step 08.1
-     * 
+     *
      * @param [type] ...$params
      * @return void
      */
-    public function orderSuccessProcessFront(...$params) 
+    public function orderSuccessProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -1319,11 +1310,11 @@ class ShopCartController extends RootFrontController
      * Page order success
      *
      * Step 08.2
-     * 
+     *
      * @return  [view]
      */
-    private function _orderSuccess() {
-
+    private function _orderSuccess()
+    {
         if (!session('orderID')) {
             return redirect()->route('home');
         }
@@ -1345,7 +1336,8 @@ class ShopCartController extends RootFrontController
     /**
      * Remove cart store ordered
      */
-    private function clearCartStore() {
+    private function clearCartStore()
+    {
         $dataCheckout = session('dataCheckout') ?? '';
         if ($dataCheckout) {
             foreach ($dataCheckout as $key => $row) {
@@ -1357,7 +1349,8 @@ class ShopCartController extends RootFrontController
     /**
      * Clear session
      */
-    private function clearSession() {
+    private function clearSession()
+    {
         session()->forget('paymentMethod'); //destroy paymentMethod
         session()->forget('shippingMethod'); //destroy shippingMethod
         session()->forget('totalMethod'); //destroy totalMethod

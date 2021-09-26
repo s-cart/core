@@ -5,7 +5,6 @@ use App\Http\Controllers\RootAdminController;
 
 class AdminSeoConfigController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -13,7 +12,6 @@ class AdminSeoConfigController extends RootAdminController
     
     public function index()
     {
-
         $data = [
             'title'    => sc_language_render('admin.seo.config'),
             'subTitle' => '',
@@ -23,5 +21,4 @@ class AdminSeoConfigController extends RootAdminController
         return view($this->templatePathAdmin.'screen.seo_config')
             ->with($data);
     }
-
 }

@@ -18,7 +18,8 @@ class AdminPage extends ShopPage
      *
      * @return  [type]       [return description]
      */
-    public static function getPageAdmin($id) {
+    public static function getPageAdmin($id)
+    {
         $data = self::where('id', $id);
         if (sc_config_global('MultiVendorPro')) {
             if (session('adminStoreId') != SC_ID_ROOT) {
@@ -39,7 +40,8 @@ class AdminPage extends ShopPage
      *
      * @return  [type]               [return description]
      */
-    public static function getPageListAdmin(array $dataSearch) {
+    public static function getPageListAdmin(array $dataSearch)
+    {
         $keyword          = $dataSearch['keyword'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
@@ -60,7 +62,7 @@ class AdminPage extends ShopPage
         }
 
         if ($keyword) {
-            $pageList = $pageList->where(function ($sql) use($tableDescription, $keyword){
+            $pageList = $pageList->where(function ($sql) use ($tableDescription, $keyword) {
                 $sql->where($tableDescription . '.title', 'like', '%' . $keyword . '%');
             });
         }
@@ -80,7 +82,7 @@ class AdminPage extends ShopPage
 
     /**
      * Get array title page
-     * user for admin 
+     * user for admin
      *
      * @return  [type]  [return description]
      */
@@ -132,8 +134,8 @@ class AdminPage extends ShopPage
      *
      * @return  [type]              [return description]
      */
-    public static function createPageAdmin(array $dataInsert) {
-
+    public static function createPageAdmin(array $dataInsert)
+    {
         return self::create($dataInsert);
     }
 
@@ -145,8 +147,8 @@ class AdminPage extends ShopPage
      *
      * @return  [type]              [return description]
      */
-    public static function insertDescriptionAdmin(array $dataInsert) {
-
+    public static function insertDescriptionAdmin(array $dataInsert)
+    {
         return ShopPageDescription::create($dataInsert);
     }
 }

@@ -7,7 +7,6 @@ use Validator;
 
 class AdminPaymentStatusController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -28,7 +27,7 @@ class AdminPaymentStatusController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_payment_status.create'),
         ];
@@ -65,10 +64,10 @@ class AdminPaymentStatusController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -91,19 +90,18 @@ class AdminPaymentStatusController extends RootAdminController
         $obj = ShopPaymentStatus::create($dataInsert);
 //
         return redirect()->route('admin_payment_status.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
-public function edit($id)
-{
-    $payment_status = ShopPaymentStatus::find($id);
-    if(!$payment_status) {
-        return 'No data';
-    }
-    $data = [
+    /**
+     * Form edit
+     */
+    public function edit($id)
+    {
+        $payment_status = ShopPaymentStatus::find($id);
+        if (!$payment_status) {
+            return 'No data';
+        }
+        $data = [
         'title' => sc_language_render('admin.payment_status.list'),
         'title_action' => '<i class="fa fa-edit" aria-hidden="true"></i> ' . sc_language_render('action.edit'),
         'subTitle' => '',
@@ -112,25 +110,25 @@ public function edit($id)
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
         'buttonSort' => 0, // 1 - Enable button sort
-        'css' => '', 
+        'css' => '',
         'js' => '',
         'url_action' => sc_route_admin('admin_payment_status.edit', ['id' => $payment_status['id']]),
         'payment_status' => $payment_status,
         'id' => $id,
     ];
 
-    $listTh = [
+        $listTh = [
         'id' => 'ID',
         'name' => sc_language_render('admin.payment_status.name'),
         'action' => sc_language_render('admin.payment_status.action.title'),
     ];
-    $obj = new ShopPaymentStatus;
-    $obj = $obj->orderBy('id', 'desc');
-    $dataTmp = $obj->paginate(20);
+        $obj = new ShopPaymentStatus;
+        $obj = $obj->orderBy('id', 'desc');
+        $dataTmp = $obj->paginate(20);
 
-    $dataTr = [];
-    foreach ($dataTmp as $key => $row) {
-        $dataTr[] = [
+        $dataTr = [];
+        foreach ($dataTmp as $key => $row) {
+            $dataTr[] = [
             'id' => $row['id'],
             'name' => $row['name'] ?? 'N/A',
             'action' => '
@@ -139,21 +137,21 @@ public function edit($id)
               <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
               ',
         ];
+        }
+
+        $data['listTh'] = $listTh;
+        $data['dataTr'] = $dataTr;
+        $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
+        $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
+
+        $data['layout'] = 'edit';
+        return view($this->templatePathAdmin.'screen.payment_status')
+        ->with($data);
     }
 
-    $data['listTh'] = $listTh;
-    $data['dataTr'] = $dataTr;
-    $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
-    $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
-
-    $data['layout'] = 'edit';
-    return view($this->templatePathAdmin.'screen.payment_status')
-        ->with($data);
-}
-
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $data = request()->all();
@@ -170,7 +168,7 @@ public function edit($id)
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
         $dataUpdate = [
             'name' => $data['name'],
         ];
@@ -178,13 +176,12 @@ public function edit($id)
         $obj->update($dataUpdate);
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -196,5 +193,4 @@ Need mothod destroy to boot deleting in model
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

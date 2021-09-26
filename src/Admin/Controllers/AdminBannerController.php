@@ -5,6 +5,7 @@ use App\Http\Controllers\RootAdminController;
 use Validator;
 use SCart\Core\Admin\Models\AdminBanner;
 use SCart\Core\Front\Models\ShopBannerType;
+
 class AdminBannerController extends RootAdminController
 {
     protected $arrTarget;
@@ -14,7 +15,7 @@ class AdminBannerController extends RootAdminController
         parent::__construct();
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
         $this->dataType  = (new ShopBannerType)->pluck('name', 'code')->all();
-        if(sc_config_global('MultiVendorPro')) {
+        if (sc_config_global('MultiVendorPro')) {
             $this->dataType['background-store'] = 'Background store';
             $this->dataType['breadcrumb-store'] = 'Breadcrumb store';
         }
@@ -31,7 +32,7 @@ class AdminBannerController extends RootAdminController
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -98,7 +99,7 @@ class AdminBannerController extends RootAdminController
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
-                    $storeTmp = array_map(function($code) {
+                    $storeTmp = array_map(function ($code) {
                         return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
                     }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
@@ -110,7 +111,6 @@ class AdminBannerController extends RootAdminController
             <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
             ';
             $dataTr[] = $dataMap;
-
         }
 
         $data['listTh'] = $listTh;
@@ -127,7 +127,7 @@ class AdminBannerController extends RootAdminController
                            </a>';
         //=menuRight
 
-        //menuSearch        
+        //menuSearch
         $data['topMenuRight'][] = '
         <form action="' . sc_route_admin('admin_banner.index') . '" id="button_search">
         <div class="input-group input-group" style="width: 350px;">
@@ -140,7 +140,7 @@ class AdminBannerController extends RootAdminController
         //=menuSearch
 
 
-        //menuSort        
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -153,10 +153,10 @@ class AdminBannerController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
     public function create()
     {
         $data = [
@@ -173,10 +173,10 @@ class AdminBannerController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -213,12 +213,11 @@ class AdminBannerController extends RootAdminController
         }
 
         return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function edit($id)
     {
         $banner = AdminBanner::getBannerAdmin($id);
@@ -286,7 +285,6 @@ class AdminBannerController extends RootAdminController
         }
 
         return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -302,7 +300,7 @@ class AdminBannerController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -318,8 +316,8 @@ class AdminBannerController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return AdminBanner::getBannerAdmin($id);
     }
-
 }

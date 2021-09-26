@@ -133,8 +133,8 @@ class AdminUser extends Authenticatable
      *
      * @return  [type]        [return description]
      */
-    public  function checkUrlAllowAccess($url) {
-
+    public function checkUrlAllowAccess($url)
+    {
         if ($this->isAdministrator() || $this->isViewAll()) {
             return true;
         }
@@ -143,17 +143,17 @@ class AdminUser extends Authenticatable
         $pathCheck = strtolower(str_replace($arrScheme, '', $url));
         if ($listUrlAllowAccess) {
             foreach ($listUrlAllowAccess as  $pathAllow) {
-                if ($pathCheck === $pathAllow   
+                if ($pathCheck === $pathAllow
                     || $pathCheck  === $pathAllow.'/'
-                    || (Str::endsWith($pathAllow, '*') && ($pathCheck === str_replace('/*', '', $pathAllow) || strpos($pathCheck, str_replace('*', '', $pathAllow)) === 0)) 
+                    || (Str::endsWith($pathAllow, '*') && ($pathCheck === str_replace('/*', '', $pathAllow) || strpos($pathCheck, str_replace('*', '', $pathAllow)) === 0))
                     || (Str::endsWith($pathAllow, '{id}') && ($pathCheck === str_replace('/{id}', '', $pathAllow) || strpos($pathCheck, str_replace('{id}', '', $pathAllow)) === 0))
                     ) {
-                        return true;
-                    }
+                    return true;
+                }
             }
         }
         return false;
-    } 
+    }
 
 
     /**
@@ -238,13 +238,13 @@ class AdminUser extends Authenticatable
                     return false;
                 }
                 $actions = explode(',', $permission->http_uri);
-                    foreach ($actions as $key => $action) {
+                foreach ($actions as $key => $action) {
                     $method = explode('::', $action);
                     if (
-                        in_array($method[0], ['ANY', 'POST']) 
+                        in_array($method[0], ['ANY', 'POST'])
                         && (
-                        SC_ADMIN_PREFIX . '/config/*' == $method[1] 
-                        || SC_ADMIN_PREFIX . '/config/update_info' == $method[1] 
+                            SC_ADMIN_PREFIX . '/config/*' == $method[1]
+                        || SC_ADMIN_PREFIX . '/config/update_info' == $method[1]
                         || SC_ADMIN_PREFIX . '/config' == $method[1]
                         )
                     ) {

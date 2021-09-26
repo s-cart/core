@@ -14,7 +14,7 @@ class AdminShopFront extends RootFrontController
 {
     /**
      * display list category root (parent = 0)
-     * @return [json]  
+     * @return [json]
      */
     public function allCategory()
     {
@@ -86,7 +86,7 @@ class AdminShopFront extends RootFrontController
     public function brandDetail($id)
     {
         $brand = (new ShopBrand)->find($id);
-        if($brand) {
+        if ($brand) {
             return response()->json($brand, 200);
         } else {
             return response()->json('Not found', 404);
@@ -156,5 +156,4 @@ class AdminShopFront extends RootFrontController
             return response()->json('Not found', 404);
         }
     }
-
 }

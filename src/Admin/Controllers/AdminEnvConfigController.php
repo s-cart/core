@@ -5,7 +5,6 @@ use App\Http\Controllers\RootAdminController;
 
 class AdminEnvConfigController extends RootAdminController
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -13,7 +12,6 @@ class AdminEnvConfigController extends RootAdminController
     
     public function index()
     {
-
         $data = [
             'title'    => sc_language_render('admin.env.title'),
             'subTitle' => '',
@@ -23,5 +21,4 @@ class AdminEnvConfigController extends RootAdminController
         return view($this->templatePathAdmin.'screen.env')
             ->with($data);
     }
-
 }

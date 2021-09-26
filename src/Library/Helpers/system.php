@@ -1,4 +1,4 @@
-<?php 
+<?php
 use SCart\Core\Admin\Models\AdminConfig;
 use SCart\Core\Admin\Models\AdminStore;
 use SCart\Core\Front\Models\ShopStoreBlockContent;
@@ -52,14 +52,14 @@ if (!function_exists('sc_config')) {
 
 
 if (!function_exists('sc_config_admin')) {
-/**
- * Get config value in adin with session store id
- *
- * @param   [type]$key  [$key description]
- * @param   null        [ description]
- *
- * @return  [type]      [return description]
- */
+    /**
+     * Get config value in adin with session store id
+     *
+     * @param   [type]$key  [$key description]
+     * @param   null        [ description]
+     *
+     * @return  [type]      [return description]
+     */
     function sc_config_admin($key = null)
     {
         return sc_config($key, session('adminStoreId'));
@@ -93,7 +93,7 @@ if (!function_exists('sc_config_global')) {
         $allConfig = [];
         try {
             $allConfig = AdminConfig::getAllGlobal();
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             //
         }
         if ($key === null) {
@@ -126,7 +126,7 @@ if (!function_exists('sc_store')) {
      * @param   [string] $key      [$key description]
      * @param   [null|int]  $store_id    store id
      *
-     * @return  [mix] 
+     * @return  [mix]
      */
     function sc_store($key = null, $store_id = null, $default = null)
     {
@@ -147,7 +147,7 @@ if (!function_exists('sc_store')) {
         $allStoreInfo = [];
         try {
             $allStoreInfo = AdminStore::getListAll()[$store_id]->toArray() ?? [];
-        } catch(\Throwable $e) {
+        } catch (\Throwable $e) {
             //
         }
 
@@ -166,7 +166,8 @@ if (!function_exists('sc_store')) {
 }
 
 if (!function_exists('sc_store_active')) {
-    function sc_store_active($field = null) {
+    function sc_store_active($field = null)
+    {
         switch ($field) {
             case 'code':
                 return AdminStore::getCodeActive();

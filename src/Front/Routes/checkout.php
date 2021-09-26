@@ -2,7 +2,7 @@
 Route::group(
     [
         'prefix' => $langUrl
-    ], 
+    ],
     function ($router) use ($suffix) {
         $prefixCartCheckout = sc_config('PREFIX_CART_CHECKOUT') ?? 'checkout';
         $prefixCartCheckoutConfirm = sc_config('PREFIX_CART_CHECKOUT_CONFIRM') ?? 'checkout-confirm';

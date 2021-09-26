@@ -12,5 +12,4 @@ Route::group(['prefix' => 'order'], function () {
     Route::get('/product_info', 'AdminOrderController@getInfoProduct')->name('admin_order.product_info');
     Route::get('/user_info', 'AdminOrderController@getInfoUser')->name('admin_order.user_info');
     Route::get('/export_detail', 'AdminOrderController@exportDetail')->name('admin_order.export_detail');
-
 });

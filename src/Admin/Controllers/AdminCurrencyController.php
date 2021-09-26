@@ -13,7 +13,6 @@ class AdminCurrencyController extends RootAdminController
     }
     public function index()
     {
-
         $data = [
             'title' => sc_language_render('admin.currency.list'),
             'subTitle' => '',
@@ -22,7 +21,7 @@ class AdminCurrencyController extends RootAdminController
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort' => 0, // 1 - Enable button sort
-            'css' => '', 
+            'css' => '',
             'js' => '',
         ];
         //Process add content
@@ -62,7 +61,6 @@ class AdminCurrencyController extends RootAdminController
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];
             $obj = $obj->orderBy($field, $sort_field);
-
         } else {
             $obj = $obj->orderBy('id', 'desc');
         }
@@ -93,13 +91,13 @@ class AdminCurrencyController extends RootAdminController
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
-//menuRight
+        //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_currency.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
         <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
-//=menuRight
+        //=menuRight
 
-//menuSort        
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -108,9 +106,9 @@ class AdminCurrencyController extends RootAdminController
         $data['urlSort'] = sc_route_admin('admin_currency.index', request()->except(['_token', '_pjax', 'sort_order']));
 
         $data['optionSort'] = $optionSort;
-//=menuSort
+        //=menuSort
 
-//menuSearch
+        //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_currency.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 350px;">
@@ -120,16 +118,16 @@ class AdminCurrencyController extends RootAdminController
                     </div>
                 </div>
                 </form>';
-//=menuSearch
+        //=menuSearch
 
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
     public function create()
     {
         $data = [
@@ -144,10 +142,10 @@ class AdminCurrencyController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -183,12 +181,11 @@ class AdminCurrencyController extends RootAdminController
         ShopCurrency::create($dataInsert);
 
         return redirect()->route('admin_currency.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
-/**
- * Form edit
- */
+    /**
+     * Form edit
+     */
     public function edit($id)
     {
         $currency = ShopCurrency::find($id);
@@ -207,9 +204,9 @@ class AdminCurrencyController extends RootAdminController
             ->with($data);
     }
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $currency = ShopCurrency::find($id);
@@ -231,7 +228,7 @@ class AdminCurrencyController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-//Edit
+        //Edit
 
         $dataUpdate = [
             'name' => $data['name'],
@@ -259,13 +256,12 @@ class AdminCurrencyController extends RootAdminController
 
 //
         return redirect()->route('admin_currency.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
-/*
-Delete list item
-Need mothod destroy to boot deleting in model
- */
+    /*
+    Delete list item
+    Need mothod destroy to boot deleting in model
+     */
     public function deleteList()
     {
         if (!request()->ajax()) {
@@ -278,5 +274,4 @@ Need mothod destroy to boot deleting in model
             return response()->json(['error' => 0, 'msg' => '']);
         }
     }
-
 }

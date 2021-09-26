@@ -1,6 +1,7 @@
 <?php
 
 namespace SCart\Core\Front\Controllers\Auth;
+
 use SCart\Core\Front\Models\ShopCustomer;
 use SCart\Core\Front\Models\ShopCustomField;
 use SCart\Core\Front\Models\ShopCountry;
@@ -17,7 +18,8 @@ trait AuthTrait
      *
      * @return  [array]         [return description]
      */
-    public function mappingValidatorEdit($data) {
+    public function mappingValidatorEdit($data)
+    {
         $dataUpdate = [
             'first_name' => $data['first_name'],
         ];
@@ -126,7 +128,7 @@ trait AuthTrait
             if (!empty($data['company'])) {
                 $dataUpdate['company'] = $data['company'];
             }
-        }   
+        }
 
         if (sc_config('customer_sex')) {
             if (sc_config('customer_sex_required')) {
@@ -137,7 +139,7 @@ trait AuthTrait
             if (!empty($data['sex'])) {
                 $dataUpdate['sex'] = $data['sex'];
             }
-        }   
+        }
 
         if (sc_config('customer_birthday')) {
             if (sc_config('customer_birthday_required')) {
@@ -148,7 +150,7 @@ trait AuthTrait
             if (!empty($data['birthday'])) {
                 $dataUpdate['birthday'] = $data['birthday'];
             }
-        } 
+        }
 
         if (sc_config('customer_group')) {
             if (sc_config('customer_group_required')) {
@@ -217,7 +219,8 @@ trait AuthTrait
      *
      * @return [array]         [return description]
      */
-    public function mappingValidator($data) {
+    public function mappingValidator($data)
+    {
         $dataInsert = $this->mappDataInsert($data);
         $validate = [
             'first_name' => config('validation.customer.first_name', 'required|string|max:100'),
@@ -296,21 +299,21 @@ trait AuthTrait
             } else {
                 $validate['company'] = config('validation.customer.company_null', 'nullable|string|max:100');
             }
-        }   
+        }
         if (sc_config('customer_sex')) {
             if (sc_config('customer_sex_required')) {
                 $validate['sex'] = config('validation.customer.sex_required', 'required|integer|max:10');
             } else {
                 $validate['sex'] = config('validation.customer.sex_null', 'nullable|integer|max:10');
             }
-        }   
+        }
         if (sc_config('customer_birthday')) {
             if (sc_config('customer_birthday_required')) {
                 $validate['birthday'] = config('validation.customer.birthday_required', 'required|date|date_format:Y-m-d');
             } else {
                 $validate['birthday'] = config('validation.customer.birthday_null', 'nullable|date|date_format:Y-m-d');
             }
-        } 
+        }
         if (sc_config('customer_group')) {
             if (sc_config('customer_group_required')) {
                 $validate['group'] = config('validation.customer.group_required', 'required|integer|max:10');
@@ -373,8 +376,8 @@ trait AuthTrait
      *
      * @return [type]         [return description]
      */
-    public function mappDataInsert($data) {
-
+    public function mappDataInsert($data)
+    {
         $dataInsert = [
             'first_name' => $data['first_name'] ?? '',
             'email' => $data['email'],
@@ -434,17 +437,17 @@ trait AuthTrait
             if (!empty($data['company'])) {
                 $dataInsert['company'] = $data['company'];
             }
-        }   
+        }
         if (sc_config('customer_sex')) {
             if (!empty($data['sex'])) {
                 $dataInsert['sex'] = $data['sex'];
             }
-        }   
+        }
         if (sc_config('customer_birthday')) {
             if (!empty($data['birthday'])) {
                 $dataInsert['birthday'] = $data['birthday'];
             }
-        } 
+        }
         if (sc_config('customer_group')) {
             if (!empty($data['group'])) {
                 $dataInsert['group'] = $data['group'];

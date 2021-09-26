@@ -34,7 +34,7 @@ class MemberOrderController extends RootFrontController
                 ->with('details')
                 ->where('customer_id', $user->id)
                 ->first();
-        if($order) {
+        if ($order) {
             $dataReturn = $order;
         } else {
             $dataReturn = [
@@ -51,7 +51,8 @@ class MemberOrderController extends RootFrontController
      *
      * @return void
      */
-    public function createOrder() {
+    public function createOrder()
+    {
         $data = request()->all();
         $user = request()->user();
         $dataOrder = $data['dataOrder'];
@@ -71,7 +72,8 @@ class MemberOrderController extends RootFrontController
      * @param [type] $orderId
      * @return void
      */
-    public function cancelOrder($orderId) {
+    public function cancelOrder($orderId)
+    {
         $user = request()->user();
         $order = (new ShopOrder)->where('id', $orderId)->where('customer_id', $user->id)->first();
         if ($order) {
@@ -94,5 +96,4 @@ class MemberOrderController extends RootFrontController
         }
         return response()->json($dataReturn, 200);
     }
-
 }

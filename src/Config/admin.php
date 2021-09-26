@@ -28,7 +28,7 @@ return [
             'body'        => 'accent-fuchsia',
             'main-header' => 'navbar-dark navbar-pink',
             'sidebar'     => 'sidebar-pink',
-        ],        
+        ],
     ],
     //Enable, disable page libary online
     'settings' => [

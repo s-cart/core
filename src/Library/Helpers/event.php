@@ -1,4 +1,4 @@
-<?php 
+<?php
 use SCart\Core\Events\OrderSuccess;
 use SCart\Core\Events\OrderCreated;
 use SCart\Core\Events\CustomerCreated;

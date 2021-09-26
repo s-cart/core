@@ -41,7 +41,8 @@ class AdminProductController extends RootAdminController
         $this->properties = (new ShopProductProperty)->pluck('name', 'code')->toArray();
     }
 
-    public function kinds() {
+    public function kinds()
+    {
         return [
             SC_PRODUCT_SINGLE => sc_language_render('product.kind_single'),
             SC_PRODUCT_BUILD  => sc_language_render('product.kind_bundle'),
@@ -60,7 +61,7 @@ class AdminProductController extends RootAdminController
             'removeList'    => 1, // Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
             'buttonSort'    => 1, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -89,8 +90,8 @@ class AdminProductController extends RootAdminController
         $listTh['status'] = sc_language_render('product.status');
 
         if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT)) {
-                // Only show store info if store is root
-                $listTh['shop_store'] = sc_language_render('front.store_list');
+            // Only show store info if store is root
+            $listTh['shop_store'] = sc_language_render('front.store_list');
         }
 
         $listTh['action'] = sc_language_render('action.title');
@@ -138,7 +139,6 @@ class AdminProductController extends RootAdminController
             $arrName = [];
             $categoriesTmpRow = $categoriesTmp[$row['id']] ?? [];
             if ($categoriesTmpRow) {
-
             }
             foreach ($categoriesTmpRow as $category) {
                 $arrName[] = $categoriesTitle[$category->category_id] ?? '';
@@ -167,7 +167,7 @@ class AdminProductController extends RootAdminController
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
-                    $storeTmp = array_map(function($code) {
+                    $storeTmp = array_map(function ($code) {
                         return '<a target=_new href="'.sc_get_domain_from_code($code).'">'.$code.'</a>';
                     }, $storeTmp);
                     $dataMap['shop_store'] = '<i class="nav-icon fab fa-shopify"></i> '.implode('<br><i class="nav-icon fab fa-shopify"></i> ', $storeTmp);
@@ -207,7 +207,7 @@ class AdminProductController extends RootAdminController
         }
         //=menuRight
 
-        //menuSort        
+        //menuSort
         $optionSort = '';
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
@@ -245,10 +245,10 @@ class AdminProductController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
     public function create()
     {
         $categories = (new AdminCategory)->getTreeCategoriesAdmin();
@@ -284,37 +284,37 @@ class AdminProductController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
-public function createProductBuild()
-{
-    $categories = (new AdminCategory)->getTreeCategoriesAdmin();
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
+    public function createProductBuild()
+    {
+        $categories = (new AdminCategory)->getTreeCategoriesAdmin();
 
-    $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
+        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
 
-    // html select product build
-    $htmlSelectBuild = '<div class="select-product">';
-    $htmlSelectBuild .= '<table width="100%"><tr><td width="70%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . sc_language_render('product.admin.select_product_in_build') . '" style="width: 100%;" name="productBuild[]" >';
-    $htmlSelectBuild .= '';
-    foreach ($listProductSingle as $k => $v) {
-        $htmlSelectBuild .= '<option value="' . $k . '">' . $v['name'] . '</option>';
-    }
-    $htmlSelectBuild .= '</select></td><td style="width:100px"><input class="form-control rounded-0"  type="number" name="productBuildQty[]" value="1" min=1></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductBuild"><i class="fa fa-times"></i></span></td></tr></table>';
-    $htmlSelectBuild .= '</div>';
-    //end select product build
+        // html select product build
+        $htmlSelectBuild = '<div class="select-product">';
+        $htmlSelectBuild .= '<table width="100%"><tr><td width="70%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . sc_language_render('product.admin.select_product_in_build') . '" style="width: 100%;" name="productBuild[]" >';
+        $htmlSelectBuild .= '';
+        foreach ($listProductSingle as $k => $v) {
+            $htmlSelectBuild .= '<option value="' . $k . '">' . $v['name'] . '</option>';
+        }
+        $htmlSelectBuild .= '</select></td><td style="width:100px"><input class="form-control rounded-0"  type="number" name="productBuildQty[]" value="1" min=1></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductBuild"><i class="fa fa-times"></i></span></td></tr></table>';
+        $htmlSelectBuild .= '</div>';
+        //end select product build
 
-    // html select attribute
-    $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
-    //end select attribute
+        // html select attribute
+        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
+        //end select attribute
 
-    // html add more images
-    $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control rounded-0 input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
-    //end add more images
+        // html add more images
+        $htmlMoreImage = '<div class="input-group"><input type="text" id="id_sub_image" name="sub_image[]" value="image_value" class="form-control rounded-0 input-sm sub_image" placeholder=""  /><span class="input-group-btn"><a data-input="id_sub_image" data-preview="preview_sub_image" data-type="product" class="btn btn-primary lfm"><i class="fa fa-picture-o"></i> Choose</a></span></div><div id="preview_sub_image" class="img_holder"></div>';
+        //end add more images
 
 
-    $data = [
+        $data = [
         'title'                => sc_language_render('product.admin.add_new_title_build'),
         'subTitle'             => '',
         'title_description'    => sc_language_render('product.admin.add_new_des'),
@@ -332,37 +332,37 @@ public function createProductBuild()
         'htmlProductAtrribute' => $htmlProductAtrribute,
         'htmlMoreImage'        => $htmlMoreImage,
         'listWeight'           => $this->listWeight,
-        'listLength'           => $this->listLength, 
+        'listLength'           => $this->listLength,
     ];
 
-    return view($this->templatePathAdmin.'screen.product_add_build')
+        return view($this->templatePathAdmin.'screen.product_add_build')
         ->with($data);
-}
-
-
-/**
- * Form create new item in admin
- * @return [type] [description]
- */
-public function createProductGroup()
-{
-    $categories = (new AdminCategory)->getTreeCategoriesAdmin();
-
-    $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
-
-    // html select product group
-    $htmlSelectGroup = '<div class="select-product">';
-    $htmlSelectGroup .= '<table width="100%"><tr><td width="80%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . sc_language_render('product.admin.select_product_in_group') . '" style="width: 100%;" name="productInGroup[]" >';
-    $htmlSelectGroup .= '';
-    foreach ($listProductSingle as $k => $v) {
-        $htmlSelectGroup .= '<option value="' . $k . '">' . $v['name'] . '</option>';
     }
-    $htmlSelectGroup .= '</select></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductInGroup"><i class="fa fa-times"></i></span></td></tr></table>';
-    $htmlSelectGroup .= '</div>';
-    //End select product group
 
 
-    $data = [
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
+    public function createProductGroup()
+    {
+        $categories = (new AdminCategory)->getTreeCategoriesAdmin();
+
+        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
+
+        // html select product group
+        $htmlSelectGroup = '<div class="select-product">';
+        $htmlSelectGroup .= '<table width="100%"><tr><td width="80%"><select class="form-control rounded-0 productInGroup select2" data-placeholder="' . sc_language_render('product.admin.select_product_in_group') . '" style="width: 100%;" name="productInGroup[]" >';
+        $htmlSelectGroup .= '';
+        foreach ($listProductSingle as $k => $v) {
+            $htmlSelectGroup .= '<option value="' . $k . '">' . $v['name'] . '</option>';
+        }
+        $htmlSelectGroup .= '</select></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductInGroup"><i class="fa fa-times"></i></span></td></tr></table>';
+        $htmlSelectGroup .= '</div>';
+        //End select product group
+
+
+        $data = [
         'title'                => sc_language_render('product.admin.add_new_title_group'),
         'subTitle'             => '',
         'title_description'    => sc_language_render('product.admin.add_new_des'),
@@ -378,22 +378,21 @@ public function createProductGroup()
         'listProductSingle'    => $listProductSingle,
         'htmlSelectGroup'      => $htmlSelectGroup,
         'listWeight'           => $this->listWeight,
-        'listLength'           => $this->listLength, 
+        'listLength'           => $this->listLength,
     ];
 
-    return view($this->templatePathAdmin.'screen.product_add_group')
+        return view($this->templatePathAdmin.'screen.product_add_group')
         ->with($data);
-}
+    }
 
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
 
     public function postCreate()
     {
-        
         $data = request()->all();
         $langFirst = array_key_first(sc_language_all()->toArray()); //get first code language active
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['descriptions'][$langFirst]['name'];
@@ -533,7 +532,7 @@ public function createProductGroup()
             'minimum'        => (int) ($data['minimum'] ?? 0),
         ];
 
-        if(!empty($data['date_available'])) {
+        if (!empty($data['date_available'])) {
             $dataInsert['date_available'] = $data['date_available'];
         }
         //insert product
@@ -594,7 +593,6 @@ public function createProductGroup()
                         }
                     }
                 }
-
             }
             $product->attributes()->saveMany($arrDataAtt);
         }
@@ -653,7 +651,6 @@ public function createProductGroup()
         sc_clear_cache('cache_product');
 
         return redirect()->route('admin_product.index')->with('success', sc_language_render('product.admin.create_success'));
-
     }
 
     /*
@@ -951,7 +948,6 @@ public function createProductGroup()
                 }
                 $product->groups()->saveMany($arrDataGroup);
             }
-
         }
 
         //Update Build
@@ -966,7 +962,6 @@ public function createProductGroup()
                 }
                 $product->builds()->saveMany($arrDataBuild);
             }
-
         }
 
         //Update path download
@@ -989,11 +984,9 @@ public function createProductGroup()
                             }
                         }
                     }
-
                 }
                 $product->attributes()->saveMany($arrDataAtt);
             }
-
         }
 
         //Update sub mages
@@ -1011,7 +1004,6 @@ public function createProductGroup()
         sc_clear_cache('cache_product');
 
         return redirect()->route('admin_product.index')->with('success', sc_language_render('product.admin.edit_success'));
-
     }
 
     /*
@@ -1029,7 +1021,7 @@ public function createProductGroup()
             $arrDontPermission = [];
             $arrDelete = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 } elseif (ShopProductBuild::where('product_id', $id)->first() || ShopProductGroup::where('product_id', $id)->first()) {
                     $arrCantDelete[] = $id;
@@ -1049,14 +1041,14 @@ public function createProductGroup()
             } else {
                 return response()->json(['error' => 0, 'msg' => '']);
             }
-
         }
     }
 
     /**
      * Validate attribute product
      */
-    public function validateAttribute(array $arrValidation) {
+    public function validateAttribute(array $arrValidation)
+    {
         if (sc_config_admin('product_brand')) {
             if (sc_config_admin('product_brand_required')) {
                 $arrValidation['brand_id'] = 'required|numeric';
@@ -1150,7 +1142,8 @@ public function createProductGroup()
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return (new AdminProduct)->getProductAdmin($id);
     }
 }

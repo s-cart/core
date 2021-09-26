@@ -22,7 +22,7 @@ class AdminEmailTemplateController extends RootAdminController
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
             'buttonSort'    => 0, // 1 - Enable button sort
-            'css'           => '', 
+            'css'           => '',
             'js'            => '',
         ];
         //Process add content
@@ -92,10 +92,10 @@ class AdminEmailTemplateController extends RootAdminController
             ->with($data);
     }
 
-/**
- * Post create new item in admin
- * @return [type] [description]
- */
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
     public function postCreate()
     {
         $data = request()->all();
@@ -122,7 +122,6 @@ class AdminEmailTemplateController extends RootAdminController
         ShopEmailTemplate::createEmailTemplateAdmin($dataInsert);
 
         return redirect()->route('admin_email_template.index')->with('success', sc_language_render('action.create_success'));
-
     }
 
     /**
@@ -147,9 +146,9 @@ class AdminEmailTemplateController extends RootAdminController
             ->with($data);
     }
 
-/**
- * update status
- */
+    /**
+     * update status
+     */
     public function postEdit($id)
     {
         $emailTemplate = AdminEmailTemplate::getEmailTemplateAdmin($id);
@@ -180,7 +179,6 @@ class AdminEmailTemplateController extends RootAdminController
         $emailTemplate->update($dataUpdate);
 
         return redirect()->route('admin_email_template.index')->with('success', sc_language_render('action.edit_success'));
-
     }
 
     /*
@@ -196,7 +194,7 @@ class AdminEmailTemplateController extends RootAdminController
             $arrID = explode(',', $ids);
             $arrDontPermission = [];
             foreach ($arrID as $key => $id) {
-                if(!$this->checkPermisisonItem($id)) {
+                if (!$this->checkPermisisonItem($id)) {
                     $arrDontPermission[] = $id;
                 }
             }
@@ -309,7 +307,8 @@ class AdminEmailTemplateController extends RootAdminController
     /**
      * Check permisison item
      */
-    public function checkPermisisonItem($id) {
+    public function checkPermisisonItem($id)
+    {
         return AdminEmailTemplate::getEmailTemplateAdmin($id);
     }
 }

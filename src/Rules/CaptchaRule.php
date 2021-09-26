@@ -13,7 +13,7 @@ class CaptchaRule implements Rule
      */
 
 
-    public  $captchaMethod;
+    public $captchaMethod;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class CaptchaRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        if($this->captchaMethod) {
+        if ($this->captchaMethod) {
             return $this->captchaMethod->validate($value);
         }
     }
@@ -41,7 +41,7 @@ class CaptchaRule implements Rule
      */
     public function message()
     {
-        if($this->captchaMethod) {
+        if ($this->captchaMethod) {
             return $this->captchaMethod->msgError();
         } else {
             return 'Method captchat empty!';

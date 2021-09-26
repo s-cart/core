@@ -17,7 +17,7 @@ class ShopProductController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function allProductsProcessFront(...$params) 
+    public function allProductsProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -77,7 +77,7 @@ class ShopProductController extends RootFrontController
      * @param [type] ...$params
      * @return void
      */
-    public function productDetailProcessFront(...$params) 
+    public function productDetailProcessFront(...$params)
     {
         if (config('app.seoLang')) {
             $lang = $params[0] ?? '';
@@ -108,10 +108,10 @@ class ShopProductController extends RootFrontController
             //End last viewed
 
             //Product last view
-                $arrlastView = empty(\Cookie::get('productsLastView')) ? array() : json_decode(\Cookie::get('productsLastView'), true);
-                $arrlastView[$product->id] = date('Y-m-d H:i:s');
-                arsort($arrlastView);
-                \Cookie::queue('productsLastView', json_encode($arrlastView), (86400 * 30));
+            $arrlastView = empty(\Cookie::get('productsLastView')) ? array() : json_decode(\Cookie::get('productsLastView'), true);
+            $arrlastView[$product->id] = date('Y-m-d H:i:s');
+            arsort($arrlastView);
+            \Cookie::queue('productsLastView', json_encode($arrlastView), (86400 * 30));
             //End product last view
 
             $categories = $product->categories->keyBy('id')->toArray();
@@ -124,7 +124,8 @@ class ShopProductController extends RootFrontController
                 ->getData();
 
             sc_check_view($this->templatePath . '.screen.shop_product_detail');
-            return view($this->templatePath . '.screen.shop_product_detail',
+            return view(
+                $this->templatePath . '.screen.shop_product_detail',
                 array(
                     'title'           => $product->name,
                     'description'     => $product->description,
