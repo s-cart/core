@@ -249,6 +249,18 @@ INSERT INTO `__SC_DB_PREFIX__shop_country` (`code`, `name`) VALUES
 
 /*Language*/
 INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`) VALUES 
+('action.disable', 'Disable', 'action', 'en'),
+('action.disable', 'Vô hiệu hóa', 'action', 'vi'),
+('action.disable_success', 'Disabled success', 'action', 'en'),
+('action.disable_success', 'Vô hiệu hóa thành công', 'action', 'vi'),
+('action.enable', 'Enable', 'action', 'en'),
+('action.enable', 'Kích hoạt', 'action', 'vi'),
+('action.enable_success', 'Enabled success', 'action', 'en'),
+('action.enable_success', 'Kích hoạt thành công', 'action', 'vi'),
+('action.remove', 'Removed', 'action', 'en'),
+('action.remove', 'Gỡ bỏ', 'action', 'vi'),
+('action.remove_success', 'Removedd success', 'action', 'en'),
+('action.remove_success', 'Gỡ bỏ thành công', 'action', 'vi'),
 ('action.edit', 'Edit', 'action', 'en'),
 ('action.edit', 'Chỉnh sửa', 'action', 'vi'),
 ('action.update', 'Update', 'action', 'en'),

@@ -92,6 +92,9 @@ INSERT INTO `__SC_DB_PREFIX__admin_role` (`id`, `name`, `slug`, `created_at`) VA
 ('5', 'Accountant', 'accountant', now()),
 ('6', 'Marketing', 'maketing', now());
 
+INSERT INTO `__SC_DB_PREFIX__admin_template` (`id`, `key`, `name`, `status`,`created_at`) VALUES 
+('1', 's-cart-light', 'S-Cart Light', 1, now());
+
 /*admin_role_permission*/
 INSERT INTO `__SC_DB_PREFIX__admin_role_permission` (`role_id`, `permission_id`, `created_at`) VALUES 
 (3, 1, now()),
