@@ -81,6 +81,14 @@ class PrepareTablesAdmin extends Migration
             $table->primary(['user_id', 'permission_id']);
         });
 
+        Schema::create(SC_DB_PREFIX . 'admin_template', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('key', 100)->unique();
+            $table->string('name', 100);
+            $table->integer('status', 0)->default(0);
+            $table->timestamps();
+        });
+
         Schema::create(SC_DB_PREFIX . 'admin_log', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');

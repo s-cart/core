@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminStore;
+use SCart\Core\Admin\Models\AdminTemplate;
 use SCart\Core\Front\Models\ShopLanguage;
 use SCart\Core\Front\Models\ShopCurrency;
 
@@ -13,15 +14,10 @@ class AdminStoreInfoController extends RootAdminController
     public function __construct()
     {
         parent::__construct();
-        $allTemplate = sc_get_all_template();
-        $templates = [];
-        foreach ($allTemplate as $key => $template) {
-            $templates[$key] = empty($template['config']['name']) ? $key : $template['config']['name'];
-        }
         foreach (timezone_identifiers_list() as $key => $value) {
             $timezones[$value] = $value;
         }
-        $this->templates = $templates;
+        $this->templates = (new AdminTemplate)->getListTemplateActive();
         $this->currencies = ShopCurrency::getCodeActive();
         $this->languages = ShopLanguage::getListActive();
         $this->timezones = $timezones;

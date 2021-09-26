@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminStore;
+use SCart\Core\Admin\Models\AdminTemplate;
 use Illuminate\Support\Facades\File;
 
 class AdminTemplateController extends RootAdminController
@@ -20,6 +21,8 @@ class AdminTemplateController extends RootAdminController
             'icon' => 'fa fa-indent',        ];
 
         $data["templates"] = sc_get_all_template();
+        $data["templatesActive"] = (new AdminTemplate)->getListTemplateActive();
+        $data["templatesInstalled"] = (new AdminTemplate)->getListTemplate();
         $data["templatesUsed"] = AdminStore::getAllTemplateUsed();
         return view($this->templatePathAdmin.'screen.template')
             ->with($data);
@@ -65,13 +68,21 @@ class AdminTemplateController extends RootAdminController
     }
 
     /**
-     * Refresh action install template
+     * Refresh or install template
      *
      * @return void
      */
     public function refresh()
     {
         $key = request('key');
+        $checkTemplate = (new AdminTemplate)->where('key', $key)->first();
+
+        if (!$checkTemplate) {
+            if (file_exists($fileConfig = resource_path() . '/views/templates/'.$key.'/config.json')) {
+                $config = json_decode(file_get_contents($fileConfig), true);
+            }
+            (new AdminTemplate)->create(['key' => $key, 'name' => $config['name'], 'status' => 1]);
+        }
 
         //Run function process before remove template
         if (file_exists($fileProcess = resource_path() . '/views/templates/'.$key.'/Provider.php')) {
@@ -89,7 +100,34 @@ class AdminTemplateController extends RootAdminController
         return response()->json($response);
     }
 
-    
+    /**
+     * Disable template
+     *
+     * @return void
+     */
+    public function disable()
+    {
+        $key = request('key');
+        (new AdminTemplate)->where('key', $key)->update(['status' => 0]);
+        $response = ['error' => 0, 'msg' => sc_language_render('action.desable_success')];
+        return response()->json($response);
+    }
+
+    /**
+     * Enable template
+     *
+     * @return void
+     */
+    public function enable()
+    {
+        $key = request('key');
+        (new AdminTemplate)->where('key', $key)->update(['status' => 1]);
+        $response = ['error' => 0, 'msg' => sc_language_render('action.enable_success')];
+        return response()->json($response);
+    }
+
+
+
     /**
      * Import template
      */

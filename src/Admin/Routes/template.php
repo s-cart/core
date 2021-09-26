@@ -11,6 +11,8 @@ Route::group(['prefix' => 'template'], function () {
     Route::post('changeTemplate', 'AdminTemplateController@changeTemplate')->name('admin_template.changeTemplate');
     Route::post('remove', 'AdminTemplateController@remove')->name('admin_template.remove');
     Route::post('refresh', 'AdminTemplateController@refresh')->name('admin_template.refresh');
+    Route::post('enable', 'AdminTemplateController@enable')->name('admin_template.enable');
+    Route::post('disable', 'AdminTemplateController@disable')->name('admin_template.disable');
 
     if(config('admin.settings.api_template')) {
         Route::get('/online', 'AdminTemplateOnlineController@index')->name('admin_template_online.index');

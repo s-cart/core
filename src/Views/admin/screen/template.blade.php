@@ -54,10 +54,20 @@
                    <td>{{ $template['config']['version']??'' }}</td>
                     <td>
                       @if (!in_array($key, $templatesUsed))
-                        <span onClick="removeTemplate($(this), '{{ $key }}');" title="{{ sc_language_render('admin.template.remove') }}" class="btn btn-flat btn-danger btn-sm"><i class="fa fa-trash"></i></span>
+                        @if (!key_exists($key, $templatesInstalled))
+                          <span onClick="processTemplate($(this), '{{ $key }}', 'install');" class="btn btn-flat btn-primary btn-sm" title="{{ sc_language_render('action.install') }}"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                        @else
+                          <span onClick="processTemplate($(this), '{{ $key }}', 'refresh');" class="btn btn-flat btn-info btn-sm" title="{{ sc_language_render('action.refresh') }}"><i class="fa fa-recycle" aria-hidden="true"></i></span>
+                          @if (!key_exists($key, $templatesActive))
+                          <span onClick="processTemplate($(this), '{{ $key }}', 'enable');" class="btn btn-flat btn-primary btn-sm" title="{{ sc_language_render('action.enable') }}"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
+                          @else
+                            <span onClick="processTemplate($(this), '{{ $key }}', 'disable');" class="btn btn-flat btn-warning btn-sm" title="{{ sc_language_render('action.disable') }}"><i class="fa fa-power-off" aria-hidden="true"></i></span>
+                          @endif
+                        @endif
+                        <span onClick="processTemplate($(this), '{{ $key }}', 'remove');" title="{{ sc_language_render('action.remove') }}" class="btn btn-flat btn-danger btn-sm"><i class="fa fa-trash"></i></span>
                       @else
                       <span class="btn btn-flat btn-success btn-sm" title="{{ sc_language_render('admin.template.used') }}"><i class="fa fa-check" aria-hidden="true"></i></span>
-                      <span onClick="refreshTemplate($(this), '{{ $key }}');" class="btn btn-flat btn-warning btn-sm" title="{{ sc_language_render('action.refresh') }}"><i class="fa fa-recycle" aria-hidden="true"></i></span>
+                      <span onClick="processTemplate($(this), '{{ $key }}', 'refresh');" class="btn btn-flat btn-info btn-sm" title="{{ sc_language_render('action.refresh') }}"><i class="fa fa-recycle" aria-hidden="true"></i></span>
                       @endif
                     </td>
                   </tr>
@@ -83,45 +93,21 @@
 
 
 <script type="text/javascript">
-  function removeTemplate(obj,key) {
+  
+function processTemplate(obj,key, action = 'refresh') {
 
-    Swal.fire({
-      title: '{{ sc_language_render('action.action_confirm') }}',
-      text: '{{ sc_language_render('action.action_confirm_warning') }}',
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '{{ sc_language_render('action.confirm_yes') }}',
-    }).then((result) => {
-      if (result.value) {
-          $('#loading').show()
-          obj.button('loading');
-          $.ajax({
-            type: 'POST',
-            dataType:'json',
-            url: '{{ sc_route_admin('admin_template.remove') }}',
-            data: {
-              "_token": "{{ csrf_token() }}",
-              "key":key,
-            },
-            success: function (response) {
-              console.log(response);
-            if(parseInt(response.error) ==0){
-              alertMsg('success', response.msg);
-            location.reload();
-            }else{
-              alertMsg('error', response.msg);
-            }
-            $('#loading').hide();
-            obj.button('reset');
-            }
-          });
-      }
-    })
+if (action == 'refresh' || action == 'install') {
+  var urlAction = '{{ sc_route_admin('admin_template.refresh') }}';
 }
-
-function refreshTemplate(obj,key) {
+if (action == 'remove') {
+  var urlAction = '{{ sc_route_admin('admin_template.remove') }}';
+}
+if (action == 'disable') {
+  var urlAction = '{{ sc_route_admin('admin_template.disable') }}';
+}
+if (action == 'enable') {
+  var urlAction = '{{ sc_route_admin('admin_template.enable') }}';
+}
 
 Swal.fire({
   title: '{{ sc_language_render('action.action_confirm') }}',
@@ -138,7 +124,7 @@ Swal.fire({
       $.ajax({
         type: 'POST',
         dataType:'json',
-        url: '{{ sc_route_admin('admin_template.refresh') }}',
+        url: urlAction,
         data: {
           "_token": "{{ csrf_token() }}",
           "key":key,
