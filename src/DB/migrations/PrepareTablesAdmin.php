@@ -160,6 +160,7 @@ class PrepareTablesAdmin extends Migration
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_permission');
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_menu');
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_user_permission');
+        Schema::dropIfExists(SC_DB_PREFIX . 'admin_template');
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_role_user');
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_role_permission');
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_log');
