@@ -145,6 +145,7 @@ class AdminTemplateController extends RootAdminController
      * @return  [type]  [return description]
      */
     public function processImport() {
+        $config = [];
         $data = request()->all();
         $validator = \Validator::make(
             $data,
@@ -208,6 +209,10 @@ class AdminTemplateController extends RootAdminController
             }
         } else {
             return redirect()->back()->with('error', sc_language_render('admin.template.error_upload'));
+        }
+        
+        if (count($config)) {
+            (new AdminTemplate)->create(['key' => $config['configKey'] ?? '', 'name' => $config['name'] ?? '', 'status' => 1]);
         }
         return redirect()->route('admin_template.index')->with('success', sc_language_render('admin.template.import_success')); 
     }
