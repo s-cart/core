@@ -49,8 +49,13 @@ class AdminStoreBlockController extends RootAdminController
             'text'     => sc_language_render('admin.store_block.text'),
             'sort'     => sc_language_render('admin.store_block.sort'),
             'status'   => sc_language_render('admin.store_block.status'),
-            'action'   => sc_language_render('action.title'),
         ];
+        if (sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT) {
+            // Only show store info if store is root
+            $listTh['shop_store'] = sc_language_render('front.store_list');
+        }
+        $listTh['action'] = sc_language_render('action.title');
+
         $dataTmp = (new AdminStoreBlockContent)->getStoreBlockContentListAdmin();
 
         $dataTr = [];
@@ -73,8 +78,9 @@ class AdminStoreBlockController extends RootAdminController
                 $type_name = '<span class="badge badge-warning">' . $type_name . '</span>';
             } elseif ($row['type'] == 'html') {
                 $type_name = '<span class="badge badge-primary">' . $type_name . '</span>';
-            }
-            $dataTr[] = [
+            }        
+
+            $storeTmp = [
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'type' => $type_name,
@@ -83,12 +89,20 @@ class AdminStoreBlockController extends RootAdminController
                 'text' => htmlspecialchars($row['text']),
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
-                'action' => '
-                    <a href="' . sc_route_admin('admin_store_block.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
-
-                  <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
-                  ',
             ];
+
+            if (sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT) {
+                $storeCode = sc_get_list_code_store()[$row['store_id']] ?? '';
+                // Only show store info if store is root
+                $storeTmp['shop_store'] = '<i class="nav-icon fab fa-shopify"></i><a target=_new href="'.sc_get_domain_from_code($storeCode).'">'.$storeCode.'</a>';
+            }
+
+            $storeTmp['action'] = '
+                <a href="' . sc_route_admin('admin_store_block.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger"><i class="fas fa-trash-alt"></i></span>
+            ';
+            $dataTr[] = $storeTmp;
+
         }
 
         $data['listTh'] = $listTh;
@@ -161,7 +175,7 @@ class AdminStoreBlockController extends RootAdminController
             'type'     => $data['type'],
             'sort'     => (int) $data['sort'],
             'status'   => (empty($data['status']) ? 0 : 1),
-            'store_id' => session('adminStoreId'),
+            'store_id' => $data['store_id'] ?? session('adminStoreId'),
         ];
         AdminStoreBlockContent::createStoreBlockContentAdmin($dataInsert);
         //
@@ -228,7 +242,7 @@ class AdminStoreBlockController extends RootAdminController
             'type' => $data['type'],
             'sort' => (int) $data['sort'],
             'status' => (empty($data['status']) ? 0 : 1),
-            'store_id' => session('adminStoreId'),
+            'store_id' => $data['store_id'] ?? session('adminStoreId'),
         ];
         $layout->update($dataUpdate);
         //

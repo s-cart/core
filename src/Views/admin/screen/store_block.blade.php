@@ -126,6 +126,28 @@
                             </div>
 
 
+
+@if (sc_config_global('MultiStorePro'))
+
+                            <div class="form-group row {{ $errors->has('store_id') ? ' text-red' : '' }}">
+                                <label for="store_id" class="col-sm-2 col-form-label">{{ sc_language_render('admin.select_store') }}</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control store_id select2" style="width: 100%;" name="store_id" >
+                                        <option value=""></option>
+                                        @foreach (sc_get_list_code_store() as $k => $v)
+                                            <option value="{{ $k }}" {{ (old('store_id', $layout['store_id']??'') ==$k) ? 'selected':'' }}>{{ sc_language_render($v) }}</option>
+                                        @endforeach
+                                    </select>
+                                        @if ($errors->has('store_id'))
+                                            <span class="form-text">
+                                                <i class="fa fa-info-circle"></i> {{ $errors->first('store_id') }}
+                                            </span>
+                                        @endif
+                                </div>
+                            </div>
+    @endif
+
+
                             <div class="form-group row  {{ $errors->has('sort') ? ' text-red' : '' }}">
                                 <label for="sort" class="col-sm-2 col-form-label">{{ sc_language_render('admin.store_block.sort') }}</label>
                                 <div class="col-sm-8">
