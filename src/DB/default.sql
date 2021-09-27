@@ -201,7 +201,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_layout_page` (`key`, `name`) VALUES
 ('shop_contact', 'admin.layout_page_position.shop_contact'),
 ('content_list', 'admin.layout_page_position.content_list'),
 ('content_detail', 'admin.layout_page_position.content_detail'),
-('store_home', 'admin.layout_page_position.store_home'),
+('vendor_home', 'admin.layout_page_position.vendor_home'),
 ('store_product_list', 'admin.layout_page_position.store_product_list');
 
 /*shop_layout_position*/

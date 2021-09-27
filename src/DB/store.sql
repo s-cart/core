@@ -414,5 +414,6 @@ gtag(\"config\", \"UA-128658138-1\");
 ('Categories', 'left', 'home,shop_home','view','categories', '1', '0', '__storeId__'),
 ('Product last view', 'left', '*','view','product_lastview', '1', '0', '__storeId__'),
 ('Products new', 'top', 'home','view','product_new', '1', '9', '__storeId__'),
+('Categories store', 'left', 'shop_home,vendor_home,vendor_product_list','view','category_store', '1', '0', '__storeId__'),
 ('Top news', 'top', 'home','view','top_news', '1', '999', '__storeId__');
   
