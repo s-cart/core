@@ -192,7 +192,7 @@ class AdminStoreBlockController extends RootAdminController
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
 
-        $listViewBlock = $this->getListViewBlock();
+        $listViewBlock = $this->getListViewBlock($layout->store_id);
 
         $data = [
             'title' => sc_language_render('action.edit'),
@@ -204,6 +204,7 @@ class AdminStoreBlockController extends RootAdminController
             'layoutType' => $this->layoutType,
             'listViewBlock' => $listViewBlock,
             'layout' => $layout,
+            'storeId' => $layout->store_id,
             'url_action' => sc_route_admin('admin_store_block.edit', ['id' => $layout['id']]),
         ];
         return view($this->templatePathAdmin.'screen.store_block')
@@ -279,10 +280,10 @@ class AdminStoreBlockController extends RootAdminController
      *
      * @return  [type]  [return description]
      */
-    public function getListViewBlock()
+    public function getListViewBlock($storeId = null)
     {
         $arrView = [];
-        foreach (glob(base_path() . "/resources/views/templates/".sc_store('template', session('adminStoreId'))."/block/*.blade.php") as $file) {
+        foreach (glob(base_path() . "/resources/views/templates/".sc_store('template', $storeId)."/block/*.blade.php") as $file) {
             if (file_exists($file)) {
                 $arr = explode('/', $file);
                 $arrView[substr(end($arr), 0, -10)] = substr(end($arr), 0, -10);
@@ -298,5 +299,33 @@ class AdminStoreBlockController extends RootAdminController
     public function checkPermisisonItem($id)
     {
         return (new AdminStoreBlockContent)->getStoreBlockContentAdmin($id);
+    }
+
+    /**
+     * Get json list view block
+     *
+     * @return void
+     */
+    public function getListViewBlockHtml() {
+        if (!request()->ajax()) {
+            $html =  '';
+        } else {
+            $html = '<select name="text" class="form-control text">';
+            $storeId = request('store_id');
+            $arrView = [];
+            foreach (glob(base_path() . "/resources/views/templates/".sc_store('template', $storeId)."/block/*.blade.php") as $file) {
+                if (file_exists($file)) {
+                    $arr = explode('/', $file);
+                    $arrView[substr(end($arr), 0, -10)] = substr(end($arr), 0, -10);
+                    $html .='<option value="'.substr(end($arr), 0, -10).'">'.substr(end($arr), 0, -10);
+                    $html .='</option>';
+                }
+            }
+            $html .='</select>';
+            $html .='<span class="form-text"><i class="fa fa-info-circle"></i>';
+            $html .= sc_language_render('admin.store_block.helper_view', ['template' => sc_store('template', $storeId)]);
+            $html .='</span>';
+        }
+        return $html;
     }
 }

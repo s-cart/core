@@ -109,7 +109,7 @@
                                                 <option value="{!! $view !!}" {{ (old('text',$layout['text']??'') == $view)?'selected':'' }} >{{ $view }}</option>
                                             @endforeach
                                         </select>
-                                        <span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_view',['template' => sc_store('template', session('adminStoreId'))]) }}</span>
+                                        <span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_view',['template' => sc_store('template', $storeId)]) }}</span>
                                     @else
                                         <textarea name="text" class="form-control text" rows="5" placeholder="Layout text">
                                             {!! old('text',$layout['text']??'') !!}
@@ -222,9 +222,36 @@ $(function () {
        obj.before('<textarea name="text" class="form-control text" rows="5" placeholder="Layout text"></textarea><span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_html') }}.</span>');
        obj.remove();
     }else if(type =='view'){
-       obj.before('<select name="text" class="form-control text">@foreach ($listViewBlock as $view)<option value="{{ $view }}">{{ $view }}</option>@endforeach</select><span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_view',['template' => sc_store('template', session('adminStoreId'))]) }}</span>');
-       obj.remove();
+        var storeId = $('[name="store_id"]').val();
+        $('#loading').show();
+        $.ajax({
+            method: 'get',
+            url: '{{ sc_route_admin('admin_store_block.listblock') }}?store_id='+storeId,
+            success: function (data) {
+                obj.before(data);
+                obj.remove();
+                $('#loading').hide();
+            }
+        });
     }
+    });
+
+    $('[name="store_id"]').change(function(){
+        if ($('[name="type"]:checked').val() != 'view') {
+            return;
+        }
+        var storeId = $(this).val();
+        $('#loading').show();
+        $.ajax({
+            method: 'get',
+            url: '{{ sc_route_admin('admin_store_block.listblock') }}?store_id='+storeId,
+            success: function (data) {
+                var obj = $('[name="text"]');
+                obj.next('.form-text').remove();
+                obj.replaceWith(data);
+                $('#loading').hide();
+            }
+        });
     });
 });
 
