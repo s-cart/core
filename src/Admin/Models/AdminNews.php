@@ -18,16 +18,14 @@ class AdminNews extends ShopNews
      *
      * @return  [type]       [return description]
      */
-    public static function getNewsAdmin($id)
+    public static function getNewsAdmin($id, $storeId = null)
     {
         $data = self::where('id', $id);
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tableNewsStore = (new ShopNewsStore)->getTable();
-                $tableNews = (new ShopNews)->getTable();
-                $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $tableNews . '.id');
-                $data = $data->where($tableNewsStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tableNewsStore = (new ShopNewsStore)->getTable();
+            $tableNews = (new ShopNews)->getTable();
+            $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $tableNews . '.id');
+            $data = $data->where($tableNewsStore . '.store_id', $storeId);
         }
         $data = $data->first();
         return $data;
@@ -40,7 +38,7 @@ class AdminNews extends ShopNews
      *
      * @return  [type]               [return description]
      */
-    public static function getNewsListAdmin(array $dataSearch)
+    public static function getNewsListAdmin(array $dataSearch, $storeId = null)
     {
         $keyword          = $dataSearch['keyword'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
@@ -53,12 +51,10 @@ class AdminNews extends ShopNews
             ->where($tableDescription . '.lang', sc_get_locale());
 
         $tableNews = (new ShopNews)->getTable();
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tableNewsStore = (new ShopNewsStore)->getTable();
-                $newsList = $newsList->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $tableNews . '.id');
-                $newsList = $newsList->where($tableNewsStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tableNewsStore = (new ShopNewsStore)->getTable();
+            $newsList = $newsList->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $tableNews . '.id');
+            $newsList = $newsList->where($tableNewsStore . '.store_id', $storeId);
         }
 
         if ($keyword) {
@@ -86,38 +82,35 @@ class AdminNews extends ShopNews
      *
      * @return  [type]  [return description]
      */
-    public static function getListTitleAdmin()
+    public static function getListTitleAdmin($storeId = null)
     {
+        $storeCache = $storeId ? $storeId : session('adminStoreId');
         $tableDescription = (new ShopNewsDescription)->getTable();
         $table = (new AdminNews)->getTable();
         if (sc_config_global('cache_status') && sc_config_global('cache_news')) {
-            if (!Cache::has(session('adminStoreId').'_cache_news_'.sc_get_locale())) {
+            if (!Cache::has($storeCache.'_cache_news_'.sc_get_locale())) {
                 if (self::$getListTitleAdmin === null) {
                     $data = self::join($tableDescription, $tableDescription.'.news_id', $table.'.id')
                     ->where('lang', sc_get_locale());
-                    if (sc_config_global('MultiVendorPro')) {
-                        if (session('adminStoreId') != SC_ID_ROOT) {
-                            $tableNewsStore = (new ShopNewsStore)->getTable();
-                            $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $table . '.id');
-                            $data = $data->where($tableNewsStore . '.store_id', session('adminStoreId'));
-                        }
+                    if ($storeId) {
+                        $tableNewsStore = (new ShopNewsStore)->getTable();
+                        $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $table . '.id');
+                        $data = $data->where($tableNewsStore . '.store_id', $storeId);
                     }
                     $data = $data->pluck('title', 'id')->toArray();
                     self::$getListTitleAdmin = $data;
                 }
-                sc_set_cache(session('adminStoreId').'_cache_news_'.sc_get_locale(), self::$getListTitleAdmin);
+                sc_set_cache($storeCache.'_cache_news_'.sc_get_locale(), self::$getListTitleAdmin);
             }
-            return Cache::get(session('adminStoreId').'_cache_news_'.sc_get_locale());
+            return Cache::get($storeCache.'_cache_news_'.sc_get_locale());
         } else {
             if (self::$getListTitleAdmin === null) {
                 $data = self::join($tableDescription, $tableDescription.'.news_id', $table.'.id')
                 ->where('lang', sc_get_locale());
-                if (sc_config_global('MultiVendorPro')) {
-                    if (session('adminStoreId') != SC_ID_ROOT) {
-                        $tableNewsStore = (new ShopNewsStore)->getTable();
-                        $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $table . '.id');
-                        $data = $data->where($tableNewsStore . '.store_id', session('adminStoreId'));
-                    }
+                if ($storeId) {
+                    $tableNewsStore = (new ShopNewsStore)->getTable();
+                    $data = $data->leftJoin($tableNewsStore, $tableNewsStore . '.news_id', $table . '.id');
+                    $data = $data->where($tableNewsStore . '.store_id', $storeId);
                 }
                 $data = $data->pluck('title', 'id')->toArray();
                 self::$getListTitleAdmin = $data;

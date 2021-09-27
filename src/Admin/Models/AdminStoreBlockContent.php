@@ -13,11 +13,13 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
      *
      * @return  [type]       [return description]
      */
-    public function getStoreBlockContentAdmin($id)
+    public function getStoreBlockContentAdmin($id, $storeId = null)
     {
-        return $this->where('id', $id)
-        ->where('store_id', session('adminStoreId'))
-        ->first();
+        $data  = $this->where('id', $id);
+        if ($storeId) {
+            $data = $data->where('store_id', $storeId);
+        }
+        return $data->first();
     }
 
     /**
@@ -27,13 +29,15 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
      *
      * @return  [type]               [return description]
      */
-    public static function getStoreBlockContentListAdmin()
+    public function getStoreBlockContentListAdmin($storeId = null)
     {
-        $blockContentList = self::where('store_id', session('adminStoreId'))
-            ->orderBy('id', 'desc');
-        $blockContentList = $blockContentList->paginate(20);
-
-        return $blockContentList;
+        if ($storeId) {
+            $data = $this->where('store_id', $storeId)
+                ->orderBy('id', 'desc');
+        } else {
+            $data = $this->orderBy('id', 'desc');
+        }
+        return $data->paginate(20);
     }
 
     /**

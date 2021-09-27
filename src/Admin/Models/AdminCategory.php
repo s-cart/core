@@ -99,19 +99,20 @@ class AdminCategory extends ShopCategory
      */
     public static function getListTitleAdmin()
     {
+        $storeCache = session('adminStoreId');
         $tableDescription = (new ShopCategoryDescription)->getTable();
         $table = (new AdminCategory)->getTable();
         if (sc_config_global('cache_status') && sc_config_global('cache_category')) {
-            if (!Cache::has(session('adminStoreId').'_cache_category_'.sc_get_locale())) {
+            if (!Cache::has($storeCache.'_cache_category_'.sc_get_locale())) {
                 if (self::$getListTitleAdmin === null) {
                     self::$getListTitleAdmin = self::join($tableDescription, $tableDescription.'.category_id', $table.'.id')
                     ->where('lang', sc_get_locale())
                     ->pluck('title', 'id')
                     ->toArray();
                 }
-                sc_set_cache(session('adminStoreId').'_cache_category_'.sc_get_locale(), self::$getListTitleAdmin);
+                sc_set_cache($storeCache.'_cache_category_'.sc_get_locale(), self::$getListTitleAdmin);
             }
-            return Cache::get(session('adminStoreId').'_cache_category_'.sc_get_locale());
+            return Cache::get($storeCache.'_cache_category_'.sc_get_locale());
         } else {
             if (self::$getListTitleAdmin === null) {
                 self::$getListTitleAdmin = self::join($tableDescription, $tableDescription.'.category_id', $table.'.id')

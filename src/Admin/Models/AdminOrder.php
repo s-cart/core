@@ -24,11 +24,14 @@ class AdminOrder extends ShopOrder
      *
      * @return  [type]       [return description]
      */
-    public static function getOrderAdmin($id)
+    public static function getOrderAdmin($id, $storeId = null)
     {
-        return self::with(['details', 'orderTotal'])
-        ->where('id', $id)
-        ->first();
+        $data  = self::with(['details', 'orderTotal'])
+        ->where('id', $id);
+        if ($storeId) {
+            $data = $data->where('store_id', $storeId);
+        }
+        return $data->first();
     }
 
     /**

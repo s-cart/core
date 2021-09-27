@@ -14,16 +14,14 @@ class AdminBanner extends ShopBanner
      *
      * @return  [type]       [return description]
      */
-    public static function getBannerAdmin($id)
+    public static function getBannerAdmin($id, $storeId = null)
     {
         $data = self::where('id', $id);
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tableBannerStore = (new ShopBannerStore)->getTable();
-                $tableBanner = (new ShopBanner)->getTable();
-                $data = $data->leftJoin($tableBannerStore, $tableBannerStore . '.banner_id', $tableBanner . '.id');
-                $data = $data->where($tableBannerStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tableBannerStore = (new ShopBannerStore)->getTable();
+            $tableBanner = (new ShopBanner)->getTable();
+            $data = $data->leftJoin($tableBannerStore, $tableBannerStore . '.banner_id', $tableBanner . '.id');
+            $data = $data->where($tableBannerStore . '.store_id', $storeId);
         }
         $data = $data->first();
         return $data;
@@ -36,19 +34,17 @@ class AdminBanner extends ShopBanner
      *
      * @return  [type]               [return description]
      */
-    public static function getBannerListAdmin(array $dataSearch)
+    public static function getBannerListAdmin(array $dataSearch, $storeId = null)
     {
         $sort_order       = $dataSearch['sort_order'] ?? '';
         $arrSort          = $dataSearch['arrSort'] ?? '';
         $keyword          = $dataSearch['keyword'] ?? '';
         $bannerList = (new ShopBanner);
         $tableBanner = $bannerList->getTable();
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tableBannerStore = (new ShopBannerStore)->getTable();
-                $bannerList = $bannerList->leftJoin($tableBannerStore, $tableBannerStore . '.banner_id', $tableBanner . '.id');
-                $bannerList = $bannerList->where($tableBannerStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tableBannerStore = (new ShopBannerStore)->getTable();
+            $bannerList = $bannerList->leftJoin($tableBannerStore, $tableBannerStore . '.banner_id', $tableBanner . '.id');
+            $bannerList = $bannerList->where($tableBannerStore . '.store_id', $storeId);
         }
         if ($keyword) {
             $bannerList->where($tableBanner.'.title', 'like', '%'.$keyword.'%');

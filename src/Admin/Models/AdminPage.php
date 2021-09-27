@@ -18,16 +18,14 @@ class AdminPage extends ShopPage
      *
      * @return  [type]       [return description]
      */
-    public static function getPageAdmin($id)
+    public static function getPageAdmin($id, $storeId = null)
     {
         $data = self::where('id', $id);
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tablePageStore = (new ShopPageStore)->getTable();
-                $tablePage = (new ShopPage)->getTable();
-                $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
-                $data = $data->where($tablePageStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tablePageStore = (new ShopPageStore)->getTable();
+            $tablePage = (new ShopPage)->getTable();
+            $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
+            $data = $data->where($tablePageStore . '.store_id', $storeId);
         }
         $data = $data->first();
         return $data;
@@ -40,7 +38,7 @@ class AdminPage extends ShopPage
      *
      * @return  [type]               [return description]
      */
-    public static function getPageListAdmin(array $dataSearch)
+    public static function getPageListAdmin(array $dataSearch, $storeId = null)
     {
         $keyword          = $dataSearch['keyword'] ?? '';
         $sort_order       = $dataSearch['sort_order'] ?? '';
@@ -53,12 +51,10 @@ class AdminPage extends ShopPage
             ->where($tableDescription . '.lang', sc_get_locale());
 
         $tablePage = (new ShopPage)->getTable();
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tablePageStore = (new ShopPageStore)->getTable();
-                $pageList = $pageList->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
-                $pageList = $pageList->where($tablePageStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tablePageStore = (new ShopPageStore)->getTable();
+            $pageList = $pageList->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
+            $pageList = $pageList->where($tablePageStore . '.store_id', $storeId);
         }
 
         if ($keyword) {
@@ -86,38 +82,35 @@ class AdminPage extends ShopPage
      *
      * @return  [type]  [return description]
      */
-    public static function getListTitleAdmin()
+    public static function getListTitleAdmin($storeId = null)
     {
+        $storeCache = $storeId ? $storeId : session('adminStoreId');
         $tableDescription = (new ShopPageDescription)->getTable();
         $table = (new AdminPage)->getTable();
         if (sc_config_global('cache_status') && sc_config_global('cache_page')) {
-            if (!Cache::has(session('adminStoreId').'_cache_page_'.sc_get_locale())) {
+            if (!Cache::has($storeCache.'_cache_page_'.sc_get_locale())) {
                 if (self::$getListTitleAdmin === null) {
                     $data = self::join($tableDescription, $tableDescription.'.page_id', $table.'.id')
                     ->where('lang', sc_get_locale());
-                    if (sc_config_global('MultiVendorPro')) {
-                        if (session('adminStoreId') != SC_ID_ROOT) {
-                            $tablePageStore = (new ShopPageStore)->getTable();
-                            $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $table . '.id');
-                            $data = $data->where($tablePageStore . '.store_id', session('adminStoreId'));
-                        }
+                    if ($storeId) {
+                        $tablePageStore = (new ShopPageStore)->getTable();
+                        $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $table . '.id');
+                        $data = $data->where($tablePageStore . '.store_id', $storeId);
                     }
                     $data = $data->pluck('title', 'id')->toArray();
                     self::$getListTitleAdmin = $data;
                 }
-                sc_set_cache(session('adminStoreId').'_cache_page_'.sc_get_locale(), self::$getListTitleAdmin);
+                sc_set_cache($storeCache.'_cache_page_'.sc_get_locale(), self::$getListTitleAdmin);
             }
-            return Cache::get(session('adminStoreId').'_cache_page_'.sc_get_locale());
+            return Cache::get($storeCache.'_cache_page_'.sc_get_locale());
         } else {
             if (self::$getListTitleAdmin === null) {
                 $data = self::join($tableDescription, $tableDescription.'.page_id', $table.'.id')
                 ->where('lang', sc_get_locale());
-                if (sc_config_global('MultiVendorPro')) {
-                    if (session('adminStoreId') != SC_ID_ROOT) {
-                        $tablePageStore = (new ShopPageStore)->getTable();
-                        $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $table . '.id');
-                        $data = $data->where($tablePageStore . '.store_id', session('adminStoreId'));
-                    }
+                if ($storeId) {
+                    $tablePageStore = (new ShopPageStore)->getTable();
+                    $data = $data->leftJoin($tablePageStore, $tablePageStore . '.page_id', $table . '.id');
+                    $data = $data->where($tablePageStore . '.store_id', $storeId);
                 }
                 $data = $data->pluck('title', 'id')->toArray();
                 self::$getListTitleAdmin = $data;

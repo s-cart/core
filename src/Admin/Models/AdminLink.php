@@ -14,16 +14,14 @@ class AdminLink extends ShopLink
      *
      * @return  [type]       [return description]
      */
-    public static function getLinkAdmin($id)
+    public static function getLinkAdmin($id, $storeId = null)
     {
         $data = self::where('id', $id);
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tableLinkStore = (new ShopLinkStore)->getTable();
-                $tableLink = (new ShopLink)->getTable();
-                $data = $data->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
-                $data = $data->where($tableLinkStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tableLinkStore = (new ShopLinkStore)->getTable();
+            $tableLink = (new ShopLink)->getTable();
+            $data = $data->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
+            $data = $data->where($tableLinkStore . '.store_id', $storeId);
         }
         $data = $data->first();
         return $data;
@@ -36,16 +34,14 @@ class AdminLink extends ShopLink
      *
      * @return  [type]               [return description]
      */
-    public static function getLinkListAdmin()
+    public static function getLinkListAdmin($storeId = null)
     {
         $linkList = (new AdminLink);
         $tableLink = $linkList->getTable();
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tableLinkStore = (new ShopLinkStore)->getTable();
-                $linkList = $linkList->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
-                $linkList = $linkList->where($tableLinkStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tableLinkStore = (new ShopLinkStore)->getTable();
+            $linkList = $linkList->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
+            $linkList = $linkList->where($tableLinkStore . '.store_id', $storeId);
         }
         $linkList = $linkList->orderBy($tableLink.'.id', 'desc');
 

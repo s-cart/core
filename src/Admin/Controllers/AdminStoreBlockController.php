@@ -50,7 +50,7 @@ class AdminStoreBlockController extends RootAdminController
             'sort'     => sc_language_render('admin.store_block.sort'),
             'status'   => sc_language_render('admin.store_block.status'),
         ];
-        if (sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT) {
+        if ((sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
             $listTh['shop_store'] = sc_language_render('front.store_list');
         }
@@ -91,7 +91,7 @@ class AdminStoreBlockController extends RootAdminController
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             ];
 
-            if (sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT) {
+            if ((sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) && session('adminStoreId') == SC_ID_ROOT) {
                 $storeCode = sc_get_list_code_store()[$row['store_id']] ?? '';
                 // Only show store info if store is root
                 $storeTmp['shop_store'] = '<i class="nav-icon fab fa-shopify"></i><a target=_new href="'.sc_get_domain_from_code($storeCode).'">'.$storeCode.'</a>';

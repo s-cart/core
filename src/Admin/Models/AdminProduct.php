@@ -17,19 +17,17 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]       [return description]
      */
-    public static function getProductAdmin($id)
+    public static function getProductAdmin($id, $storeId = null)
     {
         $tableDescription = (new ShopProductDescription)->getTable();
         $tableProduct = (new ShopProduct)->getTable();
         $data =  self::where('id', $id)
         ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id');
 
-        if (sc_config_global('MultiVendorPro')) {
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                $tableProductStore = (new ShopProductStore)->getTable();
-                $data = $data->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id');
-                $data = $data->where($tableProductStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            $tableProductStore = (new ShopProductStore)->getTable();
+            $data = $data->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id');
+            $data = $data->where($tableProductStore . '.store_id', $storeId);
         }
 
         $data = $data->first();
@@ -43,7 +41,7 @@ class AdminProduct extends ShopProduct
      *
      * @return  [type]               [return description]
      */
-    public static function getProductListAdmin(array $dataSearch)
+    public static function getProductListAdmin(array $dataSearch, $storeId = null)
     {
         $keyword          = $dataSearch['keyword'] ?? '';
         $category_id      = $dataSearch['category_id'] ?? '';
@@ -70,13 +68,9 @@ class AdminProduct extends ShopProduct
         $productList = $productList
             ->where($tableDescription . '.lang', sc_get_locale());
 
-        if (sc_config_global('MultiVendorPro')) {
-            // If multi-vendor
-            // Only get products if store active
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                // Only get products of store if store <> root or store is specified
-                $productList = $productList->where($tableProductStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            // Only get products of store if store <> root or store is specified
+            $productList = $productList->where($tableProductStore . '.store_id', $storeId);
         }
 
         if ($keyword) {
@@ -108,7 +102,7 @@ class AdminProduct extends ShopProduct
      *
      * @return  []                  [return description]
      */
-    public function getProductSelectAdmin(array $dataFilter = [])
+    public function getProductSelectAdmin(array $dataFilter = [], $storeId = null)
     {
         $keyword          = $dataFilter['keyword'] ?? '';
         $limit            = $dataFilter['limit'] ?? '';
@@ -126,13 +120,9 @@ class AdminProduct extends ShopProduct
             ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
-        if (sc_config_global('MultiVendorPro')) {
-            // If multi-vendor
-            // Only get products if store active
-            if (session('adminStoreId') != SC_ID_ROOT) {
-                // Only get products of store if store <> root or store is specified
-                $productList = $productList->where($tableProductStore . '.store_id', session('adminStoreId'));
-            }
+        if ($storeId) {
+            // Only get products of store if store <> root or store is specified
+            $productList = $productList->where($tableProductStore . '.store_id', $storeId);
         }
 
         if (is_array($kind) && $kind) {
