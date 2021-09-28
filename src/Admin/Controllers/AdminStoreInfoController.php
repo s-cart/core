@@ -38,7 +38,7 @@ class AdminStoreInfoController extends RootAdminController
         $parseName = explode('__', $fieldName);
         $name      = $parseName[0];
         $lang      = $parseName[1] ?? '';
-        $msg       = '';
+        $msg       = 'Update success';
         // Check store
         $store     = AdminStore::find($storeId);
         if (!$store) {
@@ -72,6 +72,29 @@ class AdminStoreInfoController extends RootAdminController
                         $msg = sc_language_render('store.admin.code_exist');
                     } else {
                         AdminStore::where('id', $storeId)->update([$name => $value]);
+                        $error = 0;
+                    }
+                } elseif ($name == 'template') {
+                    if (AdminStore::where('code', $value)->where('id', '<>', $storeId)->first()) {
+                        $error = 1;
+                        $msg = sc_language_render('store.admin.code_exist');
+                    } else {
+                        AdminStore::where('id', $storeId)->update([$name => $value]);
+
+                        //Install template for store
+                        if (file_exists($fileProcess = resource_path() . '/views/templates/'.$value.'/Provider.php')) {
+                            include_once $fileProcess;
+                            if (function_exists('sc_template_install_store')) {
+                                //Insert only specify store
+                                $checkTemplateEnableStore = (new \SCart\Core\Admin\Models\AdminStoreBlockContent)
+                                    ->where('template', $value)
+                                    ->where('store_id', $storeId)
+                                    ->first();
+                                if (!$checkTemplateEnableStore) {
+                                    sc_template_install_store($storeId);
+                                }
+                            }
+                        }
                         $error = 0;
                     }
                 } else {

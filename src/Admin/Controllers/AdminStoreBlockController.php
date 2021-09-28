@@ -69,7 +69,7 @@ class AdminStoreBlockController extends RootAdminController
             } else {
                 $arrPage = explode(',', $row['page']);
                 foreach ($arrPage as $key => $value) {
-                    $htmlPage .= '+' . sc_language_render($layoutPage[$value] ?? '') . '<br>';
+                    $htmlPage .= '+' . $value . '<br>';
                 }
             }
 

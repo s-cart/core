@@ -53,7 +53,9 @@ class AdminTemplateController extends RootAdminController
         if (file_exists($fileProcess = resource_path() . '/views/templates/'.$key.'/Provider.php')) {
             include_once $fileProcess;
             if (function_exists('sc_template_uninstall')) {
+                // Remove template from all stories
                 sc_template_uninstall();
+                (new AdminTemplate)->where('key', $key)->delete();
             }
         }
 
@@ -68,7 +70,7 @@ class AdminTemplateController extends RootAdminController
     }
 
     /**
-     * Refresh or install template
+     * Re-install template
      *
      * @return void
      */
@@ -87,16 +89,15 @@ class AdminTemplateController extends RootAdminController
         //Run function process before remove template
         if (file_exists($fileProcess = resource_path() . '/views/templates/'.$key.'/Provider.php')) {
             include_once $fileProcess;
-            if (function_exists('sc_template_refresh')) {
-                sc_template_refresh();
-            } else {
-                if (function_exists('sc_template_uninstall') && function_exists('sc_template_install')) {
-                    sc_template_uninstall();
-                    sc_template_install();
-                }
+            $data = ['store_id' => session('adminStoreId')];
+            if (function_exists('sc_template_uninstall') && function_exists('sc_template_install')) {
+                //Remove all stories
+                sc_template_uninstall();
+                //Insert only specify store
+                sc_template_install($data);
             }
         }
-        $response = ['error' => 0, 'msg' => 'Refresh template success'];
+        $response = ['error' => 0, 'msg' => 'Re-install template success'];
         return response()->json($response);
     }
 
@@ -191,9 +192,18 @@ class AdminTemplateController extends RootAdminController
 
                         //Run function process after install template
                         if (file_exists($fileProcess = resource_path() . '/views/templates/'.$configKey.'/Provider.php')) {
+                            $data = ['store_id' => session('adminStoreId')];
                             include_once $fileProcess;
+                            /**
+                             * Import template do from root domain
+                             */
+                            if (function_exists('sc_template_uninstall')) {
+                                //Remove all old data from all stories
+                                sc_template_uninstall();
+                            }
                             if (function_exists('sc_template_install')) {
-                                sc_template_install();
+                                //Install data default and data for root domain
+                                sc_template_install($data);
                             }
                         }
                     } catch (\Throwable $e) {

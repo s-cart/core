@@ -57,7 +57,7 @@
                         @if (!key_exists($key, $templatesInstalled))
                           <span onClick="processTemplate($(this), '{{ $key }}', 'install');" class="btn btn-flat btn-primary btn-sm" title="{{ sc_language_render('action.install') }}"><i class="fa fa-plus" aria-hidden="true"></i></span>
                         @else
-                          <span onClick="processTemplate($(this), '{{ $key }}', 'refresh');" class="btn btn-flat btn-info btn-sm" title="{{ sc_language_render('action.refresh') }}"><i class="fa fa-recycle" aria-hidden="true"></i></span>
+                          {{-- <span onClick="processTemplate($(this), '{{ $key }}', 'refresh');" class="btn btn-flat btn-info btn-sm" title="{{ sc_language_render('action.refresh') }}"><i class="fa fa-recycle" aria-hidden="true"></i></span> --}}
                           @if (!key_exists($key, $templatesActive))
                           <span onClick="processTemplate($(this), '{{ $key }}', 'enable');" class="btn btn-flat btn-primary btn-sm" title="{{ sc_language_render('action.enable') }}"><i class="fa fa-paper-plane" aria-hidden="true"></i></span>
                           @else
@@ -67,7 +67,7 @@
                         <span onClick="processTemplate($(this), '{{ $key }}', 'remove');" title="{{ sc_language_render('action.remove') }}" class="btn btn-flat btn-danger btn-sm"><i class="fa fa-trash"></i></span>
                       @else
                       <span class="btn btn-flat btn-success btn-sm" title="{{ sc_language_render('admin.template.used') }}"><i class="fa fa-check" aria-hidden="true"></i></span>
-                      <span onClick="processTemplate($(this), '{{ $key }}', 'refresh');" class="btn btn-flat btn-info btn-sm" title="{{ sc_language_render('action.refresh') }}"><i class="fa fa-recycle" aria-hidden="true"></i></span>
+                      {{-- <span onClick="processTemplate($(this), '{{ $key }}', 'refresh');" class="btn btn-flat btn-info btn-sm" title="{{ sc_language_render('action.refresh') }}"><i class="fa fa-recycle" aria-hidden="true"></i></span> --}}
                       @endif
                     </td>
                   </tr>

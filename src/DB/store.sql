@@ -386,34 +386,4 @@ img.new {
   color: red;
   font-style: italic;
 }','__storeId__');
-                
-/*shop_store_block*/
-INSERT INTO `__SC_DB_PREFIX__shop_store_block` (`name`, `position`, `page`, `type`, `text`, `status`, `sort`, `store_id`) VALUES 
-('Facebook code', 'top', '*','html','
-<div id=\"fb-root\"></div>
-<script>(function(d, s, id) {
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) return;
-js = d.createElement(s); js.id = id;
-js.src = \"//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.8&appId=934208239994473\";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, \"script\", \"facebook-jssdk\"));
-</script>', '1', '0', '__storeId__'),
-('Google Analytics', 'header', '*','html','
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-128658138-1\"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag(\"js\", new Date());
-gtag(\"config\", \"UA-128658138-1\");
-</script>', '1', '0', '__storeId__'),
-('Product special', 'left', '*','view','product_special', '1', '1', '__storeId__'),
-('Brands', 'left', '*','view','brands_left', '1', '3', '__storeId__'),
-('Banner home', 'banner_top', 'home','view','banner_image', '1', '0', '__storeId__'),
-('Categories', 'left', 'home,shop_home','view','categories', '1', '0', '__storeId__'),
-('Product last view', 'left', '*','view','product_lastview', '1', '0', '__storeId__'),
-('Products new', 'top', 'home','view','product_new', '1', '9', '__storeId__'),
-('Categories store', 'left', 'shop_home,vendor_home,vendor_product_list','view','category_store', '1', '0', '__storeId__'),
-('Top news', 'top', 'home','view','top_news', '1', '999', '__storeId__');
   

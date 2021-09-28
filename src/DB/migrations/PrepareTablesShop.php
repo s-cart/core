@@ -82,6 +82,7 @@ class PrepareTablesShop extends Migration
                 $table->tinyInteger('status')->default(0);
                 $table->integer('sort')->default(0);
                 $table->integer('store_id')->default(1)->index();
+                $table->string('template', '50')->index();
             }
         );
 
