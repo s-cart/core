@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminStoreBlockContent;
+use SCart\Core\Admin\Models\AdminStore;
 use SCart\Core\Front\Models\ShopLayoutPage;
 use SCart\Core\Front\Models\ShopLayoutPosition;
 use Validator;
@@ -152,6 +153,8 @@ class AdminStoreBlockController extends RootAdminController
      */
     public function postCreate()
     {
+        $storeId = $data['store_id'] ?? session('adminStoreId');
+        $store = AdminStore::find($storeId);
         $data = request()->all();
         $dataOrigin = request()->all();
         $validator = Validator::make($dataOrigin, [
@@ -176,8 +179,9 @@ class AdminStoreBlockController extends RootAdminController
             'text'     => $data['text'],
             'type'     => $data['type'],
             'sort'     => (int) $data['sort'],
+            'template' => $store->template,
             'status'   => (empty($data['status']) ? 0 : 1),
-            'store_id' => $data['store_id'] ?? session('adminStoreId'),
+            'store_id' => $storeId,
         ];
         AdminStoreBlockContent::createStoreBlockContentAdmin($dataInsert);
         //

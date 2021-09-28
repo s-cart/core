@@ -222,7 +222,9 @@ $(function () {
        obj.before('<textarea name="text" class="form-control text" rows="5" placeholder="Layout text"></textarea><span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_html') }}.</span>');
        obj.remove();
     }else if(type =='view'){
-        var storeId = $('[name="store_id"]').val();
+
+        var storeId = $('[name="store_id"]').val() ? $('[name="store_id"]').val() : {{ session('adminStoreId') }};
+        
         $('#loading').show();
         $.ajax({
             method: 'get',
