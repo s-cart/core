@@ -290,14 +290,3 @@ INSERT INTO `__SC_DB_PREFIX__shop_length` (`id`, `name`, `description`) VALUES
 ('2','cm','Centimeter'),
 ('3','m','Meter'),
 ('4','in','Inch');
-
-/*shop_store_block*/
-INSERT INTO `__SC_DB_PREFIX__shop_store_block` (`name`, `position`, `page`, `type`, `text`, `status`, `sort`, `store_id`, `template`) VALUES 
-('Product special', 'left', '*','view','product_special_left', '1', '20', '1', 's-cart-light'),
-('Brands', 'left', '*','view','brand_left', '1', '30', '1', 's-cart-light'),
-('Banner home', 'banner_top', 'home','view','banner_image', '1', '10', '1', 's-cart-light'),
-('Category', 'left', 'home,shop_home','view','category_left', '1', '20', '1', 's-cart-light'),
-('Product last view', 'left', '*','view','product_lastview_left', '1', '30', '1', 's-cart-light'),
-('Products new', 'top', 'home','view','product_new', '1', '10', '1', 's-cart-light'),
-('Category store', 'left', 'shop_home,vendor_home,vendor_product_list','view','category_store_left', '1', '10', '1', 's-cart-light'),
-('Top news', 'top', 'home','view','top_news', '1', '10', '1', 's-cart-light');

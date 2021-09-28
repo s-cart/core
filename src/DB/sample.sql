@@ -260,10 +260,10 @@ INSERT INTO `__SC_DB_PREFIX__shop_product_promotion` (`product_id`, `price_promo
 
 /*shop_banner*/
 INSERT INTO `__SC_DB_PREFIX__shop_banner` (`title`, `image`, `html`, `target`, `status`, `type`) VALUES 
-('Banner 1', '/data/banner/Main-banner-1-1903x600.jpg', '<h1 class=\"swiper-title-1\" data-caption-animate=\"fadeScale\" data-caption-delay=\"100\">Top-notch Furniture</h1><p class=\"biggest text-white-70\" data-caption-animate=\"fadeScale\" data-caption-delay=\"200\">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class=\"button-wrap\" data-caption-animate=\"fadeInUp\" data-caption-delay=\"300\"> <span class=\"button button-zachem-tak-delat button-white button-zakaria\"> Shop now</span> </div>',  '_self',  1,  'banner'),
-('Banner 2','/data/banner/Main-banner-3-1903x600.jpg', '<h1 class=\"swiper-title-1\" data-caption-animate=\"fadeScale\" data-caption-delay=\"100\">Top-notch Furniture</h1><p class=\"biggest text-white-70\" data-caption-animate=\"fadeScale\" data-caption-delay=\"200\">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class=\"button-wrap\" data-caption-animate=\"fadeInUp\" data-caption-delay=\"300\"> <span class=\"button button-zachem-tak-delat button-white button-zakaria\"> Shop now</span> </div>',  '_self',  1,  'banner'),
-('Banner 3','/data/banner/bgbr.jpg', '',  '_self',  1,  'breadcrumb'),
-('Banner 4','/data/banner/store-1.jpg', '',  '_self',  1,  'banner-store');
+('Banner home 1', '/data/banner/banner-home-1.jpg', '<h1 class=\"swiper-title-1\" data-caption-animate=\"fadeScale\" data-caption-delay=\"100\">Top-notch Furniture</h1><p class=\"biggest text-white-70\" data-caption-animate=\"fadeScale\" data-caption-delay=\"200\">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class=\"button-wrap\" data-caption-animate=\"fadeInUp\" data-caption-delay=\"300\"> <span class=\"button button-zachem-tak-delat button-white button-zakaria\"> Shop now</span> </div>',  '_self',  1,  'banner'),
+('Banner home 2','/data/banner/banner-home-2.jpg', '<h1 class=\"swiper-title-1\" data-caption-animate=\"fadeScale\" data-caption-delay=\"100\">Top-notch Furniture</h1><p class=\"biggest text-white-70\" data-caption-animate=\"fadeScale\" data-caption-delay=\"200\">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class=\"button-wrap\" data-caption-animate=\"fadeInUp\" data-caption-delay=\"300\"> <span class=\"button button-zachem-tak-delat button-white button-zakaria\"> Shop now</span> </div>',  '_self',  1,  'banner'),
+('Banner breadcrumb 3','/data/banner/breadcrumb.jpg', '',  '_self',  1,  'breadcrumb'),
+('Banner store','/data/banner/banner-store.jpg', '',  '_self',  1,  'banner-store');
 
 
 /*shop_banner_store*/
@@ -416,3 +416,14 @@ INSERT INTO `__SC_DB_PREFIX__shop_banner_type` (`id`, `code`, `name`) VALUES
 ('3','breadcrumb','Breadcrumb website'),
 ('4','banner-store','Banner store'),
 ('5','other','Other');
+
+/*shop_store_block*/
+INSERT INTO `__SC_DB_PREFIX__shop_store_block` (`name`, `position`, `page`, `type`, `text`, `status`, `sort`, `store_id`, `template`) VALUES 
+('Product special', 'left', '*','view','product_special_left', '1', '20', '1', 's-cart-light'),
+('Brands', 'left', '*','view','brand_left', '1', '30', '1', 's-cart-light'),
+('Banner home', 'banner_top', 'home','view','banner_image', '1', '10', '1', 's-cart-light'),
+('Category', 'left', 'home,shop_home','view','category_left', '1', '20', '1', 's-cart-light'),
+('Product last view', 'left', '*','view','product_lastview_left', '1', '30', '1', 's-cart-light'),
+('Products new', 'top', 'home','view','product_new', '1', '10', '1', 's-cart-light'),
+('Category store', 'left', 'shop_home,vendor_home,vendor_product_list','view','category_store_left', '1', '10', '1', 's-cart-light'),
+('Top news', 'top', 'home','view','top_news', '1', '10', '1', 's-cart-light');

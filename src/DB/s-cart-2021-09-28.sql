@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS `oauth_clients` (
 DELETE FROM `oauth_clients`;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-	('94808bba-048d-4c18-85d1-6be103d8fae7', NULL, 'SCart Personal Access Client', 'WBA2enPrWOjV12SHEXDhq3VkIviietl6ZjN59sqK', NULL, 'http://localhost', 1, 0, 0, '2021-09-28 10:03:29', '2021-09-28 10:03:29'),
-	('94808bba-09a5-406a-bebe-a73aa268e3df', NULL, 'SCart Password Grant Client', 'It02CNAKiVaX3QxEfjgWxudHcFlo8pdTYraydksN', 'users', 'http://localhost', 0, 1, 0, '2021-09-28 10:03:29', '2021-09-28 10:03:29');
+	('9480abd8-243c-4cef-96fe-ce9112f52525', NULL, 'SCart Personal Access Client', 'b9Os8sobBwtUvM9RHBXY3BkXcy7U8fOMVR6ccYum', NULL, 'http://localhost', 1, 0, 0, '2021-09-28 11:33:17', '2021-09-28 11:33:17'),
+	('9480abd8-276f-4373-b066-1be3a0541211', NULL, 'SCart Password Grant Client', 'V1RwAZLk7AGbUyilHaFb6DIKp5lztPND6KaP8JL3', 'users', 'http://localhost', 0, 1, 0, '2021-09-28 11:33:17', '2021-09-28 11:33:17');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_personal_access_clients
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
 DELETE FROM `oauth_personal_access_clients`;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-	(1, '94808bba-048d-4c18-85d1-6be103d8fae7', '2021-09-28 10:03:29', '2021-09-28 10:03:29');
+	(1, '9480abd8-243c-4cef-96fe-ce9112f52525', '2021-09-28 11:33:17', '2021-09-28 11:33:17');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_refresh_tokens
@@ -334,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_log` (
   KEY `sc_admin_log_user_id_index` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_admin_log: ~2 rows (approximately)
+-- Dumping data for table s-cart.sc_admin_log: ~0 rows (approximately)
 DELETE FROM `sc_admin_log`;
 /*!40000 ALTER TABLE `sc_admin_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sc_admin_log` ENABLE KEYS */;
@@ -447,19 +447,19 @@ CREATE TABLE IF NOT EXISTS `sc_admin_permission` (
 DELETE FROM `sc_admin_permission`;
 /*!40000 ALTER TABLE `sc_admin_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at`, `updated_at`) VALUES
-	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-09-28 10:03:28', NULL),
-	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-09-28 10:03:28', NULL),
-	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-09-28 10:03:28', NULL),
-	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-09-28 10:03:28', NULL),
-	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-09-28 10:03:28', NULL),
-	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-09-28 10:03:28', NULL),
-	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-09-28 10:03:28', NULL),
-	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-09-28 10:03:28', NULL),
-	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-09-28 10:03:28', NULL),
-	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-09-28 10:03:28', NULL),
-	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-09-28 10:03:28', NULL),
-	(12, 'CMS manager', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*, ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-09-28 10:03:28', NULL),
-	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-09-28 10:03:28', NULL);
+	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-09-28 11:33:17', NULL),
+	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-09-28 11:33:17', NULL),
+	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-09-28 11:33:17', NULL),
+	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-09-28 11:33:17', NULL),
+	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-09-28 11:33:17', NULL),
+	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-09-28 11:33:17', NULL),
+	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-09-28 11:33:17', NULL),
+	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-09-28 11:33:17', NULL),
+	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-09-28 11:33:17', NULL),
+	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-09-28 11:33:17', NULL),
+	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-09-28 11:33:17', NULL),
+	(12, 'CMS manager', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*, ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-09-28 11:33:17', NULL),
+	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-09-28 11:33:17', NULL);
 /*!40000 ALTER TABLE `sc_admin_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role
@@ -478,12 +478,12 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role` (
 DELETE FROM `sc_admin_role`;
 /*!40000 ALTER TABLE `sc_admin_role` DISABLE KEYS */;
 INSERT INTO `sc_admin_role` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrator', 'administrator', '2021-09-28 10:03:28', NULL),
-	(2, 'Group only View', 'view.all', '2021-09-28 10:03:28', NULL),
-	(3, 'Manager', 'manager', '2021-09-28 10:03:28', NULL),
-	(4, 'CMS', 'cms', '2021-09-28 10:03:28', NULL),
-	(5, 'Accountant', 'accountant', '2021-09-28 10:03:28', NULL),
-	(6, 'Marketing', 'maketing', '2021-09-28 10:03:28', NULL);
+	(1, 'Administrator', 'administrator', '2021-09-28 11:33:17', NULL),
+	(2, 'Group only View', 'view.all', '2021-09-28 11:33:17', NULL),
+	(3, 'Manager', 'manager', '2021-09-28 11:33:17', NULL),
+	(4, 'CMS', 'cms', '2021-09-28 11:33:17', NULL),
+	(5, 'Accountant', 'accountant', '2021-09-28 11:33:17', NULL),
+	(6, 'Marketing', 'maketing', '2021-09-28 11:33:17', NULL);
 /*!40000 ALTER TABLE `sc_admin_role` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_permission
@@ -501,31 +501,31 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role_permission` (
 DELETE FROM `sc_admin_role_permission`;
 /*!40000 ALTER TABLE `sc_admin_role_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_role_permission` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES
-	(3, 1, '2021-09-28 10:03:28', NULL),
-	(3, 2, '2021-09-28 10:03:28', NULL),
-	(3, 3, '2021-09-28 10:03:28', NULL),
-	(3, 4, '2021-09-28 10:03:28', NULL),
-	(3, 5, '2021-09-28 10:03:28', NULL),
-	(3, 6, '2021-09-28 10:03:28', NULL),
-	(3, 7, '2021-09-28 10:03:28', NULL),
-	(3, 8, '2021-09-28 10:03:28', NULL),
-	(3, 9, '2021-09-28 10:03:28', NULL),
-	(3, 10, '2021-09-28 10:03:28', NULL),
-	(3, 11, '2021-09-28 10:03:28', NULL),
-	(3, 12, '2021-09-28 10:03:28', NULL),
-	(3, 13, '2021-09-28 10:03:28', NULL),
-	(4, 1, '2021-09-28 10:03:28', NULL),
-	(4, 12, '2021-09-28 10:03:28', NULL),
-	(5, 1, '2021-09-28 10:03:28', NULL),
-	(5, 2, '2021-09-28 10:03:28', NULL),
-	(5, 7, '2021-09-28 10:03:28', NULL),
-	(5, 11, '2021-09-28 10:03:28', NULL),
-	(6, 1, '2021-09-28 10:03:28', NULL),
-	(6, 2, '2021-09-28 10:03:28', NULL),
-	(6, 8, '2021-09-28 10:03:28', NULL),
-	(6, 10, '2021-09-28 10:03:28', NULL),
-	(6, 11, '2021-09-28 10:03:28', NULL),
-	(6, 12, '2021-09-28 10:03:28', NULL);
+	(3, 1, '2021-09-28 11:33:17', NULL),
+	(3, 2, '2021-09-28 11:33:17', NULL),
+	(3, 3, '2021-09-28 11:33:17', NULL),
+	(3, 4, '2021-09-28 11:33:17', NULL),
+	(3, 5, '2021-09-28 11:33:17', NULL),
+	(3, 6, '2021-09-28 11:33:17', NULL),
+	(3, 7, '2021-09-28 11:33:17', NULL),
+	(3, 8, '2021-09-28 11:33:17', NULL),
+	(3, 9, '2021-09-28 11:33:17', NULL),
+	(3, 10, '2021-09-28 11:33:17', NULL),
+	(3, 11, '2021-09-28 11:33:17', NULL),
+	(3, 12, '2021-09-28 11:33:17', NULL),
+	(3, 13, '2021-09-28 11:33:17', NULL),
+	(4, 1, '2021-09-28 11:33:17', NULL),
+	(4, 12, '2021-09-28 11:33:17', NULL),
+	(5, 1, '2021-09-28 11:33:17', NULL),
+	(5, 2, '2021-09-28 11:33:17', NULL),
+	(5, 7, '2021-09-28 11:33:17', NULL),
+	(5, 11, '2021-09-28 11:33:17', NULL),
+	(6, 1, '2021-09-28 11:33:17', NULL),
+	(6, 2, '2021-09-28 11:33:17', NULL),
+	(6, 8, '2021-09-28 11:33:17', NULL),
+	(6, 10, '2021-09-28 11:33:17', NULL),
+	(6, 11, '2021-09-28 11:33:17', NULL),
+	(6, 12, '2021-09-28 11:33:17', NULL);
 /*!40000 ALTER TABLE `sc_admin_role_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_user
@@ -619,7 +619,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_template` (
 DELETE FROM `sc_admin_template`;
 /*!40000 ALTER TABLE `sc_admin_template` DISABLE KEYS */;
 INSERT INTO `sc_admin_template` (`id`, `key`, `name`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 's-cart-light', 'S-Cart Light', 1, '2021-09-28 10:03:28', NULL);
+	(1, 's-cart-light', 'S-Cart Light', 1, '2021-09-28 11:33:17', NULL);
 /*!40000 ALTER TABLE `sc_admin_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user
@@ -644,7 +644,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_user` (
 DELETE FROM `sc_admin_user`;
 /*!40000 ALTER TABLE `sc_admin_user` DISABLE KEYS */;
 INSERT INTO `sc_admin_user` (`id`, `username`, `password`, `name`, `email`, `avatar`, `remember_token`, `theme`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', '$2y$10$SLvbGiPjWEee9bBo.kexROb/4NtXmevMoOxlo6gZvYnXscb8Ec9sG', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, '2021-09-28 10:03:28', NULL);
+	(1, 'admin', '$2y$10$cXrp8djjSdv8k5lNDbYAseuFmCHX1CkON.IYndD/CiBLdu1MpwauO', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, '2021-09-28 11:33:17', NULL);
 /*!40000 ALTER TABLE `sc_admin_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user_permission
@@ -681,7 +681,7 @@ CREATE TABLE IF NOT EXISTS `sc_api_connection` (
 DELETE FROM `sc_api_connection`;
 /*!40000 ALTER TABLE `sc_api_connection` DISABLE KEYS */;
 INSERT INTO `sc_api_connection` (`id`, `description`, `apiconnection`, `apikey`, `expire`, `last_active`, `status`) VALUES
-	(1, 'Demo api connection', 'appmobile', 'a7e3a337-2008-11ec-a2de-04d9f5d0007b', NULL, NULL, 0);
+	(1, 'Demo api connection', 'appmobile', '33c5af02-2015-11ec-a2de-04d9f5d0007b', NULL, NULL, 0);
 /*!40000 ALTER TABLE `sc_api_connection` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_languages
@@ -3275,10 +3275,10 @@ CREATE TABLE IF NOT EXISTS `sc_shop_banner` (
 DELETE FROM `sc_shop_banner`;
 /*!40000 ALTER TABLE `sc_shop_banner` DISABLE KEYS */;
 INSERT INTO `sc_shop_banner` (`id`, `title`, `image`, `url`, `target`, `html`, `status`, `sort`, `click`, `type`, `created_at`, `updated_at`) VALUES
-	(1, 'Banner 1', '/data/banner/Main-banner-1-1903x600.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
-	(2, 'Banner 2', '/data/banner/Main-banner-3-1903x600.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
-	(3, 'Banner 3', '/data/banner/bgbr.jpg', NULL, '_self', '', 1, 0, 0, 'breadcrumb', NULL, NULL),
-	(4, 'Banner 4', '/data/banner/store-1.jpg', NULL, '_self', '', 1, 0, 0, 'banner-store', NULL, NULL);
+	(1, 'Banner home 1', '/data/banner/banner-home-1.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
+	(2, 'Banner home 2', '/data/banner/banner-home-2.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
+	(3, 'Banner breadcrumb 3', '/data/banner/breadcrumb.jpg', NULL, '_self', '', 1, 0, 0, 'breadcrumb', NULL, NULL),
+	(4, 'Banner store', '/data/banner/banner-store.jpg', NULL, '_self', '', 1, 0, 0, 'banner-store', NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_banner` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner_store
@@ -4049,12 +4049,12 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news` (
 DELETE FROM `sc_shop_news`;
 /*!40000 ALTER TABLE `sc_shop_news` DISABLE KEYS */;
 INSERT INTO `sc_shop_news` (`id`, `image`, `alias`, `sort`, `status`, `created_at`, `updated_at`) VALUES
-	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-09-28 10:03:29', NULL),
-	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-09-28 10:03:29', NULL),
-	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-09-28 10:03:29', NULL),
-	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-09-28 10:03:29', NULL),
-	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-09-28 10:03:29', NULL),
-	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-09-28 10:03:29', NULL);
+	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-09-28 11:33:17', NULL),
+	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-09-28 11:33:17', NULL),
+	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-09-28 11:33:17', NULL),
+	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-09-28 11:33:17', NULL),
+	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-09-28 11:33:17', NULL),
+	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-09-28 11:33:17', NULL);
 /*!40000 ALTER TABLE `sc_shop_news` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_description
@@ -4827,7 +4827,7 @@ CREATE TABLE IF NOT EXISTS `sc_shop_store_block` (
   KEY `sc_shop_store_block_template_index` (`template`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_shop_store_block: ~9 rows (approximately)
+-- Dumping data for table s-cart.sc_shop_store_block: ~8 rows (approximately)
 DELETE FROM `sc_shop_store_block`;
 /*!40000 ALTER TABLE `sc_shop_store_block` DISABLE KEYS */;
 INSERT INTO `sc_shop_store_block` (`id`, `name`, `position`, `page`, `type`, `text`, `status`, `sort`, `store_id`, `template`) VALUES
@@ -4971,7 +4971,7 @@ CREATE TABLE IF NOT EXISTS `vendor_category_description` (
   KEY `vendor_category_description_lang_index` (`lang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.vendor_category_description: ~2 rows (approximately)
+-- Dumping data for table s-cart.vendor_category_description: ~0 rows (approximately)
 DELETE FROM `vendor_category_description`;
 /*!40000 ALTER TABLE `vendor_category_description` DISABLE KEYS */;
 /*!40000 ALTER TABLE `vendor_category_description` ENABLE KEYS */;
