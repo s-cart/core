@@ -49,6 +49,7 @@ class AdminStoreBlockController extends RootAdminController
             'text'     => sc_language_render('admin.store_block.text'),
             'sort'     => sc_language_render('admin.store_block.sort'),
             'status'   => sc_language_render('admin.store_block.status'),
+            'template'   => 'Template',
         ];
         if ((sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
@@ -89,6 +90,7 @@ class AdminStoreBlockController extends RootAdminController
                 'text' => htmlspecialchars($row['text']),
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
+                'template' => $row['template'],
             ];
 
             if ((sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) && session('adminStoreId') == SC_ID_ROOT) {
