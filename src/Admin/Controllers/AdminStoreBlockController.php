@@ -222,6 +222,9 @@ class AdminStoreBlockController extends RootAdminController
      */
     public function postEdit($id)
     {
+        $storeId = $data['store_id'] ?? session('adminStoreId');
+        $store = AdminStore::find($storeId);
+
         $layout = (new AdminStoreBlockContent)->getStoreBlockContentAdmin($id);
         if (!$layout) {
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
@@ -248,8 +251,9 @@ class AdminStoreBlockController extends RootAdminController
             'text' => $data['text'],
             'type' => $data['type'],
             'sort' => (int) $data['sort'],
+            'template' => $store->template,
             'status' => (empty($data['status']) ? 0 : 1),
-            'store_id' => $data['store_id'] ?? session('adminStoreId'),
+            'store_id' => $storeId,
         ];
         $layout->update($dataUpdate);
         //
