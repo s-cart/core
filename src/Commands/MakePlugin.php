@@ -74,15 +74,15 @@ class MakePlugin extends Command
         $pluginUrlKey = sc_word_format_url($key);
         $pluginUrlKey = str_replace('-', '_', $pluginUrlKey);
 
-        $source = "format/plugin/src";
-        $sourcePublic = "format/plugin/public";
+        $source = "Format/plugin/src";
+        $sourcePublic = "Format/plugin/public";
         $sID = md5(time());
         $tmp = $this->tmpFolder."/".$sID.'/'.$pluginKey.'/src';
         $tmpPublic = $this->tmpFolder."/".$sID.'/'.$pluginKey.'/public';
         $description = 'Plugins/'.$pluginCode.'/'.$pluginKey;
         try {
-            File::copyDirectory(storage_path($source), storage_path($tmp));
-            File::copyDirectory(storage_path($sourcePublic), storage_path($tmpPublic));
+            File::copyDirectory(base_path('vendor/s-cart/core/src/'.$source), storage_path($tmp));
+            File::copyDirectory(base_path('vendor/s-cart/core/src/'.$sourcePublic), storage_path($tmpPublic));
 
             $adminController = file_get_contents(storage_path($tmp.'/Admin/AdminController.php'));
             $adminController      = str_replace('Plugin_Code', $pluginCode, $adminController);
@@ -135,7 +135,7 @@ class MakePlugin extends Command
             $route      = str_replace('Plugin_Key', $pluginKey, $route);
             $route          = str_replace('PluginUrlKey', $pluginUrlKey, $route);
             file_put_contents(storage_path($tmp.'/Route.php'), $route);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $msg = $e->getMessage();
             $error = 1;
         }
@@ -149,7 +149,7 @@ class MakePlugin extends Command
                 File::copyDirectory(storage_path($tmpPublic), public_path($description));
             }
             File::deleteDirectory(storage_path($this->tmpFolder.'/'.$sID));
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $msg = $e->getMessage();
             $error = 1;
         }
