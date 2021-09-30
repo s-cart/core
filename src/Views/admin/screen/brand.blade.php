@@ -224,7 +224,7 @@
                     </thead>
                     <tbody>
                         @foreach ($dataTr as $keyRow => $tr)
-                            <tr class="{{ ($id == $tr['id']) ? 'active': '' }}">
+                            <tr class="{{ (request('id') == $tr['id']) ? 'active': '' }}">
                                 @if (!empty($removeList))
                                 <td>
                                   <input class="checkbox" type="checkbox" class="grid-row-checkbox" data-id="{{ $tr['id']??'' }}">
