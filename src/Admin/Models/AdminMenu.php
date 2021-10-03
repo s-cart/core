@@ -9,6 +9,7 @@ class AdminMenu extends Model
     public $table = SC_DB_PREFIX . 'admin_menu';
     protected $guarded = [];
     private static $getList = null;
+    private static $getListDisplay = null;
 
     public static function getListAll()
     {
@@ -21,12 +22,12 @@ class AdminMenu extends Model
 
     public static function getListAllDisplay()
     {
-        if (self::$getList == null) {
-            self::$getList = self::orderBy('sort', 'asc')
+        if (self::$getListDisplay == null) {
+            self::$getListDisplay = self::orderBy('sort', 'asc')
             ->where('hidden', 0)
             ->get();
         }
-        return self::$getList;
+        return self::$getListDisplay;
     }
 
     /**
@@ -70,7 +71,7 @@ class AdminMenu extends Model
      *
      * @return  [type]              [return description]
      */
-    public static function  checkUrlIsChild($urlParent, $urlChild)
+    public static function checkUrlIsChild($urlParent, $urlChild)
     {
         $check = false;
         $urlParent = strtolower($urlParent);
@@ -119,9 +120,9 @@ class AdminMenu extends Model
         });
     }
 
-/*
-Re-sort menu
- */
+    /*
+    Re-sort menu
+     */
     public function reSort(array $data)
     {
         try {
@@ -155,5 +156,4 @@ Re-sort menu
         $dataUpdate = $dataInsert;
         return self::create($dataUpdate);
     }
-
 }
