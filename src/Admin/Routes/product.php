@@ -10,4 +10,5 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('/delete', 'AdminProductController@deleteList')->name('admin_product.delete');
     Route::get('/import', 'AdminProductController@import')->name('admin_product.import');
     Route::post('/import', 'AdminProductController@postImport')->name('admin_product.import');
+    Route::post('/clone', 'AdminProductController@cloneProduct')->name('admin_product.clone');
 });

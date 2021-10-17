@@ -12,8 +12,10 @@ use SCart\Core\Front\Models\ShopProductAttribute;
 use SCart\Core\Front\Models\ShopProductBuild;
 use SCart\Core\Front\Models\ShopProductGroup;
 use SCart\Core\Front\Models\ShopProductImage;
+use SCart\Core\Front\Models\ShopProductDescription;
 use SCart\Core\Front\Models\ShopSupplier;
 use SCart\Core\Front\Models\ShopProductStore;
+use SCart\Core\Front\Models\ShopProductCategory;
 use SCart\Core\Front\Models\ShopProductDownload;
 use SCart\Core\Front\Models\ShopProductProperty;
 use SCart\Core\Front\Models\ShopCustomField;
@@ -22,6 +24,7 @@ use SCart\Core\Admin\Models\AdminProduct;
 use SCart\Core\Admin\Models\AdminStore;
 use SCart\Core\Admin\Models\AdminCategory;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class AdminProductController extends RootAdminController
 {
@@ -175,16 +178,23 @@ class AdminProductController extends RootAdminController
                     $dataMap['shop_store'] = '';
                 }
             }
-            $dataMap['action'] = '
+            $htmlAction = '
             <a href="' . sc_route_admin('admin_product.edit', ['id' => $row['id']]) . '">
-            <span title="' . sc_language_render('product.admin.edit') . '" type="button" class="btn btn-flat btn-primary">
+            <span title="' . sc_language_render('product.admin.edit') . '" type="button" class="btn btn-flat btn-sm btn-primary">
             <i class="fa fa-edit"></i>
             </span>
-            </a>&nbsp;
-
-            <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-danger">
+            </a>';
+            if ($row['kind'] == SC_PRODUCT_SINGLE) {
+                $htmlAction .= '
+                <span onclick="cloneProduct(' . $row['id'] . ');" title="' . sc_language_render('product.admin.clone') . '" type="button" class="btn btn-flat btn-sm btn-secondary">
+                <i class="fa fa-clipboard"></i>
+                </span>';
+            }
+            $htmlAction .='<span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger">
             <i class="fas fa-trash-alt"></i>
             </span>';
+
+            $dataMap['action'] = $htmlAction;
             $dataTr[] = $dataMap;
         }
 
@@ -1145,5 +1155,68 @@ class AdminProductController extends RootAdminController
     public function checkPermisisonItem($id)
     {
         return (new AdminProduct)->getProductAdmin($id);
+    }
+
+    /**
+     * Clone product
+     * Only clone single product
+     * @return  [type]  [return description]
+     */
+    public function cloneProduct() {
+
+        if (!request()->ajax()) {
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.method_not_allow')]);
+        }
+        $pId = request('pId');
+        $product = AdminProduct::find($pId);
+        if (!$product) {
+            return response()->json(['error' => 1, 'msg' => 'Product not found']);
+       }
+        if ($product->kind != SC_PRODUCT_SINGLE) {
+            return response()->json(['error' => 1, 'msg' => 'Only clone product single']);
+        }
+        try {
+            DB::connection(SC_CONNECTION)->beginTransaction();
+            //Product info
+            $dataProduct = \Illuminate\Support\Arr::except($product->toArray(), ['id', 'created_at', 'updated_at']);
+            $dataProduct['sku'] = $dataProduct['sku'].'-'.time();
+            $dataProduct['alias'] = $dataProduct['alias'].'-'.time();
+            $newProduct = AdminProduct::create($dataProduct);
+
+            //Product description
+            $productDescription = $product->descriptions->toArray();
+            $newDescription = [];
+            foreach ($productDescription as $key => $row) {
+                $row['product_id'] = $newProduct->id;
+                $newDescription[] = $row;
+            }
+            ShopProductDescription::insert($newDescription);
+
+            //Product category
+            $productCategory = (new ShopProductCategory)->where('product_id', $product->id)->get()->toArray();
+            $newCategory = [];
+            foreach ($productCategory as $key => $row) {
+                $row['product_id'] = $newProduct->id;
+                $newCategory[] = $row;
+            }
+            ShopProductCategory::insert($newCategory);
+
+
+            //Product store
+            $productStore = (new ShopProductStore)->where('product_id', $product->id)->get()->toArray();
+            $newStore = [];
+            foreach ($productStore as $key => $row) {
+                $row['product_id'] = $newProduct->id;
+                $newStore[] = $row;
+            }
+            ShopProductStore::insert($newStore);
+
+            DB::connection(SC_CONNECTION)->commit();
+            return response()->json(['error' => 0, 'msg' => sc_language_render('product.admin.clone_success')]);
+        } catch (\Throwable $e) {
+            DB::connection(SC_CONNECTION)->rollBack();
+            return response()->json(['error' => 1, 'msg' => $e->getMessage()]);
+        }
+       
     }
 }
