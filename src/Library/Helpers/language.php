@@ -55,6 +55,18 @@ if (!function_exists('sc_language_render')) {
 }
 
 
+if (!function_exists('sc_language_quickly')) {
+    /*
+    Language quickly
+     */
+    function sc_language_quickly($string, $default = null)
+    {
+        $locale = sc_get_locale();
+        $languages = sc_languages($locale);
+        return !empty($languages[$string]) ? $languages[$string] : (\Lang::has($string) ? trans($string) : $default);
+    }
+}
+
 if (!function_exists('sc_get_locale')) {
     /*
     Get locale
