@@ -1000,15 +1000,17 @@ class AdminProductController extends RootAdminController
         }
 
         //Update sub mages
-        if ($subImages && in_array($product['kind'], [SC_PRODUCT_SINGLE, SC_PRODUCT_BUILD])) {
+        if (in_array($product['kind'], [SC_PRODUCT_SINGLE, SC_PRODUCT_BUILD])) {
             $product->images()->delete();
-            $arrSubImages = [];
-            foreach ($subImages as $key => $image) {
-                if ($image) {
-                    $arrSubImages[] = new ShopProductImage(['image' => $image]);
+            if ($subImages) {
+                $arrSubImages = [];
+                foreach ($subImages as $key => $image) {
+                    if ($image) {
+                        $arrSubImages[] = new ShopProductImage(['image' => $image]);
+                    }
                 }
+                $product->images()->saveMany($arrSubImages);
             }
-            $product->images()->saveMany($arrSubImages);
         }
 
         sc_clear_cache('cache_product');
