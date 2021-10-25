@@ -175,13 +175,5 @@
 @include($templatePathAdmin.'component.alerts')
 @show
 
-<script>
-  $(function () {
-      $(".date_time").datepicker({
-          dateFormat: "yy-mm-dd"
-      });
-  });
-</script>
-
 </body>
 </html>

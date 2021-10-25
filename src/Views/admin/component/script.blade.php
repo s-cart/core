@@ -17,7 +17,14 @@
       });
   })
 
+</script>
 
+<script>
+  $(function () {
+      $(".date_time").datepicker({
+          dateFormat: "yy-mm-dd"
+      });
+  });
 </script>
 
 {{-- image file manager --}}
