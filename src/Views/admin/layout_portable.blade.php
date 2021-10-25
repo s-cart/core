@@ -71,13 +71,6 @@
 
 @stack('scripts')
 
-@section('block_component_script')
-@include($templatePathAdmin.'component.script')
-@show
-
-@section('block_component_alerts')
-@include($templatePathAdmin.'component.alerts')
-@show
 
 <script>
   $(function () {
