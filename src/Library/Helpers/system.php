@@ -21,12 +21,13 @@ if (!function_exists('sc_config')) {
     /**
      * Get value config from table sc_config
      *
-     * @param   [string|array] $key      [$key description]
-     * @param   [null|int]  $store    Store id.
+     * @param   [string|array|null]  $key      [$key description]
+     * @param   [int|null]  $storeId  [$storeId description]
+     * @param   [string|null]  $default  [$default description]
      *
-     * @return  [type]          [return description]
+     * @return  [type]            [return description]
      */
-    function sc_config($key = null, $storeId = null)
+    function sc_config($key = null, $storeId = null, $default = null)
     {
         $storeId = ($storeId === null) ? config('app.storeId') : $storeId;
         //Update config
@@ -46,7 +47,7 @@ if (!function_exists('sc_config')) {
         if ($key === null) {
             return $allConfig;
         }
-        return $allConfig[$key] ?? (sc_config_global()[$key] ?? null);
+        return $allConfig[$key] ?? (sc_config_global()[$key] ?? $default);
     }
 }
 
