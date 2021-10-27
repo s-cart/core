@@ -20,6 +20,7 @@ if (!function_exists('sc_admin_can_config')) {
 if (!function_exists('sc_config')) {
     /**
      * Get value config from table sc_config
+     * Default value is only used if the config key does not exist (including null values)
      *
      * @param   [string|array|null]  $key      [$key description]
      * @param   [int|null]  $storeId  [$storeId description]
@@ -58,15 +59,16 @@ if (!function_exists('sc_config')) {
 if (!function_exists('sc_config_admin')) {
     /**
      * Get config value in adin with session store id
+     * Default value is only used if the config key does not exist (including null values)
      *
      * @param   [type]$key  [$key description]
      * @param   null        [ description]
      *
      * @return  [type]      [return description]
      */
-    function sc_config_admin($key = null)
+    function sc_config_admin($key = null, $default = null)
     {
-        return sc_config($key, session('adminStoreId'));
+        return sc_config($key, session('adminStoreId'), $default);
     }
 }
 
@@ -74,6 +76,7 @@ if (!function_exists('sc_config_admin')) {
 if (!function_exists('sc_config_global')) {
     /**
      * Get value config from table sc_config for store_id 0
+     * Default value is only used if the config key does not exist (including null values)
      *
      * @param   [string|array] $key      [$key description]
      * @param   [string|null]  $default  [$default description]
