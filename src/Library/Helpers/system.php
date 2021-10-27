@@ -34,7 +34,9 @@ if (!function_exists('sc_config')) {
         if (is_array($key)) {
             if (count($key) == 1) {
                 foreach ($key as $k => $v) {
-                    return AdminConfig::where('store_id', $storeId)->where('key', $k)->update(['value' => $v]);
+                    return AdminConfig::where('store_id', $storeId)
+                        ->where('key', $k)
+                        ->update(['value' => $v]);
                 }
             } else {
                 return false;
@@ -47,7 +49,8 @@ if (!function_exists('sc_config')) {
         if ($key === null) {
             return $allConfig;
         }
-        return $allConfig[$key] ?? (sc_config_global()[$key] ?? $default);
+        return array_key_exists($key, $allConfig) ? $allConfig[$key] : 
+            (array_key_exists($key, sc_config_global()) ? sc_config_global()[$key] : $default);
     }
 }
 
@@ -73,17 +76,19 @@ if (!function_exists('sc_config_global')) {
      * Get value config from table sc_config for store_id 0
      *
      * @param   [string|array] $key      [$key description]
-     * @param   [null|int]  $store    Store id.
+     * @param   [string|null]  $default  [$default description]
      *
      * @return  [type]          [return description]
      */
-    function sc_config_global($key = null)
+    function sc_config_global($key = null, $default = null)
     {
         //Update config
         if (is_array($key)) {
             if (count($key) == 1) {
                 foreach ($key as $k => $v) {
-                    return AdminConfig::where('store_id', 0)->where('key', $k)->update(['value' => $v]);
+                    return AdminConfig::where('store_id', 0)
+                        ->where('key', $k)
+                        ->update(['value' => $v]);
                 }
             } else {
                 return false;
@@ -101,7 +106,7 @@ if (!function_exists('sc_config_global')) {
             return $allConfig;
         }
         if (!array_key_exists($key, $allConfig)) {
-            return null;
+            return $default;
         } else {
             return trim($allConfig[$key]);
         }
