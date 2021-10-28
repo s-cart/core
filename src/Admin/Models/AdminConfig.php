@@ -100,7 +100,7 @@ class AdminConfig extends Model
      *
      * @return  [type]  [return description]
      */
-    public static function getAllGlobal()
+    public static function getAllGlobal():array
     {
         if (self::$getAllGlobal === null) {
             self::$getAllGlobal = self::where('store_id', 0)
@@ -117,17 +117,17 @@ class AdminConfig extends Model
      *
      * @return  [type]            [return description]
      */
-    public static function getAllConfigOfStore($storeId)
+    public static function getAllConfigOfStore($storeId):array
     {
         if (self::$getAllConfigOfStore === null) {
             self::$getAllConfigOfStore = self::get()
                 ->groupBy('store_id');
         }
-        $data =  self::$getAllConfigOfStore[$storeId] ?? '';
+        $data =  self::$getAllConfigOfStore[$storeId] ?? collect();
         if ($data) {
-            return $data->pluck('value', 'key');
+            return $data->pluck('value', 'key')->all();
         } else {
-            return null;
+            return [];
         }
     }
 
