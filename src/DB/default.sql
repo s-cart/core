@@ -151,7 +151,16 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('global', 'cache', 'cache_content_cms', '0', '7', 'admin.cache.cache_content_cms', 0),
 ('global', 'cache', 'cache_page', '0', '8', 'admin.cache.cache_page', 0),
 ('global', 'cache', 'cache_country', '0', '10', 'admin.cache.cache_country', 0),
-('global', 'env_mail', 'smtp_mode', '', '0', 'email.smtp_mode', 0);
+('global', 'env_mail', 'smtp_mode', '', '0', 'email.smtp_mode', 0),
+('global', 'admin_dashboard', 'admin_dashboard_total_order', '1', '0', 'admin.dashboard.total_order', 0),
+('global', 'admin_dashboard', 'admin_dashboard_total_customer', '1', '0', 'admin.dashboard.total_customer', 0),
+('global', 'admin_dashboard', 'admin_dashboard_total_blog', '1', '0', 'admin.dashboard.total_blog', 0),
+('global', 'admin_dashboard', 'admin_dashboard_total_product', '1', '0', 'admin.dashboard.total_product', 0),
+('global', 'admin_dashboard', 'admin_dashboard_order_month', '1', '0', 'admin.dashboard.order_month', 0),
+('global', 'admin_dashboard', 'admin_dashboard_order_year', '1', '0', 'admin.dashboard.order_year', 0),
+('global', 'admin_dashboard', 'admin_dashboard_pie_chart', '1', '0', 'admin.dashboard.pie_chart', 0),
+('global', 'admin_dashboard', 'admin_dashboard_top_order_new', '1', '0', 'admin.dashboard.top_order_new', 0),
+('global', 'admin_dashboard', 'admin_dashboard_top_customer_new', '1', '0', 'admin.dashboard.top_customer_new', 0);
 
 /*admin_store*/
 INSERT INTO `__SC_DB_PREFIX__admin_store` (`logo`, `template`, `phone`, `long_phone`, `email`, `time_active`, `address`, `timezone`, `language`, `currency`, `code`, `domain`) VALUES  

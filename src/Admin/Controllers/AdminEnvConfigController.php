@@ -2,6 +2,7 @@
 namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Models\AdminConfig;
 
 class AdminEnvConfigController extends RootAdminController
 {
@@ -17,6 +18,15 @@ class AdminEnvConfigController extends RootAdminController
             'subTitle' => '',
             'icon'     => 'fa fa-indent',
         ];
+
+        $dataCustomerConfig = [
+            'code' => 'admin_dashboard',
+            'storeId' => 0,
+            'keyBy' => 'key',
+        ];
+        $configDashboard = AdminConfig::getListConfigByCode($dataCustomerConfig);
+
+        $data['configDashboard'] = $configDashboard;
         $data['urlUpdateConfigGlobal'] = sc_route_admin('admin_config_global.update');
         return view($this->templatePathAdmin.'screen.env')
             ->with($data);

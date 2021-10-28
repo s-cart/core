@@ -5,6 +5,7 @@
 @section('main')
         <div class="row">
 
+          @if (sc_config_global('admin_dashboard_total_order'))
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
               <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
@@ -21,7 +22,9 @@
             </div>
             <!-- /.info-box -->
           </div>
-  
+          @endif
+
+          @if (sc_config_global('admin_dashboard_total_product'))
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fa fa-tags"></i></span>
@@ -39,8 +42,9 @@
             </div>
             <!-- /.info-box -->
           </div>
+          @endif
   
-  
+          @if (sc_config_global('admin_dashboard_total_customer'))
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
@@ -59,8 +63,9 @@
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
-    
+          @endif
   
+          @if (sc_config_global('admin_dashboard_total_blog'))
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
@@ -79,10 +84,11 @@
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
+          @endif
         </div>
         <!-- /.row -->
 
-
+        @if (sc_config_global('admin_dashboard_order_month'))
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -114,9 +120,11 @@
           </div>
           <!-- /.col -->
         </div>
+        @endif
         <!-- /.row -->
 
 
+        @if (sc_config_global('admin_dashboard_order_year') || sc_config_global('admin_dashboard_pie_chart'))
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -135,12 +143,18 @@
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-4">
+
+                  @if (sc_config_global('admin_dashboard_pie_chart'))
+                  <div class="{{ sc_config_global('admin_dashboard_order_year') ? 'col-md-4' : 'col-md-12'  }}">
                     <div id="chart-pie" style="width:100%; height:auto;"></div>
                   </div>
-                  <div class="col-md-8">
+                  @endif
+
+                  @if (sc_config_global('admin_dashboard_order_year'))
+                  <div class="{{ sc_config_global('admin_dashboard_pie_chart') ? 'col-md-8' : 'col-md-12'  }}">
                     <div id="chart-month" style="width:100%; height:auto;"></div>
                   </div>
+                  @endif
                 </div>
                 <!-- /.row -->
               </div>
@@ -150,14 +164,16 @@
           </div>
           <!-- /.col -->
         </div>
+        @endif
         <!-- /.row -->
 
-
+        @if (sc_config_global('admin_dashboard_top_order_new') || sc_config_global('admin_dashboard_top_customer_new'))
         <!-- Main row -->
         <div class="row">
 
-          <!-- Left col -->
-          <div class="col-md-6">
+          @if (sc_config_global('admin_dashboard_top_order_new'))
+                        <!-- Left col -->
+          <div class="{{ sc_config_global('admin_dashboard_top_customer_new') ? 'col-md-6' : 'col-md-12' }}">
             <!-- TABLE: LATEST ORDERS -->
             <div class="card">
               <div class="card-header border-transparent">
@@ -209,9 +225,11 @@
             <!-- /.card -->
           </div>
           <!-- /.col -->
+          @endif
 
+          @if (sc_config_global('admin_dashboard_top_customer_new'))         
           <!-- Left col -->
-          <div class="col-md-6">
+          <div class="{{ sc_config_global('admin_dashboard_top_order_new') ? 'col-md-6' : 'col-md-12' }}">
             <!-- TABLE: LATEST ORDERS -->
             <div class="card">
               <div class="card-header border-transparent">
@@ -264,10 +282,12 @@
 
 
           </div>
+          @endif
           <!-- /.col -->
 
 
         </div>
+        @endif
         <!-- /.row -->
 @endsection
 
