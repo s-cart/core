@@ -145,7 +145,7 @@
                 <div class="row">
 
                   @if (sc_config_global('admin_dashboard_pie_chart', 1))
-                  <div class="{{ sc_config_global('admin_dashboard_order_year') ? 'col-md-4' : 'col-md-12'  }}">
+                  <div class="{{ sc_config_global('admin_dashboard_order_year', 1) ? 'col-md-4' : 'col-md-12'  }}">
                     <div id="chart-pie" style="width:100%; height:auto;"></div>
                   </div>
                   @endif
