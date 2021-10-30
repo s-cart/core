@@ -152,13 +152,16 @@ class AdminPage extends ShopPage
      *
      * @return  array             [return description]
      */
-    public function getListPageAlias($storeId):array 
+    public function getListPageAlias($storeId = null):array 
     {
         $arrReturn = ['' => sc_language_render('admin.config_layout.home_page_default_empty')];
         $tablePage = $this->getTable();
         $tablePageStore = (new ShopPageStore)->getTable();
-        $data = $this->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
-        $data = $data->where($tablePageStore . '.store_id', $storeId);
+        $data = $this;
+        if ($storeId) {
+            $data = $this->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
+            $data = $data->where($tablePageStore . '.store_id', $storeId);
+        }
         $data = $data->pluck('alias')->toArray();
         if (count($data)) {
             foreach ($data as $key => $value) {

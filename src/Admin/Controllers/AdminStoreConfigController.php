@@ -131,6 +131,11 @@ class AdminStoreConfigController extends RootAdminController
             'contact'  => sc_language_render('admin.captcha.captcha_page_contact'),
             'review'   => sc_language_render('admin.captcha.captcha_page_review'),
         ];
+        if (sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
+            $pageList = (new AdminPage)->getListPageAlias($id);
+        } else {
+            $pageList = (new AdminPage)->getListPageAlias();
+        }
         //End email
         $data['customerConfigs']                = $customerConfigs;
         $data['customerConfigsRequired']        = $customerConfigsRequired;
@@ -139,7 +144,7 @@ class AdminStoreConfigController extends RootAdminController
         $data['productConfigAttributeRequired'] = $productConfigAttributeRequired;
         $data['configLayout']                   = $configLayout;
         $data['pluginCaptchaInstalled']         = sc_get_plugin_captcha_installed();
-        $data['pageList']                       = (new AdminPage)->getListPageAlias($id);
+        $data['pageList']                       = $pageList;
         $data['taxs']                           = $taxs;
         $data['configDisplay']                  = $configDisplay;
         $data['orderConfig']                    = $orderConfig;
