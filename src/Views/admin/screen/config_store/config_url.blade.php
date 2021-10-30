@@ -63,17 +63,17 @@
 
       <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_MEMBER_ORDER_LIST') }}</td>
-        <td>{{ url('/') }}/{{ sc_config('PREFIX_MEMBER') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_MEMBER_ORDER_LIST" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_MEMBER_ORDER_LIST') }}" data-value="{{ sc_config('PREFIX_MEMBER_ORDER_LIST', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+        <td>{{ url('/') }}/{{ sc_config('PREFIX_MEMBER', $storeId) }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_MEMBER_ORDER_LIST" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_MEMBER_ORDER_LIST') }}" data-value="{{ sc_config('PREFIX_MEMBER_ORDER_LIST', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr>    
 
       <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_MEMBER_CHANGE_PWD') }}</td>
-        <td>{{ url('/') }}/{{ sc_config('PREFIX_MEMBER') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_MEMBER_CHANGE_PWD" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_MEMBER_CHANGE_PWD') }}" data-value="{{ sc_config('PREFIX_MEMBER_CHANGE_PWD', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+        <td>{{ url('/') }}/{{ sc_config('PREFIX_MEMBER', $storeId) }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_MEMBER_CHANGE_PWD" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_MEMBER_CHANGE_PWD') }}" data-value="{{ sc_config('PREFIX_MEMBER_CHANGE_PWD', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr>
 
       <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_MEMBER_CHANGE_INFO') }}</td>
-        <td>{{ url('/') }}/{{ sc_config('PREFIX_MEMBER') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_MEMBER_CHANGE_INFO" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_MEMBER_CHANGE_INFO') }}" data-value="{{ sc_config('PREFIX_MEMBER_CHANGE_INFO', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+        <td>{{ url('/') }}/{{ sc_config('PREFIX_MEMBER', $storeId) }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_MEMBER_CHANGE_INFO" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_MEMBER_CHANGE_INFO') }}" data-value="{{ sc_config('PREFIX_MEMBER_CHANGE_INFO', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr>
 
       <tr>

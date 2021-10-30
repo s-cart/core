@@ -14,12 +14,12 @@
              <table class="table table-hover box-body text-wrap table-bordered">
                <tbody>
                  @if (!empty($emailConfig['email_action']))
-                 @foreach ($emailConfig['email_action'] as $config)
-                 <tr>
-                   <td>{!! sc_language_render($config->detail) !!}</td>
-                   <td><input class="check-data-config" data-store="{{ $storeId }}"  type="checkbox" name="{{ $config->key }}"  {{ $config->value?"checked":"" }}></td>
-                 </tr>
-               @endforeach
+                  @foreach ($emailConfig['email_action'] as $config)
+                    <tr>
+                      <td>{!! sc_language_render($config->detail) !!}</td>
+                      <td><input class="check-data-config" data-store="{{ $storeId }}"  type="checkbox" name="{{ $config->key }}"  {{ $config->value?"checked":"" }}></td>
+                    </tr>
+                  @endforeach
                  @endif
                  <tr>
                   <td>{{ sc_language_render('email.admin.forgot_password') }}</td>
@@ -28,7 +28,7 @@
 
                 <tr>
                   <td>{!! sc_language_render('email.email_action.smtp_mode') !!}</td>
-                  <td><input class="check-data-config-global"  type="checkbox" name="smtp_mode" {{ sc_config('smtp_mode', session('adminStoreId'))?"checked":"" }}></td>
+                  <td><input class="check-data-config-global"  type="checkbox" name="smtp_mode" {{ sc_config_global('smtp_mode')?"checked":"" }}></td>
                 </tr>
 
                </tbody>

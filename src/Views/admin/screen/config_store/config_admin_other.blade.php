@@ -23,14 +23,14 @@
       <tr>
         <td>{{ sc_language_render('admin.env.hidden_copyright_footer_admin') }}</td>
         <td>
-          <input class="check-data-config"  data-store="{{ $storeId }}" type="checkbox" name="hidden_copyright_footer_admin" {{ sc_config('hidden_copyright_footer_admin')?"checked":"" }}>
+          <input class="check-data-config"  data-store="{{ $storeId }}" type="checkbox" name="hidden_copyright_footer_admin" {{ sc_config('hidden_copyright_footer_admin', $storeId)?"checked":"" }}>
         </td>
       </tr>
 
       <tr>
         <td>{{ sc_language_render('admin.env.hidden_copyright_footer') }}</td>
         <td>
-          <input class="check-data-config"  data-store="{{ $storeId }}" type="checkbox" name="hidden_copyright_footer" {{ sc_config('hidden_copyright_footer')?"checked":"" }}>
+          <input class="check-data-config"  data-store="{{ $storeId }}" type="checkbox" name="hidden_copyright_footer" {{ sc_config('hidden_copyright_footer', $storeId)?"checked":"" }}>
         </td>
       </tr>
 
