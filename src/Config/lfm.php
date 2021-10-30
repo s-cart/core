@@ -55,7 +55,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -68,7 +67,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -81,7 +79,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -94,7 +91,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -107,7 +103,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -120,7 +115,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -133,7 +127,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -146,7 +139,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -159,7 +151,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
         'page' => [
@@ -171,7 +162,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -184,7 +174,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -197,7 +186,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -210,7 +198,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -223,7 +210,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
             ],
         ],
 
@@ -236,7 +222,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
                 'application/pdf',
                 'text/plain',
             ],
@@ -251,7 +236,6 @@ return [
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
-                'image/svg+xml',
                 'application/pdf',
                 'text/plain',
             ],
