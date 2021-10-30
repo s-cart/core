@@ -24,6 +24,12 @@
             <li class="nav-item">
               <a class="nav-link" id="tab-store-display-tab" data-toggle="pill" href="#tab-store-display" role="tab" aria-controls="tab-store-display" aria-selected="false">{{ sc_language_render('store.admin.config_display') }}</a>
             </li>
+
+            @if (count($configLayout))
+            <li class="nav-item">
+              <a class="nav-link" id="tab-store-layout-tab" data-toggle="pill" href="#tab-store-layout" role="tab" aria-controls="tab-store-layout" aria-selected="false">{{ sc_language_render('store.admin.config_layout') }}</a>
+            </li>
+            @endif
             <li class="nav-item">
               <a class="nav-link" id="tab-admin-other-tab" data-toggle="pill" href="#tab-admin-other" role="tab" aria-controls="tab-admin-other" aria-selected="false">{{ sc_language_render('store.admin.config_admin_other') }}</a>
             </li>
@@ -70,6 +76,14 @@
               @include($templatePathAdmin.'screen.config_store.config_captcha')
             </div>
             {{-- // captcha config --}}
+
+            @if (count($configLayout))
+            {{-- Tab layout config --}}
+            <div class="tab-pane fade" id="tab-store-layout" role="tabpanel" aria-labelledby="tab-store-layout-tab">
+              @include($templatePathAdmin.'screen.config_store.config_layout')
+            </div>
+            {{-- // layout config --}}
+            @endif
 
             {{-- Tab display config --}}
             <div class="tab-pane fade" id="tab-store-display" role="tabpanel" aria-labelledby="tab-store-display-tab">

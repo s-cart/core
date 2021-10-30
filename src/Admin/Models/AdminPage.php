@@ -144,4 +144,27 @@ class AdminPage extends ShopPage
     {
         return ShopPageDescription::create($dataInsert);
     }
+
+    /**
+     * [getListPageAlias description]
+     *
+     * @param   [type]  $storeId  [$storeId description]
+     *
+     * @return  array             [return description]
+     */
+    public function getListPageAlias($storeId):array 
+    {
+        $arrReturn = ['' => sc_language_render('admin.config_layout.home_page_default_empty')];
+        $tablePage = $this->getTable();
+        $tablePageStore = (new ShopPageStore)->getTable();
+        $data = $this->leftJoin($tablePageStore, $tablePageStore . '.page_id', $tablePage . '.id');
+        $data = $data->where($tablePageStore . '.store_id', $storeId);
+        $data = $data->pluck('alias')->toArray();
+        if (count($data)) {
+            foreach ($data as $key => $value) {
+                $arrReturn[$value] = $value;
+            }
+        }
+        return $arrReturn;
+    }
 }

@@ -23,6 +23,10 @@ class ShopContentController extends RootFrontController
      */
     public function index()
     {
+        $pageHome = sc_config('home_page_default');
+        if ($pageHome) {
+            return $this->_pageDetail($pageHome);
+        }
         $viewHome = $this->templatePath . '.screen.home';
         $layoutPage = 'home';
         sc_check_view($viewHome);

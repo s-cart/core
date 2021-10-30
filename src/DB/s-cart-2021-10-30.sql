@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS `oauth_clients` (
 DELETE FROM `oauth_clients`;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-	('94a77b85-891d-4881-b254-25f00480f581', NULL, 'SCart Personal Access Client', 'pr7pRSukYrIjeEMpUbqfG8lB6UyyOKffxymnh616', NULL, 'http://localhost', 1, 0, 0, '2021-10-17 18:35:28', '2021-10-17 18:35:28'),
-	('94a77b85-e1d1-4fc8-b75d-bfc267d3d96d', NULL, 'SCart Password Grant Client', '44QqvCY3t8SjTZ8bHKfaoLYgBBCVPTHY7AxqfsTn', 'users', 'http://localhost', 0, 1, 0, '2021-10-17 18:35:28', '2021-10-17 18:35:28');
+	('94c1d329-fb27-4fad-85a9-9653a77b3617', NULL, 'SCart Personal Access Client', '4vvijmwCb65hzfPYQJdV0p2Xot07oZlf8dVt7mJt', NULL, 'http://localhost', 1, 0, 0, '2021-10-30 20:52:03', '2021-10-30 20:52:03'),
+	('94c1d32a-016b-463a-bc8c-f57580236f29', NULL, 'SCart Password Grant Client', 'rbr9xdG56CRz3nNpIGvceZCDp460OPQeLSxbPleS', 'users', 'http://localhost', 0, 1, 0, '2021-10-30 20:52:03', '2021-10-30 20:52:03');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_personal_access_clients
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
 DELETE FROM `oauth_personal_access_clients`;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-	(1, '94a77b85-891d-4881-b254-25f00480f581', '2021-10-17 18:35:28', '2021-10-17 18:35:28');
+	(1, '94c1d329-fb27-4fad-85a9-9653a77b3617', '2021-10-30 20:52:03', '2021-10-30 20:52:03');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_refresh_tokens
@@ -180,9 +180,9 @@ CREATE TABLE IF NOT EXISTS `sc_admin_config` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_admin_config_key_store_id_unique` (`key`,`store_id`),
   KEY `sc_admin_config_code_index` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_admin_config: ~130 rows (approximately)
+-- Dumping data for table s-cart.sc_admin_config: ~146 rows (approximately)
 DELETE FROM `sc_admin_config`;
 /*!40000 ALTER TABLE `sc_admin_config` DISABLE KEYS */;
 INSERT INTO `sc_admin_config` (`id`, `group`, `code`, `key`, `value`, `security`, `store_id`, `sort`, `detail`) VALUES
@@ -205,117 +205,133 @@ INSERT INTO `sc_admin_config` (`id`, `group`, `code`, `key`, `value`, `security`
 	(17, 'global', 'cache', 'cache_page', '0', 0, 0, 8, 'admin.cache.cache_page'),
 	(18, 'global', 'cache', 'cache_country', '0', 0, 0, 10, 'admin.cache.cache_country'),
 	(19, 'global', 'env_mail', 'smtp_mode', '', 0, 0, 0, 'email.smtp_mode'),
-	(20, '', 'product_config_attribute', 'product_brand', '1', 0, 1, 0, 'product.config_manager.brand'),
-	(21, '', 'product_config_attribute_required', 'product_brand_required', '0', 0, 1, 0, ''),
-	(22, '', 'product_config_attribute', 'product_supplier', '1', 0, 1, 0, 'product.config_manager.supplier'),
-	(23, '', 'product_config_attribute_required', 'product_supplier_required', '0', 0, 1, 0, ''),
-	(24, '', 'product_config_attribute', 'product_price', '1', 0, 1, 0, 'product.config_manager.price'),
-	(25, '', 'product_config_attribute_required', 'product_price_required', '1', 0, 1, 0, ''),
-	(26, '', 'product_config_attribute', 'product_cost', '1', 0, 1, 0, 'product.config_manager.cost'),
-	(27, '', 'product_config_attribute_required', 'product_cost_required', '0', 0, 1, 0, ''),
-	(28, '', 'product_config_attribute', 'product_promotion', '1', 0, 1, 0, 'product.config_manager.promotion'),
-	(29, '', 'product_config_attribute_required', 'product_promotion_required', '0', 0, 1, 0, ''),
-	(30, '', 'product_config_attribute', 'product_stock', '1', 0, 1, 0, 'product.config_manager.stock'),
-	(31, '', 'product_config_attribute_required', 'product_stock_required', '0', 0, 1, 0, ''),
-	(32, '', 'product_config_attribute', 'product_kind', '1', 0, 1, 0, 'product.config_manager.kind'),
-	(33, '', 'product_config_attribute', 'product_property', '1', 0, 1, 0, 'product.config_manager.property'),
-	(34, '', 'product_config_attribute_required', 'product_property_required', '0', 0, 1, 0, ''),
-	(35, '', 'product_config_attribute', 'product_attribute', '1', 0, 1, 0, 'product.config_manager.attribute'),
-	(36, '', 'product_config_attribute_required', 'product_attribute_required', '0', 0, 1, 0, ''),
-	(37, '', 'product_config_attribute', 'product_available', '1', 0, 1, 0, 'product.config_manager.available'),
-	(38, '', 'product_config_attribute_required', 'product_available_required', '0', 0, 1, 0, ''),
-	(39, '', 'product_config_attribute', 'product_weight', '1', 0, 1, 0, 'product.config_manager.weight'),
-	(40, '', 'product_config_attribute_required', 'product_weight_required', '0', 0, 1, 0, ''),
-	(41, '', 'product_config_attribute', 'product_length', '1', 0, 1, 0, 'product.config_manager.length'),
-	(42, '', 'product_config_attribute_required', 'product_length_required', '0', 0, 1, 0, ''),
-	(43, '', 'product_config', 'product_display_out_of_stock', '1', 0, 1, 19, 'product.config_manager.product_display_out_of_stock'),
-	(44, '', 'product_config', 'show_date_available', '1', 0, 1, 21, 'product.config_manager.show_date_available'),
-	(45, '', 'product_config', 'product_tax', '1', 0, 1, 0, 'product.config_manager.tax'),
-	(46, '', 'customer_config_attribute', 'customer_lastname', '1', 0, 1, 1, 'customer.config_manager.lastname'),
-	(47, '', 'customer_config_attribute_required', 'customer_lastname_required', '1', 0, 1, 1, ''),
-	(48, '', 'customer_config_attribute', 'customer_address1', '1', 0, 1, 2, 'customer.config_manager.address1'),
-	(49, '', 'customer_config_attribute_required', 'customer_address1_required', '1', 0, 1, 2, ''),
-	(50, '', 'customer_config_attribute', 'customer_address2', '1', 0, 1, 2, 'customer.config_manager.address2'),
-	(51, '', 'customer_config_attribute_required', 'customer_address2_required', '1', 0, 1, 2, ''),
-	(52, '', 'customer_config_attribute', 'customer_address3', '0', 0, 1, 2, 'customer.config_manager.address3'),
-	(53, '', 'customer_config_attribute_required', 'customer_address3_required', '0', 0, 1, 2, ''),
-	(54, '', 'customer_config_attribute', 'customer_company', '0', 0, 1, 0, 'customer.config_manager.company'),
-	(55, '', 'customer_config_attribute_required', 'customer_company_required', '0', 0, 1, 0, ''),
-	(56, '', 'customer_config_attribute', 'customer_postcode', '0', 0, 1, 0, 'customer.config_manager.postcode'),
-	(57, '', 'customer_config_attribute_required', 'customer_postcode_required', '0', 0, 1, 0, ''),
-	(58, '', 'customer_config_attribute', 'customer_country', '1', 0, 1, 0, 'customer.config_manager.country'),
-	(59, '', 'customer_config_attribute_required', 'customer_country_required', '1', 0, 1, 0, ''),
-	(60, '', 'customer_config_attribute', 'customer_group', '0', 0, 1, 0, 'customer.config_manager.group'),
-	(61, '', 'customer_config_attribute_required', 'customer_group_required', '0', 0, 1, 0, ''),
-	(62, '', 'customer_config_attribute', 'customer_birthday', '0', 0, 1, 0, 'customer.config_manager.birthday'),
-	(63, '', 'customer_config_attribute_required', 'customer_birthday_required', '0', 0, 1, 0, ''),
-	(64, '', 'customer_config_attribute', 'customer_sex', '0', 0, 1, 0, 'customer.config_manager.sex'),
-	(65, '', 'customer_config_attribute_required', 'customer_sex_required', '0', 0, 1, 0, ''),
-	(66, '', 'customer_config_attribute', 'customer_phone', '1', 0, 1, 0, 'customer.config_manager.phone'),
-	(67, '', 'customer_config_attribute_required', 'customer_phone_required', '1', 0, 1, 1, ''),
-	(68, '', 'customer_config_attribute', 'customer_name_kana', '0', 0, 1, 0, 'customer.config_manager.name_kana'),
-	(69, '', 'customer_config_attribute_required', 'customer_name_kana_required', '0', 0, 1, 1, ''),
-	(70, '', 'admin_config', 'ADMIN_NAME', 'S-Cart System', 0, 1, 0, 'admin.env.ADMIN_NAME'),
-	(71, '', 'admin_config', 'ADMIN_TITLE', 'S-Cart Admin', 0, 1, 0, 'admin.env.ADMIN_TITLE'),
-	(72, '', 'admin_config', 'ADMIN_LOGO', 'S-Cart <span class="brand-text font-weight-light">Admin</span>', 0, 1, 0, 'admin.env.ADMIN_LOGO'),
-	(73, '', 'admin_config', 'hidden_copyright_footer', '0', 0, 1, 0, 'admin.env.hidden_copyright_footer'),
-	(74, '', 'admin_config', 'hidden_copyright_footer_admin', '0', 0, 1, 0, 'admin.env.hidden_copyright_footer_admin'),
-	(75, '', 'display_config', 'product_top', '12', 0, 1, 0, 'store.display.product_top'),
-	(76, '', 'display_config', 'product_list', '12', 0, 1, 0, 'store.display.list_product'),
-	(77, '', 'display_config', 'product_relation', '4', 0, 1, 0, 'store.display.relation_product'),
-	(78, '', 'display_config', 'product_viewed', '4', 0, 1, 0, 'store.display.viewed_product'),
-	(79, '', 'display_config', 'item_list', '12', 0, 1, 0, 'store.display.item_list'),
-	(80, '', 'display_config', 'item_top', '12', 0, 1, 0, 'store.display.item_top'),
-	(81, '', 'order_config', 'shop_allow_guest', '1', 0, 1, 11, 'order.admin.shop_allow_guest'),
-	(82, '', 'order_config', 'product_preorder', '1', 0, 1, 18, 'order.admin.product_preorder'),
-	(83, '', 'order_config', 'product_buy_out_of_stock', '1', 0, 1, 20, 'order.admin.product_buy_out_of_stock'),
-	(84, '', 'order_config', 'shipping_off', '0', 0, 1, 20, 'order.admin.shipping_off'),
-	(85, '', 'order_config', 'payment_off', '0', 0, 1, 20, 'order.admin.payment_off'),
-	(86, '', 'email_action', 'email_action_mode', '0', 0, 1, 0, 'email.email_action.email_action_mode'),
-	(87, '', 'email_action', 'email_action_queue', '0', 0, 1, 1, 'email.email_action.email_action_queue'),
-	(88, '', 'email_action', 'order_success_to_admin', '0', 0, 1, 1, 'email.email_action.order_success_to_admin'),
-	(89, '', 'email_action', 'order_success_to_customer', '0', 0, 1, 2, 'email.email_action.order_success_to_cutomer'),
-	(90, '', 'email_action', 'order_success_to_customer_pdf', '0', 0, 1, 3, 'email.email_action.order_success_to_cutomer_pdf'),
-	(91, '', 'email_action', 'customer_verify', '0', 0, 1, 4, 'email.email_action.customer_verify'),
-	(92, '', 'email_action', 'welcome_customer', '0', 0, 1, 4, 'email.email_action.welcome_customer'),
-	(93, '', 'email_action', 'contact_to_admin', '1', 0, 1, 6, 'email.email_action.contact_to_admin'),
-	(94, '', 'smtp_config', 'smtp_host', '', 0, 1, 1, 'email.config_smtp.smtp_host'),
-	(95, '', 'smtp_config', 'smtp_user', '', 0, 1, 2, 'email.config_smtp.smtp_user'),
-	(96, '', 'smtp_config', 'smtp_password', '', 0, 1, 3, 'email.config_smtp.smtp_password'),
-	(97, '', 'smtp_config', 'smtp_security', '', 0, 1, 4, 'email.config_smtp.smtp_security'),
-	(98, '', 'smtp_config', 'smtp_port', '', 0, 1, 5, 'email.config_smtp.smtp_port'),
-	(99, '', 'smtp_config', 'smtp_name', '', 0, 1, 6, 'email.config_smtp.smtp_name'),
-	(100, '', 'smtp_config', 'smtp_from', '', 0, 1, 7, 'email.config_smtp.smtp_from'),
-	(101, '', 'url_config', 'SUFFIX_URL', '.html', 0, 1, 0, 'admin.env.SUFFIX_URL'),
-	(102, '', 'url_config', 'PREFIX_SHOP', 'shop', 0, 1, 0, 'admin.env.PREFIX_SHOP'),
-	(103, '', 'url_config', 'PREFIX_BRAND', 'brand', 0, 1, 0, 'admin.env.PREFIX_BRAND'),
-	(104, '', 'url_config', 'PREFIX_CATEGORY', 'category', 0, 1, 0, 'admin.env.PREFIX_CATEGORY'),
-	(105, '', 'url_config', 'PREFIX_CATEGORY_VENDOR', 'category-vendor', 0, 1, 0, 'admin.env.PREFIX_CATEGORY_VENDOR'),
-	(106, '', 'url_config', 'PREFIX_SUB_CATEGORY', 'sub-category', 0, 1, 0, 'admin.env.PREFIX_SUB_CATEGORY'),
-	(107, '', 'url_config', 'PREFIX_PRODUCT', 'product', 0, 1, 0, 'admin.env.PREFIX_PRODUCT'),
-	(108, '', 'url_config', 'PREFIX_SEARCH', 'search', 0, 1, 0, 'admin.env.PREFIX_SEARCH'),
-	(109, '', 'url_config', 'PREFIX_CONTACT', 'contact', 0, 1, 0, 'admin.env.PREFIX_CONTACT'),
-	(110, '', 'url_config', 'PREFIX_NEWS', 'news', 0, 1, 0, 'admin.env.PREFIX_NEWS'),
-	(111, '', 'url_config', 'PREFIX_MEMBER', 'customer', 0, 1, 0, 'admin.env.PREFIX_MEMBER'),
-	(112, '', 'url_config', 'PREFIX_MEMBER_ORDER_LIST', 'order-list', 0, 1, 0, 'admin.env.PREFIX_MEMBER_ORDER_LIST'),
-	(113, '', 'url_config', 'PREFIX_MEMBER_CHANGE_PWD', 'change-password', 0, 1, 0, 'admin.env.PREFIX_MEMBER_CHANGE_PWD'),
-	(114, '', 'url_config', 'PREFIX_MEMBER_CHANGE_INFO', 'change-info', 0, 1, 0, 'admin.env.PREFIX_MEMBER_CHANGE_INFO'),
-	(115, '', 'url_config', 'PREFIX_CMS_CATEGORY', 'cms-category', 0, 1, 0, 'admin.env.PREFIX_CMS_CATEGORY'),
-	(116, '', 'url_config', 'PREFIX_CMS_ENTRY', 'entry', 0, 1, 0, 'admin.env.PREFIX_CMS_ENTRY'),
-	(117, '', 'url_config', 'PREFIX_CART_WISHLIST', 'wishlst', 0, 1, 0, 'admin.env.PREFIX_CART_WISHLIST'),
-	(118, '', 'url_config', 'PREFIX_CART_COMPARE', 'compare', 0, 1, 0, 'admin.env.PREFIX_CART_COMPARE'),
-	(119, '', 'url_config', 'PREFIX_CART_DEFAULT', 'cart', 0, 1, 0, 'admin.env.PREFIX_CART_DEFAULT'),
-	(120, '', 'url_config', 'PREFIX_CART_CHECKOUT', 'checkout', 0, 1, 0, 'admin.env.PREFIX_CART_CHECKOUT'),
-	(121, '', 'url_config', 'PREFIX_CART_CHECKOUT_CONFIRM', 'checkout-confirm', 0, 1, 0, 'admin.env.PREFIX_CART_CHECKOUT_CONFIRM'),
-	(122, '', 'url_config', 'PREFIX_ORDER_SUCCESS', 'order-success', 0, 1, 0, 'admin.env.PREFIX_ORDER_SUCCESS'),
-	(123, '', 'captcha_config', 'captcha_mode', '0', 0, 1, 20, 'admin.captcha.captcha_mode'),
-	(124, '', 'captcha_config', 'captcha_page', '[]', 0, 1, 10, 'captcha.captcha_page'),
-	(125, '', 'captcha_config', 'captcha_method', '', 0, 1, 0, 'admin.captcha.captcha_method'),
-	(126, '', 'admin_custom_config', 'facebook_url', 'https://www.facebook.com/SCart.Ecommerce/', 0, 1, 0, 'admin.admin_custom_config.facebook_url'),
-	(127, '', 'admin_custom_config', 'fanpage_url', 'https://www.facebook.com/groups/scart.opensource', 0, 1, 0, 'admin.admin_custom_config.fanpage_url'),
-	(128, '', 'admin_custom_config', 'twitter_url', 'https://twitter.com/ecommercescart', 0, 1, 0, 'admin.admin_custom_config.twitter_url'),
-	(129, '', 'admin_custom_config', 'instagram_url', '#', 0, 1, 0, 'admin.admin_custom_config.instagram_url'),
-	(130, '', 'admin_custom_config', 'youtube_url', 'https://www.youtube.com/channel/UCR8kitefby3N6KvvawQVqdg/videos', 0, 1, 0, 'admin.admin_custom_config.youtube_url');
+	(20, 'global', 'admin_dashboard', 'admin_dashboard_total_order', '1', 0, 0, 0, 'admin.dashboard.total_order'),
+	(21, 'global', 'admin_dashboard', 'admin_dashboard_total_customer', '1', 0, 0, 0, 'admin.dashboard.total_customer'),
+	(22, 'global', 'admin_dashboard', 'admin_dashboard_total_blog', '1', 0, 0, 0, 'admin.dashboard.total_blog'),
+	(23, 'global', 'admin_dashboard', 'admin_dashboard_total_product', '1', 0, 0, 0, 'admin.dashboard.total_product'),
+	(24, 'global', 'admin_dashboard', 'admin_dashboard_order_month', '1', 0, 0, 0, 'admin.dashboard.order_month'),
+	(25, 'global', 'admin_dashboard', 'admin_dashboard_order_year', '1', 0, 0, 0, 'admin.dashboard.order_year'),
+	(26, 'global', 'admin_dashboard', 'admin_dashboard_pie_chart', '1', 0, 0, 0, 'admin.dashboard.pie_chart'),
+	(27, 'global', 'admin_dashboard', 'admin_dashboard_top_order_new', '1', 0, 0, 0, 'admin.dashboard.top_order_new'),
+	(28, 'global', 'admin_dashboard', 'admin_dashboard_top_customer_new', '1', 0, 0, 0, 'admin.dashboard.top_customer_new'),
+	(29, '', 'product_config_attribute', 'product_brand', '1', 0, 1, 0, 'product.config_manager.brand'),
+	(30, '', 'product_config_attribute_required', 'product_brand_required', '0', 0, 1, 0, ''),
+	(31, '', 'product_config_attribute', 'product_supplier', '1', 0, 1, 0, 'product.config_manager.supplier'),
+	(32, '', 'product_config_attribute_required', 'product_supplier_required', '0', 0, 1, 0, ''),
+	(33, '', 'product_config_attribute', 'product_price', '1', 0, 1, 0, 'product.config_manager.price'),
+	(34, '', 'product_config_attribute_required', 'product_price_required', '1', 0, 1, 0, ''),
+	(35, '', 'product_config_attribute', 'product_cost', '1', 0, 1, 0, 'product.config_manager.cost'),
+	(36, '', 'product_config_attribute_required', 'product_cost_required', '0', 0, 1, 0, ''),
+	(37, '', 'product_config_attribute', 'product_promotion', '1', 0, 1, 0, 'product.config_manager.promotion'),
+	(38, '', 'product_config_attribute_required', 'product_promotion_required', '0', 0, 1, 0, ''),
+	(39, '', 'product_config_attribute', 'product_stock', '1', 0, 1, 0, 'product.config_manager.stock'),
+	(40, '', 'product_config_attribute_required', 'product_stock_required', '0', 0, 1, 0, ''),
+	(41, '', 'product_config_attribute', 'product_kind', '1', 0, 1, 0, 'product.config_manager.kind'),
+	(42, '', 'product_config_attribute', 'product_property', '1', 0, 1, 0, 'product.config_manager.property'),
+	(43, '', 'product_config_attribute_required', 'product_property_required', '0', 0, 1, 0, ''),
+	(44, '', 'product_config_attribute', 'product_attribute', '1', 0, 1, 0, 'product.config_manager.attribute'),
+	(45, '', 'product_config_attribute_required', 'product_attribute_required', '0', 0, 1, 0, ''),
+	(46, '', 'product_config_attribute', 'product_available', '1', 0, 1, 0, 'product.config_manager.available'),
+	(47, '', 'product_config_attribute_required', 'product_available_required', '0', 0, 1, 0, ''),
+	(48, '', 'product_config_attribute', 'product_weight', '1', 0, 1, 0, 'product.config_manager.weight'),
+	(49, '', 'product_config_attribute_required', 'product_weight_required', '0', 0, 1, 0, ''),
+	(50, '', 'product_config_attribute', 'product_length', '1', 0, 1, 0, 'product.config_manager.length'),
+	(51, '', 'product_config_attribute_required', 'product_length_required', '0', 0, 1, 0, ''),
+	(52, '', 'product_config', 'product_display_out_of_stock', '1', 0, 1, 19, 'product.config_manager.product_display_out_of_stock'),
+	(53, '', 'product_config', 'show_date_available', '1', 0, 1, 21, 'product.config_manager.show_date_available'),
+	(54, '', 'product_config', 'product_tax', '1', 0, 1, 0, 'product.config_manager.tax'),
+	(55, '', 'customer_config_attribute', 'customer_lastname', '1', 0, 1, 1, 'customer.config_manager.lastname'),
+	(56, '', 'customer_config_attribute_required', 'customer_lastname_required', '1', 0, 1, 1, ''),
+	(57, '', 'customer_config_attribute', 'customer_address1', '1', 0, 1, 2, 'customer.config_manager.address1'),
+	(58, '', 'customer_config_attribute_required', 'customer_address1_required', '1', 0, 1, 2, ''),
+	(59, '', 'customer_config_attribute', 'customer_address2', '1', 0, 1, 2, 'customer.config_manager.address2'),
+	(60, '', 'customer_config_attribute_required', 'customer_address2_required', '1', 0, 1, 2, ''),
+	(61, '', 'customer_config_attribute', 'customer_address3', '0', 0, 1, 2, 'customer.config_manager.address3'),
+	(62, '', 'customer_config_attribute_required', 'customer_address3_required', '0', 0, 1, 2, ''),
+	(63, '', 'customer_config_attribute', 'customer_company', '0', 0, 1, 0, 'customer.config_manager.company'),
+	(64, '', 'customer_config_attribute_required', 'customer_company_required', '0', 0, 1, 0, ''),
+	(65, '', 'customer_config_attribute', 'customer_postcode', '0', 0, 1, 0, 'customer.config_manager.postcode'),
+	(66, '', 'customer_config_attribute_required', 'customer_postcode_required', '0', 0, 1, 0, ''),
+	(67, '', 'customer_config_attribute', 'customer_country', '1', 0, 1, 0, 'customer.config_manager.country'),
+	(68, '', 'customer_config_attribute_required', 'customer_country_required', '1', 0, 1, 0, ''),
+	(69, '', 'customer_config_attribute', 'customer_group', '0', 0, 1, 0, 'customer.config_manager.group'),
+	(70, '', 'customer_config_attribute_required', 'customer_group_required', '0', 0, 1, 0, ''),
+	(71, '', 'customer_config_attribute', 'customer_birthday', '0', 0, 1, 0, 'customer.config_manager.birthday'),
+	(72, '', 'customer_config_attribute_required', 'customer_birthday_required', '0', 0, 1, 0, ''),
+	(73, '', 'customer_config_attribute', 'customer_sex', '0', 0, 1, 0, 'customer.config_manager.sex'),
+	(74, '', 'customer_config_attribute_required', 'customer_sex_required', '0', 0, 1, 0, ''),
+	(75, '', 'customer_config_attribute', 'customer_phone', '1', 0, 1, 0, 'customer.config_manager.phone'),
+	(76, '', 'customer_config_attribute_required', 'customer_phone_required', '1', 0, 1, 1, ''),
+	(77, '', 'customer_config_attribute', 'customer_name_kana', '0', 0, 1, 0, 'customer.config_manager.name_kana'),
+	(78, '', 'customer_config_attribute_required', 'customer_name_kana_required', '0', 0, 1, 1, ''),
+	(79, '', 'admin_config', 'ADMIN_NAME', 'S-Cart System', 0, 1, 0, 'admin.env.ADMIN_NAME'),
+	(80, '', 'admin_config', 'ADMIN_TITLE', 'S-Cart Admin', 0, 1, 0, 'admin.env.ADMIN_TITLE'),
+	(81, '', 'admin_config', 'ADMIN_LOGO', 'S-Cart <span class="brand-text font-weight-light">Admin</span>', 0, 1, 0, 'admin.env.ADMIN_LOGO'),
+	(82, '', 'admin_config', 'hidden_copyright_footer', '0', 0, 1, 0, 'admin.env.hidden_copyright_footer'),
+	(83, '', 'admin_config', 'hidden_copyright_footer_admin', '0', 0, 1, 0, 'admin.env.hidden_copyright_footer_admin'),
+	(84, '', 'display_config', 'product_top', '12', 0, 1, 0, 'store.display.product_top'),
+	(85, '', 'display_config', 'product_list', '12', 0, 1, 0, 'store.display.list_product'),
+	(86, '', 'display_config', 'product_relation', '4', 0, 1, 0, 'store.display.relation_product'),
+	(87, '', 'display_config', 'product_viewed', '4', 0, 1, 0, 'store.display.viewed_product'),
+	(88, '', 'display_config', 'item_list', '12', 0, 1, 0, 'store.display.item_list'),
+	(89, '', 'display_config', 'item_top', '12', 0, 1, 0, 'store.display.item_top'),
+	(90, '', 'order_config', 'shop_allow_guest', '1', 0, 1, 11, 'order.admin.shop_allow_guest'),
+	(91, '', 'order_config', 'product_preorder', '1', 0, 1, 18, 'order.admin.product_preorder'),
+	(92, '', 'order_config', 'product_buy_out_of_stock', '1', 0, 1, 20, 'order.admin.product_buy_out_of_stock'),
+	(93, '', 'order_config', 'shipping_off', '0', 0, 1, 20, 'order.admin.shipping_off'),
+	(94, '', 'order_config', 'payment_off', '0', 0, 1, 20, 'order.admin.payment_off'),
+	(95, '', 'email_action', 'email_action_mode', '0', 0, 1, 0, 'email.email_action.email_action_mode'),
+	(96, '', 'email_action', 'email_action_queue', '0', 0, 1, 1, 'email.email_action.email_action_queue'),
+	(97, '', 'email_action', 'order_success_to_admin', '0', 0, 1, 1, 'email.email_action.order_success_to_admin'),
+	(98, '', 'email_action', 'order_success_to_customer', '0', 0, 1, 2, 'email.email_action.order_success_to_cutomer'),
+	(99, '', 'email_action', 'order_success_to_customer_pdf', '0', 0, 1, 3, 'email.email_action.order_success_to_cutomer_pdf'),
+	(100, '', 'email_action', 'customer_verify', '0', 0, 1, 4, 'email.email_action.customer_verify'),
+	(101, '', 'email_action', 'welcome_customer', '0', 0, 1, 4, 'email.email_action.welcome_customer'),
+	(102, '', 'email_action', 'contact_to_admin', '1', 0, 1, 6, 'email.email_action.contact_to_admin'),
+	(103, '', 'smtp_config', 'smtp_host', '', 0, 1, 1, 'email.config_smtp.smtp_host'),
+	(104, '', 'smtp_config', 'smtp_user', '', 0, 1, 2, 'email.config_smtp.smtp_user'),
+	(105, '', 'smtp_config', 'smtp_password', '', 0, 1, 3, 'email.config_smtp.smtp_password'),
+	(106, '', 'smtp_config', 'smtp_security', '', 0, 1, 4, 'email.config_smtp.smtp_security'),
+	(107, '', 'smtp_config', 'smtp_port', '', 0, 1, 5, 'email.config_smtp.smtp_port'),
+	(108, '', 'smtp_config', 'smtp_name', '', 0, 1, 6, 'email.config_smtp.smtp_name'),
+	(109, '', 'smtp_config', 'smtp_from', '', 0, 1, 7, 'email.config_smtp.smtp_from'),
+	(110, '', 'url_config', 'SUFFIX_URL', '.html', 0, 1, 0, 'admin.env.SUFFIX_URL'),
+	(111, '', 'url_config', 'PREFIX_SHOP', 'shop', 0, 1, 0, 'admin.env.PREFIX_SHOP'),
+	(112, '', 'url_config', 'PREFIX_BRAND', 'brand', 0, 1, 0, 'admin.env.PREFIX_BRAND'),
+	(113, '', 'url_config', 'PREFIX_CATEGORY', 'category', 0, 1, 0, 'admin.env.PREFIX_CATEGORY'),
+	(114, '', 'url_config', 'PREFIX_CATEGORY_VENDOR', 'category-vendor', 0, 1, 0, 'admin.env.PREFIX_CATEGORY_VENDOR'),
+	(115, '', 'url_config', 'PREFIX_SUB_CATEGORY', 'sub-category', 0, 1, 0, 'admin.env.PREFIX_SUB_CATEGORY'),
+	(116, '', 'url_config', 'PREFIX_PRODUCT', 'product', 0, 1, 0, 'admin.env.PREFIX_PRODUCT'),
+	(117, '', 'url_config', 'PREFIX_SEARCH', 'search', 0, 1, 0, 'admin.env.PREFIX_SEARCH'),
+	(118, '', 'url_config', 'PREFIX_CONTACT', 'contact', 0, 1, 0, 'admin.env.PREFIX_CONTACT'),
+	(119, '', 'url_config', 'PREFIX_NEWS', 'news', 0, 1, 0, 'admin.env.PREFIX_NEWS'),
+	(120, '', 'url_config', 'PREFIX_MEMBER', 'customer', 0, 1, 0, 'admin.env.PREFIX_MEMBER'),
+	(121, '', 'url_config', 'PREFIX_MEMBER_ORDER_LIST', 'order-list', 0, 1, 0, 'admin.env.PREFIX_MEMBER_ORDER_LIST'),
+	(122, '', 'url_config', 'PREFIX_MEMBER_CHANGE_PWD', 'change-password', 0, 1, 0, 'admin.env.PREFIX_MEMBER_CHANGE_PWD'),
+	(123, '', 'url_config', 'PREFIX_MEMBER_CHANGE_INFO', 'change-info', 0, 1, 0, 'admin.env.PREFIX_MEMBER_CHANGE_INFO'),
+	(124, '', 'url_config', 'PREFIX_CMS_CATEGORY', 'cms-category', 0, 1, 0, 'admin.env.PREFIX_CMS_CATEGORY'),
+	(125, '', 'url_config', 'PREFIX_CMS_ENTRY', 'entry', 0, 1, 0, 'admin.env.PREFIX_CMS_ENTRY'),
+	(126, '', 'url_config', 'PREFIX_CART_WISHLIST', 'wishlst', 0, 1, 0, 'admin.env.PREFIX_CART_WISHLIST'),
+	(127, '', 'url_config', 'PREFIX_CART_COMPARE', 'compare', 0, 1, 0, 'admin.env.PREFIX_CART_COMPARE'),
+	(128, '', 'url_config', 'PREFIX_CART_DEFAULT', 'cart', 0, 1, 0, 'admin.env.PREFIX_CART_DEFAULT'),
+	(129, '', 'url_config', 'PREFIX_CART_CHECKOUT', 'checkout', 0, 1, 0, 'admin.env.PREFIX_CART_CHECKOUT'),
+	(130, '', 'url_config', 'PREFIX_CART_CHECKOUT_CONFIRM', 'checkout-confirm', 0, 1, 0, 'admin.env.PREFIX_CART_CHECKOUT_CONFIRM'),
+	(131, '', 'url_config', 'PREFIX_ORDER_SUCCESS', 'order-success', 0, 1, 0, 'admin.env.PREFIX_ORDER_SUCCESS'),
+	(132, '', 'captcha_config', 'captcha_mode', '0', 0, 1, 20, 'admin.captcha.captcha_mode'),
+	(133, '', 'captcha_config', 'captcha_page', '[]', 0, 1, 10, 'captcha.captcha_page'),
+	(134, '', 'captcha_config', 'captcha_method', '', 0, 1, 0, 'admin.captcha.captcha_method'),
+	(135, '', 'admin_custom_config', 'facebook_url', 'https://www.facebook.com/SCart.Ecommerce/', 0, 1, 0, 'admin.admin_custom_config.facebook_url'),
+	(136, '', 'admin_custom_config', 'fanpage_url', 'https://www.facebook.com/groups/scart.opensource', 0, 1, 0, 'admin.admin_custom_config.fanpage_url'),
+	(137, '', 'admin_custom_config', 'twitter_url', 'https://twitter.com/ecommercescart', 0, 1, 0, 'admin.admin_custom_config.twitter_url'),
+	(138, '', 'admin_custom_config', 'instagram_url', '#', 0, 1, 0, 'admin.admin_custom_config.instagram_url'),
+	(139, '', 'admin_custom_config', 'youtube_url', 'https://www.youtube.com/channel/UCR8kitefby3N6KvvawQVqdg/videos', 0, 1, 0, 'admin.admin_custom_config.youtube_url'),
+	(140, '', 'config_layout', 'home_page_default', '', 0, 1, 0, 'admin.config_layout.home_page_default'),
+	(141, '', 'config_layout', 'link_home_page', '1', 0, 1, 0, 'admin.config_layout.link_home_page'),
+	(142, '', 'config_layout', 'link_shop_page', '1', 0, 1, 0, 'admin.config_layout.link_shop_page'),
+	(143, '', 'config_layout', 'link_account', '1', 0, 1, 0, 'admin.config_layout.link_account'),
+	(144, '', 'config_layout', 'link_language', '1', 0, 1, 0, 'admin.config_layout.link_language'),
+	(145, '', 'config_layout', 'link_currency', '1', 0, 1, 0, 'admin.config_layout.link_currency'),
+	(146, '', 'config_layout', 'link_cart', '1', 0, 1, 0, 'admin.config_layout.link_cart');
 /*!40000 ALTER TABLE `sc_admin_config` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_log
@@ -448,19 +464,19 @@ CREATE TABLE IF NOT EXISTS `sc_admin_permission` (
 DELETE FROM `sc_admin_permission`;
 /*!40000 ALTER TABLE `sc_admin_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at`, `updated_at`) VALUES
-	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-10-17 18:35:26', NULL),
-	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-10-17 18:35:26', NULL),
-	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-10-17 18:35:26', NULL),
-	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-10-17 18:35:26', NULL),
-	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-10-17 18:35:26', NULL),
-	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-10-17 18:35:26', NULL),
-	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-10-17 18:35:26', NULL),
-	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-10-17 18:35:26', NULL),
-	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-10-17 18:35:26', NULL),
-	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-10-17 18:35:26', NULL),
-	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-10-17 18:35:26', NULL),
-	(12, 'CMS manager', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*, ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-10-17 18:35:26', NULL),
-	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-10-17 18:35:26', NULL);
+	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-10-30 20:52:02', NULL),
+	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-10-30 20:52:02', NULL),
+	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-10-30 20:52:02', NULL),
+	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-10-30 20:52:02', NULL),
+	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-10-30 20:52:02', NULL),
+	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-10-30 20:52:02', NULL),
+	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-10-30 20:52:02', NULL),
+	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-10-30 20:52:02', NULL),
+	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-10-30 20:52:02', NULL),
+	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-10-30 20:52:02', NULL),
+	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-10-30 20:52:02', NULL),
+	(12, 'CMS manager', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*, ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-10-30 20:52:02', NULL),
+	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-10-30 20:52:02', NULL);
 /*!40000 ALTER TABLE `sc_admin_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role
@@ -479,12 +495,12 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role` (
 DELETE FROM `sc_admin_role`;
 /*!40000 ALTER TABLE `sc_admin_role` DISABLE KEYS */;
 INSERT INTO `sc_admin_role` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrator', 'administrator', '2021-10-17 18:35:26', NULL),
-	(2, 'Group only View', 'view.all', '2021-10-17 18:35:26', NULL),
-	(3, 'Manager', 'manager', '2021-10-17 18:35:26', NULL),
-	(4, 'CMS', 'cms', '2021-10-17 18:35:26', NULL),
-	(5, 'Accountant', 'accountant', '2021-10-17 18:35:26', NULL),
-	(6, 'Marketing', 'maketing', '2021-10-17 18:35:26', NULL);
+	(1, 'Administrator', 'administrator', '2021-10-30 20:52:02', NULL),
+	(2, 'Group only View', 'view.all', '2021-10-30 20:52:02', NULL),
+	(3, 'Manager', 'manager', '2021-10-30 20:52:02', NULL),
+	(4, 'CMS', 'cms', '2021-10-30 20:52:02', NULL),
+	(5, 'Accountant', 'accountant', '2021-10-30 20:52:02', NULL),
+	(6, 'Marketing', 'maketing', '2021-10-30 20:52:02', NULL);
 /*!40000 ALTER TABLE `sc_admin_role` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_permission
@@ -502,31 +518,31 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role_permission` (
 DELETE FROM `sc_admin_role_permission`;
 /*!40000 ALTER TABLE `sc_admin_role_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_role_permission` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES
-	(3, 1, '2021-10-17 18:35:26', NULL),
-	(3, 2, '2021-10-17 18:35:26', NULL),
-	(3, 3, '2021-10-17 18:35:26', NULL),
-	(3, 4, '2021-10-17 18:35:26', NULL),
-	(3, 5, '2021-10-17 18:35:26', NULL),
-	(3, 6, '2021-10-17 18:35:26', NULL),
-	(3, 7, '2021-10-17 18:35:26', NULL),
-	(3, 8, '2021-10-17 18:35:26', NULL),
-	(3, 9, '2021-10-17 18:35:26', NULL),
-	(3, 10, '2021-10-17 18:35:26', NULL),
-	(3, 11, '2021-10-17 18:35:26', NULL),
-	(3, 12, '2021-10-17 18:35:26', NULL),
-	(3, 13, '2021-10-17 18:35:26', NULL),
-	(4, 1, '2021-10-17 18:35:26', NULL),
-	(4, 12, '2021-10-17 18:35:26', NULL),
-	(5, 1, '2021-10-17 18:35:26', NULL),
-	(5, 2, '2021-10-17 18:35:26', NULL),
-	(5, 7, '2021-10-17 18:35:26', NULL),
-	(5, 11, '2021-10-17 18:35:26', NULL),
-	(6, 1, '2021-10-17 18:35:26', NULL),
-	(6, 2, '2021-10-17 18:35:26', NULL),
-	(6, 8, '2021-10-17 18:35:26', NULL),
-	(6, 10, '2021-10-17 18:35:26', NULL),
-	(6, 11, '2021-10-17 18:35:26', NULL),
-	(6, 12, '2021-10-17 18:35:26', NULL);
+	(3, 1, '2021-10-30 20:52:02', NULL),
+	(3, 2, '2021-10-30 20:52:02', NULL),
+	(3, 3, '2021-10-30 20:52:02', NULL),
+	(3, 4, '2021-10-30 20:52:02', NULL),
+	(3, 5, '2021-10-30 20:52:02', NULL),
+	(3, 6, '2021-10-30 20:52:02', NULL),
+	(3, 7, '2021-10-30 20:52:02', NULL),
+	(3, 8, '2021-10-30 20:52:02', NULL),
+	(3, 9, '2021-10-30 20:52:02', NULL),
+	(3, 10, '2021-10-30 20:52:02', NULL),
+	(3, 11, '2021-10-30 20:52:02', NULL),
+	(3, 12, '2021-10-30 20:52:02', NULL),
+	(3, 13, '2021-10-30 20:52:02', NULL),
+	(4, 1, '2021-10-30 20:52:02', NULL),
+	(4, 12, '2021-10-30 20:52:02', NULL),
+	(5, 1, '2021-10-30 20:52:02', NULL),
+	(5, 2, '2021-10-30 20:52:02', NULL),
+	(5, 7, '2021-10-30 20:52:02', NULL),
+	(5, 11, '2021-10-30 20:52:02', NULL),
+	(6, 1, '2021-10-30 20:52:02', NULL),
+	(6, 2, '2021-10-30 20:52:02', NULL),
+	(6, 8, '2021-10-30 20:52:02', NULL),
+	(6, 10, '2021-10-30 20:52:02', NULL),
+	(6, 11, '2021-10-30 20:52:02', NULL),
+	(6, 12, '2021-10-30 20:52:02', NULL);
 /*!40000 ALTER TABLE `sc_admin_role_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_user
@@ -620,7 +636,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_template` (
 DELETE FROM `sc_admin_template`;
 /*!40000 ALTER TABLE `sc_admin_template` DISABLE KEYS */;
 INSERT INTO `sc_admin_template` (`id`, `key`, `name`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 's-cart-light', 'S-Cart Light', 1, '2021-10-17 18:35:26', NULL);
+	(1, 's-cart-light', 'S-Cart Light', 1, '2021-10-30 20:52:02', NULL);
 /*!40000 ALTER TABLE `sc_admin_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user
@@ -645,7 +661,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_user` (
 DELETE FROM `sc_admin_user`;
 /*!40000 ALTER TABLE `sc_admin_user` DISABLE KEYS */;
 INSERT INTO `sc_admin_user` (`id`, `username`, `password`, `name`, `email`, `avatar`, `remember_token`, `theme`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', '$2y$10$Ypi1m280IkgiMkrQTSk6Duf7K/IlsQYjB7a/Du3LxGIAcRjhj3wHO', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, '2021-10-17 18:35:26', NULL);
+	(1, 'admin', '$2y$10$zhcexiJ6aYiH4GOI9WXOpOshcNr6kzQkt0tuyuyTYsJHXc/7.tyPK', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, '2021-10-30 20:52:02', NULL);
 /*!40000 ALTER TABLE `sc_admin_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user_permission
@@ -682,7 +698,7 @@ CREATE TABLE IF NOT EXISTS `sc_api_connection` (
 DELETE FROM `sc_api_connection`;
 /*!40000 ALTER TABLE `sc_api_connection` DISABLE KEYS */;
 INSERT INTO `sc_api_connection` (`id`, `description`, `apiconnection`, `apikey`, `expire`, `last_active`, `status`) VALUES
-	(1, 'Demo api connection', 'appmobile', '52eb0c4d-2f3e-11ec-950f-04d9f5d0007b', NULL, NULL, 0);
+	(1, 'Demo api connection', 'appmobile', '8f637df5-3988-11ec-b98e-001a7dda7115', NULL, NULL, 0);
 /*!40000 ALTER TABLE `sc_api_connection` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_languages
@@ -698,9 +714,9 @@ CREATE TABLE IF NOT EXISTS `sc_languages` (
   KEY `sc_languages_code_index` (`code`),
   KEY `sc_languages_position_index` (`position`),
   KEY `sc_languages_location_index` (`location`)
-) ENGINE=InnoDB AUTO_INCREMENT=2517 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2541 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_languages: ~2,516 rows (approximately)
+-- Dumping data for table s-cart.sc_languages: ~2,540 rows (approximately)
 DELETE FROM `sc_languages`;
 /*!40000 ALTER TABLE `sc_languages` DISABLE KEYS */;
 INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`) VALUES
@@ -3160,66 +3176,90 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`) VALUES
 	(2454, 'admin.dashboard.top_order_new', 'New orders', 'admin.dashboard', 'en'),
 	(2455, 'admin.dashboard.top_customer_new', 'Khách hàng mới mới', 'admin.dashboard', 'vi'),
 	(2456, 'admin.dashboard.top_customer_new', 'New customers', 'admin.dashboard', 'en'),
-	(2457, 'admin.layout_page_position.all', 'All Page', 'admin.layout_page_position', 'en'),
-	(2458, 'admin.layout_page_position.home', 'Home page', 'admin.layout_page_position', 'en'),
-	(2459, 'admin.layout_page_position.shop_home', 'Home shop', 'admin.layout_page_position', 'en'),
-	(2460, 'admin.layout_page_position.shop_search', 'Search page', 'admin.layout_page_position', 'en'),
-	(2461, 'admin.layout_page_position.vendor_home', 'Store: home', 'admin.layout_page_position', 'en'),
-	(2462, 'admin.layout_page_position.store_product_list', 'Store: product list', 'admin.layout_page_position', 'en'),
-	(2463, 'admin.layout_page_position.product_list', 'List: product', 'admin.layout_page_position', 'en'),
-	(2464, 'admin.layout_page_position.product_detail', 'Detail: product', 'admin.layout_page_position', 'en'),
-	(2465, 'admin.layout_page_position.shop_cart', 'Cart: cart, wishlist, compare, checkout', 'admin.layout_page_position', 'en'),
-	(2466, 'admin.layout_page_position.shop_auth', 'Auth: login, forgot, register', 'admin.layout_page_position', 'en'),
-	(2467, 'admin.layout_page_position.shop_profile', 'Customer profile', 'admin.layout_page_position', 'en'),
-	(2468, 'admin.layout_page_position.item_list', 'List: category, brand, supplier', 'admin.layout_page_position', 'en'),
-	(2469, 'admin.layout_page_position.item_detail', 'Detail: item', 'admin.layout_page_position', 'en'),
-	(2470, 'admin.layout_page_position.news_list', 'List:  Blog/news', 'admin.layout_page_position', 'en'),
-	(2471, 'admin.layout_page_position.news_detail', 'Detail: entry Blog', 'admin.layout_page_position', 'en'),
-	(2472, 'admin.layout_page_position.content_list', 'List: content CMS', 'admin.layout_page_position', 'en'),
-	(2473, 'admin.layout_page_position.content_detail', 'Detail: entry CMS', 'admin.layout_page_position', 'en'),
-	(2474, 'admin.layout_page_position.shop_contact', 'Page contact', 'admin.layout_page_position', 'en'),
-	(2475, 'admin.layout_page_position.shop_page', 'Other page: about...', 'admin.layout_page_position', 'en'),
-	(2476, 'admin.layout_page_position.all', 'Tất cả trang', 'admin.layout_page_position', 'vi'),
-	(2477, 'admin.layout_page_position.home', 'Trang chủ', 'admin.layout_page_position', 'vi'),
-	(2478, 'admin.layout_page_position.shop_home', 'Trang chủ Shop', 'admin.layout_page_position', 'vi'),
-	(2479, 'admin.layout_page_position.shop_search', 'Trang tìm kiếm', 'admin.layout_page_position', 'vi'),
-	(2480, 'admin.layout_page_position.vendor_home', 'Cửa hàng: trang chủ', 'admin.layout_page_position', 'vi'),
-	(2481, 'admin.layout_page_position.store_product_list', 'Cửa hàng: danh sách sản phẩm', 'admin.layout_page_position', 'vi'),
-	(2482, 'admin.layout_page_position.product_list', 'Danh sách: sản phẩm', 'admin.layout_page_position', 'vi'),
-	(2483, 'admin.layout_page_position.product_detail', 'Chi tiết: sản phẩm', 'admin.layout_page_position', 'vi'),
-	(2484, 'admin.layout_page_position.shop_cart', 'Giỏ hàng: giỏ hàng, wishlist, compare, checkout', 'admin.layout_page_position', 'vi'),
-	(2485, 'admin.layout_page_position.shop_auth', 'Chứng thực: đăng nhập, đăng ký, quên mật khẩu', 'admin.layout_page_position', 'vi'),
-	(2486, 'admin.layout_page_position.shop_profile', 'Tài khoản khách hàng', 'admin.layout_page_position', 'vi'),
-	(2487, 'admin.layout_page_position.item_list', 'Danh sách item: danh mục, nhãn hiệu, nhà cung cấp', 'admin.layout_page_position', 'vi'),
-	(2488, 'admin.layout_page_position.item_detail', 'Chi tiết: item', 'admin.layout_page_position', 'vi'),
-	(2489, 'admin.layout_page_position.news_list', 'Danh sách: bài viết Blog', 'admin.layout_page_position', 'vi'),
-	(2490, 'admin.layout_page_position.news_detail', 'Chi tiết: bài viết Blog', 'admin.layout_page_position', 'vi'),
-	(2491, 'admin.layout_page_position.content_list', 'Danh sách: bài viết CMS', 'admin.layout_page_position', 'vi'),
-	(2492, 'admin.layout_page_position.content_detail', 'Chi tiết: bài viết CMS', 'admin.layout_page_position', 'vi'),
-	(2493, 'admin.layout_page_position.shop_contact', 'Trang liên hệ', 'admin.layout_page_position', 'vi'),
-	(2494, 'admin.layout_page_position.shop_page', 'Các trang viết: giới thiệu...', 'admin.layout_page_position', 'vi'),
-	(2495, 'admin.layout_page_block.header', 'Head code :meta, css, javascript,...', 'admin.layout_page_block', 'vi'),
-	(2496, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'vi'),
-	(2497, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'vi'),
-	(2498, 'admin.layout_page_block.left', 'BlockLeft - Cột trái', 'admin.layout_page_block', 'vi'),
-	(2499, 'admin.layout_page_block.right', 'Block Right - Cột phải', 'admin.layout_page_block', 'vi'),
-	(2500, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'vi'),
-	(2501, 'admin.layout_page_block.header', 'Head code: meta, css, javascript, ...', 'admin.layout_page_block', 'en'),
-	(2502, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'en'),
-	(2503, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'en'),
-	(2504, 'admin.layout_page_block.left', 'Block Left', 'admin.layout_page_block', 'en'),
-	(2505, 'admin.layout_page_block.right', 'Block Right', 'admin.layout_page_block', 'en'),
-	(2506, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'en'),
-	(2507, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'en'),
-	(2508, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'en'),
-	(2509, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'en'),
-	(2510, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'en'),
-	(2511, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'en'),
-	(2512, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'vi'),
-	(2513, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'vi'),
-	(2514, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'vi'),
-	(2515, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'vi'),
-	(2516, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'vi');
+	(2457, 'admin.dashboard.pie_chart', 'Hiển thị biểu đồ pie', 'admin.dashboard', 'vi'),
+	(2458, 'admin.dashboard.pie_chart', 'Display pie chart total', 'admin.dashboard', 'en'),
+	(2459, 'admin.dashboard.title', 'Trang tổng quan', 'admin.dashboard', 'vi'),
+	(2460, 'admin.dashboard.title', 'Dashboard page', 'admin.dashboard', 'en'),
+	(2461, 'admin.dashboard.config_display', 'Cấu hình trang tổng quan admin', 'admin.dashboard', 'vi'),
+	(2462, 'admin.dashboard.config_display', 'Config dashboard adminpage', 'admin.dashboard', 'en'),
+	(2463, 'admin.layout_page_position.all', 'All Page', 'admin.layout_page_position', 'en'),
+	(2464, 'admin.layout_page_position.home', 'Home page', 'admin.layout_page_position', 'en'),
+	(2465, 'admin.layout_page_position.shop_home', 'Home shop', 'admin.layout_page_position', 'en'),
+	(2466, 'admin.layout_page_position.shop_search', 'Search page', 'admin.layout_page_position', 'en'),
+	(2467, 'admin.layout_page_position.vendor_home', 'Store: home', 'admin.layout_page_position', 'en'),
+	(2468, 'admin.layout_page_position.store_product_list', 'Store: product list', 'admin.layout_page_position', 'en'),
+	(2469, 'admin.layout_page_position.product_list', 'List: product', 'admin.layout_page_position', 'en'),
+	(2470, 'admin.layout_page_position.product_detail', 'Detail: product', 'admin.layout_page_position', 'en'),
+	(2471, 'admin.layout_page_position.shop_cart', 'Cart: cart, wishlist, compare, checkout', 'admin.layout_page_position', 'en'),
+	(2472, 'admin.layout_page_position.shop_auth', 'Auth: login, forgot, register', 'admin.layout_page_position', 'en'),
+	(2473, 'admin.layout_page_position.shop_profile', 'Customer profile', 'admin.layout_page_position', 'en'),
+	(2474, 'admin.layout_page_position.item_list', 'List: category, brand, supplier', 'admin.layout_page_position', 'en'),
+	(2475, 'admin.layout_page_position.item_detail', 'Detail: item', 'admin.layout_page_position', 'en'),
+	(2476, 'admin.layout_page_position.news_list', 'List:  Blog/news', 'admin.layout_page_position', 'en'),
+	(2477, 'admin.layout_page_position.news_detail', 'Detail: entry Blog', 'admin.layout_page_position', 'en'),
+	(2478, 'admin.layout_page_position.content_list', 'List: content CMS', 'admin.layout_page_position', 'en'),
+	(2479, 'admin.layout_page_position.content_detail', 'Detail: entry CMS', 'admin.layout_page_position', 'en'),
+	(2480, 'admin.layout_page_position.shop_contact', 'Page contact', 'admin.layout_page_position', 'en'),
+	(2481, 'admin.layout_page_position.shop_page', 'Other page: about...', 'admin.layout_page_position', 'en'),
+	(2482, 'admin.layout_page_position.all', 'Tất cả trang', 'admin.layout_page_position', 'vi'),
+	(2483, 'admin.layout_page_position.home', 'Trang chủ', 'admin.layout_page_position', 'vi'),
+	(2484, 'admin.layout_page_position.shop_home', 'Trang chủ Shop', 'admin.layout_page_position', 'vi'),
+	(2485, 'admin.layout_page_position.shop_search', 'Trang tìm kiếm', 'admin.layout_page_position', 'vi'),
+	(2486, 'admin.layout_page_position.vendor_home', 'Cửa hàng: trang chủ', 'admin.layout_page_position', 'vi'),
+	(2487, 'admin.layout_page_position.store_product_list', 'Cửa hàng: danh sách sản phẩm', 'admin.layout_page_position', 'vi'),
+	(2488, 'admin.layout_page_position.product_list', 'Danh sách: sản phẩm', 'admin.layout_page_position', 'vi'),
+	(2489, 'admin.layout_page_position.product_detail', 'Chi tiết: sản phẩm', 'admin.layout_page_position', 'vi'),
+	(2490, 'admin.layout_page_position.shop_cart', 'Giỏ hàng: giỏ hàng, wishlist, compare, checkout', 'admin.layout_page_position', 'vi'),
+	(2491, 'admin.layout_page_position.shop_auth', 'Chứng thực: đăng nhập, đăng ký, quên mật khẩu', 'admin.layout_page_position', 'vi'),
+	(2492, 'admin.layout_page_position.shop_profile', 'Tài khoản khách hàng', 'admin.layout_page_position', 'vi'),
+	(2493, 'admin.layout_page_position.item_list', 'Danh sách item: danh mục, nhãn hiệu, nhà cung cấp', 'admin.layout_page_position', 'vi'),
+	(2494, 'admin.layout_page_position.item_detail', 'Chi tiết: item', 'admin.layout_page_position', 'vi'),
+	(2495, 'admin.layout_page_position.news_list', 'Danh sách: bài viết Blog', 'admin.layout_page_position', 'vi'),
+	(2496, 'admin.layout_page_position.news_detail', 'Chi tiết: bài viết Blog', 'admin.layout_page_position', 'vi'),
+	(2497, 'admin.layout_page_position.content_list', 'Danh sách: bài viết CMS', 'admin.layout_page_position', 'vi'),
+	(2498, 'admin.layout_page_position.content_detail', 'Chi tiết: bài viết CMS', 'admin.layout_page_position', 'vi'),
+	(2499, 'admin.layout_page_position.shop_contact', 'Trang liên hệ', 'admin.layout_page_position', 'vi'),
+	(2500, 'admin.layout_page_position.shop_page', 'Các trang viết: giới thiệu...', 'admin.layout_page_position', 'vi'),
+	(2501, 'admin.layout_page_block.header', 'Head code :meta, css, javascript,...', 'admin.layout_page_block', 'vi'),
+	(2502, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'vi'),
+	(2503, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'vi'),
+	(2504, 'admin.layout_page_block.left', 'BlockLeft - Cột trái', 'admin.layout_page_block', 'vi'),
+	(2505, 'admin.layout_page_block.right', 'Block Right - Cột phải', 'admin.layout_page_block', 'vi'),
+	(2506, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'vi'),
+	(2507, 'admin.layout_page_block.header', 'Head code: meta, css, javascript, ...', 'admin.layout_page_block', 'en'),
+	(2508, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'en'),
+	(2509, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'en'),
+	(2510, 'admin.layout_page_block.left', 'Block Left', 'admin.layout_page_block', 'en'),
+	(2511, 'admin.layout_page_block.right', 'Block Right', 'admin.layout_page_block', 'en'),
+	(2512, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'en'),
+	(2513, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'en'),
+	(2514, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'en'),
+	(2515, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'en'),
+	(2516, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'en'),
+	(2517, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'en'),
+	(2518, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'vi'),
+	(2519, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'vi'),
+	(2520, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'vi'),
+	(2521, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'vi'),
+	(2522, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'vi'),
+	(2523, 'admin.config_layout.home_page_default', 'Thay đổi homepage', 'admin.config_layout', 'vi'),
+	(2524, 'admin.config_layout.home_page_default', 'Change homepage', 'admin.config_layout', 'en'),
+	(2525, 'admin.config_layout.home_page_default_empty', 'Giữ mặc định', 'admin.config_layout', 'vi'),
+	(2526, 'admin.config_layout.home_page_default_empty', 'Keep default', 'admin.config_layout', 'en'),
+	(2527, 'admin.config_layout.link_home_page', 'Hiển thị link trang chủ', 'admin.config_layout', 'vi'),
+	(2528, 'admin.config_layout.link_home_page', 'Display link homepage', 'admin.config_layout', 'en'),
+	(2529, 'admin.config_layout.link_shop_page', 'Hiển thị link cửa hàng', 'admin.config_layout', 'vi'),
+	(2530, 'admin.config_layout.link_shop_page', 'Display link shop', 'admin.config_layout', 'en'),
+	(2531, 'admin.config_layout.link_account', 'Hiển thị link tài khoản', 'admin.config_layout', 'vi'),
+	(2532, 'admin.config_layout.link_account', 'Display link account', 'admin.config_layout', 'en'),
+	(2533, 'admin.config_layout.link_cart', 'Hiển thị giỏ hàng', 'admin.config_layout', 'vi'),
+	(2534, 'admin.config_layout.link_cart', 'Display link cart', 'admin.config_layout', 'en'),
+	(2535, 'admin.config_layout.link_language', 'Hiển thị ngôn ngữ', 'admin.config_layout', 'vi'),
+	(2536, 'admin.config_layout.link_language', 'Display link language', 'admin.config_layout', 'en'),
+	(2537, 'admin.config_layout.link_currency', 'Hiển thị tiền tệ', 'admin.config_layout', 'vi'),
+	(2538, 'admin.config_layout.link_currency', 'Display link currency', 'admin.config_layout', 'en'),
+	(2539, 'store.admin.config_layout', 'Cấu hình bố cục cửa hàng', 'admin.config_layout', 'vi'),
+	(2540, 'store.admin.config_layout', 'Config layout shop', 'admin.config_layout', 'en');
 /*!40000 ALTER TABLE `sc_languages` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_attribute_group
@@ -4038,12 +4078,12 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news` (
 DELETE FROM `sc_shop_news`;
 /*!40000 ALTER TABLE `sc_shop_news` DISABLE KEYS */;
 INSERT INTO `sc_shop_news` (`id`, `image`, `alias`, `sort`, `status`, `created_at`, `updated_at`) VALUES
-	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-10-17 18:35:27', NULL),
-	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-10-17 18:35:27', NULL),
-	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-10-17 18:35:27', NULL),
-	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-10-17 18:35:27', NULL),
-	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-10-17 18:35:27', NULL),
-	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-10-17 18:35:27', NULL);
+	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-10-30 20:52:03', NULL),
+	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-10-30 20:52:03', NULL),
+	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-10-30 20:52:03', NULL),
+	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-10-30 20:52:03', NULL),
+	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-10-30 20:52:03', NULL),
+	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-10-30 20:52:03', NULL);
 /*!40000 ALTER TABLE `sc_shop_news` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_description
@@ -4908,6 +4948,99 @@ INSERT INTO `sc_shop_weight` (`id`, `name`, `description`) VALUES
 	(3, 'lb', 'Pound '),
 	(4, 'oz', 'Ounce ');
 /*!40000 ALTER TABLE `sc_shop_weight` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.vendor_category
+DROP TABLE IF EXISTS `vendor_category`;
+CREATE TABLE IF NOT EXISTS `vendor_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alias` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `sort` int(11) NOT NULL DEFAULT 0,
+  `store_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `vendor_category_alias_index` (`alias`),
+  KEY `vendor_category_store_id_index` (`store_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.vendor_category: ~0 rows (approximately)
+DELETE FROM `vendor_category`;
+/*!40000 ALTER TABLE `vendor_category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vendor_category` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.vendor_category_description
+DROP TABLE IF EXISTS `vendor_category_description`;
+CREATE TABLE IF NOT EXISTS `vendor_category_description` (
+  `vendor_category_id` int(11) NOT NULL,
+  `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  UNIQUE KEY `vendor_category_description_vendor_category_id_lang_unique` (`vendor_category_id`,`lang`),
+  KEY `vendor_category_description_lang_index` (`lang`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.vendor_category_description: ~0 rows (approximately)
+DELETE FROM `vendor_category_description`;
+/*!40000 ALTER TABLE `vendor_category_description` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vendor_category_description` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.vendor_password_resets
+DROP TABLE IF EXISTS `vendor_password_resets`;
+CREATE TABLE IF NOT EXISTS `vendor_password_resets` (
+  `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  KEY `vendor_password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.vendor_password_resets: ~0 rows (approximately)
+DELETE FROM `vendor_password_resets`;
+/*!40000 ALTER TABLE `vendor_password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vendor_password_resets` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.vendor_product_category
+DROP TABLE IF EXISTS `vendor_product_category`;
+CREATE TABLE IF NOT EXISTS `vendor_product_category` (
+  `vendor_category_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  UNIQUE KEY `vendor_product_category_vendor_category_id_product_id_unique` (`vendor_category_id`,`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.vendor_product_category: ~0 rows (approximately)
+DELETE FROM `vendor_product_category`;
+/*!40000 ALTER TABLE `vendor_product_category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vendor_product_category` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.vendor_user
+DROP TABLE IF EXISTS `vendor_user`;
+CREATE TABLE IF NOT EXISTS `vendor_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postcode` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT 'VN',
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_id` int(11) NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `vendor_user_store_id_index` (`store_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.vendor_user: ~0 rows (approximately)
+DELETE FROM `vendor_user`;
+/*!40000 ALTER TABLE `vendor_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vendor_user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

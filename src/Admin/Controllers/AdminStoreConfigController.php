@@ -6,6 +6,7 @@ use SCart\Core\Front\Models\ShopLanguage;
 use SCart\Core\Front\Models\ShopCurrency;
 use SCart\Core\Admin\Models\AdminConfig;
 use SCart\Core\Admin\Models\AdminTemplate;
+use SCart\Core\Admin\Models\AdminPage;
 use SCart\Core\Front\Models\ShopTax;
 
 class AdminStoreConfigController extends RootAdminController
@@ -106,6 +107,12 @@ class AdminStoreConfigController extends RootAdminController
         $configCustomize = AdminConfig::getListConfigByCode($configCustomizeQuery);
 
         
+        $configLayoutQuery = [
+            'code' => 'config_layout',
+            'storeId' => $id,
+            'keyBy' => 'key',
+        ];
+        $configLayout = AdminConfig::getListConfigByCode($configLayoutQuery);
 
         $emailConfigQuery = [
             'code' => ['smtp_config', 'email_action'],
@@ -130,7 +137,9 @@ class AdminStoreConfigController extends RootAdminController
         $data['productConfig']                  = $productConfig;
         $data['productConfigAttribute']         = $productConfigAttribute;
         $data['productConfigAttributeRequired'] = $productConfigAttributeRequired;
+        $data['configLayout']                   = $configLayout;
         $data['pluginCaptchaInstalled']         = sc_get_plugin_captcha_installed();
+        $data['pageList']                       = (new AdminPage)->getListPageAlias($id);
         $data['taxs']                           = $taxs;
         $data['configDisplay']                  = $configDisplay;
         $data['orderConfig']                    = $orderConfig;

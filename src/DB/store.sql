@@ -110,7 +110,14 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('', 'admin_custom_config', 'fanpage_url', 'https://www.facebook.com/groups/scart.opensource', '0', 'admin.admin_custom_config.fanpage_url', '__storeId__'),
 ('', 'admin_custom_config', 'twitter_url', 'https://twitter.com/ecommercescart', '0', 'admin.admin_custom_config.twitter_url', '__storeId__'),
 ('', 'admin_custom_config', 'instagram_url', '#', '0', 'admin.admin_custom_config.instagram_url', '__storeId__'),
-('', 'admin_custom_config', 'youtube_url', 'https://www.youtube.com/channel/UCR8kitefby3N6KvvawQVqdg/videos', '0', 'admin.admin_custom_config.youtube_url', '__storeId__');
+('', 'admin_custom_config', 'youtube_url', 'https://www.youtube.com/channel/UCR8kitefby3N6KvvawQVqdg/videos', '0', 'admin.admin_custom_config.youtube_url', '__storeId__'),
+('', 'config_layout', 'home_page_default', '', '0', 'admin.config_layout.home_page_default', '__storeId__'),
+('', 'config_layout', 'link_home_page', '1', '0', 'admin.config_layout.link_home_page', '__storeId__'),
+('', 'config_layout', 'link_shop_page', '1', '0', 'admin.config_layout.link_shop_page', '__storeId__'),
+('', 'config_layout', 'link_account', '1', '0', 'admin.config_layout.link_account', '__storeId__'),
+('', 'config_layout', 'link_language', '1', '0', 'admin.config_layout.link_language', '__storeId__'),
+('', 'config_layout', 'link_currency', '1', '0', 'admin.config_layout.link_currency', '__storeId__'),
+('', 'config_layout', 'link_cart', '1', '0', 'admin.config_layout.link_cart', '__storeId__');
             
 /*shop_email_template*/
 INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`name`, `group`, `text`, `status`, `store_id`) VALUES 
