@@ -123,7 +123,7 @@ class ShopCustomer extends Authenticatable
      */
     public static function updateInfo($dataUpdate, $id)
     {
-        $dataUpdate = sc_clean($dataUpdate, 'password');
+        $dataUpdate = sc_clean($dataUpdate);
         $obj = self::find($id);
         return $obj->update($dataUpdate);
     }
@@ -134,7 +134,7 @@ class ShopCustomer extends Authenticatable
      */
     public static function createCustomer($dataInsert)
     {
-        $dataClean = sc_clean($dataInsert, 'password');
+        $dataClean = sc_clean($dataInsert);
         $dataAddress = [
             'first_name'      => $dataClean['first_name'] ?? '',
             'last_name'       => $dataClean['last_name'] ?? '',
