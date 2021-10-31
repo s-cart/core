@@ -50,7 +50,7 @@ class AdminUser extends Authenticatable
      */
     public static function updateInfo($dataUpdate, $id)
     {
-        $dataUpdate = sc_clean($dataUpdate, 'password');
+        $dataUpdate = sc_clean($dataUpdate);
         $obj        = self::find($id);
         return $obj->update($dataUpdate);
     }
@@ -79,7 +79,7 @@ class AdminUser extends Authenticatable
      */
     public static function createUser($dataInsert)
     {
-        $dataUpdate = sc_clean($dataInsert, 'password');
+        $dataUpdate = sc_clean($dataInsert);
         return self::create($dataUpdate);
     }
 
