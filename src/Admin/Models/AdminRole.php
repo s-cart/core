@@ -82,7 +82,7 @@ class AdminRole extends Model
      */
     public static function updateInfo($dataUpdate, $id)
     {
-        $dataUpdate = sc_clean($dataUpdate, 'password');
+        $dataUpdate = sc_clean($dataUpdate);
         $obj        = self::find($id);
         return $obj->update($dataUpdate);
     }
@@ -93,7 +93,7 @@ class AdminRole extends Model
      */
     public static function createRole($dataInsert)
     {
-        $dataUpdate = sc_clean($dataInsert, 'password');
+        $dataUpdate = sc_clean($dataInsert);
         return self::create($dataUpdate);
     }
 }
