@@ -226,7 +226,7 @@ class AdminUser extends Authenticatable
      *
      * @return  [type]  [return description]
      */
-    public static function checkPermissionconfig()
+    public static function checkPermissionConfig()
     {
         if (self::$canChangeConfig === null) {
             if (\Admin::user()->isAdministrator()) {

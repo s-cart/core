@@ -7,13 +7,13 @@ use SCart\Core\Front\Models\ShopStoreCss;
 
 if (!function_exists('sc_admin_can_config')) {
     /**
-     * Get value config from table sc_admin_can_config
+     * Check user can change config value
      *
      * @return  [type]          [return description]
      */
     function sc_admin_can_config()
     {
-        return \SCart\Core\Admin\Admin::user()->checkPermissionconfig();
+        return \SCart\Core\Admin\Admin::user()->checkPermissionConfig();
     }
 }
 
