@@ -61,7 +61,7 @@ class AdminConfig extends Model
      * @param  [string]  $suffix
      * @return [type]              [description]
      */
-    public static function getGroup($group = null, $suffix = null)
+    public static function getGroup($group = null, $suffix = null):array
     {
         if ($group === null) {
             return [];

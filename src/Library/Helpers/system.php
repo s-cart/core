@@ -130,7 +130,7 @@ if (!function_exists('sc_config_group')) {
 
 if (!function_exists('sc_store')) {
     /**
-     * Get info store_id, table shop_store
+     * Get info store_id, table admin_store
      *
      * @param   [string] $key      [$key description]
      * @param   [null|int]  $store_id    store id
