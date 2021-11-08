@@ -110,7 +110,7 @@ class AdminTemplateController extends RootAdminController
     {
         $key = request('key');
         (new AdminTemplate)->where('key', $key)->update(['status' => 0]);
-        $response = ['error' => 0, 'msg' => sc_language_render('action.desable_success')];
+        $response = ['error' => 0, 'msg' => sc_language_render('action.disable_success')];
         return response()->json($response);
     }
 

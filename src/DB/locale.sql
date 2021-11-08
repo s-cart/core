@@ -2279,6 +2279,8 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('admin.weight.add_new_title', 'Add weight', 'admin.weight', 'en'),
 ('admin.product_property.name', 'Tên', 'admin.product_property', 'vi'),
 ('admin.product_property.name', 'Name', 'admin.product_property', 'en'),
+('admin.product_property.code', 'Mã', 'admin.product_property', 'vi'),
+('admin.product_property.code', 'Code', 'admin.product_property', 'en'),
 ('admin.product_property.list', 'Danh sách thuộc tính', 'admin.product_property', 'vi'),
 ('admin.product_property.list', 'Product property list', 'admin.product_property', 'en'),
 ('admin.product_property.status', 'Trạng thái', 'admin.product_property', 'vi'),
