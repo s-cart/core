@@ -2,7 +2,7 @@
 /**
  * Get list store
  */
-if (!function_exists('sc_get_list_code_store')) {
+if (!function_exists('sc_get_list_code_store') && !in_array('sc_get_list_code_store', config('helper_except', []))) {
     function sc_get_list_code_store()
     {
         return \SCart\Core\Admin\Models\AdminStore::getListStoreCode();
@@ -13,8 +13,8 @@ if (!function_exists('sc_get_list_code_store')) {
 /**
  * Get domain from code
  */
-if (!function_exists('sc_get_domain_from_code')) {
-    function sc_get_domain_from_code($code)
+if (!function_exists('sc_get_domain_from_code') && !in_array('sc_get_domain_from_code', config('helper_except', []))) {
+    function sc_get_domain_from_code(string $code):string
     {
         $domainList = \SCart\Core\Admin\Models\AdminStore::getStoreDomainByCode();
         if (!empty($domainList[$code])) {
@@ -28,8 +28,8 @@ if (!function_exists('sc_get_domain_from_code')) {
 /**
  * Get domain root
  */
-if (!function_exists('sc_get_domain_root')) {
-    function sc_get_domain_root()
+if (!function_exists('sc_get_domain_root') && !in_array('sc_get_domain_root', config('helper_except', []))) {
+    function sc_get_domain_root():string
     {
         $store = \SCart\Core\Admin\Models\AdminStore::find(SC_ID_ROOT);
         return $store->domain;
@@ -39,8 +39,8 @@ if (!function_exists('sc_get_domain_root')) {
 /**
  * Check store is partner
  */
-if (!function_exists('sc_store_is_partner')) {
-    function sc_store_is_partner(int $storeId)
+if (!function_exists('sc_store_is_partner') && !in_array('sc_store_is_partner', config('helper_except', []))) {
+    function sc_store_is_partner(int $storeId):bool
     {
         $store = \SCart\Core\Admin\Models\AdminStore::find($storeId);
         if (!$store) {
@@ -53,8 +53,8 @@ if (!function_exists('sc_store_is_partner')) {
 /**
  * Check store is root
  */
-if (!function_exists('sc_store_is_root')) {
-    function sc_store_is_root(int $storeId)
+if (!function_exists('sc_store_is_root') && !in_array('sc_store_is_root', config('helper_except', []))) {
+    function sc_store_is_root(int $storeId):bool
     {
         return  $storeId == SC_ID_ROOT;
     }
@@ -66,8 +66,8 @@ if (!function_exists('sc_store_is_root')) {
 /**
  * Get list store of product detail
  */
-if (!function_exists('sc_get_list_store_of_product_detail')) {
-    function sc_get_list_store_of_product_detail($pId)
+if (!function_exists('sc_get_list_store_of_product_detail') && !in_array('sc_get_list_store_of_product_detail', config('helper_except', []))) {
+    function sc_get_list_store_of_product_detail($pId):array
     {
         return \SCart\Core\Front\Models\ShopProductStore::where('product_id', $pId)
         ->pluck('store_id')
@@ -79,8 +79,8 @@ if (!function_exists('sc_get_list_store_of_product_detail')) {
 /**
  * Get list store of discount detail
  */
-if (!function_exists('sc_get_list_store_of_discount_detail')) {
-    function sc_get_list_store_of_discount_detail($dId)
+if (!function_exists('sc_get_list_store_of_discount_detail') && !in_array('sc_get_list_store_of_discount_detail', config('helper_except', []))) {
+    function sc_get_list_store_of_discount_detail($dId):array
     {
         return \App\Plugins\Total\Discount\Models\ShopDiscountStore::where('discount_id', $dId)
             ->pluck('store_id')
@@ -90,10 +90,10 @@ if (!function_exists('sc_get_list_store_of_discount_detail')) {
 
 
 /**
- * Get store list of brand
+ * Get store list of brands
  */
-if (!function_exists('sc_get_list_store_of_brand')) {
-    function sc_get_list_store_of_brand($arrBrandId)
+if (!function_exists('sc_get_list_store_of_brand') && !in_array('sc_get_list_store_of_brand', config('helper_except', []))) {
+    function sc_get_list_store_of_brand(array $arrBrandId)
     {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableBrandStore = (new \SCart\Core\Front\Models\ShopBrandStore)->getTable();
@@ -109,8 +109,8 @@ if (!function_exists('sc_get_list_store_of_brand')) {
 /**
  * Get list store of brand detail
  */
-if (!function_exists('sc_get_list_store_of_brand_detail')) {
-    function sc_get_list_store_of_brand_detail($cId)
+if (!function_exists('sc_get_list_store_of_brand_detail') && !in_array('sc_get_list_store_of_brand_detail', config('helper_except', []))) {
+    function sc_get_list_store_of_brand_detail($cId):array
     {
         return \SCart\Core\Front\Models\ShopBrandStore::where('brand_id', $cId)
             ->pluck('store_id')
@@ -119,10 +119,10 @@ if (!function_exists('sc_get_list_store_of_brand_detail')) {
 }
 
 /**
- * Get store list of banner
+ * Get store list of banners
  */
-if (!function_exists('sc_get_list_store_of_banner')) {
-    function sc_get_list_store_of_banner($arrBannerId)
+if (!function_exists('sc_get_list_store_of_banner') && !in_array('sc_get_list_store_of_banner', config('helper_except', []))) {
+    function sc_get_list_store_of_banner(array $arrBannerId)
     {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableBannerStore = (new \SCart\Core\Front\Models\ShopBannerStore)->getTable();
@@ -137,10 +137,10 @@ if (!function_exists('sc_get_list_store_of_banner')) {
 /**
  * Get list store of banner detail
  */
-if (!function_exists('sc_get_list_store_of_banner_detail')) {
-    function sc_get_list_store_of_banner_detail($cId)
+if (!function_exists('sc_get_list_store_of_banner_detail') && !in_array('sc_get_list_store_of_banner_detail', config('helper_except', []))) {
+    function sc_get_list_store_of_banner_detail($bId):array
     {
-        return \SCart\Core\Front\Models\ShopBannerStore::where('banner_id', $cId)
+        return \SCart\Core\Front\Models\ShopBannerStore::where('banner_id', $bId)
             ->pluck('store_id')
             ->toArray();
     }
@@ -149,8 +149,8 @@ if (!function_exists('sc_get_list_store_of_banner_detail')) {
 /**
  * Get store list of news
  */
-if (!function_exists('sc_get_list_store_of_news')) {
-    function sc_get_list_store_of_news($arrNewsId)
+if (!function_exists('sc_get_list_store_of_news') && !in_array('sc_get_list_store_of_news', config('helper_except', []))) {
+    function sc_get_list_store_of_news(array $arrNewsId)
     {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableNewsStore = (new \SCart\Core\Front\Models\ShopNewsStore)->getTable();
@@ -165,20 +165,20 @@ if (!function_exists('sc_get_list_store_of_news')) {
 /**
  * Get list store of news detail
  */
-if (!function_exists('sc_get_list_store_of_news_detail')) {
-    function sc_get_list_store_of_news_detail($cId)
+if (!function_exists('sc_get_list_store_of_news_detail') && !in_array('sc_get_list_store_of_news_detail', config('helper_except', []))) {
+    function sc_get_list_store_of_news_detail($nId):array
     {
-        return \SCart\Core\Front\Models\ShopNewsStore::where('news_id', $cId)
+        return \SCart\Core\Front\Models\ShopNewsStore::where('news_id', $nId)
             ->pluck('store_id')
             ->toArray();
     }
 }
 
 /**
- * Get store list of page
+ * Get store list of pages
  */
-if (!function_exists('sc_get_list_store_of_page')) {
-    function sc_get_list_store_of_page($arrPageId)
+if (!function_exists('sc_get_list_store_of_page') && !in_array('sc_get_list_store_of_page', config('helper_except', []))) {
+    function sc_get_list_store_of_page(array $arrPageId)
     {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tablePageStore = (new \SCart\Core\Front\Models\ShopPageStore)->getTable();
@@ -193,19 +193,19 @@ if (!function_exists('sc_get_list_store_of_page')) {
 /**
  * Get list store of page detail
  */
-if (!function_exists('sc_get_list_store_of_page_detail')) {
-    function sc_get_list_store_of_page_detail($cId)
+if (!function_exists('sc_get_list_store_of_page_detail') && !in_array('sc_get_list_store_of_page_detail', config('helper_except', []))) {
+    function sc_get_list_store_of_page_detail($pId):array
     {
-        return \SCart\Core\Front\Models\ShopPageStore::where('page_id', $cId)
+        return \SCart\Core\Front\Models\ShopPageStore::where('page_id', $pId)
             ->pluck('store_id')
             ->toArray();
     }
 }
 
 /**
- * Get store list of link
+ * Get store list of links
  */
-if (!function_exists('sc_get_list_store_of_link')) {
+if (!function_exists('sc_get_list_store_of_link') && !in_array('sc_get_list_store_of_link', config('helper_except', []))) {
     function sc_get_list_store_of_link($arrLinkId)
     {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
@@ -221,7 +221,7 @@ if (!function_exists('sc_get_list_store_of_link')) {
 /**
  * Get list store of link detail
  */
-if (!function_exists('sc_get_list_store_of_link_detail')) {
+if (!function_exists('sc_get_list_store_of_link_detail') && !in_array('sc_get_list_store_of_link_detail', config('helper_except', []))) {
     function sc_get_list_store_of_link_detail($cId)
     {
         return \SCart\Core\Front\Models\ShopLinkStore::where('link_id', $cId)
@@ -231,10 +231,10 @@ if (!function_exists('sc_get_list_store_of_link_detail')) {
 }
 
 /**
- * Get store list of order
+ * Get store list of orders
  */
-if (!function_exists('sc_get_list_store_of_order')) {
-    function sc_get_list_store_of_order($arrOrderId)
+if (!function_exists('sc_get_list_store_of_order') && !in_array('sc_get_list_store_of_order', config('helper_except', []))) {
+    function sc_get_list_store_of_order(array $arrOrderId)
     {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableOrder = (new \SCart\Core\Front\Models\ShopOrder)->getTable();
@@ -247,10 +247,10 @@ if (!function_exists('sc_get_list_store_of_order')) {
 }
 
 /**
- * Get store list of category
+ * Get store list of categories
  */
-if (!function_exists('sc_get_list_store_of_category')) {
-    function sc_get_list_store_of_category($arrCategoryId)
+if (!function_exists('sc_get_list_store_of_category') && !in_array('sc_get_list_store_of_category', config('helper_except', []))) {
+    function sc_get_list_store_of_category(array $arrCategoryId)
     {
         $tableStore = (new \SCart\Core\Admin\Models\AdminStore)->getTable();
         $tableCategoryStore = (new \SCart\Core\Front\Models\ShopCategoryStore)->getTable();
@@ -266,11 +266,28 @@ if (!function_exists('sc_get_list_store_of_category')) {
 /**
  * Get list store of category detail
  */
-if (!function_exists('sc_get_list_store_of_category_detail')) {
-    function sc_get_list_store_of_category_detail($cId)
+if (!function_exists('sc_get_list_store_of_category_detail') && !in_array('sc_get_list_store_of_category_detail', config('helper_except', []))) {
+    function sc_get_list_store_of_category_detail($cId):array
     {
         return \SCart\Core\Front\Models\ShopCategoryStore::where('category_id', $cId)
             ->pluck('store_id')
             ->toArray();
+    }
+}
+
+if (!function_exists('sc_process_domain_store') && !in_array('sc_process_domain_store', config('helper_except', []))) {
+    /**
+     * Process domain store
+     *
+     * @param   [string]  $domain
+     *
+     * @return  [string]         [$domain]
+     */
+    function sc_process_domain_store(string $domain)
+    {
+        $domain = str_replace(['http://', 'https://'], '', $domain);
+        $domain = Str::lower($domain);
+        $domain = rtrim($domain, '/');
+        return $domain;
     }
 }

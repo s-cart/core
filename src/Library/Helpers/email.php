@@ -14,19 +14,20 @@ use Illuminate\Support\Facades\Mail;
  *
  * @return  mixed
  */
-function sc_send_mail($view, array $dataView = [], array $emailConfig = [], array $attach = [])
-{
-    if (!empty(sc_config('email_action_mode'))) {
-        if (!empty(sc_config('email_action_queue'))) {
-            dispatch(new SendEmailJob($view, $dataView, $emailConfig, $attach));
+if (!function_exists('sc_send_mail') && !in_array('sc_send_mail', config('helper_except', []))) {
+    function sc_send_mail($view, array $dataView = [], array $emailConfig = [], array $attach = [])
+    {
+        if (!empty(sc_config('email_action_mode'))) {
+            if (!empty(sc_config('email_action_queue'))) {
+                dispatch(new SendEmailJob($view, $dataView, $emailConfig, $attach));
+            } else {
+                sc_process_send_mail($view, $dataView, $emailConfig, $attach);
+            }
         } else {
-            sc_process_send_mail($view, $dataView, $emailConfig, $attach);
+            return false;
         }
-    } else {
-        return false;
     }
 }
-
 /**
  * Process send mail
  *
@@ -37,11 +38,13 @@ function sc_send_mail($view, array $dataView = [], array $emailConfig = [], arra
  *
  * @return  [][][]                [return description]
  */
-function sc_process_send_mail($view, array $dataView = [], array $emailConfig = [], array $attach = [])
-{
-    try {
-        Mail::send(new SendMail($view, $dataView, $emailConfig, $attach));
-    } catch (\Throwable $e) {
-        sc_report("Sendmail view:" . $view . PHP_EOL . $e->getMessage());
+if (!function_exists('sc_process_send_mail') && !in_array('sc_process_send_mail', config('helper_except', []))) {
+    function sc_process_send_mail($view, array $dataView = [], array $emailConfig = [], array $attach = [])
+    {
+        try {
+            Mail::send(new SendMail($view, $dataView, $emailConfig, $attach));
+        } catch (\Throwable $e) {
+            sc_report("Sendmail view:" . $view . PHP_EOL . $e->getMessage());
+        }
     }
 }

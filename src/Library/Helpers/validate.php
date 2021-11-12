@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('sc_check_view')) {
+if (!function_exists('sc_check_view') && !in_array('sc_check_view', config('helper_except', []))) {
     /**
      * Check view exist
      *
@@ -19,7 +19,7 @@ if (!function_exists('sc_check_view')) {
 }
 
 
-if (!function_exists('sc_clean')) {
+if (!function_exists('sc_clean') && !in_array('sc_clean', config('helper_except', []))) {
     /**
      * Clear data
      */

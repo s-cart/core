@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('sc_captcha_method')) {
+if (!function_exists('sc_captcha_method') && !in_array('sc_captcha_method', config('helper_except', []))) {
     function sc_captcha_method()
     {
         //If function captcha disable or dont setup
@@ -26,8 +26,8 @@ if (!function_exists('sc_captcha_method')) {
     }
 }
 
-if (!function_exists('sc_captcha_page')) {
-    function sc_captcha_page()
+if (!function_exists('sc_captcha_page') && !in_array('sc_captcha_page', config('helper_except', []))) {
+    function sc_captcha_page():array
     {
         if (empty(sc_config('captcha_page'))) {
             return [];
@@ -39,7 +39,7 @@ if (!function_exists('sc_captcha_page')) {
     }
 }
 
-if (!function_exists('sc_get_plugin_captcha_installed')) {
+if (!function_exists('sc_get_plugin_captcha_installed') && !in_array('sc_get_plugin_captcha_installed', config('helper_except', []))) {
     /**
      * Get all class plugin captcha installed
      *

@@ -1,11 +1,11 @@
 <?php
 /**
  * File function process currency
- * @author Naruto <lanhktc@gmail.com>
+ * @author Lanh Le <lanhktc@gmail.com>
  */
 use SCart\Core\Front\Models\ShopCurrency;
 
-if (!function_exists('sc_currency_render')) {
+if (!function_exists('sc_currency_render') && !in_array('sc_currency_render', config('helper_except', []))) {
     /**
      * Render currency: format number, change amount, add symbol
      *
@@ -24,7 +24,7 @@ if (!function_exists('sc_currency_render')) {
     }
 }
 
-if (!function_exists('sc_currency_render_symbol')) {
+if (!function_exists('sc_currency_render_symbol') && !in_array('sc_currency_render_symbol', config('helper_except', []))) {
     /**
      * Only render symbol, dont change amount
      *
@@ -44,7 +44,7 @@ if (!function_exists('sc_currency_render_symbol')) {
 }
 
 
-if (!function_exists('sc_currency_value')) {
+if (!function_exists('sc_currency_value') && !in_array('sc_currency_value', config('helper_except', []))) {
     /**
      * Get value of amount with specify exchange rate
      * if dont specify rate, will use exchange rate default
@@ -62,7 +62,7 @@ if (!function_exists('sc_currency_value')) {
 }
 
 //Get code currency
-if (!function_exists('sc_currency_code')) {
+if (!function_exists('sc_currency_code') && !in_array('sc_currency_code', config('helper_except', []))) {
     function sc_currency_code()
     {
         return ShopCurrency::getCode();
@@ -70,7 +70,7 @@ if (!function_exists('sc_currency_code')) {
 }
 
 //Get rate currency
-if (!function_exists('sc_currency_rate')) {
+if (!function_exists('sc_currency_rate') && !in_array('sc_currency_rate', config('helper_except', []))) {
     function sc_currency_rate()
     {
         return ShopCurrency::getRate();
@@ -78,7 +78,7 @@ if (!function_exists('sc_currency_rate')) {
 }
 
 //Format value without symbol
-if (!function_exists('sc_currency_format')) {
+if (!function_exists('sc_currency_format') && !in_array('sc_currency_format', config('helper_except', []))) {
     function sc_currency_format(float $money)
     {
         return ShopCurrency::format($money);
@@ -86,7 +86,7 @@ if (!function_exists('sc_currency_format')) {
 }
 
 //Get currency info
-if (!function_exists('sc_currency_info')) {
+if (!function_exists('sc_currency_info') && !in_array('sc_currency_info', config('helper_except', []))) {
     function sc_currency_info()
     {
         return ShopCurrency::getCurrency();
@@ -94,17 +94,52 @@ if (!function_exists('sc_currency_info')) {
 }
 
 //Get all currencies
-if (!function_exists('sc_currency_all')) {
+if (!function_exists('sc_currency_all') && !in_array('sc_currency_all', config('helper_except', []))) {
     function sc_currency_all()
     {
         return ShopCurrency::getListActive();
     }
 }
 
-//Get all currencies active
-if (!function_exists('sc_currency_all_active')) {
+//Get array code, name of currencies active
+if (!function_exists('sc_currency_all_active') && !in_array('sc_currency_all_active', config('helper_except', []))) {
     function sc_currency_all_active()
     {
         return ShopCurrency::getCodeActive();
+    }
+}
+
+/*
+    Return price with tax
+*/
+if (!function_exists('sc_tax_price') && !in_array('sc_tax_price', config('helper_except', []))) {
+    function sc_tax_price($price, $tax)
+    {
+        return floor($price * (100 + $tax) /100);
+    }
+}
+
+/**
+ * Render html option price
+ *
+ * @param   string $arrtribute  format: attribute-name__value-option-price
+ * @param   string $currency    code currency
+ * @param   string  $rate        rate exchange
+ * @param   string               [ description]
+ *
+ * @return  [type]             [return description]
+ */
+if (!function_exists('sc_render_option_price') && !in_array('sc_render_option_price', config('helper_except', []))) {
+    function sc_render_option_price($arrtribute, $currency = null, $rate = null, $format = '%s<span class="option_price">%s</span>')
+    {
+        $html = '';
+        $tmpAtt = explode('__', $arrtribute);
+        $add_price = $tmpAtt[1] ?? 0;
+        if ($add_price) {
+            $html = sprintf($format, $tmpAtt[0], "(+".sc_currency_render($add_price, $currency, $rate).")");
+        } else {
+            $html = sprintf($format, $tmpAtt[0], "");
+        }
+        return $html;
     }
 }

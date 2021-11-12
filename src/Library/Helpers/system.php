@@ -4,6 +4,7 @@ use SCart\Core\Admin\Models\AdminStore;
 use SCart\Core\Front\Models\ShopStoreBlockContent;
 use SCart\Core\Front\Models\ShopLink;
 use SCart\Core\Front\Models\ShopStoreCss;
+use Illuminate\Support\Arr;
 
 if (!function_exists('sc_admin_can_config')) {
     /**
@@ -17,7 +18,7 @@ if (!function_exists('sc_admin_can_config')) {
     }
 }
 
-if (!function_exists('sc_config')) {
+if (!function_exists('sc_config') && !in_array('sc_config', config('helper_except', []))) {
     /**
      * Get value config from table sc_config
      * Default value is only used if the config key does not exist (including null values)
@@ -56,7 +57,7 @@ if (!function_exists('sc_config')) {
 }
 
 
-if (!function_exists('sc_config_admin')) {
+if (!function_exists('sc_config_admin') && !in_array('sc_config_admin', config('helper_except', []))) {
     /**
      * Get config value in adin with session store id
      * Default value is only used if the config key does not exist (including null values)
@@ -73,7 +74,7 @@ if (!function_exists('sc_config_admin')) {
 }
 
 
-if (!function_exists('sc_config_global')) {
+if (!function_exists('sc_config_global') && !in_array('sc_config_global', config('helper_except', []))) {
     /**
      * Get value config from table sc_config for store_id 0
      * Default value is only used if the config key does not exist (including null values)
@@ -116,7 +117,7 @@ if (!function_exists('sc_config_global')) {
     }
 }
 
-if (!function_exists('sc_config_group')) {
+if (!function_exists('sc_config_group') && !in_array('sc_config_group', config('helper_except', []))) {
     /*
     Group Config info
      */
@@ -128,7 +129,7 @@ if (!function_exists('sc_config_group')) {
 }
 
 
-if (!function_exists('sc_store')) {
+if (!function_exists('sc_store') && !in_array('sc_store', config('helper_except', []))) {
     /**
      * Get info store_id, table admin_store
      *
@@ -174,7 +175,7 @@ if (!function_exists('sc_store')) {
     }
 }
 
-if (!function_exists('sc_store_active')) {
+if (!function_exists('sc_store_active') && !in_array('sc_store_active', config('helper_except', []))) {
     function sc_store_active($field = null)
     {
         switch ($field) {
@@ -193,20 +194,11 @@ if (!function_exists('sc_store_active')) {
     }
 }
 
-/*
-Get all block content
- */
-if (!function_exists('sc_link')) {
-    function sc_link()
-    {
-        return ShopLink::getGroup();
-    }
-}
 
 /*
 Get all layouts
  */
-if (!function_exists('sc_store_block')) {
+if (!function_exists('sc_store_block') && !in_array('sc_store_block', config('helper_except', []))) {
     function sc_store_block()
     {
         return ShopStoreBlockContent::getLayout();
@@ -217,9 +209,96 @@ if (!function_exists('sc_store_block')) {
 if (!function_exists('sc_store_css')) {
     function sc_store_css()
     {
-        $css =  ShopStoreCss::where('store_id', config('app.storeId'))->first();
-        if ($css) {
-            return $css->css;
+        $template = sc_store('template', config('app.storeId'));
+        if (\Schema::connection(SC_CONNECTION)->hasColumn((new ShopStoreCss)->getTable(), 'template')) {
+            $cssStore =  ShopStoreCss::where('store_id', config('app.storeId'))
+            ->where('template', $template)->first();
+        } else {
+            $cssStore =  ShopStoreCss::where('store_id', config('app.storeId'))->first();
+        }
+        if ($cssStore) {
+            return $cssStore->css;
+        }
+    }
+}
+
+
+/*
+Get all block content
+ */
+if (!function_exists('sc_link') && !in_array('sc_link', config('helper_except', []))) {
+    function sc_link()
+    {
+        return ShopLink::getGroup();
+    }
+}
+
+if (!function_exists('sc_get_all_template') && !in_array('sc_get_all_template', config('helper_except', []))) {
+    /*
+    Get all template
+    */
+    function sc_get_all_template():array
+    {
+        $arrTemplates = [];
+        foreach (glob(resource_path() . "/views/templates/*") as $template) {
+            if (is_dir($template)) {
+                $infoTemlate['code'] = explode('templates/', $template)[1];
+                $config = ['name' => '', 'auth' => '', 'email' => '', 'website' => ''];
+                if (file_exists($template . '/config.json')) {
+                    $config = json_decode(file_get_contents($template . '/config.json'), true);
+                }
+                $infoTemlate['config'] = $config;
+                $arrTemplates[$infoTemlate['code']] = $infoTemlate;
+            }
+        }
+        return $arrTemplates;
+    }
+}
+
+
+if (!function_exists('sc_route') && !in_array('sc_route', config('helper_except', []))) {
+    /**
+     * Render route
+     *
+     * @param   [string]  $name
+     * @param   [array]  $param
+     *
+     * @return  [type]         [return description]
+     */
+    function sc_route($name, $param = [])
+    {
+        if (!config('app.seoLang')) {
+            $param = Arr::except($param, ['lang']);
+        } else {
+            $arrRouteExcludeLanguage = ['home','locale', 'currency', 'banner.click'];
+            if (!key_exists('lang', $param) && !in_array($name, $arrRouteExcludeLanguage)) {
+                $param['lang'] = app()->getLocale();
+            }
+        }
+        if (Route::has($name)) {
+            return route($name, $param);
+        } else {
+            return url('#'.$name);
+        }
+    }
+}
+
+
+if (!function_exists('sc_route_admin') && !in_array('sc_route_admin', config('helper_except', []))) {
+    /**
+     * Render route admin
+     *
+     * @param   [string]  $name
+     * @param   [array]  $param
+     *
+     * @return  [type]         [return description]
+     */
+    function sc_route_admin($name, $param = [])
+    {
+        if (Route::has($name)) {
+            return route($name, $param);
+        } else {
+            return url('#'.$name);
         }
     }
 }

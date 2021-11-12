@@ -3,7 +3,7 @@
 use SCart\Core\Front\Models\ShopLanguage;
 use Illuminate\Support\Str;
 
-if (!function_exists('sc_language_all')) {
+if (!function_exists('sc_language_all') && !in_array('sc_language_all', config('helper_except', []))) {
     //Get all language
     function sc_language_all()
     {
@@ -11,7 +11,7 @@ if (!function_exists('sc_language_all')) {
     }
 }
 
-if (!function_exists('sc_languages')) {
+if (!function_exists('sc_languages') && !in_array('sc_languages', config('helper_except', []))) {
     /*
     Render language
     WARNING: Dont call this function (or functions that call it) in __construct or midleware, it may cause the display language to be incorrect
@@ -23,11 +23,11 @@ if (!function_exists('sc_languages')) {
     }
 }
 
-if (!function_exists('sc_language_replace')) {
+if (!function_exists('sc_language_replace') && !in_array('sc_language_replace', config('helper_except', []))) {
     /*
     Replace language
      */
-    function sc_language_replace($line, $replace)
+    function sc_language_replace(string $line, array $replace)
     {
         foreach ($replace as $key => $value) {
             $line = str_replace(
@@ -41,12 +41,12 @@ if (!function_exists('sc_language_replace')) {
 }
 
 
-if (!function_exists('sc_language_render')) {
+if (!function_exists('sc_language_render') && !in_array('sc_language_render', config('helper_except', []))) {
     /*
     Render language
     WARNING: Dont call this function (or functions that call it) in __construct or midleware, it may cause the display language to be incorrect
      */
-    function sc_language_render($string, $replace = [], $locale = null)
+    function sc_language_render($string, array $replace = [], $locale = null)
     {
         $locale = $locale ? $locale : sc_get_locale();
         $languages = sc_languages($locale);
@@ -55,7 +55,7 @@ if (!function_exists('sc_language_render')) {
 }
 
 
-if (!function_exists('sc_language_quickly')) {
+if (!function_exists('sc_language_quickly') && !in_array('sc_language_quickly', config('helper_except', []))) {
     /*
     Language quickly
      */
@@ -67,7 +67,7 @@ if (!function_exists('sc_language_quickly')) {
     }
 }
 
-if (!function_exists('sc_get_locale')) {
+if (!function_exists('sc_get_locale') && !in_array('sc_get_locale', config('helper_except', []))) {
     /*
     Get locale
     */
@@ -78,7 +78,7 @@ if (!function_exists('sc_get_locale')) {
 }
 
 
-if (!function_exists('sc_lang_switch')) {
+if (!function_exists('sc_lang_switch') && !in_array('sc_lang_switch', config('helper_except', []))) {
     /**
      * Switch language
      *

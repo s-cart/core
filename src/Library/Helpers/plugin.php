@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('sc_get_all_plugin')) {
+if (!function_exists('sc_get_all_plugin') && !in_array('sc_get_all_plugin', config('helper_except', []))) {
     /**
      * Get all class plugin
      *
@@ -8,7 +8,7 @@ if (!function_exists('sc_get_all_plugin')) {
      *
      * @return  [array]
      */
-    function sc_get_all_plugin($code)
+    function sc_get_all_plugin(string $code)
     {
         $code = sc_word_format_class($code);
         $arrClass = [];
@@ -27,7 +27,7 @@ if (!function_exists('sc_get_all_plugin')) {
     }
 }
 
-if (!function_exists('sc_get_plugin_installed')) {
+if (!function_exists('sc_get_plugin_installed') && !in_array('sc_get_plugin_installed', config('helper_except', []))) {
     /**
      * Get all class plugin
      *
@@ -43,7 +43,7 @@ if (!function_exists('sc_get_plugin_installed')) {
 
 
 
-if (!function_exists('sc_get_all_plugin_actived')) {
+if (!function_exists('sc_get_all_plugin_actived') && !in_array('sc_get_all_plugin_actived', config('helper_except', []))) {
     /**
      * Get all class plugin actived
      *
@@ -51,7 +51,7 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      *
      * @return  [array]
      */
-    function sc_get_all_plugin_actived($code)
+    function sc_get_all_plugin_actived(string $code)
     {
         $code = sc_word_format_class($code);
         
@@ -78,8 +78,8 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      * @return  [array]
      */
 
-    if (!function_exists('sc_get_class_plugin_controller')) {
-        function sc_get_class_plugin_controller($code, $key = null)
+    if (!function_exists('sc_get_class_plugin_controller') && !in_array('sc_get_class_plugin_controller', config('helper_except', []))) {
+        function sc_get_class_plugin_controller(string $code, string $key = null)
         {
             if ($key == null) {
                 return null;
@@ -104,8 +104,8 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      *
      * @return  [array]
      */
-    if (!function_exists('sc_get_class_plugin_config')) {
-        function sc_get_class_plugin_config($code, $key)
+    if (!function_exists('sc_get_class_plugin_config') && !in_array('sc_get_class_plugin_config', config('helper_except', []))) {
+        function sc_get_class_plugin_config(string $code, string $key)
         {
             $code = sc_word_format_class($code);
             $key = sc_word_format_class($key);
@@ -125,8 +125,8 @@ if (!function_exists('sc_get_all_plugin_actived')) {
      *
      * @return  [array]
      */
-    if (!function_exists('sc_get_plugin_namespace')) {
-        function sc_get_plugin_namespace($code, $key)
+    if (!function_exists('sc_get_plugin_namespace') && !in_array('sc_get_plugin_namespace', config('helper_except', []))) {
+        function sc_get_plugin_namespace(string $code, string $key)
         {
             $code = sc_word_format_class($code);
             $key = sc_word_format_class($key);
