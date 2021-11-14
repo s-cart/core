@@ -267,7 +267,7 @@ class AdminProductController extends RootAdminController
         //end add more images
 
         // html select attribute
-        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
+        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-sm btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
         $data = [
@@ -311,12 +311,12 @@ class AdminProductController extends RootAdminController
         foreach ($listProductSingle as $k => $v) {
             $htmlSelectBuild .= '<option value="' . $k . '">' . $v['name'] . '</option>';
         }
-        $htmlSelectBuild .= '</select></td><td style="width:100px"><input class="form-control rounded-0"  type="number" name="productBuildQty[]" value="1" min=1></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductBuild"><i class="fa fa-times"></i></span></td></tr></table>';
+        $htmlSelectBuild .= '</select></td><td style="width:100px"><input class="form-control rounded-0"  type="number" name="productBuildQty[]" value="1" min=1></td><td><span title="Remove" class="btn btn-flat btn-sm btn-danger removeproductBuild"><i class="fa fa-times"></i></span></td></tr></table>';
         $htmlSelectBuild .= '</div>';
         //end select product build
 
         // html select attribute
-        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
+        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-sm btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
         // html add more images
@@ -367,7 +367,7 @@ class AdminProductController extends RootAdminController
         foreach ($listProductSingle as $k => $v) {
             $htmlSelectGroup .= '<option value="' . $k . '">' . $v['name'] . '</option>';
         }
-        $htmlSelectGroup .= '</select></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductInGroup"><i class="fa fa-times"></i></span></td></tr></table>';
+        $htmlSelectGroup .= '</select></td><td><span title="Remove" class="btn btn-flat btn-sm btn-danger removeproductInGroup"><i class="fa fa-times"></i></span></td></tr></table>';
         $htmlSelectGroup .= '</div>';
         //End select product group
 
@@ -685,7 +685,7 @@ class AdminProductController extends RootAdminController
         foreach ($listProductSingle as $k => $v) {
             $htmlSelectGroup .= '<option value="' . $k . '">' . $v['name'] . '</option>';
         }
-        $htmlSelectGroup .= '</select></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductInGroup"><i class="fa fa-times"></i></span></td></tr></table>';
+        $htmlSelectGroup .= '</select></td><td><span title="Remove" class="btn btn-flat btn-sm btn-danger removeproductInGroup"><i class="fa fa-times"></i></span></td></tr></table>';
         $htmlSelectGroup .= '</div>';
         //End select product group
 
@@ -696,12 +696,12 @@ class AdminProductController extends RootAdminController
         foreach ($listProductSingle as $k => $v) {
             $htmlSelectBuild .= '<option value="' . $k . '">' . $v['name'] . '</option>';
         }
-        $htmlSelectBuild .= '</select></td><td style="width:100px"><input class="form-control rounded-0"  type="number" name="productBuildQty[]" value="1" min=1></td><td><span title="Remove" class="btn btn-flat btn-danger removeproductBuild"><i class="fa fa-times"></i></span></td></tr></table>';
+        $htmlSelectBuild .= '</select></td><td style="width:100px"><input class="form-control rounded-0"  type="number" name="productBuildQty[]" value="1" min=1></td><td><span title="Remove" class="btn btn-flat btn-sm btn-danger removeproductBuild"><i class="fa fa-times"></i></span></td></tr></table>';
         $htmlSelectBuild .= '</div>';
         //end select product build
 
         // html select attribute
-        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
+        $htmlProductAtrribute = '<tr><td><br><input type="text" name="attribute[attribute_group][name][]" value="attribute_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_attribute_place') . '" /></td><td><br><input type="number" name="attribute[attribute_group][add_price][]" value="add_price_value" class="form-control rounded-0 input-sm" placeholder="' . sc_language_render('product.admin.add_price_place') . '"></td><td><br><span title="Remove" class="btn btn-flat btn-sm btn-danger removeAttribute"><i class="fa fa-times"></i></span></td></tr>';
         //end select attribute
 
 
