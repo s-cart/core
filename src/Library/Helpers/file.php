@@ -164,7 +164,7 @@ if (!function_exists('sc_image_generate_thumb') && !in_array('sc_image_generate_
 if (!function_exists('sc_image_render') && !in_array('sc_image_render', config('helper_except', []))) {
     function sc_image_render($path, $width = null, $height = null, $alt = null, $title = null, $urlDefault = null, $options = '')
     {
-        $image = sc_image_get_path($path, $url);
+        $image = sc_image_get_path($path, $urlDefault);
         $style = '';
         $style .= ($width) ? ' width:' . $width . ';' : '';
         $style .= ($height) ? ' height:' . $height . ';' : '';

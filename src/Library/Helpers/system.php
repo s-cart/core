@@ -205,7 +205,9 @@ if (!function_exists('sc_store_block') && !in_array('sc_store_block', config('he
     }
 }
 
-
+/**
+ * Get css template
+ */
 if (!function_exists('sc_store_css')) {
     function sc_store_css()
     {
