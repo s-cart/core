@@ -6,11 +6,31 @@
         <div class="card">
             <div class="card-header with-border">
                 <h2 class="card-title">{{ $title_description??'' }}</h2>
+                @if (function_exists('sc_get_list_code_store') && count(sc_get_list_code_store()))
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        {{ sc_language_render('admin.select_store') }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left p-0">
+                    
+                    @foreach (sc_get_list_code_store() as $id => $code)
+                    <a href="{{ sc_route_admin('admin_store_css.index', ['store_id' => $id]) }}" class="dropdown-item  {{ ($storeId == $id) ? 'disabled active':'' }}">
+                        <div class="hover">
+                        {{ $code }}
+                        </div>
+                    </a>
+                    @endforeach
+                    </div>
+                </ul>
+                @endif
             </div>
             <!-- /.card-header -->
             <!-- form start -->
             <form action="{{ $url_action }}" method="post" accept-charset="UTF-8" class="form-horizontal" id="form-main"
                 enctype="multipart/form-data">
+                <input type="hidden" name="template" value="{{ $template }}">
+                <input type="hidden" name="storeId" value="{{ $storeId }}">
                 <div class="card-body">
                     <div class="card">
                         <div class="card-body">

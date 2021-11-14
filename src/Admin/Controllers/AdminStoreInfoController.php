@@ -81,7 +81,7 @@ class AdminStoreInfoController extends RootAdminController
                         include_once $fileProcess;
                         if (function_exists('sc_template_install_store')) {
                             //Insert only specify store
-                            $checkTemplateEnableStore = (new \SCart\Core\Admin\Models\AdminStoreBlockContent)
+                            $checkTemplateEnableStore = (new \SCart\Core\Front\Models\ShopStoreCss)
                                 ->where('template', $value)
                                 ->where('store_id', $storeId)
                                 ->first();

@@ -3,7 +3,8 @@ namespace SCart\Core\Admin\Controllers;
 
 use App\Http\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopStoreCss;
-
+use SCart\Core\Admin\Models\AdminTemplate;
+use SCart\Core\Admin\Models\AdminStore;
 class AdminStoreCssController extends RootAdminController
 {
     public function __construct()
@@ -16,16 +17,27 @@ class AdminStoreCssController extends RootAdminController
      */
     public function index()
     {
-        $id = session('adminStoreId');
-        ;
-        $cssContent = ShopStoreCss::where('store_id', $id)->first();
+        $storeId = request('store_id', session('adminStoreId'));
+        $store     = AdminStore::find($storeId);
+        $templates = (new AdminTemplate)->getListTemplate();
+        $template = $store->template;
+        if (!key_exists($template, $templates)) {
+            return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
+        }
+        $cssContent = ShopStoreCss::where('store_id', $storeId)
+            ->where('template', $template)
+            ->first();
+
         if (!$cssContent) {
-            return 'no data';
+            return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
         $data = [
-            'title' => sc_language_render('store.admin.css'),
+            'title' => sc_language_render('store.admin.css').' #'.$storeId,
             'subTitle' => '',
             'title_description' => '',
+            'template' => $template,
+            'templates' => $templates,
+            'storeId' => $storeId,
             'icon' => 'fa fa-edit',
             'css' => $cssContent->css,
             'url_action' => sc_route_admin('admin_store_css.index'),
@@ -33,17 +45,18 @@ class AdminStoreCssController extends RootAdminController
         return view($this->templatePathAdmin.'screen.store_css')
             ->with($data);
     }
-
+    
     /**
-     * update status
+     * update css template
      */
     public function postEdit()
     {
-        $id = session('adminStoreId');
-        ;
-        $cssContent = ShopStoreCss::where('store_id', $id)->first();
+        $data = request()->all();
+        $storeId = $data['storeId'];
+        $template = $data['template'];
+        $cssContent = ShopStoreCss::where('store_id', $storeId)->where('template', $template)->first();
         $cssContent->css = request('css');
         $cssContent->save();
-        return redirect()->route('admin_store_css.index')->with('success', sc_language_render('action.edit_success'));
+        return redirect()->route('admin_store_css.index', ['store_id' => $storeId])->with('success', sc_language_render('action.edit_success'));
     }
 }

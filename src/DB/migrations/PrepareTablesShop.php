@@ -706,15 +706,17 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_store_css',
             function (Blueprint $table) {
-                $table->text('css');
-                $table->integer('store_id')->unique();
+                $table->mediumText('css');
+                $table->integer('store_id');
+                $table->string('template', 50);
+                $table->unique(['store_id', 'template']);
             }
         );
 
         Schema::create(
             SC_DB_PREFIX.'shop_product_promotion',
             function (Blueprint $table) {
-                $table->bigIncrements('product_id')->primary();
+                $table->bigInteger('product_id')->primary();
                 $table->integer('price_promotion');
                 $table->dateTime('date_start')->nullable();
                 $table->dateTime('date_end')->nullable();

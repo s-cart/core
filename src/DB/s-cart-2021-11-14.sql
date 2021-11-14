@@ -12,8 +12,25 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for table s-cart.check_ip_access
+CREATE TABLE IF NOT EXISTS `check_ip_access` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ip` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `check_ip_access_ip_index` (`ip`),
+  KEY `check_ip_access_type_index` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.check_ip_access: ~0 rows (approximately)
+DELETE FROM `check_ip_access`;
+/*!40000 ALTER TABLE `check_ip_access` DISABLE KEYS */;
+/*!40000 ALTER TABLE `check_ip_access` ENABLE KEYS */;
+
 -- Dumping structure for table s-cart.failed_jobs
-DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `uuid` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -32,7 +49,6 @@ DELETE FROM `failed_jobs`;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.jobs
-DROP TABLE IF EXISTS `jobs`;
 CREATE TABLE IF NOT EXISTS `jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `queue` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -51,7 +67,6 @@ DELETE FROM `jobs`;
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.migrations
-DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -68,7 +83,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_access_tokens
-DROP TABLE IF EXISTS `oauth_access_tokens`;
 CREATE TABLE IF NOT EXISTS `oauth_access_tokens` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -89,7 +103,6 @@ DELETE FROM `oauth_access_tokens`;
 /*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_auth_codes
-DROP TABLE IF EXISTS `oauth_auth_codes`;
 CREATE TABLE IF NOT EXISTS `oauth_auth_codes` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -107,7 +120,6 @@ DELETE FROM `oauth_auth_codes`;
 /*!40000 ALTER TABLE `oauth_auth_codes` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_clients
-DROP TABLE IF EXISTS `oauth_clients`;
 CREATE TABLE IF NOT EXISTS `oauth_clients` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -128,12 +140,11 @@ CREATE TABLE IF NOT EXISTS `oauth_clients` (
 DELETE FROM `oauth_clients`;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-	('94c1d329-fb27-4fad-85a9-9653a77b3617', NULL, 'SCart Personal Access Client', '4vvijmwCb65hzfPYQJdV0p2Xot07oZlf8dVt7mJt', NULL, 'http://localhost', 1, 0, 0, '2021-10-30 20:52:03', '2021-10-30 20:52:03'),
-	('94c1d32a-016b-463a-bc8c-f57580236f29', NULL, 'SCart Password Grant Client', 'rbr9xdG56CRz3nNpIGvceZCDp460OPQeLSxbPleS', 'users', 'http://localhost', 0, 1, 0, '2021-10-30 20:52:03', '2021-10-30 20:52:03');
+	('94dfa54d-a001-4278-aefd-154c757fb7ff', NULL, 'SCart Personal Access Client', 'AFDea2DpOENn7vIwSRw17HrUHlw6YGgx5AJ7pZal', NULL, 'http://localhost', 1, 0, 0, '2021-11-14 16:38:39', '2021-11-14 16:38:39'),
+	('94dfa54d-a528-44c9-ac99-9d3a5858795f', NULL, 'SCart Password Grant Client', '4wzxp42LK4O90XkEsdEJLlmpEkEgpsXIwhM8JeLT', 'users', 'http://localhost', 0, 1, 0, '2021-11-14 16:38:39', '2021-11-14 16:38:39');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_personal_access_clients
-DROP TABLE IF EXISTS `oauth_personal_access_clients`;
 CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `client_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -146,11 +157,10 @@ CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
 DELETE FROM `oauth_personal_access_clients`;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-	(1, '94c1d329-fb27-4fad-85a9-9653a77b3617', '2021-10-30 20:52:03', '2021-10-30 20:52:03');
+	(1, '94dfa54d-a001-4278-aefd-154c757fb7ff', '2021-11-14 16:38:39', '2021-11-14 16:38:39');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_refresh_tokens
-DROP TABLE IF EXISTS `oauth_refresh_tokens`;
 CREATE TABLE IF NOT EXISTS `oauth_refresh_tokens` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `access_token_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -166,7 +176,6 @@ DELETE FROM `oauth_refresh_tokens`;
 /*!40000 ALTER TABLE `oauth_refresh_tokens` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_config
-DROP TABLE IF EXISTS `sc_admin_config`;
 CREATE TABLE IF NOT EXISTS `sc_admin_config` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `group` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -335,7 +344,6 @@ INSERT INTO `sc_admin_config` (`id`, `group`, `code`, `key`, `value`, `security`
 /*!40000 ALTER TABLE `sc_admin_config` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_log
-DROP TABLE IF EXISTS `sc_admin_log`;
 CREATE TABLE IF NOT EXISTS `sc_admin_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -356,12 +364,11 @@ DELETE FROM `sc_admin_log`;
 /*!40000 ALTER TABLE `sc_admin_log` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_menu
-DROP TABLE IF EXISTS `sc_admin_menu`;
 CREATE TABLE IF NOT EXISTS `sc_admin_menu` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL DEFAULT 0,
   `sort` int(11) NOT NULL DEFAULT 0,
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `icon` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `uri` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` int(11) NOT NULL DEFAULT 0,
@@ -447,10 +454,9 @@ INSERT INTO `sc_admin_menu` (`id`, `parent_id`, `sort`, `title`, `icon`, `uri`, 
 /*!40000 ALTER TABLE `sc_admin_menu` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_permission
-DROP TABLE IF EXISTS `sc_admin_permission`;
 CREATE TABLE IF NOT EXISTS `sc_admin_permission` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `http_uri` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -464,26 +470,25 @@ CREATE TABLE IF NOT EXISTS `sc_admin_permission` (
 DELETE FROM `sc_admin_permission`;
 /*!40000 ALTER TABLE `sc_admin_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at`, `updated_at`) VALUES
-	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-10-30 20:52:02', NULL),
-	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-10-30 20:52:02', NULL),
-	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-10-30 20:52:02', NULL),
-	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-10-30 20:52:02', NULL),
-	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-10-30 20:52:02', NULL),
-	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-10-30 20:52:02', NULL),
-	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-10-30 20:52:02', NULL),
-	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-10-30 20:52:02', NULL),
-	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-10-30 20:52:02', NULL),
-	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-10-30 20:52:02', NULL),
-	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-10-30 20:52:02', NULL),
-	(12, 'CMS manager', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*, ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-10-30 20:52:02', NULL),
-	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-10-30 20:52:02', NULL);
+	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-11-14 16:38:38', NULL),
+	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-11-14 16:38:38', NULL),
+	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-11-14 16:38:38', NULL),
+	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-11-14 16:38:38', NULL),
+	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-11-14 16:38:38', NULL),
+	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-11-14 16:38:38', NULL),
+	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-11-14 16:38:38', NULL),
+	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-11-14 16:38:38', NULL),
+	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-11-14 16:38:38', NULL),
+	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-11-14 16:38:38', NULL),
+	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-11-14 16:38:38', NULL),
+	(12, 'CMS manager', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*, ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-11-14 16:38:38', NULL),
+	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-11-14 16:38:38', NULL);
 /*!40000 ALTER TABLE `sc_admin_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role
-DROP TABLE IF EXISTS `sc_admin_role`;
 CREATE TABLE IF NOT EXISTS `sc_admin_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -495,16 +500,15 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role` (
 DELETE FROM `sc_admin_role`;
 /*!40000 ALTER TABLE `sc_admin_role` DISABLE KEYS */;
 INSERT INTO `sc_admin_role` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrator', 'administrator', '2021-10-30 20:52:02', NULL),
-	(2, 'Group only View', 'view.all', '2021-10-30 20:52:02', NULL),
-	(3, 'Manager', 'manager', '2021-10-30 20:52:02', NULL),
-	(4, 'CMS', 'cms', '2021-10-30 20:52:02', NULL),
-	(5, 'Accountant', 'accountant', '2021-10-30 20:52:02', NULL),
-	(6, 'Marketing', 'maketing', '2021-10-30 20:52:02', NULL);
+	(1, 'Administrator', 'administrator', '2021-11-14 16:38:38', NULL),
+	(2, 'Group only View', 'view.all', '2021-11-14 16:38:38', NULL),
+	(3, 'Manager', 'manager', '2021-11-14 16:38:38', NULL),
+	(4, 'CMS', 'cms', '2021-11-14 16:38:38', NULL),
+	(5, 'Accountant', 'accountant', '2021-11-14 16:38:38', NULL),
+	(6, 'Marketing', 'maketing', '2021-11-14 16:38:38', NULL);
 /*!40000 ALTER TABLE `sc_admin_role` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_permission
-DROP TABLE IF EXISTS `sc_admin_role_permission`;
 CREATE TABLE IF NOT EXISTS `sc_admin_role_permission` (
   `role_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL,
@@ -518,35 +522,34 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role_permission` (
 DELETE FROM `sc_admin_role_permission`;
 /*!40000 ALTER TABLE `sc_admin_role_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_role_permission` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES
-	(3, 1, '2021-10-30 20:52:02', NULL),
-	(3, 2, '2021-10-30 20:52:02', NULL),
-	(3, 3, '2021-10-30 20:52:02', NULL),
-	(3, 4, '2021-10-30 20:52:02', NULL),
-	(3, 5, '2021-10-30 20:52:02', NULL),
-	(3, 6, '2021-10-30 20:52:02', NULL),
-	(3, 7, '2021-10-30 20:52:02', NULL),
-	(3, 8, '2021-10-30 20:52:02', NULL),
-	(3, 9, '2021-10-30 20:52:02', NULL),
-	(3, 10, '2021-10-30 20:52:02', NULL),
-	(3, 11, '2021-10-30 20:52:02', NULL),
-	(3, 12, '2021-10-30 20:52:02', NULL),
-	(3, 13, '2021-10-30 20:52:02', NULL),
-	(4, 1, '2021-10-30 20:52:02', NULL),
-	(4, 12, '2021-10-30 20:52:02', NULL),
-	(5, 1, '2021-10-30 20:52:02', NULL),
-	(5, 2, '2021-10-30 20:52:02', NULL),
-	(5, 7, '2021-10-30 20:52:02', NULL),
-	(5, 11, '2021-10-30 20:52:02', NULL),
-	(6, 1, '2021-10-30 20:52:02', NULL),
-	(6, 2, '2021-10-30 20:52:02', NULL),
-	(6, 8, '2021-10-30 20:52:02', NULL),
-	(6, 10, '2021-10-30 20:52:02', NULL),
-	(6, 11, '2021-10-30 20:52:02', NULL),
-	(6, 12, '2021-10-30 20:52:02', NULL);
+	(3, 1, '2021-11-14 16:38:38', NULL),
+	(3, 2, '2021-11-14 16:38:38', NULL),
+	(3, 3, '2021-11-14 16:38:38', NULL),
+	(3, 4, '2021-11-14 16:38:38', NULL),
+	(3, 5, '2021-11-14 16:38:38', NULL),
+	(3, 6, '2021-11-14 16:38:38', NULL),
+	(3, 7, '2021-11-14 16:38:38', NULL),
+	(3, 8, '2021-11-14 16:38:38', NULL),
+	(3, 9, '2021-11-14 16:38:38', NULL),
+	(3, 10, '2021-11-14 16:38:38', NULL),
+	(3, 11, '2021-11-14 16:38:38', NULL),
+	(3, 12, '2021-11-14 16:38:38', NULL),
+	(3, 13, '2021-11-14 16:38:38', NULL),
+	(4, 1, '2021-11-14 16:38:38', NULL),
+	(4, 12, '2021-11-14 16:38:38', NULL),
+	(5, 1, '2021-11-14 16:38:38', NULL),
+	(5, 2, '2021-11-14 16:38:38', NULL),
+	(5, 7, '2021-11-14 16:38:38', NULL),
+	(5, 11, '2021-11-14 16:38:38', NULL),
+	(6, 1, '2021-11-14 16:38:38', NULL),
+	(6, 2, '2021-11-14 16:38:38', NULL),
+	(6, 8, '2021-11-14 16:38:38', NULL),
+	(6, 10, '2021-11-14 16:38:38', NULL),
+	(6, 11, '2021-11-14 16:38:38', NULL),
+	(6, 12, '2021-11-14 16:38:38', NULL);
 /*!40000 ALTER TABLE `sc_admin_role_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_user
-DROP TABLE IF EXISTS `sc_admin_role_user`;
 CREATE TABLE IF NOT EXISTS `sc_admin_role_user` (
   `role_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -563,7 +566,6 @@ INSERT INTO `sc_admin_role_user` (`role_id`, `user_id`, `created_at`, `updated_a
 /*!40000 ALTER TABLE `sc_admin_role_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_store
-DROP TABLE IF EXISTS `sc_admin_store`;
 CREATE TABLE IF NOT EXISTS `sc_admin_store` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -598,14 +600,13 @@ INSERT INTO `sc_admin_store` (`id`, `logo`, `icon`, `phone`, `long_phone`, `emai
 /*!40000 ALTER TABLE `sc_admin_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_store_description
-DROP TABLE IF EXISTS `sc_admin_store_description`;
 CREATE TABLE IF NOT EXISTS `sc_admin_store_description` (
   `store_id` int(11) NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `maintain_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `maintain_content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `maintain_note` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`store_id`,`lang`),
   KEY `sc_admin_store_description_lang_index` (`lang`)
@@ -620,11 +621,10 @@ INSERT INTO `sc_admin_store_description` (`store_id`, `lang`, `title`, `descript
 /*!40000 ALTER TABLE `sc_admin_store_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_template
-DROP TABLE IF EXISTS `sc_admin_template`;
 CREATE TABLE IF NOT EXISTS `sc_admin_template` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -636,11 +636,10 @@ CREATE TABLE IF NOT EXISTS `sc_admin_template` (
 DELETE FROM `sc_admin_template`;
 /*!40000 ALTER TABLE `sc_admin_template` DISABLE KEYS */;
 INSERT INTO `sc_admin_template` (`id`, `key`, `name`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 's-cart-light', 'S-Cart Light', 1, '2021-10-30 20:52:02', NULL);
+	(1, 's-cart-light', 'S-Cart Light', 1, '2021-11-14 16:38:38', NULL);
 /*!40000 ALTER TABLE `sc_admin_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user
-DROP TABLE IF EXISTS `sc_admin_user`;
 CREATE TABLE IF NOT EXISTS `sc_admin_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -661,11 +660,10 @@ CREATE TABLE IF NOT EXISTS `sc_admin_user` (
 DELETE FROM `sc_admin_user`;
 /*!40000 ALTER TABLE `sc_admin_user` DISABLE KEYS */;
 INSERT INTO `sc_admin_user` (`id`, `username`, `password`, `name`, `email`, `avatar`, `remember_token`, `theme`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', '$2y$10$zhcexiJ6aYiH4GOI9WXOpOshcNr6kzQkt0tuyuyTYsJHXc/7.tyPK', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, '2021-10-30 20:52:02', NULL);
+	(1, 'admin', '$2y$10$753hW4qmna1BMIrUKZZiQeMRmLidpWdGDXCypckG9ALCFaiCAGRnu', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, '2021-11-14 16:38:38', NULL);
 /*!40000 ALTER TABLE `sc_admin_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user_permission
-DROP TABLE IF EXISTS `sc_admin_user_permission`;
 CREATE TABLE IF NOT EXISTS `sc_admin_user_permission` (
   `user_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL,
@@ -681,10 +679,9 @@ DELETE FROM `sc_admin_user_permission`;
 /*!40000 ALTER TABLE `sc_admin_user_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_api_connection
-DROP TABLE IF EXISTS `sc_api_connection`;
 CREATE TABLE IF NOT EXISTS `sc_api_connection` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apiconnection` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apikey` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expire` date DEFAULT NULL,
@@ -698,11 +695,112 @@ CREATE TABLE IF NOT EXISTS `sc_api_connection` (
 DELETE FROM `sc_api_connection`;
 /*!40000 ALTER TABLE `sc_api_connection` DISABLE KEYS */;
 INSERT INTO `sc_api_connection` (`id`, `description`, `apiconnection`, `apikey`, `expire`, `last_active`, `status`) VALUES
-	(1, 'Demo api connection', 'appmobile', '8f637df5-3988-11ec-b98e-001a7dda7115', NULL, NULL, 0);
+	(1, 'Demo api connection', 'appmobile', 'a64e31bc-452e-11ec-a61c-04d9f5d0007b', NULL, NULL, 0);
 /*!40000 ALTER TABLE `sc_api_connection` ENABLE KEYS */;
 
+-- Dumping structure for table s-cart.sc_cms_category
+CREATE TABLE IF NOT EXISTS `sc_cms_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parent` int(11) NOT NULL DEFAULT 0,
+  `alias` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `store_id` int(11) NOT NULL DEFAULT 1,
+  `sort` tinyint(4) NOT NULL DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `sc_cms_category_alias_index` (`alias`),
+  KEY `sc_cms_category_store_id_index` (`store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_cms_category: ~2 rows (approximately)
+DELETE FROM `sc_cms_category`;
+/*!40000 ALTER TABLE `sc_cms_category` DISABLE KEYS */;
+INSERT INTO `sc_cms_category` (`id`, `image`, `parent`, `alias`, `store_id`, `sort`, `status`) VALUES
+	(1, '/data/cms-image/cms.jpg', 0, 'demo-category-1', 1, 0, 1),
+	(2, '/data/cms-image/cms.jpg', 0, 'demo-category-2', 1, 0, 1);
+/*!40000 ALTER TABLE `sc_cms_category` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.sc_cms_category_description
+CREATE TABLE IF NOT EXISTS `sc_cms_category_description` (
+  `category_id` int(11) NOT NULL,
+  `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`category_id`,`lang`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_cms_category_description: ~4 rows (approximately)
+DELETE FROM `sc_cms_category_description`;
+/*!40000 ALTER TABLE `sc_cms_category_description` DISABLE KEYS */;
+INSERT INTO `sc_cms_category_description` (`category_id`, `lang`, `title`, `keyword`, `description`) VALUES
+	(1, 'en', 'Category CMS 1', '', ''),
+	(1, 'vi', 'Danh mục CMS 1', '', ''),
+	(2, 'en', 'Category CMS 2', '', ''),
+	(2, 'vi', 'Danh mục CMS 2', '', '');
+/*!40000 ALTER TABLE `sc_cms_category_description` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.sc_cms_content
+CREATE TABLE IF NOT EXISTS `sc_cms_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) NOT NULL DEFAULT 0,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alias` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sort` tinyint(4) NOT NULL DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `store_id` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sc_cms_content_alias_index` (`alias`),
+  KEY `sc_cms_content_store_id_index` (`store_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_cms_content: ~2 rows (approximately)
+DELETE FROM `sc_cms_content`;
+/*!40000 ALTER TABLE `sc_cms_content` DISABLE KEYS */;
+INSERT INTO `sc_cms_content` (`id`, `category_id`, `image`, `alias`, `sort`, `status`, `store_id`, `created_at`, `updated_at`) VALUES
+	(1, 1, '/data/cms-image/cms_content_1.jpg', 'demo-alias-content-1', 0, 1, 1, '2021-09-28 00:00:00', NULL),
+	(2, 1, '/data/cms-image/cms_content_2.jpg', 'demo-alias-content-2', 0, 1, 1, '2021-09-28 00:00:00', NULL);
+/*!40000 ALTER TABLE `sc_cms_content` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.sc_cms_content_description
+CREATE TABLE IF NOT EXISTS `sc_cms_content_description` (
+  `content_id` int(11) NOT NULL,
+  `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`content_id`,`lang`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_cms_content_description: ~4 rows (approximately)
+DELETE FROM `sc_cms_content_description`;
+/*!40000 ALTER TABLE `sc_cms_content_description` DISABLE KEYS */;
+INSERT INTO `sc_cms_content_description` (`content_id`, `lang`, `title`, `keyword`, `description`, `content`) VALUES
+	(1, 'en', 'Demo cms content 1', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/cms-image/cms.jpg" style="width: 262px; height: 262px; float: right; margin: 10px;" /></p>\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	(1, 'vi', 'Demo cms content 1', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/cms-image/cms.jpg" style="width: 262px; height: 262px; float: right; margin: 10px;" /></p>\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	(2, 'en', 'Demo cms content 2', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/cms-image/cms.jpg" style="width: 262px; height: 262px; float: right; margin: 10px;" /></p>\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	(2, 'vi', 'Demo cms content 2', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/cms-image/cms.jpg" style="width: 262px; height: 262px; float: right; margin: 10px;" /></p>\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
+/*!40000 ALTER TABLE `sc_cms_content_description` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.sc_cms_image
+CREATE TABLE IF NOT EXISTS `sc_cms_image` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `content_id` int(11) NOT NULL DEFAULT 0,
+  `image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort` tinyint(4) NOT NULL DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_cms_image: ~0 rows (approximately)
+DELETE FROM `sc_cms_image`;
+/*!40000 ALTER TABLE `sc_cms_image` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sc_cms_image` ENABLE KEYS */;
+
 -- Dumping structure for table s-cart.sc_languages
-DROP TABLE IF EXISTS `sc_languages`;
 CREATE TABLE IF NOT EXISTS `sc_languages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -714,9 +812,9 @@ CREATE TABLE IF NOT EXISTS `sc_languages` (
   KEY `sc_languages_code_index` (`code`),
   KEY `sc_languages_position_index` (`position`),
   KEY `sc_languages_location_index` (`location`)
-) ENGINE=InnoDB AUTO_INCREMENT=2541 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2543 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_languages: ~2,540 rows (approximately)
+-- Dumping data for table s-cart.sc_languages: ~2,542 rows (approximately)
 DELETE FROM `sc_languages`;
 /*!40000 ALTER TABLE `sc_languages` DISABLE KEYS */;
 INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`) VALUES
@@ -2746,527 +2844,550 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`) VALUES
 	(2024, 'admin.weight.add_new_title', 'Add weight', 'admin.weight', 'en'),
 	(2025, 'admin.product_property.name', 'Tên', 'admin.product_property', 'vi'),
 	(2026, 'admin.product_property.name', 'Name', 'admin.product_property', 'en'),
-	(2027, 'admin.product_property.list', 'Danh sách thuộc tính', 'admin.product_property', 'vi'),
-	(2028, 'admin.product_property.list', 'Product property list', 'admin.product_property', 'en'),
-	(2029, 'admin.product_property.status', 'Trạng thái', 'admin.product_property', 'vi'),
-	(2030, 'admin.product_property.status', 'Status', 'admin.product_property', 'en'),
-	(2031, 'admin.product_property.add_new_title', 'Thêm thuộc tính', 'admin.product_property', 'vi'),
-	(2032, 'admin.product_property.add_new_title', 'Add product property', 'admin.product_property', 'en'),
-	(2033, 'admin.order_status.name', 'Tên', 'admin.order_status', 'vi'),
-	(2034, 'admin.order_status.name', 'Name', 'admin.order_status', 'en'),
-	(2035, 'admin.order_status.list', 'Danh sách trạng thái', 'admin.order_status', 'vi'),
-	(2036, 'admin.order_status.list', 'Order status list', 'admin.order_status', 'en'),
-	(2037, 'admin.order_status.status', 'Trạng thái', 'admin.order_status', 'vi'),
-	(2038, 'admin.order_status.status', 'Status', 'admin.order_status', 'en'),
-	(2039, 'admin.order_status.add_new_title', 'Thêm trạng thái', 'admin.order_status', 'vi'),
-	(2040, 'admin.order_status.add_new_title', 'Add status', 'admin.order_status', 'en'),
-	(2041, 'admin.payment_status.name', 'Tên', 'admin.payment_status', 'vi'),
-	(2042, 'admin.payment_status.name', 'Name', 'admin.payment_status', 'en'),
-	(2043, 'admin.payment_status.list', 'Danh sách trạng thái', 'admin.payment_status', 'vi'),
-	(2044, 'admin.payment_status.list', 'Payment status list', 'admin.payment_status', 'en'),
-	(2045, 'admin.payment_status.status', 'Trạng thái', 'admin.payment_status', 'vi'),
-	(2046, 'admin.payment_status.status', 'Status', 'admin.payment_status', 'en'),
-	(2047, 'admin.payment_status.add_new_title', 'Thêm trạng thái', 'admin.payment_status', 'vi'),
-	(2048, 'admin.payment_status.add_new_title', 'Add status', 'admin.payment_status', 'en'),
-	(2049, 'admin.shipping_status.name', 'Tên', 'admin.shipping_status', 'vi'),
-	(2050, 'admin.shipping_status.name', 'Name', 'admin.shipping_status', 'en'),
-	(2051, 'admin.shipping_status.list', 'Danh sách trạng thái', 'admin.shipping_status', 'vi'),
-	(2052, 'admin.shipping_status.list', 'Shipping status list', 'admin.shipping_status', 'en'),
-	(2053, 'admin.shipping_status.status', 'Trạng thái', 'admin.shipping_status', 'vi'),
-	(2054, 'admin.shipping_status.status', 'Status', 'admin.shipping_status', 'en'),
-	(2055, 'admin.shipping_status.add_new_title', 'Thêm trạng thái', 'admin.shipping_status', 'vi'),
-	(2056, 'admin.shipping_status.add_new_title', 'Add status', 'admin.shipping_status', 'en'),
-	(2057, 'admin.tax.name', 'Tên', 'admin.tax', 'vi'),
-	(2058, 'admin.tax.name', 'Name', 'admin.tax', 'en'),
-	(2059, 'admin.tax.value', 'Giá trị', 'admin.tax', 'vi'),
-	(2060, 'admin.tax.value', 'Value', 'admin.tax', 'en'),
-	(2061, 'admin.tax.non_tax', 'Không thuế', 'admin.tax', 'vi'),
-	(2062, 'admin.tax.non_tax', 'None tax', 'admin.tax', 'en'),
-	(2063, 'admin.tax.auto', 'Tự động', 'admin.tax', 'vi'),
-	(2064, 'admin.tax.auto', 'Auto', 'admin.tax', 'en'),
-	(2065, 'admin.tax.list', 'Danh sách thuế', 'admin.tax', 'vi'),
-	(2066, 'admin.tax.list', 'Tax list', 'admin.tax', 'en'),
-	(2067, 'admin.tax.status', 'Trạng thái', 'admin.tax', 'vi'),
-	(2068, 'admin.tax.status', 'Status', 'admin.tax', 'en'),
-	(2069, 'admin.tax.add_new_title', 'Thêm thuế', 'admin.tax', 'vi'),
-	(2070, 'admin.tax.add_new_title', 'Add tax', 'admin.tax', 'en'),
-	(2071, 'admin.captcha.captcha_title', 'Captcha', 'admin.captcha', 'en'),
-	(2072, 'admin.captcha.captcha_mode', 'Use Captcha', 'admin.captcha', 'en'),
-	(2073, 'admin.captcha.captcha_method', 'Captcha method', 'admin.captcha', 'en'),
-	(2074, 'admin.captcha.captcha_method_help', 'Select method Captcha', 'admin.captcha', 'en'),
-	(2075, 'admin.captcha.captcha_page', 'Captcha', 'admin.captcha', 'en'),
-	(2076, 'admin.captcha.captcha_page_help', 'Select page use Captcha', 'admin.captcha', 'en'),
-	(2077, 'admin.captcha.captcha_page_contact', 'Contact', 'admin.captcha', 'en'),
-	(2078, 'admin.captcha.captcha_page_register', 'Register', 'admin.captcha', 'en'),
-	(2079, 'admin.captcha.captcha_page_forgot_password', 'Forgot pasword', 'admin.captcha', 'en'),
-	(2080, 'admin.captcha.captcha_page_checkout', 'Checkout', 'admin.captcha', 'en'),
-	(2081, 'admin.captcha.captcha_page_review', 'Review product', 'admin.captcha', 'en'),
-	(2082, 'admin.captcha.captcha_title', 'Captcha', 'admin.captcha', 'vi'),
-	(2083, 'admin.captcha.captcha_mode', 'Sử dụng Captcha', 'admin.captcha', 'vi'),
-	(2084, 'admin.captcha.captcha_method', 'Loại Captcha', 'admin.captcha', 'vi'),
-	(2085, 'admin.captcha.captcha_method_help', 'Chọn loại Captcha', 'admin.captcha', 'vi'),
-	(2086, 'admin.captcha.captcha_page', 'Trang sử dụng captcha', 'admin.captcha', 'vi'),
-	(2087, 'admin.captcha.captcha_page_help', 'Chọn trang sử dụng Captcha', 'admin.captcha', 'vi'),
-	(2088, 'admin.captcha.captcha_page_contact', 'Liên hệ', 'admin.captcha', 'vi'),
-	(2089, 'admin.captcha.captcha_page_register', 'Đăng ký', 'admin.captcha', 'vi'),
-	(2090, 'admin.captcha.captcha_page_forgot_password', 'Quên mật khẩu', 'admin.captcha', 'vi'),
-	(2091, 'admin.captcha.captcha_page_checkout', 'Đặt hàng', 'admin.captcha', 'vi'),
-	(2092, 'admin.captcha.captcha_page_review', 'Đánh giá sản phẩm', 'admin.captcha', 'vi'),
-	(2093, 'admin.link.list', 'Danh sách liên kết', 'admin.link', 'vi'),
-	(2094, 'admin.link.list', 'Link list', 'admin.link', 'en'),
-	(2095, 'admin.link.name', 'Tên', 'admin.link', 'vi'),
-	(2096, 'admin.link.url', 'Đường dẫn', 'admin.link', 'vi'),
-	(2097, 'admin.link.target', 'Target', 'admin.link', 'vi'),
-	(2098, 'admin.link.group', 'Nhóm', 'admin.link', 'vi'),
-	(2099, 'admin.link.sort', 'Thứ tự', 'admin.link', 'vi'),
-	(2100, 'admin.link.status', 'Trạng thái', 'admin.link', 'vi'),
-	(2101, 'admin.link.add_new', 'Thêm mới', 'admin.link', 'vi'),
-	(2102, 'admin.link.add_new_title', 'Tạo url', 'admin.link', 'vi'),
-	(2103, 'admin.link.add_new_des', 'Tạo mới url', 'admin.link', 'vi'),
-	(2104, 'admin.link.select_group', 'Chọn nhóm', 'admin.link', 'vi'),
-	(2105, 'admin.link.select_target', 'Chọn target', 'admin.link', 'vi'),
-	(2106, 'admin.link.helper_url', 'Ví dụ: url, path, hoặc route::name', 'admin.link', 'vi'),
-	(2107, 'admin.link.name', 'Name', 'admin.link', 'en'),
-	(2108, 'admin.link.url', 'Url', 'admin.link', 'en'),
-	(2109, 'admin.link.target', 'Target', 'admin.link', 'en'),
-	(2110, 'admin.link.group', 'Group', 'admin.link', 'en'),
-	(2111, 'admin.link.status', 'Status', 'admin.link', 'en'),
-	(2112, 'admin.link.sort', 'Sort', 'admin.link', 'en'),
-	(2113, 'admin.link.add_new', 'Add new', 'admin.link', 'en'),
-	(2114, 'admin.link.add_new_title', 'Add layout url', 'admin.link', 'en'),
-	(2115, 'admin.link.add_new_des', 'Create a new layout url', 'admin.link', 'en'),
-	(2116, 'admin.link.select_group', 'Select group', 'admin.link', 'en'),
-	(2117, 'admin.link.select_target', 'Select target', 'admin.link', 'en'),
-	(2118, 'admin.link.helper_url', 'Ex: url, path, or route::name', 'admin.link', 'en'),
-	(2119, 'admin.link_position.menu', 'Menu', 'admin.link', 'vi'),
-	(2120, 'admin.link_position.menu_left', 'Menu trái', 'admin.link', 'vi'),
-	(2121, 'admin.link_position.menu_right', 'Menu phải', 'admin.link', 'vi'),
-	(2122, 'admin.link_position.footer', 'Footer', 'admin.link', 'vi'),
-	(2123, 'admin.link_position.footer_left', 'Footer trái', 'admin.link', 'vi'),
-	(2124, 'admin.link_position.footer_right', 'Footer phải', 'admin.link', 'vi'),
-	(2125, 'admin.link_position.sidebar', 'Thanh bên', 'admin.link', 'vi'),
-	(2126, 'admin.link_position.menu', 'Menu', 'admin.link', 'en'),
-	(2127, 'admin.link_position.menu_left', 'Menu left', 'admin.link', 'en'),
-	(2128, 'admin.link_position.menu_right', 'Menu right', 'admin.link', 'en'),
-	(2129, 'admin.link_position.footer', 'Footer', 'admin.link', 'en'),
-	(2130, 'admin.link_position.footer_left', 'Footer left', 'admin.link', 'en'),
-	(2131, 'admin.link_position.footer_right', 'Footer right', 'admin.link', 'en'),
-	(2132, 'admin.link_position.sidebar', 'Sidebar', 'admin.link', 'en'),
-	(2133, 'admin.supplier.name', 'Name', 'admin.supplier', 'en'),
-	(2134, 'admin.supplier.alias', 'Url customize <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span>', 'admin.supplier', 'en'),
-	(2135, 'admin.supplier.alias_validate', 'Maximum 100 characters in the group: "A-Z", "a-z", "0-9" and "-_" ', 'admin.supplier', 'en'),
-	(2136, 'admin.supplier.email', 'Email', 'admin.supplier', 'en'),
-	(2137, 'admin.supplier.phone', 'Phone', 'admin.supplier', 'en'),
-	(2138, 'admin.supplier.address', 'Address', 'admin.supplier', 'en'),
-	(2139, 'admin.supplier.image', 'Image', 'admin.supplier', 'en'),
-	(2140, 'admin.supplier.url', 'Website', 'admin.supplier', 'en'),
-	(2141, 'admin.supplier.sort', 'Sort', 'admin.supplier', 'en'),
-	(2142, 'admin.supplier.status', 'Status', 'admin.supplier', 'en'),
-	(2143, 'admin.supplier.add_new', 'Add new', 'admin.supplier', 'en'),
-	(2144, 'admin.supplier.add_new_title', 'Add supplier', 'admin.supplier', 'en'),
-	(2145, 'admin.supplier.add_new_des', 'Create a new supplier', 'admin.supplier', 'en'),
-	(2146, 'admin.supplier.list', 'Suppliers list', 'admin.supplier', 'en'),
-	(2147, 'admin.supplier.name', 'Tên nhà cung cấp', 'admin.supplier', 'vi'),
-	(2148, 'admin.supplier.alias', 'URL tùy chỉnh <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span>', 'admin.supplier', 'vi'),
-	(2149, 'admin.supplier.alias_validate', 'Tối đa 100 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_" ', 'admin.supplier', 'vi'),
-	(2150, 'admin.supplier.email', 'Email', 'admin.supplier', 'vi'),
-	(2151, 'admin.supplier.phone', 'Số điện thoại', 'admin.supplier', 'vi'),
-	(2152, 'admin.supplier.address', 'Địa chỉ', 'admin.supplier', 'vi'),
-	(2153, 'admin.supplier.image', 'Hình ảnh', 'admin.supplier', 'vi'),
-	(2154, 'admin.supplier.url', 'Website', 'admin.supplier', 'vi'),
-	(2155, 'admin.supplier.sort', 'Sắp xếp', 'admin.supplier', 'vi'),
-	(2156, 'admin.supplier.status', 'Status', 'admin.supplier', 'vi'),
-	(2157, 'admin.supplier.add_new_title', 'Tạo nhà cung cấp', 'admin.supplier', 'vi'),
-	(2158, 'admin.supplier.add_new_des', 'Tạo mới nhà cung cấp', 'admin.supplier', 'vi'),
-	(2159, 'admin.supplier.list', 'Danh sách nhà cung cấp', 'admin.supplier', 'vi'),
-	(2160, 'admin.supplier.search_place', 'Tìm tên hoặc email', 'admin.supplier', 'vi'),
-	(2161, 'admin.supplier.search_place', 'Search name or email', 'admin.supplier', 'en'),
-	(2162, 'admin.role.name', 'Name', 'admin.role', 'en'),
-	(2163, 'admin.role.slug', 'Slug', 'admin.role', 'en'),
-	(2164, 'admin.role.permission', 'Permission', 'admin.role', 'en'),
-	(2165, 'admin.role.http_path', 'HTTP path', 'admin.role', 'en'),
-	(2166, 'admin.role.http_method', 'HTTP method', 'admin.role', 'en'),
-	(2167, 'admin.role.created_at', 'Created at', 'admin.role', 'en'),
-	(2168, 'admin.role.updated_at', 'Updated at', 'admin.role', 'en'),
-	(2169, 'admin.role.password_confirmation', 'Confirmation', 'admin.role', 'en'),
-	(2170, 'admin.role.slug_validate', 'Only characters in the group: "A-Z", "a-z", "0-9" and "._-" ', 'admin.role', 'en'),
-	(2171, 'admin.role.list', 'Role manager', 'admin.role', 'en'),
-	(2172, 'admin.role.edit', 'Edit', 'admin.role', 'en'),
-	(2173, 'admin.role.add_new', 'Add new', 'admin.role', 'en'),
-	(2174, 'admin.role.add_new_title', 'Add new role', 'admin.role', 'en'),
-	(2175, 'admin.role.add_new_des', 'Create a new role', 'admin.role', 'en'),
-	(2176, 'admin.role.select_http_method', 'Select method', 'admin.role', 'en'),
-	(2177, 'admin.role.select_permission', 'Select permission', 'admin.role', 'en'),
-	(2178, 'admin.role.select_user', 'Select user', 'admin.role', 'en'),
-	(2179, 'admin.role.slug', 'Slug', 'admin.role', 'vi'),
-	(2180, 'admin.role.name', 'Tên', 'admin.role', 'vi'),
-	(2181, 'admin.role.roles', 'vai trò', 'admin.role', 'vi'),
-	(2182, 'admin.role.permission', 'Quyền hạn', 'admin.role', 'vi'),
-	(2183, 'admin.role.http_path', 'HTTP path', 'admin.role', 'vi'),
-	(2184, 'admin.role.http_method', 'HTTP method', 'admin.role', 'vi'),
-	(2185, 'admin.role.created_at', 'Tạo lúc', 'admin.role', 'vi'),
-	(2186, 'admin.role.updated_at', 'Cập nhật', 'admin.role', 'vi'),
-	(2187, 'admin.role.slug_validate', 'Chỉ sử dụng kí tự trong nhóm: "A-Z", "a-z", "0-9" and "._-" ', 'admin.role', 'vi'),
-	(2188, 'admin.role.add_new', 'Thêm mới', 'admin.role', 'vi'),
-	(2189, 'admin.role.add_new_title', 'Tạo quyền', 'admin.role', 'vi'),
-	(2190, 'admin.role.add_new_des', 'Tạo mới một quyền', 'admin.role', 'vi'),
-	(2191, 'admin.role.select_permission', 'Chọn quyền hạn', 'admin.role', 'vi'),
-	(2192, 'admin.role.select_user', 'Chọn người dùng', 'admin.role', 'vi'),
-	(2193, 'admin.template.import', 'Import Template', 'admin.template', 'en'),
-	(2194, 'admin.template.file_format', 'File format', 'admin.template', 'en'),
-	(2195, 'admin.template.choose_file', 'Choose File', 'admin.template', 'en'),
-	(2196, 'admin.template.import_submit', 'Import', 'admin.template', 'en'),
-	(2197, 'admin.template.import_note', 'File <span style="color:red">.zip</span>, max size is <span style="color:red">50MB</span>', 'admin.template', 'en'),
-	(2198, 'admin.template.error_unzip', 'Error while unzip', 'admin.template', 'en'),
-	(2199, 'admin.template.error_upload', 'Error while uploading file', 'admin.template', 'en'),
-	(2200, 'admin.template.error_check_config', 'Cannot find config file', 'admin.template', 'en'),
-	(2201, 'admin.template.error_config_format', 'The config file is not in the right format', 'admin.template', 'en'),
-	(2202, 'admin.template.import_success', 'Import success!', 'admin.template', 'en'),
-	(2203, 'admin.template.error_exist', 'Template exist!', 'admin.template', 'en'),
-	(2204, 'admin.template.template_import', '<a href="import" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Template</span></a>', 'admin.template', 'en'),
-	(2205, 'admin.template.template_more', '<a href="https://s-cart.org/en/template.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download more HERE</a>', 'admin.template', 'en'),
-	(2206, 'admin.template.manager', 'Template management', 'admin.template', 'en'),
-	(2207, 'admin.template.title', 'Template list', 'admin.template', 'en'),
-	(2208, 'admin.template.name', 'Template name', 'admin.template', 'en'),
-	(2209, 'admin.template.auth', 'Author', 'admin.template', 'en'),
-	(2210, 'admin.template.email', 'Email', 'admin.template', 'en'),
-	(2211, 'admin.template.website', 'Website', 'admin.template', 'en'),
-	(2212, 'admin.template.activated', 'Activated', 'admin.template', 'en'),
-	(2213, 'admin.template.inactive', 'Inactive', 'admin.template', 'en'),
-	(2214, 'admin.template.download', 'Download', 'admin.template', 'en'),
-	(2215, 'admin.template.remove', 'Remove', 'admin.template', 'en'),
-	(2216, 'admin.template.status', 'Status', 'admin.template', 'en'),
-	(2217, 'admin.template.action', 'Action', 'admin.template', 'en'),
-	(2218, 'admin.template.installing', 'Installing', 'admin.template', 'en'),
-	(2219, 'admin.template.local', 'Save local', 'admin.template', 'en'),
-	(2220, 'admin.template.online', 'From library', 'admin.template', 'en'),
-	(2221, 'admin.template.version', 'Version', 'admin.template', 'en'),
-	(2222, 'admin.template.link', 'Link', 'admin.template', 'en'),
-	(2223, 'admin.template.image', 'Image', 'admin.template', 'en'),
-	(2224, 'admin.template.empty', 'Empty template!', 'admin.template', 'en'),
-	(2225, 'admin.template.downloaded', 'Downloaded', 'admin.template', 'en'),
-	(2226, 'admin.template.rated', 'Rated', 'admin.template', 'en'),
-	(2227, 'admin.template.price', 'Price', 'admin.template', 'en'),
-	(2228, 'admin.template.free', 'Free', 'admin.template', 'en'),
-	(2229, 'admin.template.date', 'Date', 'admin.template', 'en'),
-	(2230, 'admin.template.click_here', 'Click here', 'admin.template', 'en'),
-	(2231, 'admin.template.located', 'Located', 'admin.template', 'en'),
-	(2232, 'admin.template.code', 'Code', 'admin.template', 'en'),
-	(2233, 'admin.template.image_demo', 'Image demo', 'admin.template', 'en'),
-	(2234, 'admin.template.only_version_current', 'Only this version', 'admin.template', 'en'),
-	(2235, 'admin.template.compatible', 'Compatible', 'admin.template', 'en'),
-	(2236, 'admin.template.used', 'Template used', 'admin.template', 'en'),
-	(2237, 'admin.template.list', 'Template list', 'admin.template', 'en'),
-	(2238, 'admin.template.import', 'Import Giao diện', 'admin.template', 'vi'),
-	(2239, 'admin.template.file_format', 'File mẫu', 'admin.template', 'vi'),
-	(2240, 'admin.template.choose_file', 'Chọn file', 'admin.template', 'vi'),
-	(2241, 'admin.template.import_submit', 'Import', 'admin.template', 'vi'),
-	(2242, 'admin.template.import_note', 'Là file <span style="color:red">.zip</span>, dung lượng tối đa <span style="color:red">50MB</span>', 'admin.template', 'vi'),
-	(2243, 'admin.template.error_unzip', 'Lỗi trong khi unzip', 'admin.template', 'vi'),
-	(2244, 'admin.template.error_upload', 'Lỗi trong khi upload file', 'admin.template', 'vi'),
-	(2245, 'admin.template.error_check_config', 'Không tìm thấy hoặc không thể đọc file config', 'admin.template', 'vi'),
-	(2246, 'admin.template.error_config_format', 'File config không đúng định dạng', 'admin.template', 'vi'),
-	(2247, 'admin.template.import_success', 'Import thành công!', 'admin.template', 'vi'),
-	(2248, 'admin.template.error_exist', 'Giao diện đã tồn tại!', 'admin.template', 'vi'),
-	(2249, 'admin.template.template_import', '<a href="import" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Plugin</span></a>', 'admin.template', 'vi'),
-	(2250, 'admin.template.template_more', '<a href="https://s-cart.org/vi/template.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download đầy đủ Ở ĐÂY</a>', 'admin.template', 'vi'),
-	(2251, 'admin.template.manager', 'Quản lý giao diện', 'admin.template', 'vi'),
-	(2252, 'admin.template.title', 'Danh sách giao diện', 'admin.template', 'vi'),
-	(2253, 'admin.template.name', 'Tên giao diện', 'admin.template', 'vi'),
-	(2254, 'admin.template.email', 'Email', 'admin.template', 'vi'),
-	(2255, 'admin.template.website', 'Website', 'admin.template', 'vi'),
-	(2256, 'admin.template.activated', 'Đang hoạt động', 'admin.template', 'vi'),
-	(2257, 'admin.template.inactive', 'Đang ẩn', 'admin.template', 'vi'),
-	(2258, 'admin.template.download', 'Tải về', 'admin.template', 'vi'),
-	(2259, 'admin.template.remove', 'Gỡ bỏ', 'admin.template', 'vi'),
-	(2260, 'admin.template.status', 'Trạng thái', 'admin.template', 'vi'),
-	(2261, 'admin.template.action', 'Hành động', 'admin.template', 'vi'),
-	(2262, 'admin.template.installing', 'Đang cài đặt', 'admin.template', 'vi'),
-	(2263, 'admin.template.local', 'Đã lưu trên máy', 'admin.template', 'vi'),
-	(2264, 'admin.template.online', 'Tải từ thư viện', 'admin.template', 'vi'),
-	(2265, 'admin.template.auth', 'Tác giả', 'admin.template', 'vi'),
-	(2266, 'admin.template.version', 'Phiên bản', 'admin.template', 'vi'),
-	(2267, 'admin.template.link', 'Liên kết', 'admin.template', 'vi'),
-	(2268, 'admin.template.image', 'Hình ảnh', 'admin.template', 'vi'),
-	(2269, 'admin.template.empty', 'Chưa có template nào!', 'admin.template', 'vi'),
-	(2270, 'admin.template.downloaded', 'Số lần tải', 'admin.template', 'vi'),
-	(2271, 'admin.template.rated', 'Đánh giá', 'admin.template', 'vi'),
-	(2272, 'admin.template.price', 'Giá', 'admin.template', 'vi'),
-	(2273, 'admin.template.free', 'Miễn phí', 'admin.template', 'vi'),
-	(2274, 'admin.template.date', 'Ngày tạo', 'admin.template', 'vi'),
-	(2275, 'admin.template.located', 'Đã tải về', 'admin.template', 'vi'),
-	(2276, 'admin.template.code', 'Mã code', 'admin.template', 'vi'),
-	(2277, 'admin.template.click_here', 'Bấm vào đây', 'admin.template', 'vi'),
-	(2278, 'admin.template.image_demo', 'Hình mẫu', 'admin.template', 'vi'),
-	(2279, 'admin.template.only_version_current', 'Chỉ phiên bản này', 'admin.template', 'vi'),
-	(2280, 'admin.template.compatible', 'Tương thích', 'admin.template', 'vi'),
-	(2281, 'admin.template.used', 'Đang sử dụng', 'admin.template', 'vi'),
-	(2282, 'admin.template.list', 'Danh sách giao diện', 'admin.template', 'vi'),
-	(2283, 'admin.plugin.compatible', 'Tương thích', 'admin.plugin', 'vi'),
-	(2284, 'admin.plugin.code', 'Mã code', 'admin.plugin', 'vi'),
-	(2285, 'admin.plugin.name', 'Tên chức năng', 'admin.plugin', 'vi'),
-	(2286, 'admin.plugin.sort', 'Thứ tự', 'admin.plugin', 'vi'),
-	(2287, 'admin.plugin.action', 'Hành động', 'admin.plugin', 'vi'),
-	(2288, 'admin.plugin.status', 'Trạng thái', 'admin.plugin', 'vi'),
-	(2289, 'admin.plugin.enable', 'Kích hoạt', 'admin.plugin', 'vi'),
-	(2290, 'admin.plugin.disable', 'Tắt', 'admin.plugin', 'vi'),
-	(2291, 'admin.plugin.remove', 'Gỡ bỏ', 'admin.plugin', 'vi'),
-	(2292, 'admin.plugin.only_delete_data', 'Chỉ xóa dữ liệu', 'admin.plugin', 'vi'),
-	(2293, 'admin.plugin.install', 'Cài đặt', 'admin.plugin', 'vi'),
-	(2294, 'admin.plugin.config', 'Cấu hình', 'admin.plugin', 'vi'),
-	(2295, 'admin.plugin.actived', 'Hoạt động', 'admin.plugin', 'vi'),
-	(2296, 'admin.plugin.disabled', 'Bị tắt', 'admin.plugin', 'vi'),
-	(2297, 'admin.plugin.not_install', 'Chưa cài đặt', 'admin.plugin', 'vi'),
-	(2298, 'admin.plugin.auth', 'Tác giả', 'admin.plugin', 'vi'),
-	(2299, 'admin.plugin.version', 'Phiên bản', 'admin.plugin', 'vi'),
-	(2300, 'admin.plugin.link', 'Liên kết', 'admin.plugin', 'vi'),
-	(2301, 'admin.plugin.image', 'Hình ảnh', 'admin.plugin', 'vi'),
-	(2302, 'admin.plugin.empty', 'Chưa có extension nào!', 'admin.plugin', 'vi'),
-	(2303, 'admin.plugin.local', 'Đã lưu trên máy', 'admin.plugin', 'vi'),
-	(2304, 'admin.plugin.online', 'Tải từ thư viện', 'admin.plugin', 'vi'),
-	(2305, 'admin.plugin.downloaded', 'Số lần tải', 'admin.plugin', 'vi'),
-	(2306, 'admin.plugin.rated', 'Đánh giá', 'admin.plugin', 'vi'),
-	(2307, 'admin.plugin.price', 'Giá', 'admin.plugin', 'vi'),
-	(2308, 'admin.plugin.free', 'Miễn phí', 'admin.plugin', 'vi'),
-	(2309, 'admin.plugin.date', 'Ngày tạo', 'admin.plugin', 'vi'),
-	(2310, 'admin.plugin.located', 'Đã tải về', 'admin.plugin', 'vi'),
-	(2311, 'admin.plugin.only_free', 'Là miễn phí', 'admin.plugin', 'vi'),
-	(2312, 'admin.plugin.only_version', 'Cùng phiên bản', 'admin.plugin', 'vi'),
-	(2313, 'admin.plugin.all_version', 'Tất cả phiên bản', 'admin.plugin', 'vi'),
-	(2314, 'admin.plugin.sort_price_asc', 'Giá tăng', 'admin.plugin', 'vi'),
-	(2315, 'admin.plugin.sort_price_desc', 'Giá giảm', 'admin.plugin', 'vi'),
-	(2316, 'admin.plugin.sort_rating', 'Bình chọn', 'admin.plugin', 'vi'),
-	(2317, 'admin.plugin.sort_download', 'Lượt tải', 'admin.plugin', 'vi'),
-	(2318, 'admin.plugin.search_keyword', 'Từ khóa', 'admin.plugin', 'vi'),
-	(2319, 'admin.plugin.enter_search_keyword', 'Nhập từ khóa', 'admin.plugin', 'vi'),
-	(2320, 'admin.plugin.search_submit', 'Lọc kết quả', 'admin.plugin', 'vi'),
-	(2321, 'admin.plugin.import', 'Import Plugin', 'admin.plugin', 'vi'),
-	(2322, 'admin.plugin.file_format', 'File mẫu', 'admin.plugin', 'vi'),
-	(2323, 'admin.plugin.choose_file', 'Chọn file', 'admin.plugin', 'vi'),
-	(2324, 'admin.plugin.import_submit', 'Import', 'admin.plugin', 'vi'),
-	(2325, 'admin.plugin.import_data', 'Import :data', 'admin.plugin', 'vi'),
-	(2326, 'admin.plugin.import_note', 'Là file <span style="color:red">.zip</span>, dung lượng tối đa <span style="color:red">50MB</span>', 'admin.plugin', 'vi'),
-	(2327, 'admin.plugin.error_unzip', 'Lỗi trong khi unzip', 'admin.plugin', 'vi'),
-	(2328, 'admin.plugin.error_upload', 'Lỗi trong khi upload file', 'admin.plugin', 'vi'),
-	(2329, 'admin.plugin.error_check_config', 'Không tìm thấy hoặc không thể đọc file config', 'admin.plugin', 'vi'),
-	(2330, 'admin.plugin.error_config_format', 'File config không đúng định dạng', 'admin.plugin', 'vi'),
-	(2331, 'admin.plugin.import_success', 'Import thành công!', 'admin.plugin', 'vi'),
-	(2332, 'admin.plugin.error_exist', 'Plugin đã tồn tại!', 'admin.plugin', 'vi'),
-	(2333, 'admin.plugin.plugin_import', '<a href="import" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Plugin</span></a>', 'admin.plugin', 'vi'),
-	(2334, 'admin.plugin.plugin_more', '<a href="https://s-cart.org/vi/plugin.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download đầy đủ Ở ĐÂY</a>', 'admin.plugin', 'vi'),
-	(2335, 'admin.plugin.Shipping_plugin', 'Shipping extension', 'admin.plugin', 'en'),
-	(2336, 'admin.plugin.Payment_plugin', 'Payment extension', 'admin.plugin', 'en'),
-	(2337, 'admin.plugin.Total_plugin', 'Total extension', 'admin.plugin', 'en'),
-	(2338, 'admin.plugin.Other_plugin', 'Other plugin', 'admin.plugin', 'en'),
-	(2339, 'admin.plugin.Api_plugin', 'Module Api', 'admin.plugin', 'en'),
-	(2340, 'admin.plugin.Cms_plugin', 'Cms plugins', 'admin.plugin', 'en'),
-	(2341, 'admin.plugin.Block_plugin', 'Block plugins', 'admin.plugin', 'en'),
-	(2342, 'admin.plugin.Shipping_plugin', 'Chức năng vận chuyển', 'admin.plugin', 'vi'),
-	(2343, 'admin.plugin.Payment_plugin', 'Chức năng thanh toán', 'admin.plugin', 'vi'),
-	(2344, 'admin.plugin.Total_plugin', 'Chức năng giá trị đơn hàng', 'admin.plugin', 'vi'),
-	(2345, 'admin.plugin.Other_plugin', 'Chức năng khác', 'admin.plugin', 'vi'),
-	(2346, 'admin.plugin.Cms_plugin', 'Module CMS', 'admin.plugin', 'vi'),
-	(2347, 'admin.plugin.Api_plugin', 'Module Api', 'admin.plugin', 'vi'),
-	(2348, 'admin.plugin.Block_plugin', 'Module Block', 'admin.plugin', 'vi'),
-	(2349, 'admin.plugin.compatible', 'Compatible', 'admin.plugin', 'en'),
-	(2350, 'admin.plugin.code', 'Code', 'admin.plugin', 'en'),
-	(2351, 'admin.plugin.name', 'Name', 'admin.plugin', 'en'),
-	(2352, 'admin.plugin.sort', 'Sort', 'admin.plugin', 'en'),
-	(2353, 'admin.plugin.action', 'Action', 'admin.plugin', 'en'),
-	(2354, 'admin.plugin.status', 'Status', 'admin.plugin', 'en'),
-	(2355, 'admin.plugin.enable', 'Enable', 'admin.plugin', 'en'),
-	(2356, 'admin.plugin.disable', 'Disable', 'admin.plugin', 'en'),
-	(2357, 'admin.plugin.remove', 'Remove', 'admin.plugin', 'en'),
-	(2358, 'admin.plugin.only_delete_data', 'Only remove data', 'admin.plugin', 'en'),
-	(2359, 'admin.plugin.install', 'Install', 'admin.plugin', 'en'),
-	(2360, 'admin.plugin.config', 'Config', 'admin.plugin', 'en'),
-	(2361, 'admin.plugin.actived', 'Actived', 'admin.plugin', 'en'),
-	(2362, 'admin.plugin.disabled', 'Disabled', 'admin.plugin', 'en'),
-	(2363, 'admin.plugin.not_install', 'Not install', 'admin.plugin', 'en'),
-	(2364, 'admin.plugin.auth', 'Auth', 'admin.plugin', 'en'),
-	(2365, 'admin.plugin.version', 'Version', 'admin.plugin', 'en'),
-	(2366, 'admin.plugin.link', 'Link', 'admin.plugin', 'en'),
-	(2367, 'admin.plugin.image', 'Image', 'admin.plugin', 'en'),
-	(2368, 'admin.plugin.empty', 'Empty extension!', 'admin.plugin', 'en'),
-	(2369, 'admin.plugin.local', 'Save local', 'admin.plugin', 'en'),
-	(2370, 'admin.plugin.online', 'From library', 'admin.plugin', 'en'),
-	(2371, 'admin.plugin.downloaded', 'Downloaded', 'admin.plugin', 'en'),
-	(2372, 'admin.plugin.rated', 'Rated', 'admin.plugin', 'en'),
-	(2373, 'admin.plugin.price', 'Price', 'admin.plugin', 'en'),
-	(2374, 'admin.plugin.free', 'Free', 'admin.plugin', 'en'),
-	(2375, 'admin.plugin.date', 'Date', 'admin.plugin', 'en'),
-	(2376, 'admin.plugin.located', 'Located', 'admin.plugin', 'en'),
-	(2377, 'admin.plugin.only_free', 'Is free', 'admin.plugin', 'en'),
-	(2378, 'admin.plugin.only_version', 'Only version', 'admin.plugin', 'en'),
-	(2379, 'admin.plugin.all_version', 'All version', 'admin.plugin', 'en'),
-	(2380, 'admin.plugin.sort_price_asc', 'Price asc', 'admin.plugin', 'en'),
-	(2381, 'admin.plugin.sort_price_desc', 'Price desc', 'admin.plugin', 'en'),
-	(2382, 'admin.plugin.sort_rating', 'Rating', 'admin.plugin', 'en'),
-	(2383, 'admin.plugin.sort_download', 'Download', 'admin.plugin', 'en'),
-	(2384, 'admin.plugin.search_keyword', 'Keyword', 'admin.plugin', 'en'),
-	(2385, 'admin.plugin.enter_search_keyword', 'Enter keyword', 'admin.plugin', 'en'),
-	(2386, 'admin.plugin.search_submit', 'Filter result', 'admin.plugin', 'en'),
-	(2387, 'admin.plugin.import', 'Import Plugin', 'admin.plugin', 'en'),
-	(2388, 'admin.plugin.file_format', 'File format', 'admin.plugin', 'en'),
-	(2389, 'admin.plugin.choose_file', 'Choose File', 'admin.plugin', 'en'),
-	(2390, 'admin.plugin.import_submit', 'Import', 'admin.plugin', 'en'),
-	(2391, 'admin.plugin.import_data', 'Import :data', 'admin.plugin', 'en'),
-	(2392, 'admin.plugin.import_note', 'File <span style="color:red">.zip</span>, max size is <span style="color:red">50MB</span>', 'admin.plugin', 'en'),
-	(2393, 'admin.plugin.error_unzip', 'Error while unzip', 'admin.plugin', 'en'),
-	(2394, 'admin.plugin.error_upload', 'Error while uploading file', 'admin.plugin', 'en'),
-	(2395, 'admin.plugin.error_check_config', 'Cannot find config file', 'admin.plugin', 'en'),
-	(2396, 'admin.plugin.error_config_format', 'The config file is not in the right format', 'admin.plugin', 'en'),
-	(2397, 'admin.plugin.import_success', 'Import success!', 'admin.plugin', 'en'),
-	(2398, 'admin.plugin.error_exist', 'Plugin exist!', 'admin.plugin', 'en'),
-	(2399, 'admin.plugin.plugin_import', '<a href="import" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Plugin</span></a>', 'admin.plugin', 'en'),
-	(2400, 'admin.plugin.plugin_more', '<a href="https://s-cart.org/en/plugin.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download more HERE</a>', 'admin.plugin', 'en'),
-	(2401, 'admin.plugin.install_success', 'Installed successfully', 'admin.plugin', 'en'),
-	(2402, 'admin.plugin.install_faild', 'Installation failed', 'admin.plugin', 'en'),
-	(2403, 'admin.plugin.table_exist', 'Table :table already exists', 'admin.plugin', 'en'),
-	(2404, 'admin.plugin.plugin_exist', 'This plugin already exists', 'admin.plugin', 'en'),
-	(2405, 'admin.plugin.action_error', 'There was an error while :action', 'admin.plugin', 'en'),
-	(2406, 'admin.plugin.install_success', 'Cài đặt thành công', 'admin.plugin', 'vi'),
-	(2407, 'admin.plugin.install_faild', 'Cài đặt thất bại', 'admin.plugin', 'vi'),
-	(2408, 'admin.plugin.table_exist', 'Bảng :table đã tồn tại rồi', 'admin.plugin', 'vi'),
-	(2409, 'admin.plugin.plugin_exist', 'Plugin này đã tồn tại rồi', 'admin.plugin', 'vi'),
-	(2410, 'admin.plugin.action_error', 'Có lỗi trong khi :action', 'admin.plugin', 'vi'),
-	(2411, 'admin.chart.static_month', 'Thống kê trong 12 tháng', 'admin.chart', 'vi'),
-	(2412, 'admin.chart.static_30_day', 'Thống kê trong 1 tháng', 'admin.chart', 'vi'),
-	(2413, 'admin.chart.static_month_help', 'Dữ liệu so sánh bằng tổng số tiền của đơn hàng, đơn vị Bit', 'admin.chart', 'vi'),
-	(2414, 'admin.chart.amount', 'Tổng số tiền (Bit)', 'admin.chart', 'vi'),
-	(2415, 'admin.chart.order', 'Tổng đơn hàng', 'admin.chart', 'vi'),
-	(2416, 'admin.chart.static_country', 'Đơn hàng theo quốc gia', 'admin.chart', 'vi'),
-	(2417, 'admin.chart.country', 'Quốc gia', 'admin.chart', 'vi'),
-	(2418, 'admin.chart.static_month', 'Statistics for 12 months', 'admin.chart', 'en'),
-	(2419, 'admin.chart.static_30_day', 'Statistics for 30 days', 'admin.chart', 'en'),
-	(2420, 'admin.chart.static_month_help', 'The comparison data is equal to the total amount of the order and the Bit units', 'admin.chart', 'en'),
-	(2421, 'admin.chart.amount', 'Total amount (Bit)', 'admin.chart', 'en'),
-	(2422, 'admin.chart.order', 'Total order', 'admin.chart', 'en'),
-	(2423, 'admin.chart.static_country', 'Statistics of orders by country', 'admin.chart', 'en'),
-	(2424, 'admin.chart.country', 'Country', 'admin.chart', 'en'),
-	(2425, 'admin.chart.static_device', 'Statistics of orders by device', 'admin.chart', 'en'),
-	(2426, 'admin.chart.static_device', 'Thống kê đơn hàng theo thiết bị', 'admin.chart', 'vi'),
-	(2427, 'admin.chart.device', 'Device type', 'admin.chart', 'en'),
-	(2428, 'admin.chart.device', 'Loại thiết bị', 'admin.chart', 'vi'),
-	(2429, 'admin.maintain.title', 'Maintenance page', 'admin.maintain', 'en'),
-	(2430, 'admin.maintain.content', 'Maintenance content of the store', 'admin.maintain', 'en'),
-	(2431, 'admin.maintain.description', 'Description', 'admin.maintain', 'en'),
-	(2432, 'admin.maintain.description_note', 'Maintenance note', 'admin.maintain', 'en'),
-	(2433, 'admin.maintain.title', 'Trang bảo trì', 'admin.maintain', 'vi'),
-	(2434, 'admin.maintain.content', 'Nội dung bảo trì của cửa hàng', 'admin.maintain', 'vi'),
-	(2435, 'admin.maintain.description', 'Nội dung', 'admin.maintain', 'vi'),
-	(2436, 'admin.maintain.description_note', 'Ghi chú bảo trì', 'admin.maintain', 'vi'),
-	(2437, 'admin.seo.config', 'Cấu hình SEO', 'admin.seo', 'vi'),
-	(2438, 'admin.seo.config', 'SEO config', 'admin.seo', 'en'),
-	(2439, 'admin.seo.url_seo_lang', 'Thêm ngôn ngữ trên URL', 'admin.seo', 'vi'),
-	(2440, 'admin.seo.url_seo_lang', 'Add language on URL', 'admin.seo', 'en'),
-	(2441, 'admin.dashboard.total_order', 'Tổng đơn hàng', 'admin.dashboard', 'vi'),
-	(2442, 'admin.dashboard.total_order', 'Order total', 'admin.dashboard', 'en'),
-	(2443, 'admin.dashboard.total_product', 'Tổng sản phẩm', 'admin.dashboard', 'vi'),
-	(2444, 'admin.dashboard.total_product', 'Product total', 'admin.dashboard', 'en'),
-	(2445, 'admin.dashboard.total_customer', 'Tổng khách hàng', 'admin.dashboard', 'vi'),
-	(2446, 'admin.dashboard.total_customer', 'Customer total', 'admin.dashboard', 'en'),
-	(2447, 'admin.dashboard.total_blog', 'Tổng blog', 'admin.dashboard', 'vi'),
-	(2448, 'admin.dashboard.total_blog', 'Blog total', 'admin.dashboard', 'en'),
-	(2449, 'admin.dashboard.order_month', 'Đơn hàng trong tháng', 'admin.dashboard', 'vi'),
-	(2450, 'admin.dashboard.order_month', 'Order in month', 'admin.dashboard', 'en'),
-	(2451, 'admin.dashboard.order_year', 'Đơn hàng trong năm', 'admin.dashboard', 'vi'),
-	(2452, 'admin.dashboard.order_year', 'Order in year', 'admin.dashboard', 'en'),
-	(2453, 'admin.dashboard.top_order_new', 'Đơn hàng mới', 'admin.dashboard', 'vi'),
-	(2454, 'admin.dashboard.top_order_new', 'New orders', 'admin.dashboard', 'en'),
-	(2455, 'admin.dashboard.top_customer_new', 'Khách hàng mới mới', 'admin.dashboard', 'vi'),
-	(2456, 'admin.dashboard.top_customer_new', 'New customers', 'admin.dashboard', 'en'),
-	(2457, 'admin.dashboard.pie_chart', 'Hiển thị biểu đồ pie', 'admin.dashboard', 'vi'),
-	(2458, 'admin.dashboard.pie_chart', 'Display pie chart total', 'admin.dashboard', 'en'),
-	(2459, 'admin.dashboard.title', 'Trang tổng quan', 'admin.dashboard', 'vi'),
-	(2460, 'admin.dashboard.title', 'Dashboard page', 'admin.dashboard', 'en'),
-	(2461, 'admin.dashboard.config_display', 'Cấu hình trang tổng quan admin', 'admin.dashboard', 'vi'),
-	(2462, 'admin.dashboard.config_display', 'Config dashboard adminpage', 'admin.dashboard', 'en'),
-	(2463, 'admin.layout_page_position.all', 'All Page', 'admin.layout_page_position', 'en'),
-	(2464, 'admin.layout_page_position.home', 'Home page', 'admin.layout_page_position', 'en'),
-	(2465, 'admin.layout_page_position.shop_home', 'Home shop', 'admin.layout_page_position', 'en'),
-	(2466, 'admin.layout_page_position.shop_search', 'Search page', 'admin.layout_page_position', 'en'),
-	(2467, 'admin.layout_page_position.vendor_home', 'Store: home', 'admin.layout_page_position', 'en'),
-	(2468, 'admin.layout_page_position.store_product_list', 'Store: product list', 'admin.layout_page_position', 'en'),
-	(2469, 'admin.layout_page_position.product_list', 'List: product', 'admin.layout_page_position', 'en'),
-	(2470, 'admin.layout_page_position.product_detail', 'Detail: product', 'admin.layout_page_position', 'en'),
-	(2471, 'admin.layout_page_position.shop_cart', 'Cart: cart, wishlist, compare, checkout', 'admin.layout_page_position', 'en'),
-	(2472, 'admin.layout_page_position.shop_auth', 'Auth: login, forgot, register', 'admin.layout_page_position', 'en'),
-	(2473, 'admin.layout_page_position.shop_profile', 'Customer profile', 'admin.layout_page_position', 'en'),
-	(2474, 'admin.layout_page_position.item_list', 'List: category, brand, supplier', 'admin.layout_page_position', 'en'),
-	(2475, 'admin.layout_page_position.item_detail', 'Detail: item', 'admin.layout_page_position', 'en'),
-	(2476, 'admin.layout_page_position.news_list', 'List:  Blog/news', 'admin.layout_page_position', 'en'),
-	(2477, 'admin.layout_page_position.news_detail', 'Detail: entry Blog', 'admin.layout_page_position', 'en'),
-	(2478, 'admin.layout_page_position.content_list', 'List: content CMS', 'admin.layout_page_position', 'en'),
-	(2479, 'admin.layout_page_position.content_detail', 'Detail: entry CMS', 'admin.layout_page_position', 'en'),
-	(2480, 'admin.layout_page_position.shop_contact', 'Page contact', 'admin.layout_page_position', 'en'),
-	(2481, 'admin.layout_page_position.shop_page', 'Other page: about...', 'admin.layout_page_position', 'en'),
-	(2482, 'admin.layout_page_position.all', 'Tất cả trang', 'admin.layout_page_position', 'vi'),
-	(2483, 'admin.layout_page_position.home', 'Trang chủ', 'admin.layout_page_position', 'vi'),
-	(2484, 'admin.layout_page_position.shop_home', 'Trang chủ Shop', 'admin.layout_page_position', 'vi'),
-	(2485, 'admin.layout_page_position.shop_search', 'Trang tìm kiếm', 'admin.layout_page_position', 'vi'),
-	(2486, 'admin.layout_page_position.vendor_home', 'Cửa hàng: trang chủ', 'admin.layout_page_position', 'vi'),
-	(2487, 'admin.layout_page_position.store_product_list', 'Cửa hàng: danh sách sản phẩm', 'admin.layout_page_position', 'vi'),
-	(2488, 'admin.layout_page_position.product_list', 'Danh sách: sản phẩm', 'admin.layout_page_position', 'vi'),
-	(2489, 'admin.layout_page_position.product_detail', 'Chi tiết: sản phẩm', 'admin.layout_page_position', 'vi'),
-	(2490, 'admin.layout_page_position.shop_cart', 'Giỏ hàng: giỏ hàng, wishlist, compare, checkout', 'admin.layout_page_position', 'vi'),
-	(2491, 'admin.layout_page_position.shop_auth', 'Chứng thực: đăng nhập, đăng ký, quên mật khẩu', 'admin.layout_page_position', 'vi'),
-	(2492, 'admin.layout_page_position.shop_profile', 'Tài khoản khách hàng', 'admin.layout_page_position', 'vi'),
-	(2493, 'admin.layout_page_position.item_list', 'Danh sách item: danh mục, nhãn hiệu, nhà cung cấp', 'admin.layout_page_position', 'vi'),
-	(2494, 'admin.layout_page_position.item_detail', 'Chi tiết: item', 'admin.layout_page_position', 'vi'),
-	(2495, 'admin.layout_page_position.news_list', 'Danh sách: bài viết Blog', 'admin.layout_page_position', 'vi'),
-	(2496, 'admin.layout_page_position.news_detail', 'Chi tiết: bài viết Blog', 'admin.layout_page_position', 'vi'),
-	(2497, 'admin.layout_page_position.content_list', 'Danh sách: bài viết CMS', 'admin.layout_page_position', 'vi'),
-	(2498, 'admin.layout_page_position.content_detail', 'Chi tiết: bài viết CMS', 'admin.layout_page_position', 'vi'),
-	(2499, 'admin.layout_page_position.shop_contact', 'Trang liên hệ', 'admin.layout_page_position', 'vi'),
-	(2500, 'admin.layout_page_position.shop_page', 'Các trang viết: giới thiệu...', 'admin.layout_page_position', 'vi'),
-	(2501, 'admin.layout_page_block.header', 'Head code :meta, css, javascript,...', 'admin.layout_page_block', 'vi'),
-	(2502, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'vi'),
-	(2503, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'vi'),
-	(2504, 'admin.layout_page_block.left', 'BlockLeft - Cột trái', 'admin.layout_page_block', 'vi'),
-	(2505, 'admin.layout_page_block.right', 'Block Right - Cột phải', 'admin.layout_page_block', 'vi'),
-	(2506, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'vi'),
-	(2507, 'admin.layout_page_block.header', 'Head code: meta, css, javascript, ...', 'admin.layout_page_block', 'en'),
-	(2508, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'en'),
-	(2509, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'en'),
-	(2510, 'admin.layout_page_block.left', 'Block Left', 'admin.layout_page_block', 'en'),
-	(2511, 'admin.layout_page_block.right', 'Block Right', 'admin.layout_page_block', 'en'),
-	(2512, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'en'),
-	(2513, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'en'),
-	(2514, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'en'),
-	(2515, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'en'),
-	(2516, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'en'),
-	(2517, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'en'),
-	(2518, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'vi'),
-	(2519, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'vi'),
-	(2520, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'vi'),
-	(2521, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'vi'),
-	(2522, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'vi'),
-	(2523, 'admin.config_layout.home_page_default', 'Thay đổi homepage', 'admin.config_layout', 'vi'),
-	(2524, 'admin.config_layout.home_page_default', 'Change homepage', 'admin.config_layout', 'en'),
-	(2525, 'admin.config_layout.home_page_default_empty', 'Giữ mặc định', 'admin.config_layout', 'vi'),
-	(2526, 'admin.config_layout.home_page_default_empty', 'Keep default', 'admin.config_layout', 'en'),
-	(2527, 'admin.config_layout.link_home_page', 'Hiển thị link trang chủ', 'admin.config_layout', 'vi'),
-	(2528, 'admin.config_layout.link_home_page', 'Display link homepage', 'admin.config_layout', 'en'),
-	(2529, 'admin.config_layout.link_shop_page', 'Hiển thị link cửa hàng', 'admin.config_layout', 'vi'),
-	(2530, 'admin.config_layout.link_shop_page', 'Display link shop', 'admin.config_layout', 'en'),
-	(2531, 'admin.config_layout.link_account', 'Hiển thị link tài khoản', 'admin.config_layout', 'vi'),
-	(2532, 'admin.config_layout.link_account', 'Display link account', 'admin.config_layout', 'en'),
-	(2533, 'admin.config_layout.link_cart', 'Hiển thị giỏ hàng', 'admin.config_layout', 'vi'),
-	(2534, 'admin.config_layout.link_cart', 'Display link cart', 'admin.config_layout', 'en'),
-	(2535, 'admin.config_layout.link_language', 'Hiển thị ngôn ngữ', 'admin.config_layout', 'vi'),
-	(2536, 'admin.config_layout.link_language', 'Display link language', 'admin.config_layout', 'en'),
-	(2537, 'admin.config_layout.link_currency', 'Hiển thị tiền tệ', 'admin.config_layout', 'vi'),
-	(2538, 'admin.config_layout.link_currency', 'Display link currency', 'admin.config_layout', 'en'),
-	(2539, 'store.admin.config_layout', 'Cấu hình bố cục cửa hàng', 'admin.config_layout', 'vi'),
-	(2540, 'store.admin.config_layout', 'Config layout shop', 'admin.config_layout', 'en');
+	(2027, 'admin.product_property.code', 'Mã', 'admin.product_property', 'vi'),
+	(2028, 'admin.product_property.code', 'Code', 'admin.product_property', 'en'),
+	(2029, 'admin.product_property.list', 'Danh sách thuộc tính', 'admin.product_property', 'vi'),
+	(2030, 'admin.product_property.list', 'Product property list', 'admin.product_property', 'en'),
+	(2031, 'admin.product_property.status', 'Trạng thái', 'admin.product_property', 'vi'),
+	(2032, 'admin.product_property.status', 'Status', 'admin.product_property', 'en'),
+	(2033, 'admin.product_property.add_new_title', 'Thêm thuộc tính', 'admin.product_property', 'vi'),
+	(2034, 'admin.product_property.add_new_title', 'Add product property', 'admin.product_property', 'en'),
+	(2035, 'admin.order_status.name', 'Tên', 'admin.order_status', 'vi'),
+	(2036, 'admin.order_status.name', 'Name', 'admin.order_status', 'en'),
+	(2037, 'admin.order_status.list', 'Danh sách trạng thái', 'admin.order_status', 'vi'),
+	(2038, 'admin.order_status.list', 'Order status list', 'admin.order_status', 'en'),
+	(2039, 'admin.order_status.status', 'Trạng thái', 'admin.order_status', 'vi'),
+	(2040, 'admin.order_status.status', 'Status', 'admin.order_status', 'en'),
+	(2041, 'admin.order_status.add_new_title', 'Thêm trạng thái', 'admin.order_status', 'vi'),
+	(2042, 'admin.order_status.add_new_title', 'Add status', 'admin.order_status', 'en'),
+	(2043, 'admin.payment_status.name', 'Tên', 'admin.payment_status', 'vi'),
+	(2044, 'admin.payment_status.name', 'Name', 'admin.payment_status', 'en'),
+	(2045, 'admin.payment_status.list', 'Danh sách trạng thái', 'admin.payment_status', 'vi'),
+	(2046, 'admin.payment_status.list', 'Payment status list', 'admin.payment_status', 'en'),
+	(2047, 'admin.payment_status.status', 'Trạng thái', 'admin.payment_status', 'vi'),
+	(2048, 'admin.payment_status.status', 'Status', 'admin.payment_status', 'en'),
+	(2049, 'admin.payment_status.add_new_title', 'Thêm trạng thái', 'admin.payment_status', 'vi'),
+	(2050, 'admin.payment_status.add_new_title', 'Add status', 'admin.payment_status', 'en'),
+	(2051, 'admin.shipping_status.name', 'Tên', 'admin.shipping_status', 'vi'),
+	(2052, 'admin.shipping_status.name', 'Name', 'admin.shipping_status', 'en'),
+	(2053, 'admin.shipping_status.list', 'Danh sách trạng thái', 'admin.shipping_status', 'vi'),
+	(2054, 'admin.shipping_status.list', 'Shipping status list', 'admin.shipping_status', 'en'),
+	(2055, 'admin.shipping_status.status', 'Trạng thái', 'admin.shipping_status', 'vi'),
+	(2056, 'admin.shipping_status.status', 'Status', 'admin.shipping_status', 'en'),
+	(2057, 'admin.shipping_status.add_new_title', 'Thêm trạng thái', 'admin.shipping_status', 'vi'),
+	(2058, 'admin.shipping_status.add_new_title', 'Add status', 'admin.shipping_status', 'en'),
+	(2059, 'admin.tax.name', 'Tên', 'admin.tax', 'vi'),
+	(2060, 'admin.tax.name', 'Name', 'admin.tax', 'en'),
+	(2061, 'admin.tax.value', 'Giá trị', 'admin.tax', 'vi'),
+	(2062, 'admin.tax.value', 'Value', 'admin.tax', 'en'),
+	(2063, 'admin.tax.non_tax', 'Không thuế', 'admin.tax', 'vi'),
+	(2064, 'admin.tax.non_tax', 'None tax', 'admin.tax', 'en'),
+	(2065, 'admin.tax.auto', 'Tự động', 'admin.tax', 'vi'),
+	(2066, 'admin.tax.auto', 'Auto', 'admin.tax', 'en'),
+	(2067, 'admin.tax.list', 'Danh sách thuế', 'admin.tax', 'vi'),
+	(2068, 'admin.tax.list', 'Tax list', 'admin.tax', 'en'),
+	(2069, 'admin.tax.status', 'Trạng thái', 'admin.tax', 'vi'),
+	(2070, 'admin.tax.status', 'Status', 'admin.tax', 'en'),
+	(2071, 'admin.tax.add_new_title', 'Thêm thuế', 'admin.tax', 'vi'),
+	(2072, 'admin.tax.add_new_title', 'Add tax', 'admin.tax', 'en'),
+	(2073, 'admin.captcha.captcha_title', 'Captcha', 'admin.captcha', 'en'),
+	(2074, 'admin.captcha.captcha_mode', 'Use Captcha', 'admin.captcha', 'en'),
+	(2075, 'admin.captcha.captcha_method', 'Captcha method', 'admin.captcha', 'en'),
+	(2076, 'admin.captcha.captcha_method_help', 'Select method Captcha', 'admin.captcha', 'en'),
+	(2077, 'admin.captcha.captcha_page', 'Captcha', 'admin.captcha', 'en'),
+	(2078, 'admin.captcha.captcha_page_help', 'Select page use Captcha', 'admin.captcha', 'en'),
+	(2079, 'admin.captcha.captcha_page_contact', 'Contact', 'admin.captcha', 'en'),
+	(2080, 'admin.captcha.captcha_page_register', 'Register', 'admin.captcha', 'en'),
+	(2081, 'admin.captcha.captcha_page_forgot_password', 'Forgot pasword', 'admin.captcha', 'en'),
+	(2082, 'admin.captcha.captcha_page_checkout', 'Checkout', 'admin.captcha', 'en'),
+	(2083, 'admin.captcha.captcha_page_review', 'Review product', 'admin.captcha', 'en'),
+	(2084, 'admin.captcha.captcha_title', 'Captcha', 'admin.captcha', 'vi'),
+	(2085, 'admin.captcha.captcha_mode', 'Sử dụng Captcha', 'admin.captcha', 'vi'),
+	(2086, 'admin.captcha.captcha_method', 'Loại Captcha', 'admin.captcha', 'vi'),
+	(2087, 'admin.captcha.captcha_method_help', 'Chọn loại Captcha', 'admin.captcha', 'vi'),
+	(2088, 'admin.captcha.captcha_page', 'Trang sử dụng captcha', 'admin.captcha', 'vi'),
+	(2089, 'admin.captcha.captcha_page_help', 'Chọn trang sử dụng Captcha', 'admin.captcha', 'vi'),
+	(2090, 'admin.captcha.captcha_page_contact', 'Liên hệ', 'admin.captcha', 'vi'),
+	(2091, 'admin.captcha.captcha_page_register', 'Đăng ký', 'admin.captcha', 'vi'),
+	(2092, 'admin.captcha.captcha_page_forgot_password', 'Quên mật khẩu', 'admin.captcha', 'vi'),
+	(2093, 'admin.captcha.captcha_page_checkout', 'Đặt hàng', 'admin.captcha', 'vi'),
+	(2094, 'admin.captcha.captcha_page_review', 'Đánh giá sản phẩm', 'admin.captcha', 'vi'),
+	(2095, 'admin.link.list', 'Danh sách liên kết', 'admin.link', 'vi'),
+	(2096, 'admin.link.list', 'Link list', 'admin.link', 'en'),
+	(2097, 'admin.link.name', 'Tên', 'admin.link', 'vi'),
+	(2098, 'admin.link.url', 'Đường dẫn', 'admin.link', 'vi'),
+	(2099, 'admin.link.target', 'Target', 'admin.link', 'vi'),
+	(2100, 'admin.link.group', 'Nhóm', 'admin.link', 'vi'),
+	(2101, 'admin.link.sort', 'Thứ tự', 'admin.link', 'vi'),
+	(2102, 'admin.link.status', 'Trạng thái', 'admin.link', 'vi'),
+	(2103, 'admin.link.add_new', 'Thêm mới', 'admin.link', 'vi'),
+	(2104, 'admin.link.add_new_title', 'Tạo url', 'admin.link', 'vi'),
+	(2105, 'admin.link.add_new_des', 'Tạo mới url', 'admin.link', 'vi'),
+	(2106, 'admin.link.select_group', 'Chọn nhóm', 'admin.link', 'vi'),
+	(2107, 'admin.link.select_target', 'Chọn target', 'admin.link', 'vi'),
+	(2108, 'admin.link.helper_url', 'Ví dụ: url, path, hoặc route::name', 'admin.link', 'vi'),
+	(2109, 'admin.link.name', 'Name', 'admin.link', 'en'),
+	(2110, 'admin.link.url', 'Url', 'admin.link', 'en'),
+	(2111, 'admin.link.target', 'Target', 'admin.link', 'en'),
+	(2112, 'admin.link.group', 'Group', 'admin.link', 'en'),
+	(2113, 'admin.link.status', 'Status', 'admin.link', 'en'),
+	(2114, 'admin.link.sort', 'Sort', 'admin.link', 'en'),
+	(2115, 'admin.link.add_new', 'Add new', 'admin.link', 'en'),
+	(2116, 'admin.link.add_new_title', 'Add layout url', 'admin.link', 'en'),
+	(2117, 'admin.link.add_new_des', 'Create a new layout url', 'admin.link', 'en'),
+	(2118, 'admin.link.select_group', 'Select group', 'admin.link', 'en'),
+	(2119, 'admin.link.select_target', 'Select target', 'admin.link', 'en'),
+	(2120, 'admin.link.helper_url', 'Ex: url, path, or route::name', 'admin.link', 'en'),
+	(2121, 'admin.link_position.menu', 'Menu', 'admin.link', 'vi'),
+	(2122, 'admin.link_position.menu_left', 'Menu trái', 'admin.link', 'vi'),
+	(2123, 'admin.link_position.menu_right', 'Menu phải', 'admin.link', 'vi'),
+	(2124, 'admin.link_position.footer', 'Footer', 'admin.link', 'vi'),
+	(2125, 'admin.link_position.footer_left', 'Footer trái', 'admin.link', 'vi'),
+	(2126, 'admin.link_position.footer_right', 'Footer phải', 'admin.link', 'vi'),
+	(2127, 'admin.link_position.sidebar', 'Thanh bên', 'admin.link', 'vi'),
+	(2128, 'admin.link_position.menu', 'Menu', 'admin.link', 'en'),
+	(2129, 'admin.link_position.menu_left', 'Menu left', 'admin.link', 'en'),
+	(2130, 'admin.link_position.menu_right', 'Menu right', 'admin.link', 'en'),
+	(2131, 'admin.link_position.footer', 'Footer', 'admin.link', 'en'),
+	(2132, 'admin.link_position.footer_left', 'Footer left', 'admin.link', 'en'),
+	(2133, 'admin.link_position.footer_right', 'Footer right', 'admin.link', 'en'),
+	(2134, 'admin.link_position.sidebar', 'Sidebar', 'admin.link', 'en'),
+	(2135, 'admin.supplier.name', 'Name', 'admin.supplier', 'en'),
+	(2136, 'admin.supplier.alias', 'Url customize <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span>', 'admin.supplier', 'en'),
+	(2137, 'admin.supplier.alias_validate', 'Maximum 100 characters in the group: "A-Z", "a-z", "0-9" and "-_" ', 'admin.supplier', 'en'),
+	(2138, 'admin.supplier.email', 'Email', 'admin.supplier', 'en'),
+	(2139, 'admin.supplier.phone', 'Phone', 'admin.supplier', 'en'),
+	(2140, 'admin.supplier.address', 'Address', 'admin.supplier', 'en'),
+	(2141, 'admin.supplier.image', 'Image', 'admin.supplier', 'en'),
+	(2142, 'admin.supplier.url', 'Website', 'admin.supplier', 'en'),
+	(2143, 'admin.supplier.sort', 'Sort', 'admin.supplier', 'en'),
+	(2144, 'admin.supplier.status', 'Status', 'admin.supplier', 'en'),
+	(2145, 'admin.supplier.add_new', 'Add new', 'admin.supplier', 'en'),
+	(2146, 'admin.supplier.add_new_title', 'Add supplier', 'admin.supplier', 'en'),
+	(2147, 'admin.supplier.add_new_des', 'Create a new supplier', 'admin.supplier', 'en'),
+	(2148, 'admin.supplier.list', 'Suppliers list', 'admin.supplier', 'en'),
+	(2149, 'admin.supplier.name', 'Tên nhà cung cấp', 'admin.supplier', 'vi'),
+	(2150, 'admin.supplier.alias', 'URL tùy chỉnh <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span>', 'admin.supplier', 'vi'),
+	(2151, 'admin.supplier.alias_validate', 'Tối đa 100 kí tự trong nhóm: "A-Z", "a-z", "0-9" and "-_" ', 'admin.supplier', 'vi'),
+	(2152, 'admin.supplier.email', 'Email', 'admin.supplier', 'vi'),
+	(2153, 'admin.supplier.phone', 'Số điện thoại', 'admin.supplier', 'vi'),
+	(2154, 'admin.supplier.address', 'Địa chỉ', 'admin.supplier', 'vi'),
+	(2155, 'admin.supplier.image', 'Hình ảnh', 'admin.supplier', 'vi'),
+	(2156, 'admin.supplier.url', 'Website', 'admin.supplier', 'vi'),
+	(2157, 'admin.supplier.sort', 'Sắp xếp', 'admin.supplier', 'vi'),
+	(2158, 'admin.supplier.status', 'Status', 'admin.supplier', 'vi'),
+	(2159, 'admin.supplier.add_new_title', 'Tạo nhà cung cấp', 'admin.supplier', 'vi'),
+	(2160, 'admin.supplier.add_new_des', 'Tạo mới nhà cung cấp', 'admin.supplier', 'vi'),
+	(2161, 'admin.supplier.list', 'Danh sách nhà cung cấp', 'admin.supplier', 'vi'),
+	(2162, 'admin.supplier.search_place', 'Tìm tên hoặc email', 'admin.supplier', 'vi'),
+	(2163, 'admin.supplier.search_place', 'Search name or email', 'admin.supplier', 'en'),
+	(2164, 'admin.role.name', 'Name', 'admin.role', 'en'),
+	(2165, 'admin.role.slug', 'Slug', 'admin.role', 'en'),
+	(2166, 'admin.role.permission', 'Permission', 'admin.role', 'en'),
+	(2167, 'admin.role.http_path', 'HTTP path', 'admin.role', 'en'),
+	(2168, 'admin.role.http_method', 'HTTP method', 'admin.role', 'en'),
+	(2169, 'admin.role.created_at', 'Created at', 'admin.role', 'en'),
+	(2170, 'admin.role.updated_at', 'Updated at', 'admin.role', 'en'),
+	(2171, 'admin.role.password_confirmation', 'Confirmation', 'admin.role', 'en'),
+	(2172, 'admin.role.slug_validate', 'Only characters in the group: "A-Z", "a-z", "0-9" and "._-" ', 'admin.role', 'en'),
+	(2173, 'admin.role.list', 'Role manager', 'admin.role', 'en'),
+	(2174, 'admin.role.edit', 'Edit', 'admin.role', 'en'),
+	(2175, 'admin.role.add_new', 'Add new', 'admin.role', 'en'),
+	(2176, 'admin.role.add_new_title', 'Add new role', 'admin.role', 'en'),
+	(2177, 'admin.role.add_new_des', 'Create a new role', 'admin.role', 'en'),
+	(2178, 'admin.role.select_http_method', 'Select method', 'admin.role', 'en'),
+	(2179, 'admin.role.select_permission', 'Select permission', 'admin.role', 'en'),
+	(2180, 'admin.role.select_user', 'Select user', 'admin.role', 'en'),
+	(2181, 'admin.role.slug', 'Slug', 'admin.role', 'vi'),
+	(2182, 'admin.role.name', 'Tên', 'admin.role', 'vi'),
+	(2183, 'admin.role.roles', 'vai trò', 'admin.role', 'vi'),
+	(2184, 'admin.role.permission', 'Quyền hạn', 'admin.role', 'vi'),
+	(2185, 'admin.role.http_path', 'HTTP path', 'admin.role', 'vi'),
+	(2186, 'admin.role.http_method', 'HTTP method', 'admin.role', 'vi'),
+	(2187, 'admin.role.created_at', 'Tạo lúc', 'admin.role', 'vi'),
+	(2188, 'admin.role.updated_at', 'Cập nhật', 'admin.role', 'vi'),
+	(2189, 'admin.role.slug_validate', 'Chỉ sử dụng kí tự trong nhóm: "A-Z", "a-z", "0-9" and "._-" ', 'admin.role', 'vi'),
+	(2190, 'admin.role.add_new', 'Thêm mới', 'admin.role', 'vi'),
+	(2191, 'admin.role.add_new_title', 'Tạo quyền', 'admin.role', 'vi'),
+	(2192, 'admin.role.add_new_des', 'Tạo mới một quyền', 'admin.role', 'vi'),
+	(2193, 'admin.role.select_permission', 'Chọn quyền hạn', 'admin.role', 'vi'),
+	(2194, 'admin.role.select_user', 'Chọn người dùng', 'admin.role', 'vi'),
+	(2195, 'admin.template.import', 'Import Template', 'admin.template', 'en'),
+	(2196, 'admin.template.file_format', 'File format', 'admin.template', 'en'),
+	(2197, 'admin.template.choose_file', 'Choose File', 'admin.template', 'en'),
+	(2198, 'admin.template.import_submit', 'Import', 'admin.template', 'en'),
+	(2199, 'admin.template.import_note', 'File <span style="color:red">.zip</span>, max size is <span style="color:red">50MB</span>', 'admin.template', 'en'),
+	(2200, 'admin.template.error_unzip', 'Error while unzip', 'admin.template', 'en'),
+	(2201, 'admin.template.error_upload', 'Error while uploading file', 'admin.template', 'en'),
+	(2202, 'admin.template.error_check_config', 'Cannot find config file', 'admin.template', 'en'),
+	(2203, 'admin.template.error_config_format', 'The config file is not in the right format', 'admin.template', 'en'),
+	(2204, 'admin.template.import_success', 'Import success!', 'admin.template', 'en'),
+	(2205, 'admin.template.error_exist', 'Template exist!', 'admin.template', 'en'),
+	(2206, 'admin.template.template_import', '<a href="import" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Template</span></a>', 'admin.template', 'en'),
+	(2207, 'admin.template.template_more', '<a href="https://s-cart.org/en/template.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download more HERE</a>', 'admin.template', 'en'),
+	(2208, 'admin.template.manager', 'Template management', 'admin.template', 'en'),
+	(2209, 'admin.template.title', 'Template list', 'admin.template', 'en'),
+	(2210, 'admin.template.name', 'Template name', 'admin.template', 'en'),
+	(2211, 'admin.template.auth', 'Author', 'admin.template', 'en'),
+	(2212, 'admin.template.email', 'Email', 'admin.template', 'en'),
+	(2213, 'admin.template.website', 'Website', 'admin.template', 'en'),
+	(2214, 'admin.template.activated', 'Activated', 'admin.template', 'en'),
+	(2215, 'admin.template.inactive', 'Inactive', 'admin.template', 'en'),
+	(2216, 'admin.template.download', 'Download', 'admin.template', 'en'),
+	(2217, 'admin.template.remove', 'Remove', 'admin.template', 'en'),
+	(2218, 'admin.template.status', 'Status', 'admin.template', 'en'),
+	(2219, 'admin.template.action', 'Action', 'admin.template', 'en'),
+	(2220, 'admin.template.installing', 'Installing', 'admin.template', 'en'),
+	(2221, 'admin.template.local', 'Save local', 'admin.template', 'en'),
+	(2222, 'admin.template.online', 'From library', 'admin.template', 'en'),
+	(2223, 'admin.template.version', 'Version', 'admin.template', 'en'),
+	(2224, 'admin.template.link', 'Link', 'admin.template', 'en'),
+	(2225, 'admin.template.image', 'Image', 'admin.template', 'en'),
+	(2226, 'admin.template.empty', 'Empty template!', 'admin.template', 'en'),
+	(2227, 'admin.template.downloaded', 'Downloaded', 'admin.template', 'en'),
+	(2228, 'admin.template.rated', 'Rated', 'admin.template', 'en'),
+	(2229, 'admin.template.price', 'Price', 'admin.template', 'en'),
+	(2230, 'admin.template.free', 'Free', 'admin.template', 'en'),
+	(2231, 'admin.template.date', 'Date', 'admin.template', 'en'),
+	(2232, 'admin.template.click_here', 'Click here', 'admin.template', 'en'),
+	(2233, 'admin.template.located', 'Located', 'admin.template', 'en'),
+	(2234, 'admin.template.code', 'Code', 'admin.template', 'en'),
+	(2235, 'admin.template.image_demo', 'Image demo', 'admin.template', 'en'),
+	(2236, 'admin.template.only_version_current', 'Only this version', 'admin.template', 'en'),
+	(2237, 'admin.template.compatible', 'Compatible', 'admin.template', 'en'),
+	(2238, 'admin.template.used', 'Template used', 'admin.template', 'en'),
+	(2239, 'admin.template.list', 'Template list', 'admin.template', 'en'),
+	(2240, 'admin.template.import', 'Import Giao diện', 'admin.template', 'vi'),
+	(2241, 'admin.template.file_format', 'File mẫu', 'admin.template', 'vi'),
+	(2242, 'admin.template.choose_file', 'Chọn file', 'admin.template', 'vi'),
+	(2243, 'admin.template.import_submit', 'Import', 'admin.template', 'vi'),
+	(2244, 'admin.template.import_note', 'Là file <span style="color:red">.zip</span>, dung lượng tối đa <span style="color:red">50MB</span>', 'admin.template', 'vi'),
+	(2245, 'admin.template.error_unzip', 'Lỗi trong khi unzip', 'admin.template', 'vi'),
+	(2246, 'admin.template.error_upload', 'Lỗi trong khi upload file', 'admin.template', 'vi'),
+	(2247, 'admin.template.error_check_config', 'Không tìm thấy hoặc không thể đọc file config', 'admin.template', 'vi'),
+	(2248, 'admin.template.error_config_format', 'File config không đúng định dạng', 'admin.template', 'vi'),
+	(2249, 'admin.template.import_success', 'Import thành công!', 'admin.template', 'vi'),
+	(2250, 'admin.template.error_exist', 'Giao diện đã tồn tại!', 'admin.template', 'vi'),
+	(2251, 'admin.template.template_import', '<a href="import" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Plugin</span></a>', 'admin.template', 'vi'),
+	(2252, 'admin.template.template_more', '<a href="https://s-cart.org/vi/template.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download đầy đủ Ở ĐÂY</a>', 'admin.template', 'vi'),
+	(2253, 'admin.template.manager', 'Quản lý giao diện', 'admin.template', 'vi'),
+	(2254, 'admin.template.title', 'Danh sách giao diện', 'admin.template', 'vi'),
+	(2255, 'admin.template.name', 'Tên giao diện', 'admin.template', 'vi'),
+	(2256, 'admin.template.email', 'Email', 'admin.template', 'vi'),
+	(2257, 'admin.template.website', 'Website', 'admin.template', 'vi'),
+	(2258, 'admin.template.activated', 'Đang hoạt động', 'admin.template', 'vi'),
+	(2259, 'admin.template.inactive', 'Đang ẩn', 'admin.template', 'vi'),
+	(2260, 'admin.template.download', 'Tải về', 'admin.template', 'vi'),
+	(2261, 'admin.template.remove', 'Gỡ bỏ', 'admin.template', 'vi'),
+	(2262, 'admin.template.status', 'Trạng thái', 'admin.template', 'vi'),
+	(2263, 'admin.template.action', 'Hành động', 'admin.template', 'vi'),
+	(2264, 'admin.template.installing', 'Đang cài đặt', 'admin.template', 'vi'),
+	(2265, 'admin.template.local', 'Đã lưu trên máy', 'admin.template', 'vi'),
+	(2266, 'admin.template.online', 'Tải từ thư viện', 'admin.template', 'vi'),
+	(2267, 'admin.template.auth', 'Tác giả', 'admin.template', 'vi'),
+	(2268, 'admin.template.version', 'Phiên bản', 'admin.template', 'vi'),
+	(2269, 'admin.template.link', 'Liên kết', 'admin.template', 'vi'),
+	(2270, 'admin.template.image', 'Hình ảnh', 'admin.template', 'vi'),
+	(2271, 'admin.template.empty', 'Chưa có template nào!', 'admin.template', 'vi'),
+	(2272, 'admin.template.downloaded', 'Số lần tải', 'admin.template', 'vi'),
+	(2273, 'admin.template.rated', 'Đánh giá', 'admin.template', 'vi'),
+	(2274, 'admin.template.price', 'Giá', 'admin.template', 'vi'),
+	(2275, 'admin.template.free', 'Miễn phí', 'admin.template', 'vi'),
+	(2276, 'admin.template.date', 'Ngày tạo', 'admin.template', 'vi'),
+	(2277, 'admin.template.located', 'Đã tải về', 'admin.template', 'vi'),
+	(2278, 'admin.template.code', 'Mã code', 'admin.template', 'vi'),
+	(2279, 'admin.template.click_here', 'Bấm vào đây', 'admin.template', 'vi'),
+	(2280, 'admin.template.image_demo', 'Hình mẫu', 'admin.template', 'vi'),
+	(2281, 'admin.template.only_version_current', 'Chỉ phiên bản này', 'admin.template', 'vi'),
+	(2282, 'admin.template.compatible', 'Tương thích', 'admin.template', 'vi'),
+	(2283, 'admin.template.used', 'Đang sử dụng', 'admin.template', 'vi'),
+	(2284, 'admin.template.list', 'Danh sách giao diện', 'admin.template', 'vi'),
+	(2285, 'admin.plugin.compatible', 'Tương thích', 'admin.plugin', 'vi'),
+	(2286, 'admin.plugin.code', 'Mã code', 'admin.plugin', 'vi'),
+	(2287, 'admin.plugin.name', 'Tên chức năng', 'admin.plugin', 'vi'),
+	(2288, 'admin.plugin.sort', 'Thứ tự', 'admin.plugin', 'vi'),
+	(2289, 'admin.plugin.action', 'Hành động', 'admin.plugin', 'vi'),
+	(2290, 'admin.plugin.status', 'Trạng thái', 'admin.plugin', 'vi'),
+	(2291, 'admin.plugin.enable', 'Kích hoạt', 'admin.plugin', 'vi'),
+	(2292, 'admin.plugin.disable', 'Tắt', 'admin.plugin', 'vi'),
+	(2293, 'admin.plugin.remove', 'Gỡ bỏ', 'admin.plugin', 'vi'),
+	(2294, 'admin.plugin.only_delete_data', 'Chỉ xóa dữ liệu', 'admin.plugin', 'vi'),
+	(2295, 'admin.plugin.install', 'Cài đặt', 'admin.plugin', 'vi'),
+	(2296, 'admin.plugin.config', 'Cấu hình', 'admin.plugin', 'vi'),
+	(2297, 'admin.plugin.actived', 'Hoạt động', 'admin.plugin', 'vi'),
+	(2298, 'admin.plugin.disabled', 'Bị tắt', 'admin.plugin', 'vi'),
+	(2299, 'admin.plugin.not_install', 'Chưa cài đặt', 'admin.plugin', 'vi'),
+	(2300, 'admin.plugin.auth', 'Tác giả', 'admin.plugin', 'vi'),
+	(2301, 'admin.plugin.version', 'Phiên bản', 'admin.plugin', 'vi'),
+	(2302, 'admin.plugin.link', 'Liên kết', 'admin.plugin', 'vi'),
+	(2303, 'admin.plugin.image', 'Hình ảnh', 'admin.plugin', 'vi'),
+	(2304, 'admin.plugin.empty', 'Chưa có extension nào!', 'admin.plugin', 'vi'),
+	(2305, 'admin.plugin.local', 'Đã lưu trên máy', 'admin.plugin', 'vi'),
+	(2306, 'admin.plugin.online', 'Tải từ thư viện', 'admin.plugin', 'vi'),
+	(2307, 'admin.plugin.downloaded', 'Số lần tải', 'admin.plugin', 'vi'),
+	(2308, 'admin.plugin.rated', 'Đánh giá', 'admin.plugin', 'vi'),
+	(2309, 'admin.plugin.price', 'Giá', 'admin.plugin', 'vi'),
+	(2310, 'admin.plugin.free', 'Miễn phí', 'admin.plugin', 'vi'),
+	(2311, 'admin.plugin.date', 'Ngày tạo', 'admin.plugin', 'vi'),
+	(2312, 'admin.plugin.located', 'Đã tải về', 'admin.plugin', 'vi'),
+	(2313, 'admin.plugin.only_free', 'Là miễn phí', 'admin.plugin', 'vi'),
+	(2314, 'admin.plugin.only_version', 'Cùng phiên bản', 'admin.plugin', 'vi'),
+	(2315, 'admin.plugin.all_version', 'Tất cả phiên bản', 'admin.plugin', 'vi'),
+	(2316, 'admin.plugin.sort_price_asc', 'Giá tăng', 'admin.plugin', 'vi'),
+	(2317, 'admin.plugin.sort_price_desc', 'Giá giảm', 'admin.plugin', 'vi'),
+	(2318, 'admin.plugin.sort_rating', 'Bình chọn', 'admin.plugin', 'vi'),
+	(2319, 'admin.plugin.sort_download', 'Lượt tải', 'admin.plugin', 'vi'),
+	(2320, 'admin.plugin.search_keyword', 'Từ khóa', 'admin.plugin', 'vi'),
+	(2321, 'admin.plugin.enter_search_keyword', 'Nhập từ khóa', 'admin.plugin', 'vi'),
+	(2322, 'admin.plugin.search_submit', 'Lọc kết quả', 'admin.plugin', 'vi'),
+	(2323, 'admin.plugin.import', 'Import Plugin', 'admin.plugin', 'vi'),
+	(2324, 'admin.plugin.file_format', 'File mẫu', 'admin.plugin', 'vi'),
+	(2325, 'admin.plugin.choose_file', 'Chọn file', 'admin.plugin', 'vi'),
+	(2326, 'admin.plugin.import_submit', 'Import', 'admin.plugin', 'vi'),
+	(2327, 'admin.plugin.import_data', 'Import :data', 'admin.plugin', 'vi'),
+	(2328, 'admin.plugin.import_note', 'Là file <span style="color:red">.zip</span>, dung lượng tối đa <span style="color:red">50MB</span>', 'admin.plugin', 'vi'),
+	(2329, 'admin.plugin.error_unzip', 'Lỗi trong khi unzip', 'admin.plugin', 'vi'),
+	(2330, 'admin.plugin.error_upload', 'Lỗi trong khi upload file', 'admin.plugin', 'vi'),
+	(2331, 'admin.plugin.error_check_config', 'Không tìm thấy hoặc không thể đọc file config', 'admin.plugin', 'vi'),
+	(2332, 'admin.plugin.error_config_format', 'File config không đúng định dạng', 'admin.plugin', 'vi'),
+	(2333, 'admin.plugin.import_success', 'Import thành công!', 'admin.plugin', 'vi'),
+	(2334, 'admin.plugin.error_exist', 'Plugin đã tồn tại!', 'admin.plugin', 'vi'),
+	(2335, 'admin.plugin.plugin_import', '<a href="import" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Plugin</span></a>', 'admin.plugin', 'vi'),
+	(2336, 'admin.plugin.plugin_more', '<a href="https://s-cart.org/vi/plugin.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download đầy đủ Ở ĐÂY</a>', 'admin.plugin', 'vi'),
+	(2337, 'admin.plugin.Shipping_plugin', 'Shipping extension', 'admin.plugin', 'en'),
+	(2338, 'admin.plugin.Payment_plugin', 'Payment extension', 'admin.plugin', 'en'),
+	(2339, 'admin.plugin.Total_plugin', 'Total extension', 'admin.plugin', 'en'),
+	(2340, 'admin.plugin.Other_plugin', 'Other plugin', 'admin.plugin', 'en'),
+	(2341, 'admin.plugin.Api_plugin', 'Module Api', 'admin.plugin', 'en'),
+	(2342, 'admin.plugin.Cms_plugin', 'Cms plugins', 'admin.plugin', 'en'),
+	(2343, 'admin.plugin.Block_plugin', 'Block plugins', 'admin.plugin', 'en'),
+	(2344, 'admin.plugin.Shipping_plugin', 'Chức năng vận chuyển', 'admin.plugin', 'vi'),
+	(2345, 'admin.plugin.Payment_plugin', 'Chức năng thanh toán', 'admin.plugin', 'vi'),
+	(2346, 'admin.plugin.Total_plugin', 'Chức năng giá trị đơn hàng', 'admin.plugin', 'vi'),
+	(2347, 'admin.plugin.Other_plugin', 'Chức năng khác', 'admin.plugin', 'vi'),
+	(2348, 'admin.plugin.Cms_plugin', 'Module CMS', 'admin.plugin', 'vi'),
+	(2349, 'admin.plugin.Api_plugin', 'Module Api', 'admin.plugin', 'vi'),
+	(2350, 'admin.plugin.Block_plugin', 'Module Block', 'admin.plugin', 'vi'),
+	(2351, 'admin.plugin.compatible', 'Compatible', 'admin.plugin', 'en'),
+	(2352, 'admin.plugin.code', 'Code', 'admin.plugin', 'en'),
+	(2353, 'admin.plugin.name', 'Name', 'admin.plugin', 'en'),
+	(2354, 'admin.plugin.sort', 'Sort', 'admin.plugin', 'en'),
+	(2355, 'admin.plugin.action', 'Action', 'admin.plugin', 'en'),
+	(2356, 'admin.plugin.status', 'Status', 'admin.plugin', 'en'),
+	(2357, 'admin.plugin.enable', 'Enable', 'admin.plugin', 'en'),
+	(2358, 'admin.plugin.disable', 'Disable', 'admin.plugin', 'en'),
+	(2359, 'admin.plugin.remove', 'Remove', 'admin.plugin', 'en'),
+	(2360, 'admin.plugin.only_delete_data', 'Only remove data', 'admin.plugin', 'en'),
+	(2361, 'admin.plugin.install', 'Install', 'admin.plugin', 'en'),
+	(2362, 'admin.plugin.config', 'Config', 'admin.plugin', 'en'),
+	(2363, 'admin.plugin.actived', 'Actived', 'admin.plugin', 'en'),
+	(2364, 'admin.plugin.disabled', 'Disabled', 'admin.plugin', 'en'),
+	(2365, 'admin.plugin.not_install', 'Not install', 'admin.plugin', 'en'),
+	(2366, 'admin.plugin.auth', 'Auth', 'admin.plugin', 'en'),
+	(2367, 'admin.plugin.version', 'Version', 'admin.plugin', 'en'),
+	(2368, 'admin.plugin.link', 'Link', 'admin.plugin', 'en'),
+	(2369, 'admin.plugin.image', 'Image', 'admin.plugin', 'en'),
+	(2370, 'admin.plugin.empty', 'Empty extension!', 'admin.plugin', 'en'),
+	(2371, 'admin.plugin.local', 'Save local', 'admin.plugin', 'en'),
+	(2372, 'admin.plugin.online', 'From library', 'admin.plugin', 'en'),
+	(2373, 'admin.plugin.downloaded', 'Downloaded', 'admin.plugin', 'en'),
+	(2374, 'admin.plugin.rated', 'Rated', 'admin.plugin', 'en'),
+	(2375, 'admin.plugin.price', 'Price', 'admin.plugin', 'en'),
+	(2376, 'admin.plugin.free', 'Free', 'admin.plugin', 'en'),
+	(2377, 'admin.plugin.date', 'Date', 'admin.plugin', 'en'),
+	(2378, 'admin.plugin.located', 'Located', 'admin.plugin', 'en'),
+	(2379, 'admin.plugin.only_free', 'Is free', 'admin.plugin', 'en'),
+	(2380, 'admin.plugin.only_version', 'Only version', 'admin.plugin', 'en'),
+	(2381, 'admin.plugin.all_version', 'All version', 'admin.plugin', 'en'),
+	(2382, 'admin.plugin.sort_price_asc', 'Price asc', 'admin.plugin', 'en'),
+	(2383, 'admin.plugin.sort_price_desc', 'Price desc', 'admin.plugin', 'en'),
+	(2384, 'admin.plugin.sort_rating', 'Rating', 'admin.plugin', 'en'),
+	(2385, 'admin.plugin.sort_download', 'Download', 'admin.plugin', 'en'),
+	(2386, 'admin.plugin.search_keyword', 'Keyword', 'admin.plugin', 'en'),
+	(2387, 'admin.plugin.enter_search_keyword', 'Enter keyword', 'admin.plugin', 'en'),
+	(2388, 'admin.plugin.search_submit', 'Filter result', 'admin.plugin', 'en'),
+	(2389, 'admin.plugin.import', 'Import Plugin', 'admin.plugin', 'en'),
+	(2390, 'admin.plugin.file_format', 'File format', 'admin.plugin', 'en'),
+	(2391, 'admin.plugin.choose_file', 'Choose File', 'admin.plugin', 'en'),
+	(2392, 'admin.plugin.import_submit', 'Import', 'admin.plugin', 'en'),
+	(2393, 'admin.plugin.import_data', 'Import :data', 'admin.plugin', 'en'),
+	(2394, 'admin.plugin.import_note', 'File <span style="color:red">.zip</span>, max size is <span style="color:red">50MB</span>', 'admin.plugin', 'en'),
+	(2395, 'admin.plugin.error_unzip', 'Error while unzip', 'admin.plugin', 'en'),
+	(2396, 'admin.plugin.error_upload', 'Error while uploading file', 'admin.plugin', 'en'),
+	(2397, 'admin.plugin.error_check_config', 'Cannot find config file', 'admin.plugin', 'en'),
+	(2398, 'admin.plugin.error_config_format', 'The config file is not in the right format', 'admin.plugin', 'en'),
+	(2399, 'admin.plugin.import_success', 'Import success!', 'admin.plugin', 'en'),
+	(2400, 'admin.plugin.error_exist', 'Plugin exist!', 'admin.plugin', 'en'),
+	(2401, 'admin.plugin.plugin_import', '<a href="import" target=_new><span class="btn btn-success btn-flat"><i class="fa fa-floppy-o" aria-hidden="true"></i> Import Plugin</span></a>', 'admin.plugin', 'en'),
+	(2402, 'admin.plugin.plugin_more', '<a href="https://s-cart.org/en/plugin.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download more HERE</a>', 'admin.plugin', 'en'),
+	(2403, 'admin.plugin.install_success', 'Installed successfully', 'admin.plugin', 'en'),
+	(2404, 'admin.plugin.install_faild', 'Installation failed', 'admin.plugin', 'en'),
+	(2405, 'admin.plugin.table_exist', 'Table :table already exists', 'admin.plugin', 'en'),
+	(2406, 'admin.plugin.plugin_exist', 'This plugin already exists', 'admin.plugin', 'en'),
+	(2407, 'admin.plugin.action_error', 'There was an error while :action', 'admin.plugin', 'en'),
+	(2408, 'admin.plugin.install_success', 'Cài đặt thành công', 'admin.plugin', 'vi'),
+	(2409, 'admin.plugin.install_faild', 'Cài đặt thất bại', 'admin.plugin', 'vi'),
+	(2410, 'admin.plugin.table_exist', 'Bảng :table đã tồn tại rồi', 'admin.plugin', 'vi'),
+	(2411, 'admin.plugin.plugin_exist', 'Plugin này đã tồn tại rồi', 'admin.plugin', 'vi'),
+	(2412, 'admin.plugin.action_error', 'Có lỗi trong khi :action', 'admin.plugin', 'vi'),
+	(2413, 'admin.chart.static_month', 'Thống kê trong 12 tháng', 'admin.chart', 'vi'),
+	(2414, 'admin.chart.static_30_day', 'Thống kê trong 1 tháng', 'admin.chart', 'vi'),
+	(2415, 'admin.chart.static_month_help', 'Dữ liệu so sánh bằng tổng số tiền của đơn hàng, đơn vị Bit', 'admin.chart', 'vi'),
+	(2416, 'admin.chart.amount', 'Tổng số tiền (Bit)', 'admin.chart', 'vi'),
+	(2417, 'admin.chart.order', 'Tổng đơn hàng', 'admin.chart', 'vi'),
+	(2418, 'admin.chart.static_country', 'Đơn hàng theo quốc gia', 'admin.chart', 'vi'),
+	(2419, 'admin.chart.country', 'Quốc gia', 'admin.chart', 'vi'),
+	(2420, 'admin.chart.static_month', 'Statistics for 12 months', 'admin.chart', 'en'),
+	(2421, 'admin.chart.static_30_day', 'Statistics for 30 days', 'admin.chart', 'en'),
+	(2422, 'admin.chart.static_month_help', 'The comparison data is equal to the total amount of the order and the Bit units', 'admin.chart', 'en'),
+	(2423, 'admin.chart.amount', 'Total amount (Bit)', 'admin.chart', 'en'),
+	(2424, 'admin.chart.order', 'Total order', 'admin.chart', 'en'),
+	(2425, 'admin.chart.static_country', 'Statistics of orders by country', 'admin.chart', 'en'),
+	(2426, 'admin.chart.country', 'Country', 'admin.chart', 'en'),
+	(2427, 'admin.chart.static_device', 'Statistics of orders by device', 'admin.chart', 'en'),
+	(2428, 'admin.chart.static_device', 'Thống kê đơn hàng theo thiết bị', 'admin.chart', 'vi'),
+	(2429, 'admin.chart.device', 'Device type', 'admin.chart', 'en'),
+	(2430, 'admin.chart.device', 'Loại thiết bị', 'admin.chart', 'vi'),
+	(2431, 'admin.maintain.title', 'Maintenance page', 'admin.maintain', 'en'),
+	(2432, 'admin.maintain.content', 'Maintenance content of the store', 'admin.maintain', 'en'),
+	(2433, 'admin.maintain.description', 'Description', 'admin.maintain', 'en'),
+	(2434, 'admin.maintain.description_note', 'Maintenance note', 'admin.maintain', 'en'),
+	(2435, 'admin.maintain.title', 'Trang bảo trì', 'admin.maintain', 'vi'),
+	(2436, 'admin.maintain.content', 'Nội dung bảo trì của cửa hàng', 'admin.maintain', 'vi'),
+	(2437, 'admin.maintain.description', 'Nội dung', 'admin.maintain', 'vi'),
+	(2438, 'admin.maintain.description_note', 'Ghi chú bảo trì', 'admin.maintain', 'vi'),
+	(2439, 'admin.seo.config', 'Cấu hình SEO', 'admin.seo', 'vi'),
+	(2440, 'admin.seo.config', 'SEO config', 'admin.seo', 'en'),
+	(2441, 'admin.seo.url_seo_lang', 'Thêm ngôn ngữ trên URL', 'admin.seo', 'vi'),
+	(2442, 'admin.seo.url_seo_lang', 'Add language on URL', 'admin.seo', 'en'),
+	(2443, 'admin.dashboard.total_order', 'Tổng đơn hàng', 'admin.dashboard', 'vi'),
+	(2444, 'admin.dashboard.total_order', 'Order total', 'admin.dashboard', 'en'),
+	(2445, 'admin.dashboard.total_product', 'Tổng sản phẩm', 'admin.dashboard', 'vi'),
+	(2446, 'admin.dashboard.total_product', 'Product total', 'admin.dashboard', 'en'),
+	(2447, 'admin.dashboard.total_customer', 'Tổng khách hàng', 'admin.dashboard', 'vi'),
+	(2448, 'admin.dashboard.total_customer', 'Customer total', 'admin.dashboard', 'en'),
+	(2449, 'admin.dashboard.total_blog', 'Tổng blog', 'admin.dashboard', 'vi'),
+	(2450, 'admin.dashboard.total_blog', 'Blog total', 'admin.dashboard', 'en'),
+	(2451, 'admin.dashboard.order_month', 'Đơn hàng trong tháng', 'admin.dashboard', 'vi'),
+	(2452, 'admin.dashboard.order_month', 'Order in month', 'admin.dashboard', 'en'),
+	(2453, 'admin.dashboard.order_year', 'Đơn hàng trong năm', 'admin.dashboard', 'vi'),
+	(2454, 'admin.dashboard.order_year', 'Order in year', 'admin.dashboard', 'en'),
+	(2455, 'admin.dashboard.top_order_new', 'Đơn hàng mới', 'admin.dashboard', 'vi'),
+	(2456, 'admin.dashboard.top_order_new', 'New orders', 'admin.dashboard', 'en'),
+	(2457, 'admin.dashboard.top_customer_new', 'Khách hàng mới mới', 'admin.dashboard', 'vi'),
+	(2458, 'admin.dashboard.top_customer_new', 'New customers', 'admin.dashboard', 'en'),
+	(2459, 'admin.dashboard.pie_chart', 'Hiển thị biểu đồ pie', 'admin.dashboard', 'vi'),
+	(2460, 'admin.dashboard.pie_chart', 'Display pie chart total', 'admin.dashboard', 'en'),
+	(2461, 'admin.dashboard.title', 'Trang tổng quan', 'admin.dashboard', 'vi'),
+	(2462, 'admin.dashboard.title', 'Dashboard page', 'admin.dashboard', 'en'),
+	(2463, 'admin.dashboard.config_display', 'Cấu hình trang tổng quan admin', 'admin.dashboard', 'vi'),
+	(2464, 'admin.dashboard.config_display', 'Config dashboard adminpage', 'admin.dashboard', 'en'),
+	(2465, 'admin.layout_page_position.all', 'All Page', 'admin.layout_page_position', 'en'),
+	(2466, 'admin.layout_page_position.home', 'Home page', 'admin.layout_page_position', 'en'),
+	(2467, 'admin.layout_page_position.shop_home', 'Home shop', 'admin.layout_page_position', 'en'),
+	(2468, 'admin.layout_page_position.shop_search', 'Search page', 'admin.layout_page_position', 'en'),
+	(2469, 'admin.layout_page_position.vendor_home', 'Store: home', 'admin.layout_page_position', 'en'),
+	(2470, 'admin.layout_page_position.store_product_list', 'Store: product list', 'admin.layout_page_position', 'en'),
+	(2471, 'admin.layout_page_position.product_list', 'List: product', 'admin.layout_page_position', 'en'),
+	(2472, 'admin.layout_page_position.product_detail', 'Detail: product', 'admin.layout_page_position', 'en'),
+	(2473, 'admin.layout_page_position.shop_cart', 'Cart: cart, wishlist, compare, checkout', 'admin.layout_page_position', 'en'),
+	(2474, 'admin.layout_page_position.shop_auth', 'Auth: login, forgot, register', 'admin.layout_page_position', 'en'),
+	(2475, 'admin.layout_page_position.shop_profile', 'Customer profile', 'admin.layout_page_position', 'en'),
+	(2476, 'admin.layout_page_position.item_list', 'List: category, brand, supplier', 'admin.layout_page_position', 'en'),
+	(2477, 'admin.layout_page_position.item_detail', 'Detail: item', 'admin.layout_page_position', 'en'),
+	(2478, 'admin.layout_page_position.news_list', 'List:  Blog/news', 'admin.layout_page_position', 'en'),
+	(2479, 'admin.layout_page_position.news_detail', 'Detail: entry Blog', 'admin.layout_page_position', 'en'),
+	(2480, 'admin.layout_page_position.content_list', 'List: content CMS', 'admin.layout_page_position', 'en'),
+	(2481, 'admin.layout_page_position.content_detail', 'Detail: entry CMS', 'admin.layout_page_position', 'en'),
+	(2482, 'admin.layout_page_position.shop_contact', 'Page contact', 'admin.layout_page_position', 'en'),
+	(2483, 'admin.layout_page_position.shop_page', 'Other page: about...', 'admin.layout_page_position', 'en'),
+	(2484, 'admin.layout_page_position.all', 'Tất cả trang', 'admin.layout_page_position', 'vi'),
+	(2485, 'admin.layout_page_position.home', 'Trang chủ', 'admin.layout_page_position', 'vi'),
+	(2486, 'admin.layout_page_position.shop_home', 'Trang chủ Shop', 'admin.layout_page_position', 'vi'),
+	(2487, 'admin.layout_page_position.shop_search', 'Trang tìm kiếm', 'admin.layout_page_position', 'vi'),
+	(2488, 'admin.layout_page_position.vendor_home', 'Cửa hàng: trang chủ', 'admin.layout_page_position', 'vi'),
+	(2489, 'admin.layout_page_position.store_product_list', 'Cửa hàng: danh sách sản phẩm', 'admin.layout_page_position', 'vi'),
+	(2490, 'admin.layout_page_position.product_list', 'Danh sách: sản phẩm', 'admin.layout_page_position', 'vi'),
+	(2491, 'admin.layout_page_position.product_detail', 'Chi tiết: sản phẩm', 'admin.layout_page_position', 'vi'),
+	(2492, 'admin.layout_page_position.shop_cart', 'Giỏ hàng: giỏ hàng, wishlist, compare, checkout', 'admin.layout_page_position', 'vi'),
+	(2493, 'admin.layout_page_position.shop_auth', 'Chứng thực: đăng nhập, đăng ký, quên mật khẩu', 'admin.layout_page_position', 'vi'),
+	(2494, 'admin.layout_page_position.shop_profile', 'Tài khoản khách hàng', 'admin.layout_page_position', 'vi'),
+	(2495, 'admin.layout_page_position.item_list', 'Danh sách item: danh mục, nhãn hiệu, nhà cung cấp', 'admin.layout_page_position', 'vi'),
+	(2496, 'admin.layout_page_position.item_detail', 'Chi tiết: item', 'admin.layout_page_position', 'vi'),
+	(2497, 'admin.layout_page_position.news_list', 'Danh sách: bài viết Blog', 'admin.layout_page_position', 'vi'),
+	(2498, 'admin.layout_page_position.news_detail', 'Chi tiết: bài viết Blog', 'admin.layout_page_position', 'vi'),
+	(2499, 'admin.layout_page_position.content_list', 'Danh sách: bài viết CMS', 'admin.layout_page_position', 'vi'),
+	(2500, 'admin.layout_page_position.content_detail', 'Chi tiết: bài viết CMS', 'admin.layout_page_position', 'vi'),
+	(2501, 'admin.layout_page_position.shop_contact', 'Trang liên hệ', 'admin.layout_page_position', 'vi'),
+	(2502, 'admin.layout_page_position.shop_page', 'Các trang viết: giới thiệu...', 'admin.layout_page_position', 'vi'),
+	(2503, 'admin.layout_page_block.header', 'Head code :meta, css, javascript,...', 'admin.layout_page_block', 'vi'),
+	(2504, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'vi'),
+	(2505, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'vi'),
+	(2506, 'admin.layout_page_block.left', 'BlockLeft - Cột trái', 'admin.layout_page_block', 'vi'),
+	(2507, 'admin.layout_page_block.right', 'Block Right - Cột phải', 'admin.layout_page_block', 'vi'),
+	(2508, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'vi'),
+	(2509, 'admin.layout_page_block.header', 'Head code: meta, css, javascript, ...', 'admin.layout_page_block', 'en'),
+	(2510, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'en'),
+	(2511, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'en'),
+	(2512, 'admin.layout_page_block.left', 'Block Left', 'admin.layout_page_block', 'en'),
+	(2513, 'admin.layout_page_block.right', 'Block Right', 'admin.layout_page_block', 'en'),
+	(2514, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'en'),
+	(2515, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'en'),
+	(2516, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'en'),
+	(2517, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'en'),
+	(2518, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'en'),
+	(2519, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'en'),
+	(2520, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'vi'),
+	(2521, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'vi'),
+	(2522, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'vi'),
+	(2523, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'vi'),
+	(2524, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'vi'),
+	(2525, 'admin.config_layout.home_page_default', 'Thay đổi homepage', 'admin.config_layout', 'vi'),
+	(2526, 'admin.config_layout.home_page_default', 'Change homepage', 'admin.config_layout', 'en'),
+	(2527, 'admin.config_layout.home_page_default_empty', 'Giữ mặc định', 'admin.config_layout', 'vi'),
+	(2528, 'admin.config_layout.home_page_default_empty', 'Keep default', 'admin.config_layout', 'en'),
+	(2529, 'admin.config_layout.link_home_page', 'Hiển thị link trang chủ', 'admin.config_layout', 'vi'),
+	(2530, 'admin.config_layout.link_home_page', 'Display link homepage', 'admin.config_layout', 'en'),
+	(2531, 'admin.config_layout.link_shop_page', 'Hiển thị link cửa hàng', 'admin.config_layout', 'vi'),
+	(2532, 'admin.config_layout.link_shop_page', 'Display link shop', 'admin.config_layout', 'en'),
+	(2533, 'admin.config_layout.link_account', 'Hiển thị link tài khoản', 'admin.config_layout', 'vi'),
+	(2534, 'admin.config_layout.link_account', 'Display link account', 'admin.config_layout', 'en'),
+	(2535, 'admin.config_layout.link_cart', 'Hiển thị giỏ hàng', 'admin.config_layout', 'vi'),
+	(2536, 'admin.config_layout.link_cart', 'Display link cart', 'admin.config_layout', 'en'),
+	(2537, 'admin.config_layout.link_language', 'Hiển thị ngôn ngữ', 'admin.config_layout', 'vi'),
+	(2538, 'admin.config_layout.link_language', 'Display link language', 'admin.config_layout', 'en'),
+	(2539, 'admin.config_layout.link_currency', 'Hiển thị tiền tệ', 'admin.config_layout', 'vi'),
+	(2540, 'admin.config_layout.link_currency', 'Display link currency', 'admin.config_layout', 'en'),
+	(2541, 'store.admin.config_layout', 'Cấu hình bố cục cửa hàng', 'admin.config_layout', 'vi'),
+	(2542, 'store.admin.config_layout', 'Config layout shop', 'admin.config_layout', 'en');
 /*!40000 ALTER TABLE `sc_languages` ENABLE KEYS */;
 
+-- Dumping structure for table s-cart.sc_product_review
+CREATE TABLE IF NOT EXISTS `sc_product_review` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `point` int(11) NOT NULL,
+  `comment` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_product_review: ~2 rows (approximately)
+DELETE FROM `sc_product_review`;
+/*!40000 ALTER TABLE `sc_product_review` DISABLE KEYS */;
+INSERT INTO `sc_product_review` (`id`, `product_id`, `customer_id`, `name`, `point`, `comment`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 125, 33, 'Test Name', 4, 'Test comment, good product', 1, '2021-09-29 14:01:58', '2021-09-29 14:01:58'),
+	(2, 20, 39, 'Shimaa Khaled ', 5, 'very good ......', 1, '2021-10-09 17:27:43', '2021-10-09 17:27:43');
+/*!40000 ALTER TABLE `sc_product_review` ENABLE KEYS */;
+
 -- Dumping structure for table s-cart.sc_shop_attribute_group
-DROP TABLE IF EXISTS `sc_shop_attribute_group`;
 CREATE TABLE IF NOT EXISTS `sc_shop_attribute_group` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `sort` int(11) NOT NULL DEFAULT 0,
   `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'radio,select,checkbox',
@@ -3282,7 +3403,6 @@ INSERT INTO `sc_shop_attribute_group` (`id`, `name`, `status`, `sort`, `type`) V
 /*!40000 ALTER TABLE `sc_shop_attribute_group` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner
-DROP TABLE IF EXISTS `sc_shop_banner`;
 CREATE TABLE IF NOT EXISTS `sc_shop_banner` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3311,7 +3431,6 @@ INSERT INTO `sc_shop_banner` (`id`, `title`, `image`, `url`, `target`, `html`, `
 /*!40000 ALTER TABLE `sc_shop_banner` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner_store
-DROP TABLE IF EXISTS `sc_shop_banner_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_banner_store` (
   `banner_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -3329,11 +3448,10 @@ INSERT INTO `sc_shop_banner_store` (`banner_id`, `store_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_banner_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner_type
-DROP TABLE IF EXISTS `sc_shop_banner_type`;
 CREATE TABLE IF NOT EXISTS `sc_shop_banner_type` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_shop_banner_type_code_unique` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3350,10 +3468,9 @@ INSERT INTO `sc_shop_banner_type` (`id`, `code`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_banner_type` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_brand
-DROP TABLE IF EXISTS `sc_shop_brand`;
 CREATE TABLE IF NOT EXISTS `sc_shop_brand` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alias` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3378,7 +3495,6 @@ INSERT INTO `sc_shop_brand` (`id`, `name`, `alias`, `image`, `url`, `status`, `s
 /*!40000 ALTER TABLE `sc_shop_brand` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_brand_store
-DROP TABLE IF EXISTS `sc_shop_brand_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_brand_store` (
   `brand_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -3400,7 +3516,6 @@ INSERT INTO `sc_shop_brand_store` (`brand_id`, `store_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_brand_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category
-DROP TABLE IF EXISTS `sc_shop_category`;
 CREATE TABLE IF NOT EXISTS `sc_shop_category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3433,13 +3548,12 @@ INSERT INTO `sc_shop_category` (`id`, `image`, `alias`, `parent`, `top`, `status
 /*!40000 ALTER TABLE `sc_shop_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category_description
-DROP TABLE IF EXISTS `sc_shop_category_description`;
 CREATE TABLE IF NOT EXISTS `sc_shop_category_description` (
   `category_id` int(11) NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   UNIQUE KEY `sc_shop_category_description_category_id_lang_unique` (`category_id`,`lang`),
   KEY `sc_shop_category_description_lang_index` (`lang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3477,7 +3591,6 @@ INSERT INTO `sc_shop_category_description` (`category_id`, `lang`, `title`, `key
 /*!40000 ALTER TABLE `sc_shop_category_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category_store
-DROP TABLE IF EXISTS `sc_shop_category_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_category_store` (
   `category_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -3504,11 +3617,10 @@ INSERT INTO `sc_shop_category_store` (`category_id`, `store_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_category_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_country
-DROP TABLE IF EXISTS `sc_shop_country`;
 CREATE TABLE IF NOT EXISTS `sc_shop_country` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_shop_country_code_unique` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3765,10 +3877,9 @@ INSERT INTO `sc_shop_country` (`id`, `code`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_country` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_currency
-DROP TABLE IF EXISTS `sc_shop_currency`;
 CREATE TABLE IF NOT EXISTS `sc_shop_currency` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `symbol` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `exchange_rate` double(8,2) NOT NULL,
@@ -3790,9 +3901,8 @@ INSERT INTO `sc_shop_currency` (`id`, `name`, `code`, `symbol`, `exchange_rate`,
 /*!40000 ALTER TABLE `sc_shop_currency` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_customer
-DROP TABLE IF EXISTS `sc_shop_customer`;
 CREATE TABLE IF NOT EXISTS `sc_shop_customer` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `first_name_kana` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3801,7 +3911,7 @@ CREATE TABLE IF NOT EXISTS `sc_shop_customer` (
   `sex` tinyint(4) DEFAULT NULL COMMENT '0:women, 1:men',
   `birthday` date DEFAULT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address_id` int(11) NOT NULL DEFAULT 0,
+  `address_id` bigint(20) NOT NULL DEFAULT 0,
   `postcode` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3830,10 +3940,9 @@ DELETE FROM `sc_shop_customer`;
 /*!40000 ALTER TABLE `sc_shop_customer` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_customer_address
-DROP TABLE IF EXISTS `sc_shop_customer_address`;
 CREATE TABLE IF NOT EXISTS `sc_shop_customer_address` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `customer_id` int(11) NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `customer_id` bigint(20) NOT NULL,
   `first_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `first_name_kana` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3854,12 +3963,11 @@ DELETE FROM `sc_shop_customer_address`;
 /*!40000 ALTER TABLE `sc_shop_customer_address` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_custom_field
-DROP TABLE IF EXISTS `sc_shop_custom_field`;
 CREATE TABLE IF NOT EXISTS `sc_shop_custom_field` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'product, customer',
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `required` int(11) NOT NULL DEFAULT 0,
   `status` int(11) NOT NULL DEFAULT 1,
   `option` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'radio, select, input',
@@ -3875,7 +3983,6 @@ DELETE FROM `sc_shop_custom_field`;
 /*!40000 ALTER TABLE `sc_shop_custom_field` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_custom_field_detail
-DROP TABLE IF EXISTS `sc_shop_custom_field_detail`;
 CREATE TABLE IF NOT EXISTS `sc_shop_custom_field_detail` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `custom_field_id` int(11) NOT NULL,
@@ -3891,13 +3998,65 @@ DELETE FROM `sc_shop_custom_field_detail`;
 /*!40000 ALTER TABLE `sc_shop_custom_field_detail` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sc_shop_custom_field_detail` ENABLE KEYS */;
 
+-- Dumping structure for table s-cart.sc_shop_discount
+CREATE TABLE IF NOT EXISTS `sc_shop_discount` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reward` int(11) NOT NULL DEFAULT 2,
+  `type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'point' COMMENT 'point - Point; percent - %',
+  `data` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `limit` int(11) NOT NULL DEFAULT 1,
+  `used` int(11) NOT NULL DEFAULT 0,
+  `login` int(11) NOT NULL DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `sc_shop_discount_code_unique` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_shop_discount: ~0 rows (approximately)
+DELETE FROM `sc_shop_discount`;
+/*!40000 ALTER TABLE `sc_shop_discount` DISABLE KEYS */;
+INSERT INTO `sc_shop_discount` (`id`, `code`, `reward`, `type`, `data`, `limit`, `used`, `login`, `status`, `expires_at`) VALUES
+	(1, 'ABC123', 10, 'percent', 'Demo coupon', 100000, 0, 0, 1, NULL);
+/*!40000 ALTER TABLE `sc_shop_discount` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.sc_shop_discount_customer
+CREATE TABLE IF NOT EXISTS `sc_shop_discount_customer` (
+  `customer_id` int(11) NOT NULL,
+  `discount_id` int(11) NOT NULL,
+  `log` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `used_at` timestamp NULL DEFAULT NULL,
+  KEY `sc_shop_discount_customer_customer_id_index` (`customer_id`),
+  KEY `sc_shop_discount_customer_discount_id_index` (`discount_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_shop_discount_customer: ~0 rows (approximately)
+DELETE FROM `sc_shop_discount_customer`;
+/*!40000 ALTER TABLE `sc_shop_discount_customer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sc_shop_discount_customer` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.sc_shop_discount_store
+CREATE TABLE IF NOT EXISTS `sc_shop_discount_store` (
+  `discount_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  PRIMARY KEY (`discount_id`,`store_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_shop_discount_store: ~2 rows (approximately)
+DELETE FROM `sc_shop_discount_store`;
+/*!40000 ALTER TABLE `sc_shop_discount_store` DISABLE KEYS */;
+INSERT INTO `sc_shop_discount_store` (`discount_id`, `store_id`) VALUES
+	(1, 1),
+	(1, 2);
+/*!40000 ALTER TABLE `sc_shop_discount_store` ENABLE KEYS */;
+
 -- Dumping structure for table s-cart.sc_shop_email_template
-DROP TABLE IF EXISTS `sc_shop_email_template`;
 CREATE TABLE IF NOT EXISTS `sc_shop_email_template` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `group` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` int(11) NOT NULL DEFAULT 1,
   `status` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
@@ -3917,10 +4076,9 @@ INSERT INTO `sc_shop_email_template` (`id`, `name`, `group`, `text`, `store_id`,
 /*!40000 ALTER TABLE `sc_shop_email_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_language
-DROP TABLE IF EXISTS `sc_shop_language`;
 CREATE TABLE IF NOT EXISTS `sc_shop_language` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `icon` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
@@ -3939,11 +4097,10 @@ INSERT INTO `sc_shop_language` (`id`, `name`, `code`, `icon`, `status`, `rtl`, `
 /*!40000 ALTER TABLE `sc_shop_language` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_layout_page
-DROP TABLE IF EXISTS `sc_shop_layout_page`;
 CREATE TABLE IF NOT EXISTS `sc_shop_layout_page` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_shop_layout_page_key_unique` (`key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3973,11 +4130,10 @@ INSERT INTO `sc_shop_layout_page` (`id`, `key`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_layout_page` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_layout_position
-DROP TABLE IF EXISTS `sc_shop_layout_position`;
 CREATE TABLE IF NOT EXISTS `sc_shop_layout_position` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_shop_layout_position_key_unique` (`key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3995,11 +4151,10 @@ INSERT INTO `sc_shop_layout_position` (`id`, `key`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_layout_position` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_length
-DROP TABLE IF EXISTS `sc_shop_length`;
 CREATE TABLE IF NOT EXISTS `sc_shop_length` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_shop_length_name_unique` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4015,10 +4170,9 @@ INSERT INTO `sc_shop_length` (`id`, `name`, `description`) VALUES
 /*!40000 ALTER TABLE `sc_shop_length` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_link
-DROP TABLE IF EXISTS `sc_shop_link`;
 CREATE TABLE IF NOT EXISTS `sc_shop_link` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `url` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `target` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `group` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4041,7 +4195,6 @@ INSERT INTO `sc_shop_link` (`id`, `name`, `url`, `target`, `group`, `module`, `s
 /*!40000 ALTER TABLE `sc_shop_link` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_link_store
-DROP TABLE IF EXISTS `sc_shop_link_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_link_store` (
   `link_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -4061,7 +4214,6 @@ INSERT INTO `sc_shop_link_store` (`link_id`, `store_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_link_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news
-DROP TABLE IF EXISTS `sc_shop_news`;
 CREATE TABLE IF NOT EXISTS `sc_shop_news` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `image` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4078,23 +4230,22 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news` (
 DELETE FROM `sc_shop_news`;
 /*!40000 ALTER TABLE `sc_shop_news` DISABLE KEYS */;
 INSERT INTO `sc_shop_news` (`id`, `image`, `alias`, `sort`, `status`, `created_at`, `updated_at`) VALUES
-	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-10-30 20:52:03', NULL),
-	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-10-30 20:52:03', NULL),
-	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-10-30 20:52:03', NULL),
-	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-10-30 20:52:03', NULL),
-	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-10-30 20:52:03', NULL),
-	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-10-30 20:52:03', NULL);
+	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-11-14 16:38:39', NULL),
+	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-11-14 16:38:39', NULL),
+	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-11-14 16:38:39', NULL),
+	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-11-14 16:38:39', NULL),
+	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-11-14 16:38:39', NULL),
+	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-11-14 16:38:39', NULL);
 /*!40000 ALTER TABLE `sc_shop_news` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_description
-DROP TABLE IF EXISTS `sc_shop_news_description`;
 CREATE TABLE IF NOT EXISTS `sc_shop_news_description` (
   `news_id` int(11) NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   UNIQUE KEY `sc_shop_news_description_news_id_lang_unique` (`news_id`,`lang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -4117,7 +4268,6 @@ INSERT INTO `sc_shop_news_description` (`news_id`, `lang`, `title`, `keyword`, `
 /*!40000 ALTER TABLE `sc_shop_news_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_store
-DROP TABLE IF EXISTS `sc_shop_news_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_news_store` (
   `news_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -4137,10 +4287,9 @@ INSERT INTO `sc_shop_news_store` (`news_id`, `store_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_news_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order
-DROP TABLE IF EXISTS `sc_shop_order`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `customer_id` int(11) NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `customer_id` bigint(20) NOT NULL,
   `domain` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `subtotal` int(11) DEFAULT 0,
   `shipping` int(11) DEFAULT 0,
@@ -4188,12 +4337,11 @@ DELETE FROM `sc_shop_order`;
 /*!40000 ALTER TABLE `sc_shop_order` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order_detail
-DROP TABLE IF EXISTS `sc_shop_order_detail`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order_detail` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` int(11) NOT NULL DEFAULT 0,
   `qty` int(11) NOT NULL DEFAULT 0,
   `store_id` int(11) NOT NULL DEFAULT 1,
@@ -4214,13 +4362,12 @@ DELETE FROM `sc_shop_order_detail`;
 /*!40000 ALTER TABLE `sc_shop_order_detail` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order_history
-DROP TABLE IF EXISTS `sc_shop_order_history`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order_history` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) NOT NULL,
   `content` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `admin_id` int(11) NOT NULL DEFAULT 0,
-  `customer_id` int(11) NOT NULL DEFAULT 0,
+  `customer_id` bigint(20) NOT NULL DEFAULT 0,
   `order_status_id` int(11) NOT NULL DEFAULT 0,
   `add_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -4232,10 +4379,9 @@ DELETE FROM `sc_shop_order_history`;
 /*!40000 ALTER TABLE `sc_shop_order_history` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order_status
-DROP TABLE IF EXISTS `sc_shop_order_status`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order_status` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -4252,11 +4398,10 @@ INSERT INTO `sc_shop_order_status` (`id`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_order_status` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order_total
-DROP TABLE IF EXISTS `sc_shop_order_total`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order_total` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `order_id` int(11) NOT NULL,
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(20) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` int(11) NOT NULL DEFAULT 0,
   `text` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4272,7 +4417,6 @@ DELETE FROM `sc_shop_order_total`;
 /*!40000 ALTER TABLE `sc_shop_order_total` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_page
-DROP TABLE IF EXISTS `sc_shop_page`;
 CREATE TABLE IF NOT EXISTS `sc_shop_page` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4290,14 +4434,13 @@ INSERT INTO `sc_shop_page` (`id`, `image`, `alias`, `status`) VALUES
 /*!40000 ALTER TABLE `sc_shop_page` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_page_description
-DROP TABLE IF EXISTS `sc_shop_page_description`;
 CREATE TABLE IF NOT EXISTS `sc_shop_page_description` (
   `page_id` int(11) NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   UNIQUE KEY `sc_shop_page_description_page_id_lang_unique` (`page_id`,`lang`),
   KEY `sc_shop_page_description_lang_index` (`lang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4311,7 +4454,6 @@ INSERT INTO `sc_shop_page_description` (`page_id`, `lang`, `title`, `keyword`, `
 /*!40000 ALTER TABLE `sc_shop_page_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_page_store
-DROP TABLE IF EXISTS `sc_shop_page_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_page_store` (
   `page_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
@@ -4326,7 +4468,6 @@ INSERT INTO `sc_shop_page_store` (`page_id`, `store_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_page_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_password_resets
-DROP TABLE IF EXISTS `sc_shop_password_resets`;
 CREATE TABLE IF NOT EXISTS `sc_shop_password_resets` (
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4340,10 +4481,9 @@ DELETE FROM `sc_shop_password_resets`;
 /*!40000 ALTER TABLE `sc_shop_password_resets` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_payment_status
-DROP TABLE IF EXISTS `sc_shop_payment_status`;
 CREATE TABLE IF NOT EXISTS `sc_shop_payment_status` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -4358,9 +4498,8 @@ INSERT INTO `sc_shop_payment_status` (`id`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_payment_status` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product
-DROP TABLE IF EXISTS `sc_shop_product`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `sku` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `upc` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'upc code',
   `ean` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'ean code',
@@ -4434,12 +4573,11 @@ INSERT INTO `sc_shop_product` (`id`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, 
 /*!40000 ALTER TABLE `sc_shop_product` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_attribute
-DROP TABLE IF EXISTS `sc_shop_product_attribute`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_attribute` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `attribute_group_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
   `add_price` int(11) NOT NULL DEFAULT 0,
   `sort` int(11) NOT NULL DEFAULT 0,
   `status` tinyint(4) NOT NULL DEFAULT 1,
@@ -4462,10 +4600,9 @@ INSERT INTO `sc_shop_product_attribute` (`id`, `name`, `attribute_group_id`, `pr
 /*!40000 ALTER TABLE `sc_shop_product_attribute` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_build
-DROP TABLE IF EXISTS `sc_shop_product_build`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_build` (
-  `build_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+  `build_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
   `quantity` int(11) NOT NULL,
   PRIMARY KEY (`build_id`,`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4485,9 +4622,8 @@ INSERT INTO `sc_shop_product_build` (`build_id`, `product_id`, `quantity`) VALUE
 /*!40000 ALTER TABLE `sc_shop_product_build` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_category
-DROP TABLE IF EXISTS `sc_shop_product_category`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_category` (
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4525,14 +4661,13 @@ INSERT INTO `sc_shop_product_category` (`product_id`, `category_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_product_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_description
-DROP TABLE IF EXISTS `sc_shop_product_description`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_description` (
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   UNIQUE KEY `sc_shop_product_description_product_id_lang_unique` (`product_id`,`lang`),
   KEY `sc_shop_product_description_lang_index` (`lang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4592,10 +4727,9 @@ INSERT INTO `sc_shop_product_description` (`product_id`, `lang`, `name`, `keywor
 /*!40000 ALTER TABLE `sc_shop_product_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_download
-DROP TABLE IF EXISTS `sc_shop_product_download`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_download` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `product_id` int(11) NOT NULL,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` bigint(20) NOT NULL,
   `path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4605,11 +4739,33 @@ DELETE FROM `sc_shop_product_download`;
 /*!40000 ALTER TABLE `sc_shop_product_download` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sc_shop_product_download` ENABLE KEYS */;
 
--- Dumping structure for table s-cart.sc_shop_product_group
-DROP TABLE IF EXISTS `sc_shop_product_group`;
-CREATE TABLE IF NOT EXISTS `sc_shop_product_group` (
-  `group_id` int(11) NOT NULL,
+-- Dumping structure for table s-cart.sc_shop_product_flash
+CREATE TABLE IF NOT EXISTS `sc_shop_product_flash` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `sold` int(11) NOT NULL,
+  `sort` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `sc_shop_product_flash_product_id_unique` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table s-cart.sc_shop_product_flash: ~6 rows (approximately)
+DELETE FROM `sc_shop_product_flash`;
+/*!40000 ALTER TABLE `sc_shop_product_flash` DISABLE KEYS */;
+INSERT INTO `sc_shop_product_flash` (`id`, `product_id`, `stock`, `sold`, `sort`) VALUES
+	(1, 1, 100, 2, 0),
+	(2, 2, 120, 0, 0),
+	(3, 118, 100, 0, 0),
+	(4, 123, 120, 0, 0),
+	(5, 124, 300, 0, 0),
+	(6, 125, 200, 22, 0);
+/*!40000 ALTER TABLE `sc_shop_product_flash` ENABLE KEYS */;
+
+-- Dumping structure for table s-cart.sc_shop_product_group
+CREATE TABLE IF NOT EXISTS `sc_shop_product_group` (
+  `group_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
   PRIMARY KEY (`group_id`,`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -4628,11 +4784,10 @@ INSERT INTO `sc_shop_product_group` (`group_id`, `product_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_product_group` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_image
-DROP TABLE IF EXISTS `sc_shop_product_image`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_image` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_id` int(11) NOT NULL DEFAULT 0,
+  `product_id` bigint(20) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `sc_shop_product_image_product_id_index` (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4668,9 +4823,8 @@ INSERT INTO `sc_shop_product_image` (`id`, `image`, `product_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_product_image` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_promotion
-DROP TABLE IF EXISTS `sc_shop_product_promotion`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_promotion` (
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
   `price_promotion` int(11) NOT NULL,
   `date_start` datetime DEFAULT NULL,
   `date_end` datetime DEFAULT NULL,
@@ -4695,11 +4849,10 @@ INSERT INTO `sc_shop_product_promotion` (`product_id`, `price_promotion`, `date_
 /*!40000 ALTER TABLE `sc_shop_product_promotion` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_property
-DROP TABLE IF EXISTS `sc_shop_product_property`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_property` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_shop_product_property_code_unique` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4713,9 +4866,8 @@ INSERT INTO `sc_shop_product_property` (`id`, `code`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_product_property` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_store
-DROP TABLE IF EXISTS `sc_shop_product_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_store` (
-  `product_id` int(11) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`product_id`,`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4751,10 +4903,9 @@ INSERT INTO `sc_shop_product_store` (`product_id`, `store_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_product_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_sessions
-DROP TABLE IF EXISTS `sc_shop_sessions`;
 CREATE TABLE IF NOT EXISTS `sc_shop_sessions` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `customer_id` int(10) unsigned DEFAULT NULL,
+  `customer_id` bigint(20) unsigned DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4768,7 +4919,6 @@ DELETE FROM `sc_shop_sessions`;
 /*!40000 ALTER TABLE `sc_shop_sessions` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_shipping_standard
-DROP TABLE IF EXISTS `sc_shop_shipping_standard`;
 CREATE TABLE IF NOT EXISTS `sc_shop_shipping_standard` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `fee` int(11) NOT NULL,
@@ -4784,10 +4934,9 @@ INSERT INTO `sc_shop_shipping_standard` (`id`, `fee`, `shipping_free`) VALUES
 /*!40000 ALTER TABLE `sc_shop_shipping_standard` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_shipping_status
-DROP TABLE IF EXISTS `sc_shop_shipping_status`;
 CREATE TABLE IF NOT EXISTS `sc_shop_shipping_status` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -4801,7 +4950,6 @@ INSERT INTO `sc_shop_shipping_status` (`id`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_shipping_status` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_shoppingcart
-DROP TABLE IF EXISTS `sc_shop_shoppingcart`;
 CREATE TABLE IF NOT EXISTS `sc_shop_shoppingcart` (
   `identifier` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `instance` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4819,10 +4967,9 @@ DELETE FROM `sc_shop_shoppingcart`;
 /*!40000 ALTER TABLE `sc_shop_shoppingcart` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_store_block
-DROP TABLE IF EXISTS `sc_shop_store_block`;
 CREATE TABLE IF NOT EXISTS `sc_shop_store_block` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `position` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `page` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4851,25 +4998,24 @@ INSERT INTO `sc_shop_store_block` (`id`, `name`, `position`, `page`, `type`, `te
 /*!40000 ALTER TABLE `sc_shop_store_block` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_store_css
-DROP TABLE IF EXISTS `sc_shop_store_css`;
 CREATE TABLE IF NOT EXISTS `sc_shop_store_css` (
-  `css` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `css` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` int(11) NOT NULL,
-  UNIQUE KEY `sc_shop_store_css_store_id_unique` (`store_id`)
+  `template` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  UNIQUE KEY `sc_shop_store_css_store_id_template_unique` (`store_id`,`template`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table s-cart.sc_shop_store_css: ~1 rows (approximately)
 DELETE FROM `sc_shop_store_css`;
 /*!40000 ALTER TABLE `sc_shop_store_css` DISABLE KEYS */;
-INSERT INTO `sc_shop_store_css` (`css`, `store_id`) VALUES
-	('\r\n.sc-overlay {\r\n  position: fixed;\r\n  top: 50%;\r\n  left: 50%;\r\n  transform: translate(-50%, -50%);\r\n  transform: -webkit-translate(-50%, -50%);\r\n  transform: -moz-translate(-50%, -50%);\r\n  transform: -ms-translate(-50%, -50%);\r\n  color:#1f222b;\r\n  z-index: 9999;\r\n  background: rgba(255,255,255,0.7);\r\n}\r\n  \r\n#sc-loading{\r\n  display: none;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  z-index: 50;\r\n  background: rgba(255,255,255,0.7);\r\n}\r\n/*end loading */\r\n  \r\n/*price*/\r\n.sc-new-price{\r\n  color:#FE980F;\r\n  font-size: 14px;\r\n  padding: 10px 5px;\r\n  font-weight:bold;\r\n  }\r\n  .sc-old-price {\r\n  text-decoration: line-through;\r\n  color: #a95d5d;\r\n  font-size: 13px;\r\n  padding: 10px;\r\n  }\r\n  /*end price*/\r\n.sc-product-build{\r\n  font-size: 20px;\r\n  font-weight: bold;\r\n}\r\n.sc-product-build img{\r\n  width: 50px;\r\n}\r\n.sc-product-group  img{\r\n  width: 100px;\r\n  cursor: pointer;\r\n  }\r\n.sc-product-group:hover{\r\n  box-shadow: 0px 0px 2px #999;\r\n}\r\n.sc-product-group:active{\r\n  box-shadow: 0px 0px 2px #ff00ff;\r\n}\r\n.sc-product-group.active{\r\n  box-shadow: 0px 0px 2px #ff00ff;\r\n}\r\n\r\n.sc-shipping-address td{\r\n  padding: 3px !important;\r\n}\r\n.sc-shipping-address textarea,\r\n.sc-shipping-address input[type="text"],\r\n.sc-shipping-address option{\r\n  width: 100%;\r\n  padding: 7px !important;\r\n}\r\n.row_cart>td{\r\n  vertical-align: middle !important;\r\n}\r\ninput[type="number"]{\r\n  text-align: center;\r\n  padding:2px;\r\n}\r\n.sc-notice{\r\n  clear: both;\r\n  clear: both;\r\n  font-size: 20px;\r\n  background: #f3f3f3;\r\n  width: 100%;\r\n}\r\nimg.new {\r\n  position: absolute;\r\n  right: 0px;\r\n  top: 0px;\r\n  padding: 0px !important;\r\n}\r\n.pointer {\r\n  cursor: pointer;\r\n}\r\n.add-to-cart-list {\r\n  padding: 5px 10px !important;\r\n  margin: 2px !important;\r\n  letter-spacing: 0px !important;\r\n  font-size: 12px !important;\r\n  border-radius: 5px;\r\n}\r\n.help-block {\r\n  font-size: 12px;\r\n  color: red;\r\n  font-style: italic;\r\n}', 1);
+INSERT INTO `sc_shop_store_css` (`css`, `store_id`, `template`) VALUES
+	('', 1, 's-cart-light');
 /*!40000 ALTER TABLE `sc_shop_store_css` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_subscribe
-DROP TABLE IF EXISTS `sc_shop_subscribe`;
 CREATE TABLE IF NOT EXISTS `sc_shop_subscribe` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `content` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1,
@@ -4887,10 +5033,9 @@ DELETE FROM `sc_shop_subscribe`;
 /*!40000 ALTER TABLE `sc_shop_subscribe` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_supplier
-DROP TABLE IF EXISTS `sc_shop_supplier`;
 CREATE TABLE IF NOT EXISTS `sc_shop_supplier` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alias` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4914,10 +5059,9 @@ INSERT INTO `sc_shop_supplier` (`id`, `name`, `alias`, `email`, `phone`, `image`
 /*!40000 ALTER TABLE `sc_shop_supplier` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_tax
-DROP TABLE IF EXISTS `sc_shop_tax`;
 CREATE TABLE IF NOT EXISTS `sc_shop_tax` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4930,11 +5074,10 @@ INSERT INTO `sc_shop_tax` (`id`, `name`, `value`) VALUES
 /*!40000 ALTER TABLE `sc_shop_tax` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_weight
-DROP TABLE IF EXISTS `sc_shop_weight`;
 CREATE TABLE IF NOT EXISTS `sc_shop_weight` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_shop_weight_name_unique` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4950,9 +5093,8 @@ INSERT INTO `sc_shop_weight` (`id`, `name`, `description`) VALUES
 /*!40000 ALTER TABLE `sc_shop_weight` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.vendor_category
-DROP TABLE IF EXISTS `vendor_category`;
 CREATE TABLE IF NOT EXISTS `vendor_category` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `alias` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 0,
@@ -4969,13 +5111,12 @@ DELETE FROM `vendor_category`;
 /*!40000 ALTER TABLE `vendor_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.vendor_category_description
-DROP TABLE IF EXISTS `vendor_category_description`;
 CREATE TABLE IF NOT EXISTS `vendor_category_description` (
   `vendor_category_id` int(11) NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   UNIQUE KEY `vendor_category_description_vendor_category_id_lang_unique` (`vendor_category_id`,`lang`),
   KEY `vendor_category_description_lang_index` (`lang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4986,7 +5127,6 @@ DELETE FROM `vendor_category_description`;
 /*!40000 ALTER TABLE `vendor_category_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.vendor_password_resets
-DROP TABLE IF EXISTS `vendor_password_resets`;
 CREATE TABLE IF NOT EXISTS `vendor_password_resets` (
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5000,7 +5140,6 @@ DELETE FROM `vendor_password_resets`;
 /*!40000 ALTER TABLE `vendor_password_resets` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.vendor_product_category
-DROP TABLE IF EXISTS `vendor_product_category`;
 CREATE TABLE IF NOT EXISTS `vendor_product_category` (
   `vendor_category_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -5013,9 +5152,8 @@ DELETE FROM `vendor_product_category`;
 /*!40000 ALTER TABLE `vendor_product_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.vendor_user
-DROP TABLE IF EXISTS `vendor_user`;
 CREATE TABLE IF NOT EXISTS `vendor_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

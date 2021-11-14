@@ -284,7 +284,7 @@ if (!function_exists('sc_process_domain_store') && !in_array('sc_process_domain_
      *
      * @return  [string]         [$domain]
      */
-    function sc_process_domain_store(string $domain)
+    function sc_process_domain_store(string $domain = null)
     {
         $domain = str_replace(['http://', 'https://'], '', $domain);
         $domain = Str::lower($domain);
