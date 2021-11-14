@@ -1,7 +1,7 @@
 <?php
 return [
     'core'             => '6.7',
-    'core-sub-version' => '6.7.0',
+    'core-sub-version' => '6.7.1',
     'homepage'         => 'https://s-cart.org',
     'name'             => 'S-Cart',
     'github'           => 'https://github.com/s-cart/s-cart',
@@ -9,4 +9,5 @@ return [
     'auth'             => 'Lanh Le',
     'email'            => 'lanhktc@gmail.com',
     'api_link'         => env('SC_API_LINK', 'https://api.s-cart.org/v3'),
+    'ecommerce_mode'   => env('SC_ECOMMERCE_MODE', 1),
 ];

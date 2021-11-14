@@ -10,7 +10,7 @@ Route::group(
     [
         'middleware' => SC_FRONT_MIDDLEWARE,
     ],
-    function () {
+    function () use($langUrl){
         foreach (glob(app_path() . '/Plugins/*/*/Route.php') as $filename) {
             require_once $filename;
         }
@@ -24,9 +24,11 @@ Route::group(
 //Include route component
 Route::middleware(SC_FRONT_MIDDLEWARE)
     ->namespace('App\Http\Controllers')
-    ->group(function () use ($suffix) {
+    ->group(function () use ($suffix, $langUrl) {
         foreach (glob(__DIR__ . '/Routes/*.php') as $filename) {
-            require_once $filename;
+            if (config('s-cart.ecommerce_mode', 1) || $filename == __DIR__ . '/Routes/content.php') {
+                require_once $filename;
+            }
         }
     });
 
@@ -46,11 +48,12 @@ Route::group(
             ->where(['lang' => '[a-zA-Z]{2}'])
             ->name('home.lang');
 
+        if (config('s-cart.ecommerce_mode', 1)) {
         //Route shop
         $prefixShop = sc_config('PREFIX_SHOP') ?? 'shop';
         Route::get($langUrl.$prefixShop, 'ShopContentController@shopProcessFront')
             ->name('shop');
-
+        }
         //Language
         Route::get('locale/{code}', function ($code) {
             session(['locale' => $code]);
@@ -67,6 +70,7 @@ Route::group(
             return redirect($urlBack);
         })->name('locale');
         
+        if (config('s-cart.ecommerce_mode', 1)) {
         //Currency
         Route::get('currency/{code}', function ($code) {
             session(['currency' => $code]);
@@ -76,7 +80,8 @@ Route::group(
 
             return back();
         })->name('currency');
-        
+        }
+
         //Process click banner
         Route::get('/banner/{id}', 'ShopContentController@clickBanner')
         ->name('banner.click');
