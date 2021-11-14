@@ -40,7 +40,7 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('code', 100)->unique();
-                $table->string('name', 100);
+                $table->string('name', 255);
             }
         );
         
@@ -49,9 +49,9 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_email_template',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 50);
+                $table->string('name', 255);
                 $table->string('group', 50);
-                $table->text('text');
+                $table->mediumText('text');
                 $table->integer('store_id')->default(1)->index();
                 $table->tinyInteger('status')->default(0);
             }
@@ -61,7 +61,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_language',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
                 $table->string('code', 50)->unique();
                 $table->string('icon', 100)->nullable();
                 $table->tinyInteger('status')->default(0);
@@ -74,7 +74,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_store_block',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
                 $table->string('position', 100);
                 $table->string('page', 200)->nullable();
                 $table->string('type', 200);
@@ -91,7 +91,7 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('key', 100)->unique();
-                $table->string('name', 100);
+                $table->string('name', 255);
             }
         );
 
@@ -100,7 +100,7 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('key', 100)->unique();
-                $table->string('name', 100);
+                $table->string('name', 255);
             }
         );
 
@@ -108,7 +108,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_link',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
                 $table->string('url', 100);
                 $table->string('target', 100);
                 $table->string('group', 100);
@@ -141,7 +141,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_brand',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
                 $table->string('alias', 120)->index();
                 $table->string('image', 255)->nullable();
                 $table->string('url', 100)->nullable();
@@ -168,9 +168,9 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->integer('category_id');
                 $table->string('lang', 10)->index();
-                $table->string('title', 200)->nullable();
+                $table->string('title', 255)->nullable();
                 $table->string('keyword', 200)->nullable();
-                $table->string('description', 300)->nullable();
+                $table->string('description', 500)->nullable();
                 $table->unique(['category_id', 'lang']);
             }
         );
@@ -179,7 +179,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_currency',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
                 $table->string('code', 10)->unique();
                 $table->string('symbol', 10);
                 $table->float('exchange_rate');
@@ -194,8 +194,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_order',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('customer_id')->index();
+                $table->bigIncrements('id');
+                $table->bigInteger('customer_id')->index();
                 $table->string('domain')->nullable();
                 $table->integer('subtotal')->nullable()->default(0);
                 $table->integer('shipping')->nullable()->default(0);
@@ -236,10 +236,10 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_order_detail',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('order_id');
-                $table->integer('product_id');
-                $table->string('name', 100);
+                $table->bigIncrements('id');
+                $table->bigInteger('order_id');
+                $table->bigInteger('product_id');
+                $table->string('name', 255);
                 $table->integer('price')->default(0);
                 $table->integer('qty')->default(0);
                 $table->integer('store_id')->default(1);
@@ -256,11 +256,11 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_order_history',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('order_id');
+                $table->bigIncrements('id');
+                $table->bigInteger('order_id');
                 $table->string('content', 300);
                 $table->integer('admin_id')->default(0);
-                $table->integer('customer_id')->default(0);
+                $table->bigInteger('customer_id')->default(0);
                 $table->integer('order_status_id')->default(0);
                 $table->dateTime('add_date');
             }
@@ -270,16 +270,16 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_order_status',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
             }
         );
 
         Schema::create(
             SC_DB_PREFIX.'shop_order_total',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('order_id');
-                $table->string('title', 100);
+                $table->bigIncrements('id');
+                $table->bigInteger('order_id');
+                $table->string('title', 255);
                 $table->string('code', 100);
                 $table->integer('value')->default(0);
                 $table->string('text', 200)->nullable();
@@ -303,10 +303,10 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->integer('page_id');
                 $table->string('lang', 10)->index();
-                $table->string('title', 200)->nullable();
+                $table->string('title', 255)->nullable();
                 $table->string('keyword', 200)->nullable();
-                $table->string('description', 300)->nullable();
-                $table->text('content')->nullable();
+                $table->string('description', 500)->nullable();
+                $table->mediumText('content')->nullable();
                 $table->unique(['page_id', 'lang']);
             }
         );
@@ -315,14 +315,14 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_payment_status',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
             }
         );
 
         Schema::create(
             SC_DB_PREFIX.'shop_product',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->string('sku', 50)->index();
                 $table->string('upc', 20)->nullable()->comment('upc code');
                 $table->string('ean', 20)->nullable()->comment('ean code');
@@ -359,12 +359,12 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_description',
             function (Blueprint $table) {
-                $table->integer('product_id');
+                $table->bigInteger('product_id');
                 $table->string('lang', 10)->index();
-                $table->string('name', 200)->nullable();
+                $table->string('name', 255)->nullable();
                 $table->string('keyword', 200)->nullable();
-                $table->string('description', 300)->nullable();
-                $table->text('content')->nullable();
+                $table->string('description', 500)->nullable();
+                $table->mediumText('content')->nullable();
                 $table->unique(['product_id', 'lang']);
             }
         );
@@ -372,17 +372,17 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_image',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->string('image', 255);
-                $table->integer('product_id')->default(0)->index();
+                $table->bigInteger('product_id')->default(0)->index();
             }
         );
 
         Schema::create(
             SC_DB_PREFIX.'shop_product_build',
             function (Blueprint $table) {
-                $table->integer('build_id');
-                $table->integer('product_id');
+                $table->bigInteger('build_id');
+                $table->bigInteger('product_id');
                 $table->integer('quantity');
                 $table->primary(['build_id', 'product_id']);
             }
@@ -391,8 +391,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_group',
             function (Blueprint $table) {
-                $table->integer('group_id');
-                $table->integer('product_id');
+                $table->bigInteger('group_id');
+                $table->bigInteger('product_id');
                 $table->primary(['group_id', 'product_id']);
             }
         );
@@ -400,7 +400,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_category',
             function (Blueprint $table) {
-                $table->integer('product_id');
+                $table->bigInteger('product_id');
                 $table->integer('category_id');
                 $table->primary(['product_id', 'category_id']);
             }
@@ -410,7 +410,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_attribute_group',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
                 $table->tinyInteger('status')->default(0);
                 $table->integer('sort')->default(0);
                 $table->string('type', 50)->comment('radio,select,checkbox');
@@ -420,10 +420,10 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_attribute',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('name', 100);
+                $table->bigIncrements('id');
+                $table->string('name', 255);
                 $table->integer('attribute_group_id');
-                $table->integer('product_id');
+                $table->bigInteger('product_id');
                 $table->integer('add_price')->default(0);
                 $table->integer('sort')->default(0);
                 $table->tinyInteger('status')->default(1);
@@ -436,7 +436,7 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('code', 100)->unique();
-                $table->string('name', 100);
+                $table->string('name', 255);
             }
         );
 
@@ -444,7 +444,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_shipping_status',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
             }
         );
 
@@ -463,7 +463,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_customer',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->bigIncrements('id');
                 $table->string('first_name', 100);
                 $table->string('last_name', 100)->nullable();
                 $table->string('first_name_kana', 100)->nullable();
@@ -472,8 +472,7 @@ class PrepareTablesShop extends Migration
                 $table->tinyInteger('sex')->nullable()->comment('0:women, 1:men');
                 $table->date('birthday')->nullable();
                 $table->string('password', 100)->nullable();
-                ;
-                $table->integer('address_id')->default(0)->index();
+                $table->bigInteger('address_id')->default(0)->index();
                 $table->string('postcode', 10)->nullable();
                 $table->string('address1', 100)->nullable();
                 $table->string('address2', 100)->nullable();
@@ -497,8 +496,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_customer_address',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('customer_id')->index();
+                $table->bigIncrements('id');
+                $table->bigInteger('customer_id')->index();
                 $table->string('first_name', 100);
                 $table->string('last_name', 100)->nullable();
                 $table->string('first_name_kana', 100)->nullable();
@@ -517,7 +516,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_supplier',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
                 $table->string('alias', 120)->index();
                 $table->string('email', 150)->nullable();
                 $table->string('phone', 20)->nullable();
@@ -534,7 +533,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_subscribe',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('email', 120)->index();
+                $table->string('email', 150)->index();
                 $table->string('phone', 20)->nullable();
                 $table->string('content', 300)->nullable();
                 $table->tinyInteger('status')->default(1);
@@ -548,7 +547,7 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('code', 10)->unique();
-                $table->string('name', 100);
+                $table->string('name', 255);
             }
         );
         
@@ -570,10 +569,10 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->integer('news_id');
                 $table->string('lang', 10);
-                $table->string('title', 200)->nullable();
+                $table->string('title', 255)->nullable();
                 $table->string('keyword', 200)->nullable();
-                $table->string('description', 300)->nullable();
-                $table->text('content')->nullable();
+                $table->string('description', 500)->nullable();
+                $table->mediumText('content')->nullable();
                 $table->unique(['news_id', 'lang']);
             }
         );
@@ -582,7 +581,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_sessions',
             function ($table) {
                 $table->string('id', 100)->unique();
-                $table->unsignedInteger('customer_id')->nullable();
+                $table->unsignedbigInteger('customer_id')->nullable();
                 $table->string('ip_address', 45)->nullable();
                 $table->text('user_agent')->nullable();
                 $table->text('payload');
@@ -642,7 +641,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'api_connection',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('description', 255);
+                $table->string('description', 500);
                 $table->string('apiconnection', 50)->unique();
                 $table->string('apikey', 128);
                 $table->date('expire')->nullable();
@@ -655,7 +654,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_tax',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 100);
+                $table->string('name', 255);
                 $table->integer('value')->default(0);
             }
         );
@@ -664,8 +663,8 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_weight',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 50)->unique();
-                $table->string('description', 100);
+                $table->string('name', 255)->unique();
+                $table->string('description', 500);
             }
         );
 
@@ -673,8 +672,8 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_length',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 50)->unique();
-                $table->string('description', 100);
+                $table->string('name', 255)->unique();
+                $table->string('description', 500);
             }
         );
 
@@ -715,7 +714,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_promotion',
             function (Blueprint $table) {
-                $table->integer('product_id')->primary();
+                $table->bigIncrements('product_id')->primary();
                 $table->integer('price_promotion');
                 $table->dateTime('date_start')->nullable();
                 $table->dateTime('date_end')->nullable();
@@ -727,8 +726,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_download',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('product_id');
+                $table->bigIncrements('id');
+                $table->bigInteger('product_id');
                 $table->string('path', 255);
             }
         );
@@ -739,7 +738,7 @@ class PrepareTablesShop extends Migration
                 $table->increments('id');
                 $table->string('type', 50)->index()->comment('product, customer');
                 $table->string('code', 100)->index();
-                $table->string('name', 250);
+                $table->string('name', 255);
                 $table->integer('required')->default(0);
                 $table->integer('status')->default(1);
                 $table->string('option', 50)->nullable()->comment('radio, select, input');
@@ -773,7 +772,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_store',
             function (Blueprint $table) {
-                $table->integer('product_id');
+                $table->bigInteger('product_id');
                 $table->integer('store_id');
                 $table->primary(['product_id', 'store_id']);
             }

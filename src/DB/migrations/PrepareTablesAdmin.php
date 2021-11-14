@@ -32,14 +32,14 @@ class PrepareTablesAdmin extends Migration
 
         Schema::create(SC_DB_PREFIX . 'admin_role', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50);
+            $table->string('name', 100);
             $table->string('slug', 50)->unique();
             $table->timestamps();
         });
 
         Schema::create(SC_DB_PREFIX . 'admin_permission', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 50)->unique();
+            $table->string('name', 100)->unique();
             $table->string('slug', 50)->unique();
             $table->text('http_uri')->nullable();
             $table->timestamps();
@@ -49,7 +49,7 @@ class PrepareTablesAdmin extends Migration
             $table->increments('id');
             $table->integer('parent_id')->default(0);
             $table->integer('sort')->default(0);
-            $table->string('title', 100);
+            $table->string('title', 255);
             $table->string('icon', 50);
             $table->string('uri', 255)->nullable();
             $table->integer('type')->default(0);
@@ -84,7 +84,7 @@ class PrepareTablesAdmin extends Migration
         Schema::create(SC_DB_PREFIX . 'admin_template', function (Blueprint $table) {
             $table->increments('id');
             $table->string('key', 100)->unique();
-            $table->string('name', 100);
+            $table->string('name', 255);
             $table->integer('status', 0)->default(0);
             $table->timestamps();
         });
@@ -139,10 +139,10 @@ class PrepareTablesAdmin extends Migration
         Schema::create(SC_DB_PREFIX . 'admin_store_description', function (Blueprint $table) {
             $table->integer('store_id');
             $table->string('lang', 10)->index();
-            $table->string('title', 200)->nullable();
-            $table->string('description', 300)->nullable();
+            $table->string('title', 255)->nullable();
+            $table->string('description', 500)->nullable();
             $table->string('keyword', 200)->nullable();
-            $table->text('maintain_content')->nullable();
+            $table->mediumText('maintain_content')->nullable();
             $table->string('maintain_note', 300)->nullable();
             $table->primary(['store_id', 'lang']);
         });
