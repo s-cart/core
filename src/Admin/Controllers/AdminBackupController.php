@@ -22,10 +22,11 @@ class AdminBackupController extends RootAdminController
             ->get()
             ->toArray();
 
+        $listFiles = glob(storage_path() . "/backups/*.sql");
         $download = request('download') ?? '';
         if ($download) {
             $file = storage_path() . "/backups/" . $download;
-            if (file_exists($file)) {
+            if (file_exists($file) && in_array($file, $listFiles)) {
                 $headers = array(
                     'Content-Type' => 'application/octet-stream',
                 );
@@ -33,7 +34,7 @@ class AdminBackupController extends RootAdminController
             }
         }
         $arrFiles = [];
-        foreach (glob(storage_path() . "/backups/*.sql") as $file) {
+        foreach ($listFiles as $file) {
             if (file_exists($file)) {
                 $fileInfo         = [];
                 $fileInfo['path'] = $file;
