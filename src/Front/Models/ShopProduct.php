@@ -91,15 +91,15 @@ class ShopProduct extends Model
     }
     public function getName()
     {
-        return $this->getText()->name;
+        return $this->getText()->name?? '';
     }
     public function getDescription()
     {
-        return $this->getText()->description;
+        return $this->getText()->description ?? '';
     }
     public function getKeyword()
     {
-        return $this->getText()->keyword;
+        return $this->getText()->keyword?? '';
     }
     public function getContent()
     {
