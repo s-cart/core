@@ -87,13 +87,13 @@ class ShopProduct extends Model
         return $this->descriptions()->where('lang', sc_get_locale())->first();
     }
     public function getName() {
-        return $this->getText()->name;
+        return $this->getText()->name?? '';
     }
     public function getDescription() {
-        return $this->getText()->description;
+        return $this->getText()->description?? '';
     }
     public function getKeyword() {
-        return $this->getText()->keyword;
+        return $this->getText()->keyword?? '';
     }
     public function getContent() {
         return $this->getText()->content;
