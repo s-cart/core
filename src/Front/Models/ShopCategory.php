@@ -39,15 +39,15 @@ class ShopCategory extends Model
     }
     public function getTitle()
     {
-        return $this->getText()->title;
+        return $this->getText()->title ?? '';
     }
     public function getDescription()
     {
-        return $this->getText()->description;
+        return $this->getText()->description?? '';
     }
     public function getKeyword()
     {
-        return $this->getText()->keyword;
+        return $this->getText()->keyword?? '';
     }
     //End  get text description
 
