@@ -81,7 +81,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_permission` (`id`, `name`, `slug`, `http_uri`
 ('9','Extension manager','extension.full', 'ANY::__SC_ADMIN_PREFIX__/template/*,ANY::__SC_ADMIN_PREFIX__/plugin/*', now()),
 ('10','Marketing manager','marketing.full', 'ANY::__SC_ADMIN_PREFIX__/shop_discount/*,ANY::__SC_ADMIN_PREFIX__/email_template/*,ANY::__SC_ADMIN_PREFIX__/customer/*,ANY::__SC_ADMIN_PREFIX__/subscribe/*,ANY::__SC_ADMIN_PREFIX__/seo/*', now()),
 ('11','Report manager','report.full', 'ANY::__SC_ADMIN_PREFIX__/report/*', now()),
-('12','CMS manager','cms.full', 'ANY::__SC_ADMIN_PREFIX__/page/*,ANY::__SC_ADMIN_PREFIX__/banner/*,ANY::__SC_ADMIN_PREFIX__/banner_type/*, ANY::__SC_ADMIN_PREFIX__/cms_category/*,ANY::__SC_ADMIN_PREFIX__/cms_content/*,ANY::__SC_ADMIN_PREFIX__/news/*', now()),
+('12','CMS full','cms.full', 'ANY::__SC_ADMIN_PREFIX__/page/*,ANY::__SC_ADMIN_PREFIX__/banner/*,ANY::__SC_ADMIN_PREFIX__/banner_type/*, ANY::__SC_ADMIN_PREFIX__/cms_category/*,ANY::__SC_ADMIN_PREFIX__/cms_content/*,ANY::__SC_ADMIN_PREFIX__/news/*', now()),
 ('13','Update config','change.config', 'POST::__SC_ADMIN_PREFIX__/store_config/update', now());
 
 /*admin_role*/
@@ -91,7 +91,8 @@ INSERT INTO `__SC_DB_PREFIX__admin_role` (`id`, `name`, `slug`, `created_at`) VA
 ('3', 'Manager', 'manager', now()),
 ('4', 'CMS', 'cms', now()),
 ('5', 'Accountant', 'accountant', now()),
-('6', 'Marketing', 'maketing', now());
+('6', 'Marketing', 'maketing', now()),
+('7', 'Admin CMS', 'admin_cms', now());
 
 INSERT INTO `__SC_DB_PREFIX__admin_template` (`id`, `key`, `name`, `status`,`created_at`) VALUES 
 ('1', 's-cart-light', 'S-Cart Light', 1, now());
@@ -122,7 +123,12 @@ INSERT INTO `__SC_DB_PREFIX__admin_role_permission` (`role_id`, `permission_id`,
 (6, 8, now()),
 (6, 10, now()),
 (6, 11, now()),
-(6, 12, now());
+(6, 12, now()),
+(7, 1, now()),
+(7, 4, now()),
+(7, 8, now()),
+(7, 12, now()),
+(7, 13, now());
 
 /*admin_role_user*/
 INSERT INTO `__SC_DB_PREFIX__admin_role_user` (`role_id`, `user_id`) VALUES  ('1', '1');
