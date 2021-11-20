@@ -663,7 +663,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_weight',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 255)->unique();
+                $table->string('name', 150)->unique();
                 $table->string('description', 500);
             }
         );
@@ -672,7 +672,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_length',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('name', 255)->unique();
+                $table->string('name', 150)->unique();
                 $table->string('description', 500);
             }
         );
