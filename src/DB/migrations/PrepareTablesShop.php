@@ -694,7 +694,7 @@ class PrepareTablesShop extends Migration
             'failed_jobs',
             function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('uuid', 200)->nullable()->unique();
+                $table->string('uuid', 150)->nullable()->unique();
                 $table->text('connection');
                 $table->text('queue');
                 $table->longText('payload');
