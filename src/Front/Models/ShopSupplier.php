@@ -70,7 +70,7 @@ class ShopSupplier extends Model
      * @param   [string]  $type  [id, alias]
      *
      */
-    public function getDetail($key, $type = null)
+    public function getDetail($key, $type = null, $status = 1)
     {
         if (empty($key)) {
             return null;
@@ -81,7 +81,7 @@ class ShopSupplier extends Model
             $data = $this->where($type, $key);
         }
 
-        $data = $data->where('status', 1)
+        $data = $data->where('status', $status)
             ->where('store_id', config('app.storeId'));
 
         return $data->first();

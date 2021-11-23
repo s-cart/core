@@ -78,7 +78,7 @@ class ShopPage extends Model
      * @param   [string]  $type  [id, alias]
      *
      */
-    public function getDetail($key, $type = null)
+    public function getDetail($key, $type = null, $status = 1)
     {
         if (empty($key)) {
             return null;
@@ -105,7 +105,7 @@ class ShopPage extends Model
         } else {
             $page = $page->where($type, $key);
         }
-        $page = $page->where($this->getTable() .'.status', 1);
+        $page = $page->where($this->getTable() .'.status', $status);
 
         return $page->first();
     }

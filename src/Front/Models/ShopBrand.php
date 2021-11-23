@@ -84,7 +84,7 @@ class ShopBrand extends Model
      * @param   [string]  $type  [id, alias]
      *
      */
-    public function getDetail($key, $type = null)
+    public function getDetail($key, $type = null, $status = 1)
     {
         if (empty($key)) {
             return null;
@@ -106,7 +106,7 @@ class ShopBrand extends Model
             $data = $data->where($tableBrandStore.'.store_id', $storeId);
         }
 
-        $data = $data->where($this->getTable().'.status', 1);
+        $data = $data->where($this->getTable().'.status', $status);
         return $data->first();
     }
 

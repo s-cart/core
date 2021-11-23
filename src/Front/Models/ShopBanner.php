@@ -50,12 +50,12 @@ class ShopBanner extends Model
      * @param   [int]  $status
      *
      */
-    public function getDetail($id)
+    public function getDetail($id, $status = 1)
     {
         $storeId = config('app.storeId');
         $dataSelect = $this->getTable().'.*';
         $data =  $this->selectRaw($dataSelect)
-            ->where('id', (int)$id)->where($this->getTable() .'.status', 1);
+            ->where('id', (int)$id)->where($this->getTable() .'.status', $status);
         if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
             $tableBannerStore = (new ShopBannerStore)->getTable();
             $tableStore = (new ShopStore)->getTable();

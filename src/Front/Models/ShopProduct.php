@@ -103,7 +103,7 @@ class ShopProduct extends Model
     }
     public function getContent()
     {
-        return $this->getText()->content;
+        return $this->getText()->content ?? '';
     }
     //End  get text description
 
@@ -181,7 +181,7 @@ class ShopProduct extends Model
      * @param  [string] $type id, sku, alias
      * @return [type]     [description]
      */
-    public function getDetail($key = null, $type = null, $storeId = null)
+    public function getDetail($key = null, $type = null, $storeId = null, $status = 1)
     {
         if (empty($key)) {
             return null;
@@ -234,7 +234,7 @@ class ShopProduct extends Model
             return null;
         }
 
-        $product = $product->where($this->getTable().'.status', 1);
+        $product = $product->where($this->getTable().'.status', $status);
         $product = $product->selectRaw($dataSelect);
         $product = $product
             ->with('images')

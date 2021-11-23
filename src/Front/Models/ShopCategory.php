@@ -106,7 +106,7 @@ class ShopCategory extends Model
      * @param   [string]  $type  [id, alias]
      *
      */
-    public function getDetail($key, $type = null)
+    public function getDetail($key, $type = null, $status = 1)
     {
         if (empty($key)) {
             return null;
@@ -132,7 +132,7 @@ class ShopCategory extends Model
         } else {
             $category = $category->where($type, $key);
         }
-        $category = $category->where($this->getTable().'.status', 1);
+        $category = $category->where($this->getTable().'.status', $status);
         return $category->first();
     }
     

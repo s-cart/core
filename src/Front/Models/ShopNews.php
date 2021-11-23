@@ -87,7 +87,7 @@ class ShopNews extends Model
      * @param   [string]  $type  [id, alias]
      *
      */
-    public function getDetail($key, $type = null)
+    public function getDetail($key, $type = null, $status = 1)
     {
         if (empty($key)) {
             return null;
@@ -113,7 +113,7 @@ class ShopNews extends Model
         } else {
             $news = $news->where($type, $key);
         }
-        $news = $news->where($this->getTable() .'.status', 1)
+        $news = $news->where($this->getTable() .'.status', $status)
             ->first();
         return $news;
     }
