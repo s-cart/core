@@ -4,6 +4,7 @@ namespace SCart\Core\Admin\Controllers;
 use App\Http\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminStoreBlockContent;
 use SCart\Core\Admin\Models\AdminStore;
+use SCart\Core\Admin\Models\AdminPage;
 use SCart\Core\Front\Models\ShopLayoutPage;
 use SCart\Core\Front\Models\ShopLayoutPosition;
 use Validator;
@@ -17,7 +18,7 @@ class AdminStoreBlockController extends RootAdminController
     {
         parent::__construct();
         $this->layoutPage = ShopLayoutPage::getPages();
-        $this->layoutType = ['html'=>'Html', 'view' => 'View'];
+        $this->layoutType = ['html'=>'Html', 'view' => 'View', 'page' => 'Page'];
         $this->layoutPosition = ShopLayoutPosition::getPositions();
     }
 
@@ -131,6 +132,7 @@ class AdminStoreBlockController extends RootAdminController
     public function create()
     {
         $listViewBlock = $this->getListViewBlock();
+        $listViewPage = $this->getListPageBlock();
         $data = [
             'title'             => sc_language_render('admin.store_block.add_new_title'),
             'subTitle'          => '',
@@ -140,6 +142,7 @@ class AdminStoreBlockController extends RootAdminController
             'layoutPage'        => $this->layoutPage,
             'layoutType'        => $this->layoutType,
             'listViewBlock'     => $listViewBlock,
+            'listViewPage'     => $listViewPage,
             'layout'            => [],
             'url_action'        => sc_route_admin('admin_store_block.create'),
         ];
@@ -199,6 +202,7 @@ class AdminStoreBlockController extends RootAdminController
         }
 
         $listViewBlock = $this->getListViewBlock($layout->store_id);
+        $listViewPage = $this->getListPageBlock($layout->store_id);
 
         $data = [
             'title' => sc_language_render('action.edit'),
@@ -209,6 +213,7 @@ class AdminStoreBlockController extends RootAdminController
             'layoutPage' => $this->layoutPage,
             'layoutType' => $this->layoutType,
             'listViewBlock' => $listViewBlock,
+            'listViewPage' => $listViewPage,
             'layout' => $layout,
             'storeId' => $layout->store_id,
             'url_action' => sc_route_admin('admin_store_block.edit', ['id' => $layout['id']]),
@@ -302,6 +307,17 @@ class AdminStoreBlockController extends RootAdminController
         return $arrView;
     }
 
+    /**
+     * Get list alias page
+     *
+     * @return  [type]  [return description]
+     */
+    public function getListPageBlock($storeId = null)
+    {
+        $arrPage = (new AdminPage)->getListPageAlias($storeId);
+        return $arrPage;
+    }
+
     
     /**
      * Check permisison item
@@ -335,6 +351,27 @@ class AdminStoreBlockController extends RootAdminController
             $html .='<span class="form-text"><i class="fa fa-info-circle"></i>';
             $html .= sc_language_render('admin.store_block.helper_view', ['template' => sc_store('template', $storeId)]);
             $html .='</span>';
+        }
+        return $html;
+    }
+
+    /**
+     * Get json list page block html
+     *
+     * @return void
+     */
+    public function getListPageBlockHtml() {
+        if (!request()->ajax()) {
+            $html =  '';
+        } else {
+            $html = '<select name="text" class="form-control text">';
+            $storeId = request('store_id');
+            $arrPage = (new AdminPage)->getListPageAlias($storeId);
+            foreach ($arrPage as $value) {
+                $html .='<option value="'.$value.'">'.$value;
+                $html .='</option>';
+            }
+            $html .='</select>';
         }
         return $html;
     }

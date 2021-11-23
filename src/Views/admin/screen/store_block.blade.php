@@ -75,13 +75,19 @@
                             </div>
 
                             <div class="form-group row {{ $errors->has('type') ? ' text-red' : '' }}">
-                                <label for="type" class="col-sm-2 col-form-label">{{ sc_language_render('admin.store_block.type') }}</label>
+                                <label class="col-sm-2 col-form-label">{{ sc_language_render('admin.store_block.type') }}</label>
                                 <div class="col-sm-8">
                             @if ($layout)
-                                <label class="radio-inline"><input type="radio" name="type" value="{!! $layout['type'] !!}" checked>{{ $layoutType[$layout['type']]}}</label>
+                            <div class="icheck-primary d-inline">
+                                <input type="radio" id="radio-default" name="type" value="{!! $layout['type'] !!}" checked>
+                                <label for="radio-default" class="radio-inline">{{ $layoutType[$layout['type']]}}</label>
+                            </div>
                             @else
                                 @foreach ( $layoutType as $key => $type)
-                                    <label class="radio-inline"><input type="radio" name="type" value="{!! $key !!}"  {{ (old('type',$layout['type']??'') == $key)?'checked':'' }}>{{ $type }}</label>
+                                <div class="icheck-primary d-inline">
+                                    <input type="radio" id="radio-{{ $key }}" name="type" value="{!! $key !!}" {{ (old('type',$layout['type']??'') == $key)?'checked':'' }}>
+                                    <label for="radio-{{ $key }}" class="radio-inline">{{ $type }}</label>
+                                </div>
                                 @endforeach
                             @endif
                                         @if ($errors->has('type'))
@@ -91,18 +97,18 @@
                                         @endif
                                 </div>
                             </div>
-
                             <div class="form-group row {{ $errors->has('text') ? ' text-red' : '' }}">
                                 <label for="text" class="col-sm-2 col-form-label">{{ sc_language_render('admin.store_block.text') }}</label>
                                 <div class="col-sm-8">
                                     @php
                                         $dataType = old('type',$layout['type']??'')
                                     @endphp
-                                    @if ($dataType =='html')
-                                        <textarea name="text" class="form-control text" rows="5" placeholder="Layout text">
-                                            {{ old('text',$layout['text']??'') }}
-                                        </textarea>
-                                    <span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_html') }}</span>
+                                    @if ($dataType =='page')
+                                    <select name="text" class="form-control text">
+                                        @foreach ($listViewPage as $view)
+                                            <option value="{!! $view !!}" {{ (old('text',$layout['text']??'') == $view)?'selected':'' }} >{{ $view }}</option>
+                                        @endforeach
+                                    </select>
                                     @elseif ($dataType =='view')
                                         <select name="text" class="form-control text">
                                             @foreach ($listViewBlock as $view)
@@ -114,6 +120,7 @@
                                         <textarea name="text" class="form-control text" rows="5" placeholder="Layout text">
                                             {!! old('text',$layout['text']??'') !!}
                                         </textarea>
+                                        <span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_html') }}</span>
                                     @endif
 
 
@@ -228,25 +235,47 @@ $(function () {
         $('#loading').show();
         $.ajax({
             method: 'get',
-            url: '{{ sc_route_admin('admin_store_block.listblock') }}?store_id='+storeId,
+            url: '{{ sc_route_admin('admin_store_block.listblock_view') }}?store_id='+storeId,
             success: function (data) {
                 obj.before(data);
                 obj.remove();
                 $('#loading').hide();
             }
         });
-    }
-    });
+    }else if(type =='page'){
 
-    $('[name="store_id"]').change(function(){
-        if ($('[name="type"]:checked').val() != 'view') {
-            return;
-        }
-        var storeId = $(this).val();
+        var storeId = $('[name="store_id"]').val() ? $('[name="store_id"]').val() : {{ session('adminStoreId') }};
+
         $('#loading').show();
         $.ajax({
             method: 'get',
-            url: '{{ sc_route_admin('admin_store_block.listblock') }}?store_id='+storeId,
+            url: '{{ sc_route_admin('admin_store_block.listblock_page') }}?store_id='+storeId,
+            success: function (data) {
+                obj.before(data);
+                obj.remove();
+                $('#loading').hide();
+            }
+        });
+        }
+    });
+
+    $('[name="store_id"]').change(function(){
+        var type_checked = $('[name="type"]:checked').val();
+        if (type_checked != 'view' || type_checked != 'page') {
+            return;
+        }
+        var storeId = $(this).val();
+        var url_type = '';
+        if (type_checked == 'view') {
+            url_type = '{{ sc_route_admin('admin_store_block.listblock_view') }}?store_id='+storeId;
+        }
+        if (type_checked == 'page') {
+            url_type = '{{ sc_route_admin('admin_store_block.listblock_page') }}?store_id='+storeId;
+        }
+        $('#loading').show();
+        $.ajax({
+            method: 'get',
+            url: url_type,
             success: function (data) {
                 var obj = $('[name="text"]');
                 obj.next('.form-text').remove();
