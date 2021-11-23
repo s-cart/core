@@ -82,9 +82,10 @@ class ShopBrand extends Model
      *
      * @param   [string]  $key     [$key description]
      * @param   [string]  $type  [id, alias]
+     * @param   [int]  $checkActive
      *
      */
-    public function getDetail($key, $type = null, $status = 1)
+    public function getDetail($key, $type = null, $checkActive = 1)
     {
         if (empty($key)) {
             return null;
@@ -105,8 +106,9 @@ class ShopBrand extends Model
             $data = $data->where($tableStore . '.status', '1');
             $data = $data->where($tableBrandStore.'.store_id', $storeId);
         }
-
-        $data = $data->where($this->getTable().'.status', $status);
+        if ($checkActive) {
+            $data = $data->where($this->getTable() .'.status', 1);
+        }
         return $data->first();
     }
 

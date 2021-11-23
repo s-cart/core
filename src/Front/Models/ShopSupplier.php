@@ -68,9 +68,10 @@ class ShopSupplier extends Model
      *
      * @param   [string]  $key     [$key description]
      * @param   [string]  $type  [id, alias]
+     * @param   [int]  $checkActive
      *
      */
-    public function getDetail($key, $type = null, $status = 1)
+    public function getDetail($key, $type = null, $checkActive = 1)
     {
         if (empty($key)) {
             return null;
@@ -80,9 +81,10 @@ class ShopSupplier extends Model
         } else {
             $data = $this->where($type, $key);
         }
-
-        $data = $data->where('status', $status)
-            ->where('store_id', config('app.storeId'));
+        if ($checkActive) {
+            $data = $data->where('status', 1);
+        }
+        $data = $data->where('store_id', config('app.storeId'));
 
         return $data->first();
     }

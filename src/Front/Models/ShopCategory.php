@@ -104,9 +104,10 @@ class ShopCategory extends Model
      *
      * @param   [string]  $key     [$key description]
      * @param   [string]  $type  [id, alias]
+     * @param   [int]  $checkActive
      *
      */
-    public function getDetail($key, $type = null, $status = 1)
+    public function getDetail($key, $type = null, $checkActive = 1)
     {
         if (empty($key)) {
             return null;
@@ -132,7 +133,9 @@ class ShopCategory extends Model
         } else {
             $category = $category->where($type, $key);
         }
-        $category = $category->where($this->getTable().'.status', $status);
+        if ($checkActive) {
+            $category = $category->where($this->getTable() .'.status', 1);
+        }
         return $category->first();
     }
     

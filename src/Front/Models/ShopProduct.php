@@ -179,9 +179,9 @@ class ShopProduct extends Model
      * Get product detail
      * @param  [string] $key [description]
      * @param  [string] $type id, sku, alias
-     * @return [type]     [description]
+     * @return [int]  $checkActive
      */
-    public function getDetail($key = null, $type = null, $storeId = null, $status = 1)
+    public function getDetail($key = null, $type = null, $storeId = null, $checkActive = 1)
     {
         if (empty($key)) {
             return null;
@@ -234,7 +234,9 @@ class ShopProduct extends Model
             return null;
         }
 
-        $product = $product->where($this->getTable().'.status', $status);
+        if ($checkActive) {
+            $product = $product->where($this->getTable() .'.status', 1);
+        }
         $product = $product->selectRaw($dataSelect);
         $product = $product
             ->with('images')
