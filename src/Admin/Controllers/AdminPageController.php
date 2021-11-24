@@ -210,13 +210,11 @@ class AdminPageController extends RootAdminController
         }
         AdminPage::insertDescriptionAdmin($dataDes);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $page->stores()->detach();
-            if ($shopStore) {
-                $page->stores()->attach($shopStore);
-            }
+        $shopStore = $data['shop_store'] ?? [session('adminStoreId')];
+
+        $page->stores()->detach();
+        if ($shopStore) {
+            $page->stores()->attach($shopStore);
         }
 
         sc_clear_cache('cache_page');
@@ -304,13 +302,11 @@ class AdminPageController extends RootAdminController
         }
         AdminPage::insertDescriptionAdmin($dataDes);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $page->stores()->detach();
-            if ($shopStore) {
-                $page->stores()->attach($shopStore);
-            }
+        $shopStore = $data['shop_store'] ?? [session('adminStoreId')];
+        
+        $page->stores()->detach();
+        if ($shopStore) {
+            $page->stores()->attach($shopStore);
         }
 
         sc_clear_cache('cache_page');

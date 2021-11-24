@@ -131,13 +131,11 @@ class AdminBrandController extends RootAdminController
         ];
         $obj = ShopBrand::create($dataInsert);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $obj->stores()->detach();
-            if ($shopStore) {
-                $obj->stores()->attach($shopStore);
-            }
+
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $obj->stores()->detach();
+        if ($shopStore) {
+            $obj->stores()->attach($shopStore);
         }
 
         return redirect()->route('admin_brand.index')->with('success', sc_language_render('action.create_success'));
@@ -247,13 +245,10 @@ class AdminBrandController extends RootAdminController
 
         $brand->update($dataUpdate);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $brand->stores()->detach();
-            if ($shopStore) {
-                $brand->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $brand->stores()->detach();
+        if ($shopStore) {
+            $brand->stores()->attach($shopStore);
         }
 //
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));

@@ -170,13 +170,10 @@ class AdminStoreLinkController extends RootAdminController
         ];
         $link = AdminLink::createLinkAdmin($dataInsert);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $link->stores()->detach();
-            if ($shopStore) {
-                $link->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $link->stores()->detach();
+        if ($shopStore) {
+            $link->stores()->attach($shopStore);
         }
 
         return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.create_success'));
@@ -240,13 +237,10 @@ class AdminStoreLinkController extends RootAdminController
         ];
         $link->update($dataUpdate);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $link->stores()->detach();
-            if ($shopStore) {
-                $link->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $link->stores()->detach();
+        if ($shopStore) {
+            $link->stores()->attach($shopStore);
         }
 
         return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.edit_success'));

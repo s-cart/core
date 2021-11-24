@@ -561,13 +561,10 @@ class AdminProductController extends RootAdminController
             $product->categories()->attach($category);
         }
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $product->stores()->detach();
-            if ($shopStore) {
-                $product->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $product->stores()->detach();
+        if ($shopStore) {
+            $product->stores()->attach($shopStore);
         }
 
         //Insert group
@@ -882,13 +879,10 @@ class AdminProductController extends RootAdminController
         }
         $product->update($dataUpdate);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $product->stores()->detach();
-            if ($shopStore) {
-                $product->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $product->stores()->detach();
+        if ($shopStore) {
+            $product->stores()->attach($shopStore);
         }
 
         //Update custom field

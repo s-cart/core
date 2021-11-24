@@ -203,15 +203,11 @@ class AdminBannerController extends RootAdminController
         ];
         $banner = AdminBanner::createBannerAdmin($dataInsert);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $banner->stores()->detach();
-            if ($shopStore) {
-                $banner->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $banner->stores()->detach();
+        if ($shopStore) {
+            $banner->stores()->attach($shopStore);
         }
-
         return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.create_success'));
     }
 
@@ -275,13 +271,10 @@ class AdminBannerController extends RootAdminController
         ];
         $banner->update($dataUpdate);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $banner->stores()->detach();
-            if ($shopStore) {
-                $banner->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $banner->stores()->detach();
+        if ($shopStore) {
+            $banner->stores()->attach($shopStore);
         }
 
         return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.edit_success'));

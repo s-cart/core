@@ -213,13 +213,10 @@ class AdminNewsController extends RootAdminController
         }
         AdminNews::insertDescriptionAdmin($dataDes);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $news->stores()->detach();
-            if ($shopStore) {
-                $news->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $news->stores()->detach();
+        if ($shopStore) {
+            $news->stores()->attach($shopStore);
         }
 
         sc_clear_cache('cache_news');
@@ -307,13 +304,10 @@ class AdminNewsController extends RootAdminController
         }
         AdminNews::insertDescriptionAdmin($dataDes);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
-            // If multi-store
-            $shopStore        = $data['shop_store'] ?? [];
-            $news->stores()->detach();
-            if ($shopStore) {
-                $news->stores()->attach($shopStore);
-            }
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $news->stores()->detach();
+        if ($shopStore) {
+            $news->stores()->attach($shopStore);
         }
 
         sc_clear_cache('cache_news');
