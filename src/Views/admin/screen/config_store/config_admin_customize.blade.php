@@ -7,6 +7,7 @@
       @foreach ($configCustomize as $config)
       <tr>
         <td>{{ sc_language_render($config->detail) }}</td>
+        <td>{{ $config->key }}</td>
         <td><a href="#" class="editable editable-click" data-name="{{ $config->key }}" data-type="text" data-pk="{{ $config->key }}" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render($config->detail) }}" data-value="{{ sc_config($config->key, $storeId) }}" data-original-title="" title=""></a></td>
       </tr>
     @endforeach
