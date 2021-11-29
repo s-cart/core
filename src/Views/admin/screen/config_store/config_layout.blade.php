@@ -6,6 +6,10 @@
     <div class="card">
       <div class="card-body table-responsivep-0">
        <table class="table table-hover box-body text-wrap table-bordered">
+        <tr>
+          <th>{{ sc_language_quickly('admin.admin_custom_config.add_new_detail', 'Key detail') }}</th>
+          <th>{{ sc_language_quickly('admin.admin_custom_config.add_new_value', 'Value') }}</th>
+        </tr>
          <tbody>
            @foreach ($configLayout as $config)
            <tr>

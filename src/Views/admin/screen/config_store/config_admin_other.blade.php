@@ -4,7 +4,10 @@
   <div class="card-body table-responsive">
    <table class="table table-hover box-body text-wrap table-bordered">
      <tbody>
-
+      <tr>
+        <th>{{ sc_language_quickly('admin.admin_custom_config.add_new_detail', 'Key detail') }}</th>
+        <th></th>
+      </tr>
       <tr>
         <td>{{ sc_language_render('admin.env.ADMIN_NAME') }}</td>
         <td><a href="#" class="editable-required editable editable-click" data-name="ADMIN_NAME" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.ADMIN_NAME') }}" data-value="{{ sc_config('ADMIN_NAME', $storeId) }}" data-original-title="" title=""></a></td>

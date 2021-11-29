@@ -201,4 +201,32 @@ class AdminStoreConfigController extends RootAdminController
             ]
         );
     }
+
+    /**
+     * Add new config admin
+     *
+     * @return  [type]  [return description]
+     */
+    public function addNew() {
+        $data = request()->all();
+        $key = $data['key'] ?? '';
+        $value = $data['value'] ?? '';
+        $detail = $data['detail'] ?? '';
+        $storeId = $data['storeId'] ?? '';
+        if (!$key) {
+            return redirect()->back()->with('error', 'Key: '.sc_language_render('admin.not_empty'));
+        }
+        $group = $data['group'] ?? 'admin_custom_config';
+        $dataUpdate = ['key' => $key, 'value' => $value, 'code' => $group, 'store_id' => $storeId, 'detail' => $detail];
+        if (AdminConfig::where(['key' => $key, 'store_id' => $storeId])->first()) {
+            return redirect()->back()->with('error', sc_language_quickly('admin.admin_custom_config.key_exist', 'Key already exist'));
+        }
+        AdminConfig::insert($dataUpdate);
+        return redirect()->back()->with('success', sc_language_render('action.update_success'));
+    }
+
+    public function remove() {
+        $id = request('id');
+        
+    }
 }
