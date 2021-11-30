@@ -213,6 +213,11 @@ class AdminStoreConfigController extends RootAdminController
         $value = $data['value'] ?? '';
         $detail = $data['detail'] ?? '';
         $storeId = $data['storeId'] ?? '';
+
+        if (session('adminStoreId') != SC_ID_ROOT && $storeId != session('adminStoreId')) {
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': storeId#' . $storeId]);
+        }
+
         if (!$key) {
             return redirect()->back()->with('error', 'Key: '.sc_language_render('admin.not_empty'));
         }
@@ -225,8 +230,19 @@ class AdminStoreConfigController extends RootAdminController
         return redirect()->back()->with('success', sc_language_render('action.update_success'));
     }
 
-    public function remove() {
-        $id = request('id');
-        
+    /**
+     * Remove config
+     *
+     * @return  [type]  [return description]
+     */
+    public function delete() {
+        $key = request('key');
+        $storeId = request('storeId');
+
+        if (session('adminStoreId') != SC_ID_ROOT && $storeId != session('adminStoreId')) {
+            return response()->json(['error' => 1, 'msg' => sc_language_render('admin.remove_dont_permisison') . ': storeId#' . $storeId]);
+        }
+        AdminConfig::where('key', $key)->where('store_id', $storeId)->delete();
+        return response()->json(['error' => 0, 'msg' => sc_language_render('action.update_success')]);
     }
 }
