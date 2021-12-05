@@ -188,7 +188,7 @@ class AdminCategoryController extends RootAdminController
                 'alias'                  => 'required|unique:"'.AdminCategory::class.'",alias|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
                 'descriptions.*.title'   => 'required|string|max:200',
                 'descriptions.*.keyword' => 'nullable|string|max:200',
-                'descriptions.*.description' => 'nullable|string|max:300',
+                'descriptions.*.description' => 'nullable|string|max:500',
             ],
             [
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.category.title')]),
@@ -287,7 +287,7 @@ class AdminCategoryController extends RootAdminController
             'alias'                  => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100|unique:"'.AdminCategory::class.'",alias,' . $id . '',
             'descriptions.*.title'   => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
-            'descriptions.*.description' => 'nullable|string|max:300',
+            'descriptions.*.description' => 'nullable|string|max:500',
             ],
             [
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.category.title')]),

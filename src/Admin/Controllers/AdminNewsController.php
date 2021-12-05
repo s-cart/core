@@ -178,7 +178,7 @@ class AdminNewsController extends RootAdminController
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
             'descriptions.*.title' => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
-            'descriptions.*.description' => 'nullable|string|max:300',
+            'descriptions.*.description' => 'nullable|string|max:500',
             ],
             [
                 'alias.regex' => sc_language_render('admin.news.alias_validate'),
@@ -267,7 +267,7 @@ class AdminNewsController extends RootAdminController
             [
             'descriptions.*.title' => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
-            'descriptions.*.description' => 'nullable|string|max:300',
+            'descriptions.*.description' => 'nullable|string|max:500',
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
             ],
             [

@@ -484,7 +484,7 @@ class AdminProductController extends RootAdminController
                     'category'                   => 'required',
                     'descriptions.*.name'        => 'required|string|max:200',
                     'descriptions.*.keyword'     => 'nullable|string|max:200',
-                    'descriptions.*.description' => 'nullable|string|max:300',
+                    'descriptions.*.description' => 'nullable|string|max:500',
                 ];
                 $arrMsg = [
                     'descriptions.*.name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('product.name')]),
@@ -757,7 +757,7 @@ class AdminProductController extends RootAdminController
                     'minimum' => 'numeric|min:0',
                     'descriptions.*.name' => 'required|string|max:200',
                     'descriptions.*.keyword' => 'nullable|string|max:200',
-                    'descriptions.*.description' => 'nullable|string|max:300',
+                    'descriptions.*.description' => 'nullable|string|max:500',
                     'descriptions.*.content' => 'required|string',
                     'category' => 'required',
                     'sku' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|product_sku_unique:'.$id,
@@ -792,7 +792,7 @@ class AdminProductController extends RootAdminController
                     'minimum' => 'numeric|min:0',
                     'descriptions.*.name' => 'required|string|max:200',
                     'descriptions.*.keyword' => 'nullable|string|max:200',
-                    'descriptions.*.description' => 'nullable|string|max:300',
+                    'descriptions.*.description' => 'nullable|string|max:500',
                     'category' => 'required',
                     'sku' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|product_sku_unique:'.$id,
                     'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:120|product_alias_unique:'.$id,
@@ -821,7 +821,7 @@ class AdminProductController extends RootAdminController
                     'sort' => 'numeric|min:0',
                     'descriptions.*.name' => 'required|string|max:200',
                     'descriptions.*.keyword' => 'nullable|string|max:200',
-                    'descriptions.*.description' => 'nullable|string|max:300',
+                    'descriptions.*.description' => 'nullable|string|max:500',
                 ];
                 $arrMsg = [
                     'sku.regex'                    => sc_language_render('product.sku_validate'),
