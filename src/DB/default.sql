@@ -81,7 +81,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_permission` (`id`, `name`, `slug`, `http_uri`
 ('9','Extension manager','extension.full', 'ANY::__SC_ADMIN_PREFIX__/template/*,ANY::__SC_ADMIN_PREFIX__/plugin/*', now()),
 ('10','Marketing manager','marketing.full', 'ANY::__SC_ADMIN_PREFIX__/shop_discount/*,ANY::__SC_ADMIN_PREFIX__/email_template/*,ANY::__SC_ADMIN_PREFIX__/customer/*,ANY::__SC_ADMIN_PREFIX__/subscribe/*,ANY::__SC_ADMIN_PREFIX__/seo/*', now()),
 ('11','Report manager','report.full', 'ANY::__SC_ADMIN_PREFIX__/report/*', now()),
-('12','CMS full','cms.full', 'ANY::__SC_ADMIN_PREFIX__/page/*,ANY::__SC_ADMIN_PREFIX__/banner/*,ANY::__SC_ADMIN_PREFIX__/banner_type/*, ANY::__SC_ADMIN_PREFIX__/cms_category/*,ANY::__SC_ADMIN_PREFIX__/cms_content/*,ANY::__SC_ADMIN_PREFIX__/news/*', now()),
+('12','CMS full','cms.full', 'ANY::__SC_ADMIN_PREFIX__/page/*,ANY::__SC_ADMIN_PREFIX__/banner/*,ANY::__SC_ADMIN_PREFIX__/banner_type/*,ANY::__SC_ADMIN_PREFIX__/cms_category/*,ANY::__SC_ADMIN_PREFIX__/cms_content/*,ANY::__SC_ADMIN_PREFIX__/news/*', now()),
 ('13','Update config','change.config', 'POST::__SC_ADMIN_PREFIX__/store_config/update', now());
 
 /*admin_role*/
