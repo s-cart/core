@@ -185,8 +185,8 @@ CREATE TABLE IF NOT EXISTS `oauth_clients` (
 DELETE FROM `oauth_clients`;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-	('950a5a82-e189-4810-9487-e7273dd97209', NULL, 'SCart Personal Access Client', 'ZQ9j39hW4CegXUJbI4lzzVa4IeygyFKEBmqAGGZT', NULL, 'http://localhost', 1, 0, 0, '2021-12-05 22:10:07', '2021-12-05 22:10:07'),
-	('950a5a83-2f19-4d0c-b6d4-7f61bcada97d', NULL, 'SCart Password Grant Client', 'EqvXZdnxUmuoXHfEPlnskwdky9jYFUqmISjEiOW4', 'users', 'http://localhost', 0, 1, 0, '2021-12-05 22:10:07', '2021-12-05 22:10:07');
+	('950e62f1-6cab-48cf-83fb-05ba19ecc6a9', NULL, 'SCart Personal Access Client', 'bfTfatwsCUqYKATMyi5iIBKY4U1NoEy3Xw15NDRz', NULL, 'http://localhost', 1, 0, 0, '2021-12-07 22:17:00', '2021-12-07 22:17:00'),
+	('950e62f1-70ff-4200-8486-9b707db65df9', NULL, 'SCart Password Grant Client', 'wIBqumi1BbR3e8eRD5avZ60yQjQ07sv6B50GDDo6', 'users', 'http://localhost', 0, 1, 0, '2021-12-07 22:17:00', '2021-12-07 22:17:00');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_personal_access_clients
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
 DELETE FROM `oauth_personal_access_clients`;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-	(1, '950a5a82-e189-4810-9487-e7273dd97209', '2021-12-05 22:10:07', '2021-12-05 22:10:07');
+	(1, '950e62f1-6cab-48cf-83fb-05ba19ecc6a9', '2021-12-07 22:17:00', '2021-12-07 22:17:00');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_refresh_tokens
@@ -237,9 +237,9 @@ CREATE TABLE IF NOT EXISTS `sc_admin_config` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `sc_admin_config_key_store_id_unique` (`key`,`store_id`),
   KEY `sc_admin_config_code_index` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_admin_config: ~145 rows (approximately)
+-- Dumping data for table s-cart.sc_admin_config: ~143 rows (approximately)
 DELETE FROM `sc_admin_config`;
 /*!40000 ALTER TABLE `sc_admin_config` DISABLE KEYS */;
 INSERT INTO `sc_admin_config` (`id`, `group`, `code`, `key`, `value`, `security`, `store_id`, `sort`, `detail`) VALUES
@@ -382,12 +382,10 @@ INSERT INTO `sc_admin_config` (`id`, `group`, `code`, `key`, `value`, `security`
 	(137, '', 'admin_custom_config', 'twitter_url', 'https://twitter.com/ecommercescart', 0, 1, 0, 'admin.admin_custom_config.twitter_url'),
 	(138, '', 'admin_custom_config', 'instagram_url', '#', 0, 1, 0, 'admin.admin_custom_config.instagram_url'),
 	(139, '', 'admin_custom_config', 'youtube_url', 'https://www.youtube.com/channel/UCR8kitefby3N6KvvawQVqdg/videos', 0, 1, 0, 'admin.admin_custom_config.youtube_url'),
-	(140, '', 'config_layout', 'link_home_page', '1', 0, 1, 0, 'admin.config_layout.link_home_page'),
-	(141, '', 'config_layout', 'link_shop_page', '1', 0, 1, 0, 'admin.config_layout.link_shop_page'),
-	(142, '', 'config_layout', 'link_account', '1', 0, 1, 0, 'admin.config_layout.link_account'),
-	(143, '', 'config_layout', 'link_language', '1', 0, 1, 0, 'admin.config_layout.link_language'),
-	(144, '', 'config_layout', 'link_currency', '1', 0, 1, 0, 'admin.config_layout.link_currency'),
-	(145, '', 'config_layout', 'link_cart', '1', 0, 1, 0, 'admin.config_layout.link_cart');
+	(140, '', 'config_layout', 'link_account', '1', 0, 1, 0, 'admin.config_layout.link_account'),
+	(141, '', 'config_layout', 'link_language', '1', 0, 1, 0, 'admin.config_layout.link_language'),
+	(142, '', 'config_layout', 'link_currency', '1', 0, 1, 0, 'admin.config_layout.link_currency'),
+	(143, '', 'config_layout', 'link_cart', '1', 0, 1, 0, 'admin.config_layout.link_cart');
 /*!40000 ALTER TABLE `sc_admin_config` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_log
@@ -404,11 +402,19 @@ CREATE TABLE IF NOT EXISTS `sc_admin_log` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `sc_admin_log_user_id_index` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_admin_log: ~0 rows (approximately)
+-- Dumping data for table s-cart.sc_admin_log: ~7 rows (approximately)
 DELETE FROM `sc_admin_log`;
 /*!40000 ALTER TABLE `sc_admin_log` DISABLE KEYS */;
+INSERT INTO `sc_admin_log` (`id`, `user_id`, `path`, `method`, `ip`, `user_agent`, `input`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'sc_admin', 'GET', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', '[]', '2021-12-07 22:17:08', '2021-12-07 22:17:08'),
+	(2, 1, 'sc_admin/store_config', 'GET', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', '[]', '2021-12-07 22:17:10', '2021-12-07 22:17:10'),
+	(3, 1, 'sc_admin/store_link', 'GET', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', '[]', '2021-12-07 22:17:18', '2021-12-07 22:17:18'),
+	(4, 1, 'sc_admin/store_link', 'GET', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', '{"_pjax":"#pjax-container"}', '2021-12-07 22:17:26', '2021-12-07 22:17:26'),
+	(5, 1, 'sc_admin/store_css', 'GET', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', '[]', '2021-12-07 22:17:29', '2021-12-07 22:17:29'),
+	(6, 1, 'sc_admin/store_css', 'GET', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', '[]', '2021-12-07 22:17:37', '2021-12-07 22:17:37'),
+	(7, 1, 'sc_admin/plugin/other', 'GET', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36', '[]', '2021-12-07 22:17:44', '2021-12-07 22:17:44');
 /*!40000 ALTER TABLE `sc_admin_log` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_menu
@@ -520,19 +526,19 @@ CREATE TABLE IF NOT EXISTS `sc_admin_permission` (
 DELETE FROM `sc_admin_permission`;
 /*!40000 ALTER TABLE `sc_admin_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at`, `updated_at`) VALUES
-	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-12-05 22:10:05', NULL),
-	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-12-05 22:10:05', NULL),
-	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-12-05 22:10:05', NULL),
-	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-12-05 22:10:05', NULL),
-	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-12-05 22:10:05', NULL),
-	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-12-05 22:10:05', NULL),
-	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-12-05 22:10:05', NULL),
-	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-12-05 22:10:05', NULL),
-	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-12-05 22:10:05', NULL),
-	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-12-05 22:10:05', NULL),
-	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-12-05 22:10:05', NULL),
-	(12, 'CMS full', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*,ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-12-05 22:10:05', NULL),
-	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-12-05 22:10:05', NULL);
+	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-12-07 22:16:59', NULL),
+	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-12-07 22:16:59', NULL),
+	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-12-07 22:16:59', NULL),
+	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-12-07 22:16:59', NULL),
+	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-12-07 22:16:59', NULL),
+	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-12-07 22:16:59', NULL),
+	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-12-07 22:16:59', NULL),
+	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-12-07 22:16:59', NULL),
+	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-12-07 22:16:59', NULL),
+	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-12-07 22:16:59', NULL),
+	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-12-07 22:16:59', NULL),
+	(12, 'CMS full', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*,ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-12-07 22:16:59', NULL),
+	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-12-07 22:16:59', NULL);
 /*!40000 ALTER TABLE `sc_admin_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role
@@ -551,13 +557,13 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role` (
 DELETE FROM `sc_admin_role`;
 /*!40000 ALTER TABLE `sc_admin_role` DISABLE KEYS */;
 INSERT INTO `sc_admin_role` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrator', 'administrator', '2021-12-05 22:10:05', NULL),
-	(2, 'Group only View', 'view.all', '2021-12-05 22:10:05', NULL),
-	(3, 'Manager', 'manager', '2021-12-05 22:10:05', NULL),
-	(4, 'CMS', 'cms', '2021-12-05 22:10:05', NULL),
-	(5, 'Accountant', 'accountant', '2021-12-05 22:10:05', NULL),
-	(6, 'Marketing', 'maketing', '2021-12-05 22:10:05', NULL),
-	(7, 'Admin CMS', 'admin_cms', '2021-12-05 22:10:05', NULL);
+	(1, 'Administrator', 'administrator', '2021-12-07 22:16:59', NULL),
+	(2, 'Group only View', 'view.all', '2021-12-07 22:16:59', NULL),
+	(3, 'Manager', 'manager', '2021-12-07 22:16:59', NULL),
+	(4, 'CMS', 'cms', '2021-12-07 22:16:59', NULL),
+	(5, 'Accountant', 'accountant', '2021-12-07 22:16:59', NULL),
+	(6, 'Marketing', 'maketing', '2021-12-07 22:16:59', NULL),
+	(7, 'Admin CMS', 'admin_cms', '2021-12-07 22:16:59', NULL);
 /*!40000 ALTER TABLE `sc_admin_role` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_permission
@@ -575,36 +581,36 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role_permission` (
 DELETE FROM `sc_admin_role_permission`;
 /*!40000 ALTER TABLE `sc_admin_role_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_role_permission` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES
-	(3, 1, '2021-12-05 22:10:05', NULL),
-	(3, 2, '2021-12-05 22:10:05', NULL),
-	(3, 3, '2021-12-05 22:10:05', NULL),
-	(3, 4, '2021-12-05 22:10:05', NULL),
-	(3, 5, '2021-12-05 22:10:05', NULL),
-	(3, 6, '2021-12-05 22:10:05', NULL),
-	(3, 7, '2021-12-05 22:10:05', NULL),
-	(3, 8, '2021-12-05 22:10:05', NULL),
-	(3, 9, '2021-12-05 22:10:05', NULL),
-	(3, 10, '2021-12-05 22:10:05', NULL),
-	(3, 11, '2021-12-05 22:10:05', NULL),
-	(3, 12, '2021-12-05 22:10:05', NULL),
-	(3, 13, '2021-12-05 22:10:05', NULL),
-	(4, 1, '2021-12-05 22:10:05', NULL),
-	(4, 12, '2021-12-05 22:10:05', NULL),
-	(5, 1, '2021-12-05 22:10:05', NULL),
-	(5, 2, '2021-12-05 22:10:05', NULL),
-	(5, 7, '2021-12-05 22:10:05', NULL),
-	(5, 11, '2021-12-05 22:10:05', NULL),
-	(6, 1, '2021-12-05 22:10:05', NULL),
-	(6, 2, '2021-12-05 22:10:05', NULL),
-	(6, 8, '2021-12-05 22:10:05', NULL),
-	(6, 10, '2021-12-05 22:10:05', NULL),
-	(6, 11, '2021-12-05 22:10:05', NULL),
-	(6, 12, '2021-12-05 22:10:05', NULL),
-	(7, 1, '2021-12-05 22:10:05', NULL),
-	(7, 4, '2021-12-05 22:10:05', NULL),
-	(7, 8, '2021-12-05 22:10:05', NULL),
-	(7, 12, '2021-12-05 22:10:05', NULL),
-	(7, 13, '2021-12-05 22:10:05', NULL);
+	(3, 1, '2021-12-07 22:16:59', NULL),
+	(3, 2, '2021-12-07 22:16:59', NULL),
+	(3, 3, '2021-12-07 22:16:59', NULL),
+	(3, 4, '2021-12-07 22:16:59', NULL),
+	(3, 5, '2021-12-07 22:16:59', NULL),
+	(3, 6, '2021-12-07 22:16:59', NULL),
+	(3, 7, '2021-12-07 22:16:59', NULL),
+	(3, 8, '2021-12-07 22:16:59', NULL),
+	(3, 9, '2021-12-07 22:16:59', NULL),
+	(3, 10, '2021-12-07 22:16:59', NULL),
+	(3, 11, '2021-12-07 22:16:59', NULL),
+	(3, 12, '2021-12-07 22:16:59', NULL),
+	(3, 13, '2021-12-07 22:16:59', NULL),
+	(4, 1, '2021-12-07 22:16:59', NULL),
+	(4, 12, '2021-12-07 22:16:59', NULL),
+	(5, 1, '2021-12-07 22:16:59', NULL),
+	(5, 2, '2021-12-07 22:16:59', NULL),
+	(5, 7, '2021-12-07 22:16:59', NULL),
+	(5, 11, '2021-12-07 22:16:59', NULL),
+	(6, 1, '2021-12-07 22:16:59', NULL),
+	(6, 2, '2021-12-07 22:16:59', NULL),
+	(6, 8, '2021-12-07 22:16:59', NULL),
+	(6, 10, '2021-12-07 22:16:59', NULL),
+	(6, 11, '2021-12-07 22:16:59', NULL),
+	(6, 12, '2021-12-07 22:16:59', NULL),
+	(7, 1, '2021-12-07 22:16:59', NULL),
+	(7, 4, '2021-12-07 22:16:59', NULL),
+	(7, 8, '2021-12-07 22:16:59', NULL),
+	(7, 12, '2021-12-07 22:16:59', NULL),
+	(7, 13, '2021-12-07 22:16:59', NULL);
 /*!40000 ALTER TABLE `sc_admin_role_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_user
@@ -656,7 +662,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_store` (
 DELETE FROM `sc_admin_store`;
 /*!40000 ALTER TABLE `sc_admin_store` DISABLE KEYS */;
 INSERT INTO `sc_admin_store` (`id`, `logo`, `icon`, `phone`, `long_phone`, `email`, `time_active`, `address`, `office`, `warehouse`, `template`, `domain`, `partner`, `code`, `language`, `timezone`, `currency`, `status`, `active`) VALUES
-	(1, 'data/logo/scart-mid.png', NULL, '0123456789', 'Support: 0987654321', 'demo@s-cart.local', '', '123st - abc - xyz', NULL, NULL, 's-cart-light', 'scart.local', '0', 's-cart', 'en', 'Asia/Ho_Chi_Minh', 'USD', 1, 1);
+	(1, 'data/logo/scart-mid.png', NULL, '0123456789', 'Support: 0987654321', 'dad@fdsf.com', '', '123st - abc - xyz', NULL, NULL, 's-cart-light', 'scart.local', '0', 's-cart', 'vi', 'Asia/Ho_Chi_Minh', 'USD', 1, 1);
 /*!40000 ALTER TABLE `sc_admin_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_store_description
@@ -698,7 +704,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_template` (
 DELETE FROM `sc_admin_template`;
 /*!40000 ALTER TABLE `sc_admin_template` DISABLE KEYS */;
 INSERT INTO `sc_admin_template` (`id`, `key`, `name`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 's-cart-light', 'S-Cart Light', 1, '2021-12-05 22:10:05', NULL);
+	(1, 's-cart-light', 'S-Cart Light', 1, '2021-12-07 22:16:59', NULL);
 /*!40000 ALTER TABLE `sc_admin_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user
@@ -723,7 +729,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_user` (
 DELETE FROM `sc_admin_user`;
 /*!40000 ALTER TABLE `sc_admin_user` DISABLE KEYS */;
 INSERT INTO `sc_admin_user` (`id`, `username`, `password`, `name`, `email`, `avatar`, `remember_token`, `theme`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', '$2y$10$MAMfhTkDFlJ2JOLnwTAAEeAZMHonp..CZBS4pbTCBa1BsyB.VSgHG', 'Administrator', 'demo@s-cart.local', '/admin/avatar/user.jpg', NULL, NULL, '2021-12-05 22:10:05', NULL);
+	(1, 'admin', '$2y$10$PIYv1eEOEIezoVy8LhO59.Lo1jQ66qk.HGh2nRz.dtx59GvTQBrYO', 'Administrator', 'dad@fdsf.com', '/admin/avatar/user.jpg', NULL, NULL, '2021-12-07 22:16:59', NULL);
 /*!40000 ALTER TABLE `sc_admin_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user_permission
@@ -760,7 +766,7 @@ CREATE TABLE IF NOT EXISTS `sc_api_connection` (
 DELETE FROM `sc_api_connection`;
 /*!40000 ALTER TABLE `sc_api_connection` DISABLE KEYS */;
 INSERT INTO `sc_api_connection` (`id`, `description`, `apiconnection`, `apikey`, `expire`, `last_active`, `status`) VALUES
-	(1, 'Demo api connection', 'appmobile', '6f079f99-55dd-11ec-a5c9-04d9f5d0007b', NULL, NULL, 0);
+	(1, 'Demo api connection', 'appmobile', 'bbfc9a64-5770-11ec-a5c9-04d9f5d0007b', NULL, NULL, 0);
 /*!40000 ALTER TABLE `sc_api_connection` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_cms_category
@@ -776,18 +782,14 @@ CREATE TABLE IF NOT EXISTS `sc_cms_category` (
   PRIMARY KEY (`id`),
   KEY `sc_cms_category_alias_index` (`alias`),
   KEY `sc_cms_category_store_id_index` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_cms_category: ~6 rows (approximately)
+-- Dumping data for table s-cart.sc_cms_category: ~2 rows (approximately)
 DELETE FROM `sc_cms_category`;
 /*!40000 ALTER TABLE `sc_cms_category` DISABLE KEYS */;
 INSERT INTO `sc_cms_category` (`id`, `image`, `parent`, `alias`, `store_id`, `sort`, `status`) VALUES
-	(1, '/data/cms-image/63b31d7af6c67e92f2be6ae0759be54a.png', 0, '', 1, 0, 1),
-	(2, '/data/cms-image/9c321d8e021fef75f66ed51dcc8fde8d.jpg', 0, '', 1, 4, 1),
-	(3, '/data/cms-image/02.png', 0, '', 1, 5, 1),
-	(7, '/data/cms-image/3c30a26a1a4ff254fe3fbb2c3c654ee6.jpg', 0, '', 1, 6, 1),
-	(8, '/data/cms-image/663.png', 0, '', 1, 0, 1),
-	(9, '/data/cms-image/0444.png', 0, '', 1, 0, 1);
+	(1, '/data/cms-image/cms.jpg', 0, 'demo-category-1', 1, 0, 1),
+	(2, '/data/cms-image/cms.jpg', 0, 'demo-category-2', 1, 0, 1);
 /*!40000 ALTER TABLE `sc_cms_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_cms_category_description
@@ -832,8 +834,8 @@ CREATE TABLE IF NOT EXISTS `sc_cms_content` (
 DELETE FROM `sc_cms_content`;
 /*!40000 ALTER TABLE `sc_cms_content` DISABLE KEYS */;
 INSERT INTO `sc_cms_content` (`id`, `category_id`, `image`, `alias`, `sort`, `status`, `store_id`, `created_at`, `updated_at`) VALUES
-	(1, 1, '/data/cms-image/cms_content_1.jpg', 'demo-alias-content-1', 0, 1, 1, '2021-12-04 00:00:00', NULL),
-	(2, 1, '/data/cms-image/cms_content_2.jpg', 'demo-alias-content-2', 0, 1, 1, '2021-12-04 00:00:00', NULL);
+	(1, 1, '/data/cms-image/cms_content_1.jpg', 'demo-alias-content-1', 0, 1, 1, '2021-12-07 00:00:00', NULL),
+	(2, 1, '/data/cms-image/cms_content_2.jpg', 'demo-alias-content-2', 0, 1, 1, '2021-12-07 00:00:00', NULL);
 /*!40000 ALTER TABLE `sc_cms_content` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_cms_content_description
@@ -1027,7 +1029,7 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`) VALUES
 	(132, 'front.categories', 'Categries', 'front', 'en'),
 	(133, 'front.sub_categories', 'Danh mục nhỏ', 'front', 'vi'),
 	(134, 'front.sub_categories', 'Subcategory', 'front', 'en'),
-	(135, 'front.blog', 'Blog', 'front', 'vi'),
+	(135, 'front.blog', 'Tin Tức', 'front', 'vi'),
 	(136, 'front.blog', 'Blogs', 'front', 'en'),
 	(137, 'front.news', 'Tin tức', 'front', 'vi'),
 	(138, 'front.news', 'News', 'front', 'en'),
@@ -4112,7 +4114,7 @@ CREATE TABLE IF NOT EXISTS `sc_shop_discount` (
   UNIQUE KEY `sc_shop_discount_code_unique` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_shop_discount: ~0 rows (approximately)
+-- Dumping data for table s-cart.sc_shop_discount: ~1 rows (approximately)
 DELETE FROM `sc_shop_discount`;
 /*!40000 ALTER TABLE `sc_shop_discount` DISABLE KEYS */;
 INSERT INTO `sc_shop_discount` (`id`, `code`, `reward`, `type`, `data`, `limit`, `used`, `login`, `status`, `expires_at`) VALUES
@@ -4286,18 +4288,20 @@ CREATE TABLE IF NOT EXISTS `sc_shop_link` (
   `status` tinyint(4) NOT NULL DEFAULT 0,
   `sort` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_shop_link: ~6 rows (approximately)
+-- Dumping data for table s-cart.sc_shop_link: ~8 rows (approximately)
 DELETE FROM `sc_shop_link`;
 /*!40000 ALTER TABLE `sc_shop_link` DISABLE KEYS */;
 INSERT INTO `sc_shop_link` (`id`, `name`, `url`, `target`, `group`, `module`, `status`, `sort`) VALUES
-	(1, 'front.blog', 'route::news', '_self', 'menu', '', 1, 30),
-	(2, 'front.contact', 'route::contact', '_self', 'menu', '', 1, 40),
-	(3, 'front.about', 'route::page.detail::about', '_self', 'menu', '', 1, 50),
-	(4, 'front.my_profile', 'route::login', '_self', 'footer', '', 1, 60),
-	(5, 'front.compare_page', 'route::compare', '_self', 'footer', '', 1, 70),
-	(6, 'front.wishlist_page', 'route::wishlist', '_self', 'footer', '', 1, 80);
+	(1, 'front.home', 'route::home', '_self', 'menu', '', 1, 10),
+	(2, 'front.shop', 'route::shop', '_self', 'menu', '', 1, 20),
+	(3, 'front.blog', 'route::news', '_self', 'menu', '', 1, 30),
+	(4, 'front.contact', 'route::contact', '_self', 'menu', '', 1, 40),
+	(5, 'front.about', 'route::page.detail::about', '_self', 'menu', '', 1, 50),
+	(6, 'front.my_profile', 'route::login', '_self', 'footer', '', 1, 60),
+	(7, 'front.compare_page', 'route::compare', '_self', 'footer', '', 1, 70),
+	(8, 'front.wishlist_page', 'route::wishlist', '_self', 'footer', '', 1, 80);
 /*!40000 ALTER TABLE `sc_shop_link` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_link_store
@@ -4338,12 +4342,12 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news` (
 DELETE FROM `sc_shop_news`;
 /*!40000 ALTER TABLE `sc_shop_news` DISABLE KEYS */;
 INSERT INTO `sc_shop_news` (`id`, `image`, `alias`, `sort`, `status`, `created_at`, `updated_at`) VALUES
-	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-12-05 22:10:06', NULL),
-	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-12-05 22:10:06', NULL),
-	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-12-05 22:10:06', NULL),
-	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-12-05 22:10:06', NULL),
-	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-12-05 22:10:06', NULL),
-	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-12-05 22:10:06', NULL);
+	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-12-07 22:17:00', NULL),
+	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-12-07 22:17:00', NULL),
+	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-12-07 22:17:00', NULL),
+	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-12-07 22:17:00', NULL),
+	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-12-07 22:17:00', NULL),
+	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-12-07 22:17:00', NULL);
 /*!40000 ALTER TABLE `sc_shop_news` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_description
