@@ -231,6 +231,8 @@ INSERT INTO `__SC_DB_PREFIX__shop_layout_position` (`key`, `name`) VALUES
 
 /*shop_link*/
 INSERT INTO `__SC_DB_PREFIX__shop_link` (`name`, `url`, `target`, `module`, `group`, `status`, `sort`) VALUES 
+('front.home', 'route::home', '_self', '',  'menu', '1', '10'),
+('front.shop', 'route::shop', '_self', '',  'menu', '1', '20'),
 ('front.blog', 'route::news', '_self', '',  'menu', '1', '30'),
 ('front.contact', 'route::contact', '_self', '',  'menu', '1', '40'),
 ('front.about', 'route::page.detail::about', '_self', '',  'menu', '1', '50'),

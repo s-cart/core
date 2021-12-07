@@ -383,7 +383,7 @@ INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`)
 ('front.categories', 'Categries', 'front', 'en'),
 ('front.sub_categories', 'Danh mục nhỏ', 'front', 'vi'),
 ('front.sub_categories', 'Subcategory', 'front', 'en'),
-('front.blog', 'Blog', 'front', 'vi'),
+('front.blog', 'Tin Tức', 'front', 'vi'),
 ('front.blog', 'Blogs', 'front', 'en'),
 ('front.news', 'Tin tức', 'front', 'vi'),
 ('front.news', 'News', 'front', 'en'),
