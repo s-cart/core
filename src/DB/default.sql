@@ -247,7 +247,9 @@ INSERT INTO `__SC_DB_PREFIX__shop_link_store` (`link_id`, `store_id`) VALUES
 (3,'1'),
 (4,'1'),
 (5,'1'),
-(6,'1');
+(6,'1'),
+(7,'1'),
+(8,'1');
 
 /*shop_shipping_standard*/
 INSERT INTO `__SC_DB_PREFIX__shop_shipping_standard` (`fee`, `shipping_free`) VALUES (20, 10000);

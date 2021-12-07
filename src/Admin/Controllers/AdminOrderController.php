@@ -64,18 +64,18 @@ class AdminOrderController extends RootAdminController
 
         $listTh = [
             'id'             => 'ID',
-            'email'          => sc_language_render('order.email'),
+            'email'          => '<i class="fas fa-envelope" aria-hidden="true" title="'.sc_language_render('order.email').'"></i>',
             'subtotal'       => '<i class="fa fa-shopping-cart" aria-hidden="true" title="'.sc_language_render('order.subtotal').'"></i>',
             'shipping'       => '<i class="fa fa-truck" aria-hidden="true" title="'.sc_language_render('order.shipping').'"></i>',
             'discount'       => '<i class="fa fa-tags" aria-hidden="true" title="'.sc_language_render('order.discount').'"></i>',
             'tax'            => sc_language_render('order.tax'),
-            'total'          => sc_language_render('order.total'),
+            'total'          => '<i class="fas fa-coins" aria-hidden="true" title="'.sc_language_render('order.total').'"></i>',
             'payment_method' => '<i class="fa fa-credit-card" aria-hidden="true" title="'.sc_language_render('order.admin.payment_method_short').'"></i>',
             'status'         => sc_language_render('order.admin.status'),
         ];
         if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
-            $listTh['shop_store'] = sc_language_render('front.store_list');
+            $listTh['shop_store'] = '<i class="fab fa-shopify" aria-hidden="true" title="'.sc_language_render('front.store_list').'"></i>';
         }
         $listTh['created_at'] = sc_language_render('admin.created_at');
         $listTh['action'] = sc_language_render('action.title');
