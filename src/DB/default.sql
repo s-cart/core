@@ -52,7 +52,6 @@ INSERT INTO `__SC_DB_PREFIX__admin_menu` (`id`, `parent_id`, `sort`, `title`, `i
 (50, 28, 0,'admin.menu_titles.operation_log', 'fas fa-history','admin::log',null,0),
 (51, 45, 0,'admin.menu_titles.seo_config', 'fas fa-bars','admin::seo/config',null,0),
 (52, 7, 103,'admin.menu_titles.news', 'far fa-file-powerpoint','admin::news',null,0),
-(53, 5, 0,'admin.menu_titles.env_config', 'fas fa-tasks','admin::env/config',null,0),
 (54, 37, 0,'admin.menu_titles.report_product', 'fas fa-bars','admin::report/product',null,0),
 (57, 65, 2,'admin.menu_titles.store_config', 'fas fa-cog','admin::store_config',null,0),
 (58, 5, 5,'admin.menu_titles.cache_manager', 'fab fa-tripadvisor','admin::cache_config',null,0),
@@ -141,7 +140,6 @@ INSERT INTO `__SC_DB_PREFIX__admin_user` (`id`, `username`, `password`, `email`,
 INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `sort`, `detail`, `store_id`) VALUES 
 ('Plugins', 'Payment', 'Cash', '1', '0', 'Plugins/Payment/Cash::lang.title', 0),
 ('Plugins', 'Shipping', 'ShippingStandard', '1', '0', 'Shipping Standard', 0),
-('global', 'env_global', 'ADMIN_LOG', 'on', '0', 'admin.env.ADMIN_LOG', 0),
 ('global', 'seo_config', 'url_seo_lang', '0', '1', 'seo.url_seo_lang', 0),
 ('global', 'webhook_config', 'LOG_SLACK_WEBHOOK_URL', '', '0', 'admin.config.LOG_SLACK_WEBHOOK_URL', 0),
 ('global', 'webhook_config', 'GOOGLE_CHAT_WEBHOOK_URL', '', '0', 'admin.config.GOOGLE_CHAT_WEBHOOK_URL', 0),
@@ -157,16 +155,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('global', 'cache', 'cache_content_cms', '0', '7', 'admin.cache.cache_content_cms', 0),
 ('global', 'cache', 'cache_page', '0', '8', 'admin.cache.cache_page', 0),
 ('global', 'cache', 'cache_country', '0', '10', 'admin.cache.cache_country', 0),
-('global', 'env_mail', 'smtp_mode', '', '0', 'email.smtp_mode', 0),
-('global', 'admin_dashboard', 'admin_dashboard_total_order', '1', '0', 'admin.dashboard.total_order', 0),
-('global', 'admin_dashboard', 'admin_dashboard_total_customer', '1', '0', 'admin.dashboard.total_customer', 0),
-('global', 'admin_dashboard', 'admin_dashboard_total_blog', '1', '0', 'admin.dashboard.total_blog', 0),
-('global', 'admin_dashboard', 'admin_dashboard_total_product', '1', '0', 'admin.dashboard.total_product', 0),
-('global', 'admin_dashboard', 'admin_dashboard_order_month', '1', '0', 'admin.dashboard.order_month', 0),
-('global', 'admin_dashboard', 'admin_dashboard_order_year', '1', '0', 'admin.dashboard.order_year', 0),
-('global', 'admin_dashboard', 'admin_dashboard_pie_chart', '1', '0', 'admin.dashboard.pie_chart', 0),
-('global', 'admin_dashboard', 'admin_dashboard_top_order_new', '1', '0', 'admin.dashboard.top_order_new', 0),
-('global', 'admin_dashboard', 'admin_dashboard_top_customer_new', '1', '0', 'admin.dashboard.top_customer_new', 0);
+('global', 'env_mail', 'smtp_mode', '', '0', 'email.smtp_mode', 0);
 
 /*admin_store*/
 INSERT INTO `__SC_DB_PREFIX__admin_store` (`logo`, `template`, `phone`, `long_phone`, `email`, `time_active`, `address`, `timezone`, `language`, `currency`, `code`, `domain`) VALUES  

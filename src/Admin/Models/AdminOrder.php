@@ -301,6 +301,18 @@ class AdminOrder extends ShopOrder
     }
 
     /**
+     * Get count order in Year
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getCountOrderTotalInYear()
+    {
+        return self::selectRaw('DATE_FORMAT(created_at, "%Y-%m") AS ym, count(*) AS count')
+            ->whereRaw('DATE_FORMAT(created_at, "%Y-%m") >=  DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH), "%Y-%m")')
+            ->groupBy('ym')->get();
+    }
+
+    /**
      * Get Sum order total In month
      *
      * @return  [type]  [return description]

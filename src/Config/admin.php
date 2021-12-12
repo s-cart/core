@@ -37,4 +37,20 @@ return [
     ],
     //Prefix path view admin
     'path_view' => 's-cart-admin::',
+
+    //Config global
+    'admin_log' => 1, //Log access admin
+
+    'admin_dashboard' => [
+        'total_order' => 1, // Total order
+        'total_customer' => 1, //Customer total
+        'total_blog' => 1, //Blog total
+        'total_product' => 1, //Product total
+        'order_month' => 1, //Order in month
+        'order_year' => 1, //Order in year
+        'pie_chart' => 1, //Display pie chart total
+        'top_order_new' => 1, //New orders
+        'top_customer_new' => 1, //New customers
+        'pie_chart_type' => 'order', // [order|device|country]
+    ],
 ];

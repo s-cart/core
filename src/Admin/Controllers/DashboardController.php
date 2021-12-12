@@ -34,19 +34,74 @@ class DashboardController extends RootAdminController
         $data['topOrder']       = AdminOrder::getTopOrder();
         $data['mapStyleStatus'] = AdminOrder::$mapStyleStatus;
 
-        //Device statistics
-        $dataCountries = AdminOrder::getDeviceInYear();
-        $arrDevice   = [];
-        foreach ($dataCountries as $key => $row) {
-            $arrDevice[] =  [
-                'name' => ucfirst($row->device_type),
-                'y' => $row->count,
-                'sliced' => true,
-                'selected' => ($key == 0) ? true : false,
-            ];
+        if (config('admin.admin_dashboard.pie_chart_type') == 'country') {
+            //Country statistics
+            $dataCountries = AdminOrder::getCountryInYear();
+            $arrCountryMap   = [];
+            $ctTotal = 0;
+            $ctTop = 0;
+            foreach ($dataCountries as $key => $country) {
+                $ctTotal +=$country->count;
+                if($key <= 3) {
+                    $ctTop +=$country->count;
+                    $countryName = $country->country ?? $key ;
+                    if($key == 0) {
+                        $arrCountryMap[] =  [
+                            'name' => $countryName,
+                            'y' => $country->count,
+                            'sliced' => true,
+                            'selected' => true,
+                        ];
+                    } else {
+                        $arrCountryMap[] =  [$countryName, $country->count];
+                    }
+                }
+            }
+            $arrCountryMap[] = ['Other', ($ctTotal - $ctTop)];
+            $arrDataPie = $arrCountryMap;
+            $pieChartTitle = sc_language_render('admin.chart.static_country');
+            //End countries
         }
-        $data['dataPie'] = json_encode($arrDevice);
-        //End Device statistics
+
+        if (config('admin.admin_dashboard.pie_chart_type') == 'device') {
+            //Device statistics
+            $dataDevices = AdminOrder::getDeviceInYear();
+            $arrDevice   = [];
+            foreach ($dataDevices as $key => $row) {
+                $arrDevice[] =  [
+                    'name' => ucfirst($row->device_type),
+                    'y' => $row->count,
+                    'sliced' => true,
+                    'selected' => ($key == 0) ? true : false,
+                ];
+            }
+            $arrDataPie = $arrDevice;
+            $pieChartTitle = sc_language_render('admin.chart.static_device');
+            //End Device statistics
+        }
+
+        if (config('admin.admin_dashboard.pie_chart_type') == 'order') {
+            //Count order in 12 months
+            $totalCountMonth = AdminOrder::getCountOrderTotalInYear()
+                ->pluck('count', 'ym')->toArray();
+            $arrCountOrder = [];
+            for ($i = 12; $i >= 0; $i--) {
+                $date = date("Y-m", strtotime(date('Y-m-01') . " -$i months"));
+                $arrCountOrder[] =  [
+                    'name' => '('.$date.')',
+                    'y' => $totalCountMonth[$date] ?? 0,
+                    'sliced' => true,
+                    'selected' => ($i == 0) ? true : false,
+                ];
+            }
+            $arrDataPie = $arrCountOrder;
+            $pieChartTitle = sc_language_render('admin.chart.static_count_order');
+            //End count order in 12 months
+        }
+
+        $data['pieChartTitle'] = $pieChartTitle;
+        $data['dataPie'] = json_encode($arrDataPie);
+
 
 
         //Order in 30 days
@@ -69,12 +124,12 @@ class DashboardController extends RootAdminController
         //End order in 30 days
         
         //Order in 12 months
-        $totalsMonth = AdminOrder::getSumOrderTotalInYear()
+        $totalMonth = AdminOrder::getSumOrderTotalInYear()
             ->pluck('total_amount', 'ym')->toArray();
         $dataInYear = [];
         for ($i = 12; $i >= 0; $i--) {
             $date = date("Y-m", strtotime(date('Y-m-01') . " -$i months"));
-            $dataInYear[$date] = $totalsMonth[$date] ?? 0;
+            $dataInYear[$date] = $totalMonth[$date] ?? 0;
         }
         $data['dataInYear'] = $dataInYear;
         //End order in 12 months

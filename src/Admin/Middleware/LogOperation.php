@@ -45,7 +45,7 @@ class LogOperation
      */
     protected function shouldLogOperation(Request $request)
     {
-        return sc_config_global('ADMIN_LOG')
+        return config('admin.admin_log')
         && !$this->inExceptArray($request)
         && Admin::user();
     }
