@@ -59,7 +59,7 @@ class ShopStore extends Model
 
     public function links()
     {
-        return $this->belongsToMany(ShopStore::class, ShopLinkStore::class, 'store_id', 'links_id');
+        return $this->belongsToMany(ShopStore::class, ShopLinkStore::class, 'store_id', 'link_id');
     }
 
     protected static function boot()
