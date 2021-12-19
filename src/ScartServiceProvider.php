@@ -18,6 +18,7 @@ use SCart\Core\Commands\Restore;
 use SCart\Core\Commands\MakePlugin;
 use SCart\Core\Commands\Infomation;
 use SCart\Core\Commands\ClearCart;
+use SCart\Core\Commands\Update;
 use Laravel\Passport\Passport;
 use Laravel\Passport\Console\ClientCommand;
 use Laravel\Passport\Console\InstallCommand;
@@ -32,6 +33,7 @@ class ScartServiceProvider extends ServiceProvider
         MakePlugin::class,
         Infomation::class,
         ClearCart::class,
+        Update::class,
     ];
 
     /**
