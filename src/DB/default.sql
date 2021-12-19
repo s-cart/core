@@ -1,5 +1,5 @@
 /*admin_menu*/
-INSERT INTO `__SC_DB_PREFIX__admin_menu` (`id`, `parent_id`, `sort`, `title`, `icon`, `uri`, `key`, `type`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_menu` (`id`, `parent_id`, `sort`, `title`, `icon`, `uri`, `key`, `type`) VALUES 
 (1, 6, 1,'admin.menu_titles.order_manager', 'fas fa-cart-arrow-down','','ORDER_MANAGER',0),
 (2, 6, 2,'admin.menu_titles.catalog_mamager', 'fas fa-folder-open','','CATALOG_MANAGER',0),
 (3, 25, 3,'admin.menu_titles.customer_manager', 'fas fa-users','','CUSTOMER_MANAGER',0),
@@ -68,7 +68,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_menu` (`id`, `parent_id`, `sort`, `title`, `i
 (70, 9, 6,'admin.menu_titles.security', 'fab fa-shirtsinbulk','','ADMIN_SECURITY',0);
 
 /*admin_permission*/
-INSERT INTO `__SC_DB_PREFIX__admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at`) VALUES 
 ('1','Auth manager','auth.full', 'ANY::__SC_ADMIN_PREFIX__/auth/*', now()),
 ('2','Dashboard','dashboard', 'GET::__SC_ADMIN_PREFIX__', now()),
 ('3','Base setting','base.setting', 'ANY::__SC_ADMIN_PREFIX__/order_status/*,ANY::__SC_ADMIN_PREFIX__/shipping_status/*,ANY::__SC_ADMIN_PREFIX__/payment_status/*,ANY::__SC_ADMIN_PREFIX__/supplier/*,ANY::__SC_ADMIN_PREFIX__/brand/*,ANY::__SC_ADMIN_PREFIX__/custom_field/*,ANY::__SC_ADMIN_PREFIX__/weight_unit/*,ANY::__SC_ADMIN_PREFIX__/length_unit/*,ANY::__SC_ADMIN_PREFIX__/attribute_group/*,ANY::__SC_ADMIN_PREFIX__/tax/*', now()),
@@ -84,7 +84,7 @@ INSERT INTO `__SC_DB_PREFIX__admin_permission` (`id`, `name`, `slug`, `http_uri`
 ('13','Update config','change.config', 'POST::__SC_ADMIN_PREFIX__/store_config/update', now());
 
 /*admin_role*/
-INSERT INTO `__SC_DB_PREFIX__admin_role` (`id`, `name`, `slug`, `created_at`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_role` (`id`, `name`, `slug`, `created_at`) VALUES 
 ('1', 'Administrator', 'administrator', now()),
 ('2', 'Group only View', 'view.all', now()),
 ('3', 'Manager', 'manager', now()),
@@ -93,11 +93,11 @@ INSERT INTO `__SC_DB_PREFIX__admin_role` (`id`, `name`, `slug`, `created_at`) VA
 ('6', 'Marketing', 'maketing', now()),
 ('7', 'Admin CMS', 'admin_cms', now());
 
-INSERT INTO `__SC_DB_PREFIX__admin_template` (`id`, `key`, `name`, `status`,`created_at`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_template` (`id`, `key`, `name`, `status`,`created_at`) VALUES 
 ('1', 's-cart-light', 'S-Cart Light', 1, now());
 
 /*admin_role_permission*/
-INSERT INTO `__SC_DB_PREFIX__admin_role_permission` (`role_id`, `permission_id`, `created_at`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_role_permission` (`role_id`, `permission_id`, `created_at`) VALUES 
 (3, 1, now()),
 (3, 2, now()),
 (3, 3, now()),
@@ -130,14 +130,14 @@ INSERT INTO `__SC_DB_PREFIX__admin_role_permission` (`role_id`, `permission_id`,
 (7, 13, now());
 
 /*admin_role_user*/
-INSERT INTO `__SC_DB_PREFIX__admin_role_user` (`role_id`, `user_id`) VALUES  ('1', '1');
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_role_user` (`role_id`, `user_id`) VALUES  ('1', '1');
 
 /*admin_user*/
-INSERT INTO `__SC_DB_PREFIX__admin_user` (`id`, `username`, `password`, `email`, `name`, `avatar`, `created_at`) VALUES  
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_user` (`id`, `username`, `password`, `email`, `name`, `avatar`, `created_at`) VALUES  
 ('1', '__adminUser__', '__adminPassword__', '__adminEmail__', 'Administrator', '/admin/avatar/user.jpg', now());
 
 /*admin_config*/
-INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `sort`, `detail`, `store_id`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `sort`, `detail`, `store_id`) VALUES 
 ('Plugins', 'Payment', 'Cash', '1', '0', 'Plugins/Payment/Cash::lang.title', 0),
 ('Plugins', 'Shipping', 'ShippingStandard', '1', '0', 'Shipping Standard', 0),
 ('global', 'seo_config', 'url_seo_lang', '0', '1', 'seo.url_seo_lang', 0),
@@ -158,11 +158,11 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('global', 'env_mail', 'smtp_mode', '', '0', 'email.smtp_mode', 0);
 
 /*admin_store*/
-INSERT INTO `__SC_DB_PREFIX__admin_store` (`logo`, `template`, `phone`, `long_phone`, `email`, `time_active`, `address`, `timezone`, `language`, `currency`, `code`, `domain`) VALUES  
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_store` (`logo`, `template`, `phone`, `long_phone`, `email`, `time_active`, `address`, `timezone`, `language`, `currency`, `code`, `domain`) VALUES  
 ('data/logo/scart-mid.png', 's-cart-light', '0123456789', 'Support: 0987654321', '__adminEmail__', '', '123st - abc - xyz', '__timezone_default__', '__language_default__', 'USD', 's-cart', '__domain__');
 
 /*admin_store_description*/
-INSERT INTO `__SC_DB_PREFIX__admin_store_description` (`store_id`, `lang`, `title`, `description`, `keyword`, `maintain_content`, `maintain_note`) VALUES  
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_store_description` (`store_id`, `lang`, `title`, `description`, `keyword`, `maintain_content`, `maintain_note`) VALUES  
 ('1', 'en', 'Demo S-Cart : Free Laravel eCommerce', 'Free website shopping cart for business', '', '<center><img src="/images/maintenance.png" />
 <h3><span style="color:#e74c3c;"><strong>Sorry! We are currently doing site maintenance!</strong></span></h3>
 </center>', 'Website is in maintenance mode!'),
@@ -171,25 +171,25 @@ INSERT INTO `__SC_DB_PREFIX__admin_store_description` (`store_id`, `lang`, `titl
 </center>', 'Website đang trong chế độ bảo trì!');
 
 /*shop_language*/
-INSERT INTO `__SC_DB_PREFIX__shop_language` (`id`, `name`, `code`, `icon`, `status`, `rtl`, `sort`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_language` (`id`, `name`, `code`, `icon`, `status`, `rtl`, `sort`) VALUES 
 ('1','English','en', '/data/language/flag_uk.png','1','0','1'),
 ('2','Tiếng Việt','vi', '/data/language/flag_vn.png','1','0','1');
 
 /*shop_payment_status*/
-INSERT INTO `__SC_DB_PREFIX__shop_payment_status` (`id`, `name`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_payment_status` (`id`, `name`) VALUES 
 ('1','Unpaid'),
 ('2','Partial payment'),
 ('3','Paid'),
 ('4','Refurn');
 
 /*shop_shipping_status*/
-INSERT INTO `__SC_DB_PREFIX__shop_shipping_status` (`id`, `name`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_shipping_status` (`id`, `name`) VALUES 
 ('1','Not sent'),
 ('2','Sending'),
 ('3','Shipping done');
 
 /*shop_layout_page*/
-INSERT INTO `__SC_DB_PREFIX__shop_layout_page` (`key`, `name`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_layout_page` (`key`, `name`) VALUES 
 ('home', 'admin.layout_page_position.home'),
 ('shop_home', 'admin.layout_page_position.shop_home'),
 ('shop_search', 'admin.layout_page_position.shop_search'),
@@ -210,7 +210,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_layout_page` (`key`, `name`) VALUES
 ('store_product_list', 'admin.layout_page_position.store_product_list');
 
 /*shop_layout_position*/
-INSERT INTO `__SC_DB_PREFIX__shop_layout_position` (`key`, `name`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_layout_position` (`key`, `name`) VALUES 
 ('header', 'admin.layout_page_block.header'),
 ('banner_top', 'admin.layout_page_block.banner_top'),
 ('top', 'admin.layout_page_block.top'),
@@ -219,7 +219,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_layout_position` (`key`, `name`) VALUES
 ('bottom', 'admin.layout_page_block.bottom');
 
 /*shop_link*/
-INSERT INTO `__SC_DB_PREFIX__shop_link` (`name`, `url`, `target`, `module`, `group`, `status`, `sort`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_link` (`name`, `url`, `target`, `module`, `group`, `status`, `sort`) VALUES 
 ('front.home', 'route::home', '_self', '',  'menu', '1', '10'),
 ('front.shop', 'route::shop', '_self', '',  'menu', '1', '20'),
 ('front.blog', 'route::news', '_self', '',  'menu', '1', '30'),
@@ -230,7 +230,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_link` (`name`, `url`, `target`, `module`, `gro
 ('front.wishlist_page', 'route::wishlist', '_self', '',  'footer', '1', '80');
 
 /*shop_link_store*/
-INSERT INTO `__SC_DB_PREFIX__shop_link_store` (`link_id`, `store_id`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_link_store` (`link_id`, `store_id`) VALUES 
 (1,'1'),
 (2,'1'),
 (3,'1'),
@@ -241,21 +241,21 @@ INSERT INTO `__SC_DB_PREFIX__shop_link_store` (`link_id`, `store_id`) VALUES
 (8,'1');
 
 /*shop_shipping_standard*/
-INSERT INTO `__SC_DB_PREFIX__shop_shipping_standard` (`fee`, `shipping_free`) VALUES (20, 10000);
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_shipping_standard` (`fee`, `shipping_free`) VALUES (20, 10000);
 
 
 /*shop_attribute_group*/
-INSERT INTO `__SC_DB_PREFIX__shop_attribute_group` (`name`, `status`, `sort`, `type`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_attribute_group` (`name`, `status`, `sort`, `type`) VALUES 
 ('Color', '1', '1', 'radio'),
 ('Size', '1', '2', 'select');
 
 /*shop_currency*/
-INSERT INTO `__SC_DB_PREFIX__shop_currency` (`id`, `name`, `code`, `symbol`, `exchange_rate`, `precision`, `symbol_first`, `thousands`, `status`, `sort`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_currency` (`id`, `name`, `code`, `symbol`, `exchange_rate`, `precision`, `symbol_first`, `thousands`, `status`, `sort`) VALUES 
 ('1', 'USD Dola','USD','$','1', '0', '1', ',', '1', '0'),
 ('2', 'VietNam Dong','VND','₫','20', '0', '0', ',', '1', '1');
 
 /*shop_order_status*/
-INSERT INTO `__SC_DB_PREFIX__shop_order_status` (`id`, `name`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_order_status` (`id`, `name`) VALUES 
 ('1','New'),
 ('2','Processing'),
 ('3','Hold'),
@@ -264,37 +264,37 @@ INSERT INTO `__SC_DB_PREFIX__shop_order_status` (`id`, `name`) VALUES
 ('6','Failed');
 
 /*shop_page*/
-INSERT INTO `__SC_DB_PREFIX__shop_page` (`id`, `image`,  `alias`, `status`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_page` (`id`, `image`,  `alias`, `status`) VALUES 
 ('1', '', 'about', '1');
 
 /*shop_page_store*/
-INSERT INTO `__SC_DB_PREFIX__shop_page_store` (`page_id`, `store_id`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_page_store` (`page_id`, `store_id`) VALUES 
 (1,'1');
 
 /*shop_page_description*/
-INSERT INTO `__SC_DB_PREFIX__shop_page_description` (`page_id`, `lang`,  `title`, `keyword`, `description`, `content`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_page_description` (`page_id`, `lang`,  `title`, `keyword`, `description`, `content`) VALUES 
 ('1', 'en', 'About', '','', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
 ('1', 'vi', 'Giới thiệu', '','', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
 
 /*api_connection*/
-INSERT INTO `__SC_DB_PREFIX__api_connection` (`description`, `apiconnection`, `apikey`, `status`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__api_connection` (`description`, `apiconnection`, `apikey`, `status`) VALUES 
 ('Demo api connection', 'appmobile',  UUID(), 0);
 
 /*shop_tax*/
-INSERT INTO `__SC_DB_PREFIX__shop_tax` (`id`, `name`, `value`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_tax` (`id`, `name`, `value`) VALUES 
 ('1', 'Tax default (10%)', 10);
 
 /*shop_weight*/
-INSERT INTO `__SC_DB_PREFIX__shop_weight` (`id`, `name`, `description`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_weight` (`id`, `name`, `description`) VALUES 
 ('1', 'g', 'Gram'),
 ('2', 'kg', 'Kilogram'),
 ('3', 'lb', 'Pound '),
 ('4', 'oz', 'Ounce ');
 
 /*shop_length*/
-INSERT INTO `__SC_DB_PREFIX__shop_length` (`id`, `name`, `description`) VALUES 
+INSERT IGNORE INTO `__SC_DB_PREFIX__shop_length` (`id`, `name`, `description`) VALUES 
 ('1','mm','Millimeter'),
 ('2','cm','Centimeter'),
 ('3','m','Meter'),
