@@ -38,7 +38,7 @@ class Update extends Command
         );
         Artisan::call('db:seed', 
         [
-            '--class' => 'DataLocalleSeeder',
+            '--class' => 'DataLocaleSeeder',
             '--force' => true
         ]
         );
