@@ -25,11 +25,6 @@
          "SCart\\Core\\": "src/"
       }
   },
-  "scripts": {
-      "post-update-cmd": [
-          "@php artisan sc:update"
-      ]
-  },
   "extra": {
       "laravel": {
           "dont-discover": [
