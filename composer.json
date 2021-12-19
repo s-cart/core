@@ -26,7 +26,7 @@
       }
   },
   "scripts": {
-      "post-autoload-dump": [
+      "post-package-update": [
           "@php artisan sc:update"
       ]
   },
