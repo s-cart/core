@@ -83,7 +83,7 @@ class Export
         //End logo
 
         $indexRow = 2;
-        $worksheet->getCell('A' . $indexRow)->setValue(sc_language_render('order.customer_name') . ':')
+        $worksheet->getCell('A' . $indexRow)->setValue(sc_language_render('order.full_name') . ':')
             ->getStyle()->getFont()->setBold(true);
         $worksheet->getCell('B' . $indexRow)->setValue($dataExport['name']);
 
@@ -173,6 +173,10 @@ class Export
         //Total
         ++$indexRowTotal;
         $worksheet->getCell('E' . $indexRowTotal)->setValue(sc_language_render('order.totals.total').':');
+        //Other
+        ++$indexRowTotal;
+        $worksheet->getCell('E' . $indexRowTotal)->setValue(sc_language_render('order.other_fee').':');
+        $worksheet->getCell('F' . $indexRowTotal)->setValue($dataExport['other_fee'] ?? 0);
         //Received
         ++$indexRowTotal;
         $worksheet->getCell('E' . $indexRowTotal)->setValue(sc_language_render('order.totals.received').':');

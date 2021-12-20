@@ -202,7 +202,7 @@
 
                   @endforeach
 
-                    <tr  {!! $style !!}  class="data-balance"><td>{{ sc_language_render('order.balance') }}:</td><td style="text-align:right">{{($order->balance === NULL)?sc_currency_format($order->total):sc_currency_format($order->balance) }}</td></tr>
+                    <tr  {!! $style !!}  class="data-balance"><td>{{ sc_language_render('order.totals.balance') }}:</td><td style="text-align:right">{{($order->balance === NULL)?sc_currency_format($order->total):sc_currency_format($order->balance) }}</td></tr>
               </table>
             </div>
 

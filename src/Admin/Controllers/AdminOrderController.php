@@ -494,7 +494,7 @@ class AdminOrderController extends RootAdminController
         } else {
             $style = 'style="font-weight:bold;"';
         }
-        $blance = '<tr ' . $style . ' class="data-balance"><td>' . sc_language_render('order.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
+        $blance = '<tr ' . $style . ' class="data-balance"><td>' . sc_language_render('order.totals.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
         return response()->json(['error' => 0, 'detail' =>
             [
                 'total' => sc_currency_format($orderUpdated->total),
@@ -627,7 +627,7 @@ class AdminOrderController extends RootAdminController
             } else {
                 $style = 'style="font-weight:bold;"';
             }
-            $blance = '<tr ' . $style . ' class="data-balance"><td>' . sc_language_render('order.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
+            $blance = '<tr ' . $style . ' class="data-balance"><td>' . sc_language_render('order.totals.balance') . ':</td><td align="right">' . sc_currency_format($orderUpdated->balance) . '</td></tr>';
             $arrayReturn = ['error' => 0, 'detail' => [
                 'total'            => sc_currency_format($orderUpdated->total),
                 'subtotal'         => sc_currency_format($orderUpdated->subtotal),
