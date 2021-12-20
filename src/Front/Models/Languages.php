@@ -50,7 +50,10 @@ class Languages extends Model
                 $data = $data->where('position', $position);
             }
             if (!empty($keyword)) {
-                $data = $data->where('code', 'like', '%'.$keyword.'%');
+                $data = $data->where(function($query) use($keyword) {
+                    $query->where('code', 'like', '%'.$keyword.'%')
+                          ->orWhere('text', 'like', '%'.$keyword.'%');
+                });
             }
             $data = $data->get()
             ->keyBy('code')
