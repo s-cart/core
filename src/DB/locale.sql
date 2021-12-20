@@ -248,7 +248,7 @@ INSERT IGNORE INTO `__SC_DB_PREFIX__shop_country` (`code`, `name`) VALUES
 ('ZW', 'Zimbabwe');
 
 /*Language*/
-INSERT INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`) VALUES 
+INSERT IGNORE  INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`) VALUES 
 ('action.disable', 'Disable', 'action', 'en'),
 ('action.disable', 'Vô hiệu hóa', 'action', 'vi'),
 ('action.disable_success', 'Disabled success', 'action', 'en'),
