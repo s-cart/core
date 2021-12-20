@@ -5,7 +5,7 @@
       {{ config('app.env') }}
       &nbsp;&nbsp;
       <strong>Version</strong> 
-      {{ config('s-cart.sub-version') }}
+      {{ config('s-cart.sub-version') }} ({{ config('s-cart.core-sub-version') }})
     </div>
     <strong>Copyright &copy; {{ date('Y') }} <a href="{{ config('s-cart.homepage') }}">S-Cart: {{ config('s-cart.title') }}</a>.</strong> All rights
     reserved.
