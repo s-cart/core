@@ -30,17 +30,24 @@ class Update extends Command
      */
     public function handle()
     {
-        Artisan::call('db:seed', 
-        [
-            '--class' => 'DataDefaultSeeder',
-            '--force' => true
-        ]
-        );
-        Artisan::call('db:seed', 
-        [
-            '--class' => 'DataLocaleSeeder',
-            '--force' => true
-        ]
-        );
+        try {
+            Artisan::call('db:seed', 
+            [
+                '--class' => 'DataDefaultSeeder',
+                '--force' => true
+            ]
+            );
+            Artisan::call('db:seed', 
+            [
+                '--class' => 'DataLocaleSeeder',
+                '--force' => true
+            ]
+            );
+            $this->info('Update done');
+        } catch (Throwable $e) {
+            sc_report($e->getMessage());
+            echo  json_encode(['error' => 1, 'msg' => $e->getMessage()]);
+            exit();
+        }
     }
 }
