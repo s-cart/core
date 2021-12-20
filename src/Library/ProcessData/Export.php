@@ -109,7 +109,7 @@ class Export
         $worksheet->insertNewRowBefore($indexRow, 1);
         $worksheet->getCell('A' . $indexRow)->setValue(sc_language_render('order.payment_method') . ':')
             ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell('B' . $indexRow)->setValue($dataExport['payment_method'] . ':');
+        $worksheet->getCell('B' . $indexRow)->setValue($dataExport['payment_method']);
 
         ++$indexRow;
         $worksheet->insertNewRowBefore($indexRow, 1);
