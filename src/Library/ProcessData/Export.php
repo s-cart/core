@@ -19,7 +19,7 @@ class Export
             case 'xls':
                 return self::exportExcel($dataExport, $options);
                 break;
-            case 'invoice':
+            case 'invoice_excel':
                 return self::exportInvoice($dataExport, $options);
                 break;
             default:

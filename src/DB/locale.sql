@@ -1142,6 +1142,8 @@ INSERT IGNORE  INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `lo
 ('order.discount', 'Discount', 'order', 'en'),
 ('order.other_fee', 'Chi phí khác', 'order', 'vi'),
 ('order.other_fee', 'Other fee', 'order', 'en'),
+('order.invoice', 'Hóa đơn', 'order', 'vi'),
+('order.invoice', 'Invoice', 'order', 'en'),
 ('order.totals.total', 'Tổng tiền', 'order', 'vi'),
 ('order.totals.total', 'Total', 'order', 'en'),
 ('order.totals.sub_total', 'Tiền hàng', 'order', 'vi'),

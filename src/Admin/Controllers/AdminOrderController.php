@@ -714,13 +714,13 @@ class AdminOrderController extends RootAdminController
         }
     }
 
-    /*
-    Export order detail order
-    */
-    public function exportDetail()
+    /**
+     * Process invoice
+     */
+    public function invoice()
     {
-        $type = request('type');
         $orderId = request('order_id') ?? 0;
+        $action = request('action') ?? '';
         $order = AdminOrder::getOrderAdmin($orderId);
         if ($order) {
             $data                    = array();
@@ -741,6 +741,9 @@ class AdminOrderController extends RootAdminController
             $data['total']           = $order['total'];
             $data['received']        = $order['received'];
             $data['balance']         = $order['balance'];
+            $data['other_fee']       = $order['other_fee'] ?? 0;
+            $data['comment']         = $order['comment'];
+            $data['country']         = $order['country'];
             $data['id']              = $order->id;
             $data['details'] = [];
 
@@ -759,12 +762,23 @@ class AdminOrderController extends RootAdminController
                         $name = $detail->name;
                     }
                     $data['details'][] = [
-                        $key + 1, $detail->sku, $name, $detail->qty, $detail->price, $detail->total_price,
+                        'no' => $key + 1, 
+                        'sku' => $detail->sku, 
+                        'name' => $name, 
+                        'qty' => $detail->qty, 
+                        'price' => $detail->price, 
+                        'total_price' => $detail->total_price,
                     ];
                 }
             }
-            $options = ['filename' => 'Order ' . $orderId];
-            return \Export::export($type, $data, $options);
+
+            if ($action =='invoice_excel') {
+                $options = ['filename' => 'Order ' . $orderId];
+                return \Export::export($action, $data, $options);
+            }
+            
+            return view($this->templatePathAdmin.'format.invoice')
+            ->with($data);
         } else {
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }

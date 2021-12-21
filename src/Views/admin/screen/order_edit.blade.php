@@ -11,11 +11,8 @@
                   <div class="btn-group float-right" style="margin-right: 0px">
                       <a href="{{ sc_route_admin('admin_order.index') }}" class="btn btn-flat btn-default"><i class="fa fa-list"></i>&nbsp;{{ sc_language_render('admin.back_list') }}</a>
                   </div>
-                  <div class="btn-group float-right" style="margin-right: 10px">
-                      <a href="{{ sc_route_admin('admin_order.export_detail').'?order_id='.$order->id.'&type=invoice' }}" class="btn btn-flat btn-twitter" title="Export"><i class="fas fa-file-excel"></i><span class="hidden-xs"> Excel</span></a>
-                  </div>
                   <div class="btn-group float-right" style="margin-right: 10px;border:1px solid #c5b5b5;">
-                      <a class="btn btn-flat" title="Export" onclick="order_print()"><i class="fa fa-print"></i><span class="hidden-xs"> Print</span></a>
+                      <a class="btn btn-flat" target=_new title="Invoice" href="{{ sc_route_admin('admin_order.invoice', ['order_id' => $order->id]) }}"><i class="far fa-file-pdf"></i><span class="hidden-xs"> {{ sc_language_render('order.invoice') }}</span></a>
                   </div>
               </div>
           </div>
