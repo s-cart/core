@@ -15,7 +15,7 @@ if (!function_exists('sc_get_list_code_store') && !in_array('sc_get_list_code_st
  * Get domain from code
  */
 if (!function_exists('sc_get_domain_from_code') && !in_array('sc_get_domain_from_code', config('helper_except', []))) {
-    function sc_get_domain_from_code(string $code):string
+    function sc_get_domain_from_code(string $code = null):string
     {
         $domainList = \SCart\Core\Admin\Models\AdminStore::getStoreDomainByCode();
         if (!empty($domainList[$code])) {
