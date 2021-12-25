@@ -249,6 +249,10 @@ INSERT IGNORE INTO `__SC_DB_PREFIX__shop_country` (`code`, `name`) VALUES
 
 /*Language*/
 INSERT IGNORE  INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `location`) VALUES 
+('action.from', 'From', 'action', 'en'),
+('action.from', 'Từ', 'action', 'vi'),
+('action.to', 'To', 'action', 'en'),
+('action.to', 'Đến', 'action', 'vi'),
 ('action.disable', 'Disable', 'action', 'en'),
 ('action.disable', 'Vô hiệu hóa', 'action', 'vi'),
 ('action.disable_success', 'Disabled success', 'action', 'en'),

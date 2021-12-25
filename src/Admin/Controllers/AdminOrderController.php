@@ -181,7 +181,7 @@ class AdminOrderController extends RootAdminController
                     <div class="input-group float-left">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>From:</label>
+                                <label>'.sc_language_render('action.from').':</label>
                                 <div class="input-group">
                                 <input type="text" name="from_to" id="from_to" class="form-control input-sm date_time rounded-0" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" /> 
                                 </div>
@@ -189,7 +189,7 @@ class AdminOrderController extends RootAdminController
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>To:</label>
+                                <label>'.sc_language_render('action.to').':</label>
                                 <div class="input-group">
                                 <input type="text" name="end_to" id="end_to" class="form-control input-sm date_time rounded-0" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" /> 
                                 </div>
