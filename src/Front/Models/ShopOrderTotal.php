@@ -15,6 +15,8 @@ class ShopOrderTotal extends Model
     const POSITION_SHIPPING_METHOD = 10;
     const POSITION_TOTAL_METHOD = 20;
     const POSITION_TOTAL = 100;
+    const POSITION_OTHER_FEE = 160;
+    const POSITION_TOTAL_PAYMENT = 180;
     const POSITION_RECEIVED = 200;
     const NOT_YET_PAY = 0;
     const PART_PAY = 1;
@@ -52,15 +54,20 @@ class ShopOrderTotal extends Model
 
         // set total value
         $total = $subtotal + $tax;
+        $otherFee = 0;
         foreach ($objects as $key => $object) {
             if (is_array($object) && $object) {
-                if ($object['code'] != 'received') {
+                if ($object['code'] != 'received' && $object['code'] != 'other_fee') {
                     $total += $object['value'];
+                }
+                if ( $object['code'] == 'other_fee') {
+                    $otherFee = $object['value'];
                 }
             } else {
                 unset($objects[$key]);
             }
         }
+
         $arrayTotal = array(
             'title' => sc_language_render('order.totals.total'),
             'code' => 'total',
@@ -68,11 +75,22 @@ class ShopOrderTotal extends Model
             'text' => sc_currency_render_symbol($total),
             'sort' => self::POSITION_TOTAL,
         );
+        
+        // Total payment
+        $totalPayment = $total + $otherFee;
+        $arrayTotalPayment = array(
+            'title' => sc_language_render('order.totals.total_payment'),
+            'code' => 'total_payment',
+            'value' => $totalPayment,
+            'text' => sc_currency_render_symbol($totalPayment),
+            'sort' => self::POSITION_TOTAL_PAYMENT,
+        );
         //End total value
 
         $objects[] = $arraySubtotal;
         $objects[] = $arrayTax;
         $objects[] = $arrayTotal;
+        $objects[] = $arrayTotalPayment;
 
         //re-sort item total
         usort($objects, function ($a, $b) {
@@ -175,6 +193,21 @@ class ShopOrderTotal extends Model
     }
 
     /**
+     * Get other fee value
+     */
+    public static function getOtherFee()
+    {
+        $otherFee = config('cart.process.other_fee');
+        return array(
+            'title' => sc_language_render('order.totals.other_fee'),
+            'code' => 'other_fee',
+            'value' => $otherFee,
+            'text' => sc_currency_render_symbol($otherFee),
+            'sort' => self::POSITION_OTHER_FEE,
+        );
+    }
+
+    /**
      * Get received value
      */
     public static function getReceived()
@@ -198,6 +231,7 @@ class ShopOrderTotal extends Model
         foreach (self::getTotal() as  $totalMethod) {
             $objects[] = $totalMethod;
         }
+        $objects[] = self::getOtherFee();
         $objects[] = self::getReceived();
         return $objects;
     }

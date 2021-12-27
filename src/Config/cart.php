@@ -6,4 +6,7 @@ return [
         'wishlist' => '30', //days
         'compare' => '30', //days
     ],
+    'process' => [
+        'other_fee' => 20,
+    ],
 ];
