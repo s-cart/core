@@ -7,6 +7,9 @@ return [
         'compare' => '30', //days
     ],
     'process' => [
-        'other_fee' => 20,
+        'other_fee' => [
+            'value' => 0,
+            'title' => 'Other fee',
+        ],
     ],
 ];

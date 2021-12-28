@@ -644,6 +644,7 @@ class ShopCartController extends RootFrontController
         $tax      = (new ShopOrderTotal)->sumValueTotal('tax', $dataTotal); //sum tax
         $shipping = (new ShopOrderTotal)->sumValueTotal('shipping', $dataTotal); //sum shipping
         $discount = (new ShopOrderTotal)->sumValueTotal('discount', $dataTotal); //sum discount
+        $otherFee = (new ShopOrderTotal)->sumValueTotal('other_fee', $dataTotal); //sum other_fee
         $received = (new ShopOrderTotal)->sumValueTotal('received', $dataTotal); //sum received
         $total    = (new ShopOrderTotal)->sumValueTotal('total', $dataTotal);
         //end total
@@ -653,6 +654,7 @@ class ShopCartController extends RootFrontController
         $dataOrder['subtotal']        = $subtotal;
         $dataOrder['shipping']        = $shipping;
         $dataOrder['discount']        = $discount;
+        $dataOrder['other_fee']        = $otherFee;
         $dataOrder['received']        = $received;
         $dataOrder['tax']             = $tax;
         $dataOrder['payment_status']  = self::PAYMENT_UNPAID;
