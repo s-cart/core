@@ -33,7 +33,9 @@ class ShopOrderTotal extends Model
         foreach (self::getTotal() as  $totalMethod) {
             $objects[] = $totalMethod;
         }
-        $objects[] = self::getOtherFee();
+        foreach (self::getOtherFee() as  $otherFeeMethod) {
+            $objects[] = $otherFeeMethod;
+        }
         $objects[] = self::getReceived();
         return $objects;
     }
@@ -212,16 +214,31 @@ class ShopOrderTotal extends Model
      */
     public static function getOtherFee()
     {
-        sc_oder_process_other_fee();
+        $otherFeeMethod = [];
 
-        $otherFee = config('cart.process.other_fee.value');
-        $otherFeeTitle = config('cart.process.other_fee.title');
-        return array(
-            'title' => $otherFeeTitle,
-            'code' => 'other_fee',
-            'value' => $otherFee,
-            'text' => sc_currency_render_symbol($otherFee),
-            'sort' => self::POSITION_OTHER_FEE,
-        );
+        $otherFeeMethod = array_keys(sc_get_all_plugin_actived('OtherFee'));
+        if ($otherFeeMethod && is_array($otherFeeMethod)) {
+            foreach ($otherFeeMethod as $keyMethod => $valueMethod) {
+                $classOtherFeeConfig = sc_get_class_plugin_config('OtherFee', $keyMethod);
+                $returnModuleOtherFee = (new $classOtherFeeConfig)->getData();
+                $otherFeeMethod[] = [
+                    'title' => $returnModuleOtherFee['title'],
+                    'code' => 'other_fee',
+                    'value' => $returnModuleOtherFee['value'],
+                    'text' => sc_currency_render_symbol($returnModuleOtherFee['value']),
+                    'sort' => self::POSITION_OTHER_FEE,
+                ];
+            }
+        }
+        if (!count($otherFeeMethod)) {
+            $otherFeeMethod[] = array(
+                'title' => sc_language_render('order.totals.other_fee'),
+                'code' => 'other_fee',
+                'value' => 0,
+                'text' => 0,
+                'sort' => self::POSITION_OTHER_FEE,
+            );
+        }
+        return $otherFeeMethod;
     }
 }
