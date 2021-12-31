@@ -43,6 +43,8 @@ class ScartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadTranslationsFrom(__DIR__.'/Lang', 's-cart');
+
         if (!file_exists(public_path('install.php')) && file_exists(base_path('.env'))) {
             //Load helper from front
             try {
