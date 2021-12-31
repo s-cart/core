@@ -59,7 +59,7 @@ if (!function_exists('sc_get_all_plugin_actived') && !in_array('sc_get_all_plugi
         $allPlugins = sc_get_all_plugin($code);
         if (count($allPlugins)) {
             foreach ($allPlugins as $keyPlugin => $plugin) {
-                if (sc_config($keyPlugin) && sc_config($keyPlugin)['value'] == 1) {
+                if (sc_config($keyPlugin) == 1) {
                     $pluginsActived[$keyPlugin] = $plugin;
                 }
             }
