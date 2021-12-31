@@ -22,7 +22,8 @@
                             <div class="form-group row {{ $errors->has('customer_id') ? ' text-red' : '' }}">
                                 <label for="customer_id" class="col-sm-2 asterisk col-form-label">{{ sc_language_render('order.admin.select_customer') }}</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control customer_id " style="width: 100%;" name="customer_id" >
+                                    <select class="form-control customer_id " style="width: 100%;" name="customer_id">
+                                        <option value="">{{ sc_language_render('order.admin.select_customer') }}</option>
                                         @foreach ($users as $k => $v)
                                             <option value="{{ $k }}" {{ (old('customer_id') ==$k) ? 'selected':'' }}>{{ $v->name.'<'.$v->email.'>' }}</option>
                                         @endforeach
@@ -32,6 +33,9 @@
                                                 {{ $errors->first('customer_id') }}
                                             </span>
                                         @endif
+                                </div>
+                                <div class="input-group-append">
+                                    <a href="{{ sc_route_admin('admin_customer.index') }}"><button type="button" id="button-filter" class="btn btn-success  btn-flat"><i class="fa fa-plus" title="Add new"></i></button></a>
                                 </div>
                             </div>
 

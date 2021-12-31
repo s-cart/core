@@ -2677,7 +2677,7 @@ INSERT IGNORE  INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `lo
 ('admin.plugin.plugin_more', '<a href="https://s-cart.org/vi/plugin.html" target=_new><i class="fa fa-download" aria-hidden="true"></i> Download đầy đủ Ở ĐÂY</a>', 'admin.plugin', 'vi'),
 ('admin.plugin.Shipping_plugin', 'Shipping extension', 'admin.plugin', 'en'),
 ('admin.plugin.Payment_plugin', 'Payment extension', 'admin.plugin', 'en'),
-('admin.plugin.Total_plugin', 'Total extension', 'admin.plugin', 'en'),
+('admin.plugin.Total_plugin', 'Order value extension', 'admin.plugin', 'en'),
 ('admin.plugin.Other_plugin', 'Other plugin', 'admin.plugin', 'en'),
 ('admin.plugin.Api_plugin', 'Module Api', 'admin.plugin', 'en'),
 ('admin.plugin.Cms_plugin', 'Cms plugins', 'admin.plugin', 'en'),

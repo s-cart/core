@@ -157,7 +157,7 @@ class AdminOrder extends ShopOrder
 
         //Sum value item order total
         $totalData = ShopOrderTotal::where('order_id', $order_id)->get();
-        $total = $discount = $shipping = $received = 0;
+        $total = $discount = $shipping = $received = $other_fee = 0;
         foreach ($totalData as $key => $value) {
             if ($value['code'] === 'subtotal') {
                 $total += $value['value'];
@@ -167,6 +167,10 @@ class AdminOrder extends ShopOrder
             }
             if ($value['code'] === 'discount') {
                 $discount += $value['value'];
+                $total += $value['value'];
+            }
+            if ($value['code'] === 'other_fee') {
+                $other_fee += $value['value'];
                 $total += $value['value'];
             }
             if ($value['code'] === 'shipping') {
@@ -189,6 +193,7 @@ class AdminOrder extends ShopOrder
         $order = ShopOrder::find($order_id);
         $order->discount = $discount;
         $order->shipping = $shipping;
+        $order->other_fee = $other_fee;
         $order->received = $received;
         $order->balance = $total + $received;
         $order->total = $total;

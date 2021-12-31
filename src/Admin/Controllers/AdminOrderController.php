@@ -13,6 +13,7 @@ use SCart\Core\Front\Models\ShopShippingStatus;
 use SCart\Core\Admin\Models\AdminCustomer;
 use SCart\Core\Admin\Models\AdminOrder;
 use SCart\Core\Admin\Models\AdminProduct;
+use SCart\Core\Front\Models\ShopOrderTotal;
 use Validator;
 
 class AdminOrderController extends RootAdminController
@@ -361,12 +362,13 @@ class AdminOrderController extends RootAdminController
 
         $order = AdminOrder::create($dataInsert);
         AdminOrder::insertOrderTotal([
-            ['code' => 'subtotal', 'value' => 0, 'title' => 'Subtotal', 'sort' => 1, 'order_id' => $order->id],
-            ['code' => 'tax', 'value' => 0, 'title' => 'Tax', 'sort' => 2, 'order_id' => $order->id],
-            ['code' => 'shipping', 'value' => 0, 'title' => 'Shipping', 'sort' => 10, 'order_id' => $order->id],
-            ['code' => 'discount', 'value' => 0, 'title' => 'Discount', 'sort' => 20, 'order_id' => $order->id],
-            ['code' => 'total', 'value' => 0, 'title' => 'Total', 'sort' => 100, 'order_id' => $order->id],
-            ['code' => 'received', 'value' => 0, 'title' => 'Received', 'sort' => 200, 'order_id' => $order->id],
+            ['code' => 'subtotal', 'value' => 0, 'title' => sc_language_render('order.totals.sub_total'), 'sort' => ShopOrderTotal::POSITION_SUBTOTAL, 'order_id' => $order->id],
+            ['code' => 'tax', 'value' => 0, 'title' => sc_language_render('order.totals.tax'), 'sort' => ShopOrderTotal::POSITION_TAX, 'order_id' => $order->id],
+            ['code' => 'shipping', 'value' => 0, 'title' => sc_language_render('order.totals.shipping'), 'sort' => ShopOrderTotal::POSITION_SHIPPING_METHOD, 'order_id' => $order->id],
+            ['code' => 'discount', 'value' => 0, 'title' => sc_language_render('order.totals.discount'), 'sort' => ShopOrderTotal::POSITION_TOTAL_METHOD, 'order_id' => $order->id],
+            ['code' => 'other_fee', 'value' => 0, 'title' => config('cart.process.other_fee.title'), 'sort' => ShopOrderTotal::POSITION_OTHER_FEE, 'order_id' => $order->id],
+            ['code' => 'total', 'value' => 0, 'title' => sc_language_render('order.totals.total'), 'sort' => ShopOrderTotal::POSITION_TOTAL, 'order_id' => $order->id],
+            ['code' => 'received', 'value' => 0, 'title' => sc_language_render('order.totals.received'), 'sort' => ShopOrderTotal::POSITION_RECEIVED, 'order_id' => $order->id],
         ]);
         //
         return redirect()->route('admin_order.index')->with('success', sc_language_render('action.create_success'));
@@ -452,7 +454,7 @@ class AdminOrderController extends RootAdminController
         $id = request('pk');
         $code = request('name');
         $value = request('value');
-        if ($code == 'shipping' || $code == 'discount' || $code == 'received') {
+        if ($code == 'shipping' || $code == 'discount' || $code == 'received' || $code == 'other_fee') {
             $orderTotalOrigin = AdminOrder::getRowOrderTotal($id);
             $orderId = $orderTotalOrigin->order_id;
             $oldValue = $orderTotalOrigin->value;
@@ -502,6 +504,7 @@ class AdminOrderController extends RootAdminController
                 'tax' => sc_currency_format($orderUpdated->tax),
                 'shipping' => sc_currency_format($orderUpdated->shipping),
                 'discount' => sc_currency_format($orderUpdated->discount),
+                'other_fee' => sc_currency_format($orderUpdated->other_fee),
                 'received' => sc_currency_format($orderUpdated->received),
                 'balance' => $blance,
             ],

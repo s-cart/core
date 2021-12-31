@@ -204,6 +204,7 @@ class PrepareTablesShop extends Migration
                 $table->integer('shipping_status')->default(1);
                 $table->integer('status')->default(0);
                 $table->integer('tax')->nullable()->default(0);
+                $table->integer('other_fee')->nullable()->default(0);
                 $table->integer('total')->nullable()->default(0);
                 $table->string('currency', 10);
                 $table->float('exchange_rate')->nullable();
