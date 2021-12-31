@@ -233,10 +233,10 @@ class ShopOrderTotal extends Model
     {
         $otherFeeMethod = [];
 
-        $otherFeeMethod = array_keys(sc_get_all_plugin_actived('OtherFee'));
+        $otherFeeMethod = sc_get_all_plugin_actived('Fee');
         if ($otherFeeMethod && is_array($otherFeeMethod)) {
             foreach ($otherFeeMethod as $keyMethod => $valueMethod) {
-                $classOtherFeeConfig = sc_get_class_plugin_config('OtherFee', $keyMethod);
+                $classOtherFeeConfig = sc_get_class_plugin_config('Fee', $keyMethod);
                 $returnModuleOtherFee = (new $classOtherFeeConfig)->getData();
                 $otherFeeMethod[] = [
                     'title' => $returnModuleOtherFee['title'],
