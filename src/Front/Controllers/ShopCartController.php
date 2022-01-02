@@ -1217,6 +1217,7 @@ class ShopCartController extends RootFrontController
                     '/\{\{\$subtotal\}\}/',
                     '/\{\{\$shipping\}\}/',
                     '/\{\{\$discount\}\}/',
+                    '/\{\{\$otherFee\}\}/',
                     '/\{\{\$total\}\}/',
                 ];
                 $dataReplace = [
@@ -1236,6 +1237,7 @@ class ShopCartController extends RootFrontController
                     sc_currency_render($data['subtotal'], '', '', '', false),
                     sc_currency_render($data['shipping'], '', '', '', false),
                     sc_currency_render($data['discount'], '', '', '', false),
+                    sc_currency_render($data['other_fee'], '', '', '', false),
                     sc_currency_render($data['total'], '', '', '', false),
                 ];
 

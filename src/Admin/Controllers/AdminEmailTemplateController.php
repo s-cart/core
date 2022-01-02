@@ -234,6 +234,7 @@ class AdminEmailTemplateController extends RootAdminController
                     '$orderDetail',
                     '$subtotal',
                     '$shipping',
+                    '$otherFee',
                     '$discount',
                     '$total',
                 ];

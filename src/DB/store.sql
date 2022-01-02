@@ -239,6 +239,11 @@ INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`name`, `group`, `text`, `sta
       <td colspan=\"2\" style=\"font-weight: bold;\">Discount</td>
       <td colspan=\"2\" align=\"right\">{{$discount}}</td>
   </tr>
+    <tr>
+      <td colspan=\"2\"></td>
+      <td colspan=\"2\" style=\"font-weight: bold;\">Other Fee</td>
+      <td colspan=\"2\" align=\"right\">{{$otherFee}}</td>
+  </tr>
   <tr>
       <td colspan=\"2\"></td>
       <td colspan=\"2\" style=\"font-weight: bold;\">Total</td>
