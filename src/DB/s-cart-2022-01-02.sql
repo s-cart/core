@@ -12,10 +12,24 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping structure for table s-cart.check_ip_access
+DROP TABLE IF EXISTS `check_ip_access`;
+CREATE TABLE IF NOT EXISTS `check_ip_access` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ip` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `check_ip_access_ip_index` (`ip`),
+  KEY `check_ip_access_type_index` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping database structure for s-cart
-CREATE DATABASE IF NOT EXISTS `s-cart` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `s-cart`;
+-- Dumping data for table s-cart.check_ip_access: ~0 rows (approximately)
+DELETE FROM `check_ip_access`;
+/*!40000 ALTER TABLE `check_ip_access` DISABLE KEYS */;
+/*!40000 ALTER TABLE `check_ip_access` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.failed_jobs
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -133,8 +147,8 @@ CREATE TABLE IF NOT EXISTS `oauth_clients` (
 DELETE FROM `oauth_clients`;
 /*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
 INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
-	('953e539e-c2aa-47bd-a279-cd8ab10fcbec', NULL, 'SCart Personal Access Client', 'dscMY69ePqdGwLQF0io7YCBJ5OBTm5KHf9LtDEKS', NULL, 'http://localhost', 1, 0, 0, '2021-12-31 18:13:54', '2021-12-31 18:13:54'),
-	('953e539e-c69a-4151-a84a-aeaf800dbe57', NULL, 'SCart Password Grant Client', 't5tN5qdFh7ccmRWMQyse2ZvncCfDifkRJxXAcMDK', 'users', 'http://localhost', 0, 1, 0, '2021-12-31 18:13:54', '2021-12-31 18:13:54');
+	('954187d6-11ba-4ad0-9fa9-757eeaff7fc1', NULL, 'SCart Personal Access Client', 'xXCHRn6rTFTMjgzIdRg7LvA5kZhb1MuraGuz8pnL', NULL, 'http://localhost', 1, 0, 0, '2022-01-02 08:27:23', '2022-01-02 08:27:23'),
+	('954187d6-165d-45de-9308-978a7138bc68', NULL, 'SCart Password Grant Client', '5uU2C3Zm9MAsIIrVJkyVwPAaT0woRc0ASQdrcHTM', 'users', 'http://localhost', 0, 1, 0, '2022-01-02 08:27:23', '2022-01-02 08:27:23');
 /*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_personal_access_clients
@@ -151,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `oauth_personal_access_clients` (
 DELETE FROM `oauth_personal_access_clients`;
 /*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
 INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
-	(1, '953e539e-c2aa-47bd-a279-cd8ab10fcbec', '2021-12-31 18:13:54', '2021-12-31 18:13:54');
+	(1, '954187d6-11ba-4ad0-9fa9-757eeaff7fc1', '2022-01-02 08:27:23', '2022-01-02 08:27:23');
 /*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.oauth_refresh_tokens
@@ -187,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_config` (
   KEY `sc_admin_config_code_index` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_admin_config: ~16 rows (approximately)
+-- Dumping data for table s-cart.sc_admin_config: ~133 rows (approximately)
 DELETE FROM `sc_admin_config`;
 /*!40000 ALTER TABLE `sc_admin_config` DISABLE KEYS */;
 INSERT INTO `sc_admin_config` (`id`, `group`, `code`, `key`, `value`, `security`, `store_id`, `sort`, `detail`) VALUES
@@ -342,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_log` (
   KEY `sc_admin_log_user_id_index` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_admin_log: ~34 rows (approximately)
+-- Dumping data for table s-cart.sc_admin_log: ~0 rows (approximately)
 DELETE FROM `sc_admin_log`;
 /*!40000 ALTER TABLE `sc_admin_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sc_admin_log` ENABLE KEYS */;
@@ -456,19 +470,19 @@ CREATE TABLE IF NOT EXISTS `sc_admin_permission` (
 DELETE FROM `sc_admin_permission`;
 /*!40000 ALTER TABLE `sc_admin_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at`, `updated_at`) VALUES
-	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2021-12-31 18:13:53', NULL),
-	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2021-12-31 18:13:53', NULL),
-	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2021-12-31 18:13:53', NULL),
-	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2021-12-31 18:13:53', NULL),
-	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2021-12-31 18:13:53', NULL),
-	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2021-12-31 18:13:53', NULL),
-	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2021-12-31 18:13:53', NULL),
-	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2021-12-31 18:13:53', NULL),
-	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2021-12-31 18:13:53', NULL),
-	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2021-12-31 18:13:53', NULL),
-	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2021-12-31 18:13:53', NULL),
-	(12, 'CMS full', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*,ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2021-12-31 18:13:53', NULL),
-	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2021-12-31 18:13:53', NULL);
+	(1, 'Auth manager', 'auth.full', 'ANY::sc_admin/auth/*', '2022-01-02 08:27:22', NULL),
+	(2, 'Dashboard', 'dashboard', 'GET::sc_admin', '2022-01-02 08:27:22', NULL),
+	(3, 'Base setting', 'base.setting', 'ANY::sc_admin/order_status/*,ANY::sc_admin/shipping_status/*,ANY::sc_admin/payment_status/*,ANY::sc_admin/supplier/*,ANY::sc_admin/brand/*,ANY::sc_admin/custom_field/*,ANY::sc_admin/weight_unit/*,ANY::sc_admin/length_unit/*,ANY::sc_admin/attribute_group/*,ANY::sc_admin/tax/*', '2022-01-02 08:27:22', NULL),
+	(4, 'Store manager', 'store.full', 'ANY::sc_admin/store_info/*,ANY::sc_admin/store_maintain/*,ANY::sc_admin/store_config/*,ANY::sc_admin/store_css/*,ANY::sc_admin/store_block/*,ANY::sc_admin/store_link/*', '2022-01-02 08:27:22', NULL),
+	(5, 'Product manager', 'product.full', 'ANY::sc_admin/product/*,ANY::sc_admin/product_property/*,ANY::sc_admin/product_tag/*', '2022-01-02 08:27:22', NULL),
+	(6, 'Category manager', 'category.full', 'ANY::sc_admin/category/*', '2022-01-02 08:27:22', NULL),
+	(7, 'Order manager', 'order.full', 'ANY::sc_admin/order/*', '2022-01-02 08:27:22', NULL),
+	(8, 'Upload management', 'upload.full', 'ANY::sc_admin/uploads/*', '2022-01-02 08:27:22', NULL),
+	(9, 'Extension manager', 'extension.full', 'ANY::sc_admin/template/*,ANY::sc_admin/plugin/*', '2022-01-02 08:27:22', NULL),
+	(10, 'Marketing manager', 'marketing.full', 'ANY::sc_admin/shop_discount/*,ANY::sc_admin/email_template/*,ANY::sc_admin/customer/*,ANY::sc_admin/subscribe/*,ANY::sc_admin/seo/*', '2022-01-02 08:27:22', NULL),
+	(11, 'Report manager', 'report.full', 'ANY::sc_admin/report/*', '2022-01-02 08:27:22', NULL),
+	(12, 'CMS full', 'cms.full', 'ANY::sc_admin/page/*,ANY::sc_admin/banner/*,ANY::sc_admin/banner_type/*,ANY::sc_admin/cms_category/*,ANY::sc_admin/cms_content/*,ANY::sc_admin/news/*', '2022-01-02 08:27:22', NULL),
+	(13, 'Update config', 'change.config', 'POST::sc_admin/store_config/update', '2022-01-02 08:27:22', NULL);
 /*!40000 ALTER TABLE `sc_admin_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role
@@ -487,13 +501,13 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role` (
 DELETE FROM `sc_admin_role`;
 /*!40000 ALTER TABLE `sc_admin_role` DISABLE KEYS */;
 INSERT INTO `sc_admin_role` (`id`, `name`, `slug`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrator', 'administrator', '2021-12-31 18:13:53', NULL),
-	(2, 'Group only View', 'view.all', '2021-12-31 18:13:53', NULL),
-	(3, 'Manager', 'manager', '2021-12-31 18:13:53', NULL),
-	(4, 'CMS', 'cms', '2021-12-31 18:13:53', NULL),
-	(5, 'Accountant', 'accountant', '2021-12-31 18:13:53', NULL),
-	(6, 'Marketing', 'maketing', '2021-12-31 18:13:53', NULL),
-	(7, 'Admin CMS', 'admin_cms', '2021-12-31 18:13:53', NULL);
+	(1, 'Administrator', 'administrator', '2022-01-02 08:27:22', NULL),
+	(2, 'Group only View', 'view.all', '2022-01-02 08:27:22', NULL),
+	(3, 'Manager', 'manager', '2022-01-02 08:27:22', NULL),
+	(4, 'CMS', 'cms', '2022-01-02 08:27:22', NULL),
+	(5, 'Accountant', 'accountant', '2022-01-02 08:27:22', NULL),
+	(6, 'Marketing', 'maketing', '2022-01-02 08:27:22', NULL),
+	(7, 'Admin CMS', 'admin_cms', '2022-01-02 08:27:22', NULL);
 /*!40000 ALTER TABLE `sc_admin_role` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_permission
@@ -511,36 +525,36 @@ CREATE TABLE IF NOT EXISTS `sc_admin_role_permission` (
 DELETE FROM `sc_admin_role_permission`;
 /*!40000 ALTER TABLE `sc_admin_role_permission` DISABLE KEYS */;
 INSERT INTO `sc_admin_role_permission` (`role_id`, `permission_id`, `created_at`, `updated_at`) VALUES
-	(3, 1, '2021-12-31 18:13:53', NULL),
-	(3, 2, '2021-12-31 18:13:53', NULL),
-	(3, 3, '2021-12-31 18:13:53', NULL),
-	(3, 4, '2021-12-31 18:13:53', NULL),
-	(3, 5, '2021-12-31 18:13:53', NULL),
-	(3, 6, '2021-12-31 18:13:53', NULL),
-	(3, 7, '2021-12-31 18:13:53', NULL),
-	(3, 8, '2021-12-31 18:13:53', NULL),
-	(3, 9, '2021-12-31 18:13:53', NULL),
-	(3, 10, '2021-12-31 18:13:53', NULL),
-	(3, 11, '2021-12-31 18:13:53', NULL),
-	(3, 12, '2021-12-31 18:13:53', NULL),
-	(3, 13, '2021-12-31 18:13:53', NULL),
-	(4, 1, '2021-12-31 18:13:53', NULL),
-	(4, 12, '2021-12-31 18:13:53', NULL),
-	(5, 1, '2021-12-31 18:13:53', NULL),
-	(5, 2, '2021-12-31 18:13:53', NULL),
-	(5, 7, '2021-12-31 18:13:53', NULL),
-	(5, 11, '2021-12-31 18:13:53', NULL),
-	(6, 1, '2021-12-31 18:13:53', NULL),
-	(6, 2, '2021-12-31 18:13:53', NULL),
-	(6, 8, '2021-12-31 18:13:53', NULL),
-	(6, 10, '2021-12-31 18:13:53', NULL),
-	(6, 11, '2021-12-31 18:13:53', NULL),
-	(6, 12, '2021-12-31 18:13:53', NULL),
-	(7, 1, '2021-12-31 18:13:53', NULL),
-	(7, 4, '2021-12-31 18:13:53', NULL),
-	(7, 8, '2021-12-31 18:13:53', NULL),
-	(7, 12, '2021-12-31 18:13:53', NULL),
-	(7, 13, '2021-12-31 18:13:53', NULL);
+	(3, 1, '2022-01-02 08:27:22', NULL),
+	(3, 2, '2022-01-02 08:27:22', NULL),
+	(3, 3, '2022-01-02 08:27:22', NULL),
+	(3, 4, '2022-01-02 08:27:22', NULL),
+	(3, 5, '2022-01-02 08:27:22', NULL),
+	(3, 6, '2022-01-02 08:27:22', NULL),
+	(3, 7, '2022-01-02 08:27:22', NULL),
+	(3, 8, '2022-01-02 08:27:22', NULL),
+	(3, 9, '2022-01-02 08:27:22', NULL),
+	(3, 10, '2022-01-02 08:27:22', NULL),
+	(3, 11, '2022-01-02 08:27:22', NULL),
+	(3, 12, '2022-01-02 08:27:22', NULL),
+	(3, 13, '2022-01-02 08:27:22', NULL),
+	(4, 1, '2022-01-02 08:27:22', NULL),
+	(4, 12, '2022-01-02 08:27:22', NULL),
+	(5, 1, '2022-01-02 08:27:22', NULL),
+	(5, 2, '2022-01-02 08:27:22', NULL),
+	(5, 7, '2022-01-02 08:27:22', NULL),
+	(5, 11, '2022-01-02 08:27:22', NULL),
+	(6, 1, '2022-01-02 08:27:22', NULL),
+	(6, 2, '2022-01-02 08:27:22', NULL),
+	(6, 8, '2022-01-02 08:27:22', NULL),
+	(6, 10, '2022-01-02 08:27:22', NULL),
+	(6, 11, '2022-01-02 08:27:22', NULL),
+	(6, 12, '2022-01-02 08:27:22', NULL),
+	(7, 1, '2022-01-02 08:27:22', NULL),
+	(7, 4, '2022-01-02 08:27:22', NULL),
+	(7, 8, '2022-01-02 08:27:22', NULL),
+	(7, 12, '2022-01-02 08:27:22', NULL),
+	(7, 13, '2022-01-02 08:27:22', NULL);
 /*!40000 ALTER TABLE `sc_admin_role_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_user
@@ -634,7 +648,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_template` (
 DELETE FROM `sc_admin_template`;
 /*!40000 ALTER TABLE `sc_admin_template` DISABLE KEYS */;
 INSERT INTO `sc_admin_template` (`id`, `key`, `name`, `status`, `created_at`, `updated_at`) VALUES
-	(1, 's-cart-light', 'S-Cart Light', 1, '2021-12-31 18:13:53', NULL);
+	(1, 's-cart-light', 'S-Cart Light', 1, '2022-01-02 08:27:22', NULL);
 /*!40000 ALTER TABLE `sc_admin_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user
@@ -659,7 +673,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_user` (
 DELETE FROM `sc_admin_user`;
 /*!40000 ALTER TABLE `sc_admin_user` DISABLE KEYS */;
 INSERT INTO `sc_admin_user` (`id`, `username`, `password`, `name`, `email`, `avatar`, `remember_token`, `theme`, `created_at`, `updated_at`) VALUES
-	(1, 'admin', '$2y$10$Nyg/2ee4KewKzz71nrC5IupCslke1DL5MyIKsXs.MEse3LOdwtXU6', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, '2021-12-31 18:13:53', NULL);
+	(1, 'admin', '$2y$10$z.W.s7hl0eW7XBk8D1OhCOx05bwjHkvhWdQgoLh54Wc7m.5HR6PDW', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, '2022-01-02 08:27:22', NULL);
 /*!40000 ALTER TABLE `sc_admin_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user_permission
@@ -696,7 +710,7 @@ CREATE TABLE IF NOT EXISTS `sc_api_connection` (
 DELETE FROM `sc_api_connection`;
 /*!40000 ALTER TABLE `sc_api_connection` DISABLE KEYS */;
 INSERT INTO `sc_api_connection` (`id`, `description`, `apiconnection`, `apikey`, `expire`, `last_active`, `status`) VALUES
-	(1, 'Demo api connection', 'appmobile', 'be1f3052-6a2a-11ec-9904-04d9f5d0007b', NULL, NULL, 0);
+	(1, 'Demo api connection', 'appmobile', '24aed05a-6b6b-11ec-9904-04d9f5d0007b', NULL, NULL, 0);
 /*!40000 ALTER TABLE `sc_api_connection` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_cms_category
@@ -1054,7 +1068,7 @@ CREATE TABLE IF NOT EXISTS `sc_languages` (
   KEY `sc_languages_location_index` (`location`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2639 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_languages: ~2,635 rows (approximately)
+-- Dumping data for table s-cart.sc_languages: ~2,634 rows (approximately)
 DELETE FROM `sc_languages`;
 /*!40000 ALTER TABLE `sc_languages` DISABLE KEYS */;
 INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`) VALUES
@@ -4344,7 +4358,7 @@ INSERT INTO `sc_shop_email_template` (`id`, `name`, `group`, `text`, `store_id`,
 	(2, 'Customer verification', 'customer_verify', '<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n<tbody><tr>\r\n  <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n  <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n      <tbody><tr>\r\n      <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n          <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n          <tbody><tr>\r\n              <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n              <a href="{{$url_verify}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$button}}</a>\r\n              </td>\r\n          </tr>\r\n          </tbody>\r\n      </table>\r\n      </td>\r\n      </tr>\r\n  </tbody>\r\n  </table>\r\n  </td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n{{$note_sendmail}}\r\n</p>\r\n<table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n<tbody><tr>\r\n<td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n  <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n  </td>\r\n  </tr>\r\n</tbody>\r\n</table>', 1, 1),
 	(3, 'Welcome new customer', 'welcome_customer', '<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:center">{{$title}}</h1>\r\n<p style="text-align:center;">Welcome to my site!</p>', 1, 1),
 	(4, 'Send form contact to admin', 'contact_to_admin', '<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n<td>\r\n<b>Name</b>: {{$name}}<br>\r\n<b>Email</b>: {{$email}}<br>\r\n<b>Phone</b>: {{$phone}}<br>\r\n</td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Content:<br>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="0">\r\n<tr>\r\n<td>{{$content}}</td>\r\n</tr>\r\n</table>', 1, 1),
-	(5, 'New order to admin', 'order_success_to_admin', '<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n  <tr>\r\n      <td>\r\n          <b>Order ID</b>: {{$orderID}}<br>\r\n          <b>Customer name</b>: {{$toname}}<br>\r\n          <b>Email</b>: {{$email}}<br>\r\n          <b>Address</b>: {{$address}}<br>\r\n          <b>Phone</b>: {{$phone}}<br>\r\n          <b>Order note</b>: {{$comment}}\r\n      </td>\r\n  </tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n===================================<br></p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n  {{$orderDetail}}\r\n  <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n      <td colspan="2" align="right">{{$subtotal}}</td>\r\n  </tr>\r\n  <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n      <td colspan="2" align="right">{{$shipping}}</td>\r\n  </tr>\r\n  <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Discount</td>\r\n      <td colspan="2" align="right">{{$discount}}</td>\r\n  </tr>\r\n  <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Total</td>\r\n      <td colspan="2" align="right">{{$total}}</td>\r\n  </tr>\r\n</table>', 1, 1),
+	(5, 'New order to admin', 'order_success_to_admin', '<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n  <tr>\r\n      <td>\r\n          <b>Order ID</b>: {{$orderID}}<br>\r\n          <b>Customer name</b>: {{$toname}}<br>\r\n          <b>Email</b>: {{$email}}<br>\r\n          <b>Address</b>: {{$address}}<br>\r\n          <b>Phone</b>: {{$phone}}<br>\r\n          <b>Order note</b>: {{$comment}}\r\n      </td>\r\n  </tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n===================================<br></p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n  {{$orderDetail}}\r\n  <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n      <td colspan="2" align="right">{{$subtotal}}</td>\r\n  </tr>\r\n  <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n      <td colspan="2" align="right">{{$shipping}}</td>\r\n  </tr>\r\n  <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Discount</td>\r\n      <td colspan="2" align="right">{{$discount}}</td>\r\n  </tr>\r\n    <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Other Fee</td>\r\n      <td colspan="2" align="right">{{$otherFee}}</td>\r\n  </tr>\r\n  <tr>\r\n      <td colspan="2"></td>\r\n      <td colspan="2" style="font-weight: bold;">Total</td>\r\n      <td colspan="2" align="right">{{$total}}</td>\r\n  </tr>\r\n</table>', 1, 1),
 	(6, 'New order to customr', 'order_success_to_customer', '<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n  <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n  </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n===================================<br></p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n  <td colspan="2"></td>\r\n  <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n  <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n  <td colspan="2"></td>\r\n  <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n  <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n  <td colspan="2"></td>\r\n  <td colspan="2" style="font-weight: bold;">Discount</td>\r\n  <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n  <td colspan="2"></td>\r\n  <td colspan="2" style="font-weight: bold;">Total</td>\r\n  <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', 1, 1);
 /*!40000 ALTER TABLE `sc_shop_email_template` ENABLE KEYS */;
 
@@ -4514,12 +4528,12 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news` (
 DELETE FROM `sc_shop_news`;
 /*!40000 ALTER TABLE `sc_shop_news` DISABLE KEYS */;
 INSERT INTO `sc_shop_news` (`id`, `image`, `alias`, `sort`, `status`, `created_at`, `updated_at`) VALUES
-	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2021-12-31 18:13:54', NULL),
-	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2021-12-31 18:13:54', NULL),
-	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2021-12-31 18:13:54', NULL),
-	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2021-12-31 18:13:54', NULL),
-	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2021-12-31 18:13:54', NULL),
-	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2021-12-31 18:13:54', NULL);
+	(1, '/data/content/blog-1.jpg', 'demo-alias-blog-1', 0, 1, '2022-01-02 08:27:23', NULL),
+	(2, '/data/content/blog-2.jpg', 'demo-alias-blog-2', 0, 1, '2022-01-02 08:27:23', NULL),
+	(3, '/data/content/blog-3.jpg', 'demo-alias-blog-3', 0, 1, '2022-01-02 08:27:23', NULL),
+	(4, '/data/content/blog-4.jpg', 'demo-alias-blog-4', 0, 1, '2022-01-02 08:27:23', NULL),
+	(5, '/data/content/blog-5.jpg', 'demo-alias-blog-5', 0, 1, '2022-01-02 08:27:23', NULL),
+	(6, '/data/content/blog-6.jpg', 'demo-alias-blog-6', 0, 1, '2022-01-02 08:27:23', NULL);
 /*!40000 ALTER TABLE `sc_shop_news` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_description
