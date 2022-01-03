@@ -92,7 +92,7 @@ class AdminProductController extends RootAdminController
 
         $listTh['status'] = sc_language_render('product.status');
 
-        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT)) {
+        if ((sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT)) {
             // Only show store info if store is root
             $listTh['shop_store'] = sc_language_render('front.store_list');
         }
@@ -120,7 +120,7 @@ class AdminProductController extends RootAdminController
         $arrProductId = $dataTmp->pluck('id')->toArray();
         $categoriesTmp = (new AdminProduct)->getListCategoryIdFromProductId($arrProductId);
 
-        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
             $tableStore = (new AdminStore)->getTable();
             $tableProductStore = (new ShopProductStore)->getTable();
@@ -166,7 +166,7 @@ class AdminProductController extends RootAdminController
 
             $dataMap['status'] = $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>';
 
-            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();

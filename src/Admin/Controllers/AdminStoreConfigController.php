@@ -131,7 +131,7 @@ class AdminStoreConfigController extends RootAdminController
             'contact'  => sc_language_render('admin.captcha.captcha_page_contact'),
             'review'   => sc_language_render('admin.captcha.captcha_page_review'),
         ];
-        if (sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
+        if (sc_check_multi_shop_installed()) {
             $pageList = (new AdminPage)->getListPageAlias($id);
         } else {
             $pageList = (new AdminPage)->getListPageAlias();

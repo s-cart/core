@@ -44,7 +44,7 @@ class AdminNewsController extends RootAdminController
             'status' => sc_language_render('admin.news.status'),
         ];
 
-        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
             $listTh['shop_store'] = sc_language_render('front.store_list');
         }
@@ -66,7 +66,7 @@ class AdminNewsController extends RootAdminController
         ];
         $dataTmp = AdminNews::getNewsListAdmin($dataSearch);
 
-        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
             $arrId = $dataTmp->pluck('id')->toArray();
             // Only show store info if store is root
             $dataStores =  sc_get_list_store_of_news($arrId);
@@ -82,7 +82,7 @@ class AdminNewsController extends RootAdminController
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             ];
 
-            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();

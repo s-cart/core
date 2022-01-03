@@ -98,7 +98,7 @@ class ShopBrand extends Model
         } else {
             $data = $data->where($type, $key);
         }
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $tableBrandStore = (new ShopBrandStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $data = $data->join($tableBrandStore, $tableBrandStore.'.brand_id', $this->getTable() . '.id');
@@ -133,7 +133,7 @@ class ShopBrand extends Model
         $query = $this->selectRaw($dataSelect)
             ->where($this->getTable().'.status', 1);
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $tableBrandStore = (new ShopBrandStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $query = $query->join($tableBrandStore, $tableBrandStore.'.brand_id', $this->getTable() . '.id');

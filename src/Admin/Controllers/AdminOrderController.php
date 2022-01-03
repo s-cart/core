@@ -74,7 +74,7 @@ class AdminOrderController extends RootAdminController
             'payment_method' => '<i class="fa fa-credit-card" aria-hidden="true" title="'.sc_language_render('order.admin.payment_method_short').'"></i>',
             'status'         => sc_language_render('order.admin.status'),
         ];
-        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
             $listTh['shop_store'] = '<i class="fab fa-shopify" aria-hidden="true" title="'.sc_language_render('front.store_list').'"></i>';
         }
@@ -105,7 +105,7 @@ class AdminOrderController extends RootAdminController
             'order_status' => $order_status,
         ];
         $dataTmp = (new AdminOrder)->getOrderListAdmin($dataSearch);
-        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
             $arrId = $dataTmp->pluck('id')->toArray();
             // Only show store info if store is root
             if (function_exists('sc_get_list_store_of_order')) {
@@ -132,7 +132,7 @@ class AdminOrderController extends RootAdminController
                 'payment_method' => $row['payment_method'].'<br>('.$row['currency'] . '/' . $row['exchange_rate'].')',
                 'status'         => $styleStatus[$row['status']] ?? $row['status'],
             ];
-            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();

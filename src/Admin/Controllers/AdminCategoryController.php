@@ -47,7 +47,7 @@ class AdminCategoryController extends RootAdminController
             'sort'   => sc_language_render('admin.category.sort'),
         ];
 
-        if (sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_store_installed() && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
             $listTh['shop_store'] = sc_language_render('front.store_list');
         }
@@ -70,7 +70,7 @@ class AdminCategoryController extends RootAdminController
         ];
         $dataTmp = (new AdminCategory)->getCategoryListAdmin($dataSearch);
         
-        if (sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_store_installed() && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
             $arrId = $dataTmp->pluck('id')->toArray();
             if (function_exists('sc_get_list_store_of_category')) {
@@ -92,7 +92,7 @@ class AdminCategoryController extends RootAdminController
                 'sort' => $row['sort'],
             ];
 
-            if (sc_config_global('MultiStorePro') && session('adminStoreId') == SC_ID_ROOT) {
+            if (sc_check_multi_store_installed() && session('adminStoreId') == SC_ID_ROOT) {
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();
@@ -224,7 +224,7 @@ class AdminCategoryController extends RootAdminController
         }
         AdminCategory::insertDescriptionAdmin($dataDes);
 
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_check_multi_store_installed()) {
             // If multi-store
             $shopStore        = $data['shop_store'] ?? [];
             $category->stores()->detach();
@@ -325,7 +325,7 @@ class AdminCategoryController extends RootAdminController
         }
         AdminCategory::insertDescriptionAdmin($dataDes);
 
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_check_multi_store_installed()) {
             // If multi-store
             $shopStore        = $data['shop_store'] ?? [];
             $category->stores()->detach();

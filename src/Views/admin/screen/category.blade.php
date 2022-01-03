@@ -137,7 +137,7 @@
 
 
 
-@if (sc_config_global('MultiStorePro'))
+@if (sc_check_multi_store_installed())
                         {{-- select shop_store --}}
                         @php
                         $listStore = [];

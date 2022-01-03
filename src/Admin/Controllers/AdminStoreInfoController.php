@@ -52,7 +52,11 @@ class AdminStoreInfoController extends RootAdminController
                     $error = 1;
                     $msg = sc_language_render('store.admin.value_cannot_change');
                 } elseif ($name == 'domain') {
-                    if ($storeId == SC_ID_ROOT || (sc_config_global('MultiVendorPro') && sc_store_is_partner($storeId)) || sc_config_global('MultiStorePro')) {
+                    if (
+                        $storeId == SC_ID_ROOT 
+                        || ((sc_check_multi_vendor_installed()) && sc_store_is_partner($storeId)) 
+                        || sc_check_multi_store_installed()
+                    ) {
                         // Only store root can edit domain
                         $domain = sc_process_domain_store($value);
                         if (AdminStore::where('domain', $domain)->where('id', '<>', $storeId)->first()) {

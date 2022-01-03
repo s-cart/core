@@ -42,6 +42,7 @@ class AdminPluginsController extends RootAdminController
         if ($code == 'Other') {
             $arrDefault[] = 'GoogleCaptcha';
             $arrDefault[] = 'MultiVendorPro';
+            $arrDefault[] = 'B2B';
             $arrDefault[] = 'MultiStorePro';
         }
         if ($code == 'Cms') {

@@ -92,7 +92,7 @@ class ShopPage extends Model
             ->where($tableDescription . '.lang', sc_get_locale());
 
         $storeId = config('app.storeId');
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $tablePageStore = (new ShopPageStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $page = $page->join($tablePageStore, $tablePageStore.'.page_id', $this->getTable() . '.id');
@@ -149,7 +149,7 @@ class ShopPage extends Model
             ->where($tableDescription . '.lang', sc_get_locale());
 
         $storeId = config('app.storeId');
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $tablePageStore = (new ShopPageStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $query = $query->join($tablePageStore, $tablePageStore.'.page_id', $this->getTable() . '.id');

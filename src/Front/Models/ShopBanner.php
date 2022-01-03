@@ -59,7 +59,7 @@ class ShopBanner extends Model
         if ($checkActive) {
             $data = $data->where($this->getTable() .'.status', 1);
         }
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $tableBannerStore = (new ShopBannerStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $data = $data->join($tableBannerStore, $tableBannerStore.'.banner_id', $this->getTable() . '.id');
@@ -179,7 +179,7 @@ class ShopBanner extends Model
 
         $storeId = config('app.storeId');
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             //Get product active for store
             if (!empty($this->sc_store)) {
                 //If sepcify store id

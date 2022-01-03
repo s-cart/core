@@ -134,7 +134,7 @@
 
 
 
-@if ((sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')))
+@if (sc_check_multi_shop_installed())
 
                             <div class="form-group row {{ $errors->has('store_id') ? ' text-red' : '' }}">
                                 <label for="store_id" class="col-sm-2 col-form-label">{{ sc_language_render('admin.select_store') }}</label>

@@ -235,12 +235,12 @@ class ScartServiceProvider extends ServiceProvider
         $storeId = SC_ID_ROOT;
 
         //Process for multi store
-        if (sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) {
+        if (sc_check_multi_shop_installed()) {
             $domain = sc_process_domain_store(url('/'));
-            if (sc_config_global('MultiVendorPro')) {
+            if (sc_check_multi_vendor_installed()) {
                 $arrDomain = ShopStore::getDomainPartner();
             }
-            if (sc_config_global('MultiStorePro')) {
+            if (sc_check_multi_store_installed()) {
                 $arrDomain = ShopStore::getDomainStore();
             }
             if (in_array($domain, $arrDomain)) {
@@ -264,7 +264,7 @@ class ScartServiceProvider extends ServiceProvider
         //Config for  email
         if (
             // Default use smtp mode for for supplier if use multi-store
-            ($storeId != SC_ID_ROOT && (sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')))
+            ($storeId != SC_ID_ROOT && sc_check_multi_shop_installed())
             ||
             // Use smtp config from admin if root domain have smtp_mode enable
             ($storeId == SC_ID_ROOT && sc_config_global('smtp_mode'))

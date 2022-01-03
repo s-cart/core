@@ -15,7 +15,7 @@ class AdminBannerController extends RootAdminController
         parent::__construct();
         $this->arrTarget = ['_blank' => '_blank', '_self' => '_self'];
         $this->dataType  = (new ShopBannerType)->pluck('name', 'code')->all();
-        if (sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_vendor_installed()) {
             $this->dataType['background-store'] = 'Background store';
             $this->dataType['breadcrumb-store'] = 'Breadcrumb store';
         }
@@ -52,7 +52,7 @@ class AdminBannerController extends RootAdminController
             'target' => sc_language_render('admin.banner.target'),
             'type'   => sc_language_render('admin.banner.type'),
         ];
-        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
             // Only show store info if store is root
             $listTh['shop_store'] = sc_language_render('front.store_list');
         }
@@ -72,7 +72,7 @@ class AdminBannerController extends RootAdminController
         ];
         $dataTmp = AdminBanner::getBannerListAdmin($dataSearch);
 
-        if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+        if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
             $arrId = $dataTmp->pluck('id')->toArray();
             // Only show store info if store is root
             if (function_exists('sc_get_list_store_of_banner')) {
@@ -95,7 +95,7 @@ class AdminBannerController extends RootAdminController
                 'type' => $this->dataType[$row['type']]??'N/A',
             ];
 
-            if ((sc_config_global('MultiVendorPro') || sc_config_global('MultiStorePro')) && session('adminStoreId') == SC_ID_ROOT) {
+            if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
                 // Only show store info if store is root
                 if (!empty($dataStores[$row['id']])) {
                     $storeTmp = $dataStores[$row['id']]->pluck('code', 'id')->toArray();

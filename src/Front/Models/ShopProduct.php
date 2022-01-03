@@ -208,14 +208,17 @@ class ShopProduct extends Model
 
         $product = $this->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id');
         
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $dataSelect .= ', '.$tableProductStore.'.store_id';
             $product = $product->join($tableProductStore, $tableProductStore.'.product_id', $this->getTable() . '.id');
             $product = $product->join($tableStore, $tableStore . '.id', $tableProductStore.'.store_id');
             $product = $product->where($tableStore . '.status', '1');
 
-            if (sc_config_global('MultiStorePro')  ||
-                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != SC_ID_ROOT))
+            if (sc_check_multi_store_installed()  
+                || (
+                    (sc_check_multi_vendor_installed()) 
+                    && (!empty($this->sc_store_id) || config('app.storeId') != SC_ID_ROOT)
+                    )
             ) {
                 //store of vendor
                 $product = $product->where($tableProductStore.'.store_id', $storeId);
@@ -688,14 +691,17 @@ class ShopProduct extends Model
             ->leftJoin($tableDescription, $tableDescription . '.product_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $dataSelect .= ', '.$tableProductStore.'.store_id';
             $query = $query->join($tableProductStore, $tableProductStore.'.product_id', $this->getTable() . '.id');
             $query = $query->join($tableStore, $tableStore . '.id', $tableProductStore.'.store_id');
             $query = $query->where($tableStore . '.status', '1');
 
-            if (sc_config_global('MultiStorePro')  ||
-                (sc_config_global('MultiVendorPro') && (!empty($this->sc_store_id) || config('app.storeId') != 1))
+            if (sc_check_multi_store_installed()  
+                || (
+                    (sc_check_multi_vendor_installed()) 
+                    && (!empty($this->sc_store_id) || config('app.storeId') != SC_ID_ROOT)
+                    )
             ) {
                 //store of vendor
                 $query = $query->where($tableProductStore.'.store_id', $storeId);
@@ -881,7 +887,7 @@ class ShopProduct extends Model
      */
     public function displayVendor()
     {
-        if (sc_config_global('MultiVendorPro') && config('app.storeId') == SC_ID_ROOT) {
+        if ((sc_check_multi_vendor_installed()) && config('app.storeId') == SC_ID_ROOT) {
             $view = 'templates.'.sc_store('template'). '.vendor.display_vendor';
             if (!view()->exists($view)) {
                 return;

@@ -27,7 +27,7 @@ class ShopLink extends Model
             $links = self::selectRaw($dataSelect)
                 ->where($tableLink.'.status', 1);
             $storeId = config('app.storeId');
-            if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+            if (sc_check_multi_shop_installed()) {
                 $tableLinkStore = (new ShopLinkStore)->getTable();
                 $tableStore = (new ShopStore)->getTable();
                 $links = $links->join($tableLinkStore, $tableLinkStore.'.link_id', $tableLink . '.id');

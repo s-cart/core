@@ -119,7 +119,7 @@ class ShopCategory extends Model
             ->leftJoin($tableDescription, $tableDescription . '.category_id', $this->getTable() . '.id')
             ->where($tableDescription . '.lang', sc_get_locale());
 
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_check_multi_store_installed()) {
             $tableCategoryStore = (new ShopCategoryStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $category = $category->join($tableCategoryStore, $tableCategoryStore.'.category_id', $this->getTable() . '.id');
@@ -212,7 +212,7 @@ class ShopCategory extends Model
             });
         }
 
-        if (sc_config_global('MultiStorePro')) {
+        if (sc_check_multi_store_installed()) {
             $tableCategoryStore = (new ShopCategoryStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $query = $query->join($tableCategoryStore, $tableCategoryStore.'.category_id', $this->getTable() . '.id');

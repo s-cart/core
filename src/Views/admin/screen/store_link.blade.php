@@ -111,7 +111,7 @@
                                 </div>
                             </div>
 
-@if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro'))
+@if (sc_check_multi_shop_installed())
                             {{-- select shop_store --}}
                             @php
                             $listStore = [];
@@ -133,7 +133,7 @@
                                     class="col-sm-2 col-form-label">{{ sc_language_render('admin.select_store') }}</label>
                                 <div class="col-sm-8">
                                     <select class="form-control shop_store select2" 
-                                    @if (sc_config_global('MultiStorePro'))
+                                    @if (sc_check_multi_store_installed())
                                         multiple="multiple"
                                     @endif
                                     data-placeholder="{{ sc_language_render('admin.select_store') }}" style="width: 100%;"

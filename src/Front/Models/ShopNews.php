@@ -100,7 +100,7 @@ class ShopNews extends Model
             ->where($tableDescription . '.lang', sc_get_locale());
 
         $storeId = config('app.storeId');
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $tableNewsStore = (new ShopNewsStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $news = $news->join($tableNewsStore, $tableNewsStore.'.news_id', $this->getTable() . '.id');
@@ -164,7 +164,7 @@ class ShopNews extends Model
         }
         
         $storeId = config('app.storeId');
-        if (sc_config_global('MultiStorePro') || sc_config_global('MultiVendorPro')) {
+        if (sc_check_multi_shop_installed()) {
             $tableNewsStore = (new ShopNewsStore)->getTable();
             $tableStore = (new ShopStore)->getTable();
             $query = $query->join($tableNewsStore, $tableNewsStore.'.news_id', $this->getTable() . '.id');
