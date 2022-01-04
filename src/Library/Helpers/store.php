@@ -328,3 +328,42 @@ if (!function_exists('sc_check_multi_store_installed') && !in_array('sc_check_mu
             return sc_config_global('MultiStorePro');
         }
 }
+
+if (!function_exists('sc_link_vendor') && !in_array('sc_link_vendor', config('helper_except', []))) {
+    /**
+     * Link vendor
+     *
+     * @return
+     */
+        function sc_link_vendor(string $code = null)
+        {
+            $link = sc_route('home');
+            if (sc_config_global('MultiVendorPro')) {
+                $link = sc_route('MultiVendorPro.detail', ['code' => $code]);
+            }
+            if (sc_config_global('B2B')) {
+                $link = sc_route('B2B.detail', ['code' => $code]);
+            }
+            return $link;
+        }
+}
+
+
+if (!function_exists('sc_path_vendor') && !in_array('sc_path_vendor', config('helper_except', []))) {
+    /**
+     * Path vendor
+     *
+     * @return
+     */
+        function sc_path_vendor()
+        {
+            $path = 'vendor';
+            if (sc_config_global('MultiVendorPro')) {
+                $path = config('MultiVendorPro.front_path');
+            }
+            if (sc_config_global('B2B')) {
+                $path = config('B2B.front_path');
+            }
+            return $path;
+        }
+}

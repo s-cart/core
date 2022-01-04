@@ -707,8 +707,13 @@ class ShopProduct extends Model
                 $query = $query->where($tableProductStore.'.store_id', $storeId);
             }
 
-            if (count($this->sc_category_vendor)) {
-                $tablePTC = (new \App\Plugins\Other\MultiVendorPro\Models\VendorProductCategory)->getTable();
+            if (count($this->sc_category_vendor) && sc_check_multi_vendor_installed()) {
+                if (sc_config_global('MultiVendorPro')) {
+                    $tablePTC = (new \App\Plugins\Other\MultiVendorPro\Models\VendorProductCategory)->getTable();
+                }
+                if (sc_config_global('B2B')) {
+                    $tablePTC = (new \App\Plugins\Other\B2B\Models\VendorProductCategory)->getTable();
+                }
                 $query = $query->leftJoin($tablePTC, $tablePTC . '.product_id', $this->getTable() . '.id');
                 $query = $query->whereIn($tablePTC . '.vendor_category_id', $this->sc_category_vendor);
             }
@@ -877,7 +882,7 @@ class ShopProduct extends Model
         if (!$code) {
             $code = $this->stores()->first()->code;
         }
-        return url('vendor/'.$code);
+        return url(sc_path_vendor().'/'.$code);
     }
 
     /**
