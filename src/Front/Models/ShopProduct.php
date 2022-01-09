@@ -794,11 +794,11 @@ class ShopProduct extends Model
                     if (is_array($rowSort) && count($rowSort) == 2) {
                         if ($rowSort[0] == 'sort') {
                             //Process sort with sort value
-                            $query = $query->orderBy($this->getTable().'.sort', 'asc');
+                            $query = $query->orderBy($this->getTable().'.sort', $rowSort[1]);
                             $ckeckSort = true;
                         } elseif ($rowSort[0] == 'id') {
                             //Process sort with product id
-                            $query = $query->orderBy($this->getTable().'.id', 'desc');
+                            $query = $query->orderBy($this->getTable().'.id', $rowSort[1]);
                             $ckeckId = true;
                         } else {
                             $query = $query->orderBy($rowSort[0], $rowSort[1]);
