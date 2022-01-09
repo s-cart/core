@@ -238,6 +238,8 @@ class AdminOrderController extends RootAdminController
             'title_description' => sc_language_render('order.admin.add_new_des'),
             'icon'              => 'fa fa-plus',
         ];
+        $paymentMethod = [];
+        $shippingMethod = [];
         $paymentMethodTmp = sc_get_plugin_installed('payment', $onlyActive = false);
         foreach ($paymentMethodTmp as $key => $value) {
             $paymentMethod[$key] = sc_language_render($value->detail);
@@ -384,6 +386,8 @@ class AdminOrderController extends RootAdminController
         if (!$order) {
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
+        $paymentMethod = [];
+        $shippingMethod = [];
         $products = (new AdminProduct)->getProductSelectAdmin(['kind' => ['0', '1']]);
         $paymentMethodTmp = sc_get_plugin_installed('payment', $onlyActive = false);
         foreach ($paymentMethodTmp as $key => $value) {
