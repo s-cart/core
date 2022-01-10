@@ -213,6 +213,22 @@ class ShopOrderTotal extends Model
     }
 
     /**
+     * Get amount total without shipping
+     *
+     * @return  [type]  [return description]
+     */
+    public static function getAmountTotalWithoutShipping() {
+        $amount = 0;
+        $carts  = ShopCurrency::sumCartCheckout();
+        $amount += $carts['subTotalWithTax'] ?? 0;
+        foreach (self::getTotal() as  $totalMethod) {
+            $amount += $totalMethod['value'] ?? 0;
+        }
+        return $amount;
+    }
+
+
+    /**
      * Get received value
      */
     public static function getReceived()
