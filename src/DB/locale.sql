@@ -1528,6 +1528,8 @@ INSERT IGNORE  INTO `__SC_DB_PREFIX__languages` (`code`, `text`, `position`, `lo
 ('admin.menu_titles.block_content', 'Block content', 'admin.menu_titles', 'en'),
 ('admin.menu_titles.block_link', 'Quản lý liên kết', 'admin.menu_titles', 'vi'),
 ('admin.menu_titles.block_link', 'Link manager', 'admin.menu_titles', 'en'),
+('admin.menu_titles.modify_layout', 'Chỉnh sửa layout', 'admin.menu_titles', 'vi'),
+('admin.menu_titles.modify_layout', 'Modify layout', 'admin.menu_titles', 'en'),
 ('admin.menu_titles.template_layout', 'Quản lý giao diện', 'admin.menu_titles', 'vi'),
 ('admin.menu_titles.template_layout', 'Template manager', 'admin.menu_titles', 'en'),
 ('admin.menu_titles.template', 'Giao diện', 'admin.menu_titles', 'vi'),
