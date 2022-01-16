@@ -1,7 +1,7 @@
 <?php
 namespace SCart\Core\Admin\Controllers;
 
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use Validator;
 use SCart\Core\Admin\Models\AdminBanner;
 use SCart\Core\Front\Models\ShopBannerType;

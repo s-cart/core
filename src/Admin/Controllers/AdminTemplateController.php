@@ -1,7 +1,7 @@
 <?php
 namespace SCart\Core\Admin\Controllers;
 
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminStore;
 use SCart\Core\Admin\Models\AdminTemplate;
 use Illuminate\Support\Facades\File;

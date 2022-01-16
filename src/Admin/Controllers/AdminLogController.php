@@ -3,7 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Models\AdminLog;
 use SCart\Core\Admin\Models\AdminUser;
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 
 class AdminLogController extends RootAdminController
 {

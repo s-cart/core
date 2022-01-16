@@ -6,16 +6,20 @@ Route::group(
     [
         'prefix' => SC_ADMIN_PREFIX,
         'middleware' => SC_ADMIN_MIDDLEWARE,
-        'namespace' => 'App\Admin\Controllers'
     ],
     function () {
         foreach (glob(__DIR__ . '/Routes/*.php') as $filename) {
             require_once $filename;
         }
-        Route::get('/', 'DashboardController@index')->name('admin.home');
-        Route::get('deny', 'DashboardController@deny')->name('admin.deny');
-        Route::get('data_not_found', 'DashboardController@dataNotFound')->name('admin.data_not_found');
-        Route::get('deny_single', 'DashboardController@denySingle')->name('admin.deny_single');
+        if (file_exists(app_path('Admin/Controllers/DashboardController.php'))) {
+            $nameSpaceAdminDashboard = 'App\Admin\Controllers';
+        } else {
+            $nameSpaceAdminDashboard = 'SCart\Core\Admin\Controllers';
+        }
+        Route::get('/', $nameSpaceAdminDashboard.'\DashboardController@index')->name('admin.home');
+        Route::get('/deny', $nameSpaceAdminDashboard.'\DashboardController@deny')->name('admin.deny');
+        Route::get('/data_not_found', $nameSpaceAdminDashboard.'\DashboardController@dataNotFound')->name('admin.data_not_found');
+        Route::get('/deny_single', $nameSpaceAdminDashboard.'\DashboardController@denySingle')->name('admin.deny_single');
 
         //Language
         Route::get('locale/{code}', function ($code) {

@@ -1,6 +1,11 @@
 <?php
-Route::group(['prefix' => 'backup'], function () {
-    Route::get('/', 'AdminBackupController@index')->name('admin_backup.index');
-    Route::post('generate', 'AdminBackupController@generateBackup')->name('admin.backup.generate');
-    Route::post('process', 'AdminBackupController@processBackupFile')->name('admin.backup.process');
+if (file_exists(app_path('Admin/Controllers/AdminBackupController.php'))) {
+    $nameSpaceAdminBackup = 'App\Admin\Controllers';
+} else {
+    $nameSpaceAdminBackup = 'SCart\Core\Admin\Controllers';
+}
+Route::group(['prefix' => 'backup'], function () use ($nameSpaceAdminBackup) {
+    Route::get('/', $nameSpaceAdminBackup.'\AdminBackupController@index')->name('admin_backup.index');
+    Route::post('generate', $nameSpaceAdminBackup.'\AdminBackupController@generateBackup')->name('admin.backup.generate');
+    Route::post('process', $nameSpaceAdminBackup.'\AdminBackupController@processBackupFile')->name('admin.backup.process');
 });

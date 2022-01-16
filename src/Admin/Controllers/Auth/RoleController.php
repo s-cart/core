@@ -4,7 +4,7 @@ namespace SCart\Core\Admin\Controllers\Auth;
 use SCart\Core\Admin\Models\AdminPermission;
 use SCart\Core\Admin\Models\AdminRole;
 use SCart\Core\Admin\Models\AdminUser;
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use Validator;
 
 class RoleController extends RootAdminController

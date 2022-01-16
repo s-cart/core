@@ -2,7 +2,7 @@
 namespace SCart\Core\Admin\Controllers\Auth;
 
 use SCart\Core\Admin\Models\AdminPermission;
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use Illuminate\Support\Str;
 use Validator;
 

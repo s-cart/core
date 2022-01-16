@@ -4,6 +4,19 @@ use Illuminate\Support\Facades\Route;
 
 $suffix = sc_config('SUFFIX_URL')??'';
 $langUrl = config('app.seoLang');
+//Process namespace
+if (file_exists(app_path('Http/Controllers/ShopContentController.php'))) {
+    $nameSpaceFrontContent = 'App\Http\Controllers';
+} else {
+    $nameSpaceFrontContent = 'SCart\Core\Front\Controllers';
+}
+
+if (file_exists(app_path('Http/Controllers/ShopStoreController.php'))) {
+    $nameSpaceFrontStore = 'App\Http\Controllers';
+} else {
+    $nameSpaceFrontStore = 'SCart\Core\Front\Controllers';
+}
+
 
 //Route plugin
 Route::group(
@@ -21,39 +34,94 @@ Route::group(
     }
 );
 
-//Include route component
-Route::middleware(SC_FRONT_MIDDLEWARE)
-    ->namespace('App\Http\Controllers')
-    ->group(function () use ($suffix, $langUrl) {
-        foreach (glob(__DIR__ . '/Routes/*.php') as $filename) {
-            if (config('s-cart.ecommerce_mode', 1) || $filename == __DIR__ . '/Routes/content.php') {
-                require_once $filename;
+
+//Include route ecommerce
+if (config('s-cart.ecommerce_mode', 1)) {
+    Route::middleware(SC_FRONT_MIDDLEWARE)
+        ->group(function () use ($suffix, $langUrl) {
+            foreach (glob(__DIR__ . '/Routes/*.php') as $filename) {
+                    require_once $filename;
             }
         }
-    });
+    );
+
+    //Route shop
+    Route::group(
+        [
+            'middleware' => SC_FRONT_MIDDLEWARE
+        ],
+        function () use ($langUrl, $nameSpaceFrontStore) {
+            $prefixShop = sc_config('PREFIX_SHOP') ?? 'shop';
+            Route::get($langUrl.$prefixShop, $nameSpaceFrontStore.'\ShopStoreController@shopProcessFront')
+            ->name('shop');
+        }
+    );
+
+}
 
 
+//Content with prefix
 Route::group(
     [
-        'middleware' => SC_FRONT_MIDDLEWARE,
-        'namespace' => 'App\Http\Controllers',
+        'prefix' => $langUrl,
+        'middleware' => SC_FRONT_MIDDLEWARE
     ],
-    function () use ($suffix, $langUrl) {
-    
+    function () use ($suffix, $nameSpaceFrontContent, $nameSpaceFrontStore) {
+        $prefixSearch = sc_config('PREFIX_SEARCH')??'search';
+        $prefixContact = sc_config('PREFIX_CONTACT')??'contact';
+        $prefixNews = sc_config('PREFIX_NEWS')??'news';
+
+        //Search
+        if (config('s-cart.ecommerce_mode', 1)) {
+            Route::get($prefixSearch.$suffix, $nameSpaceFrontStore.'\ShopStoreController@searchProcessFront')
+                ->name('search');
+        } else {
+            Route::get($prefixSearch.$suffix, $nameSpaceFrontContent.'\ShopContentController@searchProcessFront')
+                ->name('search');
+        }
+
+
+        //Subscribe
+        Route::post('/subscribe', $nameSpaceFrontContent.'\ShopContentController@emailSubscribe')
+            ->name('subscribe');
+
+        //contact
+        Route::get($prefixContact.$suffix, $nameSpaceFrontContent.'\ShopContentController@getContactProcessFront')
+            ->name('contact');
+        Route::post('/contact', $nameSpaceFrontContent.'\ShopContentController@postContact')
+            ->name('contact.post');
+
+        //News
+        Route::get($prefixNews, $nameSpaceFrontContent.'\ShopContentController@newsProcessFront')
+            ->name('news');
+        Route::get($prefixNews.'/{alias}'.$suffix, $nameSpaceFrontContent.'\ShopContentController@newsDetailProcessFront')
+            ->name('news.detail');
+
+        //Process click banner
+        Route::get('/banner/{id}', $nameSpaceFrontContent.'\ShopContentController@clickBanner')
+            ->name('banner.click');
+    }
+);
+
+
+//Content without prefix
+Route::group(
+    [
+        'middleware' => SC_FRONT_MIDDLEWARE
+    ],
+    function () use ($nameSpaceFrontContent) {
+        //Process click banner
+        Route::get('/banner/{id}', $nameSpaceFrontContent.'\ShopContentController@clickBanner')
+        ->name('banner.click');
+
         //Route home
-        Route::get('/', 'ShopContentController@index')
+        Route::get('/', $nameSpaceFrontContent.'\ShopContentController@index')
             ->name('home');
-        Route::get('index.html', 'ShopContentController@index');
-        Route::get('{lang?}', 'ShopContentController@index')
+        Route::get('index.html', $nameSpaceFrontContent.'\ShopContentController@index');
+        Route::get('{lang?}', $nameSpaceFrontContent.'\ShopContentController@index')
             ->where(['lang' => '[a-zA-Z]{2}'])
             ->name('home.lang');
 
-        if (config('s-cart.ecommerce_mode', 1)) {
-        //Route shop
-        $prefixShop = sc_config('PREFIX_SHOP') ?? 'shop';
-        Route::get($langUrl.$prefixShop, 'ShopContentController@shopProcessFront')
-            ->name('shop');
-        }
         //Language
         Route::get('locale/{code}', function ($code) {
             session(['locale' => $code]);
@@ -65,32 +133,30 @@ Route::group(
             ) {
                 return redirect(sc_route('home.lang', ['lang' => $code]));
             }
-
             $urlBack = str_replace(url('/' . app()->getLocale()) . '/', url('/' . $code) . '/', back()->getTargetUrl());
             return redirect($urlBack);
         })->name('locale');
         
-        if (config('s-cart.ecommerce_mode', 1)) {
+
         //Currency
         Route::get('currency/{code}', function ($code) {
             session(['currency' => $code]);
             if (request()->fullUrl() === redirect()->back()->getTargetUrl()) {
                 return redirect()->route('home');
             }
-
             return back();
-        })->name('currency');
-        }
+        })->name('currency');        
+    }
+);
 
-        //Process click banner
-        Route::get('/banner/{id}', 'ShopContentController@clickBanner')
-        ->name('banner.click');
-        
-        // //Site map
-        // Route::get('/sitemap.xml', 'ShopContentController@sitemap');
 
+Route::group(
+    [
+        'middleware' => SC_FRONT_MIDDLEWARE,
+    ],
+    function () use ($suffix, $langUrl, $nameSpaceFrontContent) {
         //--Please keep 2 lines route (pages + pageNotFound) at the bottom
-        Route::get($langUrl.'{alias}'.$suffix, 'ShopContentController@pageDetailProcessFront')->name('page.detail');
+        Route::get($langUrl.'{alias}'.$suffix, $nameSpaceFrontContent.'\ShopContentController@pageDetailProcessFront')->name('page.detail');
         // Route::fallback('ShopContentController@pageNotFound')->name('pageNotFound'); //Make sure before using this route.
         // There will be disadvantages when detecting 404 errors for static files like images, scripts ..
         //--end keep

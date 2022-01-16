@@ -3,7 +3,7 @@
 
 namespace App\Plugins\Plugin_Code\Plugin_Key\Admin;
 
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use App\Plugins\Plugin_Code\Plugin_Key\AppConfig;
 
 class AdminController extends RootAdminController

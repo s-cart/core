@@ -2,7 +2,7 @@
 
 namespace SCart\Core\Front\Controllers\Auth;
 
-use App\Http\Controllers\RootFrontController;
+use SCart\Core\Front\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopCountry;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;

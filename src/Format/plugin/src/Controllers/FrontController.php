@@ -3,7 +3,7 @@
 namespace App\Plugins\Plugin_Code\Plugin_Key\Controllers;
 
 use App\Plugins\Plugin_Code\Plugin_Key\AppConfig;
-use App\Http\Controllers\RootFrontController;
+use SCart\Core\Front\Controllers\RootFrontController;
 class FrontController extends RootFrontController
 {
     public $plugin;

@@ -1,7 +1,7 @@
 <?php
 namespace SCart\Core\Front\Controllers;
 
-use App\Http\Controllers\RootFrontController;
+use SCart\Core\Front\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopEmailTemplate;
 use SCart\Core\Front\Models\ShopAttributeGroup;
 use SCart\Core\Front\Models\ShopCountry;

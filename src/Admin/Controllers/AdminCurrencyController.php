@@ -1,7 +1,7 @@
 <?php
 namespace SCart\Core\Admin\Controllers;
 
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopCurrency;
 use Validator;
 

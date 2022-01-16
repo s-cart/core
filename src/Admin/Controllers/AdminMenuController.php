@@ -2,7 +2,7 @@
 namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Models\AdminMenu;
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use Validator;
 
 class AdminMenuController extends RootAdminController

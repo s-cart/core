@@ -1,5 +1,10 @@
 <?php
-Route::group(['prefix' => 'config'], function () {
-    Route::get('/webhook', 'AdminConfigGlobalController@webhook')->name('admin_config_global.webhook');
-    Route::post('/update', 'AdminConfigGlobalController@update')->name('admin_config_global.update');
+if (file_exists(app_path('Admin/Controllers/AdminConfigGlobalController.php'))) {
+    $nameSpaceAdminStoreConfigGlobal = 'App\Admin\Controllers';
+} else {
+    $nameSpaceAdminStoreConfigGlobal = 'SCart\Core\Admin\Controllers';
+}
+Route::group(['prefix' => 'config'], function () use ($nameSpaceAdminStoreConfigGlobal) {
+    Route::get('/webhook', $nameSpaceAdminStoreConfigGlobal.'\AdminConfigGlobalController@webhook')->name('admin_config_global.webhook');
+    Route::post('/update', $nameSpaceAdminStoreConfigGlobal.'\AdminConfigGlobalController@update')->name('admin_config_global.update');
 });

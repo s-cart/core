@@ -5,7 +5,7 @@ namespace SCart\Core\Admin\Controllers\Auth;
 use SCart\Core\Admin\Admin;
 use SCart\Core\Admin\Models\AdminPermission;
 use SCart\Core\Admin\Models\AdminRole;
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;

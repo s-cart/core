@@ -1,4 +1,9 @@
 <?php
-Route::group(['prefix' => 'report'], function () {
-    Route::get('/product', 'AdminReportController@product')->name('admin_report.product');
+if (file_exists(app_path('Admin/Controllers/AdminReportController.php'))) {
+    $nameSpaceAdminReport = 'App\Admin\Controllers';
+} else {
+    $nameSpaceAdminReport = 'SCart\Core\Admin\Controllers';
+}
+Route::group(['prefix' => 'report'], function () use ($nameSpaceAdminReport) {
+    Route::get('/product', $nameSpaceAdminReport.'\AdminReportController@product')->name('admin_report.product');
 });

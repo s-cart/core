@@ -2,7 +2,7 @@
 
 namespace SCart\Core\Admin\Controllers;
 
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminNews;
 use SCart\Core\Admin\Models\AdminProduct;
 use SCart\Core\Admin\Models\AdminCustomer;

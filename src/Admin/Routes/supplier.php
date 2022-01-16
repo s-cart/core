@@ -1,11 +1,16 @@
 <?php
-Route::group(['prefix' => 'supplier'], function () {
-    Route::get('/', 'AdminSupplierController@index')->name('admin_supplier.index');
+if (file_exists(app_path('Admin/Controllers/AdminSupplierController.php'))) {
+    $nameSpaceAdminSupplier = 'App\Admin\Controllers';
+} else {
+    $nameSpaceAdminSupplier = 'SCart\Core\Admin\Controllers';
+}
+Route::group(['prefix' => 'supplier'], function () use ($nameSpaceAdminSupplier) {
+    Route::get('/', $nameSpaceAdminSupplier.'\AdminSupplierController@index')->name('admin_supplier.index');
     Route::get('create', function () {
         return redirect()->route('admin_supplier.index');
     });
-    Route::post('/create', 'AdminSupplierController@postCreate')->name('admin_supplier.create');
-    Route::get('/edit/{id}', 'AdminSupplierController@edit')->name('admin_supplier.edit');
-    Route::post('/edit/{id}', 'AdminSupplierController@postEdit')->name('admin_supplier.edit');
-    Route::post('/delete', 'AdminSupplierController@deleteList')->name('admin_supplier.delete');
+    Route::post('/create', $nameSpaceAdminSupplier.'\AdminSupplierController@postCreate')->name('admin_supplier.create');
+    Route::get('/edit/{id}', $nameSpaceAdminSupplier.'\AdminSupplierController@edit')->name('admin_supplier.edit');
+    Route::post('/edit/{id}', $nameSpaceAdminSupplier.'\AdminSupplierController@postEdit')->name('admin_supplier.edit');
+    Route::post('/delete', $nameSpaceAdminSupplier.'\AdminSupplierController@deleteList')->name('admin_supplier.delete');
 });

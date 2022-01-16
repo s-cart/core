@@ -1,9 +1,13 @@
 <?php
-Route::group(['prefix' => 'auth'], function () {
-    $authController = Auth\LoginController::class;
-    Route::get('login', $authController . '@getLogin')->name('admin.login');
-    Route::post('login', $authController . '@postLogin')->name('admin.login');
-    Route::get('logout', $authController . '@getLogout')->name('admin.logout');
-    Route::get('setting', $authController . '@getSetting')->name('admin.setting');
-    Route::post('setting', $authController . '@putSetting')->name('admin.setting');
+if (file_exists(app_path('Admin/Controllers/Auth/LoginController.php'))) {
+    $nameSpaceAdminAuth = 'App\Admin\Controllers';
+} else {
+    $nameSpaceAdminAuth = 'SCart\Core\Admin\Controllers';
+}
+Route::group(['prefix' => 'auth'], function () use ($nameSpaceAdminAuth) {
+    Route::get('login', $nameSpaceAdminAuth . '\Auth\LoginController@getLogin')->name('admin.login');
+    Route::post('login', $nameSpaceAdminAuth . '\Auth\LoginController@postLogin')->name('admin.login');
+    Route::get('logout', $nameSpaceAdminAuth . '\Auth\LoginController@getLogout')->name('admin.logout');
+    Route::get('setting', $nameSpaceAdminAuth . '\Auth\LoginController@getSetting')->name('admin.setting');
+    Route::post('setting', $nameSpaceAdminAuth . '\Auth\LoginController@putSetting')->name('admin.setting');
 });

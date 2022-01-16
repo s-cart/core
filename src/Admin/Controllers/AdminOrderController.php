@@ -2,7 +2,7 @@
 namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Admin;
-use App\Http\Controllers\RootAdminController;
+use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopAttributeGroup;
 use SCart\Core\Front\Models\ShopCountry;
 use SCart\Core\Front\Models\ShopCurrency;

@@ -1,4 +1,9 @@
 <?php
-Route::group(['prefix' => 'seo'], function () {
-    Route::get('/config', 'AdminSeoConfigController@index')->name('admin_seo.config');
+if (file_exists(app_path('Admin/Controllers/AdminSeoConfigController.php'))) {
+    $nameSpaceAdminSeo = 'App\Admin\Controllers';
+} else {
+    $nameSpaceAdminSeo = 'SCart\Core\Admin\Controllers';
+}
+Route::group(['prefix' => 'seo'], function () use ($nameSpaceAdminSeo) {
+    Route::get('/config', $nameSpaceAdminSeo.'\AdminSeoConfigController@index')->name('admin_seo.config');
 });

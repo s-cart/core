@@ -1,12 +1,16 @@
 <?php
-//Banner type
-Route::group(['prefix' => 'banner_type'], function () {
-    Route::get('/', 'AdminBannerTypeController@index')->name('admin_banner_type.index');
+if (file_exists(app_path('Admin/Controllers/AdminBannerTypeController.php'))) {
+    $nameSpaceAdminBannerType = 'App\Admin\Controllers';
+} else {
+    $nameSpaceAdminBannerType = 'SCart\Core\Admin\Controllers';
+}
+Route::group(['prefix' => 'banner_type'], function () use ($nameSpaceAdminBannerType) {
+    Route::get('/', $nameSpaceAdminBannerType.'\AdminBannerTypeController@index')->name('admin_banner_type.index');
     Route::get('create', function () {
         return redirect()->route('admin_banner_type.index');
     });
-    Route::post('/create', 'AdminBannerTypeController@postCreate')->name('admin_banner_type.create');
-    Route::get('/edit/{id}', 'AdminBannerTypeController@edit')->name('admin_banner_type.edit');
-    Route::post('/edit/{id}', 'AdminBannerTypeController@postEdit')->name('admin_banner_type.edit');
-    Route::post('/delete', 'AdminBannerTypeController@deleteList')->name('admin_banner_type.delete');
+    Route::post('/create', $nameSpaceAdminBannerType.'\AdminBannerTypeController@postCreate')->name('admin_banner_type.create');
+    Route::get('/edit/{id}', $nameSpaceAdminBannerType.'\AdminBannerTypeController@edit')->name('admin_banner_type.edit');
+    Route::post('/edit/{id}', $nameSpaceAdminBannerType.'\AdminBannerTypeController@postEdit')->name('admin_banner_type.edit');
+    Route::post('/delete', $nameSpaceAdminBannerType.'\AdminBannerTypeController@deleteList')->name('admin_banner_type.delete');
 });

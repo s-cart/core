@@ -1,11 +1,16 @@
 <?php
-Route::group(['prefix' => 'store_block'], function () {
-    Route::get('/', 'AdminStoreBlockController@index')->name('admin_store_block.index');
-    Route::get('create', 'AdminStoreBlockController@create')->name('admin_store_block.create');
-    Route::post('/create', 'AdminStoreBlockController@postCreate')->name('admin_store_block.create');
-    Route::get('/edit/{id}', 'AdminStoreBlockController@edit')->name('admin_store_block.edit');
-    Route::post('/edit/{id}', 'AdminStoreBlockController@postEdit')->name('admin_store_block.edit');
-    Route::get('/listblock_view', 'AdminStoreBlockController@getListViewBlockHtml')->name('admin_store_block.listblock_view');
-    Route::get('/listblock_page', 'AdminStoreBlockController@getListPageBlockHtml')->name('admin_store_block.listblock_page');
-    Route::post('/delete', 'AdminStoreBlockController@deleteList')->name('admin_store_block.delete');
+if (file_exists(app_path('Admin/Controllers/AdminStoreBlockController.php'))) {
+    $nameSpaceAdminStoreBlock = 'App\Admin\Controllers';
+} else {
+    $nameSpaceAdminStoreBlock = 'SCart\Core\Admin\Controllers';
+}
+Route::group(['prefix' => 'store_block'], function () use ($nameSpaceAdminStoreBlock) {
+    Route::get('/', $nameSpaceAdminStoreBlock.'\AdminStoreBlockController@index')->name('admin_store_block.index');
+    Route::get('create', $nameSpaceAdminStoreBlock.'\AdminStoreBlockController@create')->name('admin_store_block.create');
+    Route::post('/create', $nameSpaceAdminStoreBlock.'\AdminStoreBlockController@postCreate')->name('admin_store_block.create');
+    Route::get('/edit/{id}', $nameSpaceAdminStoreBlock.'\AdminStoreBlockController@edit')->name('admin_store_block.edit');
+    Route::post('/edit/{id}', $nameSpaceAdminStoreBlock.'\AdminStoreBlockController@postEdit')->name('admin_store_block.edit');
+    Route::get('/listblock_view', $nameSpaceAdminStoreBlock.'\AdminStoreBlockController@getListViewBlockHtml')->name('admin_store_block.listblock_view');
+    Route::get('/listblock_page', $nameSpaceAdminStoreBlock.'\AdminStoreBlockController@getListPageBlockHtml')->name('admin_store_block.listblock_page');
+    Route::post('/delete', $nameSpaceAdminStoreBlock.'\AdminStoreBlockController@deleteList')->name('admin_store_block.delete');
 });
