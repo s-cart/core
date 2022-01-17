@@ -5,7 +5,7 @@ if (file_exists(app_path('Admin/Controllers/AdminAttributeGroupController.php'))
     $nameSpaceAdminAttribute = 'SCart\Core\Admin\Controllers';
 }
 Route::group(['prefix' => 'attribute_group'], function () use ($nameSpaceAdminAttribute) {
-    Route::get('/', 'AdminAttributeGroupController@index')->name('admin_attribute_group.index');
+    Route::get('/', $nameSpaceAdminAttribute.'\AdminAttributeGroupController@index')->name('admin_attribute_group.index');
     Route::get('create', function () {
         return redirect()->route('admin_attribute_group.index');
     });

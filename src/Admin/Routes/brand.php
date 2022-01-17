@@ -5,7 +5,7 @@ if (file_exists(app_path('Admin/Controllers/AdminBrandController.php'))) {
     $nameSpaceAdminBrand = 'SCart\Core\Admin\Controllers';
 }
 Route::group(['prefix' => 'brand'], function () use ($nameSpaceAdminBrand) {
-    Route::get('/', 'AdminBrandController@index')->name('admin_brand.index');
+    Route::get('/', $nameSpaceAdminBrand.'\AdminBrandController@index')->name('admin_brand.index');
     Route::get('create', function () {
         return redirect()->route('admin_brand.index');
     });
