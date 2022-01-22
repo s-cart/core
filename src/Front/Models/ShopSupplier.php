@@ -35,9 +35,9 @@ class ShopSupplier extends Model
      * [getUrl description]
      * @return [type] [description]
      */
-    public function getUrl()
+    public function getUrl($lang)
     {
-        return sc_route('supplier.detail', ['alias' => $this->alias]);
+        return sc_route('supplier.detail', ['alias' => $this->alias, 'lang' => $lang ?? app()->getLocale()]);
     }
 
     /*

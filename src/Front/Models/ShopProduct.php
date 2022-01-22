@@ -296,9 +296,9 @@ class ShopProduct extends Model
      * [getUrl description]
      * @return [type] [description]
      */
-    public function getUrl()
+    public function getUrl($lang = null)
     {
-        return sc_route('product.detail', ['alias' => $this->alias]);
+        return sc_route('product.detail', ['alias' => $this->alias, 'lang' => $lang ?? app()->getLocale()]);
     }
 
     /**

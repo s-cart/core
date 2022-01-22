@@ -67,9 +67,9 @@ class ShopNews extends Model
      * [getUrl description]
      * @return [type] [description]
      */
-    public function getUrl()
+    public function getUrl($lang = null)
     {
-        return sc_route('news.detail', ['alias' => $this->alias]);
+        return sc_route('news.detail', ['alias' => $this->alias, 'lang' => $lang ?? app()->getLocale()]);
     }
 
     

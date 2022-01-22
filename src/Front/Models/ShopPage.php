@@ -66,9 +66,9 @@ class ShopPage extends Model
         return sc_image_get_path($this->image);
     }
 
-    public function getUrl()
+    public function getUrl($lang = null)
     {
-        return sc_route('page.detail', ['alias' => $this->alias]);
+        return sc_route('page.detail', ['alias' => $this->alias, 'lang' => $lang ?? app()->getLocale()]);
     }
 
     /**
