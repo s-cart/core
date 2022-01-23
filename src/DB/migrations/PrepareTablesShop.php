@@ -123,7 +123,7 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->string('email', 150);
                 $table->string('token', 255);
-                $table->dateTime('created_at');
+                $table->timestamp('created_at', $precision = 0);
                 $table->index('email');
             }
         );
@@ -263,7 +263,7 @@ class PrepareTablesShop extends Migration
                 $table->integer('admin_id')->default(0);
                 $table->bigInteger('customer_id')->default(0);
                 $table->integer('order_status_id')->default(0);
-                $table->dateTime('add_date');
+                $table->timestamp('add_date', $precision = 0);
             }
         );
 
@@ -351,7 +351,7 @@ class PrepareTablesShop extends Migration
                 $table->integer('sort')->default(0);
                 $table->integer('view')->default(0);
                 $table->string('alias', 120)->index();
-                $table->dateTime('date_lastview')->nullable();
+                $table->timestamp('date_lastview', $precision = 0)->nullable();
                 $table->date('date_available')->nullable();
                 $table->timestamps();
             }
@@ -597,7 +597,7 @@ class PrepareTablesShop extends Migration
             $table->uuid('client_id');
             $table->text('scopes')->nullable();
             $table->boolean('revoked');
-            $table->dateTime('expires_at')->nullable();
+            $table->timestamp('expires_at', $precision = 0)->nullable();
         });
 
         Schema::create('oauth_access_tokens', function (Blueprint $table) {
@@ -608,14 +608,14 @@ class PrepareTablesShop extends Migration
             $table->text('scopes')->nullable();
             $table->boolean('revoked');
             $table->timestamps();
-            $table->dateTime('expires_at')->nullable();
+            $table->timestamp('expires_at', $precision = 0)->nullable();
         });
 
         Schema::create('oauth_refresh_tokens', function (Blueprint $table) {
             $table->string('id', 100)->primary();
             $table->string('access_token_id', 100)->index();
             $table->boolean('revoked');
-            $table->dateTime('expires_at')->nullable();
+            $table->timestamp('expires_at', $precision = 0)->nullable();
         });
 
         Schema::create('oauth_clients', function (Blueprint $table) {
@@ -646,7 +646,7 @@ class PrepareTablesShop extends Migration
                 $table->string('apiconnection', 50)->unique();
                 $table->string('apikey', 128);
                 $table->date('expire')->nullable();
-                $table->datetime('last_active')->nullable();
+                $table->timestamp('last_active', $precision = 0)->nullable();
                 $table->tinyInteger('status')->default(0);
             }
         );
@@ -719,8 +719,8 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->bigInteger('product_id')->primary();
                 $table->integer('price_promotion');
-                $table->dateTime('date_start')->nullable();
-                $table->dateTime('date_end')->nullable();
+                $table->timestamp('date_start', $precision = 0)->nullable();
+                $table->timestamp('date_end', $precision = 0)->nullable();
                 $table->integer('status_promotion')->default(1);
                 $table->timestamps();
             }
