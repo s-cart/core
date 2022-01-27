@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopCategoryDescription extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $primaryKey = ['category_id', 'lang'];
     public $incrementing  = false;
     public $timestamps    = false;

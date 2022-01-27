@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopSubscribe extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $table = SC_DB_PREFIX.'shop_subscribe';
     protected $guarded      = [];
     protected $connection = SC_CONNECTION;

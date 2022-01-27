@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopCustomerAddress extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $guarded    = [];
     public $timestamps    = false;
     public $table = SC_DB_PREFIX.'shop_customer_address';

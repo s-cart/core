@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopLanguage extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $table = SC_DB_PREFIX.'shop_language';
     public $timestamps                = false;
     protected $guarded                = [];

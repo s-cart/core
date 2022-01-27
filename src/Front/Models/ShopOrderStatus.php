@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopOrderStatus extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $timestamps     = false;
     public $table = SC_DB_PREFIX.'shop_order_status';
     protected $connection = SC_CONNECTION;

@@ -6,11 +6,11 @@ use SCart\Core\Front\Models\ShopNewsDescription;
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ShopStore;
 use Cache;
-use SCart\Core\Front\Models\ModelTrait;
+
 
 class ShopNews extends Model
 {
-    use ModelTrait;
+    use \SCart\Core\Front\Models\ModelTrait;
 
     public $table = SC_DB_PREFIX.'shop_news';
     protected $guarded = [];

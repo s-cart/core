@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopOrderTotal extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $table = SC_DB_PREFIX.'shop_order_total';
     protected $fillable = ['order_id', 'title', 'code', 'value', 'text', 'sort'];
     protected $connection = SC_CONNECTION;

@@ -23,7 +23,7 @@ if (!function_exists('sc_clean') && !in_array('sc_clean', config('helper_except'
     /**
      * Clear data
      */
-    function sc_clean($data = null, $exclude = [], $level_hight = null)
+    function sc_clean($data = null, $exclude = [], $level_hight = false)
     {
         if ($level_hight) {
             if (is_array($data)) {

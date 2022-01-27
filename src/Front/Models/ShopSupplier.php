@@ -3,11 +3,11 @@
 namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use SCart\Core\Front\Models\ModelTrait;
+
 
 class ShopSupplier extends Model
 {
-    use ModelTrait;
+    use \SCart\Core\Front\Models\ModelTrait;
 
     public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_supplier';

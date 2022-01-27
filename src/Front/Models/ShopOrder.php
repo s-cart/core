@@ -8,11 +8,11 @@ use SCart\Core\Front\Models\ShopOrderTotal;
 use SCart\Core\Front\Models\ShopProduct;
 use DB;
 use Illuminate\Database\Eloquent\Model;
-use SCart\Core\Front\Models\ModelTrait;
+
 
 class ShopOrder extends Model
 {
-    use ModelTrait;
+    use \SCart\Core\Front\Models\ModelTrait;
 
     public $table = SC_DB_PREFIX.'shop_order';
     protected $guarded = [];

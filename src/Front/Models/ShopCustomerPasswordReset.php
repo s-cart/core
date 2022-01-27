@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopCustomerPasswordReset extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $primaryKey = ['token'];
     public $incrementing  = false;
     protected $guarded    = [];

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopLink extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_link';
     protected $guarded = [];

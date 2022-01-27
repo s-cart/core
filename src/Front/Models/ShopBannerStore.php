@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopBannerStore extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $primaryKey = ['store_id', 'banner_id'];
     public $incrementing  = false;
     protected $guarded    = [];

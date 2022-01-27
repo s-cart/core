@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopPageDescription extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $primaryKey = ['lang', 'page_id'];
     public $incrementing  = false;
     protected $guarded    = [];

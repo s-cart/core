@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopNewsDescription extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $primaryKey = ['lang', 'news_id'];
     public $incrementing = false;
     protected $guarded = [];

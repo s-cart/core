@@ -6,6 +6,8 @@ use Cache;
 
 class ShopCountry extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $table = SC_DB_PREFIX.'shop_country';
     public $timestamps               = false;
     private static $getListCountries = null;

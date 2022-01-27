@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopProductDescription extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $primaryKey = ['lang', 'product_id'];
     public $incrementing  = false;
     protected $guarded    = [];

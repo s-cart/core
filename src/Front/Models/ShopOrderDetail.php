@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopOrderDetail extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $table = SC_DB_PREFIX.'shop_order_detail';
     protected $connection = SC_CONNECTION;
     protected $guarded = [];

@@ -5,12 +5,13 @@ namespace SCart\Core\Front\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cache;
 use SCart\Core\Front\Models\ShopStore;
-use SCart\Core\Front\Models\ModelTrait;
+
 
 class ShopPage extends Model
 {
-    use ModelTrait;
-
+    
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $timestamps     = false;
     public $table          = SC_DB_PREFIX.'shop_page';
     protected $connection  = SC_CONNECTION;

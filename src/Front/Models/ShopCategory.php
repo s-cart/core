@@ -5,12 +5,13 @@ use SCart\Core\Front\Models\ShopCategoryDescription;
 use SCart\Core\Front\Models\ShopProduct;
 use SCart\Core\Front\Models\ShopStore;
 use Illuminate\Database\Eloquent\Model;
-use SCart\Core\Front\Models\ModelTrait;
+
 
 class ShopCategory extends Model
 {
-    use ModelTrait;
-
+    
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $timestamps = false;
     public $table = SC_DB_PREFIX . 'shop_category';
     protected $guarded = [];

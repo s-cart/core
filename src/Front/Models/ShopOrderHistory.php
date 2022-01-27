@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopOrderHistory extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $table = SC_DB_PREFIX.'shop_order_history';
     protected $connection = SC_CONNECTION;
     const CREATED_AT = 'add_date';

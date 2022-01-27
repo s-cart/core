@@ -7,6 +7,8 @@ use SCart\Core\Front\Models\ShopProduct;
 
 class ShopProductGroup extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $primaryKey = ['group_id', 'product_id'];
     public $incrementing  = false;
     protected $guarded    = [];

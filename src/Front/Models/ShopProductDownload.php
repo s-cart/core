@@ -7,6 +7,8 @@ use SCart\Core\Front\Models\ShopProduct;
 
 class ShopProductDownload extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     protected $primaryKey = ['download_path', 'product_id'];
     public $incrementing  = false;
     protected $guarded    = [];

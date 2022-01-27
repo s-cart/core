@@ -12,11 +12,12 @@ use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Front\Models\ShopProductStore;
 use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use Illuminate\Database\Eloquent\Model;
-use SCart\Core\Front\Models\ModelTrait;
+
 
 class ShopProduct extends Model
 {
-    use ModelTrait;
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $table = SC_DB_PREFIX.'shop_product';
     protected $guarded = [];
 

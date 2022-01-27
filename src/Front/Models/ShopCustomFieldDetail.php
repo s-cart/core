@@ -7,6 +7,8 @@ use Cache;
 
 class ShopCustomFieldDetail extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $timestamps     = false;
     public $table          = SC_DB_PREFIX.'shop_custom_field_detail';
     protected $connection  = SC_CONNECTION;

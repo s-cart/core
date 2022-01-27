@@ -6,6 +6,8 @@ use SCart\Core\Front\Models\ShopLanguage;
 
 class Languages extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $timestamps = false;
     public $table = SC_DB_PREFIX.'languages';
     protected $guarded = [];

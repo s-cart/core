@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopStore extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $timestamps = false;
     public $table = SC_DB_PREFIX.'admin_store';
     protected $guarded = [];

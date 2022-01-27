@@ -7,6 +7,8 @@ use SCart\Core\Front\Models\ShopProduct;
 
 class ShopProductPromotion extends Model
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $table = SC_DB_PREFIX.'shop_product_promotion';
     protected $guarded    = [];
     protected $primaryKey = 'product_id';

@@ -3,12 +3,13 @@ namespace SCart\Core\Front\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ShopStore;
-use SCart\Core\Front\Models\ModelTrait;
+
 
 class ShopBanner extends Model
 {
-    use ModelTrait;
-
+    
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     public $table = SC_DB_PREFIX.'shop_banner';
     protected $guarded = [];
     protected $connection = SC_CONNECTION;

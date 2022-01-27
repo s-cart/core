@@ -13,6 +13,8 @@ use Illuminate\Auth\AuthenticationException;
 
 class ShopCustomer extends Authenticatable
 {
+    use \SCart\Core\Front\Models\ModelTrait;
+    
     use Notifiable, HasApiTokens;
 
     /**
