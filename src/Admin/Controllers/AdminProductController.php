@@ -192,7 +192,7 @@ class AdminProductController extends RootAdminController
             }
             $htmlAction .='<span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger">
             <i class="fas fa-trash-alt"></i>
-            </span>&nbsp
+            </span>
             <a target=_new href="' . sc_route('product.detail', ['alias' => $row['alias']]) . '"><span title="Link" type="button" class="btn btn-flat btn-sm btn-warning"><i class="fas fa-external-link-alt"></i></a>';
 
             $dataMap['action'] = $htmlAction;
@@ -281,7 +281,7 @@ class AdminProductController extends RootAdminController
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
-            'properties'            => $this->properties,
+            'properties'           => $this->properties,
             'kinds'                => $this->kinds(),
             'attributeGroup'       => $this->attributeGroup,
             'htmlMoreImage'        => $htmlMoreImage,
@@ -335,7 +335,7 @@ class AdminProductController extends RootAdminController
         'brands'               => (new ShopBrand)->getListAll(),
         'suppliers'            => (new ShopSupplier)->getListAll(),
         'taxs'                 => (new ShopTax)->getListAll(),
-        'properties'            => $this->properties,
+        'properties'           => $this->properties,
         'kinds'                => $this->kinds(),
         'attributeGroup'       => $this->attributeGroup,
         'htmlSelectBuild'      => $htmlSelectBuild,
@@ -383,7 +383,7 @@ class AdminProductController extends RootAdminController
         'brands'               => (new ShopBrand)->getListAll(),
         'suppliers'            => (new ShopSupplier)->getListAll(),
         'taxs'                 => (new ShopTax)->getListAll(),
-        'properties'            => $this->properties,
+        'properties'           => $this->properties,
         'kinds'                => $this->kinds(),
         'attributeGroup'       => $this->attributeGroup,
         'listProductSingle'    => $listProductSingle,
@@ -547,6 +547,7 @@ class AdminProductController extends RootAdminController
             $dataInsert['date_available'] = $data['date_available'];
         }
         //insert product
+        $dataInsert = sc_clean($dataInsert, [], true);
         $product = AdminProduct::createProductAdmin($dataInsert);
 
         //Promoton price
@@ -554,6 +555,7 @@ class AdminProductController extends RootAdminController
             $arrPromotion['price_promotion'] = $data['price_promotion'];
             $arrPromotion['date_start'] = $data['price_promotion_start'] ? $data['price_promotion_start'] : null;
             $arrPromotion['date_end'] = $data['price_promotion_end'] ? $data['price_promotion_end'] : null;
+            $arrPromotion = sc_clean($arrPromotion, [], true);
             $product->promotionPrice()->create($arrPromotion);
         }
 
@@ -597,7 +599,8 @@ class AdminProductController extends RootAdminController
                 if (count($rowGroup)) {
                     foreach ($rowGroup['name'] as $key => $nameAtt) {
                         if ($nameAtt) {
-                            $arrDataAtt[] = new ShopProductAttribute(['name' => $nameAtt, 'add_price' => $rowGroup['add_price'][$key],  'attribute_group_id' => $group]);
+                            $dataAtt = sc_clean(['name' => $nameAtt, 'add_price' => $rowGroup['add_price'][$key],  'attribute_group_id' => $group], [], true);
+                            $arrDataAtt[] = new ShopProductAttribute($dataAtt);
                         }
                     }
                 }
@@ -607,7 +610,8 @@ class AdminProductController extends RootAdminController
 
         //Insert path download
         if (!empty($data['property']) && $data['property'] == SC_PROPERTY_DOWNLOAD && $downloadPath) {
-            (new ShopProductDownload)->insert(['product_id' => $product->id, 'path' => $downloadPath]);
+            $dataDownload = sc_clean(['product_id' => $product->id, 'path' => $downloadPath], [], true);
+            (new ShopProductDownload)->insert($dataDownload);
         }
 
         //Insert custom fields
@@ -616,11 +620,11 @@ class AdminProductController extends RootAdminController
             foreach ($data['fields'] as $key => $value) {
                 $field = (new ShopCustomField)->where('code', $key)->where('type', 'product')->first();
                 if ($field) {
-                    $dataField[] = [
+                    $dataField[] = sc_clean([
                         'custom_field_id' => $field->id,
                         'rel_id' => $product->id,
                         'text' => trim($value),
-                    ];
+                    ], [], true);
                 }
             }
             if ($dataField) {
@@ -633,14 +637,14 @@ class AdminProductController extends RootAdminController
         $dataDes = [];
         $languages = $this->languages;
         foreach ($languages as $code => $value) {
-            $dataDes[] = [
+            $dataDes[] = sc_clean([
                 'product_id'  => $product->id,
                 'lang'        => $code,
                 'name'        => $descriptions[$code]['name'],
                 'keyword'     => $descriptions[$code]['keyword'],
                 'description' => $descriptions[$code]['description'],
                 'content'     => $descriptions[$code]['content'] ?? '',
-            ];
+            ], ['content'], true);
         }
 
         AdminProduct::insertDescriptionAdmin($dataDes);
@@ -650,7 +654,7 @@ class AdminProductController extends RootAdminController
             $arrSubImages = [];
             foreach ($subImages as $key => $image) {
                 if ($image) {
-                    $arrSubImages[] = new ShopProductImage(['image' => $image]);
+                    $arrSubImages[] = new ShopProductImage(sc_clean(['image' => $image], [], true));
                 }
             }
             $product->images()->saveMany($arrSubImages);
@@ -714,7 +718,7 @@ class AdminProductController extends RootAdminController
             'brands'               => (new ShopBrand)->getListAll(),
             'suppliers'            => (new ShopSupplier)->getListAll(),
             'taxs'                 => (new ShopTax)->getListAll(),
-            'properties'            => $this->properties,
+            'properties'           => $this->properties,
             'kinds'                => $this->kinds(),
             'attributeGroup'       => $this->attributeGroup,
             'htmlSelectGroup'      => $htmlSelectGroup,
@@ -878,6 +882,7 @@ class AdminProductController extends RootAdminController
         if (!empty($data['date_available'])) {
             $dataUpdate['date_available'] = $data['date_available'];
         }
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $product->update($dataUpdate);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
@@ -899,11 +904,11 @@ class AdminProductController extends RootAdminController
             foreach ($data['fields'] as $key => $value) {
                 $field = (new ShopCustomField)->where('code', $key)->where('type', 'product')->first();
                 if ($field) {
-                    $dataField[] = [
+                    $dataField[] = sc_clean([
                         'custom_field_id' => $field->id,
                         'rel_id' => $product->id,
                         'text' => trim($value),
-                    ];
+                    ], [], true);
                 }
             }
             if ($dataField) {
@@ -919,20 +924,21 @@ class AdminProductController extends RootAdminController
             $arrPromotion['price_promotion'] = $data['price_promotion'];
             $arrPromotion['date_start'] = $data['price_promotion_start'] ? $data['price_promotion_start'] : null;
             $arrPromotion['date_end'] = $data['price_promotion_end'] ? $data['price_promotion_end'] : null;
+            $arrPromotion = sc_clean($arrPromotion, [], true);
             $product->promotionPrice()->create($arrPromotion);
         }
 
         $product->descriptions()->delete();
         $dataDes = [];
         foreach ($data['descriptions'] as $code => $row) {
-            $dataDes[] = [
+            $dataDes[] = sc_clean([
                 'product_id' => $id,
                 'lang' => $code,
                 'name' => $row['name'],
                 'keyword' => $row['keyword'],
                 'description' => $row['description'],
                 'content' => $row['content'] ?? '',
-            ];
+            ], ['content'], true);
         }
         AdminProduct::insertDescriptionAdmin($dataDes);
 
@@ -972,7 +978,8 @@ class AdminProductController extends RootAdminController
         //Update path download
         (new ShopProductDownload)->where('product_id', $product->id)->delete();
         if ($product['property'] == SC_PROPERTY_DOWNLOAD && $downloadPath) {
-            (new ShopProductDownload)->insert(['product_id' => $product->id, 'path' => $downloadPath]);
+            $dataDownload = sc_clean(['product_id' => $product->id, 'path' => $downloadPath], [], true);
+            (new ShopProductDownload)->insert($dataDownload);
         }
 
 
@@ -985,7 +992,8 @@ class AdminProductController extends RootAdminController
                     if (count($rowGroup)) {
                         foreach ($rowGroup['name'] as $key => $nameAtt) {
                             if ($nameAtt) {
-                                $arrDataAtt[] = new ShopProductAttribute(['name' => $nameAtt, 'add_price' => $rowGroup['add_price'][$key], 'attribute_group_id' => $group]);
+                                $dataAtt = sc_clean(['name' => $nameAtt, 'add_price' => $rowGroup['add_price'][$key], 'attribute_group_id' => $group], [], true);
+                                $arrDataAtt[] = new ShopProductAttribute($dataAtt);
                             }
                         }
                     }
@@ -1001,7 +1009,7 @@ class AdminProductController extends RootAdminController
                 $arrSubImages = [];
                 foreach ($subImages as $key => $image) {
                     if ($image) {
-                        $arrSubImages[] = new ShopProductImage(['image' => $image]);
+                        $arrSubImages[] = new ShopProductImage(sc_clean(['image' => $image], [], true));
                     }
                 }
                 $product->images()->saveMany($arrSubImages);

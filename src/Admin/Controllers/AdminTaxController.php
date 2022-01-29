@@ -87,6 +87,7 @@ class AdminTaxController extends RootAdminController
             'value' => (int)$data['value'],
             'name' => $data['name'],
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $obj = ShopTax::create($dataInsert);
 
         return redirect()->route('admin_tax.index')->with('success', sc_language_render('action.create_success'));
@@ -176,10 +177,9 @@ class AdminTaxController extends RootAdminController
             'value' => (int)$data['value'],
             'name' => $data['name'],
         ];
-        
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $tax->update($dataUpdate);
 
-//
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

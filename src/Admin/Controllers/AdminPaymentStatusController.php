@@ -79,7 +79,7 @@ class AdminPaymentStatusController extends RootAdminController
         ]);
 
         if ($validator->fails()) {
-            // dd($validator->messages());
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -87,8 +87,8 @@ class AdminPaymentStatusController extends RootAdminController
         $dataInsert = [
             'name' => $data['name'],
         ];
-        $obj = ShopPaymentStatus::create($dataInsert);
-//
+        $dataInsert = sc_clean($dataInsert, [], true);
+        ShopPaymentStatus::create($dataInsert);
         return redirect()->route('admin_payment_status.index')->with('success', sc_language_render('action.create_success'));
     }
 
@@ -172,9 +172,10 @@ class AdminPaymentStatusController extends RootAdminController
         $dataUpdate = [
             'name' => $data['name'],
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $obj = ShopPaymentStatus::find($id);
         $obj->update($dataUpdate);
-//
+
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

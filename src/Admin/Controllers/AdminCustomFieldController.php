@@ -100,7 +100,8 @@ class AdminCustomFieldController extends RootAdminController
             'required' => (!empty($data['required']) ? 1 : 0),
             'status' => (!empty($data['status']) ? 1 : 0),
         ];
-        $obj = ShopCustomField::create($dataInsert);
+        $dataInsert = sc_clean($dataInsert, [], true);
+        ShopCustomField::create($dataInsert);
 
         return redirect()->route('admin_custom_field.index')->with('success', sc_language_render('action.create_success'));
     }
@@ -204,10 +205,10 @@ class AdminCustomFieldController extends RootAdminController
             'required' => (!empty($data['required']) ? 1 : 0),
             'status' => (!empty($data['status']) ? 1 : 0),
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
 
         $customField->update($dataUpdate);
-
-//
+        
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

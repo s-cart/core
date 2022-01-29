@@ -186,8 +186,9 @@ class AdminStoreBlockController extends RootAdminController
             'status'   => (empty($data['status']) ? 0 : 1),
             'store_id' => $storeId,
         ];
+        $dataInsert = sc_clean($dataInsert, ['text'], true);
         AdminStoreBlockContent::createStoreBlockContentAdmin($dataInsert);
-        //
+        
         return redirect()->route('admin_store_block.index')->with('success', sc_language_render('action.create_success'));
     }
 
@@ -260,8 +261,9 @@ class AdminStoreBlockController extends RootAdminController
             'status' => (empty($data['status']) ? 0 : 1),
             'store_id' => $storeId,
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $layout->update($dataUpdate);
-        //
+        
         return redirect()->route('admin_store_block.index')->with('success', sc_language_render('action.edit_success'));
     }
 

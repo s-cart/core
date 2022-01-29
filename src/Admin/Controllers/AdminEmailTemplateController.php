@@ -119,7 +119,8 @@ class AdminEmailTemplateController extends RootAdminController
             'status'   => !empty($data['status']) ? 1 : 0,
             'store_id' => session('adminStoreId'),
         ];
-        ShopEmailTemplate::createEmailTemplateAdmin($dataInsert);
+        $dataInsert = sc_clean($dataInsert, ['text'], true);
+        AdminEmailTemplate::createEmailTemplateAdmin($dataInsert);
 
         return redirect()->route('admin_email_template.index')->with('success', sc_language_render('action.create_success'));
     }
@@ -176,6 +177,7 @@ class AdminEmailTemplateController extends RootAdminController
             'status'   => !empty($data['status']) ? 1 : 0,
             'store_id' => session('adminStoreId'),
         ];
+        $dataUpdate = sc_clean($dataUpdate, ['text'], true);
         $emailTemplate->update($dataUpdate);
 
         return redirect()->route('admin_email_template.index')->with('success', sc_language_render('action.edit_success'));

@@ -210,6 +210,7 @@ class AdminCategoryController extends RootAdminController
             'status'   => !empty($data['status']) ? 1 : 0,
             'sort'     => (int) $data['sort'],
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $category = AdminCategory::createCategoryAdmin($dataInsert);
         $dataDes = [];
         $languages = $this->languages;
@@ -222,6 +223,7 @@ class AdminCategoryController extends RootAdminController
                 'description' => $data['descriptions'][$code]['description'],
             ];
         }
+        $dataDes  = sc_clean($dataDes, [], true);
         AdminCategory::insertDescriptionAdmin($dataDes);
 
         if (sc_check_multi_store_installed()) {
@@ -310,7 +312,7 @@ class AdminCategoryController extends RootAdminController
             'top'      => empty($data['top']) ? 0 : 1,
             'status'   => empty($data['status']) ? 0 : 1,
         ];
-
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $category->update($dataUpdate);
         $category->descriptions()->delete();
         $dataDes = [];
@@ -323,6 +325,7 @@ class AdminCategoryController extends RootAdminController
                 'description' => $row['description'],
             ];
         }
+        $dataDes = sc_clean($dataDes, [], true);
         AdminCategory::insertDescriptionAdmin($dataDes);
 
         if (sc_check_multi_store_installed()) {

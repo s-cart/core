@@ -168,6 +168,7 @@ class AdminStoreLinkController extends RootAdminController
             'sort'     => $data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $link = AdminLink::createLinkAdmin($dataInsert);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
@@ -235,6 +236,7 @@ class AdminStoreLinkController extends RootAdminController
             'sort'     => $data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $link->update($dataUpdate);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];

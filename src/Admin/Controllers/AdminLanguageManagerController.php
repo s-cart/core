@@ -139,6 +139,7 @@ class AdminLanguageManagerController extends RootAdminController
             'position' => trim(empty($data['position_new']) ? $data['position'] : $data['position_new']),
             'location' => 'en',
         ];
+        $dataInsert = sc_clean($dataInsert, ['text'], true);
         Languages::insert($dataInsert);
 
         return redirect(sc_route_admin('admin_language_manager.index'))->with('success', sc_language_render('action.create_success'));

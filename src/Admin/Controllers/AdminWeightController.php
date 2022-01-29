@@ -92,8 +92,9 @@ class AdminWeightController extends RootAdminController
             'name' => $data['name'],
             'description' => $data['description'],
         ];
+        $dataInsert  = sc_clean($dataInsert, [], true);
         $obj = ShopWeight::create($dataInsert);
-//
+
         return redirect()->route('admin_weight_unit.index')->with('success', sc_language_render('action.create_success'));
     }
 
@@ -181,9 +182,11 @@ class AdminWeightController extends RootAdminController
             'name' => $data['name'],
             'description' => $data['description'],
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
+
         $obj->update($dataUpdate);
 
-//
+
         return redirect()->back()->with('success', sc_language_render('admin.edit_success'));
     }
 

@@ -182,11 +182,11 @@ class AdminCustomerController extends RootAdminController
             foreach ($data['fields'] as $key => $value) {
                 $field = (new ShopCustomField)->where('code', $key)->where('type', 'customer')->first();
                 if ($field) {
-                    $dataField[] = [
+                    $dataField[] = sc_clean([
                         'custom_field_id' => $field->id,
                         'rel_id' => $customer->id,
                         'text' => trim($value),
-                    ];
+                    ], [], true);
                 }
             }
             if ($dataField) {
@@ -259,11 +259,11 @@ class AdminCustomerController extends RootAdminController
             foreach ($data['fields'] as $key => $value) {
                 $field = (new ShopCustomField)->where('code', $key)->where('type', 'customer')->first();
                 if ($field) {
-                    $dataField[] = [
+                    $dataField[] = sc_clean([
                         'custom_field_id' => $field->id,
                         'rel_id' => $customer->id,
                         'text' => trim($value),
-                    ];
+                    ], [], true);
                 }
             }
             if ($dataField) {

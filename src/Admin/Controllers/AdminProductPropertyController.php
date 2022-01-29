@@ -93,8 +93,9 @@ class AdminProductPropertyController extends RootAdminController
             'code' => $data['code'],
             'name' => $data['name'],
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $obj = ShopProductProperty::create($dataInsert);
-//
+
         return redirect()->route('admin_product_property.edit', ['id' => $obj['id']])->with('success', sc_language_render('action.create_success'));
     }
 
@@ -185,8 +186,9 @@ class AdminProductPropertyController extends RootAdminController
             'code' => $data['code'],
             'name' => $data['name'],
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $obj->update($dataUpdate);
-//
+
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

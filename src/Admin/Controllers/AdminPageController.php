@@ -209,6 +209,7 @@ class AdminPageController extends RootAdminController
                 'content'     => $data['descriptions'][$code]['content'],
             ];
         }
+        $dataDes = sc_clean($dataDes, ['content'], [], true);
         AdminPage::insertDescriptionAdmin($dataDes);
 
         $shopStore = $data['shop_store'] ?? [session('adminStoreId')];
@@ -301,6 +302,7 @@ class AdminPageController extends RootAdminController
                 'content'     => $row['content'],
             ];
         }
+        $dataDes = sc_clean($dataDes, ['content'], true);
         AdminPage::insertDescriptionAdmin($dataDes);
 
         $shopStore = $data['shop_store'] ?? [session('adminStoreId')];

@@ -92,8 +92,8 @@ class AdminLengthController extends RootAdminController
             'name' => $data['name'],
             'description' => $data['description'],
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $obj = ShopLength::create($dataInsert);
-//
         return redirect()->route('admin_length_unit.index')->with('success', sc_language_render('action.create_success'));
     }
 
@@ -184,8 +184,8 @@ class AdminLengthController extends RootAdminController
             'description' => $data['description'],
         ];
         $obj->update($dataUpdate);
+        $dataUpdate = sc_clean($dataUpdate, [], true);
 
-//
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

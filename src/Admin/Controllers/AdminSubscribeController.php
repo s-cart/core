@@ -152,6 +152,7 @@ class AdminSubscribeController extends RootAdminController
             'status' => (!empty($data['status']) ? 1 : 0),
             'store_id' => session('adminStoreId'),
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         AdminSubscribe::createSubscribeAdmin($dataInsert);
 
         return redirect()->route('admin_subscribe.index')->with('success', sc_language_render('action.create_success'));
@@ -208,6 +209,7 @@ class AdminSubscribeController extends RootAdminController
             'store_id' => session('adminStoreId'),
 
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $subscribe->update($dataUpdate);
 
         return redirect()->route('admin_subscribe.index')

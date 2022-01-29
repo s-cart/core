@@ -198,6 +198,7 @@ class AdminNewsController extends RootAdminController
             'alias'    => $data['alias'],
             'status'   => !empty($data['status']) ? 1 : 0,
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $news = AdminNews::createNewsAdmin($dataInsert);
         $id = $news->id;
         $dataDes = [];
@@ -212,6 +213,7 @@ class AdminNewsController extends RootAdminController
                 'content'     => $data['descriptions'][$code]['content'],
             ];
         }
+        $dataDes = sc_clean($dataDes, ['content'], true);
         AdminNews::insertDescriptionAdmin($dataDes);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
@@ -289,6 +291,7 @@ class AdminNewsController extends RootAdminController
             'sort' => $data['sort'],
             'status' => !empty($data['status']) ? 1 : 0,
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
 
         $news->update($dataUpdate);
         $news->descriptions()->delete();
@@ -303,6 +306,7 @@ class AdminNewsController extends RootAdminController
                 'content' => $row['content'],
             ];
         }
+        $dataDes = sc_clean($dataDes, [], true);
         AdminNews::insertDescriptionAdmin($dataDes);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];

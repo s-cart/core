@@ -100,6 +100,7 @@ class AdminLanguageController extends RootAdminController
             'status' => empty($data['status']) ? 0 : 1,
             'sort' => (int) $data['sort'],
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $obj = ShopLanguage::create($dataInsert);
 
         return redirect()->route('admin_language.edit', ['id' => $obj['id']])->with('success', sc_language_render('action.create_success'));
@@ -209,9 +210,9 @@ class AdminLanguageController extends RootAdminController
         }
         //End check status
         $obj = ShopLanguage::find($id);
+        $dataUpdate =  sc_clean($dataUpdate, [], true);
         $obj->update($dataUpdate);
 
-//
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

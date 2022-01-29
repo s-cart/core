@@ -201,6 +201,7 @@ class AdminBannerController extends RootAdminController
             'status'   => empty($data['status']) ? 0 : 1,
             'sort'     => (int) $data['sort'],
         ];
+        $dataInsert = sc_clean($dataInsert, ['html'], true);
         $banner = AdminBanner::createBannerAdmin($dataInsert);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
@@ -269,6 +270,7 @@ class AdminBannerController extends RootAdminController
             'status'   => empty($data['status']) ? 0 : 1,
             'sort'     => (int) $data['sort'],
         ];
+        $dataUpdate = sc_clean($dataUpdate, ['html'], true);
         $banner->update($dataUpdate);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];

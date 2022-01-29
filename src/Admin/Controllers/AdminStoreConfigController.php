@@ -226,6 +226,7 @@ class AdminStoreConfigController extends RootAdminController
         if (AdminConfig::where(['key' => $key, 'store_id' => $storeId])->first()) {
             return redirect()->back()->with('error', sc_language_quickly('admin.admin_custom_config.key_exist', 'Key already exist'));
         }
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         AdminConfig::insert($dataUpdate);
         return redirect()->back()->with('success', sc_language_render('action.update_success'));
     }

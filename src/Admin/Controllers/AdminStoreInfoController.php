@@ -32,6 +32,7 @@ class AdminStoreInfoController extends RootAdminController
     public function updateInfo()
     {
         $data      = request()->all();
+        $data = sc_clean($data, [], true);
         $storeId   = $data['storeId'];
         $fieldName = $data['name'];
         $value     = $data['value'];
@@ -111,6 +112,7 @@ class AdminStoreInfoController extends RootAdminController
                 'name' => $name,
                 'value' => $value,
             ];
+            $dataUpdate = sc_clean($dataUpdate, [], true);
             try {
                 AdminStore::updateDescription($dataUpdate);
                 $error = 0;

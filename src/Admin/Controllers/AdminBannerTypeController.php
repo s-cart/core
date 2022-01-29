@@ -93,8 +93,9 @@ class AdminBannerTypeController extends RootAdminController
             'code' => $data['code'],
             'name' => $data['name'],
         ];
-        $obj = ShopBannerType::create($dataInsert);
-//
+        $dataInsert = sc_clean($dataInsert, [], true);
+        ShopBannerType::create($dataInsert);
+
         return redirect()->route('admin_banner_type.index')->with('success', sc_language_render('action.create_success'));
     }
 
@@ -185,8 +186,9 @@ class AdminBannerTypeController extends RootAdminController
             'code' => $data['code'],
             'name' => $data['name'],
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $obj->update($dataUpdate);
-//
+
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

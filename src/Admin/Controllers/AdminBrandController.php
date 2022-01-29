@@ -129,8 +129,8 @@ class AdminBrandController extends RootAdminController
             'sort' => (int) $data['sort'],
             'status' => (!empty($data['status']) ? 1 : 0),
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $obj = ShopBrand::create($dataInsert);
-
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
         $obj->stores()->detach();
@@ -242,7 +242,7 @@ class AdminBrandController extends RootAdminController
             'status' => (!empty($data['status']) ? 1 : 0),
 
         ];
-
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $brand->update($dataUpdate);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
@@ -250,7 +250,7 @@ class AdminBrandController extends RootAdminController
         if ($shopStore) {
             $brand->stores()->attach($shopStore);
         }
-//
+
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

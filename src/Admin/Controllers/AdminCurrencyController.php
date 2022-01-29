@@ -178,6 +178,7 @@ class AdminCurrencyController extends RootAdminController
             'status' => empty($data['status']) ? 0 : 1,
             'sort' => (int) $data['sort'],
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         ShopCurrency::create($dataInsert);
 
         return redirect()->route('admin_currency.index')->with('success', sc_language_render('action.create_success'));
@@ -252,9 +253,9 @@ class AdminCurrencyController extends RootAdminController
         //End check status
 
         $obj = ShopCurrency::find($id);
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $obj->update($dataUpdate);
 
-//
         return redirect()->route('admin_currency.index')->with('success', sc_language_render('action.edit_success'));
     }
 

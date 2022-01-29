@@ -93,8 +93,9 @@ class AdminAttributeGroupController extends RootAdminController
             'name' => $data['name'],
             'type' => $data['type'],
         ];
-        $obj = ShopAttributeGroup::create($dataInsert);
-//
+        $dataInsert = sc_clean($dataInsert, [], true);
+        ShopAttributeGroup::create($dataInsert);
+
         return redirect()->route('admin_attribute_group.index')->with('success', sc_language_render('action.create_success'));
     }
 
@@ -185,8 +186,9 @@ class AdminAttributeGroupController extends RootAdminController
             'type' => $data['type'],
         ];
         $obj = ShopAttributeGroup::find($id);
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $obj->update($dataUpdate);
-//
+
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

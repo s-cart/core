@@ -89,8 +89,9 @@ class AdminShipingStatusController extends RootAdminController
         $dataInsert = [
             'name' => $data['name'],
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $obj = ShopShippingStatus::create($dataInsert);
-//
+
         return redirect()->route('admin_shipping_status.index')->with('success', sc_language_render('action.create_success'));
     }
 
@@ -174,9 +175,10 @@ class AdminShipingStatusController extends RootAdminController
         $dataUpdate = [
             'name' => $data['name'],
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $obj = ShopShippingStatus::find($id);
         $obj->update($dataUpdate);
-//
+
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

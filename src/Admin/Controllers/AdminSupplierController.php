@@ -106,6 +106,7 @@ class AdminSupplierController extends RootAdminController
             'phone' => $data['phone'],
             'sort' => (int) $data['sort'],
         ];
+        $dataInsert = sc_clean($dataInsert, [], true);
         $obj = ShopSupplier::create($dataInsert);
 
         return redirect()->route('admin_supplier.index')->with('success', sc_language_render('action.create_success'));
@@ -217,10 +218,9 @@ class AdminSupplierController extends RootAdminController
             'sort' => (int) $data['sort'],
 
         ];
-        
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $supplier->update($dataUpdate);
 
-//
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }
 

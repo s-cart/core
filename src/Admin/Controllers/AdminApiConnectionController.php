@@ -103,7 +103,8 @@ class AdminApiConnectionController extends RootAdminController
             'expire' => $data['expire'],
             'status' => empty($data['status']) ? 0 : 1,
         ];
-        $obj = ShopApiConnection::create($dataInsert);
+        $dataInsert = sc_clean($dataInsert, [], true);
+        ShopApiConnection::create($dataInsert);
 
         return redirect()->route('admin_api_connection.index')->with('success', sc_language_render('action.create_success'));
     }
@@ -214,7 +215,7 @@ class AdminApiConnectionController extends RootAdminController
             'expire' => $data['expire'],
             'status' => empty($data['status']) ? 0 : 1,
         ];
-       
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $obj->update($dataUpdate);
 
 //

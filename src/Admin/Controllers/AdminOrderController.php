@@ -272,7 +272,6 @@ class AdminOrderController extends RootAdminController
      */
     public function postCreate()
     {
-        $users = AdminCustomer::getListAll();
         $data = request()->all();
         $validate = [
             'first_name'      => 'required|max:100',
@@ -361,7 +360,7 @@ class AdminOrderController extends RootAdminController
             'email'           => $data['email'],
             'comment'         => $data['comment'],
         ];
-
+        $dataInsert = sc_clean($dataInsert, [], true);
         $order = AdminOrder::create($dataInsert);
         AdminOrder::insertOrderTotal([
             ['code' => 'subtotal', 'value' => 0, 'title' => sc_language_render('order.totals.sub_total'), 'sort' => ShopOrderTotal::POSITION_SUBTOTAL, 'order_id' => $order->id],
