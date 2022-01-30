@@ -141,6 +141,22 @@ if (!function_exists('sc_report') && !in_array('sc_report', config('helper_excep
 }
 
 
+if (!function_exists('sc_handle_exception') && !in_array('sc_handle_exception', config('helper_except', []))) {
+    /*
+    Process msg exception
+     */
+    function sc_handle_exception(\Throwable $exception)
+    {
+        $msg = "```". $exception->getMessage().'```'.PHP_EOL;
+        $msg .= "```IP:```".request()->ip().PHP_EOL;
+        $msg .= "*File* `".$exception->getFile()."`, *Line:* ".$exception->getLine().", *Code:* ".$exception->getCode().PHP_EOL.'URL= '.url()->current();
+        if (function_exists('sc_report') && $msg) {
+            sc_report($msg);
+        }
+    }
+}
+
+
 if (!function_exists('sc_push_include_view') && !in_array('sc_push_include_view', config('helper_except', []))) {
     /**
      * Push view
