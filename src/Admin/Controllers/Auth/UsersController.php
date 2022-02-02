@@ -190,7 +190,7 @@ class UsersController extends RootAdminController
             'email'    => strtolower($data['email']),
             'password' => bcrypt($data['password']),
         ];
-
+        $dataInsert = sc_clean($dataInsert, [], true);
         $user = AdminUser::createUser($dataInsert);
 
         $roles = $data['roles'] ?? [];
@@ -278,6 +278,7 @@ class UsersController extends RootAdminController
         if ($data['password']) {
             $dataUpdate['password'] = bcrypt($data['password']);
         }
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         AdminUser::updateInfo($dataUpdate, $id);
 
         if (!in_array($user->id, SC_GUARD_ADMIN)) {

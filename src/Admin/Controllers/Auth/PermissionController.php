@@ -188,7 +188,7 @@ class PermissionController extends RootAdminController
             'slug' => $data['slug'],
             'http_uri' => implode(',', ($data['http_uri'] ?? [])),
         ];
-
+        $dataInsert = sc_clean($dataInsert, [], true);
         $permission = AdminPermission::createPermission($dataInsert);
 
         return redirect()->route('admin_permission.index')->with('success', sc_language_render('action.create_success'));
@@ -243,8 +243,8 @@ class PermissionController extends RootAdminController
             'slug' => $data['slug'],
             'http_uri' => implode(',', ($data['http_uri'] ?? [])),
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $permission->update($dataUpdate);
-//
         return redirect()->route('admin_permission.index')->with('success', sc_language_render('action.edit_success'));
     }
 

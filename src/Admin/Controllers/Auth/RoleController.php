@@ -155,7 +155,7 @@ class RoleController extends RootAdminController
             'name' => $data['name'],
             'slug' => $data['slug'],
         ];
-
+        $dataInsert = sc_clean($dataInsert, [], true);
         $role = AdminRole::createRole($dataInsert);
         $permission = $data['permission'] ?? [];
         $administrators = $data['administrators'] ?? [];
@@ -219,6 +219,7 @@ class RoleController extends RootAdminController
             'name' => $data['name'],
             'slug' => $data['slug'],
         ];
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $role->update($dataUpdate);
         $permission = $data['permission'] ?? [];
         $administrators = $data['administrators'] ?? [];
@@ -232,7 +233,6 @@ class RoleController extends RootAdminController
         if ($administrators) {
             $role->administrators()->attach($administrators);
         }
-//
         return redirect()->route('admin_role.index')->with('success', sc_language_render('action.edit_success'));
     }
 

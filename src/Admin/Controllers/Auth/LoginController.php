@@ -130,8 +130,9 @@ class LoginController extends RootAdminController
         if ($data['password']) {
             $dataUpdate['password'] = bcrypt($data['password']);
         }
+        $dataUpdate = sc_clean($dataUpdate, [], true);
         $user->update($dataUpdate);
-//
+
         return redirect()->route('admin.home')->with('success', sc_language_render('action.edit_success'));
     }
 
