@@ -194,6 +194,12 @@
                         </div>
                         <div class="form-group info-install required">
                             <div class="controls col-md-offset-4 col-md-8 ">
+                                <input class="input-md" id="exclude_sample" name="exclude_sample"  style="margin-bottom: 10px" type="checkbox" />
+                                         {!! trans('install.exclude_sample') !!}
+                            </div>
+                        </div>
+                        <div class="form-group info-install required">
+                            <div class="controls col-md-offset-4 col-md-8 ">
                                 <input required class="input-md checkboxinput" id="id_terms" name="terms" style="margin-bottom: 10px" type="checkbox" />
                                          {!! trans('install.terms') !!}
                             </div>
@@ -242,6 +248,7 @@ $('#submit-install').click(function(event) {
                     admin_password:$('#admin_password').val(),
                     database_prefix:$('#database_prefix').val(),
                     admin_email:$('#admin_email').val(),
+                    exclude_sample:($('#exclude_sample').is(':checked') ? 1 :0),
                     admin_url:$('#admin_url').val(),
                     database_password:$('#database_password').val(),
                     step:'step1',
