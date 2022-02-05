@@ -125,13 +125,6 @@
                         <a href="#" class="editable-required editable editable-click" data-name="language" data-type="select" data-pk="" data-source="{{ json_encode($languages->pluck('name','code')->toArray()) }}" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ sc_language_render('store.language') }}" data-value="{{ $store->language }}" data-original-title="" title=""></a>
                        </td>
                     </tr>
-          
-                    <tr>
-                      <td><i class="fas fa-clock"></i> {{ sc_language_render('store.timezone') }}</td>
-                      <td>
-                        <a href="#" class="editable-required editable editable-click" data-name="timezone" data-type="select" data-pk="" data-source="{{ json_encode($timezones) }}" data-url="{{ sc_route_admin('admin_store.update') }}" data-title="{{ sc_language_render('store.timezone') }}" data-value="{{ $store->timezone }}" data-original-title="" title=""></a>
-                       </td>
-                    </tr>
 @endif
                     <tr>
                       <td><i class="nav-icon  fas fa-object-ungroup "></i>{{ sc_language_render('store.admin.template') }}</td>

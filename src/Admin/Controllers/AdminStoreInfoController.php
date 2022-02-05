@@ -12,18 +12,13 @@ class AdminStoreInfoController extends RootAdminController
     public $templates;
     public $currencies;
     public $languages;
-    public $timezones;
 
     public function __construct()
     {
         parent::__construct();
-        foreach (timezone_identifiers_list() as $key => $value) {
-            $timezones[$value] = $value;
-        }
         $this->templates = (new AdminTemplate)->getListTemplateActive();
         $this->currencies = ShopCurrency::getCodeActive();
         $this->languages = ShopLanguage::getListActive();
-        $this->timezones = $timezones;
     }
 
     /*
@@ -145,7 +140,6 @@ class AdminStoreInfoController extends RootAdminController
         ];
         $data['store'] = $store;
         $data['templates'] = $this->templates;
-        $data['timezones'] = $this->timezones;
         $data['languages'] = $this->languages;
         $data['currencies'] =$this->currencies;
         $data['storeId'] = $id;
