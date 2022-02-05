@@ -36,7 +36,7 @@ trait AuthTrait
         }
         if (!empty($data['email'])) {
             $dataUpdate['email'] = $data['email'];
-            $validate['email'] = config('validation.customer.email', 'required|string|email|max:255').'|unique:"'.ShopCustomer::class.'",email, '.$data['id'].',id';
+            $validate['email'] = config('validation.customer.email', 'required|string|email|max:255').'|unique:"'.ShopCustomer::class.'",email,'.$data['id'].',id';
         }
         //Dont update id
         unset($data['id']);
