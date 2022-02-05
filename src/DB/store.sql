@@ -117,8 +117,8 @@ INSERT INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `value`, `so
 ('', 'config_layout', 'link_cart', '1', '0', 'admin.config_layout.link_cart', '__storeId__');
             
 /*shop_email_template*/
-INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`name`, `group`, `text`, `status`, `store_id`) VALUES 
-('Reset password', 'forgot_password', '<h1 style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left\">{{$title}}</h1>
+INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`id`, `name`, `group`, `text`, `status`, `store_id`) VALUES 
+(1, 'Reset password', 'forgot_password', '<h1 style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left\">{{$title}}</h1>
 <p style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left\">{{$reason_sendmail}}</p>
 <table class=\"action\" align=\"center\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%\">
 <tbody><tr>
@@ -153,7 +153,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`name`, `group`, `text`, `sta
   </tr>
 </tbody>
 </table>', '1', '__storeId__'),
-('Customer verification', 'customer_verify', '<h1 style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left\">{{$title}}</h1>
+(2, 'Customer verification', 'customer_verify', '<h1 style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left\">{{$title}}</h1>
 <p style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left\">{{$reason_sendmail}}</p>
 <table class=\"action\" align=\"center\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%\">
 <tbody><tr>
@@ -188,9 +188,9 @@ INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`name`, `group`, `text`, `sta
   </tr>
 </tbody>
 </table>', '1', '__storeId__'),
-('Welcome new customer', 'welcome_customer', '<h1 style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:center\">{{$title}}</h1>
+(3, 'Welcome new customer', 'welcome_customer', '<h1 style=\"font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:center\">{{$title}}</h1>
 <p style=\"text-align:center;\">Welcome to my site!</p>', '1', '__storeId__'),
-('Send form contact to admin', 'contact_to_admin', '<table class=\"inner-body\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">
+(4, 'Send form contact to admin', 'contact_to_admin', '<table class=\"inner-body\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">
 <tr>
 <td>
 <b>Name</b>: {{$name}}<br>
@@ -207,7 +207,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`name`, `group`, `text`, `sta
 </tr>
 </table>', '1', '__storeId__'),
 
-('New order to admin', 'order_success_to_admin', '<table class=\"inner-body\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">
+(5, 'New order to admin', 'order_success_to_admin', '<table class=\"inner-body\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">
   <tr>
       <td>
           <b>Order ID</b>: {{$orderID}}<br>
@@ -250,7 +250,7 @@ INSERT INTO `__SC_DB_PREFIX__shop_email_template` (`name`, `group`, `text`, `sta
       <td colspan=\"2\" align=\"right\">{{$total}}</td>
   </tr>
 </table>', '1', '__storeId__'),
-('New order to customr', 'order_success_to_customer', '<table class=\"inner-body\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">
+(6, 'New order to customr', 'order_success_to_customer', '<table class=\"inner-body\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">
 <tr>
   <td>
       <b>Order ID</b>: {{$orderID}}<br>
