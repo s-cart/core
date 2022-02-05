@@ -160,8 +160,8 @@ INSERT IGNORE INTO `__SC_DB_PREFIX__admin_config` (`group`, `code`, `key`, `valu
 ('global', 'env_mail', 'smtp_mode', '', '0', 'email.smtp_mode', 0);
 
 /*admin_store*/
-INSERT IGNORE INTO `__SC_DB_PREFIX__admin_store` (`logo`, `template`, `phone`, `long_phone`, `email`, `time_active`, `address`, `timezone`, `language`, `currency`, `code`, `domain`) VALUES  
-('data/logo/scart-mid.png', 's-cart-light', '0123456789', 'Support: 0987654321', '__adminEmail__', '', '123st - abc - xyz', '__timezone_default__', '__language_default__', 'USD', 's-cart', '__domain__');
+INSERT IGNORE INTO `__SC_DB_PREFIX__admin_store` (`id`,`logo`, `template`, `phone`, `long_phone`, `email`, `time_active`, `address`,  `language`, `currency`, `code`, `domain`) VALUES  
+(1, 'data/logo/scart-mid.png', 's-cart-light', '0123456789', 'Support: 0987654321', '__adminEmail__', '', '123st - abc - xyz', '__language_default__', 'USD', 's-cart', '__domain__');
 
 /*admin_store_description*/
 INSERT IGNORE INTO `__SC_DB_PREFIX__admin_store_description` (`store_id`, `lang`, `title`, `description`, `keyword`, `maintain_content`, `maintain_note`) VALUES  

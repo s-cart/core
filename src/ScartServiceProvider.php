@@ -291,10 +291,6 @@ class ScartServiceProvider extends ServiceProvider
         }
         //email
 
-        // Time zone
-        config(['app.timezone' => (sc_store('timezone') ?? config('app.timezone'))]);
-        // End time zone
-
         //Share variable for view
         view()->share('sc_languages', sc_language_all());
         view()->share('sc_currencies', sc_currency_all());
