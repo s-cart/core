@@ -165,10 +165,10 @@ INSERT IGNORE INTO `__SC_DB_PREFIX__admin_store` (`logo`, `template`, `phone`, `
 
 /*admin_store_description*/
 INSERT IGNORE INTO `__SC_DB_PREFIX__admin_store_description` (`store_id`, `lang`, `title`, `description`, `keyword`, `maintain_content`, `maintain_note`) VALUES  
-('1', 'en', 'Demo S-Cart : Free Laravel eCommerce', 'Free website shopping cart for business', '', '<center><img src="/images/maintenance.png" />
+('1', 'en', '__SC_TITLE_EN__', 'Free website shopping cart for business', '', '<center><img src="/images/maintenance.png" />
 <h3><span style="color:#e74c3c;"><strong>Sorry! We are currently doing site maintenance!</strong></span></h3>
 </center>', 'Website is in maintenance mode!'),
-('1', 'vi', 'Demo S-Cart: Mã nguồn website thương mại điện tử miễn phí', 'Laravel shopping cart for business', '', '<center><img src="/images/maintenance.png" />
+('1', 'vi', '__SC_TITLE_VN__', 'Laravel shopping cart for business', '', '<center><img src="/images/maintenance.png" />
 <h3><span style="color:#e74c3c;"><strong>Xin lỗi! Hiện tại website đang bảo trì!</strong></span></h3>
 </center>', 'Website đang trong chế độ bảo trì!');
 

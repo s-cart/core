@@ -168,6 +168,12 @@
                                 </div>
                         </div>
                         <hr>
+                        <div id="div_website_title" class="form-group info-install required">
+                            <label for="website_title"  required class="control-label col-md-4  requiredField"> {{ trans('install.website_title') }} </label>
+                            <div class="controls col-md-8">
+                                <input class="input-md  textInput form-control" id="website_title"  name="website_title" placeholder="{{ trans('install.website_title_place') }}" style="margin-bottom: 10px" type="text" value="" />
+                            </div>
+                        </div>
                         <div id="div_admin_url" class="form-group info-install required">
                             <label for="admin_url"  required class="control-label col-md-4  requiredField"> {{ trans('install.admin_url') }} </label>
                             <div class="controls col-md-8">
@@ -250,6 +256,7 @@ $('#submit-install').click(function(event) {
                     admin_email:$('#admin_email').val(),
                     exclude_sample:($('#exclude_sample').is(':checked') ? 1 :0),
                     admin_url:$('#admin_url').val(),
+                    website_title:$('#website_title').val(),
                     database_password:$('#database_password').val(),
                     step:'step1',
                 },
