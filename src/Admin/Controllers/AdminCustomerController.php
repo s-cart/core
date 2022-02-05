@@ -44,7 +44,6 @@ class AdminCustomerController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'         => 'ID',
             'email'      => sc_language_render('customer.email'),
             'name'       => sc_language_render('customer.name'),
             'phone'      => sc_language_render('customer.phone'),
@@ -77,8 +76,7 @@ class AdminCustomerController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'email' => $row['email'],
                 'name' => $row['name'],
                 'phone' => $row['phone'],

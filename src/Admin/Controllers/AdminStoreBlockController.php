@@ -43,7 +43,6 @@ class AdminStoreBlockController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'       => 'ID',
             'name'     => sc_language_render('admin.store_block.name'),
             'type'     => sc_language_render('admin.store_block.type'),
             'position' => sc_language_render('admin.store_block.position'),
@@ -63,7 +62,6 @@ class AdminStoreBlockController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $layoutPage = $this->layoutPage;
             $htmlPage = '';
             if (!$row['page']) {
                 $htmlPage .= '';
@@ -84,7 +82,6 @@ class AdminStoreBlockController extends RootAdminController
             }        
 
             $storeTmp = [
-                'id' => $row['id'],
                 'name' => $row['name'],
                 'type' => $type_name,
                 'position' => htmlspecialchars(sc_language_render($this->layoutPosition[$row['position']]) ?? ''),
@@ -105,7 +102,7 @@ class AdminStoreBlockController extends RootAdminController
                 <a href="' . sc_route_admin('admin_store_block.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
             <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-trash-alt"></i></span>
             ';
-            $dataTr[] = $storeTmp;
+            $dataTr[$row['id']] = $storeTmp;
 
         }
 

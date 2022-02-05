@@ -29,7 +29,6 @@ class AdminSupplierController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'name' => sc_language_render('admin.supplier.name'),
             'image' => sc_language_render('admin.supplier.image'),
             'email' => sc_language_render('admin.supplier.email'),
@@ -42,8 +41,7 @@ class AdminSupplierController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'name' => $row['name'],
                 'image' => sc_image_render($row->getThumb(), '50px', '50px', $row['name']),
                 'email' => $row['email'],
@@ -138,7 +136,6 @@ class AdminSupplierController extends RootAdminController
     ];
 
         $listTh = [
-        'id' => 'ID',
         'name' => sc_language_render('admin.supplier.name'),
         'image' => sc_language_render('admin.supplier.image'),
         'email' => sc_language_render('admin.supplier.email'),
@@ -152,8 +149,7 @@ class AdminSupplierController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-            'id' => $row['id'],
+            $dataTr[$row['id']] = [
             'name' => $row['name'],
             'image' => sc_image_render($row->getThumb(), '50px', '50px', $row['name']),
             'email' => $row['email'],

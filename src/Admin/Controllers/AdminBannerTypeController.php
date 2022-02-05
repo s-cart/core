@@ -33,7 +33,6 @@ class AdminBannerTypeController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'code' => sc_language_render('admin.banner_type.code'),
             'name' => sc_language_render('admin.banner_type.name'),
             'action' => sc_language_render('action.title'),
@@ -44,8 +43,7 @@ class AdminBannerTypeController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'code' => $row['code'] ?? 'N/A',
                 'name' => $row['name'] ?? 'N/A',
                 'action' => '
@@ -125,7 +123,6 @@ class AdminBannerTypeController extends RootAdminController
     ];
 
         $listTh = [
-        'id' => 'ID',
         'code' => sc_language_render('admin.banner_type.code'),
         'name' => sc_language_render('admin.banner_type.name'),
         'action' => sc_language_render('action.title'),
@@ -136,8 +133,7 @@ class AdminBannerTypeController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-            'id' => $row['id'],
+            $dataTr[$row['id']] = [
             'code' => $row['code'] ?? 'N/A',
             'name' => $row['name'] ?? 'N/A',
             'action' => '

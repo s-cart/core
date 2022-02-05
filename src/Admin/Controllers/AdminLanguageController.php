@@ -29,7 +29,6 @@ class AdminLanguageController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'name' => sc_language_render('admin.language.name'),
             'code' => sc_language_render('admin.language.code'),
             'icon' => sc_language_render('admin.language.icon'),
@@ -45,8 +44,7 @@ class AdminLanguageController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'name' => $row['name'],
                 'code' => $row['code'],
                 'icon' => sc_image_render($row['icon'], '30px', '30px', $row['name']),
@@ -131,7 +129,6 @@ class AdminLanguageController extends RootAdminController
     ];
 
         $listTh = [
-        'id' => 'ID',
         'name' => sc_language_render('admin.language.name'),
         'code' => sc_language_render('admin.language.code'),
         'icon' => sc_language_render('admin.language.icon'),
@@ -146,8 +143,7 @@ class AdminLanguageController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-            'id' => $row['id'],
+            $dataTr[$row['id']] = [
             'name' => $row['name'],
             'code' => $row['code'],
             'icon' => sc_image_render($row['icon'], '30px', '30px', $row['name']),

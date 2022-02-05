@@ -75,7 +75,6 @@ class AdminProductController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'       => 'ID',
             'image'     => sc_language_render('product.image'),
             'name'     => sc_language_render('product.name'),
             'category' => sc_language_render('product.category'),
@@ -148,7 +147,6 @@ class AdminProductController extends RootAdminController
             }
 
             $dataMap = [
-                'id' => $row['id'],
                 'image' => sc_image_render($row->getThumb(), '50px', '50px', $row['name']),
                 'name' => $row['name'].'<br><b>SKU:</b> '.$row['sku'],
                 'category' => implode(';<br>', $arrName),
@@ -196,7 +194,7 @@ class AdminProductController extends RootAdminController
             <a target=_new href="' . sc_route('product.detail', ['alias' => $row['alias']]) . '"><span title="Link" type="button" class="btn btn-flat btn-sm btn-warning"><i class="fas fa-external-link-alt"></i></a>';
 
             $dataMap['action'] = $htmlAction;
-            $dataTr[] = $dataMap;
+            $dataTr[$row['id']] = $dataMap;
         }
 
         $data['listTh'] = $listTh;

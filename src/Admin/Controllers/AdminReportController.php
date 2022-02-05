@@ -48,7 +48,6 @@ class AdminReportController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id' => 'ID',
             'image' => sc_language_render('product.image'),
             'sku' => sc_language_render('product.sku'),
             'name' => sc_language_render('product.name'),
@@ -88,8 +87,7 @@ class AdminReportController extends RootAdminController
                 $kind = '<span class="badge badge-danger">' . $kind . '</span>';
             }
 
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'image' => sc_image_render($row['image'], '50px', '', $row['name']),
                 'sku' => $row['sku'],
                 'name' => $row['name'],

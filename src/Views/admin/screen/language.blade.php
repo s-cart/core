@@ -187,10 +187,10 @@
                     </thead>
                     <tbody>
                         @foreach ($dataTr as $keyRow => $tr)
-                            <tr class="{{ (request('id') == $tr['id']) ? 'active': '' }}">
+                            <tr class="{{ (request('id') == $keyRow) ? 'active': '' }}">
                                 @if (!empty($removeList))
                                 <td>
-                                  <input class="checkbox" type="checkbox" class="grid-row-checkbox" data-id="{{ $tr['id']??'' }}">
+                                  <input class="checkbox" type="checkbox" class="grid-row-checkbox" data-id="{{ $keyRow }}">
                                 </td>
                                 @endif
                                 @foreach ($tr as $key => $trtd)

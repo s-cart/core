@@ -34,7 +34,6 @@ class AdminAttributeGroupController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'name' => sc_language_render('admin.attribute_group.name'),
             'type' => sc_language_render('admin.attribute_group.type'),
             'action' => sc_language_render('action.create'),
@@ -45,8 +44,7 @@ class AdminAttributeGroupController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'name' => $row['name'],
                 'type' => $row['type'],
                 'action' => '
@@ -126,7 +124,6 @@ class AdminAttributeGroupController extends RootAdminController
     ];
 
         $listTh = [
-        'id' => 'ID',
         'name' => sc_language_render('admin.attribute_group.name'),
         'type' => sc_language_render('admin.attribute_group.type'),
         'action' => sc_language_render('action.title'),
@@ -138,8 +135,7 @@ class AdminAttributeGroupController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-            'id' => $row['id'],
+            $dataTr[$row['id']] = [
             'name' => $row['name'],
             'type' => $row['type'],
             'action' => '

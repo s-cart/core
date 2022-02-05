@@ -5,8 +5,7 @@ use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Front\Models\ShopStoreDescription;
 
 class AdminStore extends ShopStore
-{
-    
+{   
     /**
      * Get all template used
      *

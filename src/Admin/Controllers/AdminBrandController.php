@@ -28,7 +28,6 @@ class AdminBrandController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'name' => sc_language_render('admin.brand.name'),
             'image' => sc_language_render('admin.brand.image'),
             'status' => sc_language_render('admin.brand.status'),
@@ -57,7 +56,6 @@ class AdminBrandController extends RootAdminController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataMap = [
-                'id' => $row['id'],
                 'name' => $row['name'],
                 'image' => sc_image_render($row->getThumb(), '50px', '', $row['name']),
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
@@ -77,7 +75,7 @@ class AdminBrandController extends RootAdminController
             $dataMap['action'] = '<a href="' . sc_route_admin('admin_brand.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
                                 <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-trash-alt"></i></span>
                                 ';
-            $dataTr[] = $dataMap;
+            $dataTr[$row['id']] = $dataMap;
         }
 
 
@@ -167,7 +165,6 @@ class AdminBrandController extends RootAdminController
     ];
 
         $listTh = [
-        'id' => 'ID',
         'name' => sc_language_render('admin.brand.name'),
         'image' => sc_language_render('admin.brand.image'),
         'sort' => sc_language_render('admin.brand.sort'),
@@ -180,8 +177,7 @@ class AdminBrandController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-            'id' => $row['id'],
+            $dataTr[$row['id']] = [
             'name' => $row['name'],
             'image' => sc_image_render($row->getThumb(), '50px', '', $row['name']),
             'sort' => $row['sort'],

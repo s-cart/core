@@ -34,7 +34,6 @@ class AdminWeightController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'name' => sc_language_render('admin.weightname'),
             'description' => sc_language_render('admin.weightdescription'),
             'action' => sc_language_render('action.title'),
@@ -45,8 +44,7 @@ class AdminWeightController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'name' => $row['name'],
                 'description' => $row['description'],
                 'action' => '
@@ -124,7 +122,6 @@ class AdminWeightController extends RootAdminController
     ];
 
         $listTh = [
-        'id' => 'ID',
         'name' => sc_language_render('admin.weightname'),
         'description' => sc_language_render('admin.weightdescription'),
         'action' => sc_language_render('action.title'),
@@ -135,8 +132,7 @@ class AdminWeightController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-            'id' => $row['id'],
+            $dataTr[$row['id']] = [
             'name' => $row['name'],
             'description' => $row['description'],
             'action' => '

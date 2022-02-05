@@ -68,7 +68,7 @@ class AdminCurrencyController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataTr[$row['id']] = [
                 'name' => $row['name'],
                 'code' => $row['code'],
                 'symbol' => $row['symbol'],

@@ -28,7 +28,6 @@ class AdminCustomFieldController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'type' => sc_language_render('admin.custom_field.type'),
             'code' => sc_language_render('admin.custom_field.code'),
             'name' => sc_language_render('admin.custom_field.name'),
@@ -44,8 +43,7 @@ class AdminCustomFieldController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'type' => $row['type'],
                 'code' => $row['code'],
                 'name' => $row['name'],
@@ -132,7 +130,6 @@ class AdminCustomFieldController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'type' => sc_language_render('admin.custom_field.type'),
             'code' => sc_language_render('admin.custom_field.code'),
             'name' => sc_language_render('admin.custom_field.name'),
@@ -148,8 +145,7 @@ class AdminCustomFieldController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'type' => $row['type'],
                 'code' => $row['code'],
                 'name' => $row['name'],

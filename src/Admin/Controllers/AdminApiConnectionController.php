@@ -45,7 +45,7 @@ class AdminApiConnectionController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataTr[$row['id']] = [
                 'id' => $row['id'],
                 'description' => $row['description'],
                 'apiconnection' => $row['apiconnection'],
@@ -153,7 +153,7 @@ class AdminApiConnectionController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataTr[$row['id']] = [
             'id' => $row['id'],
             'description' => $row['description'],
             'apiconnection' => $row['apiconnection'],

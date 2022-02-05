@@ -44,7 +44,7 @@ class AdminLengthController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataTr[$row['id']] = [
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'description' => $row['description'],
@@ -135,7 +135,7 @@ class AdminLengthController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataTr[$row['id']] = [
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'description' => $row['description'],

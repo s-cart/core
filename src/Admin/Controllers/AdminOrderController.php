@@ -64,7 +64,6 @@ class AdminOrderController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'             => 'ID',
             'email'          => '<i class="fas fa-envelope" aria-hidden="true" title="'.sc_language_render('order.email').'"></i>',
             'subtotal'       => '<i class="fa fa-shopping-cart" aria-hidden="true" title="'.sc_language_render('order.subtotal').'"></i>',
             'shipping'       => '<i class="fa fa-truck" aria-hidden="true" title="'.sc_language_render('order.shipping').'"></i>',
@@ -122,7 +121,6 @@ class AdminOrderController extends RootAdminController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataMap = [
-                'id'             => $row['id'],
                 'email'          => $row['email'] ?? 'N/A',
                 'subtotal'       => sc_currency_render_symbol($row['subtotal'] ?? 0, $row['currency']),
                 'shipping'       => sc_currency_render_symbol($row['shipping'] ?? 0, $row['currency']),
@@ -148,7 +146,7 @@ class AdminOrderController extends RootAdminController
             $dataMap['action'] = '<a href="' . sc_route_admin('admin_order.detail', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
             <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-trash-alt"></i></span>
             ';
-            $dataTr[] = $dataMap;
+            $dataTr[$row['id']] = $dataMap;
         }
 
         $data['listTh'] = $listTh;

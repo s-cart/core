@@ -44,7 +44,7 @@ class AdminOrderStatusController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataTr[$row['id']] = [
                 'id' => $row['id'],
                 'name' => $row['name'] ?? 'N/A',
                 'action' => '
@@ -131,7 +131,7 @@ class AdminOrderStatusController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataTr[$row['id']] = [
             'id' => $row['id'],
             'name' => $row['name'] ?? 'N/A',
             'action' => '

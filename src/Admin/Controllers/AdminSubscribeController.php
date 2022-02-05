@@ -38,7 +38,6 @@ class AdminSubscribeController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id' => 'ID',
             'email' => sc_language_render('subscribe.admin.email'),
             'status' => sc_language_render('subscribe.admin.status'),
             'action' => sc_language_render('action.title'),
@@ -61,8 +60,7 @@ class AdminSubscribeController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'email' => $row['email'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
                 'action' => '

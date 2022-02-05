@@ -99,7 +99,7 @@ class AdminPageController extends RootAdminController
             <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-trash-alt"></i></span>&nbsp;
             <a target=_new href="' . sc_route('page.detail', ['alias' => $row['alias']]) . '"><span title="Link" type="button" class="btn btn-flat btn-sm btn-warning"><i class="fas fa-external-link-alt"></i></a>
             ';
-            $dataTr[] = $dataMap;
+            $dataTr[$row['id']] = $dataMap;
         }
 
         $data['listTh'] = $listTh;

@@ -29,7 +29,6 @@ class AdminTaxController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'value' => sc_language_render('admin.tax.value'),
             'name' => sc_language_render('admin.tax.name'),
             'action' => sc_language_render('action.title'),
@@ -40,8 +39,7 @@ class AdminTaxController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'name' => $row['name'],
                 'value' => $row['value'],
                 'action' => '
@@ -119,7 +117,6 @@ class AdminTaxController extends RootAdminController
         ];
 
         $listTh = [
-            'id' => 'ID',
             'name' => sc_language_render('admin.tax.name'),
             'value' => sc_language_render('admin.tax.value'),
             'action' => sc_language_render('action.title'),
@@ -130,8 +127,7 @@ class AdminTaxController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'name' => $row['name'],
                 'value' => $row['value'],
                 'action' => '

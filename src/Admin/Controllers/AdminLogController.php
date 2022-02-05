@@ -73,7 +73,7 @@ class AdminLogController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
+            $dataTr[$row['id']] = [
                 'id' => $row['id'],
                 'user_id' => ($user = AdminUser::find($row['user_id'])) ? $user->name : 'N/A',
                 'method' => '<span class="badge bg-' . (AdminLog::$methodColors[$row['method']] ?? '') . '">' . $row['method'] . '</span>',

@@ -37,7 +37,6 @@ class AdminNewsController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'     => 'ID',
             'title'  => sc_language_render('admin.news.title'),
             'image'  => sc_language_render('admin.news.image'),
             'sort'   => sc_language_render('admin.news.sort'),
@@ -75,7 +74,6 @@ class AdminNewsController extends RootAdminController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataMap = [
-                'id' => $row['id'],
                 'title' => $row['title'],
                 'image' => sc_image_render($row['image'], '50px', null, $row['title']),
                 'sort' => $row['sort'],
@@ -98,7 +96,7 @@ class AdminNewsController extends RootAdminController
             <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-trash-alt"></i></span>&nbsp;
             <a target=_new href="' . sc_route('news.detail', ['alias' => $row['alias']]) . '"><span title="Link" type="button" class="btn btn-flat btn-sm btn-warning"><i class="fas fa-external-link-alt"></i></a>
             ';
-            $dataTr[] = $dataMap;
+            $dataTr[$row['id']] = $dataMap;
         }
 
         $data['listTh'] = $listTh;

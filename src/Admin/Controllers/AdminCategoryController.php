@@ -38,7 +38,6 @@ class AdminCategoryController extends RootAdminController
         $data['blockBottom']  = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id'     => 'ID',
             'image'  => sc_language_render('admin.category.image'),
             'title'  => sc_language_render('admin.category.title'),
             'parent' => sc_language_render('admin.category.parent'),
@@ -83,7 +82,6 @@ class AdminCategoryController extends RootAdminController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataMap = [
-                'id' => $row['id'],
                 'image' => sc_image_render($row->getThumb(), '50px', '50px', $row['title']),
                 'title' => $row['title'],
                 'parent' => $row['parent'] ? ($categoriesTitle[$row['parent']] ?? '') : 'ROOT',
@@ -106,7 +104,7 @@ class AdminCategoryController extends RootAdminController
             <a href="' . sc_route_admin('admin_category.edit', ['id' => $row['id']]) . '"><span title="' .sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
             <span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-trash-alt"></i></span>&nbsp;
             <a target=_new href="' . sc_route('category.detail', ['alias' => $row['alias']]) . '"><span title="Link" type="button" class="btn btn-flat btn-sm btn-warning"><i class="fas fa-external-link-alt"></i></a>';
-            $dataTr[] = $dataMap;
+            $dataTr[$row['id']] = $dataMap;
         }
 
         $data['listTh'] = $listTh;

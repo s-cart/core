@@ -33,7 +33,6 @@ class AdminEmailTemplateController extends RootAdminController
         $data['blockBottom'] = sc_config_group('blockBottom', \Request::route()->getName());
 
         $listTh = [
-            'id' => 'ID',
             'name' => sc_language_render('admin.email_template.name'),
             'group' => sc_language_render('admin.email_template.group'),
             'status' => sc_language_render('admin.email_template.status'),
@@ -44,8 +43,7 @@ class AdminEmailTemplateController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[] = [
-                'id' => $row['id'],
+            $dataTr[$row['id']] = [
                 'name' => $row['name'] ?? 'N/A',
                 'group' => $row['group'] ?? 'N/A',
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
