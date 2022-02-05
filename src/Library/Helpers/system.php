@@ -304,3 +304,43 @@ if (!function_exists('sc_route_admin') && !in_array('sc_route_admin', config('he
         }
     }
 }
+
+if (!function_exists('sc_uuid') && !in_array('sc_uuid', config('helper_except', []))) {
+    /**
+     * Generate UUID
+     *
+     * @param   [string]  $name
+     * @param   [array]  $param
+     *
+     * @return  [type]         [return description]
+     */
+    function sc_uuid()
+    {
+        return \Illuminate\Support\Str::orderedUuid();
+    }
+}
+
+if (!function_exists('sc_generate_id') && !in_array('sc_generate_id', config('helper_except', []))) {
+    /**
+     * Generate ID
+     *
+     * @param   [type]  $type  [$type description]
+     *
+     * @return  [type]         [return description]
+     */
+    function sc_generate_id($type = null)
+    {
+        switch ($type) {
+            case 'shop_store':
+                return 'S-'.sc_token(5).'-'.sc_token(5);
+                break;
+            case 'shop_order':
+                return 'O-'.sc_token(5).'-'.sc_token(5);
+                break;
+            
+            default:
+                return sc_uuid();
+                break;
+        }
+    }
+}

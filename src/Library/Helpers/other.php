@@ -126,7 +126,7 @@ if (!function_exists('sc_report') && !in_array('sc_report', config('helper_excep
      */
     function sc_report(string $msg = null, array $ext = [])
     {
-        $msg = date('Y-m-d H:i:s').':'.PHP_EOL.$msg.PHP_EOL;
+        $msg = sc_time_now(config('app.timezone')).' ('.config('app.timezone').'):'.PHP_EOL.$msg.PHP_EOL;
         if (!in_array('slack', $ext)) {
             if (config('logging.channels.slack.url')) {
                 try {
@@ -245,5 +245,15 @@ if (!function_exists('sc_sync_cart') && !in_array('sc_sync_cart', config('helper
                 }
             }
         }
+    }
+}
+
+if (!function_exists('sc_time_now') && !in_array('sc_time_now', config('helper_except', []))) {
+    /**
+     * Return object carbon
+     */
+    function sc_time_now($timezone = null)
+    {
+        return (new \Carbon\Carbon)->now($timezone);
     }
 }
