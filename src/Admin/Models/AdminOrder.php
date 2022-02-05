@@ -151,7 +151,7 @@ class AdminOrder extends ShopOrder
         $upField = ShopOrderTotal::find($dataRowTotal['id']);
         $upField->value = $dataRowTotal['value'];
         $upField->text = $dataRowTotal['text'];
-        $upField->updated_at = date('Y-m-d H:i:s');
+        $upField->updated_at = sc_time_now();
         $upField->save();
         $order_id = $upField->order_id;
 

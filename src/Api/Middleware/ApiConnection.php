@@ -26,7 +26,7 @@ class ApiConnection
         }
         $check = \SCart\Core\Front\Models\ShopApiConnection::check($apiconnection, $apikey);
         if ($check) {
-            $check->update(['last_active' => date('Y-m-d H:i:s')]);
+            $check->update(['last_active' => sc_time_now()]);
             return $next($request);
         } else {
             return  response()->json(['error' => 1, 'msg' => 'Connection not correct']);

@@ -671,7 +671,7 @@ class ShopCartController extends RootFrontController
         $dataOrder['user_agent']      = $request->header('User-Agent');
         $dataOrder['device_type']      = $agent->deviceType();
         $dataOrder['ip']              = $request->ip();
-        $dataOrder['created_at']      = date('Y-m-d H:i:s');
+        $dataOrder['created_at']      = sc_time_now();
 
         if (!empty($shippingAddress['last_name'])) {
             $dataOrder['last_name']       = $shippingAddress['last_name'];

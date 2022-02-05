@@ -552,7 +552,7 @@ class AdminOrderController extends RootAdminController
                     'attribute' => $pAttr,
                     'currency' => $order->currency,
                     'exchange_rate' => $order->exchange_rate,
-                    'created_at' => date('Y-m-d H:i:s'),
+                    'created_at' => sc_time_now(),
                 );
             }
         }

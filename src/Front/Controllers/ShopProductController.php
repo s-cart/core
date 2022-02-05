@@ -103,13 +103,13 @@ class ShopProductController extends RootFrontController
         if ($product && $product->status && (!sc_config('product_stock', $storeId) || sc_config('product_display_out_of_stock', $storeId) || $product->stock > 0)) {
             //Update last view
             $product->view += 1;
-            $product->date_lastview = date('Y-m-d H:i:s');
+            $product->date_lastview = sc_time_now();
             $product->save();
             //End last viewed
 
             //Product last view
             $arrlastView = empty(\Cookie::get('productsLastView')) ? array() : json_decode(\Cookie::get('productsLastView'), true);
-            $arrlastView[$product->id] = date('Y-m-d H:i:s');
+            $arrlastView[$product->id] = sc_time_now();
             arsort($arrlastView);
             \Cookie::queue('productsLastView', json_encode($arrlastView), (86400 * 30));
             //End product last view
