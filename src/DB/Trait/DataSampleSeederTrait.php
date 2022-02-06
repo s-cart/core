@@ -333,8 +333,8 @@ trait DataSampleSeederTrait
     public function dataProduct($dataBrand, $dataSupplier, $mappingIdProduct) {
         $arrId = $mappingIdProduct['arrId'];
         $dataProduct = [];
-        $arrSku = ['PHO-BO', 'NEM-CHUA', 'NEM-NUONG', 'BANH-GAI','BUN-HUE','BANH-TRANG','MUOI-TAY-NINH','NHAN-LONG','SAU-RIENG','BIA-SAIGON','BIA-HANOI','NUOC-MAM','BANH-MYCAY','HU-TIEU',
-        'CANH-CHUA','MANG-CUT','CAM-VINH','VAI-THIEU','NON-LA','AO-DAI','KHAN-XEP','COM-NIU','THIT-CHO','MAM-TOM'];
+        $arrSku = ['PHO-BO', 'NEM-NUONG', 'BANH-GAI','BUN-HUE','BANH-TRANG','MUOI-TAY-NINH','NHAN-LONG','SAU-RIENG','BIA-SAIGON','BIA-HANOI','NUOC-MAM','BANH-MYCAY','HU-TIEU',
+        'CANH-CHUA','MANG-CUT','CAM-VINH','VAI-THIEU','NON-LA','AO-DAI','XOAI-CAT','COM-NIU','NHAN-LONG-HUNG-YEN','VAI-THIEU-LUC-NGAN','NEM-CHUA-THANH-HOA'];
         for ($i=1; $i <= 24; $i++) {
             $kind = SC_PRODUCT_SINGLE;
             if (in_array($arrId[$i], array_keys($mappingIdProduct['arrGroup']))) {
