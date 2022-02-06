@@ -5,12 +5,12 @@ namespace SCart\Core\Front\Models;
 use SCart\Core\Front\Models\ShopNewsDescription;
 use Illuminate\Database\Eloquent\Model;
 use SCart\Core\Front\Models\ShopStore;
-use Cache;
 
 
 class ShopNews extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
+    use \SCart\Core\Front\Models\UuidTrait;
 
     public $table = SC_DB_PREFIX.'shop_news';
     protected $guarded = [];
@@ -110,7 +110,7 @@ class ShopNews extends Model
         }
 
         if ($type === null) {
-            $news = $news->where($this->getTable() .'.id', (int) $key);
+            $news = $news->where($this->getTable() .'.id', $key);
         } else {
             $news = $news->where($type, $key);
         }
@@ -131,6 +131,13 @@ class ShopNews extends Model
                 $news->stores()->detach();
             }
         );
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_news');
+            }
+        });
     }
 
     /**

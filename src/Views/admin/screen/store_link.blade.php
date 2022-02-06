@@ -123,7 +123,7 @@
                             $shop_store = old('shop_store', $oldData);
                             if(is_array($shop_store)){
                                 foreach($shop_store as $value){
-                                    $listStore[] = (int)$value;
+                                    $listStore[] = $value;
                                 }
                             }
                             @endphp

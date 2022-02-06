@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\Model;
 class ShopProduct extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
-    
+    use \SCart\Core\Front\Models\UuidTrait;
+
     public $table = SC_DB_PREFIX.'shop_product';
     protected $guarded = [];
 
@@ -229,7 +230,7 @@ class ShopProduct extends Model
         $product = $product->where($tableDescription . '.lang', sc_get_locale());
 
         if (empty($type)) {
-            $product = $product->where($this->getTable().'.id', (int)$key);
+            $product = $product->where($this->getTable().'.id', $key);
         } elseif ($type == 'alias') {
             $product = $product->where($this->getTable().'.alias', $key);
         } elseif ($type == 'sku') {
@@ -275,6 +276,14 @@ class ShopProduct extends Model
                 ->delete();
             }
         );
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_product');
+            }
+        });
+
     }
 
     /*
@@ -343,7 +352,7 @@ class ShopProduct extends Model
             return false;
         }
         if ($this->status &&
-            (sc_config('product_preorder', config('app.storeId')) == 1 || $this->date_available === null || date('Y-m-d H:i:s') >= $this->date_available)
+            (sc_config('product_preorder', config('app.storeId')) == 1 || $this->date_available === null || sc_time_now() >= $this->date_available)
             && (sc_config('product_buy_out_of_stock', config('app.storeId')) || $this->stock || empty(sc_config('product_stock', config('app.storeId'))))
             && $this->kind != SC_PRODUCT_GROUP
         ) {
@@ -441,7 +450,7 @@ class ShopProduct extends Model
         if (is_array($category)) {
             $this->sc_category = $category;
         } else {
-            $this->sc_category = array((int)$category);
+            $this->sc_category = array($category);
         }
         return $this;
     }
@@ -457,7 +466,7 @@ class ShopProduct extends Model
         if (is_array($category)) {
             $this->sc_category_vendor = $category;
         } else {
-            $this->sc_category_vendor = array((int)$category);
+            $this->sc_category_vendor = array($category);
         }
         return $this;
     }
@@ -473,7 +482,7 @@ class ShopProduct extends Model
         if (is_array($brand)) {
             $this->sc_brand = $brand;
         } else {
-            $this->sc_brand = array((int)$brand);
+            $this->sc_brand = array($brand);
         }
         return $this;
     }
@@ -494,7 +503,7 @@ class ShopProduct extends Model
      */
     public function setStore($id)
     {
-        $this->sc_store_id = (int)$id;
+        $this->sc_store_id = $id;
         return $this;
     }
 
@@ -521,7 +530,7 @@ class ShopProduct extends Model
         if (is_array($arrID)) {
             $this->sc_array_ID = $arrID;
         } else {
-            $this->sc_array_ID = array((int)$arrID);
+            $this->sc_array_ID = array($arrID);
         }
         return $this;
     }
@@ -538,7 +547,7 @@ class ShopProduct extends Model
         if (is_array($supplier)) {
             $this->sc_supplier = $supplier;
         } else {
-            $this->sc_supplier = array((int)$supplier);
+            $this->sc_supplier = array($supplier);
         }
         return $this;
     }
@@ -711,9 +720,6 @@ class ShopProduct extends Model
             if (count($this->sc_category_vendor) && sc_check_multi_vendor_installed()) {
                 if (sc_config_global('MultiVendorPro')) {
                     $tablePTC = (new \App\Plugins\Other\MultiVendorPro\Models\VendorProductCategory)->getTable();
-                }
-                if (sc_config_global('B2B')) {
-                    $tablePTC = (new \App\Plugins\Other\B2B\Models\VendorProductCategory)->getTable();
                 }
                 $query = $query->leftJoin($tablePTC, $tablePTC . '.product_id', $this->getTable() . '.id');
                 $query = $query->whereIn($tablePTC . '.vendor_category_id', $this->sc_category_vendor);

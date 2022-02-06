@@ -21,7 +21,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_banner',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('title', 255)->nullable();
                 $table->string('image', 255)->nullable();
                 $table->string('url', 100)->nullable();
@@ -48,11 +48,11 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_email_template',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('name', 255);
                 $table->string('group', 50);
                 $table->mediumText('text');
-                $table->integer('store_id')->default(1)->index();
+                $table->uuid('store_id')->default(1)->index();
                 $table->tinyInteger('status')->default(0);
             }
         );
@@ -73,7 +73,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_store_block',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('name', 255);
                 $table->string('position', 100);
                 $table->string('page', 200)->nullable();
@@ -81,7 +81,7 @@ class PrepareTablesShop extends Migration
                 $table->text('text')->nullable();
                 $table->tinyInteger('status')->default(0);
                 $table->integer('sort')->default(0);
-                $table->integer('store_id')->default(1)->index();
+                $table->uuid('store_id')->default(1)->index();
                 $table->string('template', '50')->index();
             }
         );
@@ -107,7 +107,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_link',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('name', 255);
                 $table->string('url', 100);
                 $table->string('target', 100);
@@ -140,7 +140,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_brand',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('name', 255);
                 $table->string('alias', 120)->index();
                 $table->string('image', 255)->nullable();
@@ -153,10 +153,10 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_category',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('image', 255)->nullable();
                 $table->string('alias', 120)->index();
-                $table->integer('parent')->default(0);
+                $table->uuid('parent')->default(0);
                 $table->integer('top')->nullable()->default(0);
                 $table->tinyInteger('status')->default(0);
                 $table->integer('sort')->default(0);
@@ -166,7 +166,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_category_description',
             function (Blueprint $table) {
-                $table->integer('category_id');
+                $table->uuid('category_id');
                 $table->string('lang', 10)->index();
                 $table->string('title', 255)->nullable();
                 $table->string('keyword', 200)->nullable();
@@ -194,8 +194,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_order',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->bigInteger('customer_id')->index();
+                $table->uuid('id')->primary();
+                $table->uuid('customer_id')->index();
                 $table->string('domain')->nullable();
                 $table->integer('subtotal')->nullable()->default(0);
                 $table->integer('shipping')->nullable()->default(0);
@@ -229,7 +229,7 @@ class PrepareTablesShop extends Migration
                 $table->string('device_type', 20)->nullable()->default('other')->index();
                 $table->string('ip', 100)->nullable();
                 $table->string('transaction', 100)->nullable();
-                $table->integer('store_id')->nullable()->default(1)->index();
+                $table->uuid('store_id')->nullable()->default(1)->index();
                 $table->timestamps();
             }
         );
@@ -237,13 +237,13 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_order_detail',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->bigInteger('order_id');
-                $table->bigInteger('product_id');
+                $table->uuid('id')->primary();
+                $table->uuid('order_id');
+                $table->uuid('product_id');
                 $table->string('name', 255);
                 $table->integer('price')->default(0);
                 $table->integer('qty')->default(0);
-                $table->integer('store_id')->default(1);
+                $table->uuid('store_id')->default(1);
                 $table->integer('total_price')->default(0);
                 $table->integer('tax')->default(0);
                 $table->string('sku', 50);
@@ -257,11 +257,11 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_order_history',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->bigInteger('order_id');
+                $table->uuid('id')->primary();
+                $table->uuid('order_id');
                 $table->string('content', 300);
-                $table->integer('admin_id')->default(0);
-                $table->bigInteger('customer_id')->default(0);
+                $table->uuid('admin_id')->default(0);
+                $table->uuid('customer_id')->default(0);
                 $table->integer('order_status_id')->default(0);
                 $table->timestamp('add_date', $precision = 0);
             }
@@ -278,8 +278,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_order_total',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->bigInteger('order_id');
+                $table->uuid('id')->primary();
+                $table->uuid('order_id');
                 $table->string('title', 255);
                 $table->string('code', 100);
                 $table->integer('value')->default(0);
@@ -292,7 +292,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_page',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('image', 255)->nullable();
                 $table->string('alias', 120)->index();
                 $table->integer('status')->default(0);
@@ -302,7 +302,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_page_description',
             function (Blueprint $table) {
-                $table->integer('page_id');
+                $table->uuid('page_id');
                 $table->string('lang', 10)->index();
                 $table->string('title', 255)->nullable();
                 $table->string('keyword', 200)->nullable();
@@ -323,7 +323,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
+                $table->uuid('id')->primary();
                 $table->string('sku', 50)->index();
                 $table->string('upc', 20)->nullable()->comment('upc code');
                 $table->string('ean', 20)->nullable()->comment('ean code');
@@ -331,8 +331,8 @@ class PrepareTablesShop extends Migration
                 $table->string('isbn', 20)->nullable()->comment('isbn code');
                 $table->string('mpn', 64)->nullable()->comment('mpn code');
                 $table->string('image', 255)->nullable();
-                $table->integer('brand_id')->nullable()->default(0)->index();
-                $table->integer('supplier_id')->nullable()->default(0)->index();
+                $table->uuid('brand_id')->nullable()->default(0)->index();
+                $table->uuid('supplier_id')->nullable()->default(0)->index();
                 $table->integer('price')->nullable()->default(0);
                 $table->integer('cost')->nullable()->nullable()->default(0);
                 $table->integer('stock')->nullable()->default(0);
@@ -360,7 +360,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_description',
             function (Blueprint $table) {
-                $table->bigInteger('product_id');
+                $table->uuid('product_id');
                 $table->string('lang', 10)->index();
                 $table->string('name', 255)->nullable();
                 $table->string('keyword', 200)->nullable();
@@ -373,17 +373,17 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_image',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
+                $table->uuid('id')->primary();
                 $table->string('image', 255);
-                $table->bigInteger('product_id')->default(0)->index();
+                $table->uuid('product_id')->default(0)->index();
             }
         );
 
         Schema::create(
             SC_DB_PREFIX.'shop_product_build',
             function (Blueprint $table) {
-                $table->bigInteger('build_id');
-                $table->bigInteger('product_id');
+                $table->uuid('build_id');
+                $table->uuid('product_id');
                 $table->integer('quantity');
                 $table->primary(['build_id', 'product_id']);
             }
@@ -392,8 +392,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_group',
             function (Blueprint $table) {
-                $table->bigInteger('group_id');
-                $table->bigInteger('product_id');
+                $table->uuid('group_id');
+                $table->uuid('product_id');
                 $table->primary(['group_id', 'product_id']);
             }
         );
@@ -401,8 +401,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_category',
             function (Blueprint $table) {
-                $table->bigInteger('product_id');
-                $table->integer('category_id');
+                $table->uuid('product_id');
+                $table->uuid('category_id');
                 $table->primary(['product_id', 'category_id']);
             }
         );
@@ -424,7 +424,7 @@ class PrepareTablesShop extends Migration
                 $table->bigIncrements('id');
                 $table->string('name', 255);
                 $table->integer('attribute_group_id');
-                $table->bigInteger('product_id');
+                $table->uuid('product_id');
                 $table->integer('add_price')->default(0);
                 $table->integer('sort')->default(0);
                 $table->tinyInteger('status')->default(1);
@@ -457,14 +457,14 @@ class PrepareTablesShop extends Migration
                 $table->text('content');
                 $table->timestamps();
                 $table->index(['identifier', 'instance']);
-                $table->integer('store_id')->default(1)->index();
+                $table->uuid('store_id')->default(1)->index();
             }
         );
 
         Schema::create(
             SC_DB_PREFIX.'shop_customer',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
+                $table->uuid('id')->primary();
                 $table->string('first_name', 100);
                 $table->string('last_name', 100)->nullable();
                 $table->string('first_name_kana', 100)->nullable();
@@ -473,7 +473,7 @@ class PrepareTablesShop extends Migration
                 $table->tinyInteger('sex')->nullable()->comment('0:women, 1:men');
                 $table->date('birthday')->nullable();
                 $table->string('password', 100)->nullable();
-                $table->bigInteger('address_id')->default(0)->index();
+                $table->uuid('address_id')->default(0)->index();
                 $table->string('postcode', 10)->nullable();
                 $table->string('address1', 100)->nullable();
                 $table->string('address2', 100)->nullable();
@@ -481,7 +481,7 @@ class PrepareTablesShop extends Migration
                 $table->string('company', 100)->nullable();
                 $table->string('country', 10)->nullable()->default('VN');
                 $table->string('phone', 20)->nullable();
-                $table->integer('store_id')->default(1)->index();
+                $table->uuid('store_id')->default(1)->index();
                 $table->string('remember_token', 100)->nullable();
                 $table->tinyInteger('status')->default(1);
                 $table->tinyInteger('group')->default(1);
@@ -497,8 +497,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_customer_address',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->bigInteger('customer_id')->index();
+                $table->uuid('id')->primary();
+                $table->uuid('customer_id')->index();
                 $table->string('first_name', 100);
                 $table->string('last_name', 100)->nullable();
                 $table->string('first_name_kana', 100)->nullable();
@@ -516,7 +516,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_supplier',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('name', 255);
                 $table->string('alias', 120)->index();
                 $table->string('email', 150)->nullable();
@@ -525,7 +525,7 @@ class PrepareTablesShop extends Migration
                 $table->string('address', 100)->nullable();
                 $table->string('url', 100)->nullable();
                 $table->tinyInteger('status')->default(1);
-                $table->integer('store_id')->default(1)->index();
+                $table->uuid('store_id')->default(1)->index();
                 $table->integer('sort')->default(0);
             }
         );
@@ -533,12 +533,12 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_subscribe',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('email', 150)->index();
                 $table->string('phone', 20)->nullable();
                 $table->string('content', 300)->nullable();
                 $table->tinyInteger('status')->default(1);
-                $table->integer('store_id')->default(1)->index();
+                $table->uuid('store_id')->default(1)->index();
                 $table->timestamps();
             }
         );
@@ -555,7 +555,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_news',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('image', 200)->nullable();
                 $table->string('alias', 120)->index();
                 $table->integer('sort')->default(0);
@@ -568,7 +568,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_news_description',
             function (Blueprint $table) {
-                $table->integer('news_id');
+                $table->uuid('news_id');
                 $table->string('lang', 10);
                 $table->string('title', 255)->nullable();
                 $table->string('keyword', 200)->nullable();
@@ -582,7 +582,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_sessions',
             function ($table) {
                 $table->string('id', 100)->unique();
-                $table->unsignedbigInteger('customer_id')->nullable();
+                $table->uuid('customer_id')->nullable();
                 $table->string('ip_address', 45)->nullable();
                 $table->text('user_agent')->nullable();
                 $table->text('payload');
@@ -708,7 +708,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_store_css',
             function (Blueprint $table) {
                 $table->mediumText('css');
-                $table->integer('store_id');
+                $table->uuid('store_id');
                 $table->string('template', 50);
                 $table->unique(['store_id', 'template']);
             }
@@ -717,7 +717,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_promotion',
             function (Blueprint $table) {
-                $table->bigInteger('product_id')->primary();
+                $table->uuid('product_id')->primary();
                 $table->integer('price_promotion');
                 $table->timestamp('date_start', $precision = 0)->nullable();
                 $table->timestamp('date_end', $precision = 0)->nullable();
@@ -729,8 +729,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_download',
             function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->bigInteger('product_id');
+                $table->uuid('id')->primary();
+                $table->uuid('product_id');
                 $table->string('path', 255);
             }
         );
@@ -738,7 +738,7 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_custom_field',
             function (Blueprint $table) {
-                $table->increments('id');
+                $table->uuid('id')->primary();
                 $table->string('type', 50)->index()->comment('product, customer');
                 $table->string('code', 100)->index();
                 $table->string('name', 255);
@@ -752,9 +752,9 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_custom_field_detail',
             function (Blueprint $table) {
-                $table->increments('id');
-                $table->integer('custom_field_id')->index();
-                $table->integer('rel_id')->index();
+                $table->uuid('id')->primary();
+                $table->uuid('custom_field_id')->index();
+                $table->uuid('rel_id')->index()->comment('ID of product, customer,...');
                 $table->text('text')->nullable();
             }
         );
@@ -775,8 +775,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_product_store',
             function (Blueprint $table) {
-                $table->bigInteger('product_id');
-                $table->integer('store_id');
+                $table->uuid('product_id');
+                $table->uuid('store_id');
                 $table->primary(['product_id', 'store_id']);
             }
         );
@@ -784,8 +784,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_category_store',
             function (Blueprint $table) {
-                $table->integer('category_id');
-                $table->integer('store_id');
+                $table->uuid('category_id');
+                $table->uuid('store_id');
                 $table->primary(['category_id', 'store_id']);
             }
         );
@@ -793,8 +793,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_brand_store',
             function (Blueprint $table) {
-                $table->integer('brand_id');
-                $table->integer('store_id');
+                $table->uuid('brand_id');
+                $table->uuid('store_id');
                 $table->primary(['brand_id', 'store_id']);
             }
         );
@@ -802,8 +802,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_banner_store',
             function (Blueprint $table) {
-                $table->integer('banner_id');
-                $table->integer('store_id');
+                $table->uuid('banner_id');
+                $table->uuid('store_id');
                 $table->primary(['banner_id', 'store_id']);
             }
         );
@@ -811,8 +811,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_news_store',
             function (Blueprint $table) {
-                $table->integer('news_id');
-                $table->integer('store_id');
+                $table->uuid('news_id');
+                $table->uuid('store_id');
                 $table->primary(['news_id', 'store_id']);
             }
         );
@@ -820,8 +820,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_page_store',
             function (Blueprint $table) {
-                $table->integer('page_id');
-                $table->integer('store_id');
+                $table->uuid('page_id');
+                $table->uuid('store_id');
                 $table->primary(['page_id', 'store_id']);
             }
         );
@@ -829,8 +829,8 @@ class PrepareTablesShop extends Migration
         Schema::create(
             SC_DB_PREFIX.'shop_link_store',
             function (Blueprint $table) {
-                $table->integer('link_id');
-                $table->integer('store_id');
+                $table->uuid('link_id');
+                $table->uuid('store_id');
                 $table->primary(['link_id', 'store_id']);
             }
         );

@@ -14,6 +14,7 @@ use Illuminate\Auth\AuthenticationException;
 class ShopCustomer extends Authenticatable
 {
     use \SCart\Core\Front\Models\ModelTrait;
+    use \SCart\Core\Front\Models\UuidTrait;
     
     use Notifiable, HasApiTokens;
 
@@ -104,7 +105,6 @@ class ShopCustomer extends Authenticatable
         // before delete() method call this
         static::deleting(
             function ($customer) {
-
             //Delete custom field
                 (new ShopCustomFieldDetail)
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
@@ -114,6 +114,13 @@ class ShopCustomer extends Authenticatable
                 ->delete();
             }
         );
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_customer');
+            }
+        });
     }
 
 

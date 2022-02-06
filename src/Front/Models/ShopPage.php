@@ -11,7 +11,8 @@ class ShopPage extends Model
 {
     
     use \SCart\Core\Front\Models\ModelTrait;
-    
+    use \SCart\Core\Front\Models\UuidTrait;
+
     public $timestamps     = false;
     public $table          = SC_DB_PREFIX.'shop_page';
     protected $connection  = SC_CONNECTION;
@@ -103,7 +104,7 @@ class ShopPage extends Model
         }
 
         if ($type === null) {
-            $page = $page->where($this->getTable() .'.id', (int) $key);
+            $page = $page->where($this->getTable() .'.id', $key);
         } else {
             $page = $page->where($type, $key);
         }
@@ -124,6 +125,12 @@ class ShopPage extends Model
                 $page->stores()->detach();
             }
         );
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_page');
+            }
+        });
     }
 
 

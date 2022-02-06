@@ -61,7 +61,7 @@ $listPermission = [];
 $old_permission = old('permission',($role?$role->permissions->pluck('id')->toArray():''));
     if(is_array($old_permission)){
         foreach($old_permission as $value){
-            $listPermission[] = (int)$value;
+            $listPermission[] = $value;
         }
     }
 @endphp

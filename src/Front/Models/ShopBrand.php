@@ -9,7 +9,8 @@ use SCart\Core\Front\Models\ShopStore;
 class ShopBrand extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
-    
+    use \SCart\Core\Front\Models\UuidTrait;
+
     public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_brand';
     protected $guarded = [];
@@ -41,6 +42,13 @@ class ShopBrand extends Model
         // before delete() method call this
         static::deleting(function ($brand) {
             $brand->stores()->detach();
+        });
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_brand');
+            }
         });
     }
 
@@ -94,7 +102,7 @@ class ShopBrand extends Model
         $dataSelect = $this->getTable().'.*';
         $data = $this->selectRaw($dataSelect);
         if ($type === null) {
-            $data = $data->where($this->getTable().'.id', (int) $key);
+            $data = $data->where($this->getTable().'.id', $key);
         } else {
             $data = $data->where($type, $key);
         }

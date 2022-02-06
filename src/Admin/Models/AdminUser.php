@@ -1,16 +1,15 @@
 <?php
 namespace SCart\Core\Admin\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
-use SCart\Core\Front\Models\ShopStore;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class AdminUser extends Authenticatable
 {
+    use \SCart\Core\Front\Models\UuidTrait;
     use  Notifiable, HasApiTokens;
     public $table      = SC_DB_PREFIX.'admin_user';
     protected $guarded = [];
@@ -70,6 +69,13 @@ class AdminUser extends Authenticatable
             }
             $model->roles()->detach();
             $model->permissions()->detach();
+        });
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'admin_user');
+            }
         });
     }
 

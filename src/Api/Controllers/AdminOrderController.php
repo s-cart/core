@@ -28,7 +28,6 @@ class AdminOrderController extends RootFrontController
      */
     public function orderDetail(Request $request, $id)
     {
-        $id = (int)$id;
         $order = (new ShopOrder)->where('id', $id)
                 ->with('details')
                 ->first();

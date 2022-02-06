@@ -61,7 +61,7 @@ class UsersController extends RootAdminController
         $obj = new AdminUser;
 
         if ($keyword) {
-            $obj = $obj->whereRaw('(id = ' . (int) $keyword . '  OR name like "%' . $keyword . '%" OR username like "%' . $keyword . '%"  )');
+            $obj = $obj->whereRaw('(id = ' . $keyword . '  OR name like "%' . $keyword . '%" OR username like "%' . $keyword . '%"  )');
         }
         if ($sort_order && array_key_exists($sort_order, $arrSort)) {
             $field = explode('__', $sort_order)[0];

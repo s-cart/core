@@ -7,7 +7,8 @@ use SCart\Core\Front\Models\ShopStore;
 class ShopStoreBlockContent extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
-    
+    use \SCart\Core\Front\Models\UuidTrait;
+
     public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_store_block';
     protected $guarded = [];
@@ -30,5 +31,22 @@ class ShopStoreBlockContent extends Model
                 ->groupBy('position');
         }
         return self::$getLayout;
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        // before delete() method call this
+        static::deleting(
+            function ($obj) {
+            //
+            }
+        );
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_store_block');
+            }
+        });
     }
 }

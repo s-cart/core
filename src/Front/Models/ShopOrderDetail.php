@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShopOrderDetail extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
+    use \SCart\Core\Front\Models\UuidTrait;
     
     protected $table = SC_DB_PREFIX.'shop_order_detail';
     protected $connection = SC_CONNECTION;
@@ -26,15 +27,33 @@ class ShopOrderDetail extends Model
     {
         return $this->where('id', $id)->update($data);
     }
-    public function addNewDetail($data)
+    public function addNewDetail(array $data)
     {
         if ($data) {
-            $this->insert($data);
+            $this->create($data);
             //Update stock, sold
             foreach ($data as $key => $item) {
                 //Update stock, sold
                 ShopProduct::updateStock($item['product_id'], $item['qty']);
             }
         }
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        // before delete() method call this
+        static::deleting(
+            function ($news) {
+                //
+            }
+        );
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_order_detail');
+            }
+        });
     }
 }

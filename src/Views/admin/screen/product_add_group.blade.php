@@ -123,7 +123,7 @@
                             $listCate = [];
                             if (is_array(old('category'))) {
                                 foreach(old('category') as $value){
-                                    $listCate[] = (int)$value;
+                                    $listCate[] = $value;
                                 }
                             }
                             @endphp
@@ -157,7 +157,7 @@
                             $listStore = [];
                             if (is_array(old('shop_store'))) {
                                 foreach(old('shop_store') as $value){
-                                    $listStore[] = (int)$value;
+                                    $listStore[] = $value;
                                 }
                             }
                             @endphp
@@ -289,9 +289,9 @@
                             <div class="col-sm-8">
                                 @if (old('productInGroup'))
                                 @foreach (old('productInGroup') as $pID)
-                                @if ( (int)$pID)
+                                @if ($pID)
                                 @php
-                                $newHtml = str_replace('value="'.(int)$pID.'"', 'value="'.(int)$pID.'" selected',
+                                $newHtml = str_replace('value="'.$pID.'"', 'value="'.$pID.'" selected',
                                 $htmlSelectGroup);
                                 @endphp
                                 {!! $newHtml !!}

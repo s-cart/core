@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class ShopOrderTotal extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
-    
+    use \SCart\Core\Front\Models\UuidTrait;
+
     protected $table = SC_DB_PREFIX.'shop_order_total';
-    protected $fillable = ['order_id', 'title', 'code', 'value', 'text', 'sort'];
     protected $connection = SC_CONNECTION;
     protected $guarded = [];
     const POSITION_SUBTOTAL = 1;
@@ -275,5 +275,24 @@ class ShopOrderTotal extends Model
             );
         }
         return $otherFeeMethod;
+    }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+        // before delete() method call this
+        static::deleting(
+            function ($obj) {
+                //
+            }
+        );
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_order_total');
+            }
+        });
     }
 }

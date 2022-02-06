@@ -11,6 +11,7 @@ class ShopCategory extends Model
 {
     
     use \SCart\Core\Front\Models\ModelTrait;
+    use \SCart\Core\Front\Models\UuidTrait;
     
     public $timestamps = false;
     public $table = SC_DB_PREFIX . 'shop_category';
@@ -69,6 +70,12 @@ class ShopCategory extends Model
             $category->descriptions()->delete();
             $category->products()->detach();
             $category->stores()->detach();
+        });
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_category');
+            }
         });
     }
 
@@ -130,7 +137,7 @@ class ShopCategory extends Model
         }
 
         if ($type === null) {
-            $category = $category->where($this->getTable().'.id', (int) $key);
+            $category = $category->where($this->getTable().'.id', $key);
         } else {
             $category = $category->where($type, $key);
         }
@@ -157,7 +164,7 @@ class ShopCategory extends Model
      */
     public function setParent($parent)
     {
-        $this->sc_parent = (int)$parent;
+        $this->sc_parent = $parent;
         return $this;
     }
 

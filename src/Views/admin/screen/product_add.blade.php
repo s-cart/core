@@ -140,7 +140,7 @@
                             $listCate = [];
                             if (is_array(old('category'))) {
                                 foreach(old('category') as $value){
-                                    $listCate[] = (int)$value;
+                                    $listCate[] = $value;
                                 }
                             }
                             @endphp
@@ -175,7 +175,7 @@
                                 $listStore = [];
                                 if (is_array(old('shop_store'))) {
                                     foreach(old('shop_store') as $value){
-                                        $listStore[] = (int)$value;
+                                        $listStore[] = $value;
                                     }
                                 }
                                 @endphp

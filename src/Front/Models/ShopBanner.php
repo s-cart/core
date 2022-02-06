@@ -9,7 +9,8 @@ class ShopBanner extends Model
 {
     
     use \SCart\Core\Front\Models\ModelTrait;
-    
+    use \SCart\Core\Front\Models\UuidTrait;
+
     public $table = SC_DB_PREFIX.'shop_banner';
     protected $guarded = [];
     protected $connection = SC_CONNECTION;
@@ -56,7 +57,7 @@ class ShopBanner extends Model
         $storeId = config('app.storeId');
         $dataSelect = $this->getTable().'.*';
         $data =  $this->selectRaw($dataSelect)
-            ->where('id', (int)$id);
+            ->where('id', $id);
         if ($checkActive) {
             $data = $data->where($this->getTable() .'.status', 1);
         }
@@ -78,6 +79,13 @@ class ShopBanner extends Model
         // before delete() method call this
         static::deleting(function ($banner) {
             $banner->stores()->detach();
+        });
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_banner');
+            }
         });
     }
 
@@ -165,7 +173,7 @@ class ShopBanner extends Model
      */
     public function setStore($id)
     {
-        $this->sc_store = (int)$id;
+        $this->sc_store = $id;
         return $this;
     }
 

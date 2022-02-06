@@ -36,7 +36,6 @@ class AdminController extends RootFrontController
      */
     public function ordersDetail(Request $request, $id)
     {
-        $id = (int)$id;
         $user = $request->user();
         $order = (new ShopOrder)->where('id', $id)
                 ->with('details')

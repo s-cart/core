@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShopOrder extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
+    use \SCart\Core\Front\Models\UuidTrait;
 
     public $table = SC_DB_PREFIX.'shop_order';
     protected $guarded = [];
@@ -52,13 +53,19 @@ class ShopOrder extends Model
         // before delete() method call this
         static::deleting(function ($order) {
             foreach ($order->details as $key => $orderDetail) {
-                $item = ShopProduct::find($orderDetail->product_id);
                 //Update stock, sold
                 ShopProduct::updateStock($orderDetail->product_id, -$orderDetail->qty);
             }
             $order->details()->delete(); //delete order details
             $order->orderTotal()->delete(); //delete order total
             $order->history()->delete(); //delete history
+        });
+
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_order');
+            }
         });
     }
 
@@ -113,7 +120,6 @@ class ShopOrder extends Model
         $dataOrder     = sc_clean($dataOrder);
         $dataTotal     = sc_clean($dataTotal);
         $arrCartDetail = sc_clean($arrCartDetail);
-
         try {
             DB::connection(SC_CONNECTION)->beginTransaction();
             $dataOrder['domain'] = url('/');
@@ -130,14 +136,10 @@ class ShopOrder extends Model
 
             //Insert order total
             foreach ($dataTotal as $key => $row) {
-                array_walk(
-                    $row,
-                    function (&$v, $k) {
-                        return $v = sc_clean($v);
-                    }
-                );
+                $row = sc_clean($row);
+                $row['id'] = sc_generate_id($type = 'shop_order_total');
                 $row['order_id'] = $orderID;
-                $row['created_at'] = date('Y-m-d H:i:s');
+                $row['created_at'] = sc_time_now();
                 $dataTotal[$key] = $row;
             }
             ShopOrderTotal::insert($dataTotal);

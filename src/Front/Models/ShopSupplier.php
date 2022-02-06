@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ShopSupplier extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
+    use \SCart\Core\Front\Models\UuidTrait;
 
     public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_supplier';
@@ -21,14 +22,6 @@ class ShopSupplier extends Model
             self::$getList = self::get()->keyBy('id');
         }
         return self::$getList;
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-        // before delete() method call this
-        static::deleting(function ($supplier) {
-        });
     }
 
     /**
@@ -77,7 +70,7 @@ class ShopSupplier extends Model
             return null;
         }
         if ($type === null) {
-            $data = $this->where('id', (int) $key);
+            $data = $this->where('id', $key);
         } else {
             $data = $this->where($type, $key);
         }
@@ -130,5 +123,22 @@ class ShopSupplier extends Model
         }
 
         return $query;
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        // before delete() method call this
+        static::deleting(
+            function ($obj) {
+            //
+            }
+        );
+        //Uuid
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = sc_generate_id($type = 'shop_supplier');
+            }
+        });
     }
 }

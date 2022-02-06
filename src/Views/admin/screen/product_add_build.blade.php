@@ -142,7 +142,7 @@
                             $listCate = [];
                             if (is_array(old('category'))) {
                                 foreach(old('category') as $value){
-                                    $listCate[] = (int)$value;
+                                    $listCate[] = $value;
                                 }
                             }
                             @endphp
@@ -176,7 +176,7 @@
                             $listStore = [];
                             if (is_array(old('shop_store'))) {
                                 foreach(old('shop_store') as $value){
-                                    $listStore[] = (int)$value;
+                                    $listStore[] = $value;
                                 }
                             }
                             @endphp
@@ -759,12 +759,12 @@
 
                                 @if (old('productBuild'))
                                 @foreach (old('productBuild') as $key => $pID)
-                                @if ( (int)$pID && (int)old('productBuildQty')[$key])
+                                @if ( $pID && old('productBuildQty')[$key])
                                 @php
-                                $newHtml = str_replace('value="'.(int)$pID.'"', 'value="'.(int)$pID.'" selected',
+                                $newHtml = str_replace('value="'.$pID.'"', 'value="'.$pID.'" selected',
                                 $htmlSelectBuild);
                                 $newHtml = str_replace('name="productBuildQty[]" value="1" min=1',
-                                'name="productBuildQty[]" value="'.(int)old('productBuildQty')[$key].'"', $newHtml);
+                                'name="productBuildQty[]" value="'.old('productBuildQty')[$key].'"', $newHtml);
                                 @endphp
                                 {!! $newHtml !!}
                                 @endif

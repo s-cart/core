@@ -196,7 +196,7 @@
 
                         if(is_array($shop_store)){
                             foreach($shop_store as $value){
-                                $listStore[] = (int)$value;
+                                $listStore[] = $value;
                             }
                         }
                         @endphp

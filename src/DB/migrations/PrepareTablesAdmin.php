@@ -19,7 +19,7 @@ class PrepareTablesAdmin extends Migration
         $this->down();
         
         Schema::create(SC_DB_PREFIX . 'admin_user', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id')->primary();
             $table->string('username', 100)->unique();
             $table->string('password', 60);
             $table->string('name', 100);
@@ -60,7 +60,7 @@ class PrepareTablesAdmin extends Migration
 
         Schema::create(SC_DB_PREFIX . 'admin_role_user', function (Blueprint $table) {
             $table->integer('role_id');
-            $table->integer('user_id');
+            $table->uuid('user_id');
             $table->index(['role_id', 'user_id']);
             $table->timestamps();
         });
@@ -74,10 +74,10 @@ class PrepareTablesAdmin extends Migration
         });
 
         Schema::create(SC_DB_PREFIX . 'admin_user_permission', function (Blueprint $table) {
-            $table->integer('user_id');
+            $table->uuid('user_id');
             $table->integer('permission_id');
-            $table->index(['user_id', 'permission_id']);
             $table->timestamps();
+            $table->index(['user_id', 'permission_id']);
             $table->primary(['user_id', 'permission_id']);
         });
 
@@ -91,7 +91,7 @@ class PrepareTablesAdmin extends Migration
 
         Schema::create(SC_DB_PREFIX . 'admin_log', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->uuid('user_id');
             $table->string('path');
             $table->string('method', 10);
             $table->string('ip');
@@ -108,14 +108,14 @@ class PrepareTablesAdmin extends Migration
             $table->string('key', 50);
             $table->string('value', 500)->nullable();
             $table->integer('security')->default(0)->nullable();
-            $table->integer('store_id')->default(0);
+            $table->uuid('store_id')->default(0);
             $table->integer('sort')->default(0);
             $table->string('detail', 200)->nullable();
             $table->unique(['key', 'store_id']);
         });
 
         Schema::create(SC_DB_PREFIX . 'admin_store', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id')->primary();
             $table->string('logo', 255)->nullable();
             $table->string('icon', 255)->nullable();
             $table->string('phone', 20)->nullable();
@@ -130,14 +130,14 @@ class PrepareTablesAdmin extends Migration
             $table->string('partner', 10)->default(0)->index()->comment('Use for multi-vendor');
             $table->string('code', 20)->nullable()->unique();
             $table->string('language', 10);
-            $table->string('timezone', 50);
+            $table->string('timezone', 50); // will remove in v7
             $table->string('currency', 10);
             $table->integer('status')->default(1)->comment('0:Lock, 1: unlock')->comment('Use for multi-store, multi-vendor');
             $table->integer('active')->default(1)->comment('0:Maintain, 1: Active');
         });
 
         Schema::create(SC_DB_PREFIX . 'admin_store_description', function (Blueprint $table) {
-            $table->integer('store_id');
+            $table->uuid('store_id');
             $table->string('lang', 10)->index();
             $table->string('title', 255)->nullable();
             $table->string('description', 500)->nullable();

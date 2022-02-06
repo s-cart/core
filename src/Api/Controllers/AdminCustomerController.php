@@ -30,7 +30,6 @@ class AdminCustomerController extends RootFrontController
      */
     public function customerDetail(Request $request, $id)
     {
-        $id = (int)$id;
         $customer = (new ShopCustomer)->where('id', $id)
                 ->first();
         if ($customer) {

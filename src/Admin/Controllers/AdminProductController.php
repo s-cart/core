@@ -572,7 +572,7 @@ class AdminProductController extends RootAdminController
         if ($productInGroup && $data['kind'] == SC_PRODUCT_GROUP) {
             $arrDataGroup = [];
             foreach ($productInGroup as $pID) {
-                if ((int) $pID) {
+                if ($pID) {
                     $arrDataGroup[$pID] = new ShopProductGroup(['product_id' => $pID]);
                 }
             }
@@ -583,7 +583,7 @@ class AdminProductController extends RootAdminController
         if ($productBuild && $data['kind'] == SC_PRODUCT_BUILD) {
             $arrDataBuild = [];
             foreach ($productBuild as $key => $pID) {
-                if ((int) $pID) {
+                if ($pID) {
                     $arrDataBuild[$pID] = new ShopProductBuild(['product_id' => $pID, 'quantity' => $productBuildQty[$key]]);
                 }
             }
@@ -951,7 +951,7 @@ class AdminProductController extends RootAdminController
             if (count($productInGroup)) {
                 $arrDataGroup = [];
                 foreach ($productInGroup as $pID) {
-                    if ((int) $pID) {
+                    if ($pID) {
                         $arrDataGroup[$pID] = new ShopProductGroup(['product_id' => $pID]);
                     }
                 }
@@ -965,7 +965,7 @@ class AdminProductController extends RootAdminController
             if (count($productBuild)) {
                 $arrDataBuild = [];
                 foreach ($productBuild as $key => $pID) {
-                    if ((int) $pID) {
+                    if ($pID) {
                         $arrDataBuild[$pID] = new ShopProductBuild(['product_id' => $pID, 'quantity' => $productBuildQty[$key]]);
                     }
                 }

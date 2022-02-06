@@ -28,7 +28,6 @@ class MemberOrderController extends RootFrontController
      */
     public function orderDetail(Request $request, $id)
     {
-        $id = (int)$id;
         $user = $request->user();
         $order = (new ShopOrder)->where('id', $id)
                 ->with('details')

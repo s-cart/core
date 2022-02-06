@@ -157,7 +157,7 @@
                         $category = old('category', $product->categories->pluck('id')->toArray());
                         if(is_array($category)){
                             foreach($category as $value){
-                                $listCate[] = (int)$value;
+                                $listCate[] = $value;
                             }
                         }
                         @endphp
@@ -198,7 +198,7 @@
                         $shop_store = old('shop_store', $oldData);
                         if(is_array($shop_store)){
                             foreach($shop_store as $value){
-                                $listStore[] = (int)$value;
+                                $listStore[] = $value;
                             }
                         }
                         @endphp
@@ -836,15 +836,15 @@
                                 $groups = old('productInGroup',$product->groups->pluck('product_id')->toArray());
                                 if(is_array($groups)){
                                 foreach($groups as $value){
-                                $listgroups[] = (int)$value;
+                                $listgroups[] = $value;
                                 }
                                 }
                                 @endphp
                                 @if ($listgroups)
                                 @foreach ($listgroups as $pID)
-                                @if ((int)$pID)
+                                @if ($pID)
                                 @php
-                                $newHtml = str_replace('value="'.(int)$pID.'"', 'value="'.(int)$pID.'" selected',
+                                $newHtml = str_replace('value="'.$pID.'"', 'value="'.$pID.'" selected',
                                 $htmlSelectGroup);
                                 @endphp
                                 {!! $newHtml !!}
@@ -895,17 +895,17 @@
                                 $groupsQty = old('productBuildQty',$product->builds->pluck('quantity')->toArray());
                                 if(is_array($groups)){
                                 foreach($groups as $key => $value){
-                                $listBuilds[] = (int)$value;
-                                $listBuildsQty[] = (int)$groupsQty[$key];
+                                $listBuilds[] = $value;
+                                $listBuildsQty[] = $groupsQty[$key];
                                 }
                                 }
                                 @endphp
 
                                 @if ($listBuilds)
                                 @foreach ($listBuilds as $key => $pID)
-                                @if ((int)$pID && $listBuildsQty[$key])
+                                @if ($pID && $listBuildsQty[$key])
                                 @php
-                                $newHtml = str_replace('value="'.(int)$pID.'"', 'value="'.(int)$pID.'" selected',
+                                $newHtml = str_replace('value="'.$pID.'"', 'value="'.$pID.'" selected',
                                 $htmlSelectBuild);
                                 $newHtml = str_replace('name="productBuildQty[]" value="1" min=1',
                                 'name="productBuildQty[]" value="'.$listBuildsQty[$key].'"', $newHtml);
