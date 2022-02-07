@@ -358,9 +358,9 @@
               }
           },
           {
-              type: 'spline',
+              type: 'line',
               name: '{{ sc_language_render('admin.chart.amount') }}',
-              color: '#32ca0c',
+              color: '#c7730c',
               yAxis: 1,
               data: {!! json_encode(array_values($amountInMonth)) !!},
               borderWidth: 0,
@@ -437,7 +437,7 @@ var chart = new Highcharts.Chart({
         data: {!! json_encode(array_values($dataInYear)) !!},
       },
       {
-          type : 'spline',
+          type : 'line',
           color: '#d05135',
           name : '{{ sc_language_render('admin.chart.amount') }}',
           data: {!! json_encode(array_values($dataInYear)) !!}

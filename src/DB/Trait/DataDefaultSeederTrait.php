@@ -89,7 +89,7 @@ trait DataDefaultSeederTrait
         $dataShopLink = $this->dataShopLink();
         $db->table(SC_DB_PREFIX.'shop_link')->insert($dataShopLink);
 
-        $dataShopLinkStore = $this->dataShopLinkStore();
+        $dataShopLinkStore = $this->dataShopLinkStore($dataShopLink);
         $db->table(SC_DB_PREFIX.'shop_link_store')->insert($dataShopLinkStore);
 
         $dataShippingStandard = $this->dataShippingStandard();
@@ -403,29 +403,22 @@ trait DataDefaultSeederTrait
 
     public function dataShopLink() {
         $dataShopLink = [
-            ['id' => 1,'name' => 'front.home','url' => 'route::home','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '10'],
-            ['id' => 2,'name' => 'front.shop','url' => 'route::shop','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '20'],
-            ['id' => 3,'name' => 'front.blog','url' => 'route::news','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '30'],
-            ['id' => 4,'name' => 'front.contact','url' => 'route::contact','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '40'],
-            ['id' => 5,'name' => 'front.about','url' => 'route::page.detail::about','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '50'],
-            ['id' => 6,'name' => 'front.my_profile','url' => 'route::login','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '60'],
-            ['id' => 7,'name' => 'front.compare_page','url' => 'route::compare','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '70'],
-            ['id' => 8,'name' => 'front.wishlist_page','url' => 'route::wishlist','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '80'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.home','url' => 'route::home','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '10'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.shop','url' => 'route::shop','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '20'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.blog','url' => 'route::news','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '30'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.contact','url' => 'route::contact','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '40'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.about','url' => 'route::page.detail::about','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '50'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.my_profile','url' => 'route::login','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '60'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.compare_page','url' => 'route::compare','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '70'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.wishlist_page','url' => 'route::wishlist','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '80'],
         ];
         return $dataShopLink;
     }
 
-    public function dataShopLinkStore() {
-        $dataShopLinkStore = [
-            ['link_id' => 1,'store_id' => '1'],
-            ['link_id' => 2,'store_id' => '1'],
-            ['link_id' => 3,'store_id' => '1'],
-            ['link_id' => 4,'store_id' => '1'],
-            ['link_id' => 5,'store_id' => '1'],
-            ['link_id' => 6,'store_id' => '1'],
-            ['link_id' => 7,'store_id' => '1'],
-            ['link_id' => 8,'store_id' => '1'],
-        ];
+    public function dataShopLinkStore($dataShopLink) {
+        foreach ($dataShopLink as $key => $row) {
+            $dataShopLinkStore[] = ['link_id' => $row['id'],'store_id' => '1'];
+        }
         return $dataShopLinkStore;
     }
 
@@ -490,7 +483,7 @@ trait DataDefaultSeederTrait
 
     public function dataApiConnection() {
         $dataApiConnection = [
-            ['description' => 'Demo api connection','apiconnection' => 'appmobile','apikey' => Str::orderedUuid(),'status' =>  0]
+            ['description' => 'Demo api connection','apiconnection' => 'appmobile','apikey' => (string)Str::orderedUuid(),'status' =>  0]
         ];
         return $dataApiConnection;
     }

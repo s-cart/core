@@ -48,7 +48,7 @@ return [
         'total_product' => 1, //Product total
         'order_month' => 1, //Order in month
         'order_year' => 1, //Order in year
-        'pie_chart' => 1, //Display pie chart total
+        'pie_chart' => 0, //Display pie chart total
         'top_order_new' => 1, //New orders
         'top_customer_new' => 1, //New customers
         'pie_chart_type' => 'order', // [order|device|country]

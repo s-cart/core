@@ -333,6 +333,7 @@ trait DataSampleSeederTrait
     public function dataProduct($dataBrand, $dataSupplier, $mappingIdProduct) {
         $arrId = $mappingIdProduct['arrId'];
         $dataProduct = [];
+        $arrPrice = [10000,20000,30000];
         $arrSku = ['PHO-BO', 'NEM-NUONG', 'BANH-GAI','BUN-HUE','BANH-TRANG','MUOI-TAY-NINH','NHAN-LONG','SAU-RIENG','BIA-SAIGON','BIA-HANOI','NUOC-MAM','BANH-MYCAY','HU-TIEU',
         'CANH-CHUA','MANG-CUT','CAM-VINH','VAI-THIEU','NON-LA','AO-DAI','XOAI-CAT','COM-NIU','NHAN-LONG-HUNG-YEN','VAI-THIEU-LUC-NGAN','NEM-CHUA-THANH-HOA'];
         for ($i=1; $i <= 24; $i++) {
@@ -344,7 +345,7 @@ trait DataSampleSeederTrait
                 $kind = SC_PRODUCT_BUILD; 
             }
             $dataProduct[$arrId[$i]] = [
-                'id' => $arrId[$i],'sku' => $arrSku[($i-1)],'alias' => strtolower($arrSku[($i-1)]),'image' => '/data/product/product-'.$i.'.png','price' => 15000,'stock' => 100, 'status' => 1,'tax_id' => 'auto','kind' => $kind,
+                'id' => $arrId[$i],'sku' => $arrSku[($i-1)],'alias' => strtolower($arrSku[($i-1)]),'image' => '/data/product/product-'.$i.'.png','price' => $arrPrice[array_rand($arrPrice)],'stock' => 100, 'status' => 1,'tax_id' => 'auto','kind' => $kind,
                 'brand_id'=> array_rand($dataBrand), 'supplier_id' => array_rand($dataSupplier)
             ];
         }

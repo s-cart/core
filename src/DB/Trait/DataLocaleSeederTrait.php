@@ -2279,7 +2279,7 @@ trait DataLocaleSeederTrait
             ['code' => 'admin.store_block.text','text' => 'Nội dung','position' => 'admin.store_block','location' => 'vi'],
             ['code' => 'admin.store_block.status','text' => 'Trạng thái','position' => 'admin.store_block','location' => 'vi'],
             ['code' => 'admin.store_block.name','text' => 'Name','position' => 'admin.store_block','location' => 'en'],
-            ['code' => 'admin.store_block.position','position','position' => 'admin.store_block','location' => 'en'],
+            ['code' => 'admin.store_block.position','text' => 'Position','position' => 'admin.store_block','location' => 'en'],
             ['code' => 'admin.store_block.page','text' => 'Page','position' => 'admin.store_block','location' => 'en'],
             ['code' => 'admin.store_block.type','text' => 'Type','position' => 'admin.store_block','location' => 'en'],
             ['code' => 'admin.store_block.text','text' => 'Text','position' => 'admin.store_block','location' => 'en'],
