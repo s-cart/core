@@ -200,8 +200,8 @@ class RegisterController extends RootFrontController
      */
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
         $data = $request->all();
+        $this->validator($data)->validate();
         $user = $this->create($data);
         $dataMap = $this->mappDataInsert($data);
         if ($user) {

@@ -316,7 +316,7 @@ if (!function_exists('sc_uuid') && !in_array('sc_uuid', config('helper_except', 
      */
     function sc_uuid()
     {
-        return \Illuminate\Support\Str::orderedUuid();
+        return (string)\Illuminate\Support\Str::orderedUuid();
     }
 }
 

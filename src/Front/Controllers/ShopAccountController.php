@@ -381,7 +381,7 @@ class ShopAccountController extends RootFrontController
             ->where('id', $id)
             ->first();
         if ($address) {
-            $title = sc_language_render('customer.address_detail').' #'.$address->id;
+            $title = sc_language_render('customer.address_detail');
         } else {
             return $this->pageNotFound();
         }

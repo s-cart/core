@@ -988,7 +988,7 @@ trait DataLocaleSeederTrait
             ['code' => 'customer.address_list','text' => 'Address list','position' => 'customer','location' => 'en'],
             ['code' => 'customer.address_list','text' => 'Danh sách địa chỉ','position' => 'customer','location' => 'vi'],
             ['code' => 'customer.address_detail','text' => 'Address detail','position' => 'customer','location' => 'en'],
-            ['code' => 'customer.address_detail','text' => 'Danh sách địa chỉ','position' => 'customer','location' => 'vi'],
+            ['code' => 'customer.address_detail','text' => 'Thông tin địa chỉ','position' => 'customer','location' => 'vi'],
             ['code' => 'customer.address_default','text' => 'Address default','position' => 'customer','location' => 'en'],
             ['code' => 'customer.address_default','text' => 'Địa chỉ mặc định','position' => 'customer','location' => 'vi'],
             ['code' => 'customer.address_set_default','text' => 'Set address default','position' => 'customer','location' => 'en'],
