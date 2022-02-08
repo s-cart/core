@@ -188,7 +188,7 @@ class AdminProductController extends RootAdminController
                 <i class="fa fa-clipboard"></i>
                 </span>';
             }
-            $htmlAction .='<span onclick="deleteItem(' . $row['id'] . ');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger">
+            $htmlAction .='<span onclick="deleteItem(\'' . $row['id'] . '\');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger">
             <i class="fas fa-trash-alt"></i>
             </span>
             <a target=_new href="' . sc_route('product.detail', ['alias' => $row['alias']]) . '"><span title="Link" type="button" class="btn btn-flat btn-sm btn-warning"><i class="fas fa-external-link-alt"></i></a>';
