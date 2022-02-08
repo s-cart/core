@@ -364,7 +364,7 @@ class ShopContentController extends RootFrontController
         $checkEmail = ShopSubscribe::where('email', $data['subscribe_email'])
             ->first();
         if (!$checkEmail) {
-            ShopSubscribe::insert(['email' => $data['subscribe_email']]);
+            ShopSubscribe::create(['email' => $data['subscribe_email']]);
         }
         return redirect()->back()
             ->with(['success' => sc_language_render('subscribe.subscribe_success')]);
