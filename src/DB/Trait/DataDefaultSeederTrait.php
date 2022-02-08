@@ -107,10 +107,10 @@ trait DataDefaultSeederTrait
         $dataPage = $this->dataPage();
         $db->table(SC_DB_PREFIX.'shop_page')->insert($dataPage);
 
-        $dataPageStore = $this->dataPageStore();
+        $dataPageStore = $this->dataPageStore($dataPage);
         $db->table(SC_DB_PREFIX.'shop_page_store')->insert($dataPageStore);
 
-        $dataPageDescription = $this->dataPageDescription();
+        $dataPageDescription = $this->dataPageDescription($dataPage);
         $db->table(SC_DB_PREFIX.'shop_page_description')->insert($dataPageDescription);
 
         $dataApiConnection = $this->dataApiConnection();
@@ -459,25 +459,27 @@ trait DataDefaultSeederTrait
 
     public function dataPage() {
         $dataPage = [
-            ['id' => '1','image' => '','alias' => 'about','status' => '1'],
+            ['id' => (string)Str::orderedUuid(),'image' => '','alias' => 'about','status' => '1'],
         ];
         return $dataPage;
     }
 
-    public function dataPageStore() {
-        $dataPageStore = [
-            ['page_id' => '1','store_id' => '1'],
-        ];
+    public function dataPageStore($dataPage) {
+        $dataPageStore = [];
+        foreach ($dataPage as $key => $row) {
+            $dataPageStore[] = ['page_id' => $row['id'],'store_id' => '1'];
+        }
         return $dataPageStore;
     }
 
-    public function dataPageDescription() {
-        $dataPageDescription = [
-            ['page_id' => '1','lang' => 'en','title' => 'About','keyword' => '','description' => '','content' => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'],
-            ['page_id' => '1','lang' => 'vi','title' => 'Giới thiệu','keyword' => '','description' => '','content' => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'],
-        ];
+    public function dataPageDescription($dataPage) {
+        $dataPageDescription = [];
+        foreach ($dataPage as $key => $row) {
+            $dataPageDescription[] = ['page_id' => $row['id'],'lang' => 'en','title' => 'About','keyword' => '','description' => '','content' => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'];
+            $dataPageDescription[] = ['page_id' => $row['id'],'lang' => 'vi','title' => 'Giới thiệu','keyword' => '','description' => '','content' => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'];
+        }
         return $dataPageDescription;
     }
 
