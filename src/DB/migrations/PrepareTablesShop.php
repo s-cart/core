@@ -279,7 +279,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_order_total',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                $table->uuid('order_id');
+                $table->uuid('order_id')->index();
                 $table->string('title', 255);
                 $table->string('code', 100);
                 $table->integer('value')->default(0);
