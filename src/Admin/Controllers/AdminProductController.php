@@ -1064,9 +1064,9 @@ class AdminProductController extends RootAdminController
     {
         if (sc_config_admin('product_brand')) {
             if (sc_config_admin('product_brand_required')) {
-                $arrValidation['brand_id'] = 'required|numeric';
+                $arrValidation['brand_id'] = 'required';
             } else {
-                $arrValidation['brand_id'] = 'nullable|numeric';
+                $arrValidation['brand_id'] = 'nullable';
             }
         }
 

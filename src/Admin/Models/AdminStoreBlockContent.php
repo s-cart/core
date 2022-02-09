@@ -49,6 +49,6 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
      */
     public static function createStoreBlockContentAdmin(array $dataInsert)
     {
-        return self::create($dataInsert);
+        return self::insert($dataInsert);
     }
 }
