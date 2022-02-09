@@ -102,7 +102,7 @@ class PrepareTablesAdmin extends Migration
         });
 
         Schema::create(SC_DB_PREFIX . 'admin_config', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id')->primary();
             $table->string('group', 50)->nullable();
             $table->string('code', 50)->index();
             $table->string('key', 50);
