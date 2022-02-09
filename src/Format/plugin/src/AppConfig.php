@@ -42,7 +42,6 @@ class AppConfig extends ConfigDefault
             //Insert plugin to config
             $dataInsert = [
                 [
-                    'id'     => sc_uuid(),
                     'group'  => $this->configGroup,
                     'code'   => $this->configCode,
                     'key'    => $this->configKey,

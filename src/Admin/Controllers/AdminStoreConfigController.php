@@ -222,7 +222,7 @@ class AdminStoreConfigController extends RootAdminController
             return redirect()->back()->with('error', 'Key: '.sc_language_render('admin.not_empty'));
         }
         $group = $data['group'] ?? 'admin_custom_config';
-        $dataUpdate = ['id' => sc_uuid(), 'key' => $key, 'value' => $value, 'code' => $group, 'store_id' => $storeId, 'detail' => $detail];
+        $dataUpdate = ['key' => $key, 'value' => $value, 'code' => $group, 'store_id' => $storeId, 'detail' => $detail];
         if (AdminConfig::where(['key' => $key, 'store_id' => $storeId])->first()) {
             return redirect()->back()->with('error', sc_language_quickly('admin.admin_custom_config.key_exist', 'Key already exist'));
         }
