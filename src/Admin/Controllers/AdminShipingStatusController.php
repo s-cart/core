@@ -44,7 +44,7 @@ class AdminShipingStatusController extends RootAdminController
 
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
-            $dataTr[$row['id'] = [
+            $dataTr[$row['id']] = [
                 'id' => $row['id'],
                 'name' => $row['name'] ?? 'N/A',
                 'action' => '
