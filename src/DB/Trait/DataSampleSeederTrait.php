@@ -223,7 +223,9 @@ trait DataSampleSeederTrait
     public function mappingIdProduct($arrayIdCategory) {
         $arrId = [];
         $arrBuild = [];
+        $arrBuildId = [];
         $arrGroup = [];
+        $arrGroupId = [];
         $arrPromotion = [];
         $arrImage = [];
         $arrCategory = [];
@@ -240,6 +242,8 @@ trait DataSampleSeederTrait
         $arrBuild[] = ['build_id' => $arrId['20'],'product_id' => $arrId['13'], 'quantity' => 2];
         $arrBuild[] = ['build_id' => $arrId['20'],'product_id' => $arrId['3'], 'quantity' => 2];
 
+        $arrBuildId = [$arrId['5'],$arrId['10'],$arrId['15'],$arrId['20']];
+
         $arrGroup[] = ['group_id' => $arrId['4'],'product_id' => $arrId['2']];
         $arrGroup[] = ['group_id' => $arrId['4'],'product_id' => $arrId['6']];
         $arrGroup[] = ['group_id' => $arrId['14'],'product_id' => $arrId['2']];
@@ -248,6 +252,8 @@ trait DataSampleSeederTrait
         $arrGroup[] = ['group_id' => $arrId['19'],'product_id' => $arrId['21']];
         $arrGroup[] = ['group_id' => $arrId['23'],'product_id' => $arrId['3']];
         $arrGroup[] = ['group_id' => $arrId['23'],'product_id' => $arrId['7']];
+
+        $arrGroupId = [$arrId['4'],$arrId['14'],$arrId['19'],$arrId['23']];
 
         $arrPromotion[] = ['product_id' => $arrId['1'], 'price_promotion' => 5000];
         $arrPromotion[] = ['product_id' => $arrId['2'], 'price_promotion' => 3000];
@@ -322,7 +328,9 @@ trait DataSampleSeederTrait
 
         $data['arrId'] = $arrId;
         $data['arrBuild'] = $arrBuild;
+        $data['arrBuildId'] = $arrBuildId;
         $data['arrGroup'] = $arrGroup;
+        $data['arrGroupId'] = $arrGroupId;
         $data['arrPromotion'] = $arrPromotion;
         $data['arrImage'] = $arrImage;
         $data['arrCategory'] = $arrCategory;
@@ -338,10 +346,10 @@ trait DataSampleSeederTrait
         'CANH-CHUA','MANG-CUT','CAM-VINH','VAI-THIEU','NON-LA','AO-DAI','XOAI-CAT','COM-NIU','NHAN-LONG-HUNG-YEN','VAI-THIEU-LUC-NGAN','NEM-CHUA-THANH-HOA'];
         for ($i=1; $i <= 24; $i++) {
             $kind = SC_PRODUCT_SINGLE;
-            if (in_array($arrId[$i], array_keys($mappingIdProduct['arrGroup']))) {
+            if (in_array($arrId[$i], $mappingIdProduct['arrGroupId'])) {
                 $kind = SC_PRODUCT_GROUP; 
             }
-            if (in_array($arrId[$i], array_keys($mappingIdProduct['arrBuild']))) {
+            if (in_array($arrId[$i], $mappingIdProduct['arrBuildId'])) {
                 $kind = SC_PRODUCT_BUILD; 
             }
             $dataProduct[$arrId[$i]] = [
