@@ -184,7 +184,7 @@ class AdminProductController extends RootAdminController
             </a>';
             if ($row['kind'] == SC_PRODUCT_SINGLE) {
                 $htmlAction .= '
-                <span onclick="cloneProduct(' . $row['id'] . ');" title="' . sc_language_render('product.admin.clone') . '" type="button" class="btn btn-flat btn-sm btn-secondary">
+                <span onclick="cloneProduct(\'' . $row['id'] . '\');" title="' . sc_language_render('product.admin.clone') . '" type="button" class="btn btn-flat btn-sm btn-secondary">
                 <i class="fa fa-clipboard"></i>
                 </span>';
             }
