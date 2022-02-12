@@ -348,8 +348,8 @@ function update_total(e){
 //Add item
     function selectProduct(element){
         node = element.closest('tr');
-        var id = parseInt(node.find('option:selected').eq(0).val());
-        if(id == 0){
+        var id = node.find('option:selected').eq(0).val();
+        if(!id){
             node.find('.add_sku').val('');
             node.find('.add_qty').eq(0).val('');
             node.find('.add_price').eq(0).val('');

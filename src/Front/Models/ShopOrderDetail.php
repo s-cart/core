@@ -30,7 +30,7 @@ class ShopOrderDetail extends Model
     public function addNewDetail(array $data)
     {
         if ($data) {
-            $this->create($data);
+            $this->insert($data);
             //Update stock, sold
             foreach ($data as $key => $item) {
                 //Update stock, sold

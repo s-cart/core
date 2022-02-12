@@ -539,6 +539,7 @@ class AdminOrderController extends RootAdminController
                 }
                 $pAttr = json_encode($add_att[$id] ?? []);
                 $items[] = array(
+                    'id' => sc_uuid(),
                     'order_id' => $orderId,
                     'product_id' => $id,
                     'name' => $product->name,
