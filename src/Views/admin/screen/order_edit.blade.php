@@ -362,7 +362,7 @@ function update_total(e){
                 dateType:"application/json; charset=utf-8",
                 data : {
                      id : id,
-                     order_id : {{ $order->id }},
+                     order_id : '{{ $order->id }}',
                 },
             beforeSend: function(){
                 $('#loading').show();
