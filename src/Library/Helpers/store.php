@@ -41,7 +41,7 @@ if (!function_exists('sc_get_domain_root') && !in_array('sc_get_domain_root', co
  * Check store is partner
  */
 if (!function_exists('sc_store_is_partner') && !in_array('sc_store_is_partner', config('helper_except', []))) {
-    function sc_store_is_partner(int $storeId):bool
+    function sc_store_is_partner(string $storeId):bool
     {
         $store = \SCart\Core\Admin\Models\AdminStore::find($storeId);
         if (!$store) {
@@ -55,7 +55,7 @@ if (!function_exists('sc_store_is_partner') && !in_array('sc_store_is_partner', 
  * Check store is root
  */
 if (!function_exists('sc_store_is_root') && !in_array('sc_store_is_root', config('helper_except', []))) {
-    function sc_store_is_root(int $storeId):bool
+    function sc_store_is_root(string $storeId):bool
     {
         return  $storeId == SC_ID_ROOT;
     }
