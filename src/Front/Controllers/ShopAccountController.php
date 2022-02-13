@@ -213,8 +213,13 @@ class ShopAccountController extends RootFrontController
                 ->withErrors($v)
                 ->withInput();
         }
-        ShopCustomer::updateInfo($dataMapping['dataUpdate'], $id);
 
+        $fields = $dataMapping['dataUpdate']['fields'] ?? [];
+        unset($dataMapping['dataUpdate']['fields']);
+
+        ShopCustomer::updateInfo($dataMapping['dataUpdate'], $id);
+        ShopCustomer::updateCustomField($fields, $id);
+        
         return redirect(sc_route('customer.index'))
             ->with(['success' => sc_language_render('customer.update_success')]);
     }

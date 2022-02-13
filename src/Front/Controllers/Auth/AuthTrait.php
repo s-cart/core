@@ -225,7 +225,7 @@ trait AuthTrait
         $validate = [
             'first_name' => config('validation.customer.first_name', 'required|string|max:100'),
             'email' => config('validation.customer.email', 'required|string|email|max:255').'|unique:"'.ShopCustomer::class.'",email',
-            'password' => config('validation.customer.password', 'nullable|string|min:6'),
+            'password' => config('validation.customer.password_confirm', 'required|confirmed|string|min:6'),
         ];
 
         //Custom fields
@@ -453,6 +453,11 @@ trait AuthTrait
                 $dataInsert['group'] = $data['group'];
             }
         }
+
+        if (!empty($data['fields'])) {
+            $dataInsert['fields'] = $data['fields'];
+        }
+        
         return $dataInsert;
     }
 }

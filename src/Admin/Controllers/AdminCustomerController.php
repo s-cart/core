@@ -172,25 +172,14 @@ class AdminCustomerController extends RootAdminController
         $data = request()->all();
         $data['status'] = empty($data['status']) ? 0 : 1;
         $data['store_id'] = session('adminStoreId');
+
+        $fields = $dataMapping['dataInsert']['fields'];
+        unset($dataMapping['dataInsert']['fields']);
+        
         $customer = AdminCustomer::createCustomer($dataMapping['dataInsert']);
 
         //Insert custom fields
-        if (!empty($data['fields'])) {
-            $dataField = [];
-            foreach ($data['fields'] as $key => $value) {
-                $field = (new ShopCustomField)->where('code', $key)->where('type', 'customer')->first();
-                if ($field) {
-                    $dataField[] = sc_clean([
-                        'custom_field_id' => $field->id,
-                        'rel_id' => $customer->id,
-                        'text' => trim($value),
-                    ], [], true);
-                }
-            }
-            if ($dataField) {
-                (new ShopCustomFieldDetail)->insert($dataField);
-            }
-        }
+        AdminCustomer::updateCustomField($fields, $customer->id);
 
         return redirect()->route('admin_customer.index')->with('success', sc_language_render('action.create_success'));
     }
@@ -242,32 +231,14 @@ class AdminCustomerController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
+
+        $fields = $dataMapping['dataUpdate']['fields'];
+        unset($dataMapping['dataUpdate']['fields']);
+
         AdminCustomer::updateInfo($dataMapping['dataUpdate'], $id);
 
         //Update custom field
-        if (!empty($data['fields'])) {
-            (new ShopCustomFieldDetail)
-                ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-                ->select('code', 'name', 'text')
-                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $customer->id)
-                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
-                ->delete();
-
-            $dataField = [];
-            foreach ($data['fields'] as $key => $value) {
-                $field = (new ShopCustomField)->where('code', $key)->where('type', 'customer')->first();
-                if ($field) {
-                    $dataField[] = sc_clean([
-                        'custom_field_id' => $field->id,
-                        'rel_id' => $customer->id,
-                        'text' => trim($value),
-                    ], [], true);
-                }
-            }
-            if ($dataField) {
-                (new ShopCustomFieldDetail)->insert($dataField);
-            }
-        }
+        AdminCustomer::updateCustomField($fields, $id);
 
         return redirect()->route('admin_customer.index')->with('success', sc_language_render('action.edit_success'));
     }

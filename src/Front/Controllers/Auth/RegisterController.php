@@ -5,6 +5,7 @@ namespace SCart\Core\Front\Controllers\Auth;
 use SCart\Core\Front\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopEmailTemplate;
 use SCart\Core\Front\Models\ShopCustomer;
+use SCart\Core\Front\Models\ShopCustomField;
 use SCart\Core\Front\Models\ShopCountry;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -183,6 +184,7 @@ class RegisterController extends RootFrontController
                 'countries'   => ShopCountry::getCodeAll(),
                 'layout_page' => 'shop_auth',
                 'viewCaptcha' => $viewCaptcha,
+                'customFields'=> (new ShopCustomField)->getCustomField($type = 'customer'),
                 'breadcrumbs' => [
                     ['url'    => '', 'title' => sc_language_render('customer.title_register')],
                 ],
