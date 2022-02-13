@@ -88,7 +88,7 @@
               <div class="input-group mb-3">
                 <select class="form-control input-sm" style="width: 100%;" name="option">
                 @foreach (['input' => 'Input', 'radio' => 'Radio', 'select' => 'Select'] as $key => $name)
-                <option value="{{ $key }}" {{ (old('option') == $key) ? 'selected':'' }}>{{ $name }}
+                <option value="{{ $key }}" {{ (old('option', ($customField['option'] ?? '')) == $key) ? 'selected':'' }}>{{ $name }}
                 </option>
                 @endforeach
               </select> 
