@@ -7,6 +7,8 @@ use SCart\Core\Front\Models\ShopOrder;
 use SCart\Core\Front\Models\ShopOrderStatus;
 use SCart\Core\Front\Models\ShopShippingStatus;
 use SCart\Core\Front\Models\ShopCustomer;
+use SCart\Core\Front\Models\ShopCustomFieldDetail;
+use SCart\Core\Front\Models\ShopCustomField;
 use SCart\Core\Front\Models\ShopAttributeGroup;
 use SCart\Core\Front\Models\ShopCustomerAddress;
 use Illuminate\Http\Request;
@@ -183,6 +185,7 @@ class ShopAccountController extends RootFrontController
                     'customer'    => $customer,
                     'countries'   => ShopCountry::getCodeAll(),
                     'layout_page' => 'shop_profile',
+                    'customFields'=> (new ShopCustomField)->getCustomField($type = 'customer'),
                     'breadcrumbs' => [
                         ['url'    => sc_route('customer.index'), 'title' => sc_language_render('front.my_account')],
                         ['url'    => '', 'title' => sc_language_render('customer.change_infomation')],
@@ -206,14 +209,17 @@ class ShopAccountController extends RootFrontController
         $data['id'] = $id;
 
         $dataMapping = $this->mappingValidatorEdit($data);
-
         $v =  Validator::make($data, $dataMapping['validate'], $dataMapping['messages']);
         if ($v->fails()) {
             return redirect()->back()
                 ->withErrors($v)
                 ->withInput();
         }
+        $fields = $dataMapping['dataUpdate']['fields'] ?? [];
+        unset($dataMapping['dataUpdate']['fields']);
         ShopCustomer::updateInfo($dataMapping['dataUpdate'], $id);
+
+        ShopCustomer::updateCustomField($fields, $id);
 
         return redirect(sc_route('customer.index'))
             ->with(['success' => sc_language_render('customer.update_success')]);

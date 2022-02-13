@@ -31,6 +31,17 @@ trait AuthTrait
             'password' => config('validation.customer.password_null', 'nullable|string|min:6'),
         ];
 
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'customer');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $validate['fields.'.$field->code] = 'required';
+                }
+            }
+            $dataUpdate['fields'] = $data['fields'];
+        }
+
         if (!empty($data['password'])) {
             $dataUpdate['password'] = bcrypt($data['password']);
         }
@@ -225,7 +236,7 @@ trait AuthTrait
         $validate = [
             'first_name' => config('validation.customer.first_name', 'required|string|max:100'),
             'email' => config('validation.customer.email', 'required|string|email|max:255').'|unique:"'.ShopCustomer::class.'",email',
-            'password' => config('validation.customer.password', 'nullable|string|min:6'),
+            'password' => config('validation.customer.password_confirm', 'required|confirmed|string|min:6'),
         ];
 
         //Custom fields
@@ -452,6 +463,10 @@ trait AuthTrait
             if (!empty($data['group'])) {
                 $dataInsert['group'] = $data['group'];
             }
+        }
+
+        if (!empty($data['fields'])) {
+            $dataInsert['fields'] = $data['fields'];
         }
         return $dataInsert;
     }

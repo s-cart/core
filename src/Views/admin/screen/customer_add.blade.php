@@ -356,6 +356,23 @@
                                 </div>
                             </div>
 
+                            <div class="form-group  row {{ $errors->has('password_confirmation') ? ' text-red' : '' }}">
+                                <label for="password_confirmation" class="col-sm-2  col-form-label">{{ sc_language_render('customer.password_confirm') }}</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                                        </div>
+                                        <input type="text"   id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation')??'' }}" class="form-control password_confirmation" placeholder="" />
+                                    </div>
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="form-text">
+                                                <i class="fa fa-info-circle"></i> {{ $errors->first('password_confirmation') }}
+                                            </span>
+                                        @endif
+                                </div>
+                            </div>
+
 
                             <div class="form-group  row">
                                 <label for="status" class="col-sm-2  col-form-label">{{ sc_language_render('customer.status') }}</label>
