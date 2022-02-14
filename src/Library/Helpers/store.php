@@ -45,7 +45,7 @@ if (!function_exists('sc_store_is_partner') && !in_array('sc_store_is_partner', 
     {
         $store = \SCart\Core\Admin\Models\AdminStore::find($storeId);
         if (!$store) {
-            return null;
+            return false;
         }
         return $store->partner || $storeId == SC_ID_ROOT;
     }
