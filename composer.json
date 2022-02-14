@@ -18,6 +18,7 @@
       "spatie/laravel-json-api-paginate": "^1.10",
       "spatie/db-dumper": "^2.18",
       "google/apiclient": "^2.0",
+      "doctrine/dbal": "^3.3",
       "jenssegers/agent": "^2.6"
   },
   "autoload": {
