@@ -204,7 +204,7 @@
                     @if (count($topOrder))
                       @foreach ($topOrder as $order)
                             <tr>
-                              <td><a href="{{ route('admin_order.detail',['id'=>$order->id]) }}">Order#{{ $order->id }}</a></td>
+                              <td><a href="{{ route('admin_order.detail',['id'=>$order->id]) }}">#{{ $order->id }}</a></td>
                               <td>{{ $order->email }}</td>
                               <td><span class="badge badge-{{ $mapStyleStatus[$order->status]??'' }}">{{ $order->orderStatus ? $order->orderStatus->name : $order->status }}</span></td>
                               <td>{{ $order->created_at }}</td>
@@ -249,7 +249,6 @@
                 <div class="table-responsive">
                   <table class="table m-0">
                     <tr>
-                      <th>ID</th>
                       <th>{{ sc_language_render('customer.email') }}</th>
                       <th>{{ sc_language_render('customer.name') }}</th>
                       <th>{{ sc_language_render('customer.admin.provider') }}</th>
@@ -259,8 +258,7 @@
                       @if (count($topCustomer))
                       @foreach ($topCustomer as $customer)
                         <tr>
-                          <td><a href="{{ sc_route_admin('admin_customer.edit',['id'=>$customer->id]) }}">ID#{{ $customer->id }}</a></td>
-                          <td>{{ $customer->email }}</td>
+                          <td><a href="{{ sc_route_admin('admin_customer.edit',['id'=>$customer->id]) }}">{{ $customer->email }}</a></td>
                           <td>{{ $customer->name }}</td>
                           <td>{{ $customer->provider }}</td>
                           <td>{{ $customer->created_at }}</td>
