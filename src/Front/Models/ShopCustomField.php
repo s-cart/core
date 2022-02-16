@@ -10,7 +10,6 @@ class ShopCustomField extends Model
     use \SCart\Core\Front\Models\ModelTrait;
     use \SCart\Core\Front\Models\UuidTrait;
     
-    public $timestamps     = false;
     public $table          = SC_DB_PREFIX.'shop_custom_field';
     protected $connection  = SC_CONNECTION;
     protected $guarded     = [];

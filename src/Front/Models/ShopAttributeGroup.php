@@ -7,7 +7,6 @@ class ShopAttributeGroup extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
     
-    public $timestamps        = false;
     public $table = SC_DB_PREFIX.'shop_attribute_group';
     protected $guarded        = [];
     protected static $getList = null;

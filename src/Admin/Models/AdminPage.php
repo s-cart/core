@@ -68,7 +68,7 @@ class AdminPage extends ShopPage
             $sort_field = explode('__', $sort_order)[1];
             $pageList = $pageList->orderBy($field, $sort_field);
         } else {
-            $pageList = $pageList->orderBy($tablePage.'.id', 'desc');
+            $pageList = $pageList->orderBy($tablePage.'.created_at', 'desc');
         }
         $pageList = $pageList->paginate(20);
 

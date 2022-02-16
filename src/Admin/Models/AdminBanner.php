@@ -54,7 +54,7 @@ class AdminBanner extends ShopBanner
             $sort_field = explode('__', $sort_order)[1];
             $bannerList = $bannerList->sort($field, $sort_field);
         } else {
-            $bannerList = $bannerList->sort($tableBanner.'.id', 'desc');
+            $bannerList = $bannerList->sort($tableBanner.'.created_at', 'desc');
         }
         $bannerList = $bannerList->paginate(20);
 

@@ -12,7 +12,6 @@ class ShopCurrency extends Model
     use \SCart\Core\Front\Models\ModelTrait;
     
     public $table = SC_DB_PREFIX.'shop_currency';
-    public $timestamps                  = false;
     protected static $code              = '';
     protected static $name              = '';
     protected static $symbol            = '';

@@ -43,7 +43,7 @@ class AdminLink extends ShopLink
             $linkList = $linkList->leftJoin($tableLinkStore, $tableLinkStore . '.link_id', $tableLink . '.id');
             $linkList = $linkList->where($tableLinkStore . '.store_id', $storeId);
         }
-        $linkList = $linkList->orderBy($tableLink.'.id', 'desc');
+        $linkList = $linkList->orderBy($tableLink.'.created_at', 'desc');
 
         $linkList = $linkList->paginate(20);
 

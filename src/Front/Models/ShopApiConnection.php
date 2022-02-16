@@ -5,7 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShopApiConnection extends Model
 {
-    public $timestamps = false;
     public $table = SC_DB_PREFIX.'api_connection';
     protected $guarded = [];
     protected $connection = SC_CONNECTION;

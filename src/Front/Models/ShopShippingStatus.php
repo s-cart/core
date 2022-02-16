@@ -8,7 +8,6 @@ class ShopShippingStatus extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
     
-    public $timestamps  = false;
     public $table = SC_DB_PREFIX.'shop_shipping_status';
     protected $guarded           = [];
     protected static $listStatus = null;

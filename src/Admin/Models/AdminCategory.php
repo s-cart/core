@@ -52,7 +52,7 @@ class AdminCategory extends ShopCategory
             $sort_field = explode('__', $sort_order)[1];
             $categoryList = $categoryList->sort($field, $sort_field);
         } else {
-            $categoryList = $categoryList->sort('id', 'desc');
+            $categoryList = $categoryList->sort('created_at', 'desc');
         }
         $categoryList->groupBy($tableCategory.'.id');
 

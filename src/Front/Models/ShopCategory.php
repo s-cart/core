@@ -13,7 +13,6 @@ class ShopCategory extends Model
     use \SCart\Core\Front\Models\ModelTrait;
     use \SCart\Core\Front\Models\UuidTrait;
     
-    public $timestamps = false;
     public $table = SC_DB_PREFIX . 'shop_category';
     protected $guarded = [];
     protected $connection = SC_CONNECTION;

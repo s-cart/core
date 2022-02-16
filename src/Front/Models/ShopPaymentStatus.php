@@ -8,7 +8,6 @@ class ShopPaymentStatus extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
     
-    public $timestamps  = false;
     public $table = SC_DB_PREFIX.'shop_payment_status';
     protected $guarded   = [];
     protected $connection = SC_CONNECTION;

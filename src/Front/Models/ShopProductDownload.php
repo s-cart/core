@@ -13,7 +13,6 @@ class ShopProductDownload extends Model
     protected $primaryKey = ['download_path', 'product_id'];
     public $incrementing  = false;
     protected $guarded    = [];
-    public $timestamps    = false;
     public $table = SC_DB_PREFIX.'shop_product_download';
     protected $connection = SC_CONNECTION;
     

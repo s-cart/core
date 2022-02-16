@@ -10,7 +10,6 @@ class ShopStore extends Model
     use \SCart\Core\Front\Models\ModelTrait;
     use \SCart\Core\Front\Models\UuidTrait;
 
-    public $timestamps = false;
     public $table = SC_DB_PREFIX.'admin_store';
     protected $guarded = [];
     protected static $getAll = null;

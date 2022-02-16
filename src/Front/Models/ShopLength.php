@@ -8,7 +8,6 @@ class ShopLength extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
     
-    public $timestamps     = false;
     public $table = SC_DB_PREFIX.'shop_length';
     protected $connection = SC_CONNECTION;
     protected $guarded           = [];

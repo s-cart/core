@@ -90,7 +90,7 @@ class AdminOrder extends ShopOrder
             $sort_field = explode('__', $sort_order)[1];
             $orderList = $orderList->sort($field, $sort_field);
         } else {
-            $orderList = $orderList->sort('id', 'desc');
+            $orderList = $orderList->sort('created_at', 'desc');
         }
         $orderList = $orderList->paginate(20);
 
@@ -361,7 +361,7 @@ class AdminOrder extends ShopOrder
     public static function getTopOrder()
     {
         return self::with('orderStatus')
-            ->orderBy('id', 'desc')
+            ->orderBy('created_at', 'desc')
             ->limit(10)
             ->get();
     }

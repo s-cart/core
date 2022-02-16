@@ -9,7 +9,6 @@ class ShopStoreBlockContent extends Model
     use \SCart\Core\Front\Models\ModelTrait;
     use \SCart\Core\Front\Models\UuidTrait;
 
-    public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_store_block';
     protected $guarded = [];
     private static $getLayout = null;

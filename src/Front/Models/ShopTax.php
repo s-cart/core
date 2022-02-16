@@ -8,7 +8,6 @@ class ShopTax extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
     
-    public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_tax';
     protected $guarded = [];
     protected $connection = SC_CONNECTION;

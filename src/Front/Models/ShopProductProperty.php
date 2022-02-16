@@ -8,7 +8,6 @@ class ShopProductProperty extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
     
-    public $timestamps  = false;
     public $table = SC_DB_PREFIX.'shop_product_property';
     protected $guarded   = [];
     protected $connection = SC_CONNECTION;

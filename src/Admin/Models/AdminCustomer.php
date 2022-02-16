@@ -65,7 +65,7 @@ class AdminCustomer extends ShopCustomer
             $sort_field = explode('__', $sort_order)[1];
             $customerList = $customerList->orderBy($field, $sort_field);
         } else {
-            $customerList = $customerList->orderBy('id', 'desc');
+            $customerList = $customerList->orderBy('created_at', 'desc');
         }
         $customerList = $customerList->paginate(20);
 
@@ -112,7 +112,7 @@ class AdminCustomer extends ShopCustomer
      */
     public static function getTopCustomer()
     {
-        return self::orderBy('id', 'desc')
+        return self::orderBy('created_at', 'desc')
             ->limit(10)
             ->get();
     }

@@ -33,9 +33,9 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
     {
         if ($storeId) {
             $data = $this->where('store_id', $storeId)
-                ->orderBy('id', 'desc');
+                ->orderBy('created_at', 'desc');
         } else {
-            $data = $this->orderBy('id', 'desc');
+            $data = $this->orderBy('created_at', 'desc');
         }
         return $data->paginate(20);
     }

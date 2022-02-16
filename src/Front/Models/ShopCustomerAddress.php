@@ -10,7 +10,6 @@ class ShopCustomerAddress extends Model
     use \SCart\Core\Front\Models\UuidTrait;
 
     protected $guarded    = [];
-    public $timestamps    = false;
     public $table = SC_DB_PREFIX.'shop_customer_address';
     protected $connection = SC_CONNECTION;
 

@@ -9,7 +9,6 @@ class ShopLanguage extends Model
     use \SCart\Core\Front\Models\ModelTrait;
     
     public $table = SC_DB_PREFIX.'shop_language';
-    public $timestamps                = false;
     protected $guarded                = [];
     private static $getListAll      = null;
     private static $getListActive      = null;

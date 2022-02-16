@@ -68,7 +68,7 @@ class AdminNews extends ShopNews
             $sort_field = explode('__', $sort_order)[1];
             $newsList = $newsList->orderBy($field, $sort_field);
         } else {
-            $newsList = $newsList->orderBy($tableNews.'.id', 'desc');
+            $newsList = $newsList->orderBy($tableNews.'.created_at', 'desc');
         }
         $newsList = $newsList->paginate(20);
 

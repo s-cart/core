@@ -49,7 +49,7 @@ class AdminEmailTemplate extends ShopEmailTemplate
             $sort_field = explode('__', $sort_order)[1];
             $newsList = $newsList->orderBy($field, $sort_field);
         } else {
-            $newsList = $newsList->orderBy('id', 'desc');
+            $newsList = $newsList->orderBy('created_at', 'desc');
         }
         $newsList = $newsList->paginate(20);
 

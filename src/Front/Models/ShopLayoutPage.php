@@ -8,7 +8,6 @@ class ShopLayoutPage extends Model
 {
     use \SCart\Core\Front\Models\ModelTrait;
 
-    public $timestamps = false;
     public $table = SC_DB_PREFIX.'shop_layout_page';
     protected $connection = SC_CONNECTION;
 

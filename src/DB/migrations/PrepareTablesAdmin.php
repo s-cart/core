@@ -112,6 +112,7 @@ class PrepareTablesAdmin extends Migration
             $table->integer('sort')->default(0);
             $table->string('detail', 200)->nullable();
             $table->unique(['key', 'store_id']);
+            $table->timestamps();
         });
 
         Schema::create(SC_DB_PREFIX . 'admin_store', function (Blueprint $table) {
@@ -134,6 +135,7 @@ class PrepareTablesAdmin extends Migration
             $table->string('currency', 10);
             $table->integer('status')->default(1)->comment('0:Lock, 1: unlock')->comment('Use for multi-store, multi-vendor');
             $table->integer('active')->default(1)->comment('0:Maintain, 1: Active');
+            $table->timestamps();
         });
 
         Schema::create(SC_DB_PREFIX . 'admin_store_description', function (Blueprint $table) {
@@ -145,6 +147,7 @@ class PrepareTablesAdmin extends Migration
             $table->mediumText('maintain_content')->nullable();
             $table->string('maintain_note', 300)->nullable();
             $table->primary(['store_id', 'lang']);
+            $table->timestamps();
         });
     }
 
