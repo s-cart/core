@@ -183,7 +183,6 @@ class PrepareTablesShop extends Migration
                 $table->string('keyword', 200)->nullable();
                 $table->string('description', 500)->nullable();
                 $table->unique(['category_id', 'lang']);
-                $table->timestamps();
             }
         );
 
@@ -324,7 +323,6 @@ class PrepareTablesShop extends Migration
                 $table->string('description', 500)->nullable();
                 $table->mediumText('content')->nullable();
                 $table->unique(['page_id', 'lang']);
-                $table->timestamps();
             }
         );
 
@@ -384,7 +382,6 @@ class PrepareTablesShop extends Migration
                 $table->string('description', 500)->nullable();
                 $table->mediumText('content')->nullable();
                 $table->unique(['product_id', 'lang']);
-                $table->timestamps();
             }
         );
 
@@ -394,7 +391,6 @@ class PrepareTablesShop extends Migration
                 $table->uuid('id')->primary();
                 $table->string('image', 255);
                 $table->uuid('product_id')->default(0)->index();
-                $table->timestamps();
             }
         );
 
@@ -405,7 +401,6 @@ class PrepareTablesShop extends Migration
                 $table->uuid('product_id');
                 $table->integer('quantity');
                 $table->primary(['build_id', 'product_id']);
-                $table->timestamps();
             }
         );
 
@@ -415,7 +410,6 @@ class PrepareTablesShop extends Migration
                 $table->uuid('group_id');
                 $table->uuid('product_id');
                 $table->primary(['group_id', 'product_id']);
-                $table->timestamps();
             }
         );
 
@@ -425,7 +419,6 @@ class PrepareTablesShop extends Migration
                 $table->uuid('product_id');
                 $table->uuid('category_id');
                 $table->primary(['product_id', 'category_id']);
-                $table->timestamps();
             }
         );
 
@@ -452,7 +445,6 @@ class PrepareTablesShop extends Migration
                 $table->integer('sort')->default(0);
                 $table->tinyInteger('status')->default(1);
                 $table->index(['product_id', 'attribute_group_id']);
-                $table->timestamps();
             }
         );
 
@@ -602,7 +594,6 @@ class PrepareTablesShop extends Migration
                 $table->string('description', 500)->nullable();
                 $table->mediumText('content')->nullable();
                 $table->unique(['news_id', 'lang']);
-                $table->timestamps();
             }
         );
 
@@ -766,7 +757,6 @@ class PrepareTablesShop extends Migration
                 $table->uuid('id')->primary();
                 $table->uuid('product_id');
                 $table->string('path', 255);
-                $table->timestamps();
             }
         );
 

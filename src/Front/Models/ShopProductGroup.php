@@ -12,6 +12,7 @@ class ShopProductGroup extends Model
     protected $primaryKey = ['group_id', 'product_id'];
     public $incrementing  = false;
     protected $guarded    = [];
+    public $timestamps    = false;
     public $table = SC_DB_PREFIX.'shop_product_group';
     protected $connection = SC_CONNECTION;
 

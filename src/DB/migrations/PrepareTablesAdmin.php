@@ -147,7 +147,6 @@ class PrepareTablesAdmin extends Migration
             $table->mediumText('maintain_content')->nullable();
             $table->string('maintain_note', 300)->nullable();
             $table->primary(['store_id', 'lang']);
-            $table->timestamps();
         });
     }
 
