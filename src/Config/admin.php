@@ -53,4 +53,15 @@ return [
         'top_customer_new' => 1, //New customers
         'pie_chart_type' => 'order', // [order|device|country]
     ],
+    //List plugins can not remore
+    'plugin_protected' => [
+        'Cash', // Payment,
+        'ShippingStandard', // Shipping,
+        'Discount', // Total,
+        'GoogleCaptcha', // Other,
+        'MultiVendorPro', // Other,
+        'B2B', // Other,
+        'MultiStorePro', // Other,
+        'Content', // Cms,
+    ],
 ];

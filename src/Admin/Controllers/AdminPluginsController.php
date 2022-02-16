@@ -28,26 +28,7 @@ class AdminPluginsController extends RootAdminController
     protected function pluginCode($code)
     {
         $code = sc_word_format_class($code);
-
-        $arrDefault = []; // plugin default, cannot remove
-        if ($code == 'Payment') {
-            $arrDefault[] = 'Cash';
-        }
-        if ($code == 'Shipping') {
-            $arrDefault[] = 'ShippingStandard';
-        }
-        if ($code == 'Total') {
-            $arrDefault[] = 'Discount';
-        }
-        if ($code == 'Other') {
-            $arrDefault[] = 'GoogleCaptcha';
-            $arrDefault[] = 'MultiVendorPro';
-            $arrDefault[] = 'B2B';
-            $arrDefault[] = 'MultiStorePro';
-        }
-        if ($code == 'Cms') {
-            $arrDefault[] = 'Content';
-        }
+        $arrDefault = config('admin.plugin_protected');
         $pluginsInstalled = sc_get_plugin_installed($code, $onlyActive = false);
         $plugins = sc_get_all_plugin($code);
         $title = sc_language_render('admin.plugin.' . $code.'_plugin');
