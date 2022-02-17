@@ -60,8 +60,10 @@ return [
         'Discount', // Total,
         'GoogleCaptcha', // Other,
         'MultiVendorPro', // Other,
+        'MultiVendor', // Other,
         'B2B', // Other,
         'MultiStorePro', // Other,
+        'MultiStore', // Other,
         'Content', // Cms,
     ],
 ];

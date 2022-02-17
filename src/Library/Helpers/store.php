@@ -301,7 +301,12 @@ if (!function_exists('sc_check_multi_shop_installed') && !in_array('sc_check_mul
  */
     function sc_check_multi_shop_installed()
     {
-        return sc_config_global('MultiVendorPro') || sc_config_global('B2B') || sc_config_global('MultiStorePro');
+        return 
+        sc_config_global('MultiVendorPro') 
+        || sc_config_global('MultiVendor') 
+        || sc_config_global('B2B') 
+        || sc_config_global('MultiStorePro')
+        || sc_config_global('MultiStore');
     }
 }
 
@@ -313,7 +318,7 @@ if (!function_exists('sc_check_multi_vendor_installed') && !in_array('sc_check_m
      */
         function sc_check_multi_vendor_installed()
         {
-            return sc_config_global('MultiVendorPro') || sc_config_global('B2B');
+            return sc_config_global('MultiVendorPro') || sc_config_global('B2B') || sc_config_global('MultiVendor');
         }
 }
 
@@ -341,6 +346,9 @@ if (!function_exists('sc_link_vendor') && !in_array('sc_link_vendor', config('he
             if (sc_config_global('MultiVendorPro')) {
                 $link = sc_route('MultiVendorPro.detail', ['code' => $code]);
             }
+            if (sc_config_global('MultiVendor')) {
+                $link = sc_route('MultiVendor.detail', ['code' => $code]);
+            }
             if (sc_config_global('B2B')) {
                 $link = sc_route('B2B.detail', ['code' => $code]);
             }
@@ -360,6 +368,9 @@ if (!function_exists('sc_path_vendor') && !in_array('sc_path_vendor', config('he
             $path = 'vendor';
             if (sc_config_global('MultiVendorPro')) {
                 $path = config('MultiVendorPro.front_path');
+            }
+            if (sc_config_global('MultiVendor')) {
+                $path = config('MultiVendor.front_path');
             }
             if (sc_config_global('B2B')) {
                 $path = config('B2B.front_path');

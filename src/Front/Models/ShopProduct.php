@@ -721,6 +721,9 @@ class ShopProduct extends Model
                 if (sc_config_global('MultiVendorPro')) {
                     $tablePTC = (new \App\Plugins\Other\MultiVendorPro\Models\VendorProductCategory)->getTable();
                 }
+                if (sc_config_global('MultiVendor')) {
+                    $tablePTC = (new \App\Plugins\Other\MultiVendor\Models\VendorProductCategory)->getTable();
+                }
                 $query = $query->leftJoin($tablePTC, $tablePTC . '.product_id', $this->getTable() . '.id');
                 $query = $query->whereIn($tablePTC . '.vendor_category_id', $this->sc_category_vendor);
             }
