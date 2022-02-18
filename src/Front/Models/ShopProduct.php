@@ -240,7 +240,7 @@ class ShopProduct extends Model
         }
 
         if ($checkActive) {
-            $product = $product->where($this->getTable() .'.status', 1);
+            $product = $product->where($this->getTable() .'.status', 1)->where($this->getTable() .'.approve', 1);
         }
         $product = $product->selectRaw($dataSelect);
         $product = $product
@@ -770,6 +770,7 @@ class ShopProduct extends Model
         }
 
         $query = $query->where($this->getTable().'.status', 1);
+        $query = $query->where($this->getTable().'.approve', 1);
 
         if ($this->sc_kind !== []) {
             $query = $query->whereIn($this->getTable().'.kind', $this->sc_kind);

@@ -363,6 +363,7 @@ class PrepareTablesShop extends Migration
                 $table->string('property', 50)->nullable()->default('physical')->index();
                 $table->string('tax_id', 50)->nullable()->default(0)->comment('0:No-tax, auto: Use tax default')->index();
                 $table->tinyInteger('status')->default(0)->index();
+                $table->tinyInteger('approve')->default(1)->index();
                 $table->integer('sort')->default(0);
                 $table->integer('view')->default(0);
                 $table->string('alias', 120)->index();
