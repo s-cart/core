@@ -90,6 +90,7 @@ class AdminProductController extends RootAdminController
         }
 
         $listTh['status'] = sc_language_render('product.status');
+        $listTh['approve'] = sc_language_render('product.approve');
 
         if ((sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT)) {
             // Only show store info if store is root
@@ -163,6 +164,7 @@ class AdminProductController extends RootAdminController
             }
 
             $dataMap['status'] = $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>';
+            $dataMap['approve'] = $row['approve'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>';
 
             if (sc_check_multi_shop_installed() && session('adminStoreId') == SC_ID_ROOT) {
                 // Only show store info if store is root
@@ -218,8 +220,8 @@ class AdminProductController extends RootAdminController
 
         //menuSort
         $optionSort = '';
-        foreach ($arrSort as $key => $status) {
-            $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
+        foreach ($arrSort as $key => $sort) {
+            $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $sort . '</option>';
         }
         $data['optionSort'] = $optionSort;
         $data['urlSort'] = sc_route_admin('admin_product.index', request()->except(['_token', '_pjax', 'sort_order']));
@@ -537,6 +539,7 @@ class AdminProductController extends RootAdminController
             'image'          => $data['image'] ?? '',
             'tax_id'         => $data['tax_id'] ?? 0,
             'status'         => (!empty($data['status']) ? 1 : 0),
+            'approve'         => (!empty($data['approve']) ? 1 : 0),
             'sort'           => (int) $data['sort'],
             'minimum'        => (int) ($data['minimum'] ?? 0),
         ];
@@ -738,9 +741,7 @@ class AdminProductController extends RootAdminController
             ->with($data);
     }
 
-    /*
-    * update status
-    */
+
     public function postEdit($id)
     {
         $product = (new AdminProduct)->getProductAdmin($id);
@@ -874,6 +875,7 @@ class AdminProductController extends RootAdminController
             'sku'          => $data['sku'],
             'alias'        => $data['alias'],
             'status'       => (!empty($data['status']) ? 1 : 0),
+            'approve'       => (!empty($data['approve']) ? 1 : 0),
             'sort'         => (int) $data['sort'],
             'minimum'      => (int) ($data['minimum'] ?? 0)
         ];

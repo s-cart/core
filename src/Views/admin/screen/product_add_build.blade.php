@@ -742,6 +742,20 @@
                         </div>
                         {{-- //status --}}
 
+                        {{-- approve --}}
+                        <div class="form-group row ">
+                            <label for="approve" class="col-sm-2 col-form-label">{{ sc_language_render('product.approve') }}</label>
+                            <div class="col-sm-8">
+                                @if (old())
+                                <input class="checkbox" type="checkbox" name="approve" {{ ((old('approve') ==='on')?'checked':'')}}>
+                                @else
+                                <input class="checkbox" type="checkbox" name="approve" checked>
+                                @endif
+
+                            </div>
+                        </div>
+                        {{-- //approve --}}
+
                         <hr class="kind kind2">
                         {{-- List product build --}}
                         <div class="form-group row kind kind1 {{ $errors->has('productBuild') ? ' text-red' : '' }}">

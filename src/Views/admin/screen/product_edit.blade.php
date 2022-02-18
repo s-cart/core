@@ -808,15 +808,19 @@
                         <div class="form-group row ">
                             <label for="status" class="col-sm-2 col-form-label">{{ sc_language_render('product.status') }}</label>
                             <div class="col-sm-8">
-                                @if (old())
                                 <input class="checkbox" type="checkbox" name="status" {{ old('status',$product['status'])?'checked':''}}>
-                                @else
-                                <input class="checkbox" type="checkbox" name="status" checked>
-                                @endif
-
                             </div>
                         </div>
                         {{-- //Status --}}
+
+                        {{-- Approve --}}
+                        <div class="form-group row ">
+                            <label for="approve" class="col-sm-2 col-form-label">{{ sc_language_render('product.approve') }}</label>
+                            <div class="col-sm-8">
+                                <input class="checkbox" type="checkbox" name="approve" {{ old('approve',$product['approve'])?'checked':''}}>
+                            </div>
+                        </div>
+                        {{-- //Approve --}}
 
 @if (sc_config_admin('product_kind'))
                         @if ($product->kind == SC_PRODUCT_GROUP)

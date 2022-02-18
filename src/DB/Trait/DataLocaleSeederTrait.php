@@ -766,6 +766,8 @@ trait DataLocaleSeederTrait
             ['code' => 'product.width','text' => 'Chiều rộng','position' => 'product','location' => 'vi'],
             ['code' => 'product.status','text' => 'Status','position' => 'product','location' => 'en'],
             ['code' => 'product.status','text' => 'Trạng thái','position' => 'product','location' => 'vi'],
+            ['code' => 'product.approve','text' => 'Approve','position' => 'product','location' => 'en'],
+            ['code' => 'product.approve','text' => 'Duyệt','position' => 'product','location' => 'vi'],
             ['code' => 'product.quantity','text' => 'Quantity','position' => 'product','location' => 'en'],
             ['code' => 'product.quantity','text' => 'Số lượng','position' => 'product','location' => 'vi'],
             ['code' => 'product.weight','text' => 'Weight','position' => 'product','location' => 'en'],

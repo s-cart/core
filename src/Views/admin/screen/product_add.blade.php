@@ -773,6 +773,19 @@
                         </div>
                         {{-- //status --}}
 
+                        {{-- approve --}}
+                        <div class="form-group row ">
+                            <label for="approve" class="col-sm-2 col-form-label">{{ sc_language_render('product.approve') }}</label>
+                            <div class="col-sm-8">
+                                @if (old())
+                                <input class="checkbox" type="checkbox" name="approve" {{ ((old('approve') ==='on')?'checked':'')}}>
+                                @else
+                                <input class="checkbox" type="checkbox" name="approve" checked>
+                                @endif
+                            </div>
+                        </div>
+                        {{-- //approve --}}
+
 @if (sc_config_admin('product_attribute'))
                         {{-- List product attributes --}}
 
