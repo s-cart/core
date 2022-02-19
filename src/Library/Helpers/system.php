@@ -90,7 +90,7 @@ if (!function_exists('sc_config_global') && !in_array('sc_config_global', config
         if (is_array($key)) {
             if (count($key) == 1) {
                 foreach ($key as $k => $v) {
-                    return AdminConfig::where('store_id', 0)
+                    return AdminConfig::where('store_id', SC_ID_GLOBAL)
                         ->where('key', $k)
                         ->update(['value' => $v]);
                 }

@@ -102,7 +102,7 @@ class AdminConfig extends Model
     public static function getAllGlobal():array
     {
         if (self::$getAllGlobal === null) {
-            self::$getAllGlobal = self::where('store_id', 0)
+            self::$getAllGlobal = self::where('store_id', SC_ID_GLOBAL)
                 ->pluck('value', 'key')
                 ->all();
         }

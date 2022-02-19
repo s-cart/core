@@ -39,7 +39,7 @@ class AdminConfigGlobalController extends RootAdminController
         $value = $data['value'];
         try {
             AdminConfig::where('key', $name)
-                ->where('store_id', 0)
+                ->where('store_id', SC_ID_GLOBAL)
                 ->update(['value' => $value]);
             $error = 0;
             $msg = sc_language_render('action.update_success');

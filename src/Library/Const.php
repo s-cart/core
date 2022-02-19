@@ -30,3 +30,4 @@ define('SC_ADMIN_PREFIX', config('const.ADMIN_PREFIX'));
 define('SC_DB_PREFIX', config('const.DB_PREFIX'));
 // Root ID store
 define('SC_ID_ROOT', 1);
+define('SC_ID_GLOBAL', 0);
