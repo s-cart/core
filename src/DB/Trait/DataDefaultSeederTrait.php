@@ -403,14 +403,8 @@ trait DataDefaultSeederTrait
 
     public function dataShopLink() {
         $dataShopLink = [
-            ['id' => (string)Str::orderedUuid(),'name' => 'front.home','url' => 'route::home','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '10'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'front.shop','url' => 'route::shop','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '20'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'front.blog','url' => 'route::news','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '30'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'front.contact','url' => 'route::contact','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '40'],
             ['id' => (string)Str::orderedUuid(),'name' => 'front.about','url' => 'route::page.detail::about','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '50'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'front.my_profile','url' => 'route::login','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '60'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'front.compare_page','url' => 'route::compare','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '70'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'front.wishlist_page','url' => 'route::wishlist','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '80'],
+
         ];
         return $dataShopLink;
     }

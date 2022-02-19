@@ -28,6 +28,13 @@ trait DataStoreSeederTrait
         
         $dataStoreBlock = $this->dataStoreBlock($storeId);
         $db->table(SC_DB_PREFIX.'shop_store_block')->insert($dataStoreBlock);
+            
+        $dataShopLink = $this->dataShopLink();
+        $db->table(SC_DB_PREFIX.'shop_link')->insert($dataShopLink);
+
+        $dataShopLinkStore = $this->dataShopLinkStore($dataShopLink, $storeId);
+        $db->table(SC_DB_PREFIX.'shop_link_store')->insert($dataShopLinkStore);
+
     }
     
     public function dataConfig($storeId) {
@@ -362,5 +369,25 @@ trait DataStoreSeederTrait
             ['id' => (string)Str::orderedUuid(),'name' => 'Top news','position' => 'top','page' => 'home','type' => 'view','text' => 'top_news','status' => '1','sort' => '10','store_id' => $storeId,'template' => 's-cart-light'],
         ];
         return $dataStoreBlock;
+    }
+
+    public function dataShopLink() {
+        $dataShopLink = [
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.home','url' => 'route::home','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '10'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.shop','url' => 'route::shop','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '20'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.blog','url' => 'route::news','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '30'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.contact','url' => 'route::contact','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '40'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.my_profile','url' => 'route::login','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '60'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.compare_page','url' => 'route::compare','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '70'],
+            ['id' => (string)Str::orderedUuid(),'name' => 'front.wishlist_page','url' => 'route::wishlist','target' => '_self','module' => '','group' => 'footer','status' => '1','sort' => '80'],
+        ];
+        return $dataShopLink;
+    }
+
+    public function dataShopLinkStore($dataShopLink, $storeId) {
+        foreach ($dataShopLink as $key => $row) {
+            $dataShopLinkStore[] = ['link_id' => $row['id'],'store_id' => $storeId];
+        }
+        return $dataShopLinkStore;
     }
 }
