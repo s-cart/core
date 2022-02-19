@@ -87,7 +87,7 @@ class AdminConfig extends Model
     public static function getListAll()
     {
         if (self::$getAll === null) {
-            self::$getAll = self::where('store_id', '<>', 0)
+            self::$getAll = self::where('store_id', '<>', SC_ID_GLOBAL)
                 ->get()
                 ->keyBy('store_id');
         }
