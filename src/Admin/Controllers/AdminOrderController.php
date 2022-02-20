@@ -478,6 +478,21 @@ class AdminOrderController extends RootAdminController
             }
             $oldValue = $order->{$code};
             $order->update([$code => $value]);
+
+            if ($code == 'status') {
+                //Process finish order
+                if ($oldValue !=  5 && $value == 5) {
+                    if (function_exists('sc_order_success_finish')) {
+                        sc_order_success_finish($orderId);
+                    }
+                }
+                if ($oldValue ==  5 && $value != 5) {
+                    if (function_exists('sc_order_success_unfinish')) {
+                        sc_order_success_unfinish($orderId);
+                    }
+                }
+                //Process finish order
+            }
         }
 
         //Add history
