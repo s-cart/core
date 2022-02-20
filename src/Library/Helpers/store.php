@@ -378,3 +378,14 @@ if (!function_exists('sc_path_vendor') && !in_array('sc_path_vendor', config('he
             return $path;
         }
 }
+
+/**
+ * Get sum amount order
+ * From S-Cart 6.9
+ */
+if (!function_exists('sc_get_sum_amount_order') && !in_array('sc_get_sum_amount_order', config('helper_except', []))) {
+    function sc_get_sum_amount_order($storeId = null)
+    {
+        return  (new \SCart\Core\Admin\Models\AdminOrder)->getSumAmountOrder($storeId);
+    }
+}
