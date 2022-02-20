@@ -77,7 +77,7 @@ class RoleController extends RootAdminController
                 'created_at' => $row['created_at'],
                 'updated_at' => $row['updated_at'],
                 'action' => ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '
-                    <a href="' . sc_route_admin('admin_role.edit', ['id' => $row['id']]) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
+                    <a href="' . sc_route_admin('admin_role.edit', ['id' => $row['id'] ? $row['id'] : 'not-found-id']) . '"><span title="' . sc_language_render('action.edit') . '" type="button" class="btn btn-flat btn-sm btn-primary"><i class="fa fa-edit"></i></span></a>&nbsp;
                     ')
                     . ((in_array($row['id'], SC_GUARD_ROLES)) ? '' : '<span onclick="deleteItem(\'' . $row['id'] . '\');"  title="' . sc_language_render('action.delete') . '" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-trash-alt"></i></span>')
                 ,

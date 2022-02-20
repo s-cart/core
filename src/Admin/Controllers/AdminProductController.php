@@ -179,7 +179,7 @@ class AdminProductController extends RootAdminController
                 }
             }
             $htmlAction = '
-            <a href="' . sc_route_admin('admin_product.edit', ['id' => $row['id']]) . '">
+            <a href="' . sc_route_admin('admin_product.edit', ['id' => $row['id'] ? $row['id'] : 'not-found-id']) . '">
             <span title="' . sc_language_render('product.admin.edit') . '" type="button" class="btn btn-flat btn-sm btn-primary">
             <i class="fa fa-edit"></i>
             </span>
