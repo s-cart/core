@@ -1185,6 +1185,8 @@ trait DataLocaleSeederTrait
             ['code' => 'order.totals.shipping','text' => 'Shipping','position' => 'order','location' => 'en'],
             ['code' => 'order.totals.received','text' => 'Đã nhận','position' => 'order','location' => 'vi'],
             ['code' => 'order.totals.received','text' => 'Received','position' => 'order','location' => 'en'],
+            ['code' => 'order.totals.other_fee','text' => 'Phí khác','position' => 'order','location' => 'vi'],
+            ['code' => 'order.totals.other_fee','text' => 'Other fee','position' => 'order','location' => 'en'],
             ['code' => 'order.detail','text' => 'Chi tiết','position' => 'order','location' => 'vi'],
             ['code' => 'order.detail','text' => 'Order detail','position' => 'order','location' => 'en'],
             ['code' => 'order.phone_regex','text' => 'The phone format is not correct. Length 8-14, use only 0-9 and the "-" SIGN.','position' => 'order','location' => 'en'],
