@@ -13,7 +13,8 @@ class ShopStoreBlockContent extends Model
     protected $guarded = [];
     private static $getLayout = null;
     protected $connection = SC_CONNECTION;
-
+    public $incrementing  = false;
+    
     public static function getLayout()
     {
         if (self::$getLayout === null) {

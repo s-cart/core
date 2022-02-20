@@ -173,6 +173,7 @@ class AdminStoreBlockController extends RootAdminController
         }
 
         $dataInsert = [
+            'id'       => sc_uuid(),
             'name'     => $data['name'],
             'position' => $data['position'],
             'page'     => in_array('*', $data['page'] ?? []) ? '*' : implode(',', $data['page'] ?? []),
