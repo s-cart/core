@@ -375,12 +375,12 @@ class AdminOrder extends ShopOrder
      */
     public static function getSumAmountOrder($storeId = null) {
         $data = (new AdminOrder)
-        ->selectRaw('sum(total) as total_sum, store_id, currency')
+        ->selectRaw('sum(total) as total_sum, currency')
         ->where('status', 5);//Only process order completed
         if ($storeId) {
             $data = $data->where('store_id', $storeId);
         }
-        $data = $data->groupBy('store_id','currency')
+        $data = $data->groupBy('currency')
         ->get()
         ->toArray();
         return $data;
