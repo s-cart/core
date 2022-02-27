@@ -1,6 +1,6 @@
 <?php
 
-namespace SCart\Core\DB\Trait;
+namespace SCart\Core\DB\Traits;
 use DB;
 use Illuminate\Support\Str;
 
