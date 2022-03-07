@@ -255,14 +255,14 @@ trait DataSampleSeederTrait
 
         $arrGroupId = [$arrId['4'],$arrId['14'],$arrId['19'],$arrId['23']];
 
-        $arrPromotion[] = ['product_id' => $arrId['1'], 'price_promotion' => 5000];
-        $arrPromotion[] = ['product_id' => $arrId['2'], 'price_promotion' => 3000];
-        $arrPromotion[] = ['product_id' => $arrId['6'], 'price_promotion' => 5000];
-        $arrPromotion[] = ['product_id' => $arrId['8'], 'price_promotion' => 4000];
-        $arrPromotion[] = ['product_id' => $arrId['12'], 'price_promotion' => 5000];
-        $arrPromotion[] = ['product_id' => $arrId['16'], 'price_promotion' => 3000];
-        $arrPromotion[] = ['product_id' => $arrId['18'], 'price_promotion' => 6000];
-        $arrPromotion[] = ['product_id' => $arrId['22'], 'price_promotion' => 5000];
+        $arrPromotion[] = ['product_id' => $arrId['1'], 'price_promotion' => 50];
+        $arrPromotion[] = ['product_id' => $arrId['2'], 'price_promotion' => 30];
+        $arrPromotion[] = ['product_id' => $arrId['6'], 'price_promotion' => 50];
+        $arrPromotion[] = ['product_id' => $arrId['8'], 'price_promotion' => 40];
+        $arrPromotion[] = ['product_id' => $arrId['12'], 'price_promotion' => 50];
+        $arrPromotion[] = ['product_id' => $arrId['16'], 'price_promotion' => 30];
+        $arrPromotion[] = ['product_id' => $arrId['18'], 'price_promotion' => 60];
+        $arrPromotion[] = ['product_id' => $arrId['22'], 'price_promotion' => 50];
 
         $arrImage[] = ['id' => (string)Str::orderedUuid(), 'image' => '/data/product/product-2.png', 'product_id' => $arrId[1]];
         $arrImage[] = ['id' => (string)Str::orderedUuid(), 'image' => '/data/product/product-11.png', 'product_id' => $arrId[1]];
@@ -317,11 +317,11 @@ trait DataSampleSeederTrait
         $arrCategory[] = ['product_id' => $arrId[24], 'category_id' => $arrayIdCategory[9]];
 
 
-        $arrAtt[] = ['name' => 'Blue', 'attribute_group_id' => 1, 'product_id' => $arrId[24], 'add_price' => 50];
+        $arrAtt[] = ['name' => 'Blue', 'attribute_group_id' => 1, 'product_id' => $arrId[24], 'add_price' => 5];
         $arrAtt[] = ['name' => 'White', 'attribute_group_id' => 1, 'product_id' => $arrId[24], 'add_price' => 0];
-        $arrAtt[] = ['name' => 'S', 'attribute_group_id' => 2, 'product_id' => $arrId[24], 'add_price' => 20];
-        $arrAtt[] = ['name' => 'XL', 'attribute_group_id' => 2, 'product_id' => $arrId[24], 'add_price' => 30];
-        $arrAtt[] = ['name' => 'Blue', 'attribute_group_id' => 1, 'product_id' => $arrId[12], 'add_price' => 100];
+        $arrAtt[] = ['name' => 'S', 'attribute_group_id' => 2, 'product_id' => $arrId[24], 'add_price' => 2];
+        $arrAtt[] = ['name' => 'XL', 'attribute_group_id' => 2, 'product_id' => $arrId[24], 'add_price' => 3];
+        $arrAtt[] = ['name' => 'Blue', 'attribute_group_id' => 1, 'product_id' => $arrId[12], 'add_price' => 10];
         $arrAtt[] = ['name' => 'Red', 'attribute_group_id' => 1, 'product_id' => $arrId[12], 'add_price' => 0];
         $arrAtt[] = ['name' => 'S', 'attribute_group_id' => 2, 'product_id' => $arrId[12], 'add_price' => 0];
         $arrAtt[] = ['name' => 'M', 'attribute_group_id' => 2, 'product_id' => $arrId[12], 'add_price' => 0];
@@ -341,7 +341,7 @@ trait DataSampleSeederTrait
     public function dataProduct($dataBrand, $dataSupplier, $mappingIdProduct) {
         $arrId = $mappingIdProduct['arrId'];
         $dataProduct = [];
-        $arrPrice = [10000,20000,30000];
+        $arrPrice = [50,40,30];
         $arrSku = ['PHO-BO', 'NEM-NUONG', 'BANH-GAI','BUN-HUE','BANH-TRANG','MUOI-TAY-NINH','NHAN-LONG','SAU-RIENG','BIA-SAIGON','BIA-HANOI','NUOC-MAM','BANH-MYCAY','HU-TIEU',
         'CANH-CHUA','MANG-CUT','CAM-VINH','VAI-THIEU','NON-LA','AO-DAI','XOAI-CAT','COM-NIU','NHAN-LONG-HUNG-YEN','VAI-THIEU-LUC-NGAN','NEM-CHUA-THANH-HOA'];
         for ($i=1; $i <= 24; $i++) {

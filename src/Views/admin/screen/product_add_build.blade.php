@@ -375,7 +375,7 @@
                                     <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="number" style="width: 100px;" id="cost" name="cost"
+                                    <input type="number" step="0.01" style="width: 100px;" id="cost" name="cost"
                                         value="{!! old('cost')??0 !!}" class="form-control input-sm cost"
                                         placeholder="" />
                                 </div>
@@ -398,7 +398,7 @@
                                     <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="number" style="width: 100px;" id="price" name="price"
+                                    <input type="number" step="0.01" style="width: 100px;" id="price" name="price"
                                         value="{!! old('price')??0 !!}" class="form-control input-sm price"
                                         placeholder="" />
                                 </div>
@@ -452,7 +452,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="number" style="width: 100px;" id="price_promotion"
+                                        <input type="number" step="0.01" style="width: 100px;" id="price_promotion"
                                             name="price_promotion" value="{!! old('price_promotion')??0 !!}"
                                             class="form-control input-sm price" placeholder="" />
                                         <span title="Remove" class="btn btn-flat btn-danger removePromotion"><i
@@ -604,7 +604,7 @@
                                     <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="number" style="width: 100px;" id="length" name="length"
+                                    <input type="number" step="0.01" style="width: 100px;" id="length" name="length"
                                         value="{!! old('length', 0) !!}" class="form-control input-sm length"
                                         placeholder="" />
                                 </div>
@@ -623,7 +623,7 @@
                                     <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="number" style="width: 100px;" id="height" name="height"
+                                    <input type="number" step="0.01" style="width: 100px;" id="height" name="height"
                                         value="{!! old('height', 0) !!}" class="form-control input-sm height"
                                         placeholder="" />
                                 </div>
@@ -642,7 +642,7 @@
                                     <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                     </div>
-                                    <input type="number" style="width: 100px;" id="width" name="width"
+                                    <input type="number" step="0.01" style="width: 100px;" id="width" name="width"
                                         value="{!! old('width', 0) !!}" class="form-control input-sm width"
                                         placeholder="" />
                                 </div>
@@ -849,7 +849,7 @@
     $(this).before(
         '<div class="price_promotion">'
         +'<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-pencil-alt"></i></span></div>'
-        +'  <input type="number"  id="price_promotion" name="price_promotion" value="0" class="form-control input-sm price" placeholder="" />'
+        +'  <input type="number"  step="0.01" id="price_promotion" name="price_promotion" value="0" class="form-control input-sm price" placeholder="" />'
         +'  <span title="Remove" class="btn btn-flat btn-danger removePromotion"><i class="fa fa-times"></i></span>'
         +'</div>'
         +'<div class="form-group">'

@@ -433,8 +433,8 @@ trait DataDefaultSeederTrait
 
     public function dataCurrency() {
         $dataCurrency = [
-            ['id' => '1','name' => 'USD Dola','code' => 'USD','symbol' => '$','exchange_rate' => '1','precision' => '0','symbol_first' => '1','thousands' => ',','status' => '1','sort' => '0'],
-            ['id' => '2','name' => 'VietNam Dong','code' => 'VND','symbol' => '₫','exchange_rate' => '20','precision' => '0','symbol_first' => '0','thousands' => ',','status' => '1','sort' => '1'],
+            ['id' => '1','name' => 'USD Dola','code' => 'USD','symbol' => '$','exchange_rate' => '1','precision' => '2','symbol_first' => '1','thousands' => ',','status' => '1','sort' => '0'],
+            ['id' => '2','name' => 'VietNam Dong','code' => 'VND','symbol' => '₫','exchange_rate' => '20000','precision' => '0','symbol_first' => '0','thousands' => ',','status' => '1','sort' => '1'],
         ];
         return $dataCurrency;
     }

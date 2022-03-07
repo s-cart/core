@@ -787,8 +787,8 @@ class ShopProduct extends Model
         //Filter with range price
         if ($this->sc_range_price) {
             $price = explode('__', $this->sc_range_price);
-            $rangePrice['min'] = (int)$price[0] ?? 0;
-            $rangePrice['max'] = (int)$price[1] ?? 0;
+            $rangePrice['min'] = $price[0] ?? 0;
+            $rangePrice['max'] = $price[1] ?? 0;
             if ($rangePrice['max']) {
                 $query = $query->whereBetween($this->getTable().'.price', $rangePrice);
             }

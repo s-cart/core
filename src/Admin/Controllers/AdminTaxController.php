@@ -82,7 +82,7 @@ class AdminTaxController extends RootAdminController
         }
 
         $dataInsert = [
-            'value' => (int)$data['value'],
+            'value' => $data['value'],
             'name' => $data['name'],
         ];
         $dataInsert = sc_clean($dataInsert, [], true);
@@ -170,7 +170,7 @@ class AdminTaxController extends RootAdminController
         //Edit
 
         $dataUpdate = [
-            'value' => (int)$data['value'],
+            'value' => $data['value'],
             'name' => $data['name'],
         ];
         $dataUpdate = sc_clean($dataUpdate, [], true);

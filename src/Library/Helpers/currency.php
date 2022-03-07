@@ -115,7 +115,7 @@ if (!function_exists('sc_currency_all_active') && !in_array('sc_currency_all_act
 if (!function_exists('sc_tax_price') && !in_array('sc_tax_price', config('helper_except', []))) {
     function sc_tax_price($price, $tax)
     {
-        return floor($price * (100 + $tax) /100);
+        return round($price * (100 + $tax) /100, 2);
     }
 }
 

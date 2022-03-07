@@ -16,7 +16,7 @@ class ShopCurrency extends Model
     protected static $name              = '';
     protected static $symbol            = '';
     protected static $exchange_rate     = 1;
-    protected static $precision         = 0;
+    protected static $precision         = 2;
     protected static $symbol_first      = 0;
     protected static $thousands         = ',';
     protected static $decimal           = '.';
