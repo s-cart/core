@@ -25,6 +25,9 @@
                           <div class="btn-group">
                             <select class="form-control select2" name="lang">
                               <option value="">{{ sc_language_render('admin.language.select_lang') }}</option>
+                              @php
+                                  $lang = $lang ?? 'en';
+                              @endphp
                               @foreach ($languages as $key => $itemLang)
                                   <option value="{{ $key }}" {{ ($key == $lang)? 'selected': '' }}>{{ $itemLang->name }}</option>
                               @endforeach
