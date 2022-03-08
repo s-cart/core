@@ -142,6 +142,11 @@ class AdminPluginsController extends RootAdminController
         $pathTmp = time();
         $linkRedirect = '';
         $pathFile = sc_file_upload($data['file'], 'tmp', $pathFolder = $pathTmp)['pathFile'] ?? '';
+
+        if (!is_writable(storage_path('tmp'))) {
+            return response()->json(['error' => 1, 'msg' => 'No write permission '.storage_path('tmp')]);
+        }
+        
         if ($pathFile) {
             $unzip = sc_unzip(storage_path('tmp/'.$pathFile), storage_path('tmp/'.$pathTmp));
             if ($unzip) {
@@ -167,6 +172,15 @@ class AdminPluginsController extends RootAdminController
                     }
 
                     $pathPlugin = $configGroup.'/'.$configCode.'/'.$configKey;
+
+                    if (!is_writable(public_path($configGroup.'/'.$configCode))) {
+                        return response()->json(['error' => 1, 'msg' => 'No write permission '.public_path($configGroup.'/'.$configCode)]);
+                    }
+            
+                    if (!is_writable(app_path($configGroup.'/'.$configCode))) {
+                        return response()->json(['error' => 1, 'msg' => 'No write permission '.app_path($configGroup.'/'.$configCode)]);
+                    }
+
                     try {
                         File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path($pathPlugin));
                         File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/src'), app_path($pathPlugin));

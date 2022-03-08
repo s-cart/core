@@ -164,7 +164,13 @@ class AdminTemplateController extends RootAdminController
         }
         $pathTmp = time();
         $pathFile = sc_file_upload($data['file'], 'tmp', $pathFolder = $pathTmp)['pathFile'] ?? '';
+
         if ($pathFile) {
+    
+            if (!is_writable(storage_path('tmp'))) {
+                return response()->json(['error' => 1, 'msg' => 'No write permission '.storage_path('tmp')]);
+            }
+
             $unzip = sc_unzip(storage_path('tmp/'.$pathFile), storage_path('tmp/'.$pathTmp));
             if ($unzip) {
                 $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
@@ -174,6 +180,16 @@ class AdminTemplateController extends RootAdminController
                     $folderName = end($folderName);
                     $config = json_decode(file_get_contents($checkConfig[0]), true);
                     $configKey = $config['configKey'] ?? '';
+
+                    if (!is_writable(public_path('templates'))) {
+                        return response()->json(['error' => 1, 'msg' => 'No write permission '.public_path('templates')]);
+                    }
+            
+                    if (!is_writable(resource_path('views/templates'))) {
+                        return response()->json(['error' => 1, 'msg' => 'No write permission '.resource_path('views/templates')]);
+                    }
+
+
                     $configKey = str_replace('.', '-', $configKey);
                     if (!$configKey) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));

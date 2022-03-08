@@ -117,6 +117,19 @@ class AdminPluginsOnlineController extends RootAdminController
         $code = request('code');
         $key = request('key');
         $pathPlugin = 'Plugins/'.$code.'/'.$key;
+
+        if (!is_writable(public_path('Plugins/'.$code))) {
+            return response()->json(['error' => 1, 'msg' => 'No write permission '.public_path('Plugins/'.$code)]);
+        }
+
+        if (!is_writable(app_path('Plugins/'.$code))) {
+            return response()->json(['error' => 1, 'msg' => 'No write permission '.app_path('Plugins/'.$code)]);
+        }
+
+        if (!is_writable(storage_path('tmp'))) {
+            return response()->json(['error' => 1, 'msg' => 'No write permission '.storage_path('tmp')]);
+        }
+
         $path = request('path');
         try {
             $data = file_get_contents($path);

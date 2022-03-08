@@ -103,6 +103,9 @@ class AdminTemplateOnlineController extends RootAdminController
         $key = request('key');
         $key = str_replace('.', '-', $key);
         $path = request('path');
+        if (!is_writable(storage_path('tmp'))) {
+            return response()->json(['error' => 1, 'msg' => 'No write permission '.storage_path('tmp')]);
+        }
         try {
             $data = file_get_contents($path);
             $pathTmp = $key.'_'.time();
@@ -110,6 +113,14 @@ class AdminTemplateOnlineController extends RootAdminController
             Storage::disk('tmp')->put($pathTmp.'/'.$fileTmp, $data);
         } catch (\Exception $e) {
             $response = ['error' => 1, 'msg' => $e->getMessage()];
+        }
+
+        if (!is_writable(public_path('templates'))) {
+            return response()->json(['error' => 1, 'msg' => 'No write permission '.public_path('templates')]);
+        }
+
+        if (!is_writable(resource_path('views/templates'))) {
+            return response()->json(['error' => 1, 'msg' => 'No write permission '.resource_path('views/templates')]);
         }
 
         $unzip = sc_unzip(storage_path('tmp/'.$pathTmp.'/'.$fileTmp), storage_path('tmp/'.$pathTmp));
