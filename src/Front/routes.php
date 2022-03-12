@@ -18,15 +18,12 @@ if (file_exists(app_path('Http/Controllers/ShopStoreController.php'))) {
 }
 
 
-//Route plugin
+//Route customize
 Route::group(
     [
         'middleware' => SC_FRONT_MIDDLEWARE,
     ],
     function () use($langUrl){
-        foreach (glob(app_path() . '/Plugins/*/*/Route.php') as $filename) {
-            require_once $filename;
-        }
         //Include route custom
         if (file_exists(base_path('routes/myroute.php'))) {
             require_once base_path('routes/myroute.php');
@@ -146,6 +143,19 @@ Route::group(
             }
             return back();
         })->name('currency');        
+    }
+);
+
+
+//Route plugin
+Route::group(
+    [
+        'middleware' => SC_FRONT_MIDDLEWARE,
+    ],
+    function () use($langUrl){
+        foreach (glob(app_path() . '/Plugins/*/*/Route.php') as $filename) {
+            require_once $filename;
+        }
     }
 );
 
