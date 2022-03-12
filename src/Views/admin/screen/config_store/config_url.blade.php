@@ -78,12 +78,7 @@
 
       <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_CMS_CATEGORY') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CMS_CATEGORY" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CMS_CATEGORY') }}" data-value="{{ sc_config('PREFIX_CMS_CATEGORY', $storeId) }}" data-original-title="" title=""></a>/name-of-cms-categoyr{{ sc_config('SUFFIX_URL', $storeId) }}</td>
-      </tr>
-
-      <tr>
-        <td>{{ sc_language_render('admin.env.PREFIX_CMS_ENTRY') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CMS_ENTRY" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CMS_ENTRY') }}" data-value="{{ sc_config('PREFIX_CMS_ENTRY', $storeId) }}" data-original-title="" title=""></a>/name-of-entry-cms{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CMS_CATEGORY" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CMS_CATEGORY') }}" data-value="{{ sc_config('PREFIX_CMS_CATEGORY', $storeId) }}" data-original-title="" title=""></a>/name-of-cms-categoyr</td>
       </tr>
 
       <tr>

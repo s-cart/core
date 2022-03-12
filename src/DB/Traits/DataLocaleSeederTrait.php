@@ -2059,6 +2059,8 @@ trait DataLocaleSeederTrait
             ['code' => 'admin.env.hidden_copyright_footer','text' => 'Ẩn thông tin bản quyền footer website','position' => 'admin.env','location' => 'vi'],
             ['code' => 'admin.env.hidden_copyright_footer_admin','text' => 'Hide admin footer copyright information','position' => 'admin.env','location' => 'en'],
             ['code' => 'admin.env.hidden_copyright_footer','text' => 'Hide website footer copyright information','position' => 'admin.env','location' => 'en'],
+            ['code' => 'admin.env.PREFIX_CATEGORY_VENDOR','text' => 'Category vendor','position' => 'admin.env','location' => 'vi'],
+            ['code' => 'admin.env.PREFIX_CATEGORY_VENDOR','text' => 'Danh mục nhà cung cấp','position' => 'admin.env','location' => 'en'],
             ['code' => 'admin.email_template.name','text' => 'Tên','position' => 'admin.email_template','location' => 'vi'],
             ['code' => 'admin.email_template.list','text' => 'Danh sách mẫu email','position' => 'admin.email_template','location' => 'vi'],
             ['code' => 'admin.email_template.list','text' => 'Email template list','position' => 'admin.email_template','location' => 'en'],
