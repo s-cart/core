@@ -39,7 +39,7 @@ trait AuthTrait
                     $validate['fields.'.$field->code] = 'required';
                 }
             }
-            $dataUpdate['fields'] = $data['fields'];
+            $dataUpdate['fields'] = $data['fields'] ?? [];
         }
 
         if (!empty($data['password'])) {
