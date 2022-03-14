@@ -304,7 +304,7 @@ class AdminNewsController extends RootAdminController
                 'content' => $row['content'],
             ];
         }
-        $dataDes = sc_clean($dataDes, [], true);
+        $dataDes = sc_clean($dataDes, ['content'], true);
         AdminNews::insertDescriptionAdmin($dataDes);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
