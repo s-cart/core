@@ -11,14 +11,24 @@
       }
   ],
   "require": {
-      "php": "^7.4|^8.0",
-      "unisharp/laravel-filemanager": "^2.2",
-      "spatie/laravel-pjax": "^2.1",
-      "phpoffice/phpspreadsheet": "^1.16",
-      "spatie/laravel-json-api-paginate": "^1.10",
-      "spatie/db-dumper": "^2.18",
+      "php": "^8.0.2",
+      "unisharp/laravel-filemanager": "^2.4",
+      "spatie/laravel-pjax": "^2.2",
+      "phpoffice/phpspreadsheet": "^1.20",
+      "spatie/laravel-json-api-paginate": "^1.11",
+      "spatie/db-dumper": "^3.0",
       "google/apiclient": "^2.0",
-      "jenssegers/agent": "^2.6"
+      "jenssegers/agent": "^2.6",
+      "aws/aws-sdk-php": "^3.0",
+      "barryvdh/laravel-dompdf": "^v1.0.0",
+      "guzzlehttp/guzzle": "^7.2",
+      "laravel/framework": "^9.0",
+      "laravel/helpers": "^1.5",
+      "laravel/legacy-factories": "^1.1",
+      "laravel/passport": "^10.1",
+      "laravel/socialite": "^5.13",
+      "laravel/tinker": "^2.7",
+      "laravel/ui": "~3.3"
   },
   "autoload": {
       "psr-4": {
