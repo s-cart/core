@@ -173,9 +173,9 @@ class AdminTemplateController extends RootAdminController
 
             $unzip = sc_unzip(storage_path('tmp/'.$pathFile), storage_path('tmp/'.$pathTmp));
             if ($unzip) {
-                $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
+                $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/config.json');
                 if ($checkConfig) {
-                    $folderName = explode('/src', $checkConfig[0]);
+                    $folderName = explode('/config.json', $checkConfig[0]);
                     $folderName = explode('/', $folderName[0]);
                     $folderName = end($folderName);
                     $config = json_decode(file_get_contents($checkConfig[0]), true);
@@ -203,7 +203,7 @@ class AdminTemplateController extends RootAdminController
                     }
                     try {
                         File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path('templates/'.$configKey));
-                        File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/src'), resource_path('views/templates/'.$configKey));
+                        File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName), resource_path('views/templates/'.$configKey));
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
 
                         //Run function process after install template

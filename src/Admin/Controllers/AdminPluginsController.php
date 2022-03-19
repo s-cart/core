@@ -150,9 +150,9 @@ class AdminPluginsController extends RootAdminController
         if ($pathFile) {
             $unzip = sc_unzip(storage_path('tmp/'.$pathFile), storage_path('tmp/'.$pathTmp));
             if ($unzip) {
-                $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
+                $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/config.json');
                 if ($checkConfig) {
-                    $folderName = explode('/src', $checkConfig[0]);
+                    $folderName = explode('/config.json', $checkConfig[0]);
                     $folderName = explode('/', $folderName[0]);
                     $folderName = end($folderName);
                     $config = json_decode(file_get_contents($checkConfig[0]), true);
@@ -160,11 +160,12 @@ class AdminPluginsController extends RootAdminController
                     $configCode = $config['configCode'] ?? '';
                     $configKey = $config['configKey'] ?? '';
 
+                    //Process if plugin config incorect
                     if (!$configGroup || !$configCode || !$configKey) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         return redirect()->back()->with('error', sc_language_render('admin.plugin.error_config'));
                     }
-
+                    //Check plugin exist
                     $arrPluginLocal = sc_get_all_plugin($configCode);
                     if (array_key_exists($configKey, $arrPluginLocal)) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
@@ -183,7 +184,7 @@ class AdminPluginsController extends RootAdminController
 
                     try {
                         File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path($pathPlugin));
-                        File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/src'), app_path($pathPlugin));
+                        File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName), app_path($pathPlugin));
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         $namespace = sc_get_class_plugin_config($configCode, $configKey);
                         $response = (new $namespace)->install();

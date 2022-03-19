@@ -138,15 +138,15 @@ class AdminPluginsOnlineController extends RootAdminController
             Storage::disk('tmp')->put($pathTmp.'/'.$fileTmp, $data);
             $unzip = sc_unzip(storage_path('tmp/'.$pathTmp.'/'.$fileTmp), storage_path('tmp/'.$pathTmp));
             if ($unzip) {
-                $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/src/config.json');
+                $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/config.json');
                 if (!$checkConfig) {
                     return $response = ['error' => 1, 'msg' => 'Cannot found file config.json'];
                 }
-                $folderName = explode('/src', $checkConfig[0]);
+                $folderName = explode('config.json', $checkConfig[0]);
                 $folderName = explode('/', $folderName[0]);
                 $folderName = end($folderName);
                 File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path($pathPlugin));
-                File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/src'), app_path($pathPlugin));
+                File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName), app_path($pathPlugin));
                 File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                 $namespace = sc_get_class_plugin_config($code, $key);
                 $response = (new $namespace)->install();
