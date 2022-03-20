@@ -1,7 +1,7 @@
 <?php
 namespace SCart\Core\Api\Controllers;
 
-use App\Http\Controllers\RootFrontController;
+use SCart\Core\Front\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopBrand;
 use SCart\Core\Front\Models\ShopCategory;
 use SCart\Core\Front\Models\ShopProduct;

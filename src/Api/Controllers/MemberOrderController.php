@@ -2,7 +2,7 @@
 
 namespace SCart\Core\Api\Controllers;
 
-use App\Http\Controllers\RootFrontController;
+use SCart\Core\Front\Controllers\RootFrontController;
 use Illuminate\Http\Request;
 use SCart\Core\Front\Models\ShopOrder;
 
