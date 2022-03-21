@@ -277,8 +277,14 @@ if (!function_exists('sc_route') && !in_array('sc_route', config('helper_except'
                 $param['lang'] = app()->getLocale();
             }
         }
+        
         if (Route::has($name)) {
-            return route($name, $param);
+            try {
+                $route = route($name, $param);
+            } catch (\Throwable $th) {
+                $route = url('#'.$name.'#'.implode(',', $param));
+            }
+            return $route;
         } else {
             return url('#'.$name);
         }
@@ -298,7 +304,12 @@ if (!function_exists('sc_route_admin') && !in_array('sc_route_admin', config('he
     function sc_route_admin($name, $param = [])
     {
         if (Route::has($name)) {
-            return route($name, $param);
+            try {
+                $route = route($name, $param);
+            } catch (\Throwable $th) {
+                $route = url('#'.$name.'#'.implode(',', $param));
+            }
+            return $route;
         } else {
             return url('#'.$name);
         }
