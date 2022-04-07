@@ -149,6 +149,9 @@ class ShopBrand extends Model
             $query = $query->where($tableBrandStore.'.store_id', $storeId);
         }
 
+        /**
+        Note: sc_moreWhere will remove in the next version
+         */
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
                 if (count($where)) {
@@ -156,6 +159,8 @@ class ShopBrand extends Model
                 }
             }
         }
+        $query = $this->processMoreQuery($query);
+        
         if ($this->sc_random) {
             $query = $query->inRandomOrder();
         } else {

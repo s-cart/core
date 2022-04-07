@@ -176,6 +176,9 @@ class ShopPage extends Model
 
         $query = $query->where($this->getTable() .'status', 1);
 
+        /**
+        Note: sc_moreWhere will remove in the next version
+         */
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
                 if (count($where)) {
@@ -183,6 +186,8 @@ class ShopPage extends Model
                 }
             }
         }
+        $query = $this->processMoreQuery($query);
+        
 
         if ($this->random) {
             $query = $query->inRandomOrder();
