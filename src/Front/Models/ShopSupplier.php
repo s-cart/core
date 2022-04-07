@@ -101,6 +101,9 @@ class ShopSupplier extends Model
         $query = $this->where('status', 1)
         ->where('store_id', config('app.storeId'));
 
+        /**
+        Note: sc_moreWhere will remove in the next version
+         */
         if (count($this->sc_moreWhere)) {
             foreach ($this->sc_moreWhere as $key => $where) {
                 if (count($where)) {
@@ -108,6 +111,8 @@ class ShopSupplier extends Model
                 }
             }
         }
+        $query = $this->processMoreQuery($query);
+        
 
         if ($this->sc_random) {
             $query = $query->inRandomOrder();

@@ -10,7 +10,8 @@ trait ModelTrait
     protected $sc_limit = 'all'; // all or interger
     protected $sc_paginate = 0; // 0: dont paginate,
     protected $sc_sort = [];
-    protected $sc_moreWhere = []; // more wehere
+    protected $sc_moreWhere = []; // more where
+    protected $sc_moreQuery = []; // more query
     protected $sc_random = 0; // 0: no random, 1: random
     protected $sc_keyword = ''; // search search product
  
@@ -45,10 +46,12 @@ trait ModelTrait
     /**
      * Add more where
      * @param   [array]  $moreWhere
+     * NOTE: Will remove in the next versions
      */
     public function setMoreWhere(array $moreWhere)
     {
         if (is_array($moreWhere)) {
+            $where = [];
             if (count($moreWhere) == 2) {
                 $where[0] = $moreWhere[0];
                 $where[1] = '=';
@@ -61,6 +64,48 @@ trait ModelTrait
             }
         }
         return $this;
+    }
+
+    /**
+     * [setMoreQuery description]
+     *
+     * @param   string              [ description]
+     * @param   array   $moreQuery  [$moreQuery description]
+     *
+     * @return  [type]              [return description]
+     */
+
+    public function setMoreQuery(string|array $moreQuery)
+    {
+        if (is_string($moreQuery) || is_array($moreQuery)) {
+            $this->sc_moreQuery[] = $moreQuery;
+        }
+        return $this;
+    }
+
+    /**
+     * process more query
+     *
+     * @param   [type]  $query  [$query description]
+     *
+     * @return  [type]          [return description]
+     */
+    public function processMoreQuery($query) {
+        if (count($this->sc_moreQuery)) {
+            foreach ($this->sc_moreQuery as $key => $where) {
+                if (is_string($where)) {
+                    $query = $query->whereRaw($where);
+                }
+                if (is_array($where) && count($where) == 1) {
+                    foreach ($where as $ope => $obj) {
+                        if (!is_numeric($ope) && is_array($obj)) {
+                            $query = $query->{$ope}(...$obj);
+                        }
+                    }
+                }
+            }
+        }
+        return $query;
     }
 
     /**
