@@ -69,13 +69,12 @@ trait ModelTrait
     /**
      * [setMoreQuery description]
      *
-     * @param   string              [ description]
-     * @param   array   $moreQuery  [$moreQuery description]
+     * @param   string|array  $moreQuery  [$moreQuery description]
      *
      * @return  [type]              [return description]
      */
 
-    public function setMoreQuery(string|array $moreQuery)
+    public function setMoreQuery($moreQuery)
     {
         if (is_string($moreQuery) || is_array($moreQuery)) {
             $this->sc_moreQuery[] = $moreQuery;
