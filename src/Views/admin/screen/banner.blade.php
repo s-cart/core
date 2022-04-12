@@ -113,16 +113,23 @@
                                         @endif
                                 </div>
                             </div>
-
+                            
                             @if (!empty($dataType))
                             <div class="form-group row {{ $errors->has('type') ? ' text-red' : '' }}">
                                 <label class="col-sm-2 col-form-label">{{ sc_language_render('admin.banner.type') }}</label>
                                 <div class="col-sm-8">
+                                <div class="input-group">
                                 <select class="form-control" name="type">
                                     @foreach ($dataType as $key => $name)
                                     <option {{ (old('type', $banner['type']??'') ==  $key)?'selected':'' }} value="{{ $key }}">{{ $name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="input-group-append">
+                                    <a href="{{ sc_route_admin('admin_banner_type.index') }}" class="btn  btn-flat" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                     </a>
+                                </div>
+                                </div>
                                 @if ($errors->has('type'))
                                 <span class="form-text">
                                     {{ $errors->first('type') }}

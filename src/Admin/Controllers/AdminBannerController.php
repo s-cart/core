@@ -121,9 +121,6 @@ class AdminBannerController extends RootAdminController
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_banner.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
         <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
-                           </a>
-                           <a href="' . sc_route_admin('admin_banner_type.index') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-search-plus" aria-hidden="true"></i>
                            </a>';
         //=menuRight
 

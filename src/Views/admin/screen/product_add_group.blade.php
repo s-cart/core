@@ -131,8 +131,9 @@
                                 {{ sc_language_render('product.admin.select_category') }}
                             </label>
                             <div class="col-sm-8">
+                                <div class="input-group">
                                 <select class="form-control input-sm category select2" multiple="multiple"
-                                    data-placeholder="{{ sc_language_render('product.admin.select_category') }}" style="width: 100%;"
+                                    data-placeholder="{{ sc_language_render('product.admin.select_category') }}"
                                     name="category[]">
                                     <option value=""></option>
                                     @foreach ($categories as $k => $v)
@@ -141,6 +142,12 @@
                                     </option>
                                     @endforeach
                                 </select>
+                                <div class="input-group-append">
+                                    <a target=_new href="{{ sc_route_admin('admin_category.index') }}" class="btn  btn-flat" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                     </a>
+                                </div>
+                                </div>
                                 @if ($errors->has('category'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('category') }}
