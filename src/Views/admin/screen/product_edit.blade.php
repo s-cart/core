@@ -166,8 +166,9 @@
                             <label for="category"
                                 class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.select_category') }}</label>
                             <div class="col-sm-8">
+                                <div class="input-group">
                                 <select class="form-control category select2" multiple="multiple"
-                                    data-placeholder="{{ sc_language_render('product.admin.select_category') }}" style="width: 100%;"
+                                    data-placeholder="{{ sc_language_render('product.admin.select_category') }}"
                                     name="category[]">
                                     <option value=""></option>
                                     @foreach ($categories as $k => $v)
@@ -176,6 +177,12 @@
                                     </option>
                                     @endforeach
                                 </select>
+                                <div class="input-group-append">
+                                    <a target=_new href="{{ sc_route_admin('admin_category.index') }}" class="btn  btn-flat" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                     </a>
+                                </div>
+                                </div>
                                 @if ($errors->has('category'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('category') }}
@@ -343,9 +350,10 @@
 @if (sc_config_admin('product_brand') && ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD))
                         {{-- Brand --}}
                         <div class="form-group row kind kind0 kind1 {{ $errors->has('brand_id') ? ' text-red' : '' }}">
-                            <label for="brand_id" class="col-sm-2 col-form-label">{{ sc_language_render('product.brand') }} (<a href="{{ sc_route_admin('admin_brand.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="brand_id" class="col-sm-2 col-form-label">{{ sc_language_render('product.brand') }}</label>
                             <div class="col-sm-8">
-                                <select class="form-control brand_id select2" style="width: 100%;"
+                                <div class="input-group">
+                                <select class="form-control brand_id select2"
                                     name="brand_id">
                                     <option value=""></option>
                                     @foreach ($brands as $k => $v)
@@ -354,6 +362,12 @@
                                         {{ $v->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="input-group-append">
+                                    <a target=_new href="{{ sc_route_admin('admin_brand.index') }}" class="btn  btn-flat" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                     </a>
+                                </div>
+                                </div>
                                 @if ($errors->has('brand_id'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('brand_id') }}
@@ -367,9 +381,10 @@
 @if (sc_config_admin('product_supplier') && ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD))
                         {{-- Brand --}}
                         <div class="form-group row kind kind0 kind1 {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
-                            <label for="supplier_id" class="col-sm-2 col-form-label">{{ sc_language_render('product.supplier') }} (<a href="{{ sc_route_admin('admin_supplier.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="supplier_id" class="col-sm-2 col-form-label">{{ sc_language_render('product.supplier') }}</label>
                             <div class="col-sm-8">
-                                <select class="form-control supplier_id select2" style="width: 100%;"
+                                <div class="input-group">
+                                <select class="form-control supplier_id select2" 
                                     name="supplier_id">
                                     <option value=""></option>
                                     @foreach ($suppliers as $k => $v)
@@ -378,6 +393,12 @@
                                         {{ $v->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="input-group-append">
+                                    <a target=_new href="{{ sc_route_admin('admin_supplier.index') }}" class="btn  btn-flat" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                     </a>
+                                </div>
+                                </div>
                                 @if ($errors->has('supplier_id'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('supplier_id') }}
@@ -441,9 +462,10 @@
                     @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
                         {{-- Tax --}}
                         <div class="form-group row {{ $errors->has('tax_id') ? ' text-red' : '' }}">
-                            <label for="tax_id" class="col-sm-2 col-form-label">{{ sc_language_render('product.tax') }} (<a href="{{ sc_route_admin('admin_tax.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="tax_id" class="col-sm-2 col-form-label">{{ sc_language_render('product.tax') }}</label>
                             <div class="col-sm-8">
-                                <select class="form-control tax_id select2" style="width: 100%;"
+                                <div class="input-group">
+                                <select class="form-control tax_id select2"
                                     name="tax_id">
                                     <option value="0" {{ (old('tax_id', $product->tax_id) == 0) ? 'selected':'' }}>{{ sc_language_render('admin.tax.non_tax') }}</option>
                                     <option value="auto" {{ (old('tax_id', $product->tax_id) == 'auto') ? 'selected':'' }}>{{ sc_language_render('admin.tax.auto') }}</option>
@@ -453,6 +475,12 @@
                                         {{ $v->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="input-group-append">
+                                    <a target=_new href="{{ sc_route_admin('admin_tax.index') }}" class="btn  btn-flat" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                     </a>
+                                </div>
+                                </div>
                                 @if ($errors->has('tax_id'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('tax_id') }}
@@ -562,9 +590,10 @@
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
 
                         <div class="form-group row {{ $errors->has('weight_class') ? ' text-red' : '' }}">
-                            <label for="weight_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.weight_class') }} (<a href="{{ sc_route_admin('admin_weight_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="weight_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.weight_class') }}</label>
                             <div class="col-sm-8">
-                                <select class="form-control weight_class select2" style="width: 100%;"
+                                <div class="input-group">
+                                <select class="form-control weight_class select2"
                                     name="weight_class">
                                     <option value="">{{ sc_language_render('product.admin.select_weight') }}<option>
                                     @foreach ($listWeight as $k => $v)
@@ -573,6 +602,12 @@
                                         {{ $v }}</option>
                                     @endforeach
                                 </select>
+                                <div class="input-group-append">
+                                    <a target=_new href="{{ sc_route_admin('admin_weight_unit.index') }}" class="btn  btn-flat" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                     </a>
+                                </div>
+                                </div>
                                 @if ($errors->has('weight_class'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('weight_class') }}
@@ -611,9 +646,10 @@
                         @if ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD)
 
                         <div class="form-group row {{ $errors->has('length_class') ? ' text-red' : '' }}">
-                            <label for="length_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.length_class') }} (<a href="{{ sc_route_admin('admin_length_unit.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="length_class" class="col-sm-2 col-form-label">{{ sc_language_render('product.admin.length_class') }}</label>
                             <div class="col-sm-8">
-                                <select class="form-control length_class select2" style="width: 100%;"
+                                <div class="input-group">
+                                <select class="form-control length_class select2"
                                     name="length_class">
                                     <option value="">{{ sc_language_render('product.admin.select_length') }}<option>
                                     @foreach ($listLength as $k => $v)
@@ -622,6 +658,12 @@
                                         {{ $v }}</option>
                                     @endforeach
                                 </select>
+                                <div class="input-group-append">
+                                    <a target=_new href="{{ sc_route_admin('admin_length_unit.index') }}" class="btn  btn-flat" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                     </a>
+                                </div>
+                                </div>
                                 @if ($errors->has('length_class'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('length_class') }}
@@ -697,7 +739,7 @@
                         {{-- Virtual --}}
                         @if ($product->kind == SC_PRODUCT_SINGLE)
                         <div class="form-group row kind kind0 kind1  {{ $errors->has('property') ? ' text-red' : '' }}">
-                            <label for="property" class="col-sm-2 col-form-label">{{ sc_language_render('product.property') }} (<a href="{{ sc_route_admin('admin_product_property.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                            <label for="property" class="col-sm-2 col-form-label">{{ sc_language_render('product.property') }}</label>
                             <div class="col-sm-8">
                                 @foreach ( $properties as $key => $property)
                                 <div class="icheck-primary d-inline">
@@ -707,7 +749,13 @@
                                     </label>
                                 </div>
                                 @endforeach
-
+                                <div class="icheck-primary d-inline">
+                                <label>
+                                    <a target=_new href="{{ sc_route_admin('admin_product_property.index') }}" title="New">
+                                        <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                    </a>
+                                </label>
+                                </div>
                                 @if ($errors->has('property'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('property') }}
@@ -947,7 +995,7 @@
                         @if (!empty($attributeGroup))
                         <div class="form-group row">
                             <div class="col-sm-2">
-                                <label>{{ sc_language_render('product.attribute') }} (<a href="{{ sc_route_admin('admin_attribute_group.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                                <label>{{ sc_language_render('product.attribute') }} (<a href="{{ sc_route_admin('admin_attribute_group.index') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>)</label>
                             </div>
                             <div class="col-sm-8">
 
@@ -1007,7 +1055,7 @@
     $fields = $product->getCustomFields()
 @endphp
                 <hr class="kind ">
-                <label>{{ sc_language_render('admin.custom_field.title') }} (<a target=_new href="{{ sc_route_admin('admin_custom_field.index') }}"><i class="fa fa-link" aria-hidden="true"></i></a>)</label>
+                <label>{{ sc_language_render('admin.custom_field.title') }} (<a target=_new href="{{ sc_route_admin('admin_custom_field.index') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>)</label>
                     @foreach ($customFields as $keyField => $field)
                     @php
                         $default  = json_decode($field->default, true)
