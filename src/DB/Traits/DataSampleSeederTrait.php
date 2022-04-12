@@ -341,7 +341,7 @@ trait DataSampleSeederTrait
     public function dataProduct($dataBrand, $dataSupplier, $mappingIdProduct) {
         $arrId = $mappingIdProduct['arrId'];
         $dataProduct = [];
-        $arrPrice = [50,40,30];
+        $arrPrice = [60,80,100];
         $arrSku = ['PHO-BO', 'NEM-NUONG', 'BANH-GAI','BUN-HUE','BANH-TRANG','MUOI-TAY-NINH','NHAN-LONG','SAU-RIENG','BIA-SAIGON','BIA-HANOI','NUOC-MAM','BANH-MYCAY','HU-TIEU',
         'CANH-CHUA','MANG-CUT','CAM-VINH','VAI-THIEU','NON-LA','AO-DAI','XOAI-CAT','COM-NIU','NHAN-LONG-HUNG-YEN','VAI-THIEU-LUC-NGAN','NEM-CHUA-THANH-HOA'];
         for ($i=1; $i <= 24; $i++) {
