@@ -131,11 +131,11 @@ class ShopCurrency extends Model
     /**
      * [format description]
      * @param  float  $money [description]
-     * @return [type]        [description]
+     * @return float
      */
     public static function format(float $money)
     {
-        return number_format($money, self::$precision, self::$decimal, self::$thousands);
+        return floatval(number_format($money, self::$precision, self::$decimal, self::$thousands));
     }
 
     /**
