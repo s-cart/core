@@ -177,30 +177,32 @@ class ScartServiceProvider extends ServiceProvider
 
         //===========Laravel Passport====================
         //https://laravel.com/docs/8.x/passport
-        Passport::routes();
-        Passport::tokensExpireIn(now()->addDays(config('passport.config.tokensExpireIn', 15)));
-        Passport::refreshTokensExpireIn(now()->addDays(config('passport.config.refreshTokensExpireIn', 30)));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(config('passport.config.personalAccessTokensExpireIn', 6)));
+        if (config('s-cart.ecommerce_mode', 1)) {
+            Passport::routes();
+            Passport::tokensExpireIn(now()->addDays(config('passport.config.tokensExpireIn', 15)));
+            Passport::refreshTokensExpireIn(now()->addDays(config('passport.config.refreshTokensExpireIn', 30)));
+            Passport::personalAccessTokensExpireIn(now()->addMonths(config('passport.config.personalAccessTokensExpireIn', 6)));
 
-        /**
-         * Run command line passport outside console
-         */
-        $this->commands([
-            InstallCommand::class,
-            ClientCommand::class,
-            KeysCommand::class,
-        ]);
+            /**
+             * Run command line passport outside console
+             */
+            $this->commands([
+                InstallCommand::class,
+                ClientCommand::class,
+                KeysCommand::class,
+            ]);
 
-        Passport::tokensCan([
-            'user' => 'User default',
-            'user-guest' => 'User guest',
-            'admin' => 'Admin shop',
-            'admin-supper' => 'Admin supper',
-        ]);
+            Passport::tokensCan([
+                'user' => 'User default',
+                'user-guest' => 'User guest',
+                'admin' => 'Admin shop',
+                'admin-supper' => 'Admin supper',
+            ]);
 
-        Passport::setDefaultScope([
-            'user-guest',
-        ]);
+            Passport::setDefaultScope([
+                'user-guest',
+            ]);
+        }
     }
 
     /**
