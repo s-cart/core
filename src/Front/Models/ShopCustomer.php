@@ -108,7 +108,6 @@ class ShopCustomer extends Authenticatable
             //Delete custom field
                 (new ShopCustomFieldDetail)
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-                ->select('code', 'name', 'text')
                 ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $customer->id)
                 ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
                 ->delete();
