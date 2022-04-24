@@ -114,18 +114,7 @@ class ShopCustomer extends Authenticatable
         $dataClean = sc_clean($dataInsert);
         $fields = $dataClean['fields'] ?? [];
         unset($dataClean['fields']);
-        $dataAddress = [
-            'first_name'      => $dataClean['first_name'] ?? '',
-            'last_name'       => $dataClean['last_name'] ?? '',
-            'first_name_kana' => $dataClean['first_name_kana'] ?? '',
-            'last_name_kana'  => $dataClean['last_name_kana'] ?? '',
-            'postcode'        => $dataClean['postcode'] ?? '',
-            'address1'        => $dataClean['address1'] ?? '',
-            'address2'        => $dataClean['address2'] ?? '',
-            'address3'        => $dataClean['address3'] ?? '',
-            'country'         => $dataClean['country'] ?? '',
-            'phone'           => $dataClean['phone'] ?? '',
-        ];
+        $dataAddress = sc_customer_address_mapping($dataClean);
         $user = self::create($dataClean);
         $address = $user->addresses()->save(new ShopCustomerAddress($dataAddress));
         $user->address_id = $address->id;

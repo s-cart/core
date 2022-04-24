@@ -91,3 +91,31 @@ if (!function_exists('sc_customer_sendmail_verify') && !in_array('sc_customer_se
         }
     }
 }
+
+
+/**
+ * Mapping data address of customer
+ *
+ * @param   [type]  $dataClean  [$dataClean description]
+ *
+ * @return  [array]              [return description]
+ */
+if (!function_exists('sc_customer_address_mapping') && !in_array('sc_customer_address_mapping', config('helper_except', []))) {
+    function sc_customer_address_mapping(array $dataClean)
+    {
+        $dataAddress = [
+            'first_name'      => $dataClean['first_name'] ?? '',
+            'last_name'       => $dataClean['last_name'] ?? '',
+            'first_name_kana' => $dataClean['first_name_kana'] ?? '',
+            'last_name_kana'  => $dataClean['last_name_kana'] ?? '',
+            'postcode'        => $dataClean['postcode'] ?? '',
+            'address1'        => $dataClean['address1'] ?? '',
+            'address2'        => $dataClean['address2'] ?? '',
+            'address3'        => $dataClean['address3'] ?? '',
+            'country'         => $dataClean['country'] ?? '',
+            'phone'           => $dataClean['phone'] ?? '',
+        ];
+
+        return $dataAddress;
+    }
+}
