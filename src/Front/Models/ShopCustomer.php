@@ -55,38 +55,8 @@ class ShopCustomer extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $checkContent = (new ShopEmailTemplate)->where('group', 'forgot_password')->where('status', 1)->first();
-        if ($checkContent) {
-            $content = $checkContent->text;
-            $dataFind = [
-                '/\{\{\$title\}\}/',
-                '/\{\{\$reason_sendmail\}\}/',
-                '/\{\{\$note_sendmail\}\}/',
-                '/\{\{\$note_access_link\}\}/',
-                '/\{\{\$reset_link\}\}/',
-                '/\{\{\$reset_button\}\}/',
-            ];
-            $url = sc_route('password.reset', ['token' => $token]);
-            $dataReplace = [
-                sc_language_render('email.forgot_password.title'),
-                sc_language_render('email.forgot_password.reason_sendmail'),
-                sc_language_render('email.forgot_password.note_sendmail', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]),
-                sc_language_render('email.forgot_password.note_access_link', ['reset_button' => sc_language_render('email.forgot_password.reset_button'), 'url' => $url]),
-                $url,
-                sc_language_render('email.forgot_password.reset_button'),
-            ];
-            $content = preg_replace($dataFind, $dataReplace, $content);
-            $dataView = [
-                'content' => $content,
-            ];
-
-            $config = [
-                'to' => $this->getEmailForPasswordReset(),
-                'subject' => sc_language_render('email.forgot_password.reset_button'),
-            ];
-
-            sc_send_mail('templates.' . sc_store('template') . '.mail.forgot_password', $dataView, $config, $dataAtt = []);
-        }
+        $emailReset = $this->getEmailForPasswordReset();
+        return sc_customer_sendmail_reset_notification($token, $emailReset);
     }
 
     /*
@@ -225,39 +195,7 @@ class ShopCustomer extends Authenticatable
                     'token' => sha1($this->email),
                 ]
             );
-
-            $checkContent = (new ShopEmailTemplate)->where('group', 'customer_verify')->where('status', 1)->first();
-            if ($checkContent) {
-                $content = $checkContent->text;
-                $dataFind = [
-                    '/\{\{\$title\}\}/',
-                    '/\{\{\$reason_sendmail\}\}/',
-                    '/\{\{\$note_sendmail\}\}/',
-                    '/\{\{\$note_access_link\}\}/',
-                    '/\{\{\$url_verify\}\}/',
-                    '/\{\{\$button\}\}/',
-                ];
-                $dataReplace = [
-                    sc_language_render('email.verification_content.title'),
-                    sc_language_render('email.verification_content.reason_sendmail'),
-                    sc_language_render('email.verification_content.note_sendmail', ['count' => config('auth.verification')]),
-                    sc_language_render('email.verification_content.note_access_link', ['reset_button' => sc_language_render('customer.verify_email.button_verify'), 'url' => $url]),
-                    $url,
-                    sc_language_render('customer.verify_email.button_verify'),
-                ];
-                $content = preg_replace($dataFind, $dataReplace, $content);
-                $dataView = [
-                    'content' => $content,
-                ];
-    
-                $config = [
-                    'to' => $this->email,
-                    'subject' => sc_language_render('customer.verify_email.button_verify'),
-                ];
-    
-                sc_send_mail('templates.' . sc_store('template') . '.mail.customer_verify', $dataView, $config, $dataAtt = []);
-                return true;
-            }
+            return sc_customer_sendmail_verify($this->email);
         }
         return false;
     }
