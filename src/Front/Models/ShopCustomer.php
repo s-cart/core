@@ -187,15 +187,7 @@ class ShopCustomer extends Authenticatable
     public function sendEmailVerify()
     {
         if ($this->hasVerifiedEmail()) {
-            $url = \Illuminate\Support\Facades\URL::temporarySignedRoute(
-                'customer.verify_process',
-                \Carbon\Carbon::now()->addMinutes(config('auth.verification', 60)),
-                [
-                    'id' => $this->id,
-                    'token' => sha1($this->email),
-                ]
-            );
-            return sc_customer_sendmail_verify($this->email);
+            return sc_customer_sendmail_verify($this->email, $this->id);
         }
         return false;
     }

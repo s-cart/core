@@ -46,8 +46,17 @@ if (!function_exists('sc_customer_sendmail_reset_notification') && !in_array('sc
  * Send email verify
  */
 if (!function_exists('sc_customer_sendmail_verify') && !in_array('sc_customer_sendmail_verify', config('helper_except', []))) {
-    function sc_customer_sendmail_verify($emailVerify)
+    function sc_customer_sendmail_verify($emailVerify, $userId)
     {
+        $url = \Illuminate\Support\Facades\URL::temporarySignedRoute(
+            'customer.verify_process',
+            \Carbon\Carbon::now()->addMinutes(config('auth.verification', 60)),
+            [
+                'id' => $userId,
+                'token' => sha1($emailVerify),
+            ]
+        );
+
         $checkContent = (new \SCart\Core\Front\Models\ShopEmailTemplate)->where('group', 'customer_verify')->where('status', 1)->first();
         if ($checkContent) {
             $content = $checkContent->text;
