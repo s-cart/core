@@ -77,53 +77,10 @@ class RegisterController extends RootFrontController
     protected function create(array $data)
     {
         $data['country'] = strtoupper($data['country'] ?? '');
-        $dataMap = $this->mappDataInsert($data);
+        $dataMap = $this->mappingValidator($data)['dataInsert'];
 
         $user = ShopCustomer::createCustomer($dataMap);
-        if ($user) {
-            if (sc_config('welcome_customer')) {
-                $checkContent = (new ShopEmailTemplate)->where('group', 'welcome_customer')->where('status', 1)->first();
-                if ($checkContent) {
-                    $content = $checkContent->text;
-                    $dataFind = [
-                        '/\{\{\$title\}\}/',
-                        '/\{\{\$first_name\}\}/',
-                        '/\{\{\$last_name\}\}/',
-                        '/\{\{\$email\}\}/',
-                        '/\{\{\$phone\}\}/',
-                        '/\{\{\$password\}\}/',
-                        '/\{\{\$address1\}\}/',
-                        '/\{\{\$address2\}\}/',
-                        '/\{\{\$address3\}\}/',
-                        '/\{\{\$country\}\}/',
-                    ];
-                    $dataReplace = [
-                        sc_language_render('email.welcome_customer.title'),
-                        $dataMap['first_name'] ?? '',
-                        $dataMap['last_name'] ?? '',
-                        $dataMap['email'] ?? '',
-                        $dataMap['phone'] ?? '',
-                        $dataMap['password'] ?? '',
-                        $dataMap['address1'] ?? '',
-                        $dataMap['address2'] ?? '',
-                        $dataMap['address3'] ?? '',
-                        $dataMap['country'] ?? '',
-                    ];
-                    $content = preg_replace($dataFind, $dataReplace, $content);
-                    $dataView = [
-                        'content' => $content,
-                    ];
 
-                    $config = [
-                        'to' => $data['email'],
-                        'subject' => sc_language_render('email.welcome_customer.title'),
-                    ];
-
-                    sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
-                }
-            }
-        } else {
-        }
         return $user;
     }
     
@@ -205,49 +162,11 @@ class RegisterController extends RootFrontController
         $data = $request->all();
         $this->validator($data)->validate();
         $user = $this->create($data);
-        $dataMap = $this->mappDataInsert($data);
+
         if ($user) {
-            if (sc_config('welcome_customer')) {
-                $checkContent = (new ShopEmailTemplate)->where('group', 'welcome_customer')->where('status', 1)->first();
-                if ($checkContent) {
-                    $content = $checkContent->text;
-                    $dataFind = [
-                        '/\{\{\$title\}\}/',
-                        '/\{\{\$first_name\}\}/',
-                        '/\{\{\$last_name\}\}/',
-                        '/\{\{\$email\}\}/',
-                        '/\{\{\$phone\}\}/',
-                        '/\{\{\$password\}\}/',
-                        '/\{\{\$address1\}\}/',
-                        '/\{\{\$address2\}\}/',
-                        '/\{\{\$address3\}\}/',
-                        '/\{\{\$country\}\}/',
-                    ];
-                    $dataReplace = [
-                        sc_language_render('email.welcome_customer.title'),
-                        $dataMap['first_name'] ?? '',
-                        $dataMap['last_name'] ?? '',
-                        $dataMap['email'] ?? '',
-                        $dataMap['phone'] ?? '',
-                        $dataMap['password'] ?? '',
-                        $dataMap['address1'] ?? '',
-                        $dataMap['address2'] ?? '',
-                        $dataMap['address3'] ?? '',
-                        $dataMap['country'] ?? '',
-                    ];
-                    $content = preg_replace($dataFind, $dataReplace, $content);
-                    $dataView = [
-                        'content' => $content,
-                    ];
 
-                    $config = [
-                        'to' => $data['email'],
-                        'subject' => sc_language_render('email.welcome_customer.title'),
-                    ];
-
-                    sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
-                }
-            }
+            //Send email welcome
+            sc_customer_sendmail_welcome($data);
 
             //Send email verify
             $user->sendEmailVerify();

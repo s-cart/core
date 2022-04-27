@@ -105,51 +105,16 @@ class MemberAuthController extends RootFrontController
      */
     protected function insert($data)
     {
-        $dataMap = $this->mappDataInsert($data);
+        $dataMap = $this->mappingValidator($data)['dataInsert'];
 
         $user = ShopCustomer::createCustomer($dataMap);
+
         if ($user) {
-            if (sc_config('welcome_customer')) {
-                $checkContent = (new ShopEmailTemplate)->where('group', 'welcome_customer')->where('status', 1)->first();
-                if ($checkContent) {
-                    $content = $checkContent->text;
-                    $dataFind = [
-                        '/\{\{\$title\}\}/',
-                        '/\{\{\$first_name\}\}/',
-                        '/\{\{\$last_name\}\}/',
-                        '/\{\{\$email\}\}/',
-                        '/\{\{\$phone\}\}/',
-                        '/\{\{\$password\}\}/',
-                        '/\{\{\$address1\}\}/',
-                        '/\{\{\$address2\}\}/',
-                        '/\{\{\$address3\}\}/',
-                        '/\{\{\$country\}\}/',
-                    ];
-                    $dataReplace = [
-                        sc_language_render('email.welcome'),
-                        $dataMap['first_name'],
-                        $dataMap['last_name'],
-                        $dataMap['email'],
-                        $dataMap['phone'],
-                        $dataMap['password'],
-                        $dataMap['address1'],
-                        $dataMap['address2'],
-                        $dataMap['address3'],
-                        $dataMap['country'],
-                    ];
-                    $content = preg_replace($dataFind, $dataReplace, $content);
-                    $dataView = [
-                        'content' => $content,
-                    ];
+            //Send email welcome
+            sc_customer_sendmail_welcome($data);
 
-                    $config = [
-                        'to' => $data['email'],
-                        'subject' => sc_language_render('email.welcome'),
-                    ];
-
-                    sc_send_mail($this->templatePath . '.mail.welcome_customer', $dataView, $config, []);
-                }
-            }
+            //Send email verify
+            $user->sendEmailVerify();
         }
         return $user;
     }
