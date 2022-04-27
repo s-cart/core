@@ -68,6 +68,18 @@ class AdminCustomerController extends RootFrontController
     }
 
     /**
+     * Inser data new customer
+     */
+    protected function insert($data)
+    {
+        $dataMap = $this->mappDataInsert($data);
+
+        $user = ShopCustomer::createCustomer($dataMap);
+        
+        return $user;
+    }
+
+    /**
      * Validate data input
      */
     protected function validator(array $data)
