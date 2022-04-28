@@ -51,7 +51,8 @@ class AdminCustomerController extends RootFrontController
     {
         $data = $request->all();
         $data['country'] = strtoupper($data['country'] ?? '');
-        $v = $this->validator($data);
+        $dataMap = $this->mappingValidator($data);
+        $v = Validator::make($data, $dataMap['validate'], $dataMap['messages']);
         if ($v->fails()) {
             $msg = '';
             foreach ($v->errors()->toArray() as $key => $value) {
@@ -63,7 +64,7 @@ class AdminCustomerController extends RootFrontController
                 'detail' => $msg
             ]);
         }
-        $user = $this->insert($data);
+        $user = $this->insert($dataMap['dataInsert']);
         return response()->json($user);
     }
 
@@ -72,18 +73,10 @@ class AdminCustomerController extends RootFrontController
      */
     protected function insert($data)
     {
-        $dataMapping = $this->mappingValidator($data);
-        $user = ShopCustomer::createCustomer($dataMapping['dataInsert']);
-
+        $user = ShopCustomer::createCustomer($data);
+        if ($user) {
+            sc_customer_created_by_admin($user, $data);
+        }
         return $user;
-    }
-
-    /**
-     * Validate data input
-     */
-    protected function validator(array $data)
-    {
-        $dataMapping = $this->mappingValidator($data);
-        return Validator::make($data, $dataMapping['validate'], $dataMapping['messages']);
     }
 }

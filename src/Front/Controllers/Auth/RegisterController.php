@@ -164,12 +164,8 @@ class RegisterController extends RootFrontController
         $user = $this->create($data);
 
         if ($user) {
-
-            //Send email welcome
-            sc_customer_sendmail_welcome($data);
-
-            //Send email verify
-            $user->sendEmailVerify();
+            
+            sc_customer_created_by_client($user, $data);
 
             //Login
             $this->guard()->login($user);

@@ -603,3 +603,27 @@ if (!function_exists('sc_customer_data_edit_mapping') && !in_array('sc_customer_
         return $dataMap;
     }
 }
+
+/**
+ * Process after customer created by client
+ */
+if (!function_exists('sc_customer_created_by_client') && !in_array('sc_customer_created_by_client', config('helper_except', []))) {
+    function sc_customer_created_by_client(ShopCustomer $user, array $dataMap)
+    {
+        //Send email welcome
+        sc_customer_sendmail_welcome($dataMap);
+
+        //Send email verify
+        $user->sendEmailVerify();
+    }
+}
+
+/**
+ * Process after customer created by admin
+ */
+if (!function_exists('sc_customer_created_by_admin') && !in_array('sc_customer_created_by_admin', config('helper_except', []))) {
+    function sc_customer_created_by_admin(ShopCustomer $user, array $dataMap)
+    {
+        //
+    }
+}
