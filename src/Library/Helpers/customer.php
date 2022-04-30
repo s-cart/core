@@ -156,19 +156,63 @@ if (!function_exists('sc_customer_address_mapping') && !in_array('sc_customer_ad
     function sc_customer_address_mapping(array $dataRaw)
     {
         $dataAddress = [
-            'first_name'      => $dataRaw['first_name'] ?? '',
-            'last_name'       => $dataRaw['last_name'] ?? '',
-            'first_name_kana' => $dataRaw['first_name_kana'] ?? '',
-            'last_name_kana'  => $dataRaw['last_name_kana'] ?? '',
-            'postcode'        => $dataRaw['postcode'] ?? '',
-            'address1'        => $dataRaw['address1'] ?? '',
-            'address2'        => $dataRaw['address2'] ?? '',
-            'address3'        => $dataRaw['address3'] ?? '',
-            'country'         => $dataRaw['country'] ?? '',
-            'phone'           => $dataRaw['phone'] ?? '',
+            'first_name' => $dataRaw['first_name'] ?? '',
+            'address1' => $dataRaw['address1'] ?? '',
+        ];
+        $validate = [
+            'first_name' => config('validation.customer.first_name', 'required|string|max:100'),
+            'address1' => config('validation.customer.address1_required', 'required|string|max:100'),
+        ];
+        if (sc_config('customer_lastname')) {
+            $validate['last_name'] = config('validation.customer.last_name_required', 'required|string|max:100');
+            $dataAddress['last_name'] = $dataRaw['last_name']??'';
+        }
+        if (sc_config('customer_address2')) {
+            $validate['address2'] = config('validation.customer.address2_required', 'required|string|max:100');
+            $dataAddress['address2'] = $dataRaw['address2']??'';
+        }
+        if (sc_config('customer_address3')) {
+            $validate['address3'] = config('validation.customer.address3_required', 'required|string|max:100');
+            $dataAddress['address3'] = $dataRaw['address3']??'';
+        }
+        if (sc_config('customer_phone')) {
+            $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{6,12}$/');
+            $dataAddress['phone'] = $dataRaw['phone']??'';
+        }
+        if (sc_config('customer_country')) {
+            $validate['country'] = config('validation.customer.country_required', 'required|string|min:2');
+            $dataAddress['country'] = $dataRaw['country']??'';
+        }
+        if (sc_config('customer_postcode')) {
+            $validate['postcode'] = config('validation.customer.postcode_null', 'nullable|min:5');
+            $dataAddress['postcode'] = $dataRaw['postcode']??'';
+        }
+
+        $messages = [
+            'last_name.required'  => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.last_name')]),
+            'first_name.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.first_name')]),
+            'address1.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address1')]),
+            'address2.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address2')]),
+            'address3.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address3')]),
+            'phone.required'      => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.phone')]),
+            'country.required'    => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.country')]),
+            'postcode.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.postcode')]),
+            'phone.regex'         => sc_language_render('customer.phone_regex'),
+            'postcode.min'        => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.postcode')]),
+            'country.min'         => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.country')]),
+            'first_name.max'      => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.first_name')]),
+            'address1.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address1')]),
+            'address2.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address2')]),
+            'address3.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address3')]),
+            'last_name.max'       => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.last_name')]),
         ];
 
-        return $dataAddress;
+        $dataMap = [
+            'validate' => $validate,
+            'messages' => $messages,
+            'dataAddress' => $dataAddress
+        ];
+        return $dataMap;
     }
 }
 

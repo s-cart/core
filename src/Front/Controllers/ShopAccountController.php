@@ -7,7 +7,6 @@ use SCart\Core\Front\Models\ShopOrder;
 use SCart\Core\Front\Models\ShopOrderStatus;
 use SCart\Core\Front\Models\ShopShippingStatus;
 use SCart\Core\Front\Models\ShopCustomer;
-use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use SCart\Core\Front\Models\ShopCustomField;
 use SCart\Core\Front\Models\ShopAttributeGroup;
 use SCart\Core\Front\Models\ShopCustomerAddress;
@@ -15,7 +14,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
-use Carbon\Carbon;
 
 class ShopAccountController extends RootFrontController
 {
@@ -204,25 +202,39 @@ class ShopAccountController extends RootFrontController
     public function postChangeInfomation(Request $request)
     {
         $user = Auth::user();
-        $id = $user->id;
+        $cId = $user->id;
         $data = request()->all();
-        $data['id'] = $id;
 
-        $dataMapping = $this->mappingValidatorEdit($data);
-        $v =  Validator::make($data, $dataMapping['validate'], $dataMapping['messages']);
+        $v =  $this->validator($data);
         if ($v->fails()) {
             return redirect()->back()
                 ->withErrors($v)
                 ->withInput();
         }
-        $fields = $dataMapping['dataUpdate']['fields'] ?? [];
-        unset($dataMapping['dataUpdate']['fields']);
-        ShopCustomer::updateInfo($dataMapping['dataUpdate'], $id);
-
-        ShopCustomer::updateCustomField($fields, $id);
+        $user = $this->updateCustomer($data, $cId);
 
         return redirect(sc_route('customer.index'))
             ->with(['success' => sc_language_render('customer.update_success')]);
+    }
+
+    /**
+     * Validate data input
+     */
+    protected function validator(array $data)
+    {
+        $dataMapp = $this->mappingValidatorEdit($data);
+        return Validator::make($data, $dataMapp['validate'], $dataMapp['messages']);
+    }
+
+    /**
+     * Update data customer
+     */
+    protected function updateCustomer(array $data, string $cId)
+    {
+        $dataMapp = $this->mappingValidatorEdit($data);
+        $user = ShopCustomer::updateInfo($dataMapp['dataUpdate'], $cId);
+
+        return $user;
     }
 
     /**
@@ -442,57 +454,10 @@ class ShopAccountController extends RootFrontController
             ->where('id', $id)
             ->first();
         
-        $dataUpdate = [
-            'first_name' => $data['first_name'],
-            'address1' => $data['address1'],
-        ];
-        $validate = [
-            'first_name' => config('validation.customer.first_name', 'required|string|max:100'),
-            'address1' => config('validation.customer.address1_required', 'required|string|max:100'),
-        ];
-        if (sc_config('customer_lastname')) {
-            $validate['last_name'] = config('validation.customer.last_name_required', 'required|string|max:100');
-            $dataUpdate['last_name'] = $data['last_name']??'';
-        }
-        if (sc_config('customer_address2')) {
-            $validate['address2'] = config('validation.customer.address2_required', 'required|string|max:100');
-            $dataUpdate['address2'] = $data['address2']??'';
-        }
-        if (sc_config('customer_address3')) {
-            $validate['address3'] = config('validation.customer.address3_required', 'required|string|max:100');
-            $dataUpdate['address3'] = $data['address3']??'';
-        }
-        if (sc_config('customer_phone')) {
-            $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{6,12}$/');
-            $dataUpdate['phone'] = $data['phone']??'';
-        }
-        if (sc_config('customer_country')) {
-            $validate['country'] = config('validation.customer.country_required', 'required|string|min:2');
-            $dataUpdate['country'] = $data['country']??'';
-        }
-        if (sc_config('customer_postcode')) {
-            $validate['postcode'] = config('validation.customer.postcode_null', 'nullable|min:5');
-            $dataUpdate['postcode'] = $data['postcode']??'';
-        }
-
-        $messages = [
-            'last_name.required'  => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.last_name')]),
-            'first_name.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.first_name')]),
-            'address1.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address1')]),
-            'address2.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address2')]),
-            'address3.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.address3')]),
-            'phone.required'      => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.phone')]),
-            'country.required'    => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.country')]),
-            'postcode.required'   => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.postcode')]),
-            'phone.regex'         => sc_language_render('customer.phone_regex'),
-            'postcode.min'        => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.postcode')]),
-            'country.min'         => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.country')]),
-            'first_name.max'      => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.first_name')]),
-            'address1.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address1')]),
-            'address2.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address2')]),
-            'address3.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.address3')]),
-            'last_name.max'       => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.last_name')]),
-        ];
+        $dataMapp = sc_customer_address_mapping($data);
+        $dataUpdate = $dataMapp['dataAddress'];
+        $validate = $dataMapp['validate'];
+        $messages = $dataMapp['messages'];
 
         $v = Validator::make(
             $dataUpdate,

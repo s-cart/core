@@ -230,14 +230,7 @@ class AdminCustomerController extends RootAdminController
                 ->withInput();
         }
 
-        $fields = $dataMapping['dataUpdate']['fields'];
-        unset($dataMapping['dataUpdate']['fields']);
-
         AdminCustomer::updateInfo($dataMapping['dataUpdate'], $id);
-
-        //Update custom field
-        AdminCustomer::updateCustomField($fields, $id);
-
 
         return redirect()->route('admin_customer.index')->with('success', sc_language_render('action.edit_success'));
     }

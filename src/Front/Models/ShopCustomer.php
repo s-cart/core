@@ -2,14 +2,12 @@
 
 namespace SCart\Core\Front\Models;
 
-use SCart\Core\Front\Models\ShopEmailTemplate;
 use SCart\Core\Front\Models\ShopCustomerAddress;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Auth;
 use Laravel\Passport\HasApiTokens;
 use SCart\Core\Front\Models\ShopCustomFieldDetail;
-use Illuminate\Auth\AuthenticationException;
 
 class ShopCustomer extends Authenticatable
 {
@@ -100,9 +98,18 @@ class ShopCustomer extends Authenticatable
      */
     public static function updateInfo($dataUpdate, $id)
     {
-        $dataUpdate = sc_clean($dataUpdate);
-        $obj = self::find($id);
-        return $obj->update($dataUpdate);
+        $dataClean = sc_clean($dataUpdate);
+
+        $fields = $dataClean['fields'] ?? [];
+        unset($dataClean['fields']);
+
+        $user = self::find($id);
+        $user->update($dataClean);
+
+        //Insert custom fields
+        ShopCustomer::updateCustomField($fields, $user->id);
+
+        return $user;
     }
 
     /**
@@ -112,9 +119,12 @@ class ShopCustomer extends Authenticatable
     public static function createCustomer($dataInsert)
     {
         $dataClean = sc_clean($dataInsert);
+
         $fields = $dataClean['fields'] ?? [];
         unset($dataClean['fields']);
-        $dataAddress = sc_customer_address_mapping($dataClean);
+
+        $dataAddress = sc_customer_address_mapping($dataClean)['dataAddress'];
+        
         $user = self::create($dataClean);
         $address = $user->addresses()->save(new ShopCustomerAddress($dataAddress));
         $user->address_id = $address->id;
@@ -223,15 +233,15 @@ class ShopCustomer extends Authenticatable
      * Update custom field
      *
      * @param   array  $fields  [$fields description]
-     * @param   [type] $cID     [$cID description]
+     * @param   [type] $cId     [$cId description]
      *
      * @return  []              [return description]
      */
-    public static function updateCustomField(array $fields = [], $cID) {
+    public static function updateCustomField(array $fields = [], $cId) {
         if (!empty($fields)) {
             (new ShopCustomFieldDetail)
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $cID)
+                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $cId)
                 ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
                 ->delete();
 
@@ -242,7 +252,7 @@ class ShopCustomer extends Authenticatable
                     $dataField[] = sc_clean([
                         'id' => sc_uuid(),
                         'custom_field_id' => $field->id,
-                        'rel_id' => $cID,
+                        'rel_id' => $cId,
                         'text' => trim($value),
                     ], [], true);
                 }
