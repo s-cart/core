@@ -2,7 +2,6 @@
 namespace SCart\Core\Front\Controllers;
 
 use SCart\Core\Front\Controllers\RootFrontController;
-use SCart\Core\Front\Models\ShopEmailTemplate;
 use SCart\Core\Front\Models\ShopAttributeGroup;
 use SCart\Core\Front\Models\ShopCountry;
 use SCart\Core\Front\Models\ShopOrder;
@@ -318,131 +317,21 @@ class ShopCartController extends RootFrontController
 
         $data = request()->all();
 
-        $validate = [
-            'first_name'     => config('validation.customer.first_name', 'required|string|max:100'),
-            'email'          => config('validation.customer.email', 'required|string|email|max:255'),
-        ];
-        //check shipping
-        if (!sc_config('shipping_off')) {
-            $validate['shippingMethod'] = 'required';
-        }
-        //check payment
-        if (!sc_config('payment_off')) {
-            $validate['paymentMethod'] = 'required';
-        }
-
-        if (sc_config('customer_lastname')) {
-            if (sc_config('customer_lastname_required')) {
-                $validate['last_name'] = config('validation.customer.last_name_required', 'required|string|max:100');
-            } else {
-                $validate['last_name'] = config('validation.customer.last_name_null', 'nullable|string|max:100');
-            }
-        }
-        if (sc_config('customer_address1')) {
-            if (sc_config('customer_address1_required')) {
-                $validate['address1'] = config('validation.customer.address1_required', 'required|string|max:100');
-            } else {
-                $validate['address1'] = config('validation.customer.address1_null', 'nullable|string|max:100');
-            }
-        }
-
-        if (sc_config('customer_address2')) {
-            if (sc_config('customer_address2_required')) {
-                $validate['address2'] = config('validation.customer.address2_required', 'required|string|max:100');
-            } else {
-                $validate['address2'] = config('validation.customer.address2_null', 'nullable|string|max:100');
-            }
-        }
-
-        if (sc_config('customer_address3')) {
-            if (sc_config('customer_address3_required')) {
-                $validate['address3'] = config('validation.customer.address3_required', 'required|string|max:100');
-            } else {
-                $validate['address3'] = config('validation.customer.address3_null', 'nullable|string|max:100');
-            }
-        }
-
-        if (sc_config('customer_phone')) {
-            if (sc_config('customer_phone_required')) {
-                $validate['phone'] = config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{6,12}$/');
-            } else {
-                $validate['phone'] = config('validation.customer.phone_null', 'nullable|regex:/^0[^0][0-9\-]{6,12}$/');
-            }
-        }
-        if (sc_config('customer_country')) {
-            $arraycountry = (new ShopCountry)->pluck('code')->toArray();
-            if (sc_config('customer_country_required')) {
-                $validate['country'] = config('validation.customer.country_required', 'required|string|min:2').'|in:'. implode(',', $arraycountry);
-            } else {
-                $validate['country'] = config('validation.customer.country_null', 'nullable|string|min:2').'|in:'. implode(',', $arraycountry);
-            }
-        }
-
-        if (sc_config('customer_postcode')) {
-            if (sc_config('customer_postcode_required')) {
-                $validate['postcode'] = config('validation.customer.postcode_required', 'required|min:5');
-            } else {
-                $validate['postcode'] = config('validation.customer.postcode_null', 'nullable|min:5');
-            }
-        }
-        if (sc_config('customer_company')) {
-            if (sc_config('customer_company_required')) {
-                $validate['company'] = config('validation.customer.company_required', 'required|string|max:100');
-            } else {
-                $validate['company'] = config('validation.customer.company_null', 'nullable|string|max:100');
-            }
-        }
-
-        if (sc_config('customer_name_kana')) {
-            if (sc_config('customer_name_kana_required')) {
-                $validate['first_name_kana'] = config('validation.customer.name_kana_required', 'required|string|max:100');
-                $validate['last_name_kana'] = config('validation.customer.name_kana_required', 'required|string|max:100');
-            } else {
-                $validate['first_name_kana'] = config('validation.customer.name_kana_null', 'nullable|string|max:100');
-                $validate['last_name_kana'] = config('validation.customer.name_kana_null', 'nullable|string|max:100');
-            }
-        }
-
-        $messages = [
-            'last_name.required'      => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.last_name')]),
-            'first_name.required'     => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.first_name')]),
-            'email.required'          => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.email')]),
-            'address1.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address1')]),
-            'address2.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address2')]),
-            'address3.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.address3')]),
-            'phone.required'          => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.phone')]),
-            'country.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.country')]),
-            'postcode.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.postcode')]),
-            'company.required'        => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.company')]),
-            'sex.required'            => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.sex')]),
-            'birthday.required'       => sc_language_render('validation.required', ['attribute'=> sc_language_render('cart.birthday')]),
-            'email.email'             => sc_language_render('validation.email', ['attribute'=> sc_language_render('cart.email')]),
-            'phone.regex'             => sc_language_render('customer.phone_regex'),
-            'postcode.min'            => sc_language_render('validation.min', ['attribute'=> sc_language_render('cart.postcode')]),
-            'country.min'             => sc_language_render('validation.min', ['attribute'=> sc_language_render('cart.country')]),
-            'first_name.max'          => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.first_name')]),
-            'email.max'               => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.email')]),
-            'address1.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address1')]),
-            'address2.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address2')]),
-            'address3.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.address3')]),
-            'last_name.max'           => sc_language_render('validation.max', ['attribute'=> sc_language_render('cart.last_name')]),
-            'birthday.date'           => sc_language_render('validation.date', ['attribute'=> sc_language_render('cart.birthday')]),
-            'birthday.date_format'    => sc_language_render('validation.date_format', ['attribute'=> sc_language_render('cart.birthday')]),
-            'shippingMethod.required' => sc_language_render('cart.validation.shippingMethod_required'),
-            'paymentMethod.required'  => sc_language_render('cart.validation.paymentMethod_required'),
-        ];
+        $dataValidate = sc_order_mapping_validate();
+        $validate = $dataValidate['validate'];
+        $messages = $dataValidate['messages'];
 
         if (sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
             $validate['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
 
-
         $v = Validator::make(
             $data,
             $validate,
             $messages
         );
+
         if ($v->fails()) {
             return redirect()->back()
                 ->withInput()
