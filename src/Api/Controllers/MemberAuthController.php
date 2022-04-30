@@ -75,8 +75,8 @@ class MemberAuthController extends RootFrontController
     {
         $data = $request->all();
         $data['country'] = strtoupper($data['country'] ?? '');
-        $dataMapp = $this->mappingValidator($data);
-        $v = Validator::make($data, $dataMapp['validate'], $dataMapp['messages']);
+
+        $v = $this->validator($data);
         if ($v->fails()) {
             $msg = '';
             foreach ($v->errors()->toArray() as $key => $value) {
@@ -88,20 +88,31 @@ class MemberAuthController extends RootFrontController
                 'detail' => $msg
             ]);
         }
-        $user = $this->insert($dataMapp['dataInsert']);
+        
+        $user = $this->insertCustomer($data);
+
         return response()->json($user);
     }
 
+    /**
+     * Validate data input
+     */
+    protected function validator(array $data)
+    {
+        $dataMapp = $this->mappingValidator($data);
+        return Validator::make($data, $dataMapp['validate'], $dataMapp['messages']);
+    }
 
     /**
      * Inser data new customer
      */
-    protected function insert($data)
+    protected function insertCustomer($data)
     {
-        $user = ShopCustomer::createCustomer($data);
+        $dataMapp = $this->mappingValidator($data);
+        $user = ShopCustomer::createCustomer($dataMapp['dataInsert']);
 
         if ($user) {
-            sc_customer_created_by_client($user, $data);
+            sc_customer_created_by_client($user, $dataMapp['dataInsert']);
         }
         return $user;
     }
