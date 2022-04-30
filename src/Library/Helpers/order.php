@@ -132,12 +132,11 @@ if (!function_exists('sc_order_process_after_success') && !in_array('sc_order_pr
 }
 
 /**
- * Function process after order success
+ * Function process mapping validate order
  */
 if (!function_exists('sc_order_mapping_validate') && !in_array('sc_order_mapping_validate', config('helper_except', []))) {
     function sc_order_mapping_validate():array
     {
-
         $validate = [
             'first_name'     => config('validation.customer.first_name', 'required|string|max:100'),
             'email'          => config('validation.customer.email', 'required|string|email|max:255'),
@@ -252,9 +251,9 @@ if (!function_exists('sc_order_mapping_validate') && !in_array('sc_order_mapping
             'paymentMethod.required'  => sc_language_render('cart.validation.paymentMethod_required'),
         ];
 
-        $dataValidate['validate'] = $validate;
-        $dataValidate['messages'] = $messages;
+        $dataMap['validate'] = $validate;
+        $dataMap['messages'] = $messages;
 
-        return $dataValidate;
+        return $dataMap;
     }
 }

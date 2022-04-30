@@ -317,9 +317,9 @@ class ShopCartController extends RootFrontController
 
         $data = request()->all();
 
-        $dataValidate = sc_order_mapping_validate();
-        $validate = $dataValidate['validate'];
-        $messages = $dataValidate['messages'];
+        $dataMap = sc_order_mapping_validate();
+        $validate = $dataMap['validate'];
+        $messages = $dataMap['messages'];
 
         if (sc_captcha_method() && in_array('checkout', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
