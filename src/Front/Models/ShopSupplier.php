@@ -134,7 +134,7 @@ class ShopSupplier extends Model
         parent::boot();
         // before delete() method call this
         static::deleting(
-            function ($obj) {
+            function ($model) {
             //
             }
         );

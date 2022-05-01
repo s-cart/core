@@ -3,8 +3,6 @@ namespace SCart\Core\Front\Controllers;
 
 use SCart\Core\Front\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopBanner;
-use SCart\Core\Front\Models\ShopProduct;
-use SCart\Core\Front\Models\ShopEmailTemplate;
 use SCart\Core\Front\Models\ShopNews;
 use SCart\Core\Front\Models\ShopPage;
 use SCart\Core\Front\Models\ShopSubscribe;
@@ -137,28 +135,15 @@ class ShopContentController extends RootFrontController
     public function postContact(Request $request)
     {
         $data   = $request->all();
-        $validate = [
-            'name' => 'required',
-            'title' => 'required',
-            'content' => 'required',
-            'email' => 'required|email',
-            'phone' => config('validation.customer.phone_required', 'required|regex:/^0[^0][0-9\-]{6,12}$/'),
-        ];
-        $message = [
-            'name.required'    => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.name')]),
-            'content.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.content')]),
-            'title.required'   => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.subject')]),
-            'email.required'   => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.email')]),
-            'email.email'      => sc_language_render('validation.email', ['attribute' => sc_language_render('contact.email')]),
-            'phone.required'   => sc_language_render('validation.required', ['attribute' => sc_language_render('contact.phone')]),
-            'phone.regex'      => sc_language_render('customer.phone_regex'),
-        ];
 
+        $dataMap = sc_contact_mapping_validate();
+        $validate = $dataMap['validate'];
+        $messages = $dataMap['messages'];
         if (sc_captcha_method() && in_array('contact', sc_captcha_page())) {
             $data['captcha_field'] = $data[sc_captcha_method()->getField()] ?? '';
             $validate['captcha_field'] = ['required', 'string', new \SCart\Core\Rules\CaptchaRule];
         }
-        $validator = \Illuminate\Support\Facades\Validator::make($data, $validate, $message);
+        $validator = \Illuminate\Support\Facades\Validator::make($data, $validate, $messages);
         if ($validator->fails()) {
             return redirect()->back()
                         ->withErrors($validator)
@@ -169,41 +154,7 @@ class ShopContentController extends RootFrontController
         
         //Send email
         $data['content'] = str_replace("\n", "<br>", $data['content']);
-
-        if (sc_config('contact_to_admin')) {
-            $checkContent = (new ShopEmailTemplate)
-                ->where('group', 'contact_to_admin')
-                ->where('status', 1)
-                ->first();
-            if ($checkContent) {
-                $content = $checkContent->text;
-                $dataFind = [
-                    '/\{\{\$title\}\}/',
-                    '/\{\{\$name\}\}/',
-                    '/\{\{\$email\}\}/',
-                    '/\{\{\$phone\}\}/',
-                    '/\{\{\$content\}\}/',
-                ];
-                $dataReplace = [
-                    $data['title'],
-                    $data['name'],
-                    $data['email'],
-                    $data['phone'],
-                    $data['content'],
-                ];
-                $content = preg_replace($dataFind, $dataReplace, $content);
-                $dataView = [
-                    'content' => $content,
-                ];
-
-                $config = [
-                    'to' => sc_store('email'),
-                    'replyTo' => $data['email'],
-                    'subject' => $data['title'],
-                ];
-                sc_send_mail($this->templatePath . '.mail.contact_to_admin', $dataView, $config, []);
-            }
-        }
+        sc_contact_form_sendmail($data);
 
         return redirect(sc_route('contact'))
             ->with('success', sc_language_render('contact.thank_contact'));

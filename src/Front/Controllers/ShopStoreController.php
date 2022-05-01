@@ -2,13 +2,7 @@
 namespace SCart\Core\Front\Controllers;
 
 use SCart\Core\Front\Controllers\RootFrontController;
-use SCart\Core\Front\Models\ShopBanner;
 use SCart\Core\Front\Models\ShopProduct;
-use SCart\Core\Front\Models\ShopEmailTemplate;
-use SCart\Core\Front\Models\ShopNews;
-use SCart\Core\Front\Models\ShopPage;
-use SCart\Core\Front\Models\ShopSubscribe;
-use Illuminate\Http\Request;
 
 class ShopStoreController extends RootFrontController
 {

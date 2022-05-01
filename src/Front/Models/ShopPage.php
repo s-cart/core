@@ -119,9 +119,9 @@ class ShopPage extends Model
         parent::boot();
         // before delete() method call this
         static::deleting(
-            function ($page) {
-                $page->descriptions()->delete();
-                $page->stores()->detach();
+            function ($model) {
+                $model->descriptions()->delete();
+                $model->stores()->detach();
             }
         );
         //Uuid
