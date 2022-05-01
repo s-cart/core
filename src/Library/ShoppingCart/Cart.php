@@ -216,7 +216,17 @@ class Cart
         if (is_null($this->session->get($this->instance))) {
             return new Collection([]);
         }
-
+        //Check products in cart
+        $content = $this->session->get($this->instance);
+        foreach ($content as $key => $item) {
+            $product = \SCart\Core\Front\Models\ShopProduct::where('id', $item->id)
+                ->where('status', 1) //Active
+                ->where('approve', 1) //Approve
+                ->first();
+            if (!$product) {
+                $this->remove($key);
+            }
+        }
         return $this->session->get($this->instance);
     }
 
