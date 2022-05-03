@@ -275,4 +275,18 @@ class ShopCategory extends Model
 
         return $query;
     }
+
+    /**
+     * Get list id sub categories, including itself
+     *
+     * @param   string  $cId  [$cId description]
+     *
+     * @return  array         [return description]
+     */
+    public function getListSub(string $cId):array {
+        $arrayReturn = [$cId];
+        $arrayMid = $this->where('parent', $cId)->pluck('id')->toArray();
+        $arraySmall = $this->whereIn('parent', $arrayMid)->pluck('id')->toArray();
+        return $arrayReturn + $arrayMid + $arraySmall;
+    }
 }

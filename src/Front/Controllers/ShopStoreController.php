@@ -3,6 +3,7 @@ namespace SCart\Core\Front\Controllers;
 
 use SCart\Core\Front\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopCategory;
 
 class ShopStoreController extends RootFrontController
 {
@@ -54,7 +55,8 @@ class ShopStoreController extends RootFrontController
         $products = (new ShopProduct)->setKeyword($keyword);
         //Filter category
         if ($cid) {
-            $products = $products->getProductToCategory($cid);
+            $arrCate = (new ShopCategory)->getListSub($cid);
+            $products = $products->getProductToCategory($arrCate);
         }
         //filter brand
         if ($bid) {
@@ -131,7 +133,8 @@ class ShopStoreController extends RootFrontController
         $products = (new ShopProduct)->setKeyword($keyword);
         //Filter category
         if ($cid) {
-            $products = $products->getProductToCategory($cid);
+            $arrCate = (new ShopCategory)->getListSub($cid);
+            $products = $products->getProductToCategory($arrCate);
         }
         //filter brand
         if ($bid) {

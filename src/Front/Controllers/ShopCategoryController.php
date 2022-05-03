@@ -116,8 +116,9 @@ class ShopCategoryController extends RootFrontController
         $category = (new ShopCategory)->getDetail($alias, $type = 'alias');
 
         if ($category) {
+            $arrCate = (new ShopCategory)->getListSub($category->id);
             $products = (new ShopProduct)
-                ->getProductToCategory([$category->id])
+                ->getProductToCategory($arrCate)
                 ->setLimit(sc_config('product_list'))
                 ->setPaginate()
                 ->setSort([$sortBy, $sortOrder])
