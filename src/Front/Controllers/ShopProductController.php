@@ -135,6 +135,7 @@ class ShopProductController extends RootFrontController
                     'og_image'        => sc_file($product->getImage()),
                     'layout_page'     => 'shop_product_detail',
                     'breadcrumbs'     => [
+                        ['url'        => sc_route('shop'), 'title' => sc_language_render('front.shop')],
                         ['url'        => '', 'title' => $product->name],
                     ],
                 )
