@@ -287,6 +287,6 @@ class ShopCategory extends Model
         $arrayReturn = [$cId];
         $arrayMid = $this->where('parent', $cId)->pluck('id')->toArray();
         $arraySmall = $this->whereIn('parent', $arrayMid)->pluck('id')->toArray();
-        return $arrayReturn + $arrayMid + $arraySmall;
+        return array_merge($arrayReturn, $arrayMid, $arraySmall);
     }
 }
