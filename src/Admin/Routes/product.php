@@ -13,7 +13,5 @@ Route::group(['prefix' => 'product'], function () use ($nameSpaceAdminProduct) {
     Route::get('/edit/{id}', $nameSpaceAdminProduct.'\AdminProductController@edit')->name('admin_product.edit');
     Route::post('/edit/{id}', $nameSpaceAdminProduct.'\AdminProductController@postEdit')->name('admin_product.edit');
     Route::post('/delete', $nameSpaceAdminProduct.'\AdminProductController@deleteList')->name('admin_product.delete');
-    Route::get('/import', $nameSpaceAdminProduct.'\AdminProductController@import')->name('admin_product.import');
-    Route::post('/import', $nameSpaceAdminProduct.'\AdminProductController@postImport')->name('admin_product.import');
     Route::post('/clone', $nameSpaceAdminProduct.'\AdminProductController@cloneProduct')->name('admin_product.clone');
 });
