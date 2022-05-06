@@ -18,7 +18,7 @@ class PermissionController extends RootAdminController
 
         foreach ($routes as $route) {
             if (Str::startsWith($route->uri(), SC_ADMIN_PREFIX)) {
-                $prefix = SC_ADMIN_PREFIX?$route->getPrefix():ltrim($route->getPrefix(), '/');
+                $prefix = ltrim($route->getPrefix(), '/');
                 $routeAdmin[$prefix] = [
                     'uri'    => 'ANY::' . $prefix . '/*',
                     'name'   => $prefix . '/*',
