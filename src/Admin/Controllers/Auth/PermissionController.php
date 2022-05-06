@@ -148,9 +148,9 @@ class PermissionController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => sc_language_render('admin.permission.admin.add_new_title'),
+            'title' => sc_language_render('admin.permission.add_new_title'),
             'subTitle' => '',
-            'title_description' => sc_language_render('admin.permission.admin.add_new_des'),
+            'title_description' => sc_language_render('admin.permission.add_new_des'),
             'icon' => 'fa fa-plus',
             'permission' => [],
             'routeAdmin' => $this->routeAdmin,
