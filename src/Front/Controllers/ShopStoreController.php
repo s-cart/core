@@ -3,6 +3,7 @@ namespace SCart\Core\Front\Controllers;
 
 use SCart\Core\Front\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopProduct;
+use SCart\Core\Front\Models\ShopBrand;
 use SCart\Core\Front\Models\ShopCategory;
 
 class ShopStoreController extends RootFrontController
@@ -33,47 +34,12 @@ class ShopStoreController extends RootFrontController
      */
     private function _shop()
     {
-        $sortBy = 'sort';
-        $sortOrder = 'asc';
         $filter_sort = request('filter_sort') ?? '';
-        $filterArr = [
-            'price_desc' => ['price', 'desc'],
-            'price_asc' => ['price', 'asc'],
-            'sort_desc' => ['sort', 'desc'],
-            'sort_asc' => ['sort', 'asc'],
-            'id_desc' => ['id', 'desc'],
-            'id_asc' => ['id', 'asc'],
-        ];
-        if (array_key_exists($filter_sort, $filterArr)) {
-            $sortBy = $filterArr[$filter_sort][0];
-            $sortOrder = $filterArr[$filter_sort][1];
-        }
-        $keyword = request('keyword') ?? '';
-        $cid = request('cid') ?? '';
-        $bid = request('bid') ?? '';
-        $price = request('price') ?? '';
-        $products = (new ShopProduct)->setKeyword($keyword);
-        //Filter category
-        if ($cid) {
-            $arrCate = (new ShopCategory)->getListSub($cid);
-            $products = $products->getProductToCategory($arrCate);
-        }
-        //filter brand
-        if ($bid) {
-            $products = $products->getProductToBrand($bid);
-        }
-        //Filter price
-        if ($price) {
-            $products = $products->setRangePrice($price);
-        }
-
-        $products = $products
-            ->setLimit(sc_config('product_list'))
-            ->setPaginate()
-            ->setSort([$sortBy, $sortOrder])
-            ->getData();
+        
+        $products = $this->processProductList();
 
         sc_check_view($this->templatePath . '.screen.shop_home');
+        
         return view(
             $this->templatePath . '.screen.shop_home',
             array(
@@ -111,43 +77,10 @@ class ShopStoreController extends RootFrontController
      */
     private function _search()
     {
-        $sortBy = 'sort';
-        $sortOrder = 'asc';
         $filter_sort = request('filter_sort') ?? '';
-        $filterArr = [
-            'price_desc' => ['price', 'desc'],
-            'price_asc'  => ['price', 'asc'],
-            'sort_desc'  => ['sort', 'desc'],
-            'sort_asc'   => ['sort', 'asc'],
-            'id_desc'    => ['id', 'desc'],
-            'id_asc'     => ['id', 'asc'],
-        ];
-        if (array_key_exists($filter_sort, $filterArr)) {
-            $sortBy = $filterArr[$filter_sort][0];
-            $sortOrder = $filterArr[$filter_sort][1];
-        }
-        $keyword = request('keyword') ?? '';
-        $cid = request('cid') ?? '';
-        $bid = request('bid') ?? '';
-        $price = request('price') ?? '';
-        $products = (new ShopProduct)->setKeyword($keyword);
-        //Filter category
-        if ($cid) {
-            $arrCate = (new ShopCategory)->getListSub($cid);
-            $products = $products->getProductToCategory($arrCate);
-        }
-        //filter brand
-        if ($bid) {
-            $products = $products->getProductToBrand($bid);
-        }
-        //Filter price
-        if ($price) {
-            $products = $products->setRangePrice($price);
-        }
-        $products = $products->setSort([$sortBy, $sortOrder])
-            ->setPaginate()
-            ->setLimit(sc_config('product_list'))
-            ->getData();
+        
+        $products = $this->processProductList();
+
 
         $view = $this->templatePath . '.screen.shop_product_list';
 
@@ -167,5 +100,84 @@ class ShopStoreController extends RootFrontController
                 ],
             )
         );
+    }
+
+    /**
+     * Process product list
+     *
+     * @return  [type]  [return description]
+     */
+    protected function processProductList() {
+        $sortBy = 'sort';
+        $sortOrder = 'asc';
+        $arrBrandId = [];
+        $categoryId = '';
+        $filter_sort = request('filter_sort') ?? '';
+        $filterArr = [
+            'price_desc' => ['price', 'desc'],
+            'price_asc' => ['price', 'asc'],
+            'sort_desc' => ['sort', 'desc'],
+            'sort_asc' => ['sort', 'asc'],
+            'id_desc' => ['id', 'desc'],
+            'id_asc' => ['id', 'asc'],
+        ];
+        if (array_key_exists($filter_sort, $filterArr)) {
+            $sortBy = $filterArr[$filter_sort][0];
+            $sortOrder = $filterArr[$filter_sort][1];
+        }
+        $keyword = request('keyword') ?? '';
+        $cid = request('cid') ?? '';
+        $bid = request('bid') ?? '';
+        $price = request('price') ?? '';
+
+        $brand = request('brand') ?? '';
+        $category = request('category') ?? '';
+
+        if ($bid) {
+            $arrBrandId = explode(',', $bid);
+        } else {
+            if ($brand) {
+                $arrAliasBrand = explode(',', $brand);
+                $arrBrandId = ShopBrand::whereIn('alias', $arrAliasBrand)->pluck('id')->toArray();
+            }
+        }
+
+        if ($cid) {
+            $categoryId = trim($cid);
+        } else {
+            if ($category) {
+                $categoryId = ShopCategory::where('alias', $category)->first();
+                if ($categoryId) {
+                    $categoryId = $categoryId->id;
+                }
+            }
+        }
+
+        $products = (new ShopProduct);
+
+        if ($keyword) {
+            $products = $products->setKeyword($keyword);
+        }
+        //Filter category
+        if ($categoryId) {
+            $arrCate = (new ShopCategory)->getListSub($categoryId);
+            $products = $products->getProductToCategory($arrCate);
+        }
+        //filter brand
+        if ($arrBrandId) {
+            $products = $products->getProductToBrand($arrBrandId);
+        }
+        //Filter price
+        if ($price) {
+            $products = $products->setRangePrice($price);
+        }
+
+        $products = $products
+            ->setLimit(sc_config('product_list'))
+            ->setPaginate()
+            ->setSort([$sortBy, $sortOrder])
+            ->getData();
+
+        return $products;
     }
 }

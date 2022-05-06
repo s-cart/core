@@ -3,6 +3,7 @@ namespace SCart\Core\Front\Controllers;
 
 use SCart\Core\Front\Controllers\RootFrontController;
 use SCart\Core\Front\Models\ShopCategory;
+use SCart\Core\Front\Models\ShopBrand;
 use SCart\Core\Front\Models\ShopProduct;
 
 class ShopCategoryController extends RootFrontController
@@ -99,6 +100,7 @@ class ShopCategoryController extends RootFrontController
     {
         $sortBy = 'sort';
         $sortOrder = 'asc';
+        $arrBrandId = [];
         $filter_sort = request('filter_sort') ?? '';
         $filterArr = [
             'price_desc' => ['price', 'desc'],
@@ -113,16 +115,47 @@ class ShopCategoryController extends RootFrontController
             $sortOrder = $filterArr[$filter_sort][1];
         }
 
+        $keyword = request('keyword') ?? '';
+        $bid = request('bid') ?? '';
+        $price = request('price') ?? '';
+        $brand = request('brand') ?? '';
+
+        if ($bid) {
+            $arrBrandId = explode(',', $bid);
+        } else {
+            if ($brand) {
+                $arrAliasBrand = explode(',', $brand);
+                $arrBrandId = ShopBrand::whereIn('alias', $arrAliasBrand)->pluck('id')->toArray();
+            }
+        }
+
         $category = (new ShopCategory)->getDetail($alias, $type = 'alias');
 
         if ($category) {
+            
+            $products = (new ShopProduct);
+
+            if ($keyword) {
+                $products = $products->setKeyword($keyword);
+            }
+            //Filter category
             $arrCate = (new ShopCategory)->getListSub($category->id);
-            $products = (new ShopProduct)
-                ->getProductToCategory($arrCate)
-                ->setLimit(sc_config('product_list'))
-                ->setPaginate()
-                ->setSort([$sortBy, $sortOrder])
-                ->getData();
+            $products = $products->getProductToCategory($arrCate);
+
+            //filter brand
+            if ($arrBrandId) {
+                $products = $products->getProductToBrand($arrBrandId);
+            }
+            //Filter price
+            if ($price) {
+                $products = $products->setRangePrice($price);
+            }
+
+            $products = $products
+            ->setLimit(sc_config('product_list'))
+            ->setPaginate()
+            ->setSort([$sortBy, $sortOrder])
+            ->getData();
 
             $subCategory = (new ShopCategory)
                 ->setParent($category->id)
