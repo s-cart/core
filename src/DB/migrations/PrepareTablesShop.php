@@ -140,8 +140,8 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_shipping_standard',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->decimal('fee');
-                $table->decimal('shipping_free');
+                $table->decimal('fee',15,2);
+                $table->decimal('shipping_free',15,2);
                 $table->timestamps();
             }
         );
@@ -209,19 +209,19 @@ class PrepareTablesShop extends Migration
                 $table->uuid('id')->primary();
                 $table->uuid('customer_id')->index();
                 $table->string('domain')->nullable();
-                $table->decimal('subtotal')->nullable()->default(0);
-                $table->decimal('shipping')->nullable()->default(0);
-                $table->decimal('discount')->nullable()->default(0);
+                $table->decimal('subtotal',15,2)->nullable()->default(0);
+                $table->decimal('shipping',15,2)->nullable()->default(0);
+                $table->decimal('discount',15,2)->nullable()->default(0);
                 $table->integer('payment_status')->default(1);
                 $table->integer('shipping_status')->default(1);
                 $table->integer('status')->default(0);
-                $table->decimal('tax')->nullable()->default(0);
-                $table->decimal('other_fee')->nullable()->default(0);
-                $table->decimal('total')->nullable()->default(0);
+                $table->decimal('tax',15,2)->nullable()->default(0);
+                $table->decimal('other_fee',15,2)->nullable()->default(0);
+                $table->decimal('total',15,2)->nullable()->default(0);
                 $table->string('currency', 10);
-                $table->decimal('exchange_rate')->nullable();
-                $table->decimal('received')->nullable()->default(0);
-                $table->decimal('balance')->nullable()->default(0);
+                $table->decimal('exchange_rate',15,2)->nullable();
+                $table->decimal('received',15,2)->nullable()->default(0);
+                $table->decimal('balance',15,2)->nullable()->default(0);
                 $table->string('first_name', 100);
                 $table->string('last_name', 100)->nullable();
                 $table->string('first_name_kana', 100)->nullable();
@@ -253,11 +253,11 @@ class PrepareTablesShop extends Migration
                 $table->uuid('order_id');
                 $table->uuid('product_id');
                 $table->string('name', 255);
-                $table->decimal('price')->default(0);
+                $table->decimal('price',15,2)->default(0);
                 $table->integer('qty')->default(0);
                 $table->uuid('store_id')->default(1);
-                $table->decimal('total_price')->default(0);
-                $table->decimal('tax')->default(0);
+                $table->decimal('total_price',15,2)->default(0);
+                $table->decimal('tax',15,2)->default(0);
                 $table->string('sku', 50);
                 $table->string('currency', 10);
                 $table->float('exchange_rate')->nullable();
@@ -295,7 +295,7 @@ class PrepareTablesShop extends Migration
                 $table->uuid('order_id')->index();
                 $table->string('title', 255);
                 $table->string('code', 100);
-                $table->decimal('value')->default(0);
+                $table->decimal('value',15,2)->default(0);
                 $table->string('text', 200)->nullable();
                 $table->integer('sort')->default(1);
                 $table->timestamps();
@@ -348,17 +348,17 @@ class PrepareTablesShop extends Migration
                 $table->string('image', 255)->nullable();
                 $table->uuid('brand_id')->nullable()->default(0)->index();
                 $table->uuid('supplier_id')->nullable()->default(0)->index();
-                $table->decimal('price')->nullable()->default(0);
-                $table->decimal('cost')->nullable()->nullable()->default(0);
+                $table->decimal('price',15,2)->nullable()->default(0);
+                $table->decimal('cost',15,2)->nullable()->nullable()->default(0);
                 $table->integer('stock')->nullable()->default(0);
                 $table->integer('sold')->nullable()->default(0);
                 $table->integer('minimum')->nullable()->default(0);
                 $table->string('weight_class')->nullable();
-                $table->decimal('weight')->nullable()->default(0);
+                $table->decimal('weight',15,2)->nullable()->default(0);
                 $table->string('length_class')->nullable();
-                $table->decimal('length')->nullable()->default(0);
-                $table->decimal('width')->nullable()->default(0);
-                $table->decimal('height')->nullable()->default(0);
+                $table->decimal('length',15,2)->nullable()->default(0);
+                $table->decimal('width',15,2)->nullable()->default(0);
+                $table->decimal('height',15,2)->nullable()->default(0);
                 $table->tinyInteger('kind')->nullable()->default(0)->comment('0:single, 1:bundle, 2:group')->index();
                 $table->string('property', 50)->nullable()->default('physical')->index();
                 $table->string('tax_id', 50)->nullable()->default(0)->comment('0:No-tax, auto: Use tax default')->index();
@@ -442,7 +442,7 @@ class PrepareTablesShop extends Migration
                 $table->string('name', 255);
                 $table->integer('attribute_group_id');
                 $table->uuid('product_id');
-                $table->decimal('add_price')->default(0);
+                $table->decimal('add_price',15,2)->default(0);
                 $table->integer('sort')->default(0);
                 $table->tinyInteger('status')->default(1);
                 $table->index(['product_id', 'attribute_group_id']);
@@ -744,7 +744,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_product_promotion',
             function (Blueprint $table) {
                 $table->uuid('product_id')->primary();
-                $table->decimal('price_promotion');
+                $table->decimal('price_promotion',15,2);
                 $table->timestamp('date_start', $precision = 0)->nullable();
                 $table->timestamp('date_end', $precision = 0)->nullable();
                 $table->integer('status_promotion')->default(1);
