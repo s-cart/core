@@ -78,6 +78,7 @@ class ShopStoreController extends RootFrontController
     private function _search()
     {
         $filter_sort = request('filter_sort') ?? '';
+        $keyword = request('keyword') ?? '';
         
         $products = $this->processProductList();
 
