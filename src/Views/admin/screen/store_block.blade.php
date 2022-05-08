@@ -118,7 +118,7 @@
                                         <span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_view',['template' => sc_store('template', $storeId)]) }}</span>
                                     @else
                                         <textarea name="text" class="form-control text" rows="5" placeholder="Layout text">
-                                            {!! old('text',$layout['text']??'') !!}
+                                            {{ old('text',$layout['text']??'') }}
                                         </textarea>
                                         <span class="form-text"><i class="fa fa-info-circle"></i> {{ sc_language_render('admin.store_block.helper_html') }}</span>
                                     @endif

@@ -259,7 +259,7 @@ class AdminStoreBlockController extends RootAdminController
             'status' => (empty($data['status']) ? 0 : 1),
             'store_id' => $storeId,
         ];
-        $dataUpdate = sc_clean($dataUpdate, [], true);
+        $dataUpdate = sc_clean($dataUpdate, ['text'], true);
         $layout->update($dataUpdate);
         
         return redirect()->route('admin_store_block.index')->with('success', sc_language_render('action.edit_success'));
