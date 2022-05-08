@@ -33,9 +33,9 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
     {
         if ($storeId) {
             $data = $this->where('store_id', $storeId)
-                ->orderBy('created_at', 'desc');
+                ->orderBy('id', 'desc');
         } else {
-            $data = $this->orderBy('created_at', 'desc');
+            $data = $this->orderBy('id', 'desc');
         }
         return $data->paginate(20);
     }
@@ -49,6 +49,6 @@ class AdminStoreBlockContent extends ShopStoreBlockContent
      */
     public static function createStoreBlockContentAdmin(array $dataInsert)
     {
-        return self::insert($dataInsert);
+        return self::create($dataInsert);
     }
 }

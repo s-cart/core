@@ -39,7 +39,7 @@ class AdminSubscribe extends ShopSubscribe
             $sort_field = explode('__', $sort_order)[1];
             $subcribeList = $subcribeList->orderBy($field, $sort_field);
         } else {
-            $subcribeList = $subcribeList->orderBy('created_at', 'desc');
+            $subcribeList = $subcribeList->orderBy('id', 'desc');
         }
         $subcribeList = $subcribeList->paginate(20);
 

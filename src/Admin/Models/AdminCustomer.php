@@ -65,7 +65,7 @@ class AdminCustomer extends ShopCustomer
             $sort_field = explode('__', $sort_order)[1];
             $customerList = $customerList->orderBy($field, $sort_field);
         } else {
-            $customerList = $customerList->orderBy('created_at', 'desc');
+            $customerList = $customerList->orderBy('id', 'desc');
         }
         $customerList = $customerList->paginate(20);
 
