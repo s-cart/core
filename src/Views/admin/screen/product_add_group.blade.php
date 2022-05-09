@@ -380,7 +380,7 @@
 
 // Select product in group
 $('#add_product_in_group').click(function(event) {
-    var htmlSelectGroup = '{!! $htmlSelectGroup !!}';
+    var htmlSelectGroup = '{!! str_replace("\n", "", $htmlSelectGroup) !!}';
     $(this).before(htmlSelectGroup);
     $('.select2').select2();
     $('.removeproductInGroup').click(function(event) {

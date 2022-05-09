@@ -1229,9 +1229,11 @@ $('#add_sub_image').click(function(event) {
     });
 //end sub images
 
+
+@if (sc_config_admin('product_kind') && $product->kind == SC_PRODUCT_GROUP)
 // Select product in group
 $('#add_product_in_group').click(function(event) {
-    var htmlSelectGroup = '{!! $htmlSelectGroup !!}';
+    var htmlSelectGroup = '{!! str_replace("\n","", $htmlSelectGroup) !!}';
     $(this).before(htmlSelectGroup);
     $('.select2').select2();
     $('.removeproductInGroup').click(function(event) {
@@ -1242,10 +1244,12 @@ $('.removeproductInGroup').click(function(event) {
     $(this).closest('table').remove();
 });
 //end select in group
+@endif
 
+@if (sc_config_admin('product_kind') && $product->kind == SC_PRODUCT_BUNDLE)
 // Select product in build
 $('#add_product_in_build').click(function(event) {
-    var htmlSelectBuild = '{!! $htmlSelectBuild !!}';
+    var htmlSelectBuild = '{!! str_replace("\n", "", $htmlSelectBuild) !!}';
     $(this).before(htmlSelectBuild);
     $('.select2').select2();
     $('.removeproductBuild').click(function(event) {
@@ -1256,7 +1260,7 @@ $('.removeproductBuild').click(function(event) {
     $(this).closest('table').remove();
 });
 //end select in build
-
+@endif
 
 // Select product attributes
 $('.add_attribute').click(function(event) {
