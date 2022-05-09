@@ -106,51 +106,7 @@ class AdminProduct extends ShopProduct
      */
     public function getProductSelectAdmin(array $dataFilter = [], $storeId = null)
     {
-        $keyword          = $dataFilter['keyword'] ?? '';
-        $limit            = $dataFilter['limit'] ?? '';
-        $kind             = $dataFilter['kind'] ?? [];
-        $tableDescription = (new ShopProductDescription)->getTable();
-        $tableProduct     = $this->getTable();
-        $tableProductStore = (new ShopProductStore)->getTable();
-        $colSelect = [
-            'id',
-            'sku',
-             $tableDescription . '.name'
-        ];
-        $productList = (new ShopProduct)->select($colSelect)
-            ->leftJoin($tableDescription, $tableDescription . '.product_id', $tableProduct . '.id')
-            ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id')
-            ->where($tableDescription . '.lang', sc_get_locale());
-
-        if ($storeId) {
-            // Only get products of store if store <> root or store is specified
-            $productList = $productList->where($tableProductStore . '.store_id', $storeId);
-        }
-
-        if (is_array($kind) && $kind) {
-            $productList = $productList->whereIn('kind', $kind);
-        }
-        if ($keyword) {
-            $productList = $productList->where(function ($sql) use ($tableDescription, $tableProduct, $keyword) {
-                $sql->where($tableDescription . '.name', 'like', '%' . $keyword . '%')
-                    ->orWhere($tableProduct . '.sku', 'like', '%' . $keyword . '%');
-            });
-        }
-
-        if ($limit) {
-            $productList = $productList->limit($limit);
-        }
-        $productList->groupBy($tableProduct.'.id');
-        $dataTmp = $productList->get()->keyBy('id');
-        $data = [];
-        foreach ($dataTmp as $key => $row) {
-            $data[$key] = [
-                'id' => $row['id'],
-                'sku' => $row['sku'],
-                'name' => addslashes($row['name']),
-            ];
-        }
-        return $data;
+        return sc_product_admin_select_list($dataFilter, $storeId);
     }
 
 

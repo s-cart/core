@@ -303,7 +303,7 @@ class AdminProductController extends RootAdminController
     {
         $categories = (new AdminCategory)->getTreeCategoriesAdmin();
 
-        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
+        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [SC_PRODUCT_SINGLE]]);
 
         // html select product build
         $htmlSelectBuild = '<div class="select-product">';
@@ -359,7 +359,7 @@ class AdminProductController extends RootAdminController
     {
         $categories = (new AdminCategory)->getTreeCategoriesAdmin();
 
-        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [0]]);
+        $listProductSingle = (new AdminProduct)->getProductSelectAdmin(['kind' => [SC_PRODUCT_SINGLE]]);
 
         // html select product group
         $htmlSelectGroup = '<div class="select-product">';
