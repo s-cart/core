@@ -7,6 +7,7 @@ use SCart\Core\Front\Models\ShopProductStore;
 use SCart\Core\Front\Models\ShopProductDescription;
 use SCart\Core\Front\Models\ShopAttributeGroup;
 use SCart\Core\Front\Models\ShopProductCategory;
+use SCart\Core\Front\Models\ShopCategory;
 
 class AdminProduct extends ShopProduct
 {
@@ -60,9 +61,10 @@ class AdminProduct extends ShopProduct
             ->leftJoin($tableProductStore, $tableProductStore . '.product_id', $tableProduct . '.id');
 
         if ($category_id) {
+            $arrCate = (new ShopCategory)->getListSub($category_id);
             $productList = $productList
                 ->join($tablePTC, $tablePTC . '.product_id', $tableProduct . '.id')
-                ->where($tablePTC . '.category_id', $category_id);
+                ->whereIn($tablePTC . '.category_id', $arrCate);
         }
         
         $productList = $productList
