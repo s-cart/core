@@ -95,7 +95,7 @@ if (!function_exists('sc_order_process_after_success') && !in_array('sc_order_pr
                 }
 
                 // Send mail order success to customer
-                if (sc_config('order_success_to_customer') && $checkContentCustomer) {
+                if (sc_config('order_success_to_customer') && $checkContentCustomer && $data['email']) {
                     $contentCustomer = $checkContentCustomer->text;
                     $contentCustomer = preg_replace($dataFind, $dataReplace, $contentCustomer);
                     $dataView = [
