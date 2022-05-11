@@ -130,7 +130,7 @@ if (!function_exists('sc_report') && !in_array('sc_report', config('helper_excep
         if (!in_array('slack', $ext)) {
             if (config('logging.channels.slack.url')) {
                 try {
-                    \Log::channel('slack')->error($msg);
+                    \Log::channel('slack')->emergency($msg);
                 } catch (\Throwable $e) {
                     $msg .= $e->getFile().'- Line: '.$e->getLine().PHP_EOL.$e->getMessage().PHP_EOL;
                 }
