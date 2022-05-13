@@ -58,7 +58,7 @@ Route::group(['prefix' => 'uploads', 'namespace' => '\\UniSharp\\LaravelFilemana
     ]);
     Route::get('/cropnewimage', [
         'uses' => 'CropController@getNewCropimage',
-        'as' => 'unisharp.lfm.getCropimage',
+        'as' => 'unisharp.lfm.getCropnewimage',
     ]);
 
     // rename
