@@ -50,6 +50,9 @@ return [
             'folder_name' => 'product',
             'startup_view' => 'grid',
             'max_size' => 30000, // size in KB
+            'thumb' => true,
+            'thumb_width' => 80,
+            'thumb_height' => 80,
             'valid_mime' => [
                 'image/jpeg',
                 'image/pjpeg',
@@ -62,6 +65,9 @@ return [
             'folder_name' => 'category',
             'startup_view' => 'grid',
             'max_size' => 30000, // size in KB
+            'thumb' => true,
+            'thumb_width' => 80,
+            'thumb_height' => 80,
             'valid_mime' => [
                 'image/jpeg',
                 'image/pjpeg',
@@ -74,6 +80,9 @@ return [
             'folder_name' => 'category_store',
             'startup_view' => 'grid',
             'max_size' => 30000, // size in KB
+            'thumb' => true,
+            'thumb_width' => 80,
+            'thumb_height' => 80,
             'valid_mime' => [
                 'image/jpeg',
                 'image/pjpeg',
@@ -86,6 +95,9 @@ return [
             'folder_name' => 'brand',
             'startup_view' => 'grid',
             'max_size' => 30000, // size in KB
+            'thumb' => true,
+            'thumb_width' => 80,
+            'thumb_height' => 80,
             'valid_mime' => [
                 'image/jpeg',
                 'image/pjpeg',
@@ -98,6 +110,9 @@ return [
             'folder_name' => 'supplier',
             'startup_view' => 'grid',
             'max_size' => 30000, // size in KB
+            'thumb' => true,
+            'thumb_width' => 80,
+            'thumb_height' => 80,
             'valid_mime' => [
                 'image/jpeg',
                 'image/pjpeg',
@@ -110,6 +125,9 @@ return [
             'folder_name' => 'language',
             'startup_view' => 'grid',
             'max_size' => 30000, // size in KB
+            'thumb' => true,
+            'thumb_width' => 80,
+            'thumb_height' => 80,
             'valid_mime' => [
                 'image/jpeg',
                 'image/pjpeg',
