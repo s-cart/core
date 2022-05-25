@@ -1050,7 +1050,7 @@
 
 
 {{-- Custom fields --}}
-@if (isset($customFields) && $customFields)
+@if (isset($customFields) && count($customFields))
 @php
     $fields = $product->getCustomFields()
 @endphp

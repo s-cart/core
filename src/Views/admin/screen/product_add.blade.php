@@ -891,7 +891,7 @@
 
 
 {{-- Custom fields --}}
-@if ($customFields)
+@if (isset($customFields) && count($customFields))
                 <hr class="kind ">
                 <label>{{ sc_language_render('admin.custom_field.title') }} (<a target=_new href="{{ sc_route_admin('admin_custom_field.index') }}"><i class="fa fa-plus" aria-hidden="true"></i></a>)</label>
                     @foreach ($customFields as $keyField => $field)
