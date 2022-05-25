@@ -3,24 +3,26 @@
       <div class="card card-primary card-outline card-outline-tabs">
         <div class="card-header p-0 border-bottom-0">
           <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-            @if (admin()->user()->can('order.full') ||  admin()->user()->isViewAll())
+            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
             <li class="nav-item">
               <a class="nav-link active" id="tab-store-order-tab" data-toggle="pill" href="#tab-store-order" role="tab" aria-controls="tab-store-order" aria-selected="false">{{ sc_language_render('store.admin.config_order') }}</a>
             </li>
             @endif
-            @if (admin()->user()->can('marketing.full') ||  admin()->user()->isViewAll())
+            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
             <li class="nav-item">
               <a class="nav-link" id="tab-store-customer-tab" data-toggle="pill" href="#tab-store-customer" role="tab" aria-controls="tab-store-customer" aria-selected="false">{{ sc_language_render('store.admin.config_customer') }}</a>
             </li>
             @endif
-            @if (admin()->user()->can('product.full') ||  admin()->user()->isViewAll())
+            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
             <li class="nav-item">
               <a class="nav-link" id="tab-store-product-tab" data-toggle="pill" href="#tab-store-product" role="tab" aria-controls="tab-store-product" aria-selected="false">{{ sc_language_render('store.admin.config_product') }}</a>
             </li>
             @endif
+            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
             <li class="nav-item">
               <a class="nav-link" id="tab-store-email-tab" data-toggle="pill" href="#tab-store-email" role="tab" aria-controls="tab-store-email" aria-selected="false">{{ sc_language_render('store.admin.config_email') }}</a>
             </li>
+            @endif
             <li class="nav-item">
               <a class="nav-link" id="tab-store-url-tab" data-toggle="pill" href="#tab-store-url" role="tab" aria-controls="tab-store-url" aria-selected="false">{{ sc_language_render('store.admin.config_url') }}</a>
             </li>
@@ -44,10 +46,11 @@
             </li>
           </ul>
         </div>
+        
         <div class="card-body">
           <div class="tab-content" id="custom-tabs-four-tabContent">
             {{-- Tab order --}}
-            @if (admin()->user()->can('order.full') ||  admin()->user()->isViewAll())
+            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
             <div class="tab-pane fade  fade active show" id="tab-store-order" role="tabpanel" aria-labelledby="store-order">
               @include($templatePathAdmin.'screen.config_store.config_order')
             </div>
@@ -55,7 +58,7 @@
             {{-- //End tab order --}}
 
             {{-- Tab customer --}}
-            @if (admin()->user()->can('marketing.full') ||  admin()->user()->isViewAll())
+            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
             <div class="tab-pane fade" id="tab-store-customer" role="tabpanel" aria-labelledby="tab-store-customer-tab">
               @include($templatePathAdmin.'screen.config_store.config_customer')
             </div>
@@ -63,19 +66,20 @@
             {{-- //Tab customer --}}
 
             {{-- Tab product --}}
-            @if (admin()->user()->can('product.full') ||  admin()->user()->isViewAll())
+            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
             <div class="tab-pane fade" id="tab-store-product" role="tabpanel" aria-labelledby="tab-store-product-tab">
               @include($templatePathAdmin.'screen.config_store.config_product')
             </div>
             @endif
+            
             {{-- //Tab product --}}
-
+            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
             {{-- Tab email config --}}
             <div class="tab-pane fade" id="tab-store-email" role="tabpanel" aria-labelledby="tab-store-email-tab">
               @include($templatePathAdmin.'screen.config_store.config_mail')
             </div>
             {{-- // Email config --}}
-
+            @endif
 
             {{-- Tab url config --}}
             <div class="tab-pane fade" id="tab-store-url" role="tabpanel" aria-labelledby="tab-store-url-tab">
