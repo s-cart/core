@@ -117,6 +117,20 @@ class ShopProductController extends RootFrontController
             $categories = $product->categories->keyBy('id')->toArray();
             $arrCategoriId = array_keys($categories);
 
+            //first category
+            $categoryFirst = $product->categories->first();
+            if ($categoryFirst) {
+                $dataCategoryFirst = [
+                    'url' => $categoryFirst->getUrl(),
+                    'title' => $categoryFirst->getTitle(),
+                ];
+            } else {
+                $dataCategoryFirst = [
+                    'url' => '',
+                    'title' => '',
+                ];
+            }
+
             $productRelation = (new ShopProduct)
                 ->getProductToCategory($arrCategoriId)
                 ->setLimit(sc_config('product_relation', $storeId))
@@ -136,6 +150,7 @@ class ShopProductController extends RootFrontController
                     'layout_page'     => 'shop_product_detail',
                     'breadcrumbs'     => [
                         ['url'        => sc_route('shop'), 'title' => sc_language_render('front.shop')],
+                        $dataCategoryFirst,
                         ['url'        => '', 'title' => $product->name],
                     ],
                 )
