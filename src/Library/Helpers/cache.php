@@ -3,7 +3,7 @@
 use SCart\Core\Front\Models\ShopLanguage;
 use \Illuminate\Support\Facades\Cache;
 
-if (!function_exists('sc_clear_cache') && !in_array('sc_get_plugin_captcha_installed', config('helper_except', []))) {
+if (!function_exists('sc_clear_cache') && !in_array('sc_clear_cache', config('helper_except', []))) {
     /**
      * Clear cache
      *
@@ -44,7 +44,7 @@ if (!function_exists('sc_clear_cache') && !in_array('sc_get_plugin_captcha_insta
     }
 }
 
-if (!function_exists('sc_set_cache') && !in_array('sc_get_plugin_captcha_installed', config('helper_except', []))) {
+if (!function_exists('sc_set_cache') && !in_array('sc_set_cache', config('helper_except', []))) {
     /**
      * [sc_set_cache description]
      *
