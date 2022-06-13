@@ -7,7 +7,7 @@ use SCart\Core\Front\Models\ShopCountry;
  * Send email reset password
  */
 if (!function_exists('sc_customer_sendmail_reset_notification') && !in_array('sc_customer_sendmail_reset_notification', config('helper_except', []))) {
-    function sc_customer_sendmail_reset_notification($token, $emailReset)
+    function sc_customer_sendmail_reset_notification(string $token, string $emailReset)
     {
         $checkContent = (new \SCart\Core\Front\Models\ShopEmailTemplate)->where('group', 'forgot_password')->where('status', 1)->first();
         if ($checkContent) {
@@ -49,7 +49,7 @@ if (!function_exists('sc_customer_sendmail_reset_notification') && !in_array('sc
  * Send email verify
  */
 if (!function_exists('sc_customer_sendmail_verify') && !in_array('sc_customer_sendmail_verify', config('helper_except', []))) {
-    function sc_customer_sendmail_verify($emailVerify, $userId)
+    function sc_customer_sendmail_verify(string $emailVerify, string $userId)
     {
         $url = \Illuminate\Support\Facades\URL::temporarySignedRoute(
             'customer.verify_process',
