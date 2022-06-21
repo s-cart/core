@@ -1246,7 +1246,7 @@ $('.removeproductInGroup').click(function(event) {
 //end select in group
 @endif
 
-@if (sc_config_admin('product_kind') && $product->kind == SC_PRODUCT_BUNDLE)
+@if (sc_config_admin('product_kind') && $product->kind == SC_PRODUCT_BUILD)
 // Select product in build
 $('#add_product_in_build').click(function(event) {
     var htmlSelectBuild = '{!! str_replace("\n", "", $htmlSelectBuild) !!}';
