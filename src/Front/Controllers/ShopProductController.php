@@ -144,6 +144,7 @@ class ShopProductController extends RootFrontController
                     'title'           => $product->name,
                     'description'     => $product->description,
                     'keyword'         => $product->keyword,
+                    'productId'       => $product->id,
                     'product'         => $product,
                     'productRelation' => $productRelation,
                     'og_image'        => sc_file($product->getImage()),

@@ -168,6 +168,7 @@ class ShopCategoryController extends RootFrontController
                 $this->templatePath . '.screen.shop_product_list',
                 array(
                     'title'       => $category->title,
+                    'categoryId'  => $category->id,
                     'description' => $category->description,
                     'keyword'     => $category->keyword,
                     'products'    => $products,

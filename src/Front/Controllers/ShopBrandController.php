@@ -129,6 +129,7 @@ class ShopBrandController extends RootFrontController
                     'title'       => $brand->name,
                     'description' => $brand->description,
                     'keyword'     => $brand->keyword,
+                    'brandId'     => $brand->id,
                     'products'    => $products,
                     'og_image'    => sc_file($brand->getImage()),
                     'filter_sort' => $filter_sort,
