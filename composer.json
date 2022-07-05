@@ -44,7 +44,7 @@
           ],
           "aliases": {
             "Export" : "SCart\\Core\\Library\\ProcessData\\Export",
-            "ProcessData" : "SCart\\Core\\Library\\ProcessData\\Boot",
+            "Import" : "SCart\\Core\\Library\\ProcessData\\Import",
             "Cart" : "SCart\\Core\\Library\\ShoppingCart\\Facades\\Cart",
             "Admin" : "SCart\\Core\\Admin\\Admin"
           }
