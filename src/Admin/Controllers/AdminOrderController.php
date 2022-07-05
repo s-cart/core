@@ -340,7 +340,7 @@ class AdminOrderController extends RootAdminController
         }
         //Create new order
         $dataInsert = [
-            'customer_id'     => $data['customer_id'] ?? 0,
+            'customer_id'     => $data['customer_id'] ?? "",
             'first_name'      => $data['first_name'],
             'last_name'       => $data['last_name'] ?? '',
             'status'          => $data['status'],
@@ -675,7 +675,7 @@ class AdminOrderController extends RootAdminController
     {
         try {
             $data = request()->all();
-            $pId = $data['pId'] ?? 0;
+            $pId = $data['pId'] ?? "";
             $itemDetail = (new ShopOrderDetail)->where('id', $pId)->first();
             if (!$itemDetail) {
                 return response()->json(['error' => 1, 'msg' => sc_language_render('admin.data_not_found_detail', ['msg' => 'detail#'.$pId]), 'detail' => '']);
@@ -739,7 +739,7 @@ class AdminOrderController extends RootAdminController
      */
     public function invoice()
     {
-        $orderId = request('order_id') ?? 0;
+        $orderId = request('order_id') ?? null;
         $action = request('action') ?? '';
         $order = AdminOrder::getOrderAdmin($orderId);
         if ($order) {

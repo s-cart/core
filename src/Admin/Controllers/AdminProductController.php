@@ -521,8 +521,8 @@ class AdminProductController extends RootAdminController
         $subImages       = $data['sub_image'] ?? [];
         $downloadPath    = $data['download_path'] ?? '';
         $dataInsert = [
-            'brand_id'       => $data['brand_id'] ?? 0,
-            'supplier_id'    => $data['supplier_id'] ?? 0,
+            'brand_id'       => $data['brand_id'] ?? "",
+            'supplier_id'    => $data['supplier_id'] ?? "",
             'price'          => $data['price'] ?? 0,
             'sku'            => $data['sku'],
             'cost'           => $data['cost'] ?? 0,
@@ -537,7 +537,7 @@ class AdminProductController extends RootAdminController
             'alias'          => $data['alias'],
             'property'       => $data['property'] ?? SC_PROPERTY_PHYSICAL,
             'image'          => $data['image'] ?? '',
-            'tax_id'         => $data['tax_id'] ?? 0,
+            'tax_id'         => $data['tax_id'] ?? "",
             'status'         => (!empty($data['status']) ? 1 : 0),
             'approve'         => (!empty($data['approve']) ? 1 : 0),
             'sort'           => (int) $data['sort'],
@@ -859,9 +859,9 @@ class AdminProductController extends RootAdminController
         $downloadPath    = $data['download_path'] ?? '';
         $dataUpdate = [
             'image'        => $data['image'] ?? '',
-            'tax_id'       => $data['tax_id'] ?? 0,
-            'brand_id'     => $data['brand_id'] ?? 0,
-            'supplier_id'  => $data['supplier_id'] ?? 0,
+            'tax_id'       => $data['tax_id'] ?? "",
+            'brand_id'     => $data['brand_id'] ?? "",
+            'supplier_id'  => $data['supplier_id'] ?? "",
             'price'        => $data['price'] ?? 0,
             'cost'         => $data['cost'] ?? 0,
             'stock'        => $data['stock'] ?? 0,

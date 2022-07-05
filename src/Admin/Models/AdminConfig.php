@@ -147,7 +147,7 @@ class AdminConfig extends Model
         } else {
             $data = self::where('code', $dataQuery['code']);
         }
-        $storeId = $dataQuery['storeId'] ?? 0;
+        $storeId = $dataQuery['storeId'] ?? "";
         $sort    = $dataQuery['sort'] ?? 'desc';
         $groupBy = $dataQuery['groupBy'] ?? null;
         $keyBy   = $dataQuery['keyBy'] ?? null;
