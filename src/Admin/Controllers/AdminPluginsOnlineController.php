@@ -153,7 +153,7 @@ class AdminPluginsOnlineController extends RootAdminController
             } else {
                 $response = ['error' => 1, 'msg' => 'error while unzip'];
             }
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $response = ['error' => 1, 'msg' => $e->getMessage()];
         }
         return response()->json($response);

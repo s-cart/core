@@ -111,7 +111,7 @@ class AdminTemplateOnlineController extends RootAdminController
             $pathTmp = $key.'_'.time();
             $fileTmp = $pathTmp.'.zip';
             Storage::disk('tmp')->put($pathTmp.'/'.$fileTmp, $data);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $response = ['error' => 1, 'msg' => $e->getMessage()];
         }
 

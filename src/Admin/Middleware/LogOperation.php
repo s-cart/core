@@ -30,7 +30,7 @@ class LogOperation
 
             try {
                 AdminLog::create($log);
-            } catch (\Exception $exception) {
+            } catch (\Throwable $exception) {
                 // pass
             }
         }

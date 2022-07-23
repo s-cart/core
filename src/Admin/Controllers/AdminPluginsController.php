@@ -192,7 +192,7 @@ class AdminPluginsController extends RootAdminController
                             return redirect()->back()->with('error', $response['msg']);
                         }
                         $linkRedirect = route('admin_plugin', ['code' => (new $namespace)->configCode]);
-                    } catch (\Exception $e) {
+                    } catch (\Throwable $e) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                         return redirect()->back()->with('error', $e->getMessage());
                     }
