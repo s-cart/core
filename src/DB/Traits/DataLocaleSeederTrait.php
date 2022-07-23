@@ -2937,6 +2937,8 @@ trait DataLocaleSeederTrait
             ['code' => 'common.from','text' => 'From','position' => 'common','location' => 'en'],
             ['code' => 'common.to','text' => 'Đến','position' => 'common','location' => 'vi'],
             ['code' => 'common.to','text' => 'To','position' => 'common','location' => 'en'],
+            ['code' => 'plugin.plugin_action.plugin_exist','text' => 'Plugin này đã tồn tại rồi','position' => 'plugin','location' => 'vi'],
+            ['code' => 'plugin.plugin_action.plugin_exist','text' => 'This plugin already exists','position' => 'plugin','location' => 'en'],
         ];
         return $dataLang;
     }
