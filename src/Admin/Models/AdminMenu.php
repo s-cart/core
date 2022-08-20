@@ -151,9 +151,8 @@ class AdminMenu extends Model
      * Create new menu
      * @return [type] [description]
      */
-    public static function createMenu($dataInsert)
+    public static function createMenu($dataCreate)
     {
-        $dataUpdate = $dataInsert;
-        return self::create($dataUpdate);
+        return self::create($dataCreate);
     }
 }

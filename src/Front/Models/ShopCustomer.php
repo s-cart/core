@@ -116,7 +116,7 @@ class ShopCustomer extends Authenticatable
      * Create new customer
      * @return [type] [description]
      */
-    public static function createCustomer($dataInsert)
+    public static function createCustomer(array $dataInsert)
     {
         $dataClean = sc_clean($dataInsert);
 

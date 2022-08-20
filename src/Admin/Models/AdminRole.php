@@ -91,9 +91,9 @@ class AdminRole extends Model
      * Create new role
      * @return [type] [description]
      */
-    public static function createRole($dataInsert)
+    public static function createRole($dataCreate)
     {
-        $dataUpdate = sc_clean($dataInsert);
-        return self::create($dataUpdate);
+        $dataCreate = sc_clean($dataCreate);
+        return self::create($dataCreate);
     }
 }

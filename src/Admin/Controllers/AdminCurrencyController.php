@@ -167,7 +167,7 @@ class AdminCurrencyController extends RootAdminController
                 ->withInput();
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
             'code' => $data['code'],
             'symbol' => $data['symbol'],
@@ -178,8 +178,8 @@ class AdminCurrencyController extends RootAdminController
             'status' => empty($data['status']) ? 0 : 1,
             'sort' => (int) $data['sort'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        ShopCurrency::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        ShopCurrency::create($dataCreate);
 
         return redirect()->route('admin_currency.index')->with('success', sc_language_render('action.create_success'));
     }

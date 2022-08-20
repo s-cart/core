@@ -86,11 +86,11 @@ class AdminOrderStatusController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $obj = ShopOrderStatus::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $obj = ShopOrderStatus::create($dataCreate);
 
         return redirect()->route('admin_order_status.edit', ['id' => $obj['id']])->with('success', sc_language_render('action.create_success'));
     }

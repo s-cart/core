@@ -151,12 +151,12 @@ class RoleController extends RootAdminController
                 ->withInput();
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
             'slug' => $data['slug'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $role = AdminRole::createRole($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $role = AdminRole::createRole($dataCreate);
         $permission = $data['permission'] ?? [];
         $administrators = $data['administrators'] ?? [];
         //Insert permission

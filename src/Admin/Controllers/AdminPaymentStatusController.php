@@ -84,11 +84,11 @@ class AdminPaymentStatusController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        ShopPaymentStatus::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        ShopPaymentStatus::create($dataCreate);
         return redirect()->route('admin_payment_status.index')->with('success', sc_language_render('action.create_success'));
     }
 

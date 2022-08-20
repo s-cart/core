@@ -183,15 +183,15 @@ class UsersController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $dataInsert = [
+        $dataCreate = [
             'name'     => $data['name'],
             'username' => strtolower($data['username']),
             'avatar'   => $data['avatar'],
             'email'    => strtolower($data['email']),
             'password' => bcrypt($data['password']),
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $user = AdminUser::createUser($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $user = AdminUser::createUser($dataCreate);
 
         $roles = $data['roles'] ?? [];
         $permission = $data['permission'] ?? [];

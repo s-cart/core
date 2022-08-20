@@ -90,7 +90,7 @@ class AdminLanguageController extends RootAdminController
                 ->withInput();
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'icon' => $data['icon'],
             'name' => $data['name'],
             'code' => $data['code'],
@@ -98,8 +98,8 @@ class AdminLanguageController extends RootAdminController
             'status' => empty($data['status']) ? 0 : 1,
             'sort' => (int) $data['sort'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $obj = ShopLanguage::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $obj = ShopLanguage::create($dataCreate);
 
         return redirect()->route('admin_language.edit', ['id' => $obj['id']])->with('success', sc_language_render('action.create_success'));
     }

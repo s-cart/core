@@ -87,12 +87,12 @@ class AdminBannerTypeController extends RootAdminController
         }
         $data['code'] = sc_word_format_url($data['code']);
         $data['code'] = sc_word_limit($data['code'], 100);
-        $dataInsert = [
+        $dataCreate = [
             'code' => $data['code'],
             'name' => $data['name'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        ShopBannerType::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        ShopBannerType::create($dataCreate);
 
         return redirect()->route('admin_banner_type.index')->with('success', sc_language_render('action.create_success'));
     }

@@ -94,7 +94,7 @@ class AdminSupplierController extends RootAdminController
                 ->withInput($data);
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'image' => $data['image'],
             'name' => $data['name'],
             'alias' => $data['alias'],
@@ -104,8 +104,8 @@ class AdminSupplierController extends RootAdminController
             'phone' => $data['phone'],
             'sort' => (int) $data['sort'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $obj = ShopSupplier::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $obj = ShopSupplier::create($dataCreate);
 
         return redirect()->route('admin_supplier.index')->with('success', sc_language_render('action.create_success'));
     }

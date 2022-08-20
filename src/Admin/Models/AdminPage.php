@@ -123,26 +123,26 @@ class AdminPage extends ShopPage
     /**
      * Create a new page
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function createPageAdmin(array $dataInsert)
+    public static function createPageAdmin(array $dataCreate)
     {
-        return self::create($dataInsert);
+        return self::create($dataCreate);
     }
 
 
     /**
      * Insert data description
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function insertDescriptionAdmin(array $dataInsert)
+    public static function insertDescriptionAdmin(array $dataCreate)
     {
-        return ShopPageDescription::create($dataInsert);
+        return ShopPageDescription::create($dataCreate);
     }
 
     /**

@@ -53,13 +53,13 @@ class AdminLink extends ShopLink
     /**
      * Create a new link
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function createLinkAdmin(array $dataInsert)
+    public static function createLinkAdmin(array $dataCreate)
     {
-        $dataInsert = sc_clean($dataInsert);
-        return self::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate);
+        return self::create($dataCreate);
     }
 }

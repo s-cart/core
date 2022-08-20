@@ -188,7 +188,7 @@ class AdminBannerController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $dataInsert = [
+        $dataCreate = [
             'image'    => $data['image'],
             'url'      => $data['url'],
             'title'    => $data['title'],
@@ -198,8 +198,8 @@ class AdminBannerController extends RootAdminController
             'status'   => empty($data['status']) ? 0 : 1,
             'sort'     => (int) $data['sort'],
         ];
-        $dataInsert = sc_clean($dataInsert, ['html'], true);
-        $banner = AdminBanner::createBannerAdmin($dataInsert);
+        $dataCreate = sc_clean($dataCreate, ['html'], true);
+        $banner = AdminBanner::createBannerAdmin($dataCreate);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
         $banner->stores()->detach();

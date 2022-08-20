@@ -87,12 +87,12 @@ class AdminAttributeGroupController extends RootAdminController
                 ->withInput();
         }
         //Create new order
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
             'type' => $data['type'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        ShopAttributeGroup::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        ShopAttributeGroup::create($dataCreate);
 
         return redirect()->route('admin_attribute_group.index')->with('success', sc_language_render('action.create_success'));
     }

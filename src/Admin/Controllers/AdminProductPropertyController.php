@@ -87,12 +87,12 @@ class AdminProductPropertyController extends RootAdminController
         }
         $data['code'] = sc_word_format_url($data['code']);
         $data['code'] = sc_word_limit($data['code'], 100);
-        $dataInsert = [
+        $dataCreate = [
             'code' => $data['code'],
             'name' => $data['name'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $obj = ShopProductProperty::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $obj = ShopProductProperty::create($dataCreate);
 
         return redirect()->route('admin_product_property.edit', ['id' => $obj['id']])->with('success', sc_language_render('action.create_success'));
     }

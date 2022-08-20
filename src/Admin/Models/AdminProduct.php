@@ -113,26 +113,26 @@ class AdminProduct extends ShopProduct
     /**
      * Create a new product
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function createProductAdmin(array $dataInsert)
+    public static function createProductAdmin(array $dataCreate)
     {
-        return self::create($dataInsert);
+        return self::create($dataCreate);
     }
 
 
     /**
      * Insert data description
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function insertDescriptionAdmin(array $dataInsert)
+    public static function insertDescriptionAdmin(array $dataCreate)
     {
-        return ShopProductDescription::create($dataInsert);
+        return ShopProductDescription::create($dataCreate);
     }
 
     /**

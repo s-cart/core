@@ -172,7 +172,7 @@ class AdminStoreBlockController extends RootAdminController
                 ->withInput();
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'id'       => sc_uuid(),
             'name'     => $data['name'],
             'position' => $data['position'],
@@ -184,8 +184,8 @@ class AdminStoreBlockController extends RootAdminController
             'status'   => (empty($data['status']) ? 0 : 1),
             'store_id' => $storeId,
         ];
-        $dataInsert = sc_clean($dataInsert, ['text'], true);
-        AdminStoreBlockContent::createStoreBlockContentAdmin($dataInsert);
+        $dataCreate = sc_clean($dataCreate, ['text'], true);
+        AdminStoreBlockContent::createStoreBlockContentAdmin($dataCreate);
         
         return redirect()->route('admin_store_block.index')->with('success', sc_language_render('action.create_success'));
     }

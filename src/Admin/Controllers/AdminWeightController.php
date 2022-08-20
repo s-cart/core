@@ -86,12 +86,12 @@ class AdminWeightController extends RootAdminController
                 ->withInput();
         }
         //Create new order
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
             'description' => $data['description'],
         ];
-        $dataInsert  = sc_clean($dataInsert, [], true);
-        $obj = ShopWeight::create($dataInsert);
+        $dataCreate  = sc_clean($dataCreate, [], true);
+        $obj = ShopWeight::create($dataCreate);
 
         return redirect()->route('admin_weight_unit.index')->with('success', sc_language_render('action.create_success'));
     }

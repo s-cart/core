@@ -520,7 +520,7 @@ class AdminProductController extends RootAdminController
         $productBuildQty = $data['productBuildQty'] ?? [];
         $subImages       = $data['sub_image'] ?? [];
         $downloadPath    = $data['download_path'] ?? '';
-        $dataInsert = [
+        $dataCreate = [
             'brand_id'       => $data['brand_id'] ?? "",
             'supplier_id'    => $data['supplier_id'] ?? "",
             'price'          => $data['price'] ?? 0,
@@ -545,11 +545,11 @@ class AdminProductController extends RootAdminController
         ];
 
         if (!empty($data['date_available'])) {
-            $dataInsert['date_available'] = $data['date_available'];
+            $dataCreate['date_available'] = $data['date_available'];
         }
         //insert product
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $product = AdminProduct::createProductAdmin($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $product = AdminProduct::createProductAdmin($dataCreate);
 
         //Promoton price
         if (isset($data['price_promotion']) && in_array($data['kind'], [SC_PRODUCT_SINGLE, SC_PRODUCT_BUILD])) {

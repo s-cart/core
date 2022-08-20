@@ -339,7 +339,7 @@ class AdminOrderController extends RootAdminController
                 ->withInput();
         }
         //Create new order
-        $dataInsert = [
+        $dataCreate = [
             'customer_id'     => $data['customer_id'] ?? "",
             'first_name'      => $data['first_name'],
             'last_name'       => $data['last_name'] ?? '',
@@ -358,8 +358,8 @@ class AdminOrderController extends RootAdminController
             'email'           => $data['email'],
             'comment'         => $data['comment'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $order = AdminOrder::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $order = AdminOrder::create($dataCreate);
         AdminOrder::insertOrderTotal([
             ['id' => sc_uuid(),'code' => 'subtotal', 'value' => 0, 'title' => sc_language_render('order.totals.sub_total'), 'sort' => ShopOrderTotal::POSITION_SUBTOTAL, 'order_id' => $order->id],
             ['id' => sc_uuid(),'code' => 'tax', 'value' => 0, 'title' => sc_language_render('order.totals.tax'), 'sort' => ShopOrderTotal::POSITION_TAX, 'order_id' => $order->id],

@@ -81,12 +81,12 @@ class AdminTaxController extends RootAdminController
                 ->withInput($data);
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'value' => $data['value'],
             'name' => $data['name'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $obj = ShopTax::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $obj = ShopTax::create($dataCreate);
 
         return redirect()->route('admin_tax.index')->with('success', sc_language_render('action.create_success'));
     }

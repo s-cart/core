@@ -59,12 +59,12 @@ class AdminEmailTemplate extends ShopEmailTemplate
     /**
      * Create a new news
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function createEmailTemplateAdmin(array $dataInsert)
+    public static function createEmailTemplateAdmin(array $dataCreate)
     {
-        return self::create($dataInsert);
+        return self::create($dataCreate);
     }
 }

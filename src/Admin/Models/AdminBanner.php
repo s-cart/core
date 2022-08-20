@@ -64,12 +64,12 @@ class AdminBanner extends ShopBanner
     /**
      * Create a new banner
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function createBannerAdmin(array $dataInsert)
+    public static function createBannerAdmin(array $dataCreate)
     {
-        return self::create($dataInsert);
+        return self::create($dataCreate);
     }
 }

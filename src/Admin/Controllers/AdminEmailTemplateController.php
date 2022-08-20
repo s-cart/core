@@ -110,15 +110,15 @@ class AdminEmailTemplateController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $dataInsert = [
+        $dataCreate = [
             'name'     => $data['name'],
             'group'    => $data['group'],
             'text'     => $data['text'],
             'status'   => !empty($data['status']) ? 1 : 0,
             'store_id' => session('adminStoreId'),
         ];
-        $dataInsert = sc_clean($dataInsert, ['text'], true);
-        AdminEmailTemplate::createEmailTemplateAdmin($dataInsert);
+        $dataCreate = sc_clean($dataCreate, ['text'], true);
+        AdminEmailTemplate::createEmailTemplateAdmin($dataCreate);
 
         return redirect()->route('admin_email_template.index')->with('success', sc_language_render('action.create_success'));
     }

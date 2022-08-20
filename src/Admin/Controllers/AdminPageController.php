@@ -191,12 +191,12 @@ class AdminPageController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput($data);
         }
-        $dataInsert = [
+        $dataCreate = [
             'image'    => $data['image'],
             'alias'    => $data['alias'],
             'status'   => !empty($data['status']) ? 1 : 0,
         ];
-        $page = AdminPage::createPageAdmin($dataInsert);
+        $page = AdminPage::createPageAdmin($dataCreate);
         $dataDes = [];
         $languages = $this->languages;
         foreach ($languages as $code => $value) {

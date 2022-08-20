@@ -119,7 +119,7 @@ class AdminBrandController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput($data);
         }
-        $dataInsert = [
+        $dataCreate = [
             'image' => $data['image'],
             'name' => $data['name'],
             'alias' => $data['alias'],
@@ -127,8 +127,8 @@ class AdminBrandController extends RootAdminController
             'sort' => (int) $data['sort'],
             'status' => (!empty($data['status']) ? 1 : 0),
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $obj = ShopBrand::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $obj = ShopBrand::create($dataCreate);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
         $obj->stores()->detach();

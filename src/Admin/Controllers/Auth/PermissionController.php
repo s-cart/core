@@ -183,13 +183,13 @@ class PermissionController extends RootAdminController
                 ->withInput();
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
             'slug' => $data['slug'],
             'http_uri' => implode(',', ($data['http_uri'] ?? [])),
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $permission = AdminPermission::createPermission($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $permission = AdminPermission::createPermission($dataCreate);
 
         return redirect()->route('admin_permission.index')->with('success', sc_language_render('action.create_success'));
     }

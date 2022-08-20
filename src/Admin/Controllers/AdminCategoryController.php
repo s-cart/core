@@ -200,7 +200,7 @@ class AdminCategoryController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput($data);
         }
-        $dataInsert = [
+        $dataCreate = [
             'image'    => $data['image'],
             'alias'    => $data['alias'],
             'parent'   => $data['parent'],
@@ -208,8 +208,8 @@ class AdminCategoryController extends RootAdminController
             'status'   => !empty($data['status']) ? 1 : 0,
             'sort'     => (int) $data['sort'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $category = AdminCategory::createCategoryAdmin($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $category = AdminCategory::createCategoryAdmin($dataCreate);
         $dataDes = [];
         $languages = $this->languages;
         foreach ($languages as $code => $value) {

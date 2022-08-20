@@ -190,14 +190,14 @@ class AdminNewsController extends RootAdminController
                 ->withInput($data);
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'image'    => $data['image'],
             'sort'     => $data['sort'],
             'alias'    => $data['alias'],
             'status'   => !empty($data['status']) ? 1 : 0,
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $news = AdminNews::createNewsAdmin($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $news = AdminNews::createNewsAdmin($dataCreate);
         $id = $news->id;
         $dataDes = [];
         $languages = $this->languages;

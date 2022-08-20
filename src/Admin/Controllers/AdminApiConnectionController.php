@@ -96,15 +96,15 @@ class AdminApiConnectionController extends RootAdminController
                 ->withInput();
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'description' => $data['description'],
             'apiconnection' => $data['apiconnection'],
             'apikey' => $data['apikey'],
             'expire' => $data['expire'],
             'status' => empty($data['status']) ? 0 : 1,
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        ShopApiConnection::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        ShopApiConnection::create($dataCreate);
 
         return redirect()->route('admin_api_connection.index')->with('success', sc_language_render('action.create_success'));
     }

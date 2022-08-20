@@ -47,15 +47,15 @@ class AdminMenuController extends RootAdminController
                 ->withInput();
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'title' => $data['title'],
             'parent_id' => $data['parent_id'],
             'uri' => $data['uri'],
             'icon' => $data['icon'],
             'sort' => $data['sort'] ?? 0,
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        AdminMenu::createMenu($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        AdminMenu::createMenu($dataCreate);
         return redirect()->route('admin_menu.index')->with('success', sc_language_render('admin.menu.create_success'));
     }
 

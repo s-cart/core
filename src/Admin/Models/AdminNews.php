@@ -123,26 +123,26 @@ class AdminNews extends ShopNews
     /**
      * Create a new news
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function createNewsAdmin(array $dataInsert)
+    public static function createNewsAdmin(array $dataCreate)
     {
-        return self::create($dataInsert);
+        return self::create($dataCreate);
     }
 
 
     /**
      * Insert data description
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function insertDescriptionAdmin(array $dataInsert)
+    public static function insertDescriptionAdmin(array $dataCreate)
     {
-        return ShopNewsDescription::create($dataInsert);
+        return ShopNewsDescription::create($dataCreate);
     }
 
     /**

@@ -145,13 +145,13 @@ class AdminSubscribeController extends RootAdminController
                 ->withInput();
         }
 
-        $dataInsert = [
+        $dataCreate = [
             'email' => $data['email'],
             'status' => (!empty($data['status']) ? 1 : 0),
             'store_id' => session('adminStoreId'),
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        AdminSubscribe::createSubscribeAdmin($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        AdminSubscribe::createSubscribeAdmin($dataCreate);
 
         return redirect()->route('admin_subscribe.index')->with('success', sc_language_render('action.create_success'));
     }

@@ -146,25 +146,25 @@ class AdminCategory extends ShopCategory
     /**
      * Create a new category
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function createCategoryAdmin(array $dataInsert)
+    public static function createCategoryAdmin(array $dataCreate)
     {
-        return self::create($dataInsert);
+        return self::create($dataCreate);
     }
 
 
     /**
      * Insert data description
      *
-     * @param   array  $dataInsert  [$dataInsert description]
+     * @param   array  $dataCreate  [$dataCreate description]
      *
      * @return  [type]              [return description]
      */
-    public static function insertDescriptionAdmin(array $dataInsert)
+    public static function insertDescriptionAdmin(array $dataCreate)
     {
-        return ShopCategoryDescription::create($dataInsert);
+        return ShopCategoryDescription::create($dataCreate);
     }
 }

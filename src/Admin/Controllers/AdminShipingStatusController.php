@@ -86,11 +86,11 @@ class AdminShipingStatusController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $obj = ShopShippingStatus::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $obj = ShopShippingStatus::create($dataCreate);
 
         return redirect()->route('admin_shipping_status.index')->with('success', sc_language_render('action.create_success'));
     }

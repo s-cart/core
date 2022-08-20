@@ -160,7 +160,7 @@ class AdminStoreLinkController extends RootAdminController
                 ->withErrors($validator)
                 ->withInput();
         }
-        $dataInsert = [
+        $dataCreate = [
             'name'     => $data['name'],
             'url'      => $data['url'],
             'target'   => $data['target'],
@@ -168,8 +168,8 @@ class AdminStoreLinkController extends RootAdminController
             'sort'     => $data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $link = AdminLink::createLinkAdmin($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $link = AdminLink::createLinkAdmin($dataCreate);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
         $link->stores()->detach();

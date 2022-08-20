@@ -88,12 +88,12 @@ class AdminLengthController extends RootAdminController
                 ->withInput();
         }
         //Create new order
-        $dataInsert = [
+        $dataCreate = [
             'name' => $data['name'],
             'description' => $data['description'],
         ];
-        $dataInsert = sc_clean($dataInsert, [], true);
-        $obj = ShopLength::create($dataInsert);
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $obj = ShopLength::create($dataCreate);
         return redirect()->route('admin_length_unit.index')->with('success', sc_language_render('action.create_success'));
     }
 

@@ -173,10 +173,10 @@ class AdminCustomerController extends RootAdminController
         $data['status'] = empty($data['status']) ? 0 : 1;
         $data['store_id'] = session('adminStoreId');
 
-        $customer = AdminCustomer::createCustomer($dataMapping['dataInsert']);
+        $customer = AdminCustomer::createCustomer($dataMapping['dataCreate']);
 
         if ($customer) {
-            sc_customer_created_by_admin($customer, $dataMapping['dataInsert']);
+            sc_customer_created_by_admin($customer, $dataMapping['dataCreate']);
         }
 
         return redirect()->route('admin_customer.index')->with('success', sc_language_render('action.create_success'));

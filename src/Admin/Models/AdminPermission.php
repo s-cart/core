@@ -82,9 +82,8 @@ class AdminPermission extends Model
      * Create new permission
      * @return [type] [description]
      */
-    public static function createPermission($dataInsert)
+    public static function createPermission($dataCreate)
     {
-        $dataUpdate = $dataInsert;
-        return self::create($dataUpdate);
+        return self::create($dataCreate);
     }
 }
