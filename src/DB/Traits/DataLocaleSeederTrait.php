@@ -347,7 +347,7 @@ trait DataLocaleSeederTrait
             ['code' => 'action.confirm','text' => 'Xác nhận','position' => 'action','location' => 'vi'],
             ['code' => 'action.confirm','text' => 'Confirmation','position' => 'action','location' => 'en'],
             ['code' => 'action.add_to_cart','text' => 'Add to cart','position' => 'action','location' => 'en'],
-            ['code' => 'action.add_to_cart','text' => 'Thêm vào giỏ hàng','position' => 'action','location' => 'vi'],
+            ['code' => 'action.add_to_cart','text' => 'Chọn mua','position' => 'action','location' => 'vi'],
             ['code' => 'action.add_to_wishlist','text' => 'Thêm yêu thích','position' => 'action','location' => 'vi'],
             ['code' => 'action.add_to_wishlist','text' => 'Add to wishlist','position' => 'action','location' => 'en'],
             ['code' => 'action.add_to_compare','text' => 'Add to compare','position' => 'action','location' => 'en'],
