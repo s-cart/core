@@ -52,6 +52,11 @@
       </tr>
 
       <tr>
+        <td>{{ sc_language_render('admin.env.PREFIX_ABOUT') }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_ABOUT" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_ABOUT') }}" data-value="{{ sc_config('PREFIX_ABOUT', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+      </tr>
+
+      <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_NEWS') }}</td>
         <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_NEWS" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_NEWS') }}" data-value="{{ sc_config('PREFIX_NEWS', $storeId) }}" data-original-title="" title=""></a>/name-of-blog-news{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr>

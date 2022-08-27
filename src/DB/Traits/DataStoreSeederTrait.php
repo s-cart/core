@@ -132,6 +132,7 @@ trait DataStoreSeederTrait
             ['group' => '','code' => 'url_config','key' => 'PREFIX_PRODUCT','value' => 'product','sort' => '0','detail' => 'admin.env.PREFIX_PRODUCT','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_SEARCH','value' => 'search','sort' => '0','detail' => 'admin.env.PREFIX_SEARCH','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_CONTACT','value' => 'contact','sort' => '0','detail' => 'admin.env.PREFIX_CONTACT','store_id' => $storeId],
+            ['group' => '','code' => 'url_config','key' => 'PREFIX_ABOUT','value' => 'about','sort' => '0','detail' => 'admin.env.PREFIX_ABOUT','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_NEWS','value' => 'news','sort' => '0','detail' => 'admin.env.PREFIX_NEWS','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_MEMBER','value' => 'customer','sort' => '0','detail' => 'admin.env.PREFIX_MEMBER','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_MEMBER_ORDER_LIST','value' => 'order-list','sort' => '0','detail' => 'admin.env.PREFIX_MEMBER_ORDER_LIST','store_id' => $storeId],

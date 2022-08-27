@@ -66,6 +66,7 @@ Route::group(
     function () use ($suffix, $nameSpaceFrontContent, $nameSpaceFrontStore) {
         $prefixSearch = sc_config('PREFIX_SEARCH')??'search';
         $prefixContact = sc_config('PREFIX_CONTACT')??'contact';
+        $prefixAbout = sc_config('PREFIX_ABOUT')??'about';
         $prefixNews = sc_config('PREFIX_NEWS')??'news';
 
         //Search
@@ -87,6 +88,10 @@ Route::group(
             ->name('contact');
         Route::post('/contact', $nameSpaceFrontContent.'\ShopContentController@postContact')
             ->name('contact.post');
+
+        //About
+        Route::get($prefixAbout.$suffix, $nameSpaceFrontContent.'\ShopContentController@getAboutProcessFront')
+        ->name('about');
 
         //News
         Route::get($prefixNews, $nameSpaceFrontContent.'\ShopContentController@newsProcessFront')
