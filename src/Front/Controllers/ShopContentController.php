@@ -321,4 +321,56 @@ class ShopContentController extends RootFrontController
         return redirect()->back()
             ->with(['success' => sc_language_render('subscribe.subscribe_success')]);
     }
+
+
+    /**
+     * Process front form about page
+     *
+     * @param [type] ...$params
+     * @return void
+     */
+    public function getAboutProcessFront(...$params)
+    {
+        if (config('app.seoLang')) {
+            $lang = $params[0] ?? '';
+            sc_lang_switch($lang);
+        }
+        return $this->_getAbout();
+    }
+
+    /**
+     * form about
+     * @return [view]
+     */
+    private function _getAbout()
+    {
+        sc_check_view($this->templatePath . '.screen.shop_about');
+        $page = (new ShopPage)->getDetail('about', $type = 'alias');
+        if ($page) {
+            $title = $page->title;
+            $description = $page->description;
+            $keyword = $page->keyword;
+            $og_image = sc_file($page->getImage());
+        } else {
+            $title = sc_language_render('front.about');
+            $description = '';
+            $keyword = '';
+            $og_image = '';
+        }
+        return view(
+            $this->templatePath . '.screen.shop_about',
+            array(
+                'title'       => $title,
+                'description' => $description,
+                'keyword'     => $keyword,
+                'layout_page' => 'shop_about',
+                'og_image'    => $og_image,
+                'page'        => $page,
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => $title],
+                ],
+            )
+        );
+    }
+
 }
