@@ -15,10 +15,10 @@ trait DataLocaleSeederTrait
         $db = DB::connection(SC_CONNECTION);
 
         $dataCountry = $this->dataCountry();
-        $db->table(SC_DB_PREFIX.'shop_country')->insert($dataCountry);
+        $db->table(SC_DB_PREFIX.'shop_country')->insertOrIgnore($dataCountry);
 
         $dataLang = $this->dataLang();
-        $db->table(SC_DB_PREFIX.'languages')->insert($dataLang);
+        $db->table(SC_DB_PREFIX.'languages')->insertOrIgnore($dataLang);
     }
 
     public function dataCountry() {
@@ -2518,6 +2518,14 @@ trait DataLocaleSeederTrait
             ['code' => 'admin.link_position.footer_left','text' => 'Footer left','position' => 'admin.link','location' => 'en'],
             ['code' => 'admin.link_position.footer_right','text' => 'Footer right','position' => 'admin.link','location' => 'en'],
             ['code' => 'admin.link_position.sidebar','text' => 'Sidebar','position' => 'admin.link','location' => 'en'],
+            ['code' => 'admin.link_group.list','text' => 'Danh sách nhóm link','position' => 'admin.link_group','location' => 'vi'],
+            ['code' => 'admin.link_group.list','text' => 'Link group list','position' => 'admin.link_group','location' => 'en'],
+            ['code' => 'admin.link_group.add_new_title','text' => 'Thêm loại mới','position' => 'admin.link_group','location' => 'vi'],
+            ['code' => 'admin.link_group.add_new_title','text' => 'Add new type','position' => 'admin.link_group','location' => 'en'],
+            ['code' => 'admin.link_group.code','text' => 'Mã','position' => 'admin.link_group','location' => 'vi'],
+            ['code' => 'admin.link_group.code','text' => 'Code','position' => 'admin.link_group','location' => 'en'],
+            ['code' => 'admin.link_group.name','text' => 'Tên','position' => 'admin.link_group','location' => 'vi'],
+            ['code' => 'admin.link_group.name','text' => 'Name','position' => 'admin.link_group','location' => 'en'],
             ['code' => 'admin.supplier.name','text' => 'Name','position' => 'admin.supplier','location' => 'en'],
             ['code' => 'admin.supplier.alias','text' => 'Url customize <span class="seo" title="SEO"><i class="fa fa-coffee" aria-hidden="true"></i></span>','position' => 'admin.supplier','location' => 'en'],
             ['code' => 'admin.supplier.alias_validate','text' => 'Maximum 100 characters in the group: "A-Z", "a-z", "0-9" and "-_" ','position' => 'admin.supplier','location' => 'en'],

@@ -127,6 +127,17 @@ class PrepareTablesShop extends Migration
         );
 
         Schema::create(
+            SC_DB_PREFIX.'shop_link_group',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('code', 100)->unique();
+                $table->string('name', 255);
+                $table->timestamps();
+                
+            }
+        );
+
+        Schema::create(
             SC_DB_PREFIX.'shop_password_resets',
             function (Blueprint $table) {
                 $table->string('email', 150);

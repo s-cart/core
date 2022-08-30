@@ -78,17 +78,24 @@
                             <div class="form-group row {{ $errors->has('group') ? ' text-red' : '' }}">
                                 <label for="group" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.select_group') }}</label>
                                 <div class="col-sm-8">
-                                    <select class="form-control group select2" style="width: 100%;" name="group" >
+                                    <div class="input-group">
+                                    <select class="form-control group select2" name="group" >
                                         <option value=""></option>
                                         @foreach ($arrGroup as $k => $v)
                                             <option value="{{ $k }}" {{ (old('group',$link['group']??'') ==$k) ? 'selected':'' }}>{{ $v }}</option>
                                         @endforeach
                                     </select>
+                                    <div class="input-group-append">
+                                        <a href="{{ sc_route_admin('admin_store_link_group.index') }}" class="btn  btn-flat" title="New">
+                                            <i class="fa fa-plus" title="{{ sc_language_render('action.add') }}"></i>
+                                         </a>
+                                    </div>
                                         @if ($errors->has('group'))
                                             <span class="form-text">
                                                 <i class="fa fa-info-circle"></i> {{ $errors->first('group') }}
                                             </span>
                                         @endif
+                                    </div>
                                 </div>
                             </div>
 

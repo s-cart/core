@@ -21,6 +21,8 @@ trait DataDefaultSeederTrait
      */
     public function runProcess()
     {
+        $this->updateDataVersion();
+
         $db = DB::connection(SC_CONNECTION);
         
         if (!empty(session('infoInstall')['admin_user'])) {
@@ -42,94 +44,99 @@ trait DataDefaultSeederTrait
         }
 
         $dataMenu = $this->dataMenu();
-        $db->table(SC_DB_PREFIX.'admin_menu')->insert($dataMenu);
+        $db->table(SC_DB_PREFIX.'admin_menu')->insertOrIgnore($dataMenu);
         
         $dataAdminPermission = $this->dataAdminPermission(SC_ADMIN_PREFIX);
-        $db->table(SC_DB_PREFIX.'admin_permission')->insert($dataAdminPermission);
+        $db->table(SC_DB_PREFIX.'admin_permission')->insertOrIgnore($dataAdminPermission);
         
         $dataAdminRole = $this->dataAdminRole();
-        $db->table(SC_DB_PREFIX.'admin_role')->insert($dataAdminRole);
+        $db->table(SC_DB_PREFIX.'admin_role')->insertOrIgnore($dataAdminRole);
         
         $dataAdminTemplate = $this->dataAdminTemplate();
-        $db->table(SC_DB_PREFIX.'admin_template')->insert($dataAdminTemplate);
+        $db->table(SC_DB_PREFIX.'admin_template')->insertOrIgnore($dataAdminTemplate);
 
         $dataAdminRolePermission = $this->dataAdminRolePermission();
-        $db->table(SC_DB_PREFIX.'admin_role_permission')->insert($dataAdminRolePermission);
+        $db->table(SC_DB_PREFIX.'admin_role_permission')->insertOrIgnore($dataAdminRolePermission);
 
         $dataAdminRoleUser = $this->dataAdminRoleUser();
-        $db->table(SC_DB_PREFIX.'admin_role_user')->insert($dataAdminRoleUser);
+        $db->table(SC_DB_PREFIX.'admin_role_user')->insertOrIgnore($dataAdminRoleUser);
 
         $dataAdminUser = $this->dataAdminUser($this->adminUser, $this->adminPassword, $this->adminEmail);
-        $db->table(SC_DB_PREFIX.'admin_user')->insert($dataAdminUser);
+        $db->table(SC_DB_PREFIX.'admin_user')->insertOrIgnore($dataAdminUser);
 
         $dataAdminConfig = $this->dataAdminConfig();
-        $db->table(SC_DB_PREFIX.'admin_config')->insert($dataAdminConfig);
+        $db->table(SC_DB_PREFIX.'admin_config')->insertOrIgnore($dataAdminConfig);
 
         $dataAdminStore = $this->dataAdminStore($this->adminEmail, $this->language_default, str_replace(['http://','https://', '/install.php'], '', url('/')));
-        $db->table(SC_DB_PREFIX.'admin_store')->insert($dataAdminStore);
+        $db->table(SC_DB_PREFIX.'admin_store')->insertOrIgnore($dataAdminStore);
 
         $dataAdminStoreDescription = $this->dataAdminStoreDescription($this->title_en, $this->title_vi);
-        $db->table(SC_DB_PREFIX.'admin_store_description')->insert($dataAdminStoreDescription);
+        $db->table(SC_DB_PREFIX.'admin_store_description')->insertOrIgnore($dataAdminStoreDescription);
 
         $dataShopLang = $this->dataShopLang();
-        $db->table(SC_DB_PREFIX.'shop_language')->insert($dataShopLang);
+        $db->table(SC_DB_PREFIX.'shop_language')->insertOrIgnore($dataShopLang);
 
         $dataPaymentStatus = $this->dataPaymentStatus();
-        $db->table(SC_DB_PREFIX.'shop_payment_status')->insert($dataPaymentStatus);
+        $db->table(SC_DB_PREFIX.'shop_payment_status')->insertOrIgnore($dataPaymentStatus);
 
         $dataShippingStatus = $this->dataShippingStatus();
-        $db->table(SC_DB_PREFIX.'shop_shipping_status')->insert($dataShippingStatus);
+        $db->table(SC_DB_PREFIX.'shop_shipping_status')->insertOrIgnore($dataShippingStatus);
 
         $dataShopLayoutPage = $this->dataShopLayoutPage();
-        $db->table(SC_DB_PREFIX.'shop_layout_page')->insert($dataShopLayoutPage);
+        $db->table(SC_DB_PREFIX.'shop_layout_page')->insertOrIgnore($dataShopLayoutPage);
 
         $dataShopLayoutPosition = $this->dataShopLayoutPosition();
-        $db->table(SC_DB_PREFIX.'shop_layout_position')->insert($dataShopLayoutPosition);
+        $db->table(SC_DB_PREFIX.'shop_layout_position')->insertOrIgnore($dataShopLayoutPosition);
 
         $dataShopLink = $this->dataShopLink();
-        $db->table(SC_DB_PREFIX.'shop_link')->insert($dataShopLink);
+        $db->table(SC_DB_PREFIX.'shop_link')->insertOrIgnore($dataShopLink);
 
         $dataShopLinkStore = $this->dataShopLinkStore($dataShopLink);
-        $db->table(SC_DB_PREFIX.'shop_link_store')->insert($dataShopLinkStore);
+        $db->table(SC_DB_PREFIX.'shop_link_store')->insertOrIgnore($dataShopLinkStore);
 
         $dataShippingStandard = $this->dataShippingStandard();
-        $db->table(SC_DB_PREFIX.'shop_shipping_standard')->insert($dataShippingStandard);
+        $db->table(SC_DB_PREFIX.'shop_shipping_standard')->insertOrIgnore($dataShippingStandard);
 
         $dataAtrributeGroup = $this->dataAtrributeGroup();
-        $db->table(SC_DB_PREFIX.'shop_attribute_group')->insert($dataAtrributeGroup);
+        $db->table(SC_DB_PREFIX.'shop_attribute_group')->insertOrIgnore($dataAtrributeGroup);
 
         $dataCurrency = $this->dataCurrency();
-        $db->table(SC_DB_PREFIX.'shop_currency')->insert($dataCurrency);
+        $db->table(SC_DB_PREFIX.'shop_currency')->insertOrIgnore($dataCurrency);
 
         $dataOrderStatus = $this->dataOrderStatus();
-        $db->table(SC_DB_PREFIX.'shop_order_status')->insert($dataOrderStatus);
+        $db->table(SC_DB_PREFIX.'shop_order_status')->insertOrIgnore($dataOrderStatus);
 
         $dataPage = $this->dataPage();
-        $db->table(SC_DB_PREFIX.'shop_page')->insert($dataPage);
+        $db->table(SC_DB_PREFIX.'shop_page')->insertOrIgnore($dataPage);
 
         $dataPageStore = $this->dataPageStore($dataPage);
-        $db->table(SC_DB_PREFIX.'shop_page_store')->insert($dataPageStore);
+        $db->table(SC_DB_PREFIX.'shop_page_store')->insertOrIgnore($dataPageStore);
 
         $dataPageDescription = $this->dataPageDescription($dataPage);
-        $db->table(SC_DB_PREFIX.'shop_page_description')->insert($dataPageDescription);
+        $db->table(SC_DB_PREFIX.'shop_page_description')->insertOrIgnore($dataPageDescription);
 
         $dataApiConnection = $this->dataApiConnection();
-        $db->table(SC_DB_PREFIX.'api_connection')->insert($dataApiConnection);
+        $db->table(SC_DB_PREFIX.'api_connection')->insertOrIgnore($dataApiConnection);
 
         $dataTax = $this->dataTax();
-        $db->table(SC_DB_PREFIX.'shop_tax')->insert($dataTax);
+        $db->table(SC_DB_PREFIX.'shop_tax')->insertOrIgnore($dataTax);
 
         $dataWeight = $this->dataWeight();
-        $db->table(SC_DB_PREFIX.'shop_weight')->insert($dataWeight);
+        $db->table(SC_DB_PREFIX.'shop_weight')->insertOrIgnore($dataWeight);
 
         $dataLenght = $this->dataLenght();
-        $db->table(SC_DB_PREFIX.'shop_length')->insert($dataLenght);
+        $db->table(SC_DB_PREFIX.'shop_length')->insertOrIgnore($dataLenght);
 
         $dataBannerType = $this->dataBannerType();
-        $db->table(SC_DB_PREFIX.'shop_banner_type')->insert($dataBannerType);
+        $db->table(SC_DB_PREFIX.'shop_banner_type')->insertOrIgnore($dataBannerType);
 
         $dataProductProperty = $this->dataProductProperty();
-        $db->table(SC_DB_PREFIX.'shop_product_property')->insert($dataProductProperty);
+        $db->table(SC_DB_PREFIX.'shop_product_property')->insertOrIgnore($dataProductProperty);
+
+        $dataLinkGroup = $this->dataLinkGroup();
+        $db->table(SC_DB_PREFIX.'shop_link_group')->insertOrIgnore($dataLinkGroup);
+
+
     }
 
     public function dataMenu() {
@@ -521,12 +528,43 @@ trait DataDefaultSeederTrait
         return $dataBannerType;
     }
 
+    public function dataLinkGroup() {
+        $dataLinkGroup = [
+            ['id' => '1','code' => 'menu','name' => 'Menu main'],
+            ['id' => '2','code' => 'menu_left','name' =>'Menu left'],
+            ['id' => '3','code' => 'menu_right','name' =>'Menu right'],
+            ['id' => '4','code' => 'footer','name' =>'Footer main'],
+            ['id' => '5','code' => 'footer_left','name' =>'Footer left'],
+            ['id' => '6','code' => 'footer_right','name' =>'Footer right'],
+            ['id' => '7','code' => 'sidebar','name' =>'Sidebar'],
+        ];
+        return $dataLinkGroup;
+    }
+
     public function dataProductProperty() {
         $dataProductProperty = [
             ['id' => '1','code' => 'physical','name' => 'Product physical'],
             ['id' => '2','code' => 'download','name' => 'Product download'],
         ];
         return $dataProductProperty;
+    }
+
+
+    public function updateDataVersion() {
+        //Ony use updated v7.1 -> v7.2
+        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'shop_link_group')) {
+            \Illuminate\Support\Facades\Schema::create(
+                SC_DB_PREFIX.'shop_link_group',
+                function (\Illuminate\Database\Schema\Blueprint $table) {
+                    $table->increments('id');
+                    $table->string('code', 100)->unique();
+                    $table->string('name', 255);
+                    $table->timestamps();
+                    
+                }
+            );
+        }
+        //End update
     }
 
 }

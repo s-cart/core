@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Admin\Models\AdminLink;
+use SCart\Core\Front\Models\ShopLinkGroup;
 use Validator;
 
 class AdminStoreLinkController extends RootAdminController
@@ -17,15 +18,7 @@ class AdminStoreLinkController extends RootAdminController
 
     public function arrGroup()
     {
-        return   [
-            'menu' => sc_language_render('admin.link_position.menu'),
-            'menu_left' => sc_language_render('admin.link_position.menu_left'),
-            'menu_right' => sc_language_render('admin.link_position.menu_right'),
-            'footer' => sc_language_render('admin.link_position.footer'),
-            'footer_right' => sc_language_render('admin.link_position.footer_right'),
-            'footer_left' => sc_language_render('admin.link_position.footer_left'),
-            'sidebar' => sc_language_render('admin.link_position.sidebar'),
-        ];
+        return  (new ShopLinkGroup)->pluck('name', 'code')->all();
     }
     public function index()
     {
