@@ -891,6 +891,7 @@ class PrepareTablesShop extends Migration
         Schema::dropIfExists(SC_DB_PREFIX.'shop_layout_page');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_layout_position');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_link');
+        Schema::dropIfExists(SC_DB_PREFIX.'shop_link_group');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_password_resets');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_shipping_standard');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_api');
