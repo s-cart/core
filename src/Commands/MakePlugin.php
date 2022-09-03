@@ -74,10 +74,10 @@ class MakePlugin extends Command
         $pluginUrlKey = sc_word_format_url($key);
         $pluginUrlKey = str_replace('-', '_', $pluginUrlKey);
 
-        $source = "Format/plugin/src";
+        $source = "Format/plugin";
         $sourcePublic = "Format/plugin/public";
         $sID = md5(time());
-        $tmp = $this->tmpFolder."/".$sID.'/'.$pluginKey.'/src';
+        $tmp = $this->tmpFolder."/".$sID.'/'.$pluginKey;
         $tmpPublic = $this->tmpFolder."/".$sID.'/'.$pluginKey.'/public';
         $description = 'Plugins/'.$pluginCode.'/'.$pluginKey;
         try {
