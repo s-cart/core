@@ -142,8 +142,8 @@ class MakePlugin extends Command
 
         try {
             if ($download) {
-                sc_zip(storage_path($this->tmpFolder."/".$sID), storage_path($this->tmpFolder.'/'.$sID.'.zip'));
-                $path = $sID;
+                $path = storage_path($this->tmpFolder.'/'.$sID.'.zip');
+                sc_zip(storage_path($this->tmpFolder."/".$sID), $path);
             } else {
                 File::copyDirectory(storage_path($tmp), app_path($description));
                 File::copyDirectory(storage_path($tmpPublic), public_path($description));
