@@ -1,6 +1,7 @@
 <?php
 /**
- * Plugin format 2.0
+ * Plugin format 3.0
+ * Use for S-cart 7.x
  */
 #App\Plugins\Plugin_Code\Plugin_Key\AppConfig.php
 namespace App\Plugins\Plugin_Code\Plugin_Key;
