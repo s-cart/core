@@ -917,6 +917,6 @@ class PrepareTablesShop extends Migration
         Schema::dropIfExists(SC_DB_PREFIX.'shop_link_store');
 
         //Sanctum
-        Schema::dropIfExists(SC_DB_PREFIX.'personal_access_tokens');
+        Schema::dropIfExists('personal_access_tokens');
     }
 }

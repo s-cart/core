@@ -566,7 +566,7 @@ trait DataDefaultSeederTrait
             );
         }
 
-        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'personal_access_tokens')) {
+        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable('personal_access_tokens')) {
             \Illuminate\Support\Facades\Schema::create('personal_access_tokens', 
                 function (\Illuminate\Database\Schema\Blueprint $table) {
                     $table->id();
