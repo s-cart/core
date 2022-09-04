@@ -15,7 +15,7 @@ use SCart\Core\Front\Models\ShopStore;
 use SCart\Core\Commands\Customize;
 use SCart\Core\Commands\Backup;
 use SCart\Core\Commands\Restore;
-use SCart\Core\Commands\MakePlugin;
+use SCart\Core\Commands\Make;
 use SCart\Core\Commands\Infomation;
 use SCart\Core\Commands\ClearCart;
 use SCart\Core\Commands\Update;
@@ -30,7 +30,7 @@ class ScartServiceProvider extends ServiceProvider
         Customize::class,
         Backup::class,
         Restore::class,
-        MakePlugin::class,
+        Make::class,
         Infomation::class,
         ClearCart::class,
         Update::class,

@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class MakePlugin extends Command
+class Make extends Command
 {
     /**
      * The name and signature of the console command.
@@ -20,7 +20,9 @@ class MakePlugin extends Command
      *
      * @var string
      */
-    protected $description = 'Make plugin format';
+    protected $description = 'Make format plugin and template:'
+    .PHP_EOL.'Plugin:   "php artisan sc:make plugin --name=Payment/YourPluginName --download=0"'
+    .PHP_EOL.'Template:  "php artisan sc:make tmplate --name=YourTemplateName --download=0"';
 
     protected $tmpFolder = 'tmp';
     /**
@@ -53,6 +55,10 @@ class MakePlugin extends Command
                 $this->plugin($code, $key, $download);
                 break;
 
+            case 'template':
+                $this->template($name, $download);
+                break;
+
             default:
                 # code...
                 break;
@@ -79,7 +85,7 @@ class MakePlugin extends Command
         $sID = md5(time());
         $tmp = $this->tmpFolder."/".$sID.'/'.$pluginKey;
         $tmpPublic = $this->tmpFolder."/".$sID.'/'.$pluginKey.'/public';
-        $description = 'Plugins/'.$pluginCode.'/'.$pluginKey;
+        $destination = 'Plugins/'.$pluginCode.'/'.$pluginKey;
         try {
             File::copyDirectory(base_path('vendor/s-cart/core/src/'.$source), storage_path($tmp));
             File::copyDirectory(base_path('vendor/s-cart/core/src/'.$sourcePublic), storage_path($tmpPublic));
@@ -145,8 +151,58 @@ class MakePlugin extends Command
                 $path = storage_path($this->tmpFolder.'/'.$sID.'.zip');
                 sc_zip(storage_path($this->tmpFolder."/".$sID), $path);
             } else {
-                File::copyDirectory(storage_path($tmp), app_path($description));
-                File::copyDirectory(storage_path($tmpPublic), public_path($description));
+                File::copyDirectory(storage_path($tmp), app_path($destination));
+                File::copyDirectory(storage_path($tmpPublic), public_path($destination));
+            }
+            File::deleteDirectory(storage_path($this->tmpFolder.'/'.$sID));
+        } catch (\Throwable $e) {
+            $msg = $e->getMessage();
+            $error = 1;
+        }
+
+        echo json_encode([
+            'error' => $error,
+            'path' => $path ?? '',
+            'msg' => $msg
+        ]);
+    }
+
+
+    //Create format template
+    public function template(string $name, $download = 0)
+    {
+        $error = 0;
+        $msg = '';
+        $source = "Format/template";
+        $sourcePublic = "Format/template/public";
+        $sID = md5(time());
+        $tmp = $this->tmpFolder."/".$sID.'/'.$name;
+        $tmpPublic = $this->tmpFolder."/".$sID.'/'.$name.'/public';
+        $destination = 'templates/'.$name;
+        try {
+            File::copyDirectory(base_path('vendor/s-cart/core/src/'.$source), storage_path($tmp));
+            File::copyDirectory(base_path('vendor/s-cart/core/src/'.$sourcePublic), storage_path($tmpPublic));
+
+            $providerContent = file_get_contents(storage_path($tmp.'/Provider.php'));
+            $providerContent      = str_replace('your-template-name', $name, $providerContent);
+            file_put_contents(storage_path($tmp.'/Provider.php'), $providerContent);
+
+            $configJson = file_get_contents(storage_path($tmp.'/config.json'));
+            $configJson      = str_replace('your-template-name', $name, $configJson);
+            file_put_contents(storage_path($tmp.'/config.json'), $configJson);
+
+        } catch (\Throwable $e) {
+            $msg = $e->getMessage();
+            $error = 1;
+        }
+
+        try {
+            if ($download) {
+                $path = storage_path($this->tmpFolder.'/'.$sID.'.zip');
+                sc_zip(storage_path($this->tmpFolder."/".$sID), $path);
+            } else {
+                File::copyDirectory(storage_path($tmp), resource_path('views/'.$destination));
+                File::copyDirectory(storage_path($tmpPublic), public_path($destination));
             }
             File::deleteDirectory(storage_path($this->tmpFolder.'/'.$sID));
         } catch (\Throwable $e) {
