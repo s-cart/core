@@ -169,7 +169,6 @@ if (request()->method() == 'POST' && request()->ajax()) {
                                     '--force' => true
                                 ]
                             );
-                            Artisan::call('passport:install');
                         } catch(\Throwable $e) {
                             echo json_encode([
                                 'error' => '1',

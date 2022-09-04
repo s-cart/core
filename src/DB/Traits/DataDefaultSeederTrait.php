@@ -552,6 +552,7 @@ trait DataDefaultSeederTrait
 
     public function updateDataVersion() {
         //Ony use updated v7.1 -> v7.2
+
         if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'shop_link_group')) {
             \Illuminate\Support\Facades\Schema::create(
                 SC_DB_PREFIX.'shop_link_group',
@@ -563,6 +564,20 @@ trait DataDefaultSeederTrait
                     
                 }
             );
+        }
+
+        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'personal_access_tokens')) {
+            \Illuminate\Support\Facades\Schema::create('personal_access_tokens', 
+                function (\Illuminate\Database\Schema\Blueprint $table) {
+                    $table->id();
+                    $table->uuidMorphs('tokenable');
+                    $table->string('name');
+                    $table->string('token', 64)->unique();
+                    $table->text('abilities')->nullable();
+                    $table->timestamp('last_used_at')->nullable();
+                    $table->timestamp('expires_at')->nullable();
+                    $table->timestamps();
+            });
         }
         //End update
     }

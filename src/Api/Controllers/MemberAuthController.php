@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use SCart\Core\Front\Models\ShopCustomer;
 use Illuminate\Support\Facades\Validator;
-use SCart\Core\Front\Models\ShopEmailTemplate;
 use SCart\Core\Front\Controllers\Auth\AuthTrait;
 
 class MemberAuthController extends RootFrontController
@@ -32,7 +31,6 @@ class MemberAuthController extends RootFrontController
             'password' => 'required|string',
             'remember_me' => 'boolean'
         ]);
-
         $credentials = request(['email', 'password']);
 
         if (!$this->guard()->attempt($credentials)) {
@@ -45,25 +43,25 @@ class MemberAuthController extends RootFrontController
         $user = $this->guard()->user();
 
         if ($user->status == 0) {
-            $scope = ['user-guest'];
+            $scope = explode(',', config('api.auth.api_scope_user_guest'));
         } else {
-            $scope = ['user'];
+            $scope = explode(',', config('api.auth.api_scope_user'));
         }
         
         $tokenResult = $user->createToken('Client:'.$user->email.'- '.now(), $scope);
-        $token = $tokenResult->token;
-
+        $token = $tokenResult->plainTextToken;
+        $accessToken = $tokenResult->accessToken;
         if ($request->remember_me) {
-            $token->expires_at = Carbon::now()->addWeeks(1);
+            $accessToken->expires_at = Carbon::now()->addDays(config('api.auth.api_remmember'));
         }
-
-        $token->save();
+        $accessToken->save();
 
         return response()->json([
-            'access_token' => $tokenResult->accessToken,
+            'access_token' => $token,
             'token_type' => 'Bearer',
+            'scopes' => $accessToken->abilities,
             'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
+                $accessToken->expires_at
             )->toDateTimeString()
         ]);
     }

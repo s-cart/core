@@ -19,10 +19,8 @@ use SCart\Core\Commands\Make;
 use SCart\Core\Commands\Infomation;
 use SCart\Core\Commands\ClearCart;
 use SCart\Core\Commands\Update;
-use Laravel\Passport\Passport;
-use Laravel\Passport\Console\ClientCommand;
-use Laravel\Passport\Console\InstallCommand;
-use Laravel\Passport\Console\KeysCommand;
+use Laravel\Sanctum\Sanctum;
+use SCart\Core\Front\Models\PersonalAccessToken;
 
 class ScartServiceProvider extends ServiceProvider
 {
@@ -43,6 +41,7 @@ class ScartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         $this->loadTranslationsFrom(__DIR__.'/Lang', 's-cart');
 
         if (!file_exists(public_path('install.php')) && file_exists(base_path('.env'))) {
@@ -174,35 +173,6 @@ class ScartServiceProvider extends ServiceProvider
             echo $msg;
             exit;
         }
-
-        //===========Laravel Passport====================
-        //https://laravel.com/docs/8.x/passport
-        if (config('s-cart.ecommerce_mode', 1)) {
-            Passport::routes();
-            Passport::tokensExpireIn(now()->addDays(config('passport.config.tokensExpireIn', 15)));
-            Passport::refreshTokensExpireIn(now()->addDays(config('passport.config.refreshTokensExpireIn', 30)));
-            Passport::personalAccessTokensExpireIn(now()->addMonths(config('passport.config.personalAccessTokensExpireIn', 6)));
-
-            /**
-             * Run command line passport outside console
-             */
-            $this->commands([
-                InstallCommand::class,
-                ClientCommand::class,
-                KeysCommand::class,
-            ]);
-
-            Passport::tokensCan([
-                'user' => 'User default',
-                'user-guest' => 'User guest',
-                'admin' => 'Admin shop',
-                'admin-supper' => 'Admin supper',
-            ]);
-
-            Passport::setDefaultScope([
-                'user-guest',
-            ]);
-        }
     }
 
     /**
@@ -212,6 +182,8 @@ class ScartServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Sanctum::ignoreMigrations();
+        
         if (file_exists(__DIR__.'/Library/Const.php')) {
             require_once(__DIR__.'/Library/Const.php');
         }
@@ -223,11 +195,9 @@ class ScartServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/Config/s-cart.php', 's-cart');
         $this->mergeConfigFrom(__DIR__.'/Config/cart.php', 'cart');
         $this->mergeConfigFrom(__DIR__.'/Config/middleware.php', 'middleware');
+        $this->mergeConfigFrom(__DIR__.'/Config/api.php', 'api');
         $this->loadViewsFrom(__DIR__.'/Views/admin', 's-cart-admin');
         $this->loadViewsFrom(__DIR__.'/Views/front', 's-cart-front');
-
-        //Dont use migrate from library passport
-        Passport::ignoreMigrations();
     }
 
     public function bootScart()
@@ -329,9 +299,9 @@ class ScartServiceProvider extends ServiceProvider
         'admin.permission' => Admin\Middleware\PermissionMiddleware::class,
         'admin.storeId'    => Admin\Middleware\AdminStoreId::class,
         'admin.theme'      => Admin\Middleware\AdminTheme::class,
-        //Passport
-        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
-        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+        //Sanctum
+        'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
+        'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
     ];
 
     /**
@@ -400,6 +370,7 @@ class ScartServiceProvider extends ServiceProvider
             $this->publishes([__DIR__.'/Config/admin.php' => config_path('admin.php')], 'sc:config-admin');
             $this->publishes([__DIR__.'/Config/validation.php' => config_path('validation.php')], 'sc:config-validation');
             $this->publishes([__DIR__.'/Config/cart.php' => config_path('cart.php')], 'sc:config-cart');
+            $this->publishes([__DIR__.'/Config/api.php' => config_path('api.php')], 'sc:config-api');
         }
     }
 }

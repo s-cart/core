@@ -29,9 +29,9 @@ class ClearCart extends Command
      */
     public function handle()
     {
-        CartModel::where('instance', 'default')->where('updated_at', '<', Carbon::now()->subDays(config('cart.exprire.cart')))->delete();
-        CartModel::where('instance', 'wishlist')->where('updated_at', '<', Carbon::now()->subDays(config('cart.exprire.wishlist')))->delete();
-        CartModel::where('instance', 'compare')->where('updated_at', '<', Carbon::now()->subDays(config('cart.exprire.compare')))->delete();
+        CartModel::where('instance', 'default')->where('updated_at', '<', Carbon::now()->subDays(config('cart.expire.cart')))->delete();
+        CartModel::where('instance', 'wishlist')->where('updated_at', '<', Carbon::now()->subDays(config('cart.expire.wishlist')))->delete();
+        CartModel::where('instance', 'compare')->where('updated_at', '<', Carbon::now()->subDays(config('cart.expire.compare')))->delete();
         \Log::info('Clear cart success!');
         echo json_encode(['error' => 0, 'msg' => 'Clear cart success!']);
         exit;

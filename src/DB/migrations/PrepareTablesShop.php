@@ -622,54 +622,6 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        //Passport
-        Schema::create('oauth_auth_codes', function (Blueprint $table) {
-            $table->string('id', 100)->primary();
-            $table->uuid('user_id')->index();
-            $table->uuid('client_id');
-            $table->text('scopes')->nullable();
-            $table->boolean('revoked');
-            $table->timestamp('expires_at', $precision = 0)->nullable();
-        });
-
-        Schema::create('oauth_access_tokens', function (Blueprint $table) {
-            $table->string('id', 100)->primary();
-            $table->uuid('user_id')->nullable()->index();
-            $table->uuid('client_id');
-            $table->string('name')->nullable();
-            $table->text('scopes')->nullable();
-            $table->boolean('revoked');
-            $table->timestamps();
-            $table->timestamp('expires_at', $precision = 0)->nullable();
-        });
-
-        Schema::create('oauth_refresh_tokens', function (Blueprint $table) {
-            $table->string('id', 100)->primary();
-            $table->string('access_token_id', 100)->index();
-            $table->boolean('revoked');
-            $table->timestamp('expires_at', $precision = 0)->nullable();
-        });
-
-        Schema::create('oauth_clients', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('user_id')->nullable()->index();
-            $table->string('name');
-            $table->string('secret', 100)->nullable();
-            $table->string('provider')->nullable();
-            $table->text('redirect');
-            $table->boolean('personal_access_client');
-            $table->boolean('password_client');
-            $table->boolean('revoked');
-            $table->timestamps();
-        });
-        
-        Schema::create('oauth_personal_access_clients', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->uuid('client_id');
-            $table->timestamps();
-        });
-
-
         Schema::create(
             SC_DB_PREFIX.'api_connection',
             function (Blueprint $table) {
@@ -874,6 +826,18 @@ class PrepareTablesShop extends Migration
                 $table->primary(['link_id', 'store_id']);
             }
         );
+        
+        //Sanctum
+        Schema::create('personal_access_tokens', function (Blueprint $table) {
+            $table->id();
+            $table->uuidMorphs('tokenable');
+            $table->string('name');
+            $table->string('token', 64)->unique();
+            $table->text('abilities')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -932,12 +896,6 @@ class PrepareTablesShop extends Migration
         Schema::dropIfExists(SC_DB_PREFIX.'shop_weight');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_length');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_product_download');
-        //Passport
-        Schema::dropIfExists('oauth_auth_codes');
-        Schema::dropIfExists('oauth_access_tokens');
-        Schema::dropIfExists('oauth_refresh_tokens');
-        Schema::dropIfExists('oauth_clients');
-        Schema::dropIfExists('oauth_personal_access_clients');
         //Api connection
         Schema::dropIfExists(SC_DB_PREFIX.'api_connection');
         //Job
@@ -957,5 +915,8 @@ class PrepareTablesShop extends Migration
         Schema::dropIfExists(SC_DB_PREFIX.'shop_news_store');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_page_store');
         Schema::dropIfExists(SC_DB_PREFIX.'shop_link_store');
+
+        //Sanctum
+        Schema::dropIfExists(SC_DB_PREFIX.'personal_access_tokens');
     }
 }

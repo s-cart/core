@@ -6,8 +6,8 @@ use SCart\Core\Front\Models\ShopCustomerAddress;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Auth;
-use Laravel\Passport\HasApiTokens;
 use SCart\Core\Front\Models\ShopCustomFieldDetail;
+use Laravel\Sanctum\HasApiTokens;
 
 class ShopCustomer extends Authenticatable
 {

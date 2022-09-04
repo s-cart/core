@@ -41,23 +41,22 @@ class AdminAuthController extends RootFrontController
 
         $user = $this->guard()->user();
 
-        $scope = ['admin-supper'];
+        $scope = explode(',', config('api.auth.api_scope_admin'));
         
-        $tokenResult = $user->createToken('Admin:'.$user->username.'- '.now(), $scope);
-
-        $token = $tokenResult->token;
-
+        $tokenResult = $user->createToken('Admin:'.$user->email.'- '.now(), $scope);
+        $token = $tokenResult->plainTextToken;
+        $accessToken = $tokenResult->accessToken;
         if ($request->remember_me) {
-            $token->expires_at = Carbon::now()->addWeeks(1);
+            $accessToken->expires_at = Carbon::now()->addDays(config('api.auth.api_remmember_admin'));
         }
-
-        $token->save();
+        $accessToken->save();
 
         return response()->json([
-            'access_token' => $tokenResult->accessToken,
+            'access_token' => $token,
             'token_type' => 'Bearer',
+            'scopes' => $accessToken->abilities,
             'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
+                $accessToken->expires_at
             )->toDateTimeString()
         ]);
     }
