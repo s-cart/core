@@ -44,6 +44,10 @@ class Customize extends Command
                 $this->call('vendor:publish', ['--tag' => 'sc:config-cart']);
                 break;
 
+            case 'api':
+                $this->call('vendor:publish', ['--tag' => 'sc:config-api']);
+                break;
+
             default:
                 $this->info('Nothing');
                 break;

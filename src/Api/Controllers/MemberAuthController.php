@@ -53,6 +53,8 @@ class MemberAuthController extends RootFrontController
         $accessToken = $tokenResult->accessToken;
         if ($request->remember_me) {
             $accessToken->expires_at = Carbon::now()->addDays(config('api.auth.api_remmember'));
+        } else {
+            $accessToken->expires_at = Carbon::now()->addDays(config('api.auth.api_token_expire_admin_default'));
         }
         $accessToken->save();
 
