@@ -270,7 +270,7 @@ return [
     |--------------------------------------------------------------------------
      */
 
-    'disk'                     => 'uploads',
+    'disk'                     => env('SC_UPLOAD_DISK', 'uploads'),
 
     'rename_file'              => false,
 
@@ -278,14 +278,14 @@ return [
 
     'alphanumeric_directory'   => false,
 
-    'should_validate_size'     => false,
+    'should_validate_size'     => true,
 
     'should_validate_mime'     => true,
 
     // behavior on files with identical name
     // setting it to true cause old file replace with new one
     // setting it to false show `error-file-exist` error and stop upload
-    'over_write_on_duplicate'  => false,
+    'over_write_on_duplicate'  => env('SC_UPLOAD_OVER_WRITE_DUPLICATE', false),
 
     // Item Columns
     'item_columns' => ['name', 'url', 'time', 'icon', 'is_file', 'is_image', 'thumb_url'],
@@ -297,9 +297,9 @@ return [
      */
 
     // If true, image thumbnails would be created during upload
-    'should_create_thumbnails' => false,
+    'should_create_thumbnails' => env('SC_UPLOAD_THUMB_STATUS', false),
 
-    'thumb_folder_name'        => 'thumbs',
+    'thumb_folder_name'        => env('SC_UPLOAD_THUMB_FOLDER', 'thumbs'),
 
     // Create thumbnails automatically only for listed types.
     'raster_mimetypes'         => [
@@ -308,9 +308,9 @@ return [
         'image/png',
     ],
 
-    'thumb_img_width'          => 200, // px
+    'thumb_img_width'          => env('SC_UPLOAD_THUMB_WIDTH', '200'), // px
 
-    'thumb_img_height'         => 200, // px
+    'thumb_img_height'         => env('SC_UPLOAD_THUMB_HEIGHT', '200'), // px
 
     /*
     |--------------------------------------------------------------------------

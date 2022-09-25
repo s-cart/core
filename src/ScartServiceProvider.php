@@ -371,6 +371,8 @@ class ScartServiceProvider extends ServiceProvider
             $this->publishes([__DIR__.'/Config/validation.php' => config_path('validation.php')], 'sc:config-validation');
             $this->publishes([__DIR__.'/Config/cart.php' => config_path('cart.php')], 'sc:config-cart');
             $this->publishes([__DIR__.'/Config/api.php' => config_path('api.php')], 'sc:config-api');
+            $this->publishes([__DIR__.'/Config/middleware.php' => config_path('middleware.php')], 'sc:config-middleware');
+            $this->publishes([__DIR__.'/Config/lfm.php' => config_path('lfm.php')], 'sc:config-lfm');
         }
     }
 }

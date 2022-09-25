@@ -32,26 +32,26 @@ return [
     ],
     //Enable, disable page libary online
     'settings' => [
-        'api_plugin'   => 1,
-        'api_template' => 1,
+        'api_plugin'   => env('SC_ADMIN_API_PLUGIN', 1),
+        'api_template' => env('SC_ADMIN_API_TEMPLATE', 1),
     ],
     //Prefix path view admin
     'path_view' => 's-cart-admin::',
 
     //Config global
-    'admin_log' => 1, //Log access admin
+    'admin_log' => env('SC_ADMIN_LOG', 1), //Log access admin
 
     'admin_dashboard' => [
-        'total_order' => 1, // Total order
-        'total_customer' => 1, //Customer total
-        'total_blog' => 1, //Blog total
-        'total_product' => 1, //Product total
-        'order_month' => 1, //Order in month
-        'order_year' => 1, //Order in year
-        'pie_chart' => 0, //Display pie chart total
-        'top_order_new' => 1, //New orders
-        'top_customer_new' => 1, //New customers
-        'pie_chart_type' => 'order', // [order|device|country]
+        'total_order' => env('SC_ADMIN_DASHBOARD_TOTAL_ORDER', 1), // Total order
+        'total_customer' => env('SC_ADMIN_DASHBOARD_TOTAL_CUSTOMER', 1), //Customer total
+        'total_blog' => env('SC_ADMIN_DASHBOARD_TOTAL_BLOG', 1), //Blog total
+        'total_product' => env('SC_ADMIN_DASHBOARD_TOTAL_PRODUCT', 1), //Product total
+        'order_month' => env('SC_ADMIN_DASHBOARD_ORDER_MONTH', 1), //Order in month
+        'order_year' => env('SC_ADMIN_DASHBOARD_ORDER_YEAR', 1), //Order in year
+        'pie_chart' => env('SC_ADMIN_DASHBOARD_PIE_CHART', 0), //Display pie chart total
+        'top_order_new' => env('SC_ADMIN_DASHBOARD_TOP_ORDER_NEW', 1), //New orders
+        'top_customer_new' => env('SC_ADMIN_DASHBOARD_TOP_CUSTOMER_NEW', 1), //New customers
+        'pie_chart_type' => env('SC_ADMIN_DASHBOARD_PIE_CHART_TYPE', 'order'), // [order|device|country]
     ],
     //List plugins can not remore
     'plugin_protected' => [
