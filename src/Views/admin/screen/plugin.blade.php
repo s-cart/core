@@ -51,17 +51,17 @@
 
                 @php
                 //Begin try catch error
-                try{
+                try {
                 @endphp
 
                 @php
                   $classConfig = $pluginClassName.'\\AppConfig';
                   $pluginClass = new $classConfig;
                   //Check Plugin installed
-                  if(!array_key_exists($codePlugin, $pluginsInstalled->toArray())){
+                  if (!array_key_exists($codePlugin, $pluginsInstalled->toArray())) {
                     $pluginStatusTitle = sc_language_render('admin.plugin.not_install');
                     $pluginAction = '<span onClick="installPlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.install').'" type="button" class="btn btn-flat btn-success"><i class="fa fa-plus-circle"></i></span>';
-                  }else{
+                  } else {
                     //Check plugin enable
                     if($pluginsInstalled[$codePlugin]['value']){
                       $pluginStatusTitle = sc_language_render('admin.plugin.actived');
@@ -108,7 +108,7 @@
 
                   @php
                   //End try cacth
-                    }catch(\Exception $e) {
+                    } catch(\Throwable $e) {
                       sc_report(json_encode($pluginClassName)." : ".$e->getMessage());
                       echo json_encode($pluginClassName)." : ".$e->getMessage();
                     }
