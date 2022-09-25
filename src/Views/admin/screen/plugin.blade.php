@@ -47,74 +47,73 @@
                     </td>
                   </tr>
                 @else
-                @foreach ($plugins as $codePlugin => $pluginClassName)
 
-                @php
-                //Begin try catch error
-                try {
-                @endphp
-
-                @php
-                  $classConfig = $pluginClassName.'\\AppConfig';
-                  $pluginClass = new $classConfig;
-                  //Check Plugin installed
-                  if (!array_key_exists($codePlugin, $pluginsInstalled->toArray())) {
-                    $pluginStatusTitle = sc_language_render('admin.plugin.not_install');
-                    $pluginAction = '<span onClick="installPlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.install').'" type="button" class="btn btn-flat btn-success"><i class="fa fa-plus-circle"></i></span>';
-                  } else {
-                    //Check plugin enable
-                    if($pluginsInstalled[$codePlugin]['value']){
-                      $pluginStatusTitle = sc_language_render('admin.plugin.actived');
-                      $pluginAction ='<span onClick="disablePlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.disable').'" type="button" class="btn btn-flat btn-warning btn-flat"><i class="fa fa-power-off"></i></span>&nbsp;';
-
-                        if($pluginClass->config()){
-                          $pluginAction .='<a href="'.url()->current().'?action=config&pluginKey='.$codePlugin.'"><span title="'.sc_language_render('admin.plugin.config').'" class="btn btn-flat btn-primary"><i class="fas fa-cog"></i></span>&nbsp;</a>';
-                        }
-                        //Delete data
-                        $pluginAction .='<span onClick="uninstallPlugin($(this),\''.$codePlugin.'\', 1);" title="'.sc_language_render('admin.plugin.only_delete_data').'" class="btn btn-flat btn-danger"><i class="fas fa-times"></i></span>';
-
-                        //You can not remove if plugin is default
-                        if(!in_array($codePlugin, $arrDefault)) {
-                          $pluginAction .=' <span onClick="uninstallPlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.remove').'" class="btn btn-flat btn-danger"><i class="fa fa-trash"></i></span>';
-                        }
-                    }else{
-                      $pluginStatusTitle = sc_language_render('admin.plugin.disabled');
-                      $pluginAction = '<span onClick="enablePlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.enable').'" type="button" class="btn btn-flat btn-primary"><i class="fa fa-paper-plane"></i></span>&nbsp;';
-                        if($pluginClass->config()){
-                          $pluginAction .='<a href="'.url()->current().'?action=config&pluginKey='.$codePlugin.'"><span title="'.sc_language_render('admin.plugin.config').'" class="btn btn-flat btn-primary"><i class="fas fa-cog"></i></span>&nbsp;</a>';
-                        }
-                        //Delete data
-                        $pluginAction .='<span onClick="uninstallPlugin($(this),\''.$codePlugin.'\', 1);" title="'.sc_language_render('admin.plugin.only_delete_data').'" class="btn btn-flat btn-danger"><i class="fas fa-times"></i></span>';
-
-                        //You can not remove if plugin is default
-                        if(!in_array($codePlugin, $arrDefault)) {
-                          $pluginAction .=' <span onClick="uninstallPlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.remove').'" class="btn btn-flat btn-danger"><i class="fa fa-trash"></i></span>';
-                        }
-                    }
-                  }
-                @endphp
-                  <tr>
-                    <td>{!! sc_image_render($pluginClass->image,'50px', '', $pluginClass->title) !!}</td>
-                    <td>{{ $codePlugin }}</td>
-                    <td>{{ $pluginClass->title }}</td>
-                    <td>{{ $pluginClass->version??'' }}</td>
-                    <td>{{ $pluginClass->auth??'' }}</td>
-                    <td><a href="{{ $pluginClass->link??'' }}" target=_new><i class="fa fa-link" aria-hidden="true"></i>Link</a></td>
-                    <td>{{ $pluginsInstalled[$codePlugin]['sort']??'' }}</td>
-                    <td>
-                      {!! $pluginAction !!}
-                    </td>
-                  </tr>
+                  @foreach ($plugins as $codePlugin => $pluginClassName)
 
                   @php
-                  //End try cacth
+                  //Begin try catch error
+                  try {
+                    $classConfig = $pluginClassName.'\\AppConfig';
+                    $pluginClass = new $classConfig;
+                    //Check Plugin installed
+                    if (!array_key_exists($codePlugin, $pluginsInstalled->toArray())) {
+                      $pluginStatusTitle = sc_language_render('admin.plugin.not_install');
+                      $pluginAction = '<span onClick="installPlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.install').'" type="button" class="btn btn-flat btn-success"><i class="fa fa-plus-circle"></i></span>';
+                    } else {
+                      //Check plugin enable
+                      if($pluginsInstalled[$codePlugin]['value']){
+                        $pluginStatusTitle = sc_language_render('admin.plugin.actived');
+                        $pluginAction ='<span onClick="disablePlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.disable').'" type="button" class="btn btn-flat btn-warning btn-flat"><i class="fa fa-power-off"></i></span>&nbsp;';
+
+                          if($pluginClass->config()){
+                            $pluginAction .='<a href="'.url()->current().'?action=config&pluginKey='.$codePlugin.'"><span title="'.sc_language_render('admin.plugin.config').'" class="btn btn-flat btn-primary"><i class="fas fa-cog"></i></span>&nbsp;</a>';
+                          }
+                          //Delete data
+                          $pluginAction .='<span onClick="uninstallPlugin($(this),\''.$codePlugin.'\', 1);" title="'.sc_language_render('admin.plugin.only_delete_data').'" class="btn btn-flat btn-danger"><i class="fas fa-times"></i></span>';
+
+                          //You can not remove if plugin is default
+                          if(!in_array($codePlugin, $arrDefault)) {
+                            $pluginAction .=' <span onClick="uninstallPlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.remove').'" class="btn btn-flat btn-danger"><i class="fa fa-trash"></i></span>';
+                          }
+                      }else{
+                        $pluginStatusTitle = sc_language_render('admin.plugin.disabled');
+                        $pluginAction = '<span onClick="enablePlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.enable').'" type="button" class="btn btn-flat btn-primary"><i class="fa fa-paper-plane"></i></span>&nbsp;';
+                          if($pluginClass->config()){
+                            $pluginAction .='<a href="'.url()->current().'?action=config&pluginKey='.$codePlugin.'"><span title="'.sc_language_render('admin.plugin.config').'" class="btn btn-flat btn-primary"><i class="fas fa-cog"></i></span>&nbsp;</a>';
+                          }
+                          //Delete data
+                          $pluginAction .='<span onClick="uninstallPlugin($(this),\''.$codePlugin.'\', 1);" title="'.sc_language_render('admin.plugin.only_delete_data').'" class="btn btn-flat btn-danger"><i class="fas fa-times"></i></span>';
+
+                          //You can not remove if plugin is default
+                          if(!in_array($codePlugin, $arrDefault)) {
+                            $pluginAction .=' <span onClick="uninstallPlugin($(this),\''.$codePlugin.'\');" title="'.sc_language_render('admin.plugin.remove').'" class="btn btn-flat btn-danger"><i class="fa fa-trash"></i></span>';
+                          }
+                      }
+                    }
+                    @endphp
+                    
+                    <tr>
+                      <td>{!! sc_image_render($pluginClass->image,'50px', '', $pluginClass->title) !!}</td>
+                      <td>{{ $codePlugin }}</td>
+                      <td>{{ $pluginClass->title }}</td>
+                      <td>{{ $pluginClass->version??'' }}</td>
+                      <td>{{ $pluginClass->auth??'' }}</td>
+                      <td><a href="{{ $pluginClass->link??'' }}" target=_new><i class="fa fa-link" aria-hidden="true"></i>Link</a></td>
+                      <td>{{ $pluginsInstalled[$codePlugin]['sort']??'' }}</td>
+                      <td>
+                        {!! $pluginAction !!}
+                      </td>
+                    </tr>
+
+                    @php
+                    //End try cacth
                     } catch(\Throwable $e) {
                       sc_report(json_encode($pluginClassName)." : ".$e->getMessage());
                       echo json_encode($pluginClassName)." : ".$e->getMessage();
                     }
-                  @endphp
-                  
-                @endforeach
+                    @endphp
+                    
+                  @endforeach
                 @endif
               </tbody>
             </table>
