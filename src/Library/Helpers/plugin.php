@@ -17,8 +17,7 @@ if (!function_exists('sc_get_all_plugin') && !in_array('sc_get_all_plugin', conf
             foreach ($dirs as $dir) {
                 $tmp = explode('/', $dir);
                 $nameSpace = '\App\Plugins\\' . $code . '\\' . end($tmp);
-                $nameSpaceConfig = $nameSpace . '\\AppConfig';
-                if (file_exists($dir . '/AppConfig.php') && class_exists($nameSpaceConfig)) {
+                if (file_exists($dir . '/AppConfig.php')) {
                     $arrClass[end($tmp)] = $nameSpace;
                 }
             }
