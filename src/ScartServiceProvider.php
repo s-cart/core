@@ -41,6 +41,9 @@ class ScartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(file_exists(base_path('bootstrap/cache/routes-v7.php'))) {
+            echo ('<div style="color:red;font-size:10px; background:black;z-index:99999;position:fixed; top:1px;">Sorry!! SC cannot use route cache. Please delete the file "bootstrap/cache/routes-v7.php" or use the command "php artisan route:clear""</div>');
+        }
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         $this->loadTranslationsFrom(__DIR__.'/Lang', 's-cart');
 
