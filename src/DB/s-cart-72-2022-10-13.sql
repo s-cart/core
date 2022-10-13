@@ -587,7 +587,7 @@ CREATE TABLE IF NOT EXISTS `sc_admin_user` (
 DELETE FROM `sc_admin_user`;
 /*!40000 ALTER TABLE `sc_admin_user` DISABLE KEYS */;
 INSERT INTO `sc_admin_user` (`id`, `username`, `password`, `name`, `email`, `avatar`, `remember_token`, `theme`, `created_at`, `updated_at`) VALUES
-	('1', 'admin', '$2y$10$AZA79kPU5lRB0mT2zurhnOz9FSdZbf93JuZUSq8e9o9C7.l7f6xju', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, NULL, NULL);
+	('1', 'admin', '$2y$10$mBJWKsXlzBadUFCJj2hteOMqvp0szWpcECeWUQH9P1ztNYMai/m0K', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `sc_admin_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user_permission
@@ -626,7 +626,7 @@ CREATE TABLE IF NOT EXISTS `sc_api_connection` (
 DELETE FROM `sc_api_connection`;
 /*!40000 ALTER TABLE `sc_api_connection` DISABLE KEYS */;
 INSERT INTO `sc_api_connection` (`id`, `description`, `apiconnection`, `apikey`, `expire`, `last_active`, `created_at`, `updated_at`, `status`) VALUES
-	(1, 'Demo api connection', 'appmobile', '972f4462-1129-4564-a587-3ebaca88e826', NULL, NULL, NULL, NULL, 0);
+	(1, 'Demo api connection', 'appmobile', '977dd986-6aa5-4a46-bd6d-bdec9612b45b', NULL, NULL, NULL, NULL, 0);
 /*!40000 ALTER TABLE `sc_api_connection` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_languages
@@ -644,9 +644,9 @@ CREATE TABLE IF NOT EXISTS `sc_languages` (
   KEY `sc_languages_code_index` (`code`),
   KEY `sc_languages_position_index` (`position`),
   KEY `sc_languages_location_index` (`location`)
-) ENGINE=InnoDB AUTO_INCREMENT=2678 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2680 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_languages: ~2,677 rows (approximately)
+-- Dumping data for table s-cart.sc_languages: ~2,679 rows (approximately)
 DELETE FROM `sc_languages`;
 /*!40000 ALTER TABLE `sc_languages` DISABLE KEYS */;
 INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`, `created_at`, `updated_at`) VALUES
@@ -3181,152 +3181,154 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`, `creat
 	(2529, 'admin.plugin.table_exist', 'Bảng :table đã tồn tại rồi', 'admin.plugin', 'vi', NULL, NULL),
 	(2530, 'admin.plugin.plugin_exist', 'Plugin này đã tồn tại rồi', 'admin.plugin', 'vi', NULL, NULL),
 	(2531, 'admin.plugin.action_error', 'Có lỗi trong khi :action', 'admin.plugin', 'vi', NULL, NULL),
-	(2532, 'admin.chart.static_month', 'Thống kê trong 12 tháng', 'admin.chart', 'vi', NULL, NULL),
-	(2533, 'admin.chart.static_30_day', 'Thống kê trong 1 tháng', 'admin.chart', 'vi', NULL, NULL),
-	(2534, 'admin.chart.static_month_help', 'Dữ liệu so sánh bằng tổng số tiền của đơn hàng, đơn vị Bit', 'admin.chart', 'vi', NULL, NULL),
-	(2535, 'admin.chart.amount', 'Tổng số tiền (Bit)', 'admin.chart', 'vi', NULL, NULL),
-	(2536, 'admin.chart.order', 'Tổng đơn hàng', 'admin.chart', 'vi', NULL, NULL),
-	(2537, 'admin.chart.static_country', 'Đơn hàng theo quốc gia', 'admin.chart', 'vi', NULL, NULL),
-	(2538, 'admin.chart.country', 'Quốc gia', 'admin.chart', 'vi', NULL, NULL),
-	(2539, 'admin.chart.static_month', 'Statistics for 12 months', 'admin.chart', 'en', NULL, NULL),
-	(2540, 'admin.chart.static_30_day', 'Statistics for 30 days', 'admin.chart', 'en', NULL, NULL),
-	(2541, 'admin.chart.static_month_help', 'The comparison data is equal to the total amount of the order and the Bit units', 'admin.chart', 'en', NULL, NULL),
-	(2542, 'admin.chart.amount', 'Total amount (Bit)', 'admin.chart', 'en', NULL, NULL),
-	(2543, 'admin.chart.order', 'Total order', 'admin.chart', 'en', NULL, NULL),
-	(2544, 'admin.chart.static_country', 'Statistics of orders by country', 'admin.chart', 'en', NULL, NULL),
-	(2545, 'admin.chart.country', 'Country', 'admin.chart', 'en', NULL, NULL),
-	(2546, 'admin.chart.static_device', 'Statistics of orders by device', 'admin.chart', 'en', NULL, NULL),
-	(2547, 'admin.chart.static_device', 'Thống kê đơn hàng theo thiết bị', 'admin.chart', 'vi', NULL, NULL),
-	(2548, 'admin.chart.static_count_order', 'Statistics of count orders', 'admin.chart', 'en', NULL, NULL),
-	(2549, 'admin.chart.static_count_order', 'Thống kê tổng số đơn hàng', 'admin.chart', 'vi', NULL, NULL),
-	(2550, 'admin.chart.device', 'Device type', 'admin.chart', 'en', NULL, NULL),
-	(2551, 'admin.chart.device', 'Loại thiết bị', 'admin.chart', 'vi', NULL, NULL),
-	(2552, 'admin.maintain.title', 'Maintenance page', 'admin.maintain', 'en', NULL, NULL),
-	(2553, 'admin.maintain.content', 'Maintenance content of the store', 'admin.maintain', 'en', NULL, NULL),
-	(2554, 'admin.maintain.description', 'Description', 'admin.maintain', 'en', NULL, NULL),
-	(2555, 'admin.maintain.description_note', 'Maintenance note', 'admin.maintain', 'en', NULL, NULL),
-	(2556, 'admin.maintain.title', 'Trang bảo trì', 'admin.maintain', 'vi', NULL, NULL),
-	(2557, 'admin.maintain.content', 'Nội dung bảo trì của cửa hàng', 'admin.maintain', 'vi', NULL, NULL),
-	(2558, 'admin.maintain.description', 'Nội dung', 'admin.maintain', 'vi', NULL, NULL),
-	(2559, 'admin.maintain.description_note', 'Ghi chú bảo trì', 'admin.maintain', 'vi', NULL, NULL),
-	(2560, 'admin.seo.config', 'Cấu hình SEO', 'admin.seo', 'vi', NULL, NULL),
-	(2561, 'admin.seo.config', 'SEO config', 'admin.seo', 'en', NULL, NULL),
-	(2562, 'admin.seo.url_seo_lang', 'Thêm ngôn ngữ trên URL', 'admin.seo', 'vi', NULL, NULL),
-	(2563, 'admin.seo.url_seo_lang', 'Add language on URL', 'admin.seo', 'en', NULL, NULL),
-	(2564, 'admin.dashboard.total_order', 'Tổng đơn hàng', 'admin.dashboard', 'vi', NULL, NULL),
-	(2565, 'admin.dashboard.total_order', 'Order total', 'admin.dashboard', 'en', NULL, NULL),
-	(2566, 'admin.dashboard.total_product', 'Tổng sản phẩm', 'admin.dashboard', 'vi', NULL, NULL),
-	(2567, 'admin.dashboard.total_product', 'Product total', 'admin.dashboard', 'en', NULL, NULL),
-	(2568, 'admin.dashboard.total_customer', 'Tổng khách hàng', 'admin.dashboard', 'vi', NULL, NULL),
-	(2569, 'admin.dashboard.total_customer', 'Customer total', 'admin.dashboard', 'en', NULL, NULL),
-	(2570, 'admin.dashboard.total_blog', 'Tổng blog', 'admin.dashboard', 'vi', NULL, NULL),
-	(2571, 'admin.dashboard.total_blog', 'Blog total', 'admin.dashboard', 'en', NULL, NULL),
-	(2572, 'admin.dashboard.order_month', 'Đơn hàng trong tháng', 'admin.dashboard', 'vi', NULL, NULL),
-	(2573, 'admin.dashboard.order_month', 'Order in month', 'admin.dashboard', 'en', NULL, NULL),
-	(2574, 'admin.dashboard.order_year', 'Đơn hàng trong năm', 'admin.dashboard', 'vi', NULL, NULL),
-	(2575, 'admin.dashboard.order_year', 'Order in year', 'admin.dashboard', 'en', NULL, NULL),
-	(2576, 'admin.dashboard.top_order_new', 'Đơn hàng mới', 'admin.dashboard', 'vi', NULL, NULL),
-	(2577, 'admin.dashboard.top_order_new', 'New orders', 'admin.dashboard', 'en', NULL, NULL),
-	(2578, 'admin.dashboard.top_customer_new', 'Khách hàng mới mới', 'admin.dashboard', 'vi', NULL, NULL),
-	(2579, 'admin.dashboard.top_customer_new', 'New customers', 'admin.dashboard', 'en', NULL, NULL),
-	(2580, 'admin.dashboard.pie_chart', 'Hiển thị biểu đồ pie', 'admin.dashboard', 'vi', NULL, NULL),
-	(2581, 'admin.dashboard.pie_chart', 'Display pie chart total', 'admin.dashboard', 'en', NULL, NULL),
-	(2582, 'admin.dashboard.title', 'Trang tổng quan', 'admin.dashboard', 'vi', NULL, NULL),
-	(2583, 'admin.dashboard.title', 'Dashboard page', 'admin.dashboard', 'en', NULL, NULL),
-	(2584, 'admin.dashboard.config_display', 'Cấu hình trang tổng quan admin', 'admin.dashboard', 'vi', NULL, NULL),
-	(2585, 'admin.dashboard.config_display', 'Config dashboard adminpage', 'admin.dashboard', 'en', NULL, NULL),
-	(2586, 'admin.layout_page_position.all', 'All Page', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2587, 'admin.layout_page_position.home', 'Home page', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2588, 'admin.layout_page_position.shop_home', 'Home shop', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2589, 'admin.layout_page_position.shop_search', 'Search page', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2590, 'admin.layout_page_position.vendor_home', 'Store: home', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2591, 'admin.layout_page_position.store_product_list', 'Store: product list', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2592, 'admin.layout_page_position.product_list', 'List: product', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2593, 'admin.layout_page_position.product_detail', 'Detail: product', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2594, 'admin.layout_page_position.shop_cart', 'Cart: cart, wishlist, compare, checkout', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2595, 'admin.layout_page_position.shop_auth', 'Auth: login, forgot, register', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2596, 'admin.layout_page_position.shop_profile', 'Customer profile', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2597, 'admin.layout_page_position.item_list', 'List: category, brand, supplier', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2598, 'admin.layout_page_position.item_detail', 'Detail: item', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2599, 'admin.layout_page_position.news_list', 'List:  Blog/news', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2600, 'admin.layout_page_position.news_detail', 'Detail: entry Blog', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2601, 'admin.layout_page_position.content_list', 'List: content CMS', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2602, 'admin.layout_page_position.content_detail', 'Detail: entry CMS', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2603, 'admin.layout_page_position.shop_contact', 'Page contact', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2604, 'admin.layout_page_position.shop_page', 'Other page: about...', 'admin.layout_page_position', 'en', NULL, NULL),
-	(2605, 'admin.layout_page_position.all', 'Tất cả trang', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2606, 'admin.layout_page_position.home', 'Trang chủ', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2607, 'admin.layout_page_position.shop_home', 'Trang chủ Shop', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2608, 'admin.layout_page_position.shop_search', 'Trang tìm kiếm', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2609, 'admin.layout_page_position.vendor_home', 'Cửa hàng: trang chủ', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2610, 'admin.layout_page_position.store_product_list', 'Cửa hàng: danh sách sản phẩm', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2611, 'admin.layout_page_position.product_list', 'Danh sách: sản phẩm', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2612, 'admin.layout_page_position.product_detail', 'Chi tiết: sản phẩm', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2613, 'admin.layout_page_position.shop_cart', 'Giỏ hàng: giỏ hàng, wishlist, compare, checkout', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2614, 'admin.layout_page_position.shop_auth', 'Chứng thực: đăng nhập, đăng ký, quên mật khẩu', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2615, 'admin.layout_page_position.shop_profile', 'Tài khoản khách hàng', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2616, 'admin.layout_page_position.item_list', 'Danh sách item: danh mục, thương hiệu, nhà cung cấp', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2617, 'admin.layout_page_position.item_detail', 'Chi tiết: item', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2618, 'admin.layout_page_position.news_list', 'Danh sách: bài viết Blog', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2619, 'admin.layout_page_position.news_detail', 'Chi tiết: bài viết Blog', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2620, 'admin.layout_page_position.content_list', 'Danh sách: bài viết CMS', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2621, 'admin.layout_page_position.content_detail', 'Chi tiết: bài viết CMS', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2622, 'admin.layout_page_position.shop_contact', 'Trang liên hệ', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2623, 'admin.layout_page_position.shop_page', 'Các trang viết: giới thiệu...', 'admin.layout_page_position', 'vi', NULL, NULL),
-	(2624, 'admin.layout_page_block.header', 'Head code :meta, css, javascript,...', 'admin.layout_page_block', 'vi', NULL, NULL),
-	(2625, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'vi', NULL, NULL),
-	(2626, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'vi', NULL, NULL),
-	(2627, 'admin.layout_page_block.left', 'BlockLeft - Cột trái', 'admin.layout_page_block', 'vi', NULL, NULL),
-	(2628, 'admin.layout_page_block.right', 'Block Right - Cột phải', 'admin.layout_page_block', 'vi', NULL, NULL),
-	(2629, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'vi', NULL, NULL),
-	(2630, 'admin.layout_page_block.header', 'Head code: meta, css, javascript, ...', 'admin.layout_page_block', 'en', NULL, NULL),
-	(2631, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'en', NULL, NULL),
-	(2632, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'en', NULL, NULL),
-	(2633, 'admin.layout_page_block.left', 'Block Left', 'admin.layout_page_block', 'en', NULL, NULL),
-	(2634, 'admin.layout_page_block.right', 'Block Right', 'admin.layout_page_block', 'en', NULL, NULL),
-	(2635, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'en', NULL, NULL),
-	(2636, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2637, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2638, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2639, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2640, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2641, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2642, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2643, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2644, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2645, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2646, 'admin.admin_custom_config.add_new', 'Thêm mới cấu hình', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2647, 'admin.admin_custom_config.add_new', 'Add new config', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2648, 'admin.admin_custom_config.add_new_detail', 'Thông tin cấu hình', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2649, 'admin.admin_custom_config.add_new_detail', 'Config detail', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2650, 'admin.admin_custom_config.add_new_key', 'Key cấu hình', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2651, 'admin.admin_custom_config.add_new_key', 'Key config', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2652, 'admin.admin_custom_config.add_new_value', 'Giá trị', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2653, 'admin.admin_custom_config.add_new_value', 'Value', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2654, 'admin.admin_custom_config.key_exist', 'Key đã tồn tại', 'admin.admin_custom_config', 'vi', NULL, NULL),
-	(2655, 'admin.admin_custom_config.key_exist', 'Key already exist', 'admin.admin_custom_config', 'en', NULL, NULL),
-	(2656, 'admin.config_layout.link_home_page', 'Hiển thị link trang chủ', 'admin.config_layout', 'vi', NULL, NULL),
-	(2657, 'admin.config_layout.link_home_page', 'Display link homepage', 'admin.config_layout', 'en', NULL, NULL),
-	(2658, 'admin.config_layout.link_shop_page', 'Hiển thị link cửa hàng', 'admin.config_layout', 'vi', NULL, NULL),
-	(2659, 'admin.config_layout.link_shop_page', 'Display link shop', 'admin.config_layout', 'en', NULL, NULL),
-	(2660, 'admin.config_layout.link_account', 'Hiển thị link tài khoản', 'admin.config_layout', 'vi', NULL, NULL),
-	(2661, 'admin.config_layout.link_account', 'Display link account', 'admin.config_layout', 'en', NULL, NULL),
-	(2662, 'admin.config_layout.link_cart', 'Hiển thị giỏ hàng', 'admin.config_layout', 'vi', NULL, NULL),
-	(2663, 'admin.config_layout.link_cart', 'Display link cart', 'admin.config_layout', 'en', NULL, NULL),
-	(2664, 'admin.config_layout.link_language', 'Hiển thị ngôn ngữ', 'admin.config_layout', 'vi', NULL, NULL),
-	(2665, 'admin.config_layout.link_language', 'Display link language', 'admin.config_layout', 'en', NULL, NULL),
-	(2666, 'admin.config_layout.link_currency', 'Hiển thị tiền tệ', 'admin.config_layout', 'vi', NULL, NULL),
-	(2667, 'admin.config_layout.link_currency', 'Display link currency', 'admin.config_layout', 'en', NULL, NULL),
-	(2668, 'common.created_at', 'Tạo lúc', 'common', 'vi', NULL, NULL),
-	(2669, 'common.created_at', 'Created at', 'common', 'en', NULL, NULL),
-	(2670, 'common.updated_at', 'Cập nhật lúc', 'common', 'vi', NULL, NULL),
-	(2671, 'common.updated_at', 'Updated at', 'common', 'en', NULL, NULL),
-	(2672, 'common.from', 'Từ', 'common', 'vi', NULL, NULL),
-	(2673, 'common.from', 'From', 'common', 'en', NULL, NULL),
-	(2674, 'common.to', 'Đến', 'common', 'vi', NULL, NULL),
-	(2675, 'common.to', 'To', 'common', 'en', NULL, NULL),
-	(2676, 'plugin.plugin_action.plugin_exist', 'Plugin này đã tồn tại rồi', 'plugin', 'vi', NULL, NULL),
-	(2677, 'plugin.plugin_action.plugin_exist', 'This plugin already exists', 'plugin', 'en', NULL, NULL);
+	(2532, 'admin.plugin.not_compatible', 'Lỗi không tương thích. Plugin/template này chỉ hỗ trợ các phiên bản :version. Phiên bản hiện tại là :sc_version', 'admin.plugin', 'vi', NULL, NULL),
+	(2533, 'admin.plugin.not_compatible', 'Incompatibility error. This plugin/template only supports :version versions. The current version is :sc_version', 'admin.plugin', 'en', NULL, NULL),
+	(2534, 'admin.chart.static_month', 'Thống kê trong 12 tháng', 'admin.chart', 'vi', NULL, NULL),
+	(2535, 'admin.chart.static_30_day', 'Thống kê trong 1 tháng', 'admin.chart', 'vi', NULL, NULL),
+	(2536, 'admin.chart.static_month_help', 'Dữ liệu so sánh bằng tổng số tiền của đơn hàng, đơn vị Bit', 'admin.chart', 'vi', NULL, NULL),
+	(2537, 'admin.chart.amount', 'Tổng số tiền (Bit)', 'admin.chart', 'vi', NULL, NULL),
+	(2538, 'admin.chart.order', 'Tổng đơn hàng', 'admin.chart', 'vi', NULL, NULL),
+	(2539, 'admin.chart.static_country', 'Đơn hàng theo quốc gia', 'admin.chart', 'vi', NULL, NULL),
+	(2540, 'admin.chart.country', 'Quốc gia', 'admin.chart', 'vi', NULL, NULL),
+	(2541, 'admin.chart.static_month', 'Statistics for 12 months', 'admin.chart', 'en', NULL, NULL),
+	(2542, 'admin.chart.static_30_day', 'Statistics for 30 days', 'admin.chart', 'en', NULL, NULL),
+	(2543, 'admin.chart.static_month_help', 'The comparison data is equal to the total amount of the order and the Bit units', 'admin.chart', 'en', NULL, NULL),
+	(2544, 'admin.chart.amount', 'Total amount (Bit)', 'admin.chart', 'en', NULL, NULL),
+	(2545, 'admin.chart.order', 'Total order', 'admin.chart', 'en', NULL, NULL),
+	(2546, 'admin.chart.static_country', 'Statistics of orders by country', 'admin.chart', 'en', NULL, NULL),
+	(2547, 'admin.chart.country', 'Country', 'admin.chart', 'en', NULL, NULL),
+	(2548, 'admin.chart.static_device', 'Statistics of orders by device', 'admin.chart', 'en', NULL, NULL),
+	(2549, 'admin.chart.static_device', 'Thống kê đơn hàng theo thiết bị', 'admin.chart', 'vi', NULL, NULL),
+	(2550, 'admin.chart.static_count_order', 'Statistics of count orders', 'admin.chart', 'en', NULL, NULL),
+	(2551, 'admin.chart.static_count_order', 'Thống kê tổng số đơn hàng', 'admin.chart', 'vi', NULL, NULL),
+	(2552, 'admin.chart.device', 'Device type', 'admin.chart', 'en', NULL, NULL),
+	(2553, 'admin.chart.device', 'Loại thiết bị', 'admin.chart', 'vi', NULL, NULL),
+	(2554, 'admin.maintain.title', 'Maintenance page', 'admin.maintain', 'en', NULL, NULL),
+	(2555, 'admin.maintain.content', 'Maintenance content of the store', 'admin.maintain', 'en', NULL, NULL),
+	(2556, 'admin.maintain.description', 'Description', 'admin.maintain', 'en', NULL, NULL),
+	(2557, 'admin.maintain.description_note', 'Maintenance note', 'admin.maintain', 'en', NULL, NULL),
+	(2558, 'admin.maintain.title', 'Trang bảo trì', 'admin.maintain', 'vi', NULL, NULL),
+	(2559, 'admin.maintain.content', 'Nội dung bảo trì của cửa hàng', 'admin.maintain', 'vi', NULL, NULL),
+	(2560, 'admin.maintain.description', 'Nội dung', 'admin.maintain', 'vi', NULL, NULL),
+	(2561, 'admin.maintain.description_note', 'Ghi chú bảo trì', 'admin.maintain', 'vi', NULL, NULL),
+	(2562, 'admin.seo.config', 'Cấu hình SEO', 'admin.seo', 'vi', NULL, NULL),
+	(2563, 'admin.seo.config', 'SEO config', 'admin.seo', 'en', NULL, NULL),
+	(2564, 'admin.seo.url_seo_lang', 'Thêm ngôn ngữ trên URL', 'admin.seo', 'vi', NULL, NULL),
+	(2565, 'admin.seo.url_seo_lang', 'Add language on URL', 'admin.seo', 'en', NULL, NULL),
+	(2566, 'admin.dashboard.total_order', 'Tổng đơn hàng', 'admin.dashboard', 'vi', NULL, NULL),
+	(2567, 'admin.dashboard.total_order', 'Order total', 'admin.dashboard', 'en', NULL, NULL),
+	(2568, 'admin.dashboard.total_product', 'Tổng sản phẩm', 'admin.dashboard', 'vi', NULL, NULL),
+	(2569, 'admin.dashboard.total_product', 'Product total', 'admin.dashboard', 'en', NULL, NULL),
+	(2570, 'admin.dashboard.total_customer', 'Tổng khách hàng', 'admin.dashboard', 'vi', NULL, NULL),
+	(2571, 'admin.dashboard.total_customer', 'Customer total', 'admin.dashboard', 'en', NULL, NULL),
+	(2572, 'admin.dashboard.total_blog', 'Tổng blog', 'admin.dashboard', 'vi', NULL, NULL),
+	(2573, 'admin.dashboard.total_blog', 'Blog total', 'admin.dashboard', 'en', NULL, NULL),
+	(2574, 'admin.dashboard.order_month', 'Đơn hàng trong tháng', 'admin.dashboard', 'vi', NULL, NULL),
+	(2575, 'admin.dashboard.order_month', 'Order in month', 'admin.dashboard', 'en', NULL, NULL),
+	(2576, 'admin.dashboard.order_year', 'Đơn hàng trong năm', 'admin.dashboard', 'vi', NULL, NULL),
+	(2577, 'admin.dashboard.order_year', 'Order in year', 'admin.dashboard', 'en', NULL, NULL),
+	(2578, 'admin.dashboard.top_order_new', 'Đơn hàng mới', 'admin.dashboard', 'vi', NULL, NULL),
+	(2579, 'admin.dashboard.top_order_new', 'New orders', 'admin.dashboard', 'en', NULL, NULL),
+	(2580, 'admin.dashboard.top_customer_new', 'Khách hàng mới mới', 'admin.dashboard', 'vi', NULL, NULL),
+	(2581, 'admin.dashboard.top_customer_new', 'New customers', 'admin.dashboard', 'en', NULL, NULL),
+	(2582, 'admin.dashboard.pie_chart', 'Hiển thị biểu đồ pie', 'admin.dashboard', 'vi', NULL, NULL),
+	(2583, 'admin.dashboard.pie_chart', 'Display pie chart total', 'admin.dashboard', 'en', NULL, NULL),
+	(2584, 'admin.dashboard.title', 'Trang tổng quan', 'admin.dashboard', 'vi', NULL, NULL),
+	(2585, 'admin.dashboard.title', 'Dashboard page', 'admin.dashboard', 'en', NULL, NULL),
+	(2586, 'admin.dashboard.config_display', 'Cấu hình trang tổng quan admin', 'admin.dashboard', 'vi', NULL, NULL),
+	(2587, 'admin.dashboard.config_display', 'Config dashboard adminpage', 'admin.dashboard', 'en', NULL, NULL),
+	(2588, 'admin.layout_page_position.all', 'All Page', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2589, 'admin.layout_page_position.home', 'Home page', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2590, 'admin.layout_page_position.shop_home', 'Home shop', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2591, 'admin.layout_page_position.shop_search', 'Search page', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2592, 'admin.layout_page_position.vendor_home', 'Store: home', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2593, 'admin.layout_page_position.store_product_list', 'Store: product list', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2594, 'admin.layout_page_position.product_list', 'List: product', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2595, 'admin.layout_page_position.product_detail', 'Detail: product', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2596, 'admin.layout_page_position.shop_cart', 'Cart: cart, wishlist, compare, checkout', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2597, 'admin.layout_page_position.shop_auth', 'Auth: login, forgot, register', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2598, 'admin.layout_page_position.shop_profile', 'Customer profile', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2599, 'admin.layout_page_position.item_list', 'List: category, brand, supplier', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2600, 'admin.layout_page_position.item_detail', 'Detail: item', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2601, 'admin.layout_page_position.news_list', 'List:  Blog/news', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2602, 'admin.layout_page_position.news_detail', 'Detail: entry Blog', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2603, 'admin.layout_page_position.content_list', 'List: content CMS', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2604, 'admin.layout_page_position.content_detail', 'Detail: entry CMS', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2605, 'admin.layout_page_position.shop_contact', 'Page contact', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2606, 'admin.layout_page_position.shop_page', 'Other page: about...', 'admin.layout_page_position', 'en', NULL, NULL),
+	(2607, 'admin.layout_page_position.all', 'Tất cả trang', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2608, 'admin.layout_page_position.home', 'Trang chủ', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2609, 'admin.layout_page_position.shop_home', 'Trang chủ Shop', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2610, 'admin.layout_page_position.shop_search', 'Trang tìm kiếm', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2611, 'admin.layout_page_position.vendor_home', 'Cửa hàng: trang chủ', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2612, 'admin.layout_page_position.store_product_list', 'Cửa hàng: danh sách sản phẩm', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2613, 'admin.layout_page_position.product_list', 'Danh sách: sản phẩm', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2614, 'admin.layout_page_position.product_detail', 'Chi tiết: sản phẩm', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2615, 'admin.layout_page_position.shop_cart', 'Giỏ hàng: giỏ hàng, wishlist, compare, checkout', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2616, 'admin.layout_page_position.shop_auth', 'Chứng thực: đăng nhập, đăng ký, quên mật khẩu', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2617, 'admin.layout_page_position.shop_profile', 'Tài khoản khách hàng', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2618, 'admin.layout_page_position.item_list', 'Danh sách item: danh mục, thương hiệu, nhà cung cấp', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2619, 'admin.layout_page_position.item_detail', 'Chi tiết: item', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2620, 'admin.layout_page_position.news_list', 'Danh sách: bài viết Blog', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2621, 'admin.layout_page_position.news_detail', 'Chi tiết: bài viết Blog', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2622, 'admin.layout_page_position.content_list', 'Danh sách: bài viết CMS', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2623, 'admin.layout_page_position.content_detail', 'Chi tiết: bài viết CMS', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2624, 'admin.layout_page_position.shop_contact', 'Trang liên hệ', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2625, 'admin.layout_page_position.shop_page', 'Các trang viết: giới thiệu...', 'admin.layout_page_position', 'vi', NULL, NULL),
+	(2626, 'admin.layout_page_block.header', 'Head code :meta, css, javascript,...', 'admin.layout_page_block', 'vi', NULL, NULL),
+	(2627, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'vi', NULL, NULL),
+	(2628, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'vi', NULL, NULL),
+	(2629, 'admin.layout_page_block.left', 'BlockLeft - Cột trái', 'admin.layout_page_block', 'vi', NULL, NULL),
+	(2630, 'admin.layout_page_block.right', 'Block Right - Cột phải', 'admin.layout_page_block', 'vi', NULL, NULL),
+	(2631, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'vi', NULL, NULL),
+	(2632, 'admin.layout_page_block.header', 'Head code: meta, css, javascript, ...', 'admin.layout_page_block', 'en', NULL, NULL),
+	(2633, 'admin.layout_page_block.top', 'Block Top', 'admin.layout_page_block', 'en', NULL, NULL),
+	(2634, 'admin.layout_page_block.bottom', 'Block Bottom', 'admin.layout_page_block', 'en', NULL, NULL),
+	(2635, 'admin.layout_page_block.left', 'Block Left', 'admin.layout_page_block', 'en', NULL, NULL),
+	(2636, 'admin.layout_page_block.right', 'Block Right', 'admin.layout_page_block', 'en', NULL, NULL),
+	(2637, 'admin.layout_page_block.banner_top', 'Block banner top', 'admin.layout_page_block', 'en', NULL, NULL),
+	(2638, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2639, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2640, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2641, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2642, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2643, 'admin.admin_custom_config.facebook_url', 'Facebook Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2644, 'admin.admin_custom_config.fanpage_url', 'Fanpage Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2645, 'admin.admin_custom_config.twitter_url', 'Twitter Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2646, 'admin.admin_custom_config.instagram_url', 'Instagram Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2647, 'admin.admin_custom_config.youtube_url', 'Youtube Url', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2648, 'admin.admin_custom_config.add_new', 'Thêm mới cấu hình', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2649, 'admin.admin_custom_config.add_new', 'Add new config', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2650, 'admin.admin_custom_config.add_new_detail', 'Thông tin cấu hình', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2651, 'admin.admin_custom_config.add_new_detail', 'Config detail', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2652, 'admin.admin_custom_config.add_new_key', 'Key cấu hình', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2653, 'admin.admin_custom_config.add_new_key', 'Key config', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2654, 'admin.admin_custom_config.add_new_value', 'Giá trị', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2655, 'admin.admin_custom_config.add_new_value', 'Value', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2656, 'admin.admin_custom_config.key_exist', 'Key đã tồn tại', 'admin.admin_custom_config', 'vi', NULL, NULL),
+	(2657, 'admin.admin_custom_config.key_exist', 'Key already exist', 'admin.admin_custom_config', 'en', NULL, NULL),
+	(2658, 'admin.config_layout.link_home_page', 'Hiển thị link trang chủ', 'admin.config_layout', 'vi', NULL, NULL),
+	(2659, 'admin.config_layout.link_home_page', 'Display link homepage', 'admin.config_layout', 'en', NULL, NULL),
+	(2660, 'admin.config_layout.link_shop_page', 'Hiển thị link cửa hàng', 'admin.config_layout', 'vi', NULL, NULL),
+	(2661, 'admin.config_layout.link_shop_page', 'Display link shop', 'admin.config_layout', 'en', NULL, NULL),
+	(2662, 'admin.config_layout.link_account', 'Hiển thị link tài khoản', 'admin.config_layout', 'vi', NULL, NULL),
+	(2663, 'admin.config_layout.link_account', 'Display link account', 'admin.config_layout', 'en', NULL, NULL),
+	(2664, 'admin.config_layout.link_cart', 'Hiển thị giỏ hàng', 'admin.config_layout', 'vi', NULL, NULL),
+	(2665, 'admin.config_layout.link_cart', 'Display link cart', 'admin.config_layout', 'en', NULL, NULL),
+	(2666, 'admin.config_layout.link_language', 'Hiển thị ngôn ngữ', 'admin.config_layout', 'vi', NULL, NULL),
+	(2667, 'admin.config_layout.link_language', 'Display link language', 'admin.config_layout', 'en', NULL, NULL),
+	(2668, 'admin.config_layout.link_currency', 'Hiển thị tiền tệ', 'admin.config_layout', 'vi', NULL, NULL),
+	(2669, 'admin.config_layout.link_currency', 'Display link currency', 'admin.config_layout', 'en', NULL, NULL),
+	(2670, 'common.created_at', 'Tạo lúc', 'common', 'vi', NULL, NULL),
+	(2671, 'common.created_at', 'Created at', 'common', 'en', NULL, NULL),
+	(2672, 'common.updated_at', 'Cập nhật lúc', 'common', 'vi', NULL, NULL),
+	(2673, 'common.updated_at', 'Updated at', 'common', 'en', NULL, NULL),
+	(2674, 'common.from', 'Từ', 'common', 'vi', NULL, NULL),
+	(2675, 'common.from', 'From', 'common', 'en', NULL, NULL),
+	(2676, 'common.to', 'Đến', 'common', 'vi', NULL, NULL),
+	(2677, 'common.to', 'To', 'common', 'en', NULL, NULL),
+	(2678, 'plugin.plugin_action.plugin_exist', 'Plugin này đã tồn tại rồi', 'plugin', 'vi', NULL, NULL),
+	(2679, 'plugin.plugin_action.plugin_exist', 'This plugin already exists', 'plugin', 'en', NULL, NULL);
 /*!40000 ALTER TABLE `sc_languages` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_attribute_group
@@ -3373,10 +3375,10 @@ CREATE TABLE IF NOT EXISTS `sc_shop_banner` (
 DELETE FROM `sc_shop_banner`;
 /*!40000 ALTER TABLE `sc_shop_banner` DISABLE KEYS */;
 INSERT INTO `sc_shop_banner` (`id`, `title`, `image`, `url`, `target`, `html`, `status`, `sort`, `click`, `type`, `created_at`, `updated_at`) VALUES
-	('972f4463-1e36-4658-bb1d-cfcafd7a48c3', 'Banner home 1 (s-cart-light)', '/data/banner/banner-home-1.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
-	('972f4463-1e3e-4da3-9ba3-14b8f67937b7', 'Banner home 2 (s-cart-light)', '/data/banner/banner-home-2.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
-	('972f4463-1e43-4041-92ad-5b8c134dd83f', 'Banner breadcrumb (s-cart-light)', '/data/banner/breadcrumb.jpg', NULL, '_self', '', 1, 0, 0, 'breadcrumb', NULL, NULL),
-	('972f4463-1e47-4421-811a-a2d0ecfb5802', 'Banner store (s-cart-light)', '/data/banner/banner-store.jpg', NULL, '_self', '', 1, 0, 0, 'banner-store', NULL, NULL);
+	('977dd987-8464-4517-aae4-58493231eb0f', 'Banner home 1 (s-cart-light)', '/data/banner/banner-home-1.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
+	('977dd987-846d-4066-9034-8daabd7c4dd0', 'Banner home 2 (s-cart-light)', '/data/banner/banner-home-2.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
+	('977dd987-8472-400c-b08e-ea0d081d57f9', 'Banner breadcrumb (s-cart-light)', '/data/banner/breadcrumb.jpg', NULL, '_self', '', 1, 0, 0, 'breadcrumb', NULL, NULL),
+	('977dd987-8477-494f-a4b5-63202a1474d5', 'Banner store (s-cart-light)', '/data/banner/banner-store.jpg', NULL, '_self', '', 1, 0, 0, 'banner-store', NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_banner` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner_store
@@ -3391,10 +3393,10 @@ CREATE TABLE IF NOT EXISTS `sc_shop_banner_store` (
 DELETE FROM `sc_shop_banner_store`;
 /*!40000 ALTER TABLE `sc_shop_banner_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_banner_store` (`banner_id`, `store_id`) VALUES
-	('972f4463-1e36-4658-bb1d-cfcafd7a48c3', '1'),
-	('972f4463-1e3e-4da3-9ba3-14b8f67937b7', '1'),
-	('972f4463-1e43-4041-92ad-5b8c134dd83f', '1'),
-	('972f4463-1e47-4421-811a-a2d0ecfb5802', '1');
+	('977dd987-8464-4517-aae4-58493231eb0f', '1'),
+	('977dd987-846d-4066-9034-8daabd7c4dd0', '1'),
+	('977dd987-8472-400c-b08e-ea0d081d57f9', '1'),
+	('977dd987-8477-494f-a4b5-63202a1474d5', '1');
 /*!40000 ALTER TABLE `sc_shop_banner_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner_type
@@ -3440,15 +3442,15 @@ CREATE TABLE IF NOT EXISTS `sc_shop_brand` (
 DELETE FROM `sc_shop_brand`;
 /*!40000 ALTER TABLE `sc_shop_brand` DISABLE KEYS */;
 INSERT INTO `sc_shop_brand` (`id`, `name`, `alias`, `image`, `url`, `status`, `sort`, `created_at`, `updated_at`) VALUES
-	('972f4463-1be5-4b46-a347-c46817bac42e', 'DaNang', 'danang', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
-	('972f4463-1bf0-44ef-9cd0-8550de4d10f0', 'SaiGon', 'saigon', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
-	('972f4463-1bf5-4dd9-b57b-e6b9f260fb67', 'HaNoi', 'hanoi', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
-	('972f4463-1bfa-4a10-ba73-6e52d0dd0903', 'BenTre', 'bentre', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
-	('972f4463-1c00-43dd-be51-1d1982a3b866', 'NgheAn', 'nghean', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
-	('972f4463-1c06-49b1-8de6-d370beee2dc5', 'LongAn', 'longan', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
-	('972f4463-1c0d-414d-bef6-8b37aceb981b', 'CaMau', 'camau', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
-	('972f4463-1c14-471b-92f3-33c336f0d17d', 'HaGiang', 'hagiang', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
-	('972f4463-1c1a-4675-a08e-31491a550805', 'ThanhHoa', 'thanhhoa', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL);
+	('977dd987-8251-4752-9ca7-a1081ba52f99', 'DaNang', 'danang', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
+	('977dd987-8258-44b0-9712-51588937d863', 'SaiGon', 'saigon', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
+	('977dd987-825c-4591-8221-756ec19ffd7f', 'HaNoi', 'hanoi', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
+	('977dd987-8260-4530-a8ec-f7accfd98eb7', 'BenTre', 'bentre', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
+	('977dd987-8264-4a00-b3d8-224a12477434', 'NgheAn', 'nghean', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
+	('977dd987-8268-400c-9194-797996f0ded3', 'LongAn', 'longan', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
+	('977dd987-826c-47f3-b95f-44f7219277bf', 'CaMau', 'camau', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
+	('977dd987-8270-405d-9842-c7e481d78988', 'HaGiang', 'hagiang', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL),
+	('977dd987-8274-4796-a3ec-dbd3d6982e27', 'ThanhHoa', 'thanhhoa', '/data/brand/brand.jpg', NULL, 1, 0, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_brand` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_brand_store
@@ -3463,15 +3465,15 @@ CREATE TABLE IF NOT EXISTS `sc_shop_brand_store` (
 DELETE FROM `sc_shop_brand_store`;
 /*!40000 ALTER TABLE `sc_shop_brand_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_brand_store` (`brand_id`, `store_id`) VALUES
-	('972f4463-1be5-4b46-a347-c46817bac42e', '1'),
-	('972f4463-1bf0-44ef-9cd0-8550de4d10f0', '1'),
-	('972f4463-1bf5-4dd9-b57b-e6b9f260fb67', '1'),
-	('972f4463-1bfa-4a10-ba73-6e52d0dd0903', '1'),
-	('972f4463-1c00-43dd-be51-1d1982a3b866', '1'),
-	('972f4463-1c06-49b1-8de6-d370beee2dc5', '1'),
-	('972f4463-1c0d-414d-bef6-8b37aceb981b', '1'),
-	('972f4463-1c14-471b-92f3-33c336f0d17d', '1'),
-	('972f4463-1c1a-4675-a08e-31491a550805', '1');
+	('977dd987-8251-4752-9ca7-a1081ba52f99', '1'),
+	('977dd987-8258-44b0-9712-51588937d863', '1'),
+	('977dd987-825c-4591-8221-756ec19ffd7f', '1'),
+	('977dd987-8260-4530-a8ec-f7accfd98eb7', '1'),
+	('977dd987-8264-4a00-b3d8-224a12477434', '1'),
+	('977dd987-8268-400c-9194-797996f0ded3', '1'),
+	('977dd987-826c-47f3-b95f-44f7219277bf', '1'),
+	('977dd987-8270-405d-9842-c7e481d78988', '1'),
+	('977dd987-8274-4796-a3ec-dbd3d6982e27', '1');
 /*!40000 ALTER TABLE `sc_shop_brand_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category
@@ -3494,19 +3496,19 @@ CREATE TABLE IF NOT EXISTS `sc_shop_category` (
 DELETE FROM `sc_shop_category`;
 /*!40000 ALTER TABLE `sc_shop_category` DISABLE KEYS */;
 INSERT INTO `sc_shop_category` (`id`, `image`, `alias`, `parent`, `top`, `status`, `sort`, `created_at`, `updated_at`) VALUES
-	('972f4463-15ca-40bf-a5a7-c9276f6227d3', '/data/category/category.jpg', 'am-thuc', '0', 1, 1, 0, NULL, NULL),
-	('972f4463-15d2-4286-9c4b-cdec9939b9d8', '/data/category/category.jpg', 'trai-cay', '0', 1, 1, 0, NULL, NULL),
-	('972f4463-15d7-476b-9329-ca08c16490c2', '/data/category/category.jpg', 'thu-cong-my-nghe', '0', 1, 1, 0, NULL, NULL),
-	('972f4463-15db-4d83-ac74-5cd30abe9181', '/data/category/category.jpg', 'bun-pho', '972f4463-15ca-40bf-a5a7-c9276f6227d3', 1, 1, 0, NULL, NULL),
-	('972f4463-15e0-4707-8544-b51b6f39af26', '/data/category/category.jpg', 'banh-my', '972f4463-15ca-40bf-a5a7-c9276f6227d3', 1, 1, 0, NULL, NULL),
-	('972f4463-15e4-4bf7-aa36-73f8d7f746ac', '/data/category/category.jpg', 'trai-cay-nam-bo', '972f4463-15d2-4286-9c4b-cdec9939b9d8', 1, 1, 0, NULL, NULL),
-	('972f4463-15e8-4753-a98d-aff7c57bb37a', '/data/category/category.jpg', 'trai-cay-mien-bac', '972f4463-15d2-4286-9c4b-cdec9939b9d8', 1, 1, 0, NULL, NULL),
-	('972f4463-15ec-434d-8995-6ad964151e8a', '/data/category/category.jpg', 'che-thai-nguyen', '972f4463-15d2-4286-9c4b-cdec9939b9d8', 0, 1, 0, NULL, NULL),
-	('972f4463-15f0-492a-828a-6f63ba40f4df', '/data/category/category.jpg', 'toi-ly-son', '972f4463-15d2-4286-9c4b-cdec9939b9d8', 0, 1, 0, NULL, NULL),
-	('972f4463-15f3-4c42-b52c-45706f6254c6', '/data/category/category.jpg', 'gom-bat-trang', '972f4463-15d7-476b-9329-ca08c16490c2', 1, 1, 0, NULL, NULL),
-	('972f4463-15f7-41be-bd47-2f3eb347a2fa', '/data/category/category.jpg', 'tranh-dong-ho', '972f4463-15d7-476b-9329-ca08c16490c2', 0, 1, 0, NULL, NULL),
-	('972f4463-15fb-44d1-9974-fa4edea7291c', '/data/category/category.jpg', 'du-lich', '972f4463-15d7-476b-9329-ca08c16490c2', 0, 1, 0, NULL, NULL),
-	('972f4463-15ff-4e30-b95a-84c8a107cdd9', '/data/category/category.jpg', 'nhac-co-truyen', '972f4463-15d2-4286-9c4b-cdec9939b9d8', 0, 1, 0, NULL, NULL);
+	('977dd987-7cd7-4058-9f7c-41367dbb5ebf', '/data/category/category.jpg', 'am-thuc', '0', 1, 1, 0, NULL, NULL),
+	('977dd987-7cdf-4aa4-8152-d0da58e9cb5f', '/data/category/category.jpg', 'trai-cay', '0', 1, 1, 0, NULL, NULL),
+	('977dd987-7ce4-4ff2-8e92-7a795ec4dba4', '/data/category/category.jpg', 'thu-cong-my-nghe', '0', 1, 1, 0, NULL, NULL),
+	('977dd987-7ce8-440e-be9c-15c2717a3979', '/data/category/category.jpg', 'bun-pho', '977dd987-7cd7-4058-9f7c-41367dbb5ebf', 1, 1, 0, NULL, NULL),
+	('977dd987-7cec-4b91-bf54-d3d81a7a27df', '/data/category/category.jpg', 'banh-my', '977dd987-7cd7-4058-9f7c-41367dbb5ebf', 1, 1, 0, NULL, NULL),
+	('977dd987-7cf0-4ee9-95a8-475d261c6c0d', '/data/category/category.jpg', 'trai-cay-nam-bo', '977dd987-7cdf-4aa4-8152-d0da58e9cb5f', 1, 1, 0, NULL, NULL),
+	('977dd987-7cf4-41a2-ae1b-619442e58091', '/data/category/category.jpg', 'trai-cay-mien-bac', '977dd987-7cdf-4aa4-8152-d0da58e9cb5f', 1, 1, 0, NULL, NULL),
+	('977dd987-7cf8-4a1d-a90b-f1831e0e5921', '/data/category/category.jpg', 'che-thai-nguyen', '977dd987-7cdf-4aa4-8152-d0da58e9cb5f', 0, 1, 0, NULL, NULL),
+	('977dd987-7cfc-4a0a-81c1-c773e5b094ec', '/data/category/category.jpg', 'toi-ly-son', '977dd987-7cdf-4aa4-8152-d0da58e9cb5f', 0, 1, 0, NULL, NULL),
+	('977dd987-7d00-469c-a500-f9cfadeec4fd', '/data/category/category.jpg', 'gom-bat-trang', '977dd987-7ce4-4ff2-8e92-7a795ec4dba4', 1, 1, 0, NULL, NULL),
+	('977dd987-7d03-4ca1-8591-6c3ab183a4cd', '/data/category/category.jpg', 'tranh-dong-ho', '977dd987-7ce4-4ff2-8e92-7a795ec4dba4', 0, 1, 0, NULL, NULL),
+	('977dd987-7d08-4d15-8715-3a5d5f28796c', '/data/category/category.jpg', 'du-lich', '977dd987-7ce4-4ff2-8e92-7a795ec4dba4', 0, 1, 0, NULL, NULL),
+	('977dd987-7d0c-4fe9-baf4-9f54cebfab6e', '/data/category/category.jpg', 'nhac-co-truyen', '977dd987-7cdf-4aa4-8152-d0da58e9cb5f', 0, 1, 0, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category_description
@@ -3525,32 +3527,32 @@ CREATE TABLE IF NOT EXISTS `sc_shop_category_description` (
 DELETE FROM `sc_shop_category_description`;
 /*!40000 ALTER TABLE `sc_shop_category_description` DISABLE KEYS */;
 INSERT INTO `sc_shop_category_description` (`category_id`, `lang`, `title`, `keyword`, `description`) VALUES
-	('972f4463-15ca-40bf-a5a7-c9276f6227d3', 'en', 'Am Thuc', NULL, NULL),
-	('972f4463-15ca-40bf-a5a7-c9276f6227d3', 'vi', 'Am Thuc', NULL, NULL),
-	('972f4463-15d2-4286-9c4b-cdec9939b9d8', 'en', 'Trai Cay', NULL, NULL),
-	('972f4463-15d2-4286-9c4b-cdec9939b9d8', 'vi', 'Trai Cay', NULL, NULL),
-	('972f4463-15d7-476b-9329-ca08c16490c2', 'en', 'Thu Cong My Nghe', NULL, NULL),
-	('972f4463-15d7-476b-9329-ca08c16490c2', 'vi', 'Thu Cong My Nghe', NULL, NULL),
-	('972f4463-15db-4d83-ac74-5cd30abe9181', 'en', 'Bun Pho', NULL, NULL),
-	('972f4463-15db-4d83-ac74-5cd30abe9181', 'vi', 'Bun Pho', NULL, NULL),
-	('972f4463-15e0-4707-8544-b51b6f39af26', 'en', 'Banh My', NULL, NULL),
-	('972f4463-15e0-4707-8544-b51b6f39af26', 'vi', 'Banh My', NULL, NULL),
-	('972f4463-15e4-4bf7-aa36-73f8d7f746ac', 'en', 'Trai Cay Nam Bo', NULL, NULL),
-	('972f4463-15e4-4bf7-aa36-73f8d7f746ac', 'vi', 'Trai Cay Nam Bo', NULL, NULL),
-	('972f4463-15e8-4753-a98d-aff7c57bb37a', 'en', 'Trai Cay Mien Bac', NULL, NULL),
-	('972f4463-15e8-4753-a98d-aff7c57bb37a', 'vi', 'Trai Cay Mien Bac', NULL, NULL),
-	('972f4463-15ec-434d-8995-6ad964151e8a', 'en', 'Che Thai Nguyen', NULL, NULL),
-	('972f4463-15ec-434d-8995-6ad964151e8a', 'vi', 'Che Thai Nguyen', NULL, NULL),
-	('972f4463-15f0-492a-828a-6f63ba40f4df', 'en', 'Toi Ly Son', NULL, NULL),
-	('972f4463-15f0-492a-828a-6f63ba40f4df', 'vi', 'Toi Ly Son', NULL, NULL),
-	('972f4463-15f3-4c42-b52c-45706f6254c6', 'en', 'Gom Bat Trang', NULL, NULL),
-	('972f4463-15f3-4c42-b52c-45706f6254c6', 'vi', 'Gom Bat Trang', NULL, NULL),
-	('972f4463-15f7-41be-bd47-2f3eb347a2fa', 'en', 'Tranh Dong Ho', NULL, NULL),
-	('972f4463-15f7-41be-bd47-2f3eb347a2fa', 'vi', 'Tranh Dong Ho', NULL, NULL),
-	('972f4463-15fb-44d1-9974-fa4edea7291c', 'en', 'Du Lich', NULL, NULL),
-	('972f4463-15fb-44d1-9974-fa4edea7291c', 'vi', 'Du Lich', NULL, NULL),
-	('972f4463-15ff-4e30-b95a-84c8a107cdd9', 'en', 'Nhac Co Truyen', NULL, NULL),
-	('972f4463-15ff-4e30-b95a-84c8a107cdd9', 'vi', 'Nhac Co Truyen', NULL, NULL);
+	('977dd987-7cd7-4058-9f7c-41367dbb5ebf', 'en', 'Am Thuc', NULL, NULL),
+	('977dd987-7cd7-4058-9f7c-41367dbb5ebf', 'vi', 'Am Thuc', NULL, NULL),
+	('977dd987-7cdf-4aa4-8152-d0da58e9cb5f', 'en', 'Trai Cay', NULL, NULL),
+	('977dd987-7cdf-4aa4-8152-d0da58e9cb5f', 'vi', 'Trai Cay', NULL, NULL),
+	('977dd987-7ce4-4ff2-8e92-7a795ec4dba4', 'en', 'Thu Cong My Nghe', NULL, NULL),
+	('977dd987-7ce4-4ff2-8e92-7a795ec4dba4', 'vi', 'Thu Cong My Nghe', NULL, NULL),
+	('977dd987-7ce8-440e-be9c-15c2717a3979', 'en', 'Bun Pho', NULL, NULL),
+	('977dd987-7ce8-440e-be9c-15c2717a3979', 'vi', 'Bun Pho', NULL, NULL),
+	('977dd987-7cec-4b91-bf54-d3d81a7a27df', 'en', 'Banh My', NULL, NULL),
+	('977dd987-7cec-4b91-bf54-d3d81a7a27df', 'vi', 'Banh My', NULL, NULL),
+	('977dd987-7cf0-4ee9-95a8-475d261c6c0d', 'en', 'Trai Cay Nam Bo', NULL, NULL),
+	('977dd987-7cf0-4ee9-95a8-475d261c6c0d', 'vi', 'Trai Cay Nam Bo', NULL, NULL),
+	('977dd987-7cf4-41a2-ae1b-619442e58091', 'en', 'Trai Cay Mien Bac', NULL, NULL),
+	('977dd987-7cf4-41a2-ae1b-619442e58091', 'vi', 'Trai Cay Mien Bac', NULL, NULL),
+	('977dd987-7cf8-4a1d-a90b-f1831e0e5921', 'en', 'Che Thai Nguyen', NULL, NULL),
+	('977dd987-7cf8-4a1d-a90b-f1831e0e5921', 'vi', 'Che Thai Nguyen', NULL, NULL),
+	('977dd987-7cfc-4a0a-81c1-c773e5b094ec', 'en', 'Toi Ly Son', NULL, NULL),
+	('977dd987-7cfc-4a0a-81c1-c773e5b094ec', 'vi', 'Toi Ly Son', NULL, NULL),
+	('977dd987-7d00-469c-a500-f9cfadeec4fd', 'en', 'Gom Bat Trang', NULL, NULL),
+	('977dd987-7d00-469c-a500-f9cfadeec4fd', 'vi', 'Gom Bat Trang', NULL, NULL),
+	('977dd987-7d03-4ca1-8591-6c3ab183a4cd', 'en', 'Tranh Dong Ho', NULL, NULL),
+	('977dd987-7d03-4ca1-8591-6c3ab183a4cd', 'vi', 'Tranh Dong Ho', NULL, NULL),
+	('977dd987-7d08-4d15-8715-3a5d5f28796c', 'en', 'Du Lich', NULL, NULL),
+	('977dd987-7d08-4d15-8715-3a5d5f28796c', 'vi', 'Du Lich', NULL, NULL),
+	('977dd987-7d0c-4fe9-baf4-9f54cebfab6e', 'en', 'Nhac Co Truyen', NULL, NULL),
+	('977dd987-7d0c-4fe9-baf4-9f54cebfab6e', 'vi', 'Nhac Co Truyen', NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_category_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category_store
@@ -3565,19 +3567,19 @@ CREATE TABLE IF NOT EXISTS `sc_shop_category_store` (
 DELETE FROM `sc_shop_category_store`;
 /*!40000 ALTER TABLE `sc_shop_category_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_category_store` (`category_id`, `store_id`) VALUES
-	('972f4463-15ca-40bf-a5a7-c9276f6227d3', '1'),
-	('972f4463-15d2-4286-9c4b-cdec9939b9d8', '1'),
-	('972f4463-15d7-476b-9329-ca08c16490c2', '1'),
-	('972f4463-15db-4d83-ac74-5cd30abe9181', '1'),
-	('972f4463-15e0-4707-8544-b51b6f39af26', '1'),
-	('972f4463-15e4-4bf7-aa36-73f8d7f746ac', '1'),
-	('972f4463-15e8-4753-a98d-aff7c57bb37a', '1'),
-	('972f4463-15ec-434d-8995-6ad964151e8a', '1'),
-	('972f4463-15f0-492a-828a-6f63ba40f4df', '1'),
-	('972f4463-15f3-4c42-b52c-45706f6254c6', '1'),
-	('972f4463-15f7-41be-bd47-2f3eb347a2fa', '1'),
-	('972f4463-15fb-44d1-9974-fa4edea7291c', '1'),
-	('972f4463-15ff-4e30-b95a-84c8a107cdd9', '1');
+	('977dd987-7cd7-4058-9f7c-41367dbb5ebf', '1'),
+	('977dd987-7cdf-4aa4-8152-d0da58e9cb5f', '1'),
+	('977dd987-7ce4-4ff2-8e92-7a795ec4dba4', '1'),
+	('977dd987-7ce8-440e-be9c-15c2717a3979', '1'),
+	('977dd987-7cec-4b91-bf54-d3d81a7a27df', '1'),
+	('977dd987-7cf0-4ee9-95a8-475d261c6c0d', '1'),
+	('977dd987-7cf4-41a2-ae1b-619442e58091', '1'),
+	('977dd987-7cf8-4a1d-a90b-f1831e0e5921', '1'),
+	('977dd987-7cfc-4a0a-81c1-c773e5b094ec', '1'),
+	('977dd987-7d00-469c-a500-f9cfadeec4fd', '1'),
+	('977dd987-7d03-4ca1-8591-6c3ab183a4cd', '1'),
+	('977dd987-7d08-4d15-8715-3a5d5f28796c', '1'),
+	('977dd987-7d0c-4fe9-baf4-9f54cebfab6e', '1');
 /*!40000 ALTER TABLE `sc_shop_category_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_country
@@ -3995,12 +3997,12 @@ CREATE TABLE IF NOT EXISTS `sc_shop_email_template` (
 DELETE FROM `sc_shop_email_template`;
 /*!40000 ALTER TABLE `sc_shop_email_template` DISABLE KEYS */;
 INSERT INTO `sc_shop_email_template` (`id`, `name`, `group`, `text`, `store_id`, `status`, `created_at`, `updated_at`) VALUES
-	('972f4462-1c2c-45d3-9604-6796ba282e3b', 'Reset password', 'forgot_password', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n<tbody>\r\n    <tr>\r\n    <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <tbody>\r\n                <tr>\r\n                <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                    <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                        <tbody>\r\n                            <tr>\r\n                            <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                                <a href="{{$reset_link}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$reset_button}}</a>\r\n                            </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </td>\r\n    </tr>\r\n    </tbody>\r\n    </table>\r\n    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n    {{$note_sendmail}}\r\n    </p>\r\n    <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n    <tbody>\r\n    <tr>\r\n        <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>', '1', 1, NULL, NULL),
-	('972f4462-1c34-43cf-b8f2-913882237689', 'Customer verification', 'customer_verify', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n    <tbody>\r\n    <tr>\r\n        <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                <tbody>\r\n                <tr>\r\n                    <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                        <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                            <tbody>\r\n                            <tr>\r\n                                <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                                    <a href="{{$url_verify}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$button}}</a>\r\n                                </td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </td>\r\n                </tr>\r\n                </tbody>\r\n            </table>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n    </table>\r\n    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n    {{$note_sendmail}}\r\n    </p>\r\n    <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n    <tbody>\r\n    <tr>\r\n        <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>', '1', 1, NULL, NULL),
-	('972f4462-1c39-46cf-8061-c3200b45daa9', 'Welcome new customer', 'welcome_customer', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:center">{{$title}}</h1>\r\n<p style="text-align:center;">Welcome to my site!</p>', '1', 1, NULL, NULL),
-	('972f4462-1c3d-4475-aaac-3ce00ebe0628', 'Send form contact to admin', 'contact_to_admin', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Name</b>: {{$name}}<br>\r\n      <b>Email</b>: {{$email}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Content:<br>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="0">\r\n<tr>\r\n   <td>{{$content}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL),
-	('972f4462-1c41-4e7f-b716-05cc412b0819', 'New order to admin', 'order_success_to_admin', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Email</b>: {{$email}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n   ===================================<br>\r\n</p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n   <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n   <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Discount</td>\r\n   <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Other Fee</td>\r\n   <td colspan="2" align="right">{{$otherFee}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Total</td>\r\n   <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL),
-	('972f4462-1c46-41be-abf4-944e292c102f', 'New order to customr', 'order_success_to_customer', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n   ===================================<br>\r\n</p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n   <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n   <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Discount</td>\r\n   <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Total</td>\r\n   <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL);
+	('977dd986-7ce9-4097-a278-3fa2ceba4c9b', 'Reset password', 'forgot_password', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n<tbody>\r\n    <tr>\r\n    <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <tbody>\r\n                <tr>\r\n                <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                    <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                        <tbody>\r\n                            <tr>\r\n                            <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                                <a href="{{$reset_link}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$reset_button}}</a>\r\n                            </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </td>\r\n    </tr>\r\n    </tbody>\r\n    </table>\r\n    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n    {{$note_sendmail}}\r\n    </p>\r\n    <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n    <tbody>\r\n    <tr>\r\n        <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>', '1', 1, NULL, NULL),
+	('977dd986-7cf1-4f1a-a5e0-4a18f3c4a379', 'Customer verification', 'customer_verify', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n    <tbody>\r\n    <tr>\r\n        <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                <tbody>\r\n                <tr>\r\n                    <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                        <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                            <tbody>\r\n                            <tr>\r\n                                <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                                    <a href="{{$url_verify}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$button}}</a>\r\n                                </td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </td>\r\n                </tr>\r\n                </tbody>\r\n            </table>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n    </table>\r\n    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n    {{$note_sendmail}}\r\n    </p>\r\n    <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n    <tbody>\r\n    <tr>\r\n        <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>', '1', 1, NULL, NULL),
+	('977dd986-7cf5-4cb9-9cf2-853fd5cd1b4a', 'Welcome new customer', 'welcome_customer', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:center">{{$title}}</h1>\r\n<p style="text-align:center;">Welcome to my site!</p>', '1', 1, NULL, NULL),
+	('977dd986-7cfa-4227-b170-e571da548b37', 'Send form contact to admin', 'contact_to_admin', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Name</b>: {{$name}}<br>\r\n      <b>Email</b>: {{$email}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Content:<br>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="0">\r\n<tr>\r\n   <td>{{$content}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL),
+	('977dd986-7cfe-4ab9-8f0c-9cce8281ada5', 'New order to admin', 'order_success_to_admin', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Email</b>: {{$email}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n   ===================================<br>\r\n</p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n   <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n   <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Discount</td>\r\n   <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Other Fee</td>\r\n   <td colspan="2" align="right">{{$otherFee}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Total</td>\r\n   <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL),
+	('977dd986-7d02-432e-b17d-1577af2c64ff', 'New order to customr', 'order_success_to_customer', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n   ===================================<br>\r\n</p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n   <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n   <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Discount</td>\r\n   <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Total</td>\r\n   <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_email_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_language
@@ -4129,14 +4131,14 @@ CREATE TABLE IF NOT EXISTS `sc_shop_link` (
 DELETE FROM `sc_shop_link`;
 /*!40000 ALTER TABLE `sc_shop_link` DISABLE KEYS */;
 INSERT INTO `sc_shop_link` (`id`, `name`, `url`, `target`, `group`, `module`, `status`, `sort`, `created_at`, `updated_at`) VALUES
-	('972f4462-0514-4901-9399-3385b765c28e', 'front.about', 'route::page.detail::about', '_self', 'menu', '', 1, 50, NULL, NULL),
-	('972f4462-1ec3-437c-a2ad-01f004cbbfac', 'front.home', 'route::home', '_self', 'menu', '', 1, 10, NULL, NULL),
-	('972f4462-1ecc-42df-bbc8-a25088d450ed', 'front.shop', 'route::shop', '_self', 'menu', '', 1, 20, NULL, NULL),
-	('972f4462-1ed0-4a12-96e6-1eae664b2002', 'front.blog', 'route::news', '_self', 'menu', '', 1, 30, NULL, NULL),
-	('972f4462-1ed4-4864-93ed-2ad927635e76', 'front.contact', 'route::contact', '_self', 'menu', '', 1, 40, NULL, NULL),
-	('972f4462-1ed9-49a9-9182-6d4da4f7baf1', 'front.my_profile', 'route::login', '_self', 'footer', '', 1, 60, NULL, NULL),
-	('972f4462-1edc-428d-965c-caed98e8b2ab', 'front.compare_page', 'route::compare', '_self', 'footer', '', 1, 70, NULL, NULL),
-	('972f4462-1ee0-4489-bb27-19bfc9ce80e8', 'front.wishlist_page', 'route::wishlist', '_self', 'footer', '', 1, 80, NULL, NULL);
+	('977dd986-4a5f-4131-99d5-67ae5506fc4a', 'front.about', 'route::page.detail::about', '_self', 'menu', '', 1, 50, NULL, NULL),
+	('977dd986-7f54-4985-8eca-88a7d422a90c', 'front.home', 'route::home', '_self', 'menu', '', 1, 10, NULL, NULL),
+	('977dd986-7f5b-4e22-bedb-49f0546b65d7', 'front.shop', 'route::shop', '_self', 'menu', '', 1, 20, NULL, NULL),
+	('977dd986-7f5f-4261-a4de-a38364ef7dfc', 'front.blog', 'route::news', '_self', 'menu', '', 1, 30, NULL, NULL),
+	('977dd986-7f63-43bf-8a2f-ff8ac2dc32c1', 'front.contact', 'route::contact', '_self', 'menu', '', 1, 40, NULL, NULL),
+	('977dd986-7f67-4151-98bc-0b0d7ca541cc', 'front.my_profile', 'route::login', '_self', 'footer', '', 1, 60, NULL, NULL),
+	('977dd986-7f6c-43b8-a709-00713776b70c', 'front.compare_page', 'route::compare', '_self', 'footer', '', 1, 70, NULL, NULL),
+	('977dd986-7f6f-4119-ac00-dfe5c7721c8c', 'front.wishlist_page', 'route::wishlist', '_self', 'footer', '', 1, 80, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_link` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_link_group
@@ -4176,14 +4178,14 @@ CREATE TABLE IF NOT EXISTS `sc_shop_link_store` (
 DELETE FROM `sc_shop_link_store`;
 /*!40000 ALTER TABLE `sc_shop_link_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_link_store` (`link_id`, `store_id`) VALUES
-	('972f4462-0514-4901-9399-3385b765c28e', '1'),
-	('972f4462-1ec3-437c-a2ad-01f004cbbfac', '1'),
-	('972f4462-1ecc-42df-bbc8-a25088d450ed', '1'),
-	('972f4462-1ed0-4a12-96e6-1eae664b2002', '1'),
-	('972f4462-1ed4-4864-93ed-2ad927635e76', '1'),
-	('972f4462-1ed9-49a9-9182-6d4da4f7baf1', '1'),
-	('972f4462-1edc-428d-965c-caed98e8b2ab', '1'),
-	('972f4462-1ee0-4489-bb27-19bfc9ce80e8', '1');
+	('977dd986-4a5f-4131-99d5-67ae5506fc4a', '1'),
+	('977dd986-7f54-4985-8eca-88a7d422a90c', '1'),
+	('977dd986-7f5b-4e22-bedb-49f0546b65d7', '1'),
+	('977dd986-7f5f-4261-a4de-a38364ef7dfc', '1'),
+	('977dd986-7f63-43bf-8a2f-ff8ac2dc32c1', '1'),
+	('977dd986-7f67-4151-98bc-0b0d7ca541cc', '1'),
+	('977dd986-7f6c-43b8-a709-00713776b70c', '1'),
+	('977dd986-7f6f-4119-ac00-dfe5c7721c8c', '1');
 /*!40000 ALTER TABLE `sc_shop_link_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news
@@ -4204,12 +4206,12 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news` (
 DELETE FROM `sc_shop_news`;
 /*!40000 ALTER TABLE `sc_shop_news` DISABLE KEYS */;
 INSERT INTO `sc_shop_news` (`id`, `image`, `alias`, `sort`, `status`, `created_at`, `updated_at`) VALUES
-	('972f4463-0ac0-48c9-9622-db274e695e81', '/data/content/blog-1.jpg', 'demo-scart-blog-1', 0, 1, '2022-09-04 18:57:45', NULL),
-	('972f4463-0bcd-42d5-98d2-a2092b0b5439', '/data/content/blog-2.jpg', 'demo-scart-blog-2', 0, 1, '2022-09-04 18:57:45', NULL),
-	('972f4463-0bd2-40d3-890e-3af4a9038771', '/data/content/blog-3.jpg', 'demo-scart-blog-3', 0, 1, '2022-09-04 18:57:45', NULL),
-	('972f4463-0bd8-4696-b13f-7c8ea1d11ebb', '/data/content/blog-4.jpg', 'demo-scart-blog-4', 0, 1, '2022-09-04 18:57:45', NULL),
-	('972f4463-0bdd-4374-a4c1-d5db63fe6f38', '/data/content/blog-5.jpg', 'demo-scart-blog-5', 0, 1, '2022-09-04 18:57:45', NULL),
-	('972f4463-0be2-46c9-a1e6-0c0cd8b13775', '/data/content/blog-6.jpg', 'demo-scart-blog-6', 0, 1, '2022-09-04 18:57:45', NULL);
+	('977dd987-6f14-41ae-81ef-966f8faf5d2b', '/data/content/blog-1.jpg', 'demo-scart-blog-1', 0, 1, '2022-10-13 20:29:22', NULL),
+	('977dd987-700e-4c3b-a382-eb6c3195da2f', '/data/content/blog-2.jpg', 'demo-scart-blog-2', 0, 1, '2022-10-13 20:29:22', NULL),
+	('977dd987-7014-452c-bb57-817f952a5ed3', '/data/content/blog-3.jpg', 'demo-scart-blog-3', 0, 1, '2022-10-13 20:29:22', NULL),
+	('977dd987-7019-48ed-bb45-b62af68efe70', '/data/content/blog-4.jpg', 'demo-scart-blog-4', 0, 1, '2022-10-13 20:29:22', NULL),
+	('977dd987-701d-4d03-934b-518846fa0d0a', '/data/content/blog-5.jpg', 'demo-scart-blog-5', 0, 1, '2022-10-13 20:29:22', NULL),
+	('977dd987-7021-44be-8c9c-4ae8bb54c12f', '/data/content/blog-6.jpg', 'demo-scart-blog-6', 0, 1, '2022-10-13 20:29:22', NULL);
 /*!40000 ALTER TABLE `sc_shop_news` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_description
@@ -4228,18 +4230,18 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news_description` (
 DELETE FROM `sc_shop_news_description`;
 /*!40000 ALTER TABLE `sc_shop_news_description` DISABLE KEYS */;
 INSERT INTO `sc_shop_news_description` (`news_id`, `lang`, `title`, `keyword`, `description`, `content`) VALUES
-	('972f4463-0ac0-48c9-9622-db274e695e81', 'en', 'Easy Polo Black Edition 1', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0ac0-48c9-9622-db274e695e81', 'vi', 'Easy Polo Black Edition 1', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0bcd-42d5-98d2-a2092b0b5439', 'en', 'Easy Polo Black Edition 2', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0bcd-42d5-98d2-a2092b0b5439', 'vi', 'Easy Polo Black Edition 2', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0bd2-40d3-890e-3af4a9038771', 'en', 'Easy Polo Black Edition 3', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0bd2-40d3-890e-3af4a9038771', 'vi', 'Easy Polo Black Edition 3', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0bd8-4696-b13f-7c8ea1d11ebb', 'en', 'Easy Polo Black Edition 4', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0bd8-4696-b13f-7c8ea1d11ebb', 'vi', 'Easy Polo Black Edition 4', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0bdd-4374-a4c1-d5db63fe6f38', 'en', 'Easy Polo Black Edition 5', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0bdd-4374-a4c1-d5db63fe6f38', 'vi', 'Easy Polo Black Edition 5', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0be2-46c9-a1e6-0c0cd8b13775', 'en', 'Easy Polo Black Edition 6', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-0be2-46c9-a1e6-0c0cd8b13775', 'vi', 'Easy Polo Black Edition 6', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
+	('977dd987-6f14-41ae-81ef-966f8faf5d2b', 'en', 'Easy Polo Black Edition 1', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-6f14-41ae-81ef-966f8faf5d2b', 'vi', 'Easy Polo Black Edition 1', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-700e-4c3b-a382-eb6c3195da2f', 'en', 'Easy Polo Black Edition 2', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-700e-4c3b-a382-eb6c3195da2f', 'vi', 'Easy Polo Black Edition 2', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-7014-452c-bb57-817f952a5ed3', 'en', 'Easy Polo Black Edition 3', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-7014-452c-bb57-817f952a5ed3', 'vi', 'Easy Polo Black Edition 3', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-7019-48ed-bb45-b62af68efe70', 'en', 'Easy Polo Black Edition 4', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-7019-48ed-bb45-b62af68efe70', 'vi', 'Easy Polo Black Edition 4', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-701d-4d03-934b-518846fa0d0a', 'en', 'Easy Polo Black Edition 5', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-701d-4d03-934b-518846fa0d0a', 'vi', 'Easy Polo Black Edition 5', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-7021-44be-8c9c-4ae8bb54c12f', 'en', 'Easy Polo Black Edition 6', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-7021-44be-8c9c-4ae8bb54c12f', 'vi', 'Easy Polo Black Edition 6', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
 /*!40000 ALTER TABLE `sc_shop_news_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_store
@@ -4254,12 +4256,12 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news_store` (
 DELETE FROM `sc_shop_news_store`;
 /*!40000 ALTER TABLE `sc_shop_news_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_news_store` (`news_id`, `store_id`) VALUES
-	('972f4463-0ac0-48c9-9622-db274e695e81', '1'),
-	('972f4463-0bcd-42d5-98d2-a2092b0b5439', '1'),
-	('972f4463-0bd2-40d3-890e-3af4a9038771', '1'),
-	('972f4463-0bd8-4696-b13f-7c8ea1d11ebb', '1'),
-	('972f4463-0bdd-4374-a4c1-d5db63fe6f38', '1'),
-	('972f4463-0be2-46c9-a1e6-0c0cd8b13775', '1');
+	('977dd987-6f14-41ae-81ef-966f8faf5d2b', '1'),
+	('977dd987-700e-4c3b-a382-eb6c3195da2f', '1'),
+	('977dd987-7014-452c-bb57-817f952a5ed3', '1'),
+	('977dd987-7019-48ed-bb45-b62af68efe70', '1'),
+	('977dd987-701d-4d03-934b-518846fa0d0a', '1'),
+	('977dd987-7021-44be-8c9c-4ae8bb54c12f', '1');
 /*!40000 ALTER TABLE `sc_shop_news_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order
@@ -4418,7 +4420,7 @@ CREATE TABLE IF NOT EXISTS `sc_shop_page` (
 DELETE FROM `sc_shop_page`;
 /*!40000 ALTER TABLE `sc_shop_page` DISABLE KEYS */;
 INSERT INTO `sc_shop_page` (`id`, `image`, `alias`, `status`, `created_at`, `updated_at`) VALUES
-	('972f4462-0e4f-4b77-b814-fd5a459ceb07', '', 'about', 1, NULL, NULL);
+	('977dd986-66c5-4058-a599-77216c3f1411', '', 'about', 1, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_page` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_page_description
@@ -4438,8 +4440,8 @@ CREATE TABLE IF NOT EXISTS `sc_shop_page_description` (
 DELETE FROM `sc_shop_page_description`;
 /*!40000 ALTER TABLE `sc_shop_page_description` DISABLE KEYS */;
 INSERT INTO `sc_shop_page_description` (`page_id`, `lang`, `title`, `keyword`, `description`, `content`) VALUES
-	('972f4462-0e4f-4b77-b814-fd5a459ceb07', 'en', 'About', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4462-0e4f-4b77-b814-fd5a459ceb07', 'vi', 'Giới thiệu', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
+	('977dd986-66c5-4058-a599-77216c3f1411', 'en', 'About', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd986-66c5-4058-a599-77216c3f1411', 'vi', 'Giới thiệu', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-2.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
 /*!40000 ALTER TABLE `sc_shop_page_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_page_store
@@ -4454,7 +4456,7 @@ CREATE TABLE IF NOT EXISTS `sc_shop_page_store` (
 DELETE FROM `sc_shop_page_store`;
 /*!40000 ALTER TABLE `sc_shop_page_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_page_store` (`page_id`, `store_id`) VALUES
-	('972f4462-0e4f-4b77-b814-fd5a459ceb07', '1');
+	('977dd986-66c5-4058-a599-77216c3f1411', '1');
 /*!40000 ALTER TABLE `sc_shop_page_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_password_resets
@@ -4543,30 +4545,30 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product` (
 DELETE FROM `sc_shop_product`;
 /*!40000 ALTER TABLE `sc_shop_product` DISABLE KEYS */;
 INSERT INTO `sc_shop_product` (`id`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `image`, `brand_id`, `supplier_id`, `price`, `cost`, `stock`, `sold`, `minimum`, `weight_class`, `weight`, `length_class`, `length`, `width`, `height`, `kind`, `property`, `tax_id`, `status`, `approve`, `sort`, `view`, `alias`, `date_lastview`, `date_available`, `created_at`, `updated_at`) VALUES
-	('972f4463-2131-402d-bbd9-8e6dda28b8ff', 'PHO-BO', NULL, NULL, NULL, NULL, NULL, '/data/product/product-1.png', '972f4463-1bf0-44ef-9cd0-8550de4d10f0', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'pho-bo', NULL, NULL, NULL, NULL),
-	('972f4463-2138-419b-b2fc-8dfec9e0f158', 'NEM-NUONG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-2.png', '972f4463-1bf0-44ef-9cd0-8550de4d10f0', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nem-nuong', NULL, NULL, NULL, NULL),
-	('972f4463-213d-4f33-ae96-35c6827f3138', 'BANH-GAI', NULL, NULL, NULL, NULL, NULL, '/data/product/product-3.png', '972f4463-1c1a-4675-a08e-31491a550805', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'banh-gai', NULL, NULL, NULL, NULL),
-	('972f4463-2141-485c-9cd1-bd041062c2f2', 'BUN-HUE', NULL, NULL, NULL, NULL, NULL, '/data/product/product-4.png', '972f4463-1c14-471b-92f3-33c336f0d17d', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'bun-hue', NULL, NULL, NULL, NULL),
-	('972f4463-2145-4a0b-a7ac-e7db7ea48ec6', 'BANH-TRANG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-5.png', '972f4463-1c06-49b1-8de6-d370beee2dc5', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'banh-trang', NULL, NULL, NULL, NULL),
-	('972f4463-2149-47ef-90b1-8b45fc2a5f22', 'MUOI-TAY-NINH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-6.png', '972f4463-1be5-4b46-a347-c46817bac42e', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'muoi-tay-ninh', NULL, NULL, NULL, NULL),
-	('972f4463-214d-471d-8a13-f35b1e5e1706', 'NHAN-LONG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-7.png', '972f4463-1bf0-44ef-9cd0-8550de4d10f0', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nhan-long', NULL, NULL, NULL, NULL),
-	('972f4463-2151-406e-8d6e-8eeae57b30af', 'SAU-RIENG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-8.png', '972f4463-1c06-49b1-8de6-d370beee2dc5', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'sau-rieng', NULL, NULL, NULL, NULL),
-	('972f4463-2155-4a13-9ff9-d5e635e0ba7e', 'BIA-SAIGON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-9.png', '972f4463-1c00-43dd-be51-1d1982a3b866', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'bia-saigon', NULL, NULL, NULL, NULL),
-	('972f4463-2159-4df9-a463-5c59a39109fb', 'BIA-HANOI', NULL, NULL, NULL, NULL, NULL, '/data/product/product-10.png', '972f4463-1c14-471b-92f3-33c336f0d17d', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'bia-hanoi', NULL, NULL, NULL, NULL),
-	('972f4463-215d-466f-9286-0a9d10be598f', 'NUOC-MAM', NULL, NULL, NULL, NULL, NULL, '/data/product/product-11.png', '972f4463-1bf0-44ef-9cd0-8550de4d10f0', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nuoc-mam', NULL, NULL, NULL, NULL),
-	('972f4463-2161-4f3c-a6e1-a93ae54c93f5', 'BANH-MYCAY', NULL, NULL, NULL, NULL, NULL, '/data/product/product-12.png', '972f4463-1c1a-4675-a08e-31491a550805', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'banh-mycay', NULL, NULL, NULL, NULL),
-	('972f4463-2164-406a-a443-6074ad365196', 'HU-TIEU', NULL, NULL, NULL, NULL, NULL, '/data/product/product-13.png', '972f4463-1bfa-4a10-ba73-6e52d0dd0903', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'hu-tieu', NULL, NULL, NULL, NULL),
-	('972f4463-2168-482c-b61d-0e0651861c43', 'CANH-CHUA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-14.png', '972f4463-1c00-43dd-be51-1d1982a3b866', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'canh-chua', NULL, NULL, NULL, NULL),
-	('972f4463-216c-423a-86f6-c908c45d597c', 'MANG-CUT', NULL, NULL, NULL, NULL, NULL, '/data/product/product-15.png', '972f4463-1c14-471b-92f3-33c336f0d17d', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'mang-cut', NULL, NULL, NULL, NULL),
-	('972f4463-2170-4734-803b-e82766fb475b', 'CAM-VINH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-16.png', '972f4463-1c00-43dd-be51-1d1982a3b866', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cam-vinh', NULL, NULL, NULL, NULL),
-	('972f4463-2174-4f1f-b95a-f18a77168ea6', 'VAI-THIEU', NULL, NULL, NULL, NULL, NULL, '/data/product/product-17.png', '972f4463-1be5-4b46-a347-c46817bac42e', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'vai-thieu', NULL, NULL, NULL, NULL),
-	('972f4463-2178-4426-9d6a-ebc38fb2536a', 'NON-LA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-18.png', '972f4463-1bfa-4a10-ba73-6e52d0dd0903', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'non-la', NULL, NULL, NULL, NULL),
-	('972f4463-217b-4386-bc0f-996b9d7cf893', 'AO-DAI', NULL, NULL, NULL, NULL, NULL, '/data/product/product-19.png', '972f4463-1c0d-414d-bef6-8b37aceb981b', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'ao-dai', NULL, NULL, NULL, NULL),
-	('972f4463-217f-4421-973e-77e105d32db5', 'XOAI-CAT', NULL, NULL, NULL, NULL, NULL, '/data/product/product-20.png', '972f4463-1c00-43dd-be51-1d1982a3b866', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'xoai-cat', NULL, NULL, NULL, NULL),
-	('972f4463-2183-42f3-b183-aeabf6425454', 'COM-NIU', NULL, NULL, NULL, NULL, NULL, '/data/product/product-21.png', '972f4463-1bf5-4dd9-b57b-e6b9f260fb67', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'com-niu', NULL, NULL, NULL, NULL),
-	('972f4463-2187-444e-92c8-becaced0d514', 'NHAN-LONG-HUNG-YEN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-22.png', '972f4463-1bf0-44ef-9cd0-8550de4d10f0', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nhan-long-hung-yen', NULL, NULL, NULL, NULL),
-	('972f4463-218b-4b8b-bb0e-0d585141e935', 'VAI-THIEU-LUC-NGAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-23.png', '972f4463-1c0d-414d-bef6-8b37aceb981b', '972f4463-19f2-4b2f-bdf8-532ade0a33cf', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'vai-thieu-luc-ngan', NULL, NULL, NULL, NULL),
-	('972f4463-218f-4290-bea9-c65487c34c27', 'NEM-CHUA-THANH-HOA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-24.png', '972f4463-1c00-43dd-be51-1d1982a3b866', '972f4463-19ea-4ca1-ad58-c9a80d1e5146', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nem-chua-thanh-hoa', NULL, NULL, NULL, NULL);
+	('977dd987-866b-486d-bb60-65f9e14b1269', 'PHO-BO', NULL, NULL, NULL, NULL, NULL, '/data/product/product-1.png', '977dd987-8251-4752-9ca7-a1081ba52f99', '977dd987-8098-4a84-8949-1db6ca5f905c', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'pho-bo', NULL, NULL, NULL, NULL),
+	('977dd987-8673-4082-bc8d-efdf2b123bc6', 'NEM-NUONG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-2.png', '977dd987-8274-4796-a3ec-dbd3d6982e27', '977dd987-8098-4a84-8949-1db6ca5f905c', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nem-nuong', NULL, NULL, NULL, NULL),
+	('977dd987-8678-4d5f-92f4-6d0dc7861bf2', 'BANH-GAI', NULL, NULL, NULL, NULL, NULL, '/data/product/product-3.png', '977dd987-8251-4752-9ca7-a1081ba52f99', '977dd987-808f-4338-b021-213e8eacd42e', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'banh-gai', NULL, NULL, NULL, NULL),
+	('977dd987-867c-4122-89d8-3a89ded8c44a', 'BUN-HUE', NULL, NULL, NULL, NULL, NULL, '/data/product/product-4.png', '977dd987-8268-400c-9194-797996f0ded3', '977dd987-808f-4338-b021-213e8eacd42e', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'bun-hue', NULL, NULL, NULL, NULL),
+	('977dd987-8680-410a-923a-4731aeb4532d', 'BANH-TRANG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-5.png', '977dd987-8274-4796-a3ec-dbd3d6982e27', '977dd987-8098-4a84-8949-1db6ca5f905c', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'banh-trang', NULL, NULL, NULL, NULL),
+	('977dd987-8684-47af-890d-045deb86aafe', 'MUOI-TAY-NINH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-6.png', '977dd987-8251-4752-9ca7-a1081ba52f99', '977dd987-8098-4a84-8949-1db6ca5f905c', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'muoi-tay-ninh', NULL, NULL, NULL, NULL),
+	('977dd987-8688-4708-bc23-38fd28ba8ea5', 'NHAN-LONG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-7.png', '977dd987-8258-44b0-9712-51588937d863', '977dd987-808f-4338-b021-213e8eacd42e', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nhan-long', NULL, NULL, NULL, NULL),
+	('977dd987-868c-455a-84db-6ccb596e9514', 'SAU-RIENG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-8.png', '977dd987-825c-4591-8221-756ec19ffd7f', '977dd987-8098-4a84-8949-1db6ca5f905c', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'sau-rieng', NULL, NULL, NULL, NULL),
+	('977dd987-8690-4339-b9ea-9064b6168670', 'BIA-SAIGON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-9.png', '977dd987-8268-400c-9194-797996f0ded3', '977dd987-8098-4a84-8949-1db6ca5f905c', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'bia-saigon', NULL, NULL, NULL, NULL),
+	('977dd987-8694-459c-bdfa-a3946141956f', 'BIA-HANOI', NULL, NULL, NULL, NULL, NULL, '/data/product/product-10.png', '977dd987-826c-47f3-b95f-44f7219277bf', '977dd987-808f-4338-b021-213e8eacd42e', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'bia-hanoi', NULL, NULL, NULL, NULL),
+	('977dd987-8697-4184-b8f3-4d633d08868a', 'NUOC-MAM', NULL, NULL, NULL, NULL, NULL, '/data/product/product-11.png', '977dd987-8258-44b0-9712-51588937d863', '977dd987-8098-4a84-8949-1db6ca5f905c', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nuoc-mam', NULL, NULL, NULL, NULL),
+	('977dd987-869c-47fd-9bfa-c8c54330971c', 'BANH-MYCAY', NULL, NULL, NULL, NULL, NULL, '/data/product/product-12.png', '977dd987-8268-400c-9194-797996f0ded3', '977dd987-808f-4338-b021-213e8eacd42e', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'banh-mycay', NULL, NULL, NULL, NULL),
+	('977dd987-869f-481d-81a8-84f76849367c', 'HU-TIEU', NULL, NULL, NULL, NULL, NULL, '/data/product/product-13.png', '977dd987-8274-4796-a3ec-dbd3d6982e27', '977dd987-808f-4338-b021-213e8eacd42e', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'hu-tieu', NULL, NULL, NULL, NULL),
+	('977dd987-86a3-4fcf-b2ef-2042a3a1f855', 'CANH-CHUA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-14.png', '977dd987-8258-44b0-9712-51588937d863', '977dd987-808f-4338-b021-213e8eacd42e', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'canh-chua', NULL, NULL, NULL, NULL),
+	('977dd987-86a7-4925-bcb6-3ea69d33de21', 'MANG-CUT', NULL, NULL, NULL, NULL, NULL, '/data/product/product-15.png', '977dd987-8260-4530-a8ec-f7accfd98eb7', '977dd987-8098-4a84-8949-1db6ca5f905c', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'mang-cut', NULL, NULL, NULL, NULL),
+	('977dd987-86ab-430d-b53a-e6d2e4198137', 'CAM-VINH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-16.png', '977dd987-8268-400c-9194-797996f0ded3', '977dd987-8098-4a84-8949-1db6ca5f905c', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cam-vinh', NULL, NULL, NULL, NULL),
+	('977dd987-86af-4d94-a2be-e1221a4f58b0', 'VAI-THIEU', NULL, NULL, NULL, NULL, NULL, '/data/product/product-17.png', '977dd987-8264-4a00-b3d8-224a12477434', '977dd987-808f-4338-b021-213e8eacd42e', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'vai-thieu', NULL, NULL, NULL, NULL),
+	('977dd987-86b2-4d8f-acfe-1c0ed0fff7a2', 'NON-LA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-18.png', '977dd987-8260-4530-a8ec-f7accfd98eb7', '977dd987-8098-4a84-8949-1db6ca5f905c', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'non-la', NULL, NULL, NULL, NULL),
+	('977dd987-86b6-431c-bd61-5ec1b3b57f77', 'AO-DAI', NULL, NULL, NULL, NULL, NULL, '/data/product/product-19.png', '977dd987-8264-4a00-b3d8-224a12477434', '977dd987-8098-4a84-8949-1db6ca5f905c', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'ao-dai', NULL, NULL, NULL, NULL),
+	('977dd987-86ba-4581-b7cd-a4459d946eea', 'XOAI-CAT', NULL, NULL, NULL, NULL, NULL, '/data/product/product-20.png', '977dd987-8270-405d-9842-c7e481d78988', '977dd987-8098-4a84-8949-1db6ca5f905c', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'xoai-cat', NULL, NULL, NULL, NULL),
+	('977dd987-86be-4874-9e0a-a2dd5ab81358', 'COM-NIU', NULL, NULL, NULL, NULL, NULL, '/data/product/product-21.png', '977dd987-8251-4752-9ca7-a1081ba52f99', '977dd987-808f-4338-b021-213e8eacd42e', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'com-niu', NULL, NULL, NULL, NULL),
+	('977dd987-86c2-40ee-bdd0-5cf6c6f52264', 'NHAN-LONG-HUNG-YEN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-22.png', '977dd987-8258-44b0-9712-51588937d863', '977dd987-808f-4338-b021-213e8eacd42e', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nhan-long-hung-yen', NULL, NULL, NULL, NULL),
+	('977dd987-86c6-4f9f-8d7e-12693f0da2fc', 'VAI-THIEU-LUC-NGAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-23.png', '977dd987-8270-405d-9842-c7e481d78988', '977dd987-8098-4a84-8949-1db6ca5f905c', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'vai-thieu-luc-ngan', NULL, NULL, NULL, NULL),
+	('977dd987-86ca-41a3-8ead-bb605078392d', 'NEM-CHUA-THANH-HOA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-24.png', '977dd987-8264-4a00-b3d8-224a12477434', '977dd987-8098-4a84-8949-1db6ca5f905c', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nem-chua-thanh-hoa', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_product` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_attribute
@@ -4587,14 +4589,14 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_attribute` (
 DELETE FROM `sc_shop_product_attribute`;
 /*!40000 ALTER TABLE `sc_shop_product_attribute` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_attribute` (`id`, `name`, `attribute_group_id`, `product_id`, `add_price`, `sort`, `status`) VALUES
-	(1, 'Blue', 1, '972f4463-218f-4290-bea9-c65487c34c27', 5.00, 0, 1),
-	(2, 'White', 1, '972f4463-218f-4290-bea9-c65487c34c27', 0.00, 0, 1),
-	(3, 'S', 2, '972f4463-218f-4290-bea9-c65487c34c27', 2.00, 0, 1),
-	(4, 'XL', 2, '972f4463-218f-4290-bea9-c65487c34c27', 3.00, 0, 1),
-	(5, 'Blue', 1, '972f4463-2161-4f3c-a6e1-a93ae54c93f5', 10.00, 0, 1),
-	(6, 'Red', 1, '972f4463-2161-4f3c-a6e1-a93ae54c93f5', 0.00, 0, 1),
-	(7, 'S', 2, '972f4463-2161-4f3c-a6e1-a93ae54c93f5', 0.00, 0, 1),
-	(8, 'M', 2, '972f4463-2161-4f3c-a6e1-a93ae54c93f5', 0.00, 0, 1);
+	(1, 'Blue', 1, '977dd987-86ca-41a3-8ead-bb605078392d', 5.00, 0, 1),
+	(2, 'White', 1, '977dd987-86ca-41a3-8ead-bb605078392d', 0.00, 0, 1),
+	(3, 'S', 2, '977dd987-86ca-41a3-8ead-bb605078392d', 2.00, 0, 1),
+	(4, 'XL', 2, '977dd987-86ca-41a3-8ead-bb605078392d', 3.00, 0, 1),
+	(5, 'Blue', 1, '977dd987-869c-47fd-9bfa-c8c54330971c', 10.00, 0, 1),
+	(6, 'Red', 1, '977dd987-869c-47fd-9bfa-c8c54330971c', 0.00, 0, 1),
+	(7, 'S', 2, '977dd987-869c-47fd-9bfa-c8c54330971c', 0.00, 0, 1),
+	(8, 'M', 2, '977dd987-869c-47fd-9bfa-c8c54330971c', 0.00, 0, 1);
 /*!40000 ALTER TABLE `sc_shop_product_attribute` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_build
@@ -4610,14 +4612,14 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_build` (
 DELETE FROM `sc_shop_product_build`;
 /*!40000 ALTER TABLE `sc_shop_product_build` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_build` (`build_id`, `product_id`, `quantity`) VALUES
-	('972f4463-2145-4a0b-a7ac-e7db7ea48ec6', '972f4463-213d-4f33-ae96-35c6827f3138', 1),
-	('972f4463-2145-4a0b-a7ac-e7db7ea48ec6', '972f4463-214d-471d-8a13-f35b1e5e1706', 2),
-	('972f4463-2159-4df9-a463-5c59a39109fb', '972f4463-2164-406a-a443-6074ad365196', 1),
-	('972f4463-2159-4df9-a463-5c59a39109fb', '972f4463-2174-4f1f-b95a-f18a77168ea6', 2),
-	('972f4463-216c-423a-86f6-c908c45d597c', '972f4463-2168-482c-b61d-0e0651861c43', 2),
-	('972f4463-216c-423a-86f6-c908c45d597c', '972f4463-2170-4734-803b-e82766fb475b', 1),
-	('972f4463-217f-4421-973e-77e105d32db5', '972f4463-213d-4f33-ae96-35c6827f3138', 2),
-	('972f4463-217f-4421-973e-77e105d32db5', '972f4463-2164-406a-a443-6074ad365196', 2);
+	('977dd987-8680-410a-923a-4731aeb4532d', '977dd987-8678-4d5f-92f4-6d0dc7861bf2', 1),
+	('977dd987-8680-410a-923a-4731aeb4532d', '977dd987-8688-4708-bc23-38fd28ba8ea5', 2),
+	('977dd987-8694-459c-bdfa-a3946141956f', '977dd987-869f-481d-81a8-84f76849367c', 1),
+	('977dd987-8694-459c-bdfa-a3946141956f', '977dd987-86af-4d94-a2be-e1221a4f58b0', 2),
+	('977dd987-86a7-4925-bcb6-3ea69d33de21', '977dd987-86a3-4fcf-b2ef-2042a3a1f855', 2),
+	('977dd987-86a7-4925-bcb6-3ea69d33de21', '977dd987-86ab-430d-b53a-e6d2e4198137', 1),
+	('977dd987-86ba-4581-b7cd-a4459d946eea', '977dd987-8678-4d5f-92f4-6d0dc7861bf2', 2),
+	('977dd987-86ba-4581-b7cd-a4459d946eea', '977dd987-869f-481d-81a8-84f76849367c', 2);
 /*!40000 ALTER TABLE `sc_shop_product_build` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_category
@@ -4632,32 +4634,32 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_category` (
 DELETE FROM `sc_shop_product_category`;
 /*!40000 ALTER TABLE `sc_shop_product_category` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_category` (`product_id`, `category_id`) VALUES
-	('972f4463-2131-402d-bbd9-8e6dda28b8ff', '972f4463-15e4-4bf7-aa36-73f8d7f746ac'),
-	('972f4463-2131-402d-bbd9-8e6dda28b8ff', '972f4463-15f3-4c42-b52c-45706f6254c6'),
-	('972f4463-2131-402d-bbd9-8e6dda28b8ff', '972f4463-15ff-4e30-b95a-84c8a107cdd9'),
-	('972f4463-2138-419b-b2fc-8dfec9e0f158', '972f4463-15ff-4e30-b95a-84c8a107cdd9'),
-	('972f4463-213d-4f33-ae96-35c6827f3138', '972f4463-15f7-41be-bd47-2f3eb347a2fa'),
-	('972f4463-2141-485c-9cd1-bd041062c2f2', '972f4463-15f7-41be-bd47-2f3eb347a2fa'),
-	('972f4463-2145-4a0b-a7ac-e7db7ea48ec6', '972f4463-15f7-41be-bd47-2f3eb347a2fa'),
-	('972f4463-2149-47ef-90b1-8b45fc2a5f22', '972f4463-15f7-41be-bd47-2f3eb347a2fa'),
-	('972f4463-214d-471d-8a13-f35b1e5e1706', '972f4463-15fb-44d1-9974-fa4edea7291c'),
-	('972f4463-2151-406e-8d6e-8eeae57b30af', '972f4463-15f3-4c42-b52c-45706f6254c6'),
-	('972f4463-2155-4a13-9ff9-d5e635e0ba7e', '972f4463-15e4-4bf7-aa36-73f8d7f746ac'),
-	('972f4463-2159-4df9-a463-5c59a39109fb', '972f4463-15f7-41be-bd47-2f3eb347a2fa'),
-	('972f4463-215d-466f-9286-0a9d10be598f', '972f4463-15f3-4c42-b52c-45706f6254c6'),
-	('972f4463-2161-4f3c-a6e1-a93ae54c93f5', '972f4463-15f0-492a-828a-6f63ba40f4df'),
-	('972f4463-2164-406a-a443-6074ad365196', '972f4463-15e0-4707-8544-b51b6f39af26'),
-	('972f4463-2168-482c-b61d-0e0651861c43', '972f4463-15f7-41be-bd47-2f3eb347a2fa'),
-	('972f4463-216c-423a-86f6-c908c45d597c', '972f4463-15e4-4bf7-aa36-73f8d7f746ac'),
-	('972f4463-2170-4734-803b-e82766fb475b', '972f4463-15f0-492a-828a-6f63ba40f4df'),
-	('972f4463-2174-4f1f-b95a-f18a77168ea6', '972f4463-15f0-492a-828a-6f63ba40f4df'),
-	('972f4463-2178-4426-9d6a-ebc38fb2536a', '972f4463-15f0-492a-828a-6f63ba40f4df'),
-	('972f4463-217b-4386-bc0f-996b9d7cf893', '972f4463-15e4-4bf7-aa36-73f8d7f746ac'),
-	('972f4463-217f-4421-973e-77e105d32db5', '972f4463-15f7-41be-bd47-2f3eb347a2fa'),
-	('972f4463-2183-42f3-b183-aeabf6425454', '972f4463-15f3-4c42-b52c-45706f6254c6'),
-	('972f4463-2187-444e-92c8-becaced0d514', '972f4463-15f3-4c42-b52c-45706f6254c6'),
-	('972f4463-218b-4b8b-bb0e-0d585141e935', '972f4463-15fb-44d1-9974-fa4edea7291c'),
-	('972f4463-218f-4290-bea9-c65487c34c27', '972f4463-15f0-492a-828a-6f63ba40f4df');
+	('977dd987-866b-486d-bb60-65f9e14b1269', '977dd987-7cf0-4ee9-95a8-475d261c6c0d'),
+	('977dd987-866b-486d-bb60-65f9e14b1269', '977dd987-7d00-469c-a500-f9cfadeec4fd'),
+	('977dd987-866b-486d-bb60-65f9e14b1269', '977dd987-7d0c-4fe9-baf4-9f54cebfab6e'),
+	('977dd987-8673-4082-bc8d-efdf2b123bc6', '977dd987-7d0c-4fe9-baf4-9f54cebfab6e'),
+	('977dd987-8678-4d5f-92f4-6d0dc7861bf2', '977dd987-7d03-4ca1-8591-6c3ab183a4cd'),
+	('977dd987-867c-4122-89d8-3a89ded8c44a', '977dd987-7d03-4ca1-8591-6c3ab183a4cd'),
+	('977dd987-8680-410a-923a-4731aeb4532d', '977dd987-7d03-4ca1-8591-6c3ab183a4cd'),
+	('977dd987-8684-47af-890d-045deb86aafe', '977dd987-7d03-4ca1-8591-6c3ab183a4cd'),
+	('977dd987-8688-4708-bc23-38fd28ba8ea5', '977dd987-7d08-4d15-8715-3a5d5f28796c'),
+	('977dd987-868c-455a-84db-6ccb596e9514', '977dd987-7d00-469c-a500-f9cfadeec4fd'),
+	('977dd987-8690-4339-b9ea-9064b6168670', '977dd987-7cf0-4ee9-95a8-475d261c6c0d'),
+	('977dd987-8694-459c-bdfa-a3946141956f', '977dd987-7d03-4ca1-8591-6c3ab183a4cd'),
+	('977dd987-8697-4184-b8f3-4d633d08868a', '977dd987-7d00-469c-a500-f9cfadeec4fd'),
+	('977dd987-869c-47fd-9bfa-c8c54330971c', '977dd987-7cfc-4a0a-81c1-c773e5b094ec'),
+	('977dd987-869f-481d-81a8-84f76849367c', '977dd987-7cec-4b91-bf54-d3d81a7a27df'),
+	('977dd987-86a3-4fcf-b2ef-2042a3a1f855', '977dd987-7d03-4ca1-8591-6c3ab183a4cd'),
+	('977dd987-86a7-4925-bcb6-3ea69d33de21', '977dd987-7cf0-4ee9-95a8-475d261c6c0d'),
+	('977dd987-86ab-430d-b53a-e6d2e4198137', '977dd987-7cfc-4a0a-81c1-c773e5b094ec'),
+	('977dd987-86af-4d94-a2be-e1221a4f58b0', '977dd987-7cfc-4a0a-81c1-c773e5b094ec'),
+	('977dd987-86b2-4d8f-acfe-1c0ed0fff7a2', '977dd987-7cfc-4a0a-81c1-c773e5b094ec'),
+	('977dd987-86b6-431c-bd61-5ec1b3b57f77', '977dd987-7cf0-4ee9-95a8-475d261c6c0d'),
+	('977dd987-86ba-4581-b7cd-a4459d946eea', '977dd987-7d03-4ca1-8591-6c3ab183a4cd'),
+	('977dd987-86be-4874-9e0a-a2dd5ab81358', '977dd987-7d00-469c-a500-f9cfadeec4fd'),
+	('977dd987-86c2-40ee-bdd0-5cf6c6f52264', '977dd987-7d00-469c-a500-f9cfadeec4fd'),
+	('977dd987-86c6-4f9f-8d7e-12693f0da2fc', '977dd987-7d08-4d15-8715-3a5d5f28796c'),
+	('977dd987-86ca-41a3-8ead-bb605078392d', '977dd987-7cfc-4a0a-81c1-c773e5b094ec');
 /*!40000 ALTER TABLE `sc_shop_product_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_description
@@ -4677,54 +4679,54 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_description` (
 DELETE FROM `sc_shop_product_description`;
 /*!40000 ALTER TABLE `sc_shop_product_description` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_description` (`product_id`, `lang`, `name`, `keyword`, `description`, `content`) VALUES
-	('972f4463-2131-402d-bbd9-8e6dda28b8ff', 'en', 'Pho Bo', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2131-402d-bbd9-8e6dda28b8ff', 'vi', 'Pho Bo', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2138-419b-b2fc-8dfec9e0f158', 'en', 'Nem Nuong', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2138-419b-b2fc-8dfec9e0f158', 'vi', 'Nem Nuong', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-213d-4f33-ae96-35c6827f3138', 'en', 'Banh Gai', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-213d-4f33-ae96-35c6827f3138', 'vi', 'Banh Gai', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2141-485c-9cd1-bd041062c2f2', 'en', 'Bun Hue', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2141-485c-9cd1-bd041062c2f2', 'vi', 'Bun Hue', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2145-4a0b-a7ac-e7db7ea48ec6', 'en', 'Banh Trang', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2145-4a0b-a7ac-e7db7ea48ec6', 'vi', 'Banh Trang', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2149-47ef-90b1-8b45fc2a5f22', 'en', 'Muoi Tay Ninh', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2149-47ef-90b1-8b45fc2a5f22', 'vi', 'Muoi Tay Ninh', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-214d-471d-8a13-f35b1e5e1706', 'en', 'Nhan Long', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-214d-471d-8a13-f35b1e5e1706', 'vi', 'Nhan Long', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2151-406e-8d6e-8eeae57b30af', 'en', 'Sau Rieng', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2151-406e-8d6e-8eeae57b30af', 'vi', 'Sau Rieng', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2155-4a13-9ff9-d5e635e0ba7e', 'en', 'Bia Saigon', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2155-4a13-9ff9-d5e635e0ba7e', 'vi', 'Bia Saigon', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2159-4df9-a463-5c59a39109fb', 'en', 'Bia Hanoi', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2159-4df9-a463-5c59a39109fb', 'vi', 'Bia Hanoi', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-215d-466f-9286-0a9d10be598f', 'en', 'Nuoc Mam', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-215d-466f-9286-0a9d10be598f', 'vi', 'Nuoc Mam', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2161-4f3c-a6e1-a93ae54c93f5', 'en', 'Banh Mycay', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2161-4f3c-a6e1-a93ae54c93f5', 'vi', 'Banh Mycay', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2164-406a-a443-6074ad365196', 'en', 'Hu Tieu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2164-406a-a443-6074ad365196', 'vi', 'Hu Tieu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2168-482c-b61d-0e0651861c43', 'en', 'Canh Chua', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2168-482c-b61d-0e0651861c43', 'vi', 'Canh Chua', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-216c-423a-86f6-c908c45d597c', 'en', 'Mang Cut', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-216c-423a-86f6-c908c45d597c', 'vi', 'Mang Cut', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2170-4734-803b-e82766fb475b', 'en', 'Cam Vinh', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2170-4734-803b-e82766fb475b', 'vi', 'Cam Vinh', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2174-4f1f-b95a-f18a77168ea6', 'en', 'Vai Thieu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2174-4f1f-b95a-f18a77168ea6', 'vi', 'Vai Thieu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2178-4426-9d6a-ebc38fb2536a', 'en', 'Non La', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2178-4426-9d6a-ebc38fb2536a', 'vi', 'Non La', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-217b-4386-bc0f-996b9d7cf893', 'en', 'Ao Dai', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-217b-4386-bc0f-996b9d7cf893', 'vi', 'Ao Dai', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-217f-4421-973e-77e105d32db5', 'en', 'Xoai Cat', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-217f-4421-973e-77e105d32db5', 'vi', 'Xoai Cat', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2183-42f3-b183-aeabf6425454', 'en', 'Com Niu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2183-42f3-b183-aeabf6425454', 'vi', 'Com Niu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2187-444e-92c8-becaced0d514', 'en', 'Nhan Long Hung Yen', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-2187-444e-92c8-becaced0d514', 'vi', 'Nhan Long Hung Yen', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-218b-4b8b-bb0e-0d585141e935', 'en', 'Vai Thieu Luc Ngan', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-218b-4b8b-bb0e-0d585141e935', 'vi', 'Vai Thieu Luc Ngan', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-218f-4290-bea9-c65487c34c27', 'en', 'Nem Chua Thanh Hoa', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('972f4463-218f-4290-bea9-c65487c34c27', 'vi', 'Nem Chua Thanh Hoa', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
+	('977dd987-866b-486d-bb60-65f9e14b1269', 'en', 'Pho Bo', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-866b-486d-bb60-65f9e14b1269', 'vi', 'Pho Bo', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8673-4082-bc8d-efdf2b123bc6', 'en', 'Nem Nuong', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8673-4082-bc8d-efdf2b123bc6', 'vi', 'Nem Nuong', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8678-4d5f-92f4-6d0dc7861bf2', 'en', 'Banh Gai', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8678-4d5f-92f4-6d0dc7861bf2', 'vi', 'Banh Gai', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-867c-4122-89d8-3a89ded8c44a', 'en', 'Bun Hue', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-867c-4122-89d8-3a89ded8c44a', 'vi', 'Bun Hue', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8680-410a-923a-4731aeb4532d', 'en', 'Banh Trang', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8680-410a-923a-4731aeb4532d', 'vi', 'Banh Trang', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8684-47af-890d-045deb86aafe', 'en', 'Muoi Tay Ninh', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8684-47af-890d-045deb86aafe', 'vi', 'Muoi Tay Ninh', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8688-4708-bc23-38fd28ba8ea5', 'en', 'Nhan Long', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8688-4708-bc23-38fd28ba8ea5', 'vi', 'Nhan Long', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-868c-455a-84db-6ccb596e9514', 'en', 'Sau Rieng', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-868c-455a-84db-6ccb596e9514', 'vi', 'Sau Rieng', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8690-4339-b9ea-9064b6168670', 'en', 'Bia Saigon', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8690-4339-b9ea-9064b6168670', 'vi', 'Bia Saigon', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8694-459c-bdfa-a3946141956f', 'en', 'Bia Hanoi', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8694-459c-bdfa-a3946141956f', 'vi', 'Bia Hanoi', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8697-4184-b8f3-4d633d08868a', 'en', 'Nuoc Mam', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-8697-4184-b8f3-4d633d08868a', 'vi', 'Nuoc Mam', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-869c-47fd-9bfa-c8c54330971c', 'en', 'Banh Mycay', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-869c-47fd-9bfa-c8c54330971c', 'vi', 'Banh Mycay', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-869f-481d-81a8-84f76849367c', 'en', 'Hu Tieu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-869f-481d-81a8-84f76849367c', 'vi', 'Hu Tieu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86a3-4fcf-b2ef-2042a3a1f855', 'en', 'Canh Chua', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86a3-4fcf-b2ef-2042a3a1f855', 'vi', 'Canh Chua', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86a7-4925-bcb6-3ea69d33de21', 'en', 'Mang Cut', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86a7-4925-bcb6-3ea69d33de21', 'vi', 'Mang Cut', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86ab-430d-b53a-e6d2e4198137', 'en', 'Cam Vinh', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86ab-430d-b53a-e6d2e4198137', 'vi', 'Cam Vinh', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86af-4d94-a2be-e1221a4f58b0', 'en', 'Vai Thieu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86af-4d94-a2be-e1221a4f58b0', 'vi', 'Vai Thieu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86b2-4d8f-acfe-1c0ed0fff7a2', 'en', 'Non La', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86b2-4d8f-acfe-1c0ed0fff7a2', 'vi', 'Non La', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86b6-431c-bd61-5ec1b3b57f77', 'en', 'Ao Dai', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86b6-431c-bd61-5ec1b3b57f77', 'vi', 'Ao Dai', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86ba-4581-b7cd-a4459d946eea', 'en', 'Xoai Cat', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86ba-4581-b7cd-a4459d946eea', 'vi', 'Xoai Cat', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86be-4874-9e0a-a2dd5ab81358', 'en', 'Com Niu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86be-4874-9e0a-a2dd5ab81358', 'vi', 'Com Niu', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86c2-40ee-bdd0-5cf6c6f52264', 'en', 'Nhan Long Hung Yen', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86c2-40ee-bdd0-5cf6c6f52264', 'vi', 'Nhan Long Hung Yen', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86c6-4f9f-8d7e-12693f0da2fc', 'en', 'Vai Thieu Luc Ngan', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86c6-4f9f-8d7e-12693f0da2fc', 'vi', 'Vai Thieu Luc Ngan', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86ca-41a3-8ead-bb605078392d', 'en', 'Nem Chua Thanh Hoa', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('977dd987-86ca-41a3-8ead-bb605078392d', 'vi', 'Nem Chua Thanh Hoa', NULL, NULL, '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
 /*!40000 ALTER TABLE `sc_shop_product_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_download
@@ -4753,14 +4755,14 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_group` (
 DELETE FROM `sc_shop_product_group`;
 /*!40000 ALTER TABLE `sc_shop_product_group` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_group` (`group_id`, `product_id`) VALUES
-	('972f4463-2141-485c-9cd1-bd041062c2f2', '972f4463-2138-419b-b2fc-8dfec9e0f158'),
-	('972f4463-2141-485c-9cd1-bd041062c2f2', '972f4463-2149-47ef-90b1-8b45fc2a5f22'),
-	('972f4463-2168-482c-b61d-0e0651861c43', '972f4463-2138-419b-b2fc-8dfec9e0f158'),
-	('972f4463-2168-482c-b61d-0e0651861c43', '972f4463-2161-4f3c-a6e1-a93ae54c93f5'),
-	('972f4463-217b-4386-bc0f-996b9d7cf893', '972f4463-215d-466f-9286-0a9d10be598f'),
-	('972f4463-217b-4386-bc0f-996b9d7cf893', '972f4463-2183-42f3-b183-aeabf6425454'),
-	('972f4463-218b-4b8b-bb0e-0d585141e935', '972f4463-213d-4f33-ae96-35c6827f3138'),
-	('972f4463-218b-4b8b-bb0e-0d585141e935', '972f4463-214d-471d-8a13-f35b1e5e1706');
+	('977dd987-867c-4122-89d8-3a89ded8c44a', '977dd987-8673-4082-bc8d-efdf2b123bc6'),
+	('977dd987-867c-4122-89d8-3a89ded8c44a', '977dd987-8684-47af-890d-045deb86aafe'),
+	('977dd987-86a3-4fcf-b2ef-2042a3a1f855', '977dd987-8673-4082-bc8d-efdf2b123bc6'),
+	('977dd987-86a3-4fcf-b2ef-2042a3a1f855', '977dd987-869c-47fd-9bfa-c8c54330971c'),
+	('977dd987-86b6-431c-bd61-5ec1b3b57f77', '977dd987-8697-4184-b8f3-4d633d08868a'),
+	('977dd987-86b6-431c-bd61-5ec1b3b57f77', '977dd987-86be-4874-9e0a-a2dd5ab81358'),
+	('977dd987-86c6-4f9f-8d7e-12693f0da2fc', '977dd987-8678-4d5f-92f4-6d0dc7861bf2'),
+	('977dd987-86c6-4f9f-8d7e-12693f0da2fc', '977dd987-8688-4708-bc23-38fd28ba8ea5');
 /*!40000 ALTER TABLE `sc_shop_product_group` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_image
@@ -4777,30 +4779,30 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_image` (
 DELETE FROM `sc_shop_product_image`;
 /*!40000 ALTER TABLE `sc_shop_product_image` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_image` (`id`, `image`, `product_id`) VALUES
-	('972f4463-2193-469e-ab6f-4c7e0c7e917f', '/data/product/product-2.png', '972f4463-2131-402d-bbd9-8e6dda28b8ff'),
-	('972f4463-2197-4f33-b062-869bc7a3439a', '/data/product/product-11.png', '972f4463-2131-402d-bbd9-8e6dda28b8ff'),
-	('972f4463-219b-4597-b111-ba0ce75099ab', '/data/product/product-8.png', '972f4463-215d-466f-9286-0a9d10be598f'),
-	('972f4463-219f-4690-bb56-776761e47771', '/data/product/product-6.png', '972f4463-2138-419b-b2fc-8dfec9e0f158'),
-	('972f4463-21a3-4e81-abba-48c61cfcc48d', '/data/product/product-13.png', '972f4463-215d-466f-9286-0a9d10be598f'),
-	('972f4463-21a7-4926-a166-5b122040e5ca', '/data/product/product-12.png', '972f4463-2145-4a0b-a7ac-e7db7ea48ec6'),
-	('972f4463-21ab-4e19-b51a-c7e3c520a86c', '/data/product/product-17.png', '972f4463-2145-4a0b-a7ac-e7db7ea48ec6'),
-	('972f4463-21ae-4394-ba3f-5e665d9e1851', '/data/product/product-11.png', '972f4463-2138-419b-b2fc-8dfec9e0f158'),
-	('972f4463-21b2-4d94-846b-e2052b54ba9e', '/data/product/product-5.png', '972f4463-2138-419b-b2fc-8dfec9e0f158'),
-	('972f4463-21b6-4e73-afdc-2d226dbc8d7f', '/data/product/product-12.png', '972f4463-2155-4a13-9ff9-d5e635e0ba7e'),
-	('972f4463-21ba-46f9-b6f9-5bf8addb40bc', '/data/product/product-15.png', '972f4463-2151-406e-8d6e-8eeae57b30af'),
-	('972f4463-21be-4456-98a3-95497d9952ff', '/data/product/product-19.png', '972f4463-214d-471d-8a13-f35b1e5e1706'),
-	('972f4463-21c2-4879-a480-93a8f88cbe49', '/data/product/product-12.png', '972f4463-214d-471d-8a13-f35b1e5e1706'),
-	('972f4463-21c6-4a1b-a44a-e53bdd4ba994', '/data/product/product-1.png', '972f4463-2145-4a0b-a7ac-e7db7ea48ec6'),
-	('972f4463-21ca-474d-93b0-38be436eea9e', '/data/product/product-12.png', '972f4463-2141-485c-9cd1-bd041062c2f2'),
-	('972f4463-21cd-4f60-84d6-3b44e93aaf7c', '/data/product/product-7.png', '972f4463-216c-423a-86f6-c908c45d597c'),
-	('972f4463-21d1-4035-a1d1-3379e9619d9c', '/data/product/product-12.png', '972f4463-216c-423a-86f6-c908c45d597c'),
-	('972f4463-21d5-4a3e-b3e1-ad445f933f0b', '/data/product/product-16.png', '972f4463-2174-4f1f-b95a-f18a77168ea6'),
-	('972f4463-21d9-47d4-ae2e-81cff4b4683a', '/data/product/product-6.png', '972f4463-2174-4f1f-b95a-f18a77168ea6'),
-	('972f4463-21dd-4ab0-9c4f-63828b2729f4', '/data/product/product-12.png', '972f4463-2174-4f1f-b95a-f18a77168ea6'),
-	('972f4463-21e1-40cb-b008-1debe622c9df', '/data/product/product-18.png', '972f4463-2187-444e-92c8-becaced0d514'),
-	('972f4463-21e4-4fa6-a7b7-618dbb9399ae', '/data/product/product-19.png', '972f4463-2187-444e-92c8-becaced0d514'),
-	('972f4463-21e8-4578-b389-a137efac9778', '/data/product/product-24.png', '972f4463-218f-4290-bea9-c65487c34c27'),
-	('972f4463-21ec-41a4-992e-5751a688aec3', '/data/product/product-22.png', '972f4463-218f-4290-bea9-c65487c34c27');
+	('977dd987-86ce-4208-9bda-065f4d08acfc', '/data/product/product-2.png', '977dd987-866b-486d-bb60-65f9e14b1269'),
+	('977dd987-86d2-44a4-b8c8-bfe72451958d', '/data/product/product-11.png', '977dd987-866b-486d-bb60-65f9e14b1269'),
+	('977dd987-86d6-4a35-8c40-6241e82b6255', '/data/product/product-8.png', '977dd987-8697-4184-b8f3-4d633d08868a'),
+	('977dd987-86da-4869-9095-0f8b6ec40584', '/data/product/product-6.png', '977dd987-8673-4082-bc8d-efdf2b123bc6'),
+	('977dd987-86de-483d-92a2-c6c9d25a5e93', '/data/product/product-13.png', '977dd987-8697-4184-b8f3-4d633d08868a'),
+	('977dd987-86e2-44d5-9453-bd037c6b62e1', '/data/product/product-12.png', '977dd987-8680-410a-923a-4731aeb4532d'),
+	('977dd987-86e5-403b-8ff5-2ade72233df7', '/data/product/product-17.png', '977dd987-8680-410a-923a-4731aeb4532d'),
+	('977dd987-86e9-4ccd-a050-58cf65b7f483', '/data/product/product-11.png', '977dd987-8673-4082-bc8d-efdf2b123bc6'),
+	('977dd987-86ed-4e3c-94f9-8874f3329f9e', '/data/product/product-5.png', '977dd987-8673-4082-bc8d-efdf2b123bc6'),
+	('977dd987-86f1-46e6-975c-82361625030a', '/data/product/product-12.png', '977dd987-8690-4339-b9ea-9064b6168670'),
+	('977dd987-86f5-45bf-aa26-a3777517397a', '/data/product/product-15.png', '977dd987-868c-455a-84db-6ccb596e9514'),
+	('977dd987-86f9-48b3-bb9f-cff7242a5f60', '/data/product/product-19.png', '977dd987-8688-4708-bc23-38fd28ba8ea5'),
+	('977dd987-86fc-4bc6-b4fc-cb395c1f50ef', '/data/product/product-12.png', '977dd987-8688-4708-bc23-38fd28ba8ea5'),
+	('977dd987-8700-404c-aeb0-8ea73db4ee97', '/data/product/product-1.png', '977dd987-8680-410a-923a-4731aeb4532d'),
+	('977dd987-8704-4a6e-b844-65f91365ae97', '/data/product/product-12.png', '977dd987-867c-4122-89d8-3a89ded8c44a'),
+	('977dd987-8708-4d2b-9202-9e0a0efd4a41', '/data/product/product-7.png', '977dd987-86a7-4925-bcb6-3ea69d33de21'),
+	('977dd987-870c-4b78-b71c-4dc38bf4d2b4', '/data/product/product-12.png', '977dd987-86a7-4925-bcb6-3ea69d33de21'),
+	('977dd987-8710-4b9d-9220-52d5952c0545', '/data/product/product-16.png', '977dd987-86af-4d94-a2be-e1221a4f58b0'),
+	('977dd987-8714-4b81-b3e2-f57028803be0', '/data/product/product-6.png', '977dd987-86af-4d94-a2be-e1221a4f58b0'),
+	('977dd987-8717-476b-8658-26421e604c99', '/data/product/product-12.png', '977dd987-86af-4d94-a2be-e1221a4f58b0'),
+	('977dd987-871b-4498-a862-5d3c456681d5', '/data/product/product-18.png', '977dd987-86c2-40ee-bdd0-5cf6c6f52264'),
+	('977dd987-871f-4bea-890b-91a38da09985', '/data/product/product-19.png', '977dd987-86c2-40ee-bdd0-5cf6c6f52264'),
+	('977dd987-8723-4967-bca5-0ff1c566d02b', '/data/product/product-24.png', '977dd987-86ca-41a3-8ead-bb605078392d'),
+	('977dd987-8727-42b2-8ba6-685e4b11a653', '/data/product/product-22.png', '977dd987-86ca-41a3-8ead-bb605078392d');
 /*!40000 ALTER TABLE `sc_shop_product_image` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_promotion
@@ -4820,14 +4822,14 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_promotion` (
 DELETE FROM `sc_shop_product_promotion`;
 /*!40000 ALTER TABLE `sc_shop_product_promotion` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_promotion` (`product_id`, `price_promotion`, `date_start`, `date_end`, `status_promotion`, `created_at`, `updated_at`) VALUES
-	('972f4463-2131-402d-bbd9-8e6dda28b8ff', 50.00, NULL, NULL, 1, NULL, NULL),
-	('972f4463-2138-419b-b2fc-8dfec9e0f158', 30.00, NULL, NULL, 1, NULL, NULL),
-	('972f4463-2149-47ef-90b1-8b45fc2a5f22', 50.00, NULL, NULL, 1, NULL, NULL),
-	('972f4463-2151-406e-8d6e-8eeae57b30af', 40.00, NULL, NULL, 1, NULL, NULL),
-	('972f4463-2161-4f3c-a6e1-a93ae54c93f5', 50.00, NULL, NULL, 1, NULL, NULL),
-	('972f4463-2170-4734-803b-e82766fb475b', 30.00, NULL, NULL, 1, NULL, NULL),
-	('972f4463-2178-4426-9d6a-ebc38fb2536a', 60.00, NULL, NULL, 1, NULL, NULL),
-	('972f4463-2187-444e-92c8-becaced0d514', 50.00, NULL, NULL, 1, NULL, NULL);
+	('977dd987-866b-486d-bb60-65f9e14b1269', 50.00, NULL, NULL, 1, NULL, NULL),
+	('977dd987-8673-4082-bc8d-efdf2b123bc6', 30.00, NULL, NULL, 1, NULL, NULL),
+	('977dd987-8684-47af-890d-045deb86aafe', 50.00, NULL, NULL, 1, NULL, NULL),
+	('977dd987-868c-455a-84db-6ccb596e9514', 40.00, NULL, NULL, 1, NULL, NULL),
+	('977dd987-869c-47fd-9bfa-c8c54330971c', 50.00, NULL, NULL, 1, NULL, NULL),
+	('977dd987-86ab-430d-b53a-e6d2e4198137', 30.00, NULL, NULL, 1, NULL, NULL),
+	('977dd987-86b2-4d8f-acfe-1c0ed0fff7a2', 60.00, NULL, NULL, 1, NULL, NULL),
+	('977dd987-86c2-40ee-bdd0-5cf6c6f52264', 50.00, NULL, NULL, 1, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_product_promotion` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_property
@@ -4862,30 +4864,30 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_store` (
 DELETE FROM `sc_shop_product_store`;
 /*!40000 ALTER TABLE `sc_shop_product_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_store` (`product_id`, `store_id`) VALUES
-	('972f4463-2131-402d-bbd9-8e6dda28b8ff', '1'),
-	('972f4463-2138-419b-b2fc-8dfec9e0f158', '1'),
-	('972f4463-213d-4f33-ae96-35c6827f3138', '1'),
-	('972f4463-2141-485c-9cd1-bd041062c2f2', '1'),
-	('972f4463-2145-4a0b-a7ac-e7db7ea48ec6', '1'),
-	('972f4463-2149-47ef-90b1-8b45fc2a5f22', '1'),
-	('972f4463-214d-471d-8a13-f35b1e5e1706', '1'),
-	('972f4463-2151-406e-8d6e-8eeae57b30af', '1'),
-	('972f4463-2155-4a13-9ff9-d5e635e0ba7e', '1'),
-	('972f4463-2159-4df9-a463-5c59a39109fb', '1'),
-	('972f4463-215d-466f-9286-0a9d10be598f', '1'),
-	('972f4463-2161-4f3c-a6e1-a93ae54c93f5', '1'),
-	('972f4463-2164-406a-a443-6074ad365196', '1'),
-	('972f4463-2168-482c-b61d-0e0651861c43', '1'),
-	('972f4463-216c-423a-86f6-c908c45d597c', '1'),
-	('972f4463-2170-4734-803b-e82766fb475b', '1'),
-	('972f4463-2174-4f1f-b95a-f18a77168ea6', '1'),
-	('972f4463-2178-4426-9d6a-ebc38fb2536a', '1'),
-	('972f4463-217b-4386-bc0f-996b9d7cf893', '1'),
-	('972f4463-217f-4421-973e-77e105d32db5', '1'),
-	('972f4463-2183-42f3-b183-aeabf6425454', '1'),
-	('972f4463-2187-444e-92c8-becaced0d514', '1'),
-	('972f4463-218b-4b8b-bb0e-0d585141e935', '1'),
-	('972f4463-218f-4290-bea9-c65487c34c27', '1');
+	('977dd987-866b-486d-bb60-65f9e14b1269', '1'),
+	('977dd987-8673-4082-bc8d-efdf2b123bc6', '1'),
+	('977dd987-8678-4d5f-92f4-6d0dc7861bf2', '1'),
+	('977dd987-867c-4122-89d8-3a89ded8c44a', '1'),
+	('977dd987-8680-410a-923a-4731aeb4532d', '1'),
+	('977dd987-8684-47af-890d-045deb86aafe', '1'),
+	('977dd987-8688-4708-bc23-38fd28ba8ea5', '1'),
+	('977dd987-868c-455a-84db-6ccb596e9514', '1'),
+	('977dd987-8690-4339-b9ea-9064b6168670', '1'),
+	('977dd987-8694-459c-bdfa-a3946141956f', '1'),
+	('977dd987-8697-4184-b8f3-4d633d08868a', '1'),
+	('977dd987-869c-47fd-9bfa-c8c54330971c', '1'),
+	('977dd987-869f-481d-81a8-84f76849367c', '1'),
+	('977dd987-86a3-4fcf-b2ef-2042a3a1f855', '1'),
+	('977dd987-86a7-4925-bcb6-3ea69d33de21', '1'),
+	('977dd987-86ab-430d-b53a-e6d2e4198137', '1'),
+	('977dd987-86af-4d94-a2be-e1221a4f58b0', '1'),
+	('977dd987-86b2-4d8f-acfe-1c0ed0fff7a2', '1'),
+	('977dd987-86b6-431c-bd61-5ec1b3b57f77', '1'),
+	('977dd987-86ba-4581-b7cd-a4459d946eea', '1'),
+	('977dd987-86be-4874-9e0a-a2dd5ab81358', '1'),
+	('977dd987-86c2-40ee-bdd0-5cf6c6f52264', '1'),
+	('977dd987-86c6-4f9f-8d7e-12693f0da2fc', '1'),
+	('977dd987-86ca-41a3-8ead-bb605078392d', '1');
 /*!40000 ALTER TABLE `sc_shop_product_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_sessions
@@ -4986,14 +4988,14 @@ CREATE TABLE IF NOT EXISTS `sc_shop_store_block` (
 DELETE FROM `sc_shop_store_block`;
 /*!40000 ALTER TABLE `sc_shop_store_block` DISABLE KEYS */;
 INSERT INTO `sc_shop_store_block` (`id`, `name`, `position`, `page`, `type`, `text`, `status`, `sort`, `store_id`, `template`, `created_at`, `updated_at`) VALUES
-	('972f4462-1d82-4fe6-850f-b4cc414c150c', 'Product special', 'left', '*', 'view', 'product_special_left', 1, 20, '1', 's-cart-light', NULL, NULL),
-	('972f4462-1d88-4b78-ba9e-8a48a95e1b53', 'Brands', 'left', '*', 'view', 'brand_left', 1, 30, '1', 's-cart-light', NULL, NULL),
-	('972f4462-1d8d-4a81-9c3e-38c12971aaf4', 'Banner home', 'banner_top', 'home', 'view', 'banner_image', 1, 10, '1', 's-cart-light', NULL, NULL),
-	('972f4462-1d96-4a3d-8958-c8166bb59e92', 'Category', 'left', 'home,shop_home', 'view', 'category_left', 1, 20, '1', 's-cart-light', NULL, NULL),
-	('972f4462-1da1-46d0-ad62-53e2f7a2eb9c', 'Product last view', 'left', '*', 'view', 'product_lastview_left', 1, 30, '1', 's-cart-light', NULL, NULL),
-	('972f4462-1da9-411b-8799-9e134636fac0', 'Products new', 'top', 'home', 'view', 'product_new', 1, 10, '1', 's-cart-light', NULL, NULL),
-	('972f4462-1daf-4009-a301-863e2df08c6a', 'Category store', 'left', 'shop_home,vendor_home,vendor_product_list', 'view', 'category_store_left', 1, 10, '1', 's-cart-light', NULL, NULL),
-	('972f4462-1db4-4525-8c5d-ee31cd39b2b3', 'Top news', 'top', 'home', 'view', 'top_news', 1, 10, '1', 's-cart-light', NULL, NULL);
+	('977dd986-7e42-44e8-850c-9acdd3a8ffc1', 'Product special', 'left', '*', 'view', 'product_special_left', 1, 20, '1', 's-cart-light', NULL, NULL),
+	('977dd986-7e49-4c28-b65c-b9e45891dfb9', 'Brands', 'left', '*', 'view', 'brand_left', 1, 30, '1', 's-cart-light', NULL, NULL),
+	('977dd986-7e4d-4991-8a77-c310775fdf75', 'Banner home', 'banner_top', 'home', 'view', 'banner_image', 1, 10, '1', 's-cart-light', NULL, NULL),
+	('977dd986-7e52-4cf3-941b-164269813128', 'Category', 'left', 'home,shop_home', 'view', 'category_left', 1, 20, '1', 's-cart-light', NULL, NULL),
+	('977dd986-7e56-4b48-8ac2-e6556f32d62a', 'Product last view', 'left', '*', 'view', 'product_lastview_left', 1, 30, '1', 's-cart-light', NULL, NULL),
+	('977dd986-7e5a-4f0a-aa6d-210294ada16d', 'Products new', 'top', 'home', 'view', 'product_new', 1, 10, '1', 's-cart-light', NULL, NULL),
+	('977dd986-7e5d-42db-b2d0-693a14a89de6', 'Category store', 'left', 'shop_home,vendor_home,vendor_product_list', 'view', 'category_store_left', 1, 10, '1', 's-cart-light', NULL, NULL),
+	('977dd986-7e61-4c34-acd8-10a63dda1ec1', 'Top news', 'top', 'home', 'view', 'top_news', 1, 10, '1', 's-cart-light', NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_store_block` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_store_css
@@ -5060,8 +5062,8 @@ CREATE TABLE IF NOT EXISTS `sc_shop_supplier` (
 DELETE FROM `sc_shop_supplier`;
 /*!40000 ALTER TABLE `sc_shop_supplier` DISABLE KEYS */;
 INSERT INTO `sc_shop_supplier` (`id`, `name`, `alias`, `email`, `phone`, `image`, `address`, `url`, `status`, `store_id`, `sort`, `created_at`, `updated_at`) VALUES
-	('972f4463-19ea-4ca1-ad58-c9a80d1e5146', 'Supplier ABC', 'supplier-abc', 'abc@gmail.com', '0123456789', '/data/supplier/supplier.jpg', NULL, NULL, 1, '1', 0, NULL, NULL),
-	('972f4463-19f2-4b2f-bdf8-532ade0a33cf', 'Supplier XYZ', 'supplier-xyz', 'xyz@gmail.com', '0987654321', '/data/supplier/supplier.jpg', NULL, NULL, 1, '1', 0, NULL, NULL);
+	('977dd987-808f-4338-b021-213e8eacd42e', 'Supplier ABC', 'supplier-abc', 'abc@gmail.com', '0123456789', '/data/supplier/supplier.jpg', NULL, NULL, 1, '1', 0, NULL, NULL),
+	('977dd987-8098-4a84-8949-1db6ca5f905c', 'Supplier XYZ', 'supplier-xyz', 'xyz@gmail.com', '0987654321', '/data/supplier/supplier.jpg', NULL, NULL, 1, '1', 0, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_supplier` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_tax

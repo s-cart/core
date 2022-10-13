@@ -193,13 +193,13 @@
           "key":key,
           "path":path,
         },
-        success: function (response) {
-          console.log(response);
-              if(parseInt(response.error) ==0){
-                alertJs('success', response.msg);
+        success: function (data) {
+          console.log(data);
+              if(parseInt(data.error) ==0){
+                alertJs('success', data.msg);
               location.reload();
               }else{
-                alertMsg('error', response.msg, 'You clicked the button!');
+                alertMsg('error', data.msg, 'You clicked the button!');
               }
               $('#loading').hide();
               obj.button('reset');

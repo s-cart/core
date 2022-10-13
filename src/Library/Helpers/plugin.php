@@ -133,3 +133,17 @@ if (!function_exists('sc_get_all_plugin_actived') && !in_array('sc_get_all_plugi
             return $nameSpace;
         }
     }
+
+    /**
+     * Check plugin and template compatibility with S-cart version
+     *
+     * @param   string  $versionsConfig  [$versionsConfig description]
+     *
+     * @return  [type]                   [return description]
+     */
+    if (!function_exists('sc_plugin_compatibility_check') && !in_array('sc_plugin_compatibility_check', config('helper_except', []))) {
+        function sc_plugin_compatibility_check(string $versionsConfig) {
+            $arrVersionSCart = explode('|', $versionsConfig);
+            return in_array(config('s-cart.core'), $arrVersionSCart);
+        }
+    }

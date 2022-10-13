@@ -178,7 +178,15 @@ class AdminTemplateController extends RootAdminController
                     $folderName = explode('/config.json', $checkConfig[0]);
                     $folderName = explode('/', $folderName[0]);
                     $folderName = end($folderName);
+
+                    //Check compatibility 
                     $config = json_decode(file_get_contents($checkConfig[0]), true);
+                    $scartVersion = $config['scartVersion'] ?? '';
+                    if (!sc_plugin_compatibility_check($scartVersion)) {
+                        File::deleteDirectory(storage_path('tmp/'.$pathTmp));
+                        return response()->json(['error' => 1, 'msg' => sc_language_render('admin.plugin.not_compatible', ['version' => $scartVersion, 'sc_version' => config('s-cart.core')])]);
+                    }
+
                     $configKey = $config['configKey'] ?? '';
 
                     if (!is_writable(public_path('templates'))) {

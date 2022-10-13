@@ -190,9 +190,9 @@
           "path":path,
           "code":"{{ $code }}"
         },
-        success: function (response) {
-          console.log(response);
-              if(parseInt(response.error) ==0){
+        success: function (data) {
+          console.log(data);
+              if(parseInt(data.error) ==0){
               location.reload();
               }else{
                 alertMsg('error', data.msg, 'You clicked the button!');

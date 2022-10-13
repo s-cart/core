@@ -2809,6 +2809,8 @@ trait DataLocaleSeederTrait
             ['code' => 'admin.plugin.table_exist','text' => 'Bảng :table đã tồn tại rồi','position' => 'admin.plugin','location' => 'vi'],
             ['code' => 'admin.plugin.plugin_exist','text' => 'Plugin này đã tồn tại rồi','position' => 'admin.plugin','location' => 'vi'],
             ['code' => 'admin.plugin.action_error','text' => 'Có lỗi trong khi :action','position' => 'admin.plugin','location' => 'vi'],
+            ['code' => 'admin.plugin.not_compatible','text' => 'Lỗi không tương thích. Plugin/template này chỉ hỗ trợ các phiên bản :version. Phiên bản hiện tại là :sc_version','position' => 'admin.plugin','location' => 'vi'],
+            ['code' => 'admin.plugin.not_compatible','text' => 'Incompatibility error. This plugin/template only supports :version versions. The current version is :sc_version','position' => 'admin.plugin','location' => 'en'],
             ['code' => 'admin.chart.static_month','text' => 'Thống kê trong 12 tháng','position' => 'admin.chart','location' => 'vi'],
             ['code' => 'admin.chart.static_30_day','text' => 'Thống kê trong 1 tháng','position' => 'admin.chart','location' => 'vi'],
             ['code' => 'admin.chart.static_month_help','text' => 'Dữ liệu so sánh bằng tổng số tiền của đơn hàng, đơn vị Bit','position' => 'admin.chart','location' => 'vi'],

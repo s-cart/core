@@ -127,15 +127,26 @@ class AdminTemplateOnlineController extends RootAdminController
         if ($unzip) {
             $checkConfig = glob(storage_path('tmp/'.$pathTmp) . '/*/config.json');
             if (!$checkConfig) {
-                return $response = ['error' => 1, 'msg' => 'Cannot found file config.json'];
+                $response = ['error' => 1, 'msg' => 'Cannot found file config.json'];
+                return response()->json($response);
             }
-            $folderName = explode('/config.json', $checkConfig[0]);
-            $folderName = explode('/', $folderName[0]);
-            $folderName = end($folderName);
-            
-            File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path('templates/'.$key));
-            File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName), resource_path('views/templates/'.$key));
-            File::deleteDirectory(storage_path('tmp/'.$pathTmp));
+
+            //Check compatibility 
+            $config = json_decode(file_get_contents($checkConfig[0]), true);
+            $scartVersion = $config['scartVersion'] ?? '';
+            if (!sc_plugin_compatibility_check($scartVersion)) {
+                File::deleteDirectory(storage_path('tmp/'.$pathTmp));
+                $response = ['error' => 1, 'msg' => sc_language_render('admin.plugin.not_compatible', ['version' => $scartVersion, 'sc_version' => config('s-cart.core')])];
+            } else {
+                $folderName = explode('/config.json', $checkConfig[0]);
+                $folderName = explode('/', $folderName[0]);
+                $folderName = end($folderName);
+                
+                File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path('templates/'.$key));
+                File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName), resource_path('views/templates/'.$key));
+                File::deleteDirectory(storage_path('tmp/'.$pathTmp));
+            }
+
         } else {
             $response = ['error' => 1, 'msg' => 'error while unzip'];
         }
