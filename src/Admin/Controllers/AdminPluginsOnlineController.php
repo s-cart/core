@@ -152,7 +152,7 @@ class AdminPluginsOnlineController extends RootAdminController
                     File::deleteDirectory(storage_path('tmp/'.$pathTmp));
                     $response = ['error' => 1, 'msg' => sc_language_render('admin.plugin.not_compatible', ['version' => $scartVersion, 'sc_version' => config('s-cart.core')])];
                 } else {
-                    $folderName = explode('config.json', $checkConfig[0]);
+                    $folderName = explode('/config.json', $checkConfig[0]);
                     $folderName = explode('/', $folderName[0]);
                     $folderName = end($folderName);
                     File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path($pathPlugin));
