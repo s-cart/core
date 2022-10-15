@@ -142,7 +142,7 @@ class AdminPluginsOnlineController extends RootAdminController
                 if (!$checkConfig) {
                     return $response = ['error' => 1, 'msg' => 'Cannot found file config.json'];
                 }
-                $folderName = explode('config.json', $checkConfig[0]);
+                $folderName = explode('/config.json', $checkConfig[0]);
                 $folderName = explode('/', $folderName[0]);
                 $folderName = end($folderName);
                 File::copyDirectory(storage_path('tmp/'.$pathTmp.'/'.$folderName.'/public'), public_path($pathPlugin));
