@@ -41,7 +41,7 @@ class Export
             $worksheet->getCell('A1')->setValue($title);
         }
         $worksheet->fromArray($dataExport, $nullValue = null, $startCell = 'A' . $row);
-        $writer = IOFactory::createWriter($spreadsheet, "Xls");
+        $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
         // $writer->save('write.xls');
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="' . $filename . '.xls"');
@@ -51,10 +51,10 @@ class Export
 
     public static function exportInvoice($dataExport = [], $options = [])
     {
+        
         $filename = $options['filename'] ?? self::$filename;
         $sheetname = $options['sheetname'] ?? self::$sheetname;
         $title = $options['title'] ?? self::$title;
-        $row = empty($title) ? 1 : 2;
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
         if (file_exists(resource_path('views/vendor/s-cart-admin/format/export/invoice.xlsx'))) {
             $spreadsheet = $reader->load(resource_path('views/vendor/s-cart-admin/format/export/invoice.xlsx'));
@@ -186,7 +186,7 @@ class Export
         $worksheet->getCell('E' . $indexRowTotal)->setValue(sc_language_render('order.totals.balance').':');
 
         // $worksheet->fromArray($dataExport, $nullValue = null, $startCell = 'A' . $row);
-        $writer = IOFactory::createWriter($spreadsheet, "Xls");
+        $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
         // $writer->save('write.xls');
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename="' . $filename . '.xls"');
