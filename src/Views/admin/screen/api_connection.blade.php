@@ -42,7 +42,7 @@
               </div>
         
               <div class="form-group row {{ $errors->has('apiconnection') ? ' text-red' : '' }}">
-                <label for="apiconnection" class="col-sm-2 col-form-label">{{ sc_language_render('admin.api_connection.apikey') }}</label>
+                <label for="apiconnection" class="col-sm-2 col-form-label">{{ sc_language_render('admin.api_connection.connection') }}</label>
                 <div class="col-sm-10 ">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
