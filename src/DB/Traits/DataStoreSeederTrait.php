@@ -127,7 +127,6 @@ trait DataStoreSeederTrait
             ['group' => '','code' => 'url_config','key' => 'PREFIX_SHOP','value' => 'shop','sort' => '0','detail' => 'admin.env.PREFIX_SHOP','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_BRAND','value' => 'brand','sort' => '0','detail' => 'admin.env.PREFIX_BRAND','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_CATEGORY','value' => 'category','sort' => '0','detail' => 'admin.env.PREFIX_CATEGORY','store_id' => $storeId],
-            ['group' => '','code' => 'url_config','key' => 'PREFIX_CATEGORY_VENDOR','value' => 'category-vendor','sort' => '0','detail' => 'admin.env.PREFIX_CATEGORY_VENDOR','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_SUB_CATEGORY','value' => 'sub-category','sort' => '0','detail' => 'admin.env.PREFIX_SUB_CATEGORY','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_PRODUCT','value' => 'product','sort' => '0','detail' => 'admin.env.PREFIX_PRODUCT','store_id' => $storeId],
             ['group' => '','code' => 'url_config','key' => 'PREFIX_SEARCH','value' => 'search','sort' => '0','detail' => 'admin.env.PREFIX_SEARCH','store_id' => $storeId],

@@ -25,11 +25,6 @@
         <td>{{ sc_language_render('admin.env.PREFIX_CATEGORY') }}</td>
         <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CATEGORY" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CATEGORY') }}" data-value="{{ sc_config('PREFIX_CATEGORY', $storeId) }}" data-original-title="" title=""></a>/name-of-category{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr>
-
-      <tr>
-        <td>{{ sc_language_render('admin.env.PREFIX_CATEGORY_VENDOR') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CATEGORY_VENDOR" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CATEGORY_VENDOR') }}" data-value="{{ sc_config('PREFIX_CATEGORY_VENDOR', $storeId) }}" data-original-title="" title=""></a>/name-of-category{{ sc_config('SUFFIX_URL', $storeId) }}</td>
-      </tr>
       
       <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_SUB_CATEGORY') }}</td>
