@@ -74,7 +74,8 @@ Route::group(
     function ($router) {
         $router->get('/password/reset/{token}', 'ResetPasswordController@showResetFormProcessFront')
             ->name('password.reset');
-        $router->post('/password/reset', 'ResetPasswordController@reset');
+        $router->post('/password/reset', 'ResetPasswordController@reset')
+            ->name('password.request');
     }
 );
 //End Auth
