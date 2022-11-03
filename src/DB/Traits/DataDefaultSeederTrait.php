@@ -409,7 +409,7 @@ trait DataDefaultSeederTrait
 
     public function dataShopLink() {
         $dataShopLink = [
-            ['id' => (string)Str::orderedUuid(),'name' => 'front.about','url' => 'route::page.detail::about','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '50'],
+            ['id' => 1,'name' => 'front.about','url' => 'route::page.detail::about','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '50'],
 
         ];
         return $dataShopLink;
@@ -459,7 +459,7 @@ trait DataDefaultSeederTrait
 
     public function dataPage() {
         $dataPage = [
-            ['id' => (string)Str::orderedUuid(),'image' => '','alias' => 'about','status' => '1'],
+            ['id' => 1,'image' => '','alias' => 'about','status' => '1'],
         ];
         return $dataPage;
     }
@@ -554,20 +554,20 @@ trait DataDefaultSeederTrait
         //Ony use updated v7.1 -> v7.2
 
         if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'shop_link_group')) {
-            \Illuminate\Support\Facades\Schema::create(
+            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create(
                 SC_DB_PREFIX.'shop_link_group',
                 function (\Illuminate\Database\Schema\Blueprint $table) {
                     $table->increments('id');
                     $table->string('code', 100)->unique();
                     $table->string('name', 255);
                     $table->timestamps();
-                    
+
                 }
             );
         }
 
         if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable('personal_access_tokens')) {
-            \Illuminate\Support\Facades\Schema::create('personal_access_tokens', 
+            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create('personal_access_tokens', 
                 function (\Illuminate\Database\Schema\Blueprint $table) {
                     $table->id();
                     $table->uuidMorphs('tokenable');
@@ -579,6 +579,19 @@ trait DataDefaultSeederTrait
                     $table->timestamps();
             });
         }
+
+        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'admin_password_resets')) {
+            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create(
+                SC_DB_PREFIX.'admin_password_resets',
+                function (\Illuminate\Database\Schema\Blueprint $table) {
+                    $table->string('email', 150);
+                    $table->string('token', 255);
+                    $table->timestamp('created_at', $precision = 0);
+                    $table->index('email');
+                }
+            );
+        }
+
         //End update
     }
 
