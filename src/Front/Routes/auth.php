@@ -1,5 +1,4 @@
 <?php
-Auth::routes();
 $prefixCustomer = sc_config('PREFIX_MEMBER') ?? 'customer';
 $langUrl = config('app.seoLang');
 
@@ -78,12 +77,4 @@ Route::group(
         $router->post('/password/reset', 'ResetPasswordController@reset');
     }
 );
-
-if ($suffix) {
-    Route::get('/login', function () {
-        return redirect(sc_route('login'));
-    });
-}
-
-
 //End Auth
