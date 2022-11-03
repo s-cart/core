@@ -254,7 +254,7 @@
     font-size: 15px;
     line-height: 1.5;
     color: white;
-    width: 50%;
+    min-width: 50%;
     height: 50px;
     border-radius: 7px;
     background: #f9710c;

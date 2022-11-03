@@ -34,10 +34,14 @@ class Authenticate
      */
     protected function shouldPassThrough($request)
     {
-        $routeName = $request->path();
+        $routeName = $request->route()->getName();
         $excepts = [
-            SC_ADMIN_PREFIX . '/auth/login',
-            SC_ADMIN_PREFIX . '/auth/logout',
+            'admin.login',
+            'admin.logout',
+            'admin.forgot',
+            'admin.register',
+            'admin.password_reset',
+            'admin.password_request',
         ];
         return in_array($routeName, $excepts);
     }

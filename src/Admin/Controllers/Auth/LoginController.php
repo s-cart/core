@@ -29,7 +29,7 @@ class LoginController extends RootAdminController
             return redirect($this->redirectPath());
         }
 
-        return view($this->templatePathAdmin.'auth.login', ['title'=> sc_language_render('action.login')]);
+        return view($this->templatePathAdmin.'auth.login', ['title'=> sc_language_render('admin.login')]);
     }
 
     /**

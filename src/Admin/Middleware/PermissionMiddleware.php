@@ -26,7 +26,7 @@ class PermissionMiddleware
      */
     public function handle(Request $request, \Closure $next, ...$args)
     {
-        if (!empty($args) || $this->shouldPassThrough($request) || Admin::user()->isAdministrator()) {
+        if (!empty($args) || $this->shouldPassThrough($request) || (Admin::user() && Admin::user()->isAdministrator())) {
             return $next($request);
         }
 
@@ -42,7 +42,7 @@ class PermissionMiddleware
 
         //Group view all
         // this group can view all path, but cannot change data
-        if (Admin::user()->isViewAll()) {
+        if (Admin::user() && Admin::user()->isViewAll()) {
             if ($request->method() == 'GET'
                 && !collect($this->viewWithoutToMessage())->contains($request->path())
                 && !collect($this->viewWithout())->contains($request->path())
@@ -63,7 +63,7 @@ class PermissionMiddleware
             }
         }
 
-        if (!Admin::user()->allPermissions()->first(function ($modelPermission) use ($request) {
+        if (Admin::user() && !Admin::user()->allPermissions()->first(function ($modelPermission) use ($request) {
             return $modelPermission->passRequest($request);
         })) {
             if (!request()->ajax()) {

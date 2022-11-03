@@ -148,6 +148,16 @@ class PrepareTablesAdmin extends Migration
             $table->string('maintain_note', 300)->nullable();
             $table->primary(['store_id', 'lang']);
         });
+
+        Schema::create(
+            SC_DB_PREFIX.'admin_password_resets',
+            function (Blueprint $table) {
+                $table->string('email', 150);
+                $table->string('token', 255);
+                $table->timestamp('created_at', $precision = 0);
+                $table->index('email');
+            }
+        );
     }
 
     /**
@@ -169,5 +179,6 @@ class PrepareTablesAdmin extends Migration
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_config');
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_store');
         Schema::dropIfExists(SC_DB_PREFIX . 'admin_store_description');
+        Schema::dropIfExists(SC_DB_PREFIX . 'admin_password_resets');
     }
 }

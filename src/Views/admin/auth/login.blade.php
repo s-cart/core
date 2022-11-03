@@ -4,40 +4,47 @@
 @include($templatePathAdmin.'component.css_login')
     <div class="container-login100">
       <div class="wrap-login100 main-login">
-        <form action="{{ sc_route_admin('admin.login') }}" method="post">
-          <div class="col-md-12">
+        <div class="card-header text-center">
+          <a href="{{ sc_route('home') }}" class="h1">
             <img src="{{ sc_file(sc_store('logo')) }}" alt="logo" class="logo">
-          </div>
-          <div class="login-title-des col-md-12 p-b-41">
-            <a><b>{{sc_config_admin('ADMIN_NAME')}}</b></a>
-          </div>
-          <div class="col-md-12 form-group has-feedback {!! !$errors->has('username') ?: 'text-red' !!}">
-            <div class="wrap-input100 validate-input form-group ">
-              <input class="input100 form-control" type="text" placeholder="{{ sc_language_render('admin.user.username') }}"
-                name="username" value="{{ old('username') }}">
-              <span class="focus-input100"></span>
-              <span class="symbol-input100">
-                <i class="fa fa-user"></i>
-              </span>
+          </a>
+        </div>
+        <div class="login-title-des col-md-12 p-b-41">
+          <a><b>{{sc_language_render('admin.login')}}</b></a>
+        </div>
+        <form action="{{ sc_route_admin('admin.login') }}" method="post">
+
+          <div class="input-form {!! !$errors->has('email') ?: 'text-red' !!}">
+            <div class="col-md-12 form-group has-feedback {!! !$errors->has('username') ?: 'text-red' !!}">
+              <div class="wrap-input100 validate-input form-group ">
+                <input class="input100 form-control" type="text" placeholder="{{ sc_language_render('admin.user.username') }}"
+                  name="username" value="{{ old('username') }}">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-user"></i>
+                </span>
+              </div>
               @if($errors->has('username'))
               @foreach($errors->get('username') as $message)
-              <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</label><br>
+              <i class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</i><br>
               @endforeach
               @endif
             </div>
           </div>
-          <div class="col-md-12 form-group has-feedback {!! !$errors->has('password') ?: 'text-red' !!}">
-            <div class="wrap-input100 validate-input form-group ">
-              <input class="input100 form-control" type="password" placeholder="{{ sc_language_render('admin.user.password') }}"
-                name="password">
-              <span class="focus-input100"></span>
-              <span class="symbol-input100">
-                <i class="fa fa-lock"></i>
-              </span>
 
+          <div class="input-form {!! !$errors->has('password') ?: 'text-red' !!}">
+            <div class="col-md-12 form-group has-feedback">
+              <div class="wrap-input100 validate-input form-group ">
+                <input class="input100 form-control" type="password" placeholder="{{ sc_language_render('admin.user.password') }}"
+                  name="password">
+                <span class="focus-input100"></span>
+                <span class="symbol-input100">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
               @if($errors->has('password'))
               @foreach($errors->get('password') as $message)
-              <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</label><br>
+              <i class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</i>
               @endforeach
               @endif
             </div>
@@ -48,11 +55,15 @@
                 {{ sc_language_render('admin.user.login') }}
               </button>
             </div>
-            {{-- <div class="text-center">
-              <a href="" class="forgot">
-                <i class="fa fa-caret-right"></i> <b>Forgot Password</b>
+
+            @if (sc_config_global('admin_forgot_password', 1))
+            <div class="text-center">
+              <a href="{{ sc_route_admin('admin.forgot') }}" class="forgot">
+                <i class="fa fa-caret-right"></i> <b>{{ sc_language_render('admin.password_forgot') }}</b>
               </a>
-            </div> --}}
+            </div>
+            @endif
+
 
             <div class="checkbox input text-center remember">
               <label>

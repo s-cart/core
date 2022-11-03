@@ -32,17 +32,31 @@ class Update extends Command
     {
         try {
             Artisan::call('db:seed', 
-            [
-                '--class' => 'DataDefaultSeeder',
-                '--force' => true
-            ]
+                [
+                    '--class' => 'DataDefaultSeeder',
+                    '--force' => true
+                ]
             );
             Artisan::call('db:seed', 
-            [
-                '--class' => 'DataLocaleSeeder',
-                '--force' => true
-            ]
+                [
+                    '--class' => 'DataLocaleSeeder',
+                    '--force' => true
+                ]
             );
+
+            // Add table for S-Cart 7.2
+            if (!\Illuminate\Support\Facades\Schema::hasTable(SC_DB_PREFIX.'admin_password_resets')) {
+                \Illuminate\Support\Facades\Schema::create(
+                    SC_DB_PREFIX.'admin_password_resets',
+                    function (\Illuminate\Database\Schema\Blueprint $table) {
+                        $table->string('email', 150);
+                        $table->string('token', 255);
+                        $table->timestamp('created_at', $precision = 0);
+                        $table->index('email');
+                    }
+                );
+            }
+
             $this->info('Update done');
         } catch (Throwable $e) {
             sc_report($e->getMessage());

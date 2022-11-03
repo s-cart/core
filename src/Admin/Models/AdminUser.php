@@ -266,4 +266,16 @@ class AdminUser extends Authenticatable
             return self::$canChangeConfig;
         }
     }
+
+
+    /**
+     * Send email reset password
+     * @param  [type] $token [description]
+     * @return [type]        [description]
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $emailReset = $this->getEmailForPasswordReset();
+        return sc_admin_sendmail_reset_notification($token, $emailReset);
+    }
 }

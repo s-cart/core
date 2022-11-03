@@ -315,9 +315,9 @@ class ScartServiceProvider extends ServiceProvider
     protected function middlewareGroups()
     {
         return [
-            'admin' => config('middleware.admin'),
-            'front' => config('middleware.front'),
-            'api.extend' => config('middleware.api_extend'),
+            'admin'           => config('middleware.admin'),
+            'front'           => config('middleware.front'),
+            'api.extend'      => config('middleware.api_extend'),
         ];
     }
 
