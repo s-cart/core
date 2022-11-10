@@ -82,7 +82,7 @@
                                     <select class="form-control group select2" name="group" >
                                         <option value=""></option>
                                         @foreach ($arrGroup as $k => $v)
-                                            <option value="{{ $k }}" {{ (old('group',$link['group']??'') ==$k) ? 'selected':'' }}>{{ $v }}</option>
+                                            <option value="{{ $k }}" {{ (old('group',$link['group']??'') ==$k) ? 'selected':'' }}>{{ $v." (Code: ".$k.")" }}</option>
                                         @endforeach
                                     </select>
                                     <div class="input-group-append">
