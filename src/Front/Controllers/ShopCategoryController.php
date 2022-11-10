@@ -36,7 +36,7 @@ class ShopCategoryController extends RootFrontController
     {
         $sortBy = 'sort';
         $sortOrder = 'asc';
-        $filter_sort = request('filter_sort') ?? '';
+        $filter_sort = sc_request('filter_sort','','string');
         $filterArr = [
             'sort_desc' => ['sort', 'desc'],
             'sort_asc' => ['sort', 'asc'],
@@ -101,7 +101,7 @@ class ShopCategoryController extends RootFrontController
         $sortBy = 'sort';
         $sortOrder = 'asc';
         $arrBrandId = [];
-        $filter_sort = request('filter_sort') ?? '';
+        $filter_sort = sc_request('filter_sort','','string');
         $filterArr = [
             'price_desc' => ['price', 'desc'],
             'price_asc' => ['price', 'asc'],
@@ -115,10 +115,10 @@ class ShopCategoryController extends RootFrontController
             $sortOrder = $filterArr[$filter_sort][1];
         }
 
-        $keyword = request('keyword') ?? '';
-        $bid = request('bid') ?? '';
-        $price = request('price') ?? '';
-        $brand = request('brand') ?? '';
+        $keyword = sc_request('keyword','', 'string');
+        $bid = sc_request('bid','', 'string');
+        $price = sc_request('price','', 'string');
+        $brand = sc_request('brand','', 'string');
 
         if ($bid) {
             $arrBrandId = explode(',', $bid);
