@@ -257,3 +257,26 @@ if (!function_exists('sc_time_now') && !in_array('sc_time_now', config('helper_e
         return (new \Carbon\Carbon)->now($timezone);
     }
 }
+
+if (!function_exists('sc_request') && !in_array('sc_request', config('helper_except', []))) {
+    /**
+     * Return object carbon
+     */
+    function sc_request($key = null, $default = null, string $type = null)
+    {
+
+        if ($type == 'string') {
+            if (is_array(request($key, $default))) {
+                return 'array';
+            }
+        }
+
+        if ($type == 'array') {
+            if (is_string(request($key, $default))) {
+                return [request($key, $default)];
+            }
+        }
+
+        return request($key, $default);
+    }
+}
