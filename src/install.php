@@ -238,6 +238,7 @@ if (request()->method() == 'POST' && request()->ajax()) {
         'writable' => [
             storage_path() => is_writable(storage_path()),
             public_path('data') => is_writable(public_path('data')),
+            public_path('templates') => is_writable(public_path('templates')),
             base_path('vendor') => is_writable(base_path('vendor')),
             base_path('bootstrap/cache') => is_writable(base_path('bootstrap/cache')),
             base_path('app/Plugins') => is_writable(base_path('app/Plugins')),

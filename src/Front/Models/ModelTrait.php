@@ -130,7 +130,7 @@ trait ModelTrait
      * Set keyword search
      * @param   [string]  $keyword
      */
-    public function setKeyword($keyword)
+    public function setKeyword(string $keyword)
     {
         if (trim($keyword)) {
             $this->sc_keyword = trim($keyword);
