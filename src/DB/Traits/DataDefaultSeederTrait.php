@@ -409,7 +409,10 @@ trait DataDefaultSeederTrait
 
     public function dataShopLink() {
         $dataShopLink = [
-            ['id' => 1,'name' => 'front.about','url' => 'route::page.detail::about','target' => '_self','module' => '','group' => 'menu','status' => '1','sort' => '50'],
+            ['id' => 1,'name' => 'front.about','url' => 'route::page.detail::about','target' => '_self','module' => null,'group' => 'menu','type' => null, 'collection_id' => null, 'status' => '1','sort' => '50'],
+            ['id' => 2,'name' => 'S-Cart','url' => '#collection','target' => '_self','module' => null,'group' => 'menu', 'type' => 'collection', 'collection_id' => null, 'status' => '1','sort' => '60'],
+            ['id' => 3,'name' => 'About us','url' => 'https://s-cart.org/en/about.html','target' => '_self','module' => null,'group' => 'menu', 'type' => null, 'collection_id' => 2, 'status' => '1','sort' => '10'],
+            ['id' => 4,'name' => 'Github','url' => 'https://github.com/s-cart/s-cart','target' => '_self','module' => null,'group' => 'menu', 'type' => null, 'collection_id' => 2, 'status' => '1','sort' => '20'],
 
         ];
         return $dataShopLink;
@@ -592,6 +595,14 @@ trait DataDefaultSeederTrait
             );
         }
 
+        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'shop_link', 'type') 
+        AND !\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'shop_link', 'collection_id')) {
+            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'shop_link',
+                function (\Illuminate\Database\Schema\Blueprint $table) {
+                $table->string('type', 100)->nullable()->comment("Distinguish between Link and Collection. \nValue collection|null");
+                $table->string('collection_id', 100)->nullable()->comment("Collection\'s ID");
+            });
+        }
         //End update
     }
 

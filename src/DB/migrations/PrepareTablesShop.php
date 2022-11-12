@@ -116,10 +116,12 @@ class PrepareTablesShop extends Migration
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
                 $table->string('name', 255);
-                $table->string('url', 100);
+                $table->string('url', 100)->nullable();
                 $table->string('target', 100);
-                $table->string('group', 100);
-                $table->string('module', 100)->nullable();
+                $table->string('group', 100)->comment("Location of the link: footer, menu,...");
+                $table->string('module', 100)->nullable()->comment("Related components (plugins, templates).\n Used to track, remove when the relevant component is removed.");
+                $table->string('type', 100)->nullable()->comment("Distinguish between Link and Collection. \nValue collection|null");
+                $table->string('collection_id', 100)->nullable()->comment("Collection\'s ID");
                 $table->tinyInteger('status')->default(0);
                 $table->integer('sort')->default(0);
                 $table->timestamps();

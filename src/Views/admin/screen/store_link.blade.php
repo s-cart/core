@@ -36,6 +36,7 @@
                                 </div>
                             </div>
 
+@if ($layout !='collection')
                             <div class="form-group row {{ $errors->has('url') ? ' text-red' : '' }}">
                                 <label for="url" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.url') }}</label>
                                 <div class="col-sm-8">
@@ -74,6 +75,24 @@
                                         @endif
                                 </div>
                             </div>
+
+                            <div class="form-group row {{ $errors->has('collection_id') ? ' text-red' : '' }}">
+                                <label for="group" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.select_collection') }}</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control collection select2" name="collection_id" >
+                                        <option value="">----</option>
+                                        @foreach ($arrCollection as $k => $v)
+                                            <option value="{{ $k }}" {{ (old('collection_id',$link['collection_id']??'') ==$k) ? 'selected':'' }}>{{ $v." (ID: ".$k.")" }}</option>
+                                        @endforeach
+                                    </select>
+                                        @if ($errors->has('collection_id'))
+                                            <span class="form-text">
+                                                <i class="fa fa-info-circle"></i> {{ $errors->first('collection_id') }}
+                                            </span>
+                                        @endif
+                                </div>
+                            </div>
+@endif
 
                             <div class="form-group row {{ $errors->has('group') ? ' text-red' : '' }}">
                                 <label for="group" class="col-sm-2 col-form-label">{{ sc_language_render('admin.link.select_group') }}</label>

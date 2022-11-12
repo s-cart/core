@@ -20,6 +20,13 @@ class AdminStoreLinkController extends RootAdminController
     {
         return  (new ShopLinkGroup)->pluck('name', 'code')->all();
     }
+
+    public function arrCollection()
+    {
+        return  (new AdminLink)->where('type', 'collection')
+            ->pluck('name', 'id')
+            ->all();
+    }
     public function index()
     {
         $data = [
@@ -43,7 +50,8 @@ class AdminStoreLinkController extends RootAdminController
         $listTh = [
             'name' => sc_language_render('admin.link.name'),
             'url' => sc_language_render('admin.link.url'),
-            'target' => sc_language_render('admin.link.target'),
+            'type' => sc_language_render('admin.link.type'),
+            'collection' => sc_language_render('admin.link.collection'),
             'group' => sc_language_render('admin.link.group'),
             'sort' => sc_language_render('admin.link.sort'),
             'status' => sc_language_render('admin.link.status'),
@@ -73,8 +81,9 @@ class AdminStoreLinkController extends RootAdminController
             $dataMap = [
                 'name' => sc_language_render($row['name']),
                 'url' => $row['url'],
-                'target' => $this->arrTarget[$row['target']] ?? '',
-                'group' => $this->arrGroup()[$row['group']] ?? '',
+                'type' => $row['type'] == 'collection' ? '<span class="badge badge-success">Collection</span>' : 'Single',
+                'collection' => $this->arrCollection()[$row['collection_id']] ?? $row['collection_id'],
+                'group' => $this->arrGroup()[$row['group']] ?? $row['group'],
                 'sort' => $row['sort'],
                 'status' => $row['status'] ? '<span class="badge badge-success">ON</span>' : '<span class="badge badge-danger">OFF</span>',
             ];
@@ -104,8 +113,11 @@ class AdminStoreLinkController extends RootAdminController
 
         //menuRight
         $data['menuRight'][] = '<a href="' . sc_route_admin('admin_store_link.create') . '" class="btn  btn-success  btn-flat" title="New" id="button_create_new">
-                           <i class="fa fa-plus" title="' . sc_language_render('admin.link.add_new') . '"></i>
-                           </a>';
+        <i class="fa fa-plus" title="' . sc_language_render('admin.link.add_new') . '"></i>
+        </a>';
+        $data['menuRight'][] = '<a href="' . sc_route_admin('admin_store_link.collection_create') . '" class="btn btn-success btn-flat" title="'.sc_language_render('admin.link.add_collection_new').'" id="button_create_new">
+        <i class="fas fa-network-wired"></i>
+        </a>';
         //=menuRight
 
         return view($this->templatePathAdmin.'screen.list')
@@ -126,7 +138,31 @@ class AdminStoreLinkController extends RootAdminController
             'link'              => [],
             'arrTarget'         => $this->arrTarget,
             'arrGroup'          => $this->arrGroup(),
+            'arrCollection'           => $this->arrCollection(),
+            'layout'            => 'single',
             'url_action'        => sc_route_admin('admin_store_link.create'),
+        ];
+        return view($this->templatePathAdmin.'screen.store_link')
+            ->with($data);
+    }
+
+    /**
+     * Form create new item in admin
+     * @return [type] [description]
+     */
+    public function collectionCreate()
+    {
+        $data = [
+            'title'             => sc_language_render('admin.link.add_new_collection_title'),
+            'subTitle'          => '',
+            'title_description' => sc_language_render('admin.link.add_new_collection_des'),
+            'icon'              => 'fa fa-plus',
+            'link'              => [],
+            'arrTarget'         => $this->arrTarget,
+            'arrGroup'          => $this->arrGroup(),
+            'arrCollection'           => $this->arrCollection(),
+            'layout'            => 'collection',
+            'url_action'        => sc_route_admin('admin_store_link.collection_create'),
         ];
         return view($this->templatePathAdmin.'screen.store_link')
             ->with($data);
@@ -141,10 +177,11 @@ class AdminStoreLinkController extends RootAdminController
         $data = request()->all();
         $dataOrigin = request()->all();
         $validator = Validator::make($dataOrigin, [
-            'name'   => 'required',
-            'url'    => 'required',
-            'group'  => 'required',
-            'target' => 'required',
+            'name'   => 'required|string',
+            'url'    => 'required|string',
+            'group'  => 'required|string',
+            'target' => 'required|string',
+            'collection_id' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -157,6 +194,47 @@ class AdminStoreLinkController extends RootAdminController
             'name'     => $data['name'],
             'url'      => $data['url'],
             'target'   => $data['target'],
+            'group'    => $data['group'],
+            'collection_id'  => $data['collection_id'],
+            'type'     => '', // link single
+            'sort'     => $data['sort'],
+            'status'   => empty($data['status']) ? 0 : 1,
+        ];
+        $dataCreate = sc_clean($dataCreate, [], true);
+        $link = AdminLink::createLinkAdmin($dataCreate);
+
+        $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
+        $link->stores()->detach();
+        if ($shopStore) {
+            $link->stores()->attach($shopStore);
+        }
+
+        return redirect()->route('admin_store_link.index')->with('success', sc_language_render('action.create_success'));
+    }
+
+    /**
+     * Post create new item in admin
+     * @return [type] [description]
+     */
+    public function postCollectionCreate()
+    {
+        $data = request()->all();
+        $dataOrigin = request()->all();
+        $validator = Validator::make($dataOrigin, [
+            'name'   => 'required|string',
+            'group'  => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $dataCreate = [
+            'name'     => $data['name'],
+            'url'      => 'collection',
+            'type'     => 'collection',
+            'target'   => 'blank',
             'group'    => $data['group'],
             'sort'     => $data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
@@ -183,14 +261,16 @@ class AdminStoreLinkController extends RootAdminController
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
         $data = [
-            'title' => sc_language_render('action.edit'),
-            'subTitle' => '',
+            'title'             => sc_language_render('action.edit'),
+            'subTitle'          => '',
             'title_description' => '',
-            'icon' => 'fa fa-edit',
-            'link' => $link,
-            'arrTarget' => $this->arrTarget,
-            'arrGroup' => $this->arrGroup(),
-            'url_action' => sc_route_admin('admin_store_link.edit', ['id' => $link['id']]),
+            'icon'              => 'fa fa-edit',
+            'link'              => $link,
+            'arrTarget'         => $this->arrTarget,
+            'arrCollection'           => $this->arrCollection(),
+            'arrGroup'          => $this->arrGroup(),
+            'layout'            => $link->type == 'collection' ? 'collection': 'single',
+            'url_action'        => sc_route_admin('admin_store_link.edit', ['id' => $link['id']]),
         ];
         return view($this->templatePathAdmin.'screen.store_link')
             ->with($data);
@@ -205,14 +285,22 @@ class AdminStoreLinkController extends RootAdminController
         if (!$link) {
             return redirect()->route('admin.data_not_found')->with(['url' => url()->full()]);
         }
+        $type = $link->type;
+
         $data = request()->all();
         $dataOrigin = request()->all();
-        $validator = Validator::make($dataOrigin, [
-            'name'   => 'required',
-            'url'    => 'required',
+        $arrValidate = [
+            'name'   => 'required|string',
             'group'  => 'required',
-            'target' => 'required',
-        ]);
+        ];
+        
+        if ($type != "collection") {
+            $arrValidate['collection_id'] = 'nullable|string';
+            $arrValidate['url'] = 'required|string';
+            $arrValidate['target'] = 'required|string';
+        }
+
+        $validator = Validator::make($dataOrigin, $arrValidate);
 
         if ($validator->fails()) {
             // dd($validator->messages());
@@ -223,12 +311,17 @@ class AdminStoreLinkController extends RootAdminController
         //Edit
         $dataUpdate = [
             'name'     => $data['name'],
-            'url'      => $data['url'],
-            'target'   => $data['target'],
             'group'    => $data['group'],
             'sort'     => $data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
         ];
+
+        if ($type != "collection") {
+            $dataUpdate['url'] = $data['url'];
+            $dataUpdate['collection_id'] = $data['collection_id'];
+            $dataUpdate['target'] = $data['target'];
+        }
+
         $dataUpdate = sc_clean($dataUpdate, [], true);
         $link->update($dataUpdate);
 

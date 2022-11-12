@@ -60,7 +60,7 @@ class AdminStoreLinkGroupController extends RootAdminController
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'index';
-        return view($this->templatePathAdmin.'screen.banner_type')
+        return view($this->templatePathAdmin.'screen.store_link_group')
             ->with($data);
     }
 
@@ -150,7 +150,7 @@ class AdminStoreLinkGroupController extends RootAdminController
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'edit';
-        return view($this->templatePathAdmin.'screen.banner_type')
+        return view($this->templatePathAdmin.'screen.store_link_group')
         ->with($data);
     }
 

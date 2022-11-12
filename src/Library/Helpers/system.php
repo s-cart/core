@@ -225,15 +225,22 @@ if (!function_exists('sc_store_css')) {
 }
 
 
-/*
-Get all block content
- */
+
 if (!function_exists('sc_link') && !in_array('sc_link', config('helper_except', []))) {
     function sc_link()
     {
         return ShopLink::getGroup();
     }
 }
+
+
+if (!function_exists('sc_link_collection') && !in_array('sc_link_collection', config('helper_except', []))) {
+    function sc_link_collection()
+    {
+        return ShopLink::getLinksCollection();
+    }
+}
+
 
 if (!function_exists('sc_get_all_template') && !in_array('sc_get_all_template', config('helper_except', []))) {
     /*
