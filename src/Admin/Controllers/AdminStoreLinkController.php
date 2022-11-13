@@ -50,7 +50,6 @@ class AdminStoreLinkController extends RootAdminController
         $listTh = [
             'name' => sc_language_render('admin.link.name'),
             'url' => sc_language_render('admin.link.url'),
-            'type' => sc_language_render('admin.link.type'),
             'collection' => sc_language_render('admin.link.collection'),
             'group' => sc_language_render('admin.link.group'),
             'sort' => sc_language_render('admin.link.sort'),
@@ -79,9 +78,8 @@ class AdminStoreLinkController extends RootAdminController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataMap = [
-                'name' => sc_language_render($row['name']),
+                'name' => ($row['type'] == 'collection' ? '<span class="badge badge-warning"><i class="fas fa-folder-open"></i></span> ' : ' ').sc_language_render($row['name']),
                 'url' => $row['url'],
-                'type' => $row['type'] == 'collection' ? '<span class="badge badge-success">Collection</span>' : 'Single',
                 'collection' => $this->arrCollection()[$row['collection_id']] ?? $row['collection_id'],
                 'group' => $this->arrGroup()[$row['group']] ?? $row['group'],
                 'sort' => $row['sort'],
