@@ -183,7 +183,7 @@ class AdminStoreLinkController extends RootAdminController
         ]);
 
         if ($validator->fails()) {
-            // dd($validator->messages());
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -301,7 +301,7 @@ class AdminStoreLinkController extends RootAdminController
         $validator = Validator::make($dataOrigin, $arrValidate);
 
         if ($validator->fails()) {
-            // dd($validator->messages());
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();

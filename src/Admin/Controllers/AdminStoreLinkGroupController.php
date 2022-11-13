@@ -80,7 +80,7 @@ class AdminStoreLinkGroupController extends RootAdminController
         ]);
 
         if ($validator->fails()) {
-            // dd($validator->messages());
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -170,7 +170,7 @@ class AdminStoreLinkGroupController extends RootAdminController
         ]);
 
         if ($validator->fails()) {
-            // dd($validator->messages());
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();

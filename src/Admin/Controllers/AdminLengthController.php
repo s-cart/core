@@ -82,7 +82,7 @@ class AdminLengthController extends RootAdminController
         ]);
 
         if ($validator->fails()) {
-            // dd($validator->messages());
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -173,7 +173,7 @@ class AdminLengthController extends RootAdminController
         ]);
 
         if ($validator->fails()) {
-            // dd($validator->messages());
+
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();

@@ -334,10 +334,10 @@ trait DataDefaultSeederTrait
 
     public function dataAdminStoreDescription($titleE, $titleV) {
         $dataAdminStoreDescription = [
-            ['store_id' => '1','lang' => 'en','title' => $titleE,'description' => 'Free website shopping cart for business','keyword' => '','maintain_content' => '<center><img src="/images/maintenance.png" />
+            ['store_id' => SC_ID_ROOT,'lang' => 'en','title' => $titleE,'description' => 'Free website shopping cart for business','keyword' => '','maintain_content' => '<center><img src="/images/maintenance.png" />
             <h3><span style="color:#e74c3c;"><strong>Sorry! We are currently doing site maintenance!</strong></span></h3>
             </center>','maintain_note' => 'Website is in maintenance mode!'],
-            ['store_id' => '1','lang' => 'vi','title' => $titleV,'description' => 'Laravel shopping cart for business','keyword' => '','maintain_content' => '<center><img src="/images/maintenance.png" />
+            ['store_id' => SC_ID_ROOT,'lang' => 'vi','title' => $titleV,'description' => 'Laravel shopping cart for business','keyword' => '','maintain_content' => '<center><img src="/images/maintenance.png" />
             <h3><span style="color:#e74c3c;"><strong>Xin lỗi! Hiện tại website đang bảo trì!</strong></span></h3>
             </center>','maintain_note' => 'Website đang trong chế độ bảo trì!'],
         ];
@@ -420,7 +420,7 @@ trait DataDefaultSeederTrait
 
     public function dataShopLinkStore($dataShopLink) {
         foreach ($dataShopLink as $key => $row) {
-            $dataShopLinkStore[] = ['link_id' => $row['id'],'store_id' => '1'];
+            $dataShopLinkStore[] = ['link_id' => $row['id'],'store_id' => SC_ID_ROOT];
         }
         return $dataShopLinkStore;
     }
@@ -470,7 +470,7 @@ trait DataDefaultSeederTrait
     public function dataPageStore($dataPage) {
         $dataPageStore = [];
         foreach ($dataPage as $key => $row) {
-            $dataPageStore[] = ['page_id' => $row['id'],'store_id' => '1'];
+            $dataPageStore[] = ['page_id' => $row['id'],'store_id' => SC_ID_ROOT];
         }
         return $dataPageStore;
     }
