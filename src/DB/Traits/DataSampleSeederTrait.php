@@ -110,7 +110,7 @@ trait DataSampleSeederTrait
         $dataNewsStore = [];
         foreach ($ids as $key => $id) {
             $dataNewsStore[] = [
-                'news_id' => $id, 'store_id' => 1
+                'news_id' => $id, 'store_id' => SC_ID_ROOT
             ];
         }
         return $dataNewsStore;
@@ -146,7 +146,7 @@ trait DataSampleSeederTrait
         $dataCategoryStore = [];
         foreach ($dataCate as  $cate) {
             $dataCategoryStore[] = [
-                'category_id' => $cate['id'], 'store_id' => 1
+                'category_id' => $cate['id'], 'store_id' => SC_ID_ROOT
             ];
         }
         return $dataCategoryStore;
@@ -169,8 +169,8 @@ trait DataSampleSeederTrait
         $dataSupplier = [];
         $id1 = (string)Str::orderedUuid();
         $id2 = (string)Str::orderedUuid();
-        $dataSupplier[$id1] = ['id' => $id1, 'alias' => 'supplier-abc', 'name' => 'Supplier ABC','email' => 'abc@gmail.com','phone' => '0123456789', 'image' => '/data/supplier/supplier.jpg', 'store_id' => 1];
-        $dataSupplier[$id2] = ['id' => $id2, 'alias' => 'supplier-xyz', 'name' => 'Supplier XYZ','email' => 'xyz@gmail.com','phone' => '0987654321', 'image' => '/data/supplier/supplier.jpg', 'store_id' => 1];
+        $dataSupplier[$id1] = ['id' => $id1, 'alias' => 'supplier-abc', 'name' => 'Supplier ABC','email' => 'abc@gmail.com','phone' => '0123456789', 'image' => '/data/supplier/supplier.jpg', 'store_id' => SC_ID_ROOT];
+        $dataSupplier[$id2] = ['id' => $id2, 'alias' => 'supplier-xyz', 'name' => 'Supplier XYZ','email' => 'xyz@gmail.com','phone' => '0987654321', 'image' => '/data/supplier/supplier.jpg', 'store_id' => SC_ID_ROOT];
         return $dataSupplier;
     }
 
@@ -195,7 +195,7 @@ trait DataSampleSeederTrait
         $dataBrandStore = [];
         foreach ($dataBrand as  $brand) {
             $dataBrandStore[] = [
-                'brand_id' => $brand['id'], 'store_id' => 1
+                'brand_id' => $brand['id'], 'store_id' => SC_ID_ROOT
             ];
         }
         return $dataBrandStore;
@@ -214,7 +214,7 @@ trait DataSampleSeederTrait
         $dataBannerStore = [];
         foreach ($dataBanner as  $banner) {
             $dataBannerStore[] = [
-                'banner_id' => $banner['id'], 'store_id' => 1
+                'banner_id' => $banner['id'], 'store_id' => SC_ID_ROOT
             ];
         }
         return $dataBannerStore;
@@ -364,7 +364,7 @@ trait DataSampleSeederTrait
         $dataProductStore = [];
         foreach ($arrayIdProduct as  $id) {
             $dataProductStore[] = [
-                'product_id' => $id, 'store_id' => 1
+                'product_id' => $id, 'store_id' => SC_ID_ROOT
             ];
         }
         return $dataProductStore;
