@@ -44,10 +44,7 @@ function sc_process_css_default($storeId = null) {
 
 //Setup for every store
 function sc_template_install_store($storeId = null) {
-        $storeId = $storeId ? $storeId : session('adminStoreId');
-    //Uninstall for store before install
-    sc_template_uninstall_store($storeId);
-
+    $storeId = $storeId ? $storeId : session('adminStoreId');
     $dataInsert[] = [
         'id'       => sc_uuid(),
         'name'     => 'Banner top (your-template-name)',
@@ -124,7 +121,7 @@ function sc_template_uninstall_store($storeId = null) {
         if ($idBanners) {
             \SCart\Core\Front\Models\ShopBannerStore::whereIn('banner_id', $idBanners)
             ->delete();
-            \SCart\Core\Front\Models\ShopBanner::where('title', 'like', '%(your-template-name)%')
+            \SCart\Core\Front\Models\ShopBanner::whereIn('id', $idBanners)
             ->delete();
         }
         \SCart\Core\Front\Models\ShopStoreCss::where('template', 'your-template-name')
