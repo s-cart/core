@@ -111,18 +111,18 @@ trait ModelTrait
      * Enable paginate mode
      *  0 - no paginate
      */
-    public function setPaginate()
+    public function setPaginate(int $value = 1)
     {
-        $this->sc_paginate = 1;
+        $this->sc_paginate = $value;
         return $this;
     }
 
     /**
      * Set random mode
      */
-    public function setRandom()
+    public function setRandom(int $value = 1)
     {
-        $this->sc_random = 1;
+        $this->sc_random = $value;
         return $this;
     }
     
