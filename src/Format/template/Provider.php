@@ -1,4 +1,16 @@
 <?php
+/**
+ * [sc_template_info description]
+ *
+ * @return  [type]  [return description]
+ */
+function sc_template_info() {
+    $config = [];
+    if (file_exists($fileConfig = __DIR__.'/config.json')) {
+        $config = json_decode(file_get_contents($fileConfig), true);
+    }
+    return $config;
+}
 
 /**
  * Install template
@@ -35,10 +47,10 @@ function sc_template_uninstall($data = []) {
 function sc_process_css_default($storeId = null) {
         if ($storeId) {
         $cssContent = '';
-        if (file_exists($path = resource_path() . '/views/templates/your-template-name/css_default.css')) {
+        if (file_exists($path = resource_path() . '/views/templates/'.sc_template_info()['configKey'].'/css_default.css')) {
             $cssContent = file_get_contents($path);
         }
-        \SCart\Core\Front\Models\ShopStoreCss::insert(['css' => $cssContent, 'store_id' => $storeId, 'template' => 'your-template-name']);
+        \SCart\Core\Front\Models\ShopStoreCss::insert(['css' => $cssContent, 'store_id' => $storeId, 'template' => sc_template_info()['configKey']]);
     }
 }
 
@@ -47,14 +59,14 @@ function sc_template_install_store($storeId = null) {
     $storeId = $storeId ? $storeId : session('adminStoreId');
     $dataInsert[] = [
         'id'       => sc_uuid(),
-        'name'     => 'Banner top (your-template-name)',
+        'name'     => 'Banner top ('.sc_template_info()['configKey'].')',
         'position' => 'banner_top',
         'page'     => 'home',
         'text'     => 'banner_image',
         'type'     => 'view',
         'sort'     => 10,
         'status'   => 1,
-        'template' => 'your-template-name',
+        'template' => sc_template_info()['configKey'],
         'store_id' => $storeId,
     ];
     \SCart\Core\Admin\Models\AdminStoreBlockContent::insert($dataInsert);
@@ -62,7 +74,7 @@ function sc_template_install_store($storeId = null) {
     $modelBanner = new \SCart\Core\Front\Models\ShopBanner;
     $modelBannerStore = new \SCart\Core\Front\Models\ShopBannerStore; 
 
-    $idBanner = $modelBanner->create(['title' => 'Banner store (your-template-name)', 'image' => '/data/banner/banner-store.jpg', 'target' => '_self', 'html' => '', 'status' => 1, 'type' => 'banner-store']);
+    $idBanner = $modelBanner->create(['title' => 'Banner store ('.sc_template_info()['configKey'].')', 'image' => '/data/banner/banner-store.jpg', 'target' => '_self', 'html' => '', 'status' => 1, 'type' => 'banner-store']);
     $modelBannerStore->create(['banner_id' => $idBanner->id, 'store_id' => $storeId]);
 
     //Insert css default
@@ -92,14 +104,14 @@ function sc_template_uninstall_default() {}
  */
 function sc_template_uninstall_store($storeId = null) {
         if ($storeId) {
-        \SCart\Core\Admin\Models\AdminStoreBlockContent::where('template', 'your-template-name')
+        \SCart\Core\Admin\Models\AdminStoreBlockContent::where('template', sc_template_info()['configKey'])
             ->where('store_id', $storeId)
             ->delete();
         $tableBanner = (new \SCart\Core\Front\Models\ShopBanner)->getTable();
         $tableBannerStore = (new \SCart\Core\Front\Models\ShopBannerStore)->getTable();
         $idBanners = (new \SCart\Core\Front\Models\ShopBanner)
             ->join($tableBannerStore, $tableBannerStore.'.banner_id', $tableBanner.'.id')
-            ->where($tableBanner.'.title', 'like', '%(your-template-name)%')
+            ->where($tableBanner.'.title', 'like', '%('.sc_template_info()['configKey'].')%')
             ->where($tableBannerStore.'.store_id', $storeId)
             ->pluck('id');
 
@@ -109,14 +121,14 @@ function sc_template_uninstall_store($storeId = null) {
             \SCart\Core\Front\Models\ShopBanner::whereIn('id', $idBanners)
             ->delete();
         }
-        \SCart\Core\Front\Models\ShopStoreCss::where('template', 'your-template-name')
+        \SCart\Core\Front\Models\ShopStoreCss::where('template', sc_template_info()['configKey'])
         ->where('store_id', $storeId)
         ->delete();
     } else {
         // Remove from all stories
-        \SCart\Core\Admin\Models\AdminStoreBlockContent::where('template', 'your-template-name')
+        \SCart\Core\Admin\Models\AdminStoreBlockContent::where('template', sc_template_info()['configKey'])
             ->delete();
-        $idBanners = \SCart\Core\Front\Models\ShopBanner::where('title', 'like', '%(your-template-name)%')
+        $idBanners = \SCart\Core\Front\Models\ShopBanner::where('title', 'like', '%('.sc_template_info()['configKey'].')%')
             ->pluck('id');
         if ($idBanners) {
             \SCart\Core\Front\Models\ShopBannerStore::whereIn('banner_id', $idBanners)
@@ -124,7 +136,7 @@ function sc_template_uninstall_store($storeId = null) {
             \SCart\Core\Front\Models\ShopBanner::whereIn('id', $idBanners)
             ->delete();
         }
-        \SCart\Core\Front\Models\ShopStoreCss::where('template', 'your-template-name')
+        \SCart\Core\Front\Models\ShopStoreCss::where('template', sc_template_info()['configKey'])
         ->delete();
     }
 }
