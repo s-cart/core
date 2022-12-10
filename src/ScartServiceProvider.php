@@ -47,18 +47,19 @@ class ScartServiceProvider extends ServiceProvider
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
         $this->loadTranslationsFrom(__DIR__.'/Lang', 's-cart');
 
-        if (!file_exists(public_path('install.php')) && file_exists(base_path('.env'))) {
-            //Load helper from front
-            try {
-                foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
-                    require_once $filename;
-                }
-            } catch (\Throwable $e) {
-                $msg = '#SC001::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
-                // sc_report($msg);
-                echo $msg;
-                exit;
+        //Load helper from front
+        try {
+            foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
+                require_once $filename;
             }
+        } catch (\Throwable $e) {
+            $msg = '#SC001::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
+            // sc_report($msg);
+            echo $msg;
+            exit;
+        }
+
+        if (!file_exists(public_path('install.php')) && file_exists(base_path('.env'))) {
 
             //Load helper from vendor
             try {
