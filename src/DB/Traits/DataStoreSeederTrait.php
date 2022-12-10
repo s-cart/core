@@ -6,6 +6,9 @@ use Illuminate\Support\Str;
 
 trait DataStoreSeederTrait
 {
+    public function getTemplateDefault() {
+        return  empty(session('lastStoreTemplate')) ? 's-cart-light' : session('lastStoreTemplate');
+    }
     /**
      * Run the database seeds.
      *
@@ -20,21 +23,23 @@ trait DataStoreSeederTrait
         $dataConfig = $this->dataConfig($storeId);
         $db->table(SC_DB_PREFIX.'admin_config')->insert($dataConfig);
 
-        $dataStoreCss = $this->dataStoreCss($storeId);
-        $db->table(SC_DB_PREFIX.'shop_store_css')->insert($dataStoreCss);
-
         $dataEmailTemplate = $this->dataEmailTemplate($storeId);
         $db->table(SC_DB_PREFIX.'shop_email_template')->insert($dataEmailTemplate);
         
-        $dataStoreBlock = $this->dataStoreBlock($storeId);
-        $db->table(SC_DB_PREFIX.'shop_store_block')->insert($dataStoreBlock);
-            
         $dataShopLink = $this->dataShopLink();
         $db->table(SC_DB_PREFIX.'shop_link')->insert($dataShopLink);
 
         $dataShopLinkStore = $this->dataShopLinkStore($dataShopLink, $storeId);
         $db->table(SC_DB_PREFIX.'shop_link_store')->insert($dataShopLinkStore);
 
+
+        if (file_exists($fileProcess = resource_path() . '/views/templates/'.$this->getTemplateDefault().'/Provider.php')) {
+            include_once $fileProcess;
+            if (function_exists('sc_template_install_store')) {
+                //Insert only specify store
+                sc_template_install_store($storeId);
+            }
+        } 
     }
     
     public function dataConfig($storeId) {
@@ -159,13 +164,6 @@ trait DataStoreSeederTrait
             ['group' => '','code' => 'config_layout','key' => 'link_cart','value' => '1','sort' => '0','detail' => 'admin.config_layout.link_cart','store_id' => $storeId],
         ];
         return $dataConfig;
-    }
-
-    public function dataStoreCss($storeId) {
-        $dataStoreCss = [
-            ['css' => '','store_id' => $storeId,'template' => 's-cart-light'],
-        ];
-        return $dataStoreCss;
     }
 
     public function dataEmailTemplate($storeId) {
@@ -357,21 +355,6 @@ trait DataStoreSeederTrait
 </table>','status' => '1','store_id' => $storeId],
         ];
         return $dataEmailTemplate;
-    }
-
-
-    public function dataStoreBlock($storeId) {
-        $dataStoreBlock = [
-            ['id' => (string)Str::orderedUuid(),'name' => 'Product special','position' => 'left','page' => '*','type' => 'view','text' => 'product_special_left','status' => '1','sort' => '20','store_id' => $storeId,'template' => 's-cart-light'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'Brands','position' => 'left','page' => '*','type' => 'view','text' => 'brand_left','status' => '1','sort' => '30','store_id' => $storeId,'template' => 's-cart-light'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'Banner home','position' => 'banner_top','page' => 'home','type' => 'view','text' => 'banner_image','status' => '1','sort' => '10','store_id' => $storeId,'template' => 's-cart-light'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'Category','position' => 'left','page' => 'home,shop_home','type' => 'view','text' => 'category_left','status' => '1','sort' => '20','store_id' => $storeId,'template' => 's-cart-light'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'Product last view','position' => 'left','page' => '*','type' => 'view','text' => 'product_lastview_left','status' => '1','sort' => '30','store_id' => $storeId,'template' => 's-cart-light'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'Products new','position' => 'top','page' => 'home','type' => 'view','text' => 'product_new','status' => '1','sort' => '10','store_id' => $storeId,'template' => 's-cart-light'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'Category store','position' => 'left','page' => 'shop_home,vendor_home,vendor_product_list','type' => 'view','text' => 'category_store_left','status' => '1','sort' => '10','store_id' => $storeId,'template' => 's-cart-light'],
-            ['id' => (string)Str::orderedUuid(),'name' => 'Top news','position' => 'top','page' => 'home','type' => 'view','text' => 'top_news','status' => '1','sort' => '10','store_id' => $storeId,'template' => 's-cart-light'],
-        ];
-        return $dataStoreBlock;
     }
 
     public function dataShopLink() {

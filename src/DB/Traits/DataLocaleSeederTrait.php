@@ -1391,6 +1391,8 @@ trait DataLocaleSeederTrait
             ['code' => 'contact.page_title','text' => 'Contact page','position' => 'contact','location' => 'en'],
             ['code' => 'contact.thank_contact','text' => 'Cảm ơn vì bạn đã liên hệ','position' => 'contact','location' => 'vi'],
             ['code' => 'contact.thank_contact','text' => 'Thank you for your contact','position' => 'contact','location' => 'en'],
+            ['code' => 'filter_sort.button','text' => 'Lọc sản phẩm','position' => 'filter_sort','location' => 'vi'],
+            ['code' => 'filter_sort.button','text' => 'Filter product','position' => 'filter_sort','location' => 'en'],
             ['code' => 'filter_sort.sort','text' => 'Thứ tự','position' => 'filter_sort','location' => 'vi'],
             ['code' => 'filter_sort.sort','text' => 'Sort','position' => 'filter_sort','location' => 'en'],
             ['code' => 'filter_sort.price_asc','text' => 'Giá tăng dần','position' => 'filter_sort','location' => 'vi'],

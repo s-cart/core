@@ -522,11 +522,13 @@ trait DataDefaultSeederTrait
 
     public function dataBannerType() {
         $dataBannerType = [
-            ['id' => '1','code' => 'banner','name' => 'Banner website'],
+            ['id' => '1','code' => 'banner','name' => 'Banner main'],
             ['id' => '2','code' => 'background','name' =>'Background website'],
-            ['id' => '3','code' => 'breadcrumb','name' =>'Breadcrumb website'],
+            ['id' => '3','code' => 'breadcrumb','name' =>'Breadcrumb'],
             ['id' => '4','code' => 'banner-store','name' =>'Banner store'],
-            ['id' => '5','code' => 'other','name' =>'Other'],
+            ['id' => '5','code' => 'banner-left','name' =>'Banner left'],
+            ['id' => '6','code' => 'banner-right','name' =>'Banner right'],
+            ['id' => '7','code' => 'other','name' =>'Other'],
         ];
         return $dataBannerType;
     }

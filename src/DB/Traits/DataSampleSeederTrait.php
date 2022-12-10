@@ -118,7 +118,7 @@ trait DataSampleSeederTrait
 
     public function arrayIdCategory() {
         $ids = [];
-        for ($i=1; $i <= 13; $i++) {
+        for ($i=1; $i <= 27; $i++) {
             $ids[$i] = (string)Str::orderedUuid();
         }
         return $ids;
@@ -126,19 +126,33 @@ trait DataSampleSeederTrait
 
     public function dataCategory($arrayIdCategory) {
         $dataCategory = [];
-        $dataCategory[] = ['id' => $arrayIdCategory[1], 'alias' => 'am-thuc', 'image' => '/data/category/category.jpg', 'parent' => 0, 'top' => 1, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[2], 'alias' => 'trai-cay', 'image' => '/data/category/category.jpg', 'parent' => 0, 'top' => 1, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[3], 'alias' => 'thu-cong-my-nghe', 'image' => '/data/category/category.jpg', 'parent' => 0, 'top' => 1, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[4], 'alias' => 'bun-pho', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[1], 'top' => 1, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[5], 'alias' => 'banh-my', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[1], 'top' => 1, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[6], 'alias' => 'trai-cay-nam-bo', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[2], 'top' => 1, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[7], 'alias' => 'trai-cay-mien-bac', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[2], 'top' => 1, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[8], 'alias' => 'che-thai-nguyen', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[2], 'top' => 0, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[9], 'alias' => 'toi-ly-son', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[2], 'top' => 0, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[10], 'alias' => 'gom-bat-trang', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[3], 'top' => 1, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[11], 'alias' => 'tranh-dong-ho', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[3], 'top' => 0, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[12], 'alias' => 'du-lich', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[3], 'top' => 0, 'sort' => 0, 'status' => 1];
-        $dataCategory[] = ['id' => $arrayIdCategory[13], 'alias' => 'nhac-co-truyen', 'image' => '/data/category/category.jpg', 'parent' => $arrayIdCategory[2], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[1], 'alias' => 'am-thuc', 'image' => '/data/category/laptop1.png', 'parent' => 0, 'top' => 1, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[2], 'alias' => 'du-lich', 'image' => '/data/category/headphone1.png', 'parent' => 0, 'top' => 1, 'sort' => 1, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[3], 'alias' => 'my-nghe', 'image' => '/data/category/phone1.png', 'parent' => 0, 'top' => 1, 'sort' => 2, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[4], 'alias' => 'van-hoa', 'image' => '/data/category/camera1.png', 'parent' => 0, 'top' => 1, 'sort' => 3, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[5], 'alias' => 'the-thao', 'image' => '/data/category/wifi1.png', 'parent' => 0, 'top' => 1, 'sort' => 4, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[6], 'alias' => 'cong-nghe', 'image' => '/data/category/iot1.png', 'parent' => 0, 'top' => 1, 'sort' => 5, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[7], 'alias' => 'ky-thuat', 'image' => '/data/category/usb1.png', 'parent' => 0, 'top' => 1, 'sort' => 6, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[8], 'alias' => 'dich-vu', 'image' => '/data/category/service1.png', 'parent' => 0, 'top' => 1, 'sort' => 7, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[9], 'alias' => 'banh-my-sai-gon', 'image' => '/data/category/speaker1.png', 'parent' => $arrayIdCategory[5], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[10], 'alias' => 'gom-bat-trang', 'image' => '/data/category/laptop6.png', 'parent' => $arrayIdCategory[4], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[11], 'alias' => 'dan-ca-quan-ho', 'image' => '/data/category/cpu1.png', 'parent' => $arrayIdCategory[6], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[12], 'alias' => 'don-ca-tai-tu', 'image' => '/data/category/cpu2.png', 'parent' => $arrayIdCategory[6], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[13], 'alias' => 'nem-chua', 'image' => '/data/category/blueetooth2.png', 'parent' => $arrayIdCategory[3], 'top' => 1, 'sort' => 7, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[14], 'alias' => 'toi-ly-son', 'image' => '/data/category/wifi2.png', 'parent' => $arrayIdCategory[5], 'top' => 1, 'sort' => 20, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[15], 'alias' => 'phong-nha-kebang', 'image' => '/data/category/headphone3.png', 'parent' => $arrayIdCategory[2], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[16], 'alias' => 'pho-nam-dinh', 'image' => '/data/category/laptop2.png', 'parent' => $arrayIdCategory[1], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[17], 'alias' => 'com-lang-vong', 'image' => '/data/category/laptop3.png', 'parent' => $arrayIdCategory[1], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[18], 'alias' => 'bun-cha-hanoi', 'image' => '/data/category/laptop4.png', 'parent' => $arrayIdCategory[1], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[19], 'alias' => 'com-tam-an-giang', 'image' => '/data/category/laptop5.png', 'parent' => $arrayIdCategory[6], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[20], 'alias' => 'vinh-ha-long', 'image' => '/data/category/headphone2.png', 'parent' => $arrayIdCategory[2], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[21], 'alias' => 'lua-ha-dong', 'image' => '/data/category/camera1.png', 'parent' => $arrayIdCategory[4], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[22], 'alias' => 'non-quai-thao', 'image' => '/data/category/camera2.png', 'parent' => $arrayIdCategory[4], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[23], 'alias' => 'tranh-dong-ho', 'image' => '/data/category/monitor2.png', 'parent' => $arrayIdCategory[3], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[24], 'alias' => 'trai-cay-nam-bo', 'image' => '/data/category/monitor1.png', 'parent' => $arrayIdCategory[3], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[25], 'alias' => 'chieu-coi-nga-son', 'image' => '/data/category/phone2.png', 'parent' => $arrayIdCategory[3], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[26], 'alias' => 'nhac-co-truyen', 'image' => '/data/category/server1.png', 'parent' => $arrayIdCategory[2], 'top' => 0, 'sort' => 0, 'status' => 1];
+        $dataCategory[] = ['id' => $arrayIdCategory[27], 'alias' => 'con-dao', 'image' => '/data/category/print1.png', 'parent' => $arrayIdCategory[2], 'top' => 1, 'sort' => 10, 'status' => 1];
         return $dataCategory;
     }
 
@@ -176,18 +190,19 @@ trait DataSampleSeederTrait
 
     public function dataBrand() {
         $dataBrand = [];
-        for ($i=1; $i <=9 ; $i++) { 
+        for ($i=1; $i <=10 ; $i++) { 
             ${'id'.$i} = (string)(string)Str::orderedUuid();
         }
-        $dataBrand[$id1] = ['id' => $id1, 'alias' => 'danang', 'name' => 'DaNang','image' => '/data/brand/brand.jpg','status' =>1];
-        $dataBrand[$id2] = ['id' => $id2, 'alias' => 'saigon', 'name' => 'SaiGon','image' => '/data/brand/brand.jpg','status' =>1];
-        $dataBrand[$id3] = ['id' => $id3, 'alias' => 'hanoi', 'name' => 'HaNoi','image' => '/data/brand/brand.jpg','status' =>1];
-        $dataBrand[$id4] = ['id' => $id4, 'alias' => 'bentre', 'name' => 'BenTre','image' => '/data/brand/brand.jpg','status' =>1];
-        $dataBrand[$id5] = ['id' => $id5, 'alias' => 'nghean', 'name' => 'NgheAn','image' => '/data/brand/brand.jpg','status' =>1];
-        $dataBrand[$id6] = ['id' => $id6, 'alias' => 'longan', 'name' => 'LongAn','image' => '/data/brand/brand.jpg','status' =>1];
-        $dataBrand[$id7] = ['id' => $id7, 'alias' => 'camau', 'name' => 'CaMau','image' => '/data/brand/brand.jpg','status' =>1];
-        $dataBrand[$id8] = ['id' => $id8, 'alias' => 'hagiang', 'name' => 'HaGiang','image' => '/data/brand/brand.jpg','status' =>1];
-        $dataBrand[$id9] = ['id' => $id9, 'alias' => 'thanhhoa', 'name' => 'ThanhHoa','image' => '/data/brand/brand.jpg','status' =>1];
+        $dataBrand[$id1] = ['id' => $id1, 'alias' => 'danang', 'name' => 'DaNang','image' => '/data/brand/acer.png','status' =>1];
+        $dataBrand[$id2] = ['id' => $id2, 'alias' => 'saigon', 'name' => 'SaiGon','image' => '/data/brand/assus.png','status' =>1];
+        $dataBrand[$id3] = ['id' => $id3, 'alias' => 'hanoi', 'name' => 'HaNoi','image' => '/data/brand/casio.png','status' =>1];
+        $dataBrand[$id4] = ['id' => $id4, 'alias' => 'bentre', 'name' => 'BenTre','image' => '/data/brand/dell.png','status' =>1];
+        $dataBrand[$id5] = ['id' => $id5, 'alias' => 'nghean', 'name' => 'NgheAn','image' => '/data/brand/microsoft.png','status' =>1];
+        $dataBrand[$id6] = ['id' => $id6, 'alias' => 'longan', 'name' => 'LongAn','image' => '/data/brand/nokia.png','status' =>1];
+        $dataBrand[$id7] = ['id' => $id7, 'alias' => 'camau', 'name' => 'CaMau','image' => '/data/brand/panasonic.png','status' =>1];
+        $dataBrand[$id8] = ['id' => $id8, 'alias' => 'hagiang', 'name' => 'HaGiang','image' => '/data/brand/sharp.png','status' =>1];
+        $dataBrand[$id9] = ['id' => $id9, 'alias' => 'thanhhoa', 'name' => 'ThanhHoa','image' => '/data/brand/sony.png','status' =>1];
+        $dataBrand[$id9] = ['id' => $id10, 'alias' => 'thanhhoa', 'name' => 'ThanhHoa','image' => '/data/brand/vaio.png','status' =>1];
         return $dataBrand;
     }
 
@@ -230,7 +245,7 @@ trait DataSampleSeederTrait
         $arrImage = [];
         $arrCategory = [];
         $arrAtt = [];
-        for ($i=1; $i <= 24; $i++) {
+        for ($i=1; $i <= 36; $i++) {
             $arrId[$i] = (string)Str::orderedUuid();
         }
         $arrBuild[] = ['build_id' => $arrId['5'],'product_id' => $arrId['3'], 'quantity' => 1];
@@ -239,10 +254,10 @@ trait DataSampleSeederTrait
         $arrBuild[] = ['build_id' => $arrId['10'],'product_id' => $arrId['17'], 'quantity' => 2];
         $arrBuild[] = ['build_id' => $arrId['15'],'product_id' => $arrId['16'], 'quantity' => 1];
         $arrBuild[] = ['build_id' => $arrId['15'],'product_id' => $arrId['14'], 'quantity' => 2];
-        $arrBuild[] = ['build_id' => $arrId['20'],'product_id' => $arrId['13'], 'quantity' => 2];
-        $arrBuild[] = ['build_id' => $arrId['20'],'product_id' => $arrId['3'], 'quantity' => 2];
+        $arrBuild[] = ['build_id' => $arrId['33'],'product_id' => $arrId['13'], 'quantity' => 2];
+        $arrBuild[] = ['build_id' => $arrId['33'],'product_id' => $arrId['3'], 'quantity' => 2];
 
-        $arrBuildId = [$arrId['5'],$arrId['10'],$arrId['15'],$arrId['20']];
+        $arrBuildId = [$arrId['5'],$arrId['10'],$arrId['15'],$arrId['33']];
 
         $arrGroup[] = ['group_id' => $arrId['4'],'product_id' => $arrId['2']];
         $arrGroup[] = ['group_id' => $arrId['4'],'product_id' => $arrId['6']];
@@ -250,10 +265,10 @@ trait DataSampleSeederTrait
         $arrGroup[] = ['group_id' => $arrId['14'],'product_id' => $arrId['12']];
         $arrGroup[] = ['group_id' => $arrId['19'],'product_id' => $arrId['11']];
         $arrGroup[] = ['group_id' => $arrId['19'],'product_id' => $arrId['21']];
-        $arrGroup[] = ['group_id' => $arrId['23'],'product_id' => $arrId['3']];
-        $arrGroup[] = ['group_id' => $arrId['23'],'product_id' => $arrId['7']];
+        $arrGroup[] = ['group_id' => $arrId['34'],'product_id' => $arrId['3']];
+        $arrGroup[] = ['group_id' => $arrId['34'],'product_id' => $arrId['7']];
 
-        $arrGroupId = [$arrId['4'],$arrId['14'],$arrId['19'],$arrId['23']];
+        $arrGroupId = [$arrId['4'],$arrId['14'],$arrId['19'],$arrId['34']];
 
         $arrPromotion[] = ['product_id' => $arrId['1'], 'price_promotion' => 50];
         $arrPromotion[] = ['product_id' => $arrId['2'], 'price_promotion' => 30];
@@ -263,6 +278,12 @@ trait DataSampleSeederTrait
         $arrPromotion[] = ['product_id' => $arrId['16'], 'price_promotion' => 30];
         $arrPromotion[] = ['product_id' => $arrId['18'], 'price_promotion' => 60];
         $arrPromotion[] = ['product_id' => $arrId['22'], 'price_promotion' => 50];
+        $arrPromotion[] = ['product_id' => $arrId['26'], 'price_promotion' => 60];
+        $arrPromotion[] = ['product_id' => $arrId['28'], 'price_promotion' => 50];
+        $arrPromotion[] = ['product_id' => $arrId['30'], 'price_promotion' => 60];
+        $arrPromotion[] = ['product_id' => $arrId['31'], 'price_promotion' => 50];
+        $arrPromotion[] = ['product_id' => $arrId['35'], 'price_promotion' => 60];
+        $arrPromotion[] = ['product_id' => $arrId['36'], 'price_promotion' => 50];
 
         $arrImage[] = ['id' => (string)Str::orderedUuid(), 'image' => '/data/product/product-2.png', 'product_id' => $arrId[1]];
         $arrImage[] = ['id' => (string)Str::orderedUuid(), 'image' => '/data/product/product-11.png', 'product_id' => $arrId[1]];
@@ -294,7 +315,7 @@ trait DataSampleSeederTrait
         $arrCategory[] = ['product_id' => $arrId[1], 'category_id' => $arrayIdCategory[10]];
         $arrCategory[] = ['product_id' => $arrId[1], 'category_id' => $arrayIdCategory[6]];
         $arrCategory[] = ['product_id' => $arrId[3], 'category_id' => $arrayIdCategory[11]];
-        $arrCategory[] = ['product_id' => $arrId[4], 'category_id' => $arrayIdCategory[11]];
+        $arrCategory[] = ['product_id' => $arrId[4], 'category_id' => $arrayIdCategory[17]];
         $arrCategory[] = ['product_id' => $arrId[5], 'category_id' => $arrayIdCategory[11]];
         $arrCategory[] = ['product_id' => $arrId[6], 'category_id' => $arrayIdCategory[11]];
         $arrCategory[] = ['product_id' => $arrId[7], 'category_id' => $arrayIdCategory[12]];
@@ -306,21 +327,33 @@ trait DataSampleSeederTrait
         $arrCategory[] = ['product_id' => $arrId[13], 'category_id' => $arrayIdCategory[5]];
         $arrCategory[] = ['product_id' => $arrId[14], 'category_id' => $arrayIdCategory[11]];
         $arrCategory[] = ['product_id' => $arrId[15], 'category_id' => $arrayIdCategory[6]];
-        $arrCategory[] = ['product_id' => $arrId[16], 'category_id' => $arrayIdCategory[9]];
+        $arrCategory[] = ['product_id' => $arrId[16], 'category_id' => $arrayIdCategory[5]];
         $arrCategory[] = ['product_id' => $arrId[17], 'category_id' => $arrayIdCategory[9]];
-        $arrCategory[] = ['product_id' => $arrId[18], 'category_id' => $arrayIdCategory[9]];
+        $arrCategory[] = ['product_id' => $arrId[18], 'category_id' => $arrayIdCategory[19]];
         $arrCategory[] = ['product_id' => $arrId[19], 'category_id' => $arrayIdCategory[6]];
         $arrCategory[] = ['product_id' => $arrId[20], 'category_id' => $arrayIdCategory[11]];
         $arrCategory[] = ['product_id' => $arrId[21], 'category_id' => $arrayIdCategory[10]];
-        $arrCategory[] = ['product_id' => $arrId[22], 'category_id' => $arrayIdCategory[10]];
+        $arrCategory[] = ['product_id' => $arrId[22], 'category_id' => $arrayIdCategory[21]];
         $arrCategory[] = ['product_id' => $arrId[23], 'category_id' => $arrayIdCategory[12]];
         $arrCategory[] = ['product_id' => $arrId[24], 'category_id' => $arrayIdCategory[9]];
+        $arrCategory[] = ['product_id' => $arrId[25], 'category_id' => $arrayIdCategory[27]];
+        $arrCategory[] = ['product_id' => $arrId[26], 'category_id' => $arrayIdCategory[16]];
+        $arrCategory[] = ['product_id' => $arrId[27], 'category_id' => $arrayIdCategory[15]];
+        $arrCategory[] = ['product_id' => $arrId[28], 'category_id' => $arrayIdCategory[15]];
+        $arrCategory[] = ['product_id' => $arrId[29], 'category_id' => $arrayIdCategory[13]];
+        $arrCategory[] = ['product_id' => $arrId[30], 'category_id' => $arrayIdCategory[16]];
+        $arrCategory[] = ['product_id' => $arrId[31], 'category_id' => $arrayIdCategory[11]];
+        $arrCategory[] = ['product_id' => $arrId[32], 'category_id' => $arrayIdCategory[16]];
+        $arrCategory[] = ['product_id' => $arrId[33], 'category_id' => $arrayIdCategory[20]];
+        $arrCategory[] = ['product_id' => $arrId[34], 'category_id' => $arrayIdCategory[19]];
+        $arrCategory[] = ['product_id' => $arrId[35], 'category_id' => $arrayIdCategory[16]];
+        $arrCategory[] = ['product_id' => $arrId[36], 'category_id' => $arrayIdCategory[16]];
 
 
-        $arrAtt[] = ['name' => 'Blue', 'attribute_group_id' => 1, 'product_id' => $arrId[24], 'add_price' => 5];
-        $arrAtt[] = ['name' => 'White', 'attribute_group_id' => 1, 'product_id' => $arrId[24], 'add_price' => 0];
-        $arrAtt[] = ['name' => 'S', 'attribute_group_id' => 2, 'product_id' => $arrId[24], 'add_price' => 2];
-        $arrAtt[] = ['name' => 'XL', 'attribute_group_id' => 2, 'product_id' => $arrId[24], 'add_price' => 3];
+        $arrAtt[] = ['name' => 'Blue', 'attribute_group_id' => 1, 'product_id' => $arrId[36], 'add_price' => 5];
+        $arrAtt[] = ['name' => 'White', 'attribute_group_id' => 1, 'product_id' => $arrId[36], 'add_price' => 0];
+        $arrAtt[] = ['name' => 'S', 'attribute_group_id' => 2, 'product_id' => $arrId[36], 'add_price' => 2];
+        $arrAtt[] = ['name' => 'XL', 'attribute_group_id' => 2, 'product_id' => $arrId[36], 'add_price' => 3];
         $arrAtt[] = ['name' => 'Blue', 'attribute_group_id' => 1, 'product_id' => $arrId[12], 'add_price' => 10];
         $arrAtt[] = ['name' => 'Red', 'attribute_group_id' => 1, 'product_id' => $arrId[12], 'add_price' => 0];
         $arrAtt[] = ['name' => 'S', 'attribute_group_id' => 2, 'product_id' => $arrId[12], 'add_price' => 0];
@@ -342,9 +375,10 @@ trait DataSampleSeederTrait
         $arrId = $mappingIdProduct['arrId'];
         $dataProduct = [];
         $arrPrice = [60,80,100];
-        $arrSku = ['PHO-BO', 'NEM-NUONG', 'BANH-GAI','BUN-HUE','BANH-TRANG','MUOI-TAY-NINH','NHAN-LONG','SAU-RIENG','BIA-SAIGON','BIA-HANOI','NUOC-MAM','BANH-MYCAY','HU-TIEU',
-        'CANH-CHUA','MANG-CUT','CAM-VINH','VAI-THIEU','NON-LA','AO-DAI','XOAI-CAT','COM-NIU','NHAN-LONG-HUNG-YEN','VAI-THIEU-LUC-NGAN','NEM-CHUA-THANH-HOA'];
-        for ($i=1; $i <= 24; $i++) {
+        $arrSku = ['PHO-BO-NAM-DNH', 'NEM-NUONG-THANH-HOA', 'BANH-GAI-TU-TRU','BUN-HUE-GIA-TRUYEN','BANH-TRANG-TRON','MUOI-TAY-NINH','NHAN-LONG-HUNG-YEN','SAU-RIENG-DAK-LAK','BIA-LON-SAIGON','BIA-TUOI-HANOI','NUOC-MAM-PHAN-THIET','BANH-MY-CHA-CA','HU-TIEU-NAM-VANG',
+        'CANH-CHUA-CA-LOC','CHOM-CHOM-NHAN','CAM-VINH-LOAI-I','KEO-DUA-BEN-TRE','NON-LA-VIETNAM','AO-DAI-VIETNAM','XOAI-CAT-HOA-LOC','COM-NIU-SAI-GON','COM-TAM-AN-GIANG','VAI-THIEU-LUC-NGAN','NEM-CHUA-THANH-HOA','CHA-CA-NHA-TRANG','CHA-CA-THAC-LAC','HOA-DAO-NHAT-TAN','CAY-TO-BAY-MON','MY-CAY-7-CAP-DO',
+        'COM-CHIEN-HAI-SAN','CHAO-LONG-TIET-CANH','THIT-CHAU-GAC-BEP','CU-DO-HA-TINH','BANH-DAU-XANH-HUNG-YEN','CAM-SANH-MONG-NUOC','THANH-LONG-RUOT-DO'];
+        for ($i=1; $i <= 36; $i++) {
             $kind = SC_PRODUCT_SINGLE;
             if (in_array($arrId[$i], $mappingIdProduct['arrGroupId'])) {
                 $kind = SC_PRODUCT_GROUP; 
@@ -372,13 +406,16 @@ trait DataSampleSeederTrait
 
     public function dataProductDescription($dataProduct) {
         $dataProductDescription = [];
+        $des = "- 27-inch (diagonal) Retina 5K display
+        - 3.1GHz 6-core 10th-generation Intel Core i5
+        - AMD Radeon Pro 5300 graphics";
         foreach ($dataProduct as $product) {
             $dataProductDescription[] = [
-                'product_id' => $product['id'], 'lang' => 'en', 'name' => Str::title(str_replace('-', ' ', $product['alias'])), 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
+                'product_id' => $product['id'], 'lang' => 'en', 'description' => $des, 'name' => Str::title(str_replace('-', ' ', $product['alias'])), 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
             ];
             $dataProductDescription[] = [
-                'product_id' => $product['id'], 'lang' => 'vi', 'name' => Str::title(str_replace('-', ' ', $product['alias'])), 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
+                'product_id' => $product['id'], 'lang' => 'vi', 'description' => $des, 'name' => Str::title(str_replace('-', ' ', $product['alias'])), 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
             ];
         }
