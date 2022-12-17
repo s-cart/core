@@ -95,11 +95,11 @@ trait DataSampleSeederTrait
         $dataNewsDescription = [];
         foreach ($ids as $key => $id) {
             $dataNewsDescription[] = [
-                'news_id' => $id, 'lang' => 'en', 'title' => 'Easy Polo Black Edition '.$key, 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
+                'news_id' => $id, 'lang' => 'en', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','title' => 'Easy Polo Black Edition '.$key, 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
             ];
             $dataNewsDescription[] = [
-                'news_id' => $id, 'lang' => 'vi', 'title' => 'Easy Polo Black Edition '.$key, 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
+                'news_id' => $id, 'lang' => 'vi', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','title' => 'Easy Polo Black Edition '.$key, 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
             ];
         }
@@ -377,7 +377,7 @@ trait DataSampleSeederTrait
         $arrPrice = [60,80,100];
         $arrSku = ['PHO-BO-NAM-DNH', 'NEM-NUONG-THANH-HOA', 'BANH-GAI-TU-TRU','BUN-HUE-GIA-TRUYEN','BANH-TRANG-TRON','MUOI-TAY-NINH','NHAN-LONG-HUNG-YEN','SAU-RIENG-DAK-LAK','BIA-LON-SAIGON','BIA-TUOI-HANOI','NUOC-MAM-PHAN-THIET','BANH-MY-CHA-CA','HU-TIEU-NAM-VANG',
         'CANH-CHUA-CA-LOC','CHOM-CHOM-NHAN','CAM-VINH-LOAI-I','KEO-DUA-BEN-TRE','NON-LA-VIETNAM','AO-DAI-VIETNAM','XOAI-CAT-HOA-LOC','COM-NIU-SAI-GON','COM-TAM-AN-GIANG','VAI-THIEU-LUC-NGAN','NEM-CHUA-THANH-HOA','CHA-CA-NHA-TRANG','CHA-CA-THAC-LAC','HOA-DAO-NHAT-TAN','CAY-TO-BAY-MON','MY-CAY-7-CAP-DO',
-        'COM-CHIEN-HAI-SAN','CHAO-LONG-TIET-CANH','THIT-CHAU-GAC-BEP','CU-DO-HA-TINH','BANH-DAU-XANH-HUNG-YEN','CAM-SANH-MONG-NUOC','THANH-LONG-RUOT-DO'];
+        'COM-CHIEN-HAI-SAN','CHAO-LONG-TIET-CANH','THIT-TRAU-GAC-BEP','CU-DO-HA-TINH','BANH-DAU-XANH-HUNG-YEN','CAM-SANH-MONG-NUOC','THANH-LONG-RUOT-DO'];
         for ($i=1; $i <= 36; $i++) {
             $kind = SC_PRODUCT_SINGLE;
             if (in_array($arrId[$i], $mappingIdProduct['arrGroupId'])) {
