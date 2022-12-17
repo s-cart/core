@@ -105,7 +105,11 @@ class ShopCartController extends RootFrontController
         $arrCheckQty = [];
         $cart = $cartGroup[$storeId];
         foreach ($cart as $key => $row) {
-            $arrCheckQty[$row->id] = ($arrCheckQty[$row->id] ?? 0) + $row->qty;
+            $qtyUpdate = (int)$data['qty-'.$row->rowId];
+            Cart::update($row->rowId, $qtyUpdate);
+            
+            $newQty = ($arrCheckQty[$row->row] ?? 0) + ($data['qty-'.$row->id] ?? 0);
+            $arrCheckQty[$row->id] = $newQty;
         }
         $arrProductMinimum = ShopProduct::whereIn('id', array_keys($arrCheckQty))->pluck('minimum', 'id')->all();
         $arrErrorQty = [];
@@ -117,12 +121,12 @@ class ShopCartController extends RootFrontController
         if (count($arrErrorQty)) {
             return redirect(sc_route('cart'))->with(['arrErrorQty' => $arrErrorQty, 'error'=> sc_language_render('cart.have_error')]);
         }
+        //End check minimum
 
         //Set session
         session(['dataCheckout' => $cart]);
         session(['storeCheckout' => $storeId]);
 
-        //End check minimum
         return redirect(sc_route('checkout'));
     }
 
