@@ -90,7 +90,7 @@ class AdminProduct extends ShopProduct
             $sort_field = explode('__', $sort_order)[1];
             $productList = $productList->sort($field, $sort_field);
         } else {
-            $productList = $productList->sort($tableProduct.'.created_at', 'desc');
+            $productList = $productList->sort($tableProduct.'.id', 'desc');
         }
         $productList = $productList->paginate(20);
 
