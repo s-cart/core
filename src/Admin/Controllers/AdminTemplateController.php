@@ -93,7 +93,7 @@ class AdminTemplateController extends RootAdminController
             if (function_exists('sc_template_uninstall') && function_exists('sc_template_install')) {
                 //Remove all stories
                 sc_template_uninstall();
-                //Insert only specify store
+                //Install data default and data for root domain
                 sc_template_install($data);
             }
         }
