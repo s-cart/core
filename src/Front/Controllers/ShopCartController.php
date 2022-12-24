@@ -261,8 +261,8 @@ class ShopCartController extends RootFrontController
             if (view()->exists(sc_captcha_method()->pathPlugin.'::render')) {
                 $dataView = [
                     'titleButton' => sc_language_render('cart.checkout'),
-                    'idForm' => 'form-process',
-                    'idButtonForm' => 'button-form-process',
+                    'idForm' => 'sc_form-process',
+                    'idButtonForm' => 'sc_button-form-process',
                 ];
                 $viewCaptcha = view(sc_captcha_method()->pathPlugin.'::render', $dataView)->render();
             }
