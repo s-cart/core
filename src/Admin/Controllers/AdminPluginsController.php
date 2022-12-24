@@ -171,7 +171,7 @@ class AdminPluginsController extends RootAdminController
                     //Process if plugin config incorect
                     if (!$configGroup || !$configCode || !$configKey) {
                         File::deleteDirectory(storage_path('tmp/'.$pathTmp));
-                        return redirect()->back()->with('error', sc_language_render('admin.plugin.error_config'));
+                        return redirect()->back()->with('error', sc_language_render('admin.plugin.error_config_format'));
                     }
                     //Check plugin exist
                     $arrPluginLocal = sc_get_all_plugin($configCode);

@@ -33,10 +33,6 @@
   <!-- Tempusdominus Bbootstrap 4 -->
   {{-- <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}"> --}}
 
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ sc_file('admin/LTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
-  <!-- Theme style -->
-
   @section('block_component_css')
     @include($templatePathAdmin.'component.css')
   @show
@@ -160,10 +156,15 @@
 <script src="{{ sc_file('admin/LTE/plugins/select2/js/select2.full.min.js')}}"></script>
 {{-- switch --}}
 <script src="{{ sc_file('admin/plugin/bootstrap-switch.min.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-{{-- <script src="{{ sc_file('admin/LTE/dist/js/demo.js')}}"></script> --}}
 
 <script src="{{ sc_file('admin/LTE/plugins/iCheck/icheck.min.js')}}"></script>
+<script src="{{ sc_file('admin/LTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+
+<script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+  </script>
 
 @stack('scripts')
 

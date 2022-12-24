@@ -18,8 +18,8 @@
                             <div class="col-sm-6">
                                 <div class="input-group">
                                     <div class="custom-file">
-                                      <input type="file" class="custom-file-input" accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"  required="required" name="file">
-                                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                      <input type="file" id="input-file" class="custom-file-input" accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"  required="required" name="file">
+                                      <label class="custom-file-label" for="input-file">Choose file</label>
                                     </div>
                                     <div class="input-group-append">
                                       <span class="btn button-upload">{{ sc_language_render('admin.template.import_submit') }}</span>
