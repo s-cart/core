@@ -46,9 +46,13 @@ class AdminPluginsOnlineController extends RootAdminController
         $ch            = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
         $dataApi   = curl_exec($ch);
         curl_close($ch);
+        // dd($dataApi);
         $dataApi = json_decode($dataApi, true);
+
         if (!empty($dataApi['data'])) {
             foreach ($dataApi['data'] as $key => $data) {
                 $arrPluginLibrary[] = [
