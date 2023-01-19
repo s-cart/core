@@ -204,6 +204,10 @@ if (request()->method() == 'POST' && request()->ajax()) {
         break;
     }
 } else {
+    if (file_exists(base_path() . "/.env")) {
+        @rename(base_path() . "/.env", base_path() . "/.env_bk");
+    }
+
     $dirsWritable = [
         storage_path(),
         public_path('data'),
@@ -216,7 +220,7 @@ if (request()->method() == 'POST' && request()->ajax()) {
     } catch (\Throwable $e) {   
         echo json_encode([
             'error' => '1',
-            'msg' => '#ISC008::'.trans('install.rename_error'),
+            'msg' => '#ISC008::'.trans('install.writealble_error'),
         ]);
     }
     $requirements = [
