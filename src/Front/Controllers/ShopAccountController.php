@@ -183,7 +183,7 @@ class ShopAccountController extends RootFrontController
                     'customer'    => $customer,
                     'countries'   => ShopCountry::getCodeAll(),
                     'layout_page' => 'shop_profile',
-                    'customFields'=> (new ShopCustomField)->getCustomField($type = 'customer'),
+                    'customFields'=> (new ShopCustomField)->getCustomField($type = 'shop_customer'),
                     'breadcrumbs' => [
                         ['url'    => sc_route('customer.index'), 'title' => sc_language_render('front.my_account')],
                         ['url'    => '', 'title' => sc_language_render('customer.change_infomation')],

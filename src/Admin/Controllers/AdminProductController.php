@@ -19,7 +19,6 @@ use SCart\Core\Front\Models\ShopProductCategory;
 use SCart\Core\Front\Models\ShopProductDownload;
 use SCart\Core\Front\Models\ShopProductProperty;
 use SCart\Core\Front\Models\ShopCustomField;
-use SCart\Core\Front\Models\ShopCustomFieldDetail;
 use SCart\Core\Admin\Models\AdminProduct;
 use SCart\Core\Admin\Models\AdminStore;
 use SCart\Core\Admin\Models\AdminCategory;
@@ -288,7 +287,7 @@ class AdminProductController extends RootAdminController
             'htmlProductAtrribute' => $htmlProductAtrribute,
             'listWeight'           => $this->listWeight,
             'listLength'           => $this->listLength,
-            'customFields'         => (new ShopCustomField)->getCustomField($type = 'product'),
+            'customFields'         => (new ShopCustomField)->getCustomField($type = 'shop_product'),
         ];
 
         return view($this->templatePathAdmin.'screen.product_add')
@@ -426,7 +425,7 @@ class AdminProductController extends RootAdminController
                 ];
 
                 //Custom fields
-                $customFields = (new ShopCustomField)->getCustomField($type = 'product');
+                $customFields = (new ShopCustomField)->getCustomField($type = 'shop_product');
                 if ($customFields) {
                     foreach ($customFields as $field) {
                         if ($field->required) {
@@ -616,23 +615,8 @@ class AdminProductController extends RootAdminController
         }
 
         //Insert custom fields
-        if (!empty($data['fields'])) {
-            $dataField = [];
-            foreach ($data['fields'] as $key => $value) {
-                $field = (new ShopCustomField)->where('code', $key)->where('type', 'product')->first();
-                if ($field) {
-                    $dataField[] = sc_clean([
-                        'custom_field_id' => $field->id,
-                        'rel_id' => $product->id,
-                        'text' => trim($value),
-                    ], [], true);
-                }
-            }
-            if ($dataField) {
-                (new ShopCustomFieldDetail)->insert($dataField);
-            }
-        }
-
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $product->id, 'shop_product');
 
         //Insert description
         $dataDes = [];
@@ -733,7 +717,7 @@ class AdminProductController extends RootAdminController
 
         //Only prduct single have custom field
         if ($product->kind == SC_PRODUCT_SINGLE) {
-            $data['customFields'] = (new ShopCustomField)->getCustomField($type = 'product');
+            $data['customFields'] = (new ShopCustomField)->getCustomField($type = 'shop_product');
         } else {
             $data['customFields'] = [];
         }
@@ -769,7 +753,7 @@ class AdminProductController extends RootAdminController
                 ];
 
                 //Custom fields
-                $customFields = (new ShopCustomField)->getCustomField($type = 'product');
+                $customFields = (new ShopCustomField)->getCustomField($type = 'shop_product');
                 if ($customFields) {
                     foreach ($customFields as $field) {
                         if ($field->required) {
@@ -892,30 +876,8 @@ class AdminProductController extends RootAdminController
         }
 
         //Update custom field
-        if (!empty($data['fields'])) {
-            (new ShopCustomFieldDetail)
-                ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-                ->select('code', 'name', 'text')
-                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $product->id)
-                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
-                ->delete();
-
-            $dataField = [];
-            foreach ($data['fields'] as $key => $value) {
-                $field = (new ShopCustomField)->where('code', $key)->where('type', 'product')->first();
-                if ($field) {
-                    $dataField[] = sc_clean([
-                        'custom_field_id' => $field->id,
-                        'rel_id' => $product->id,
-                        'text' => trim($value),
-                    ], [], true);
-                }
-            }
-            if ($dataField) {
-                (new ShopCustomFieldDetail)->insert($dataField);
-            }
-        }
-
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $product->id, 'shop_product');
 
 
         //Promoton price

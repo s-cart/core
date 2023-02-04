@@ -97,7 +97,7 @@
                             <div class="col-sm-8">
                                     <textarea id="{{ $code }}__description"
                                         name="descriptions[{{ $code }}][description]"
-                                        class="form-control {{ $code.'__description' }}" placeholder="" />{{  old('descriptions.'.$code.'.description',($descriptions[$code]['description']??''))  }}</textarea>
+                                        class="form-control {{ $code.'__description' }}" placeholder="" >{{  old('descriptions.'.$code.'.description',($descriptions[$code]['description']??''))  }}</textarea>
                                 @if ($errors->has('descriptions.'.$code.'.description'))
                                 <span class="form-text">
                                     <i class="fa fa-info-circle"></i> {{ $errors->first('descriptions.'.$code.'.description') }}
@@ -235,6 +235,15 @@
                                     {{ old('status',(empty($page['status'])?0:1))?'checked':''}}>
                             </div>
                         </div>
+
+
+                        {{-- Custom fields --}}
+                        @php
+                            $customFields = isset($customFields) ? $customFields : [];
+                            $fields = !empty($page) ? $page->getCustomFields() : [];
+                        @endphp
+                        @includeIf($templatePathAdmin.'component.render_form_custom_field', ['customFields' => $customFields, 'fields' => $fields])
+                        {{-- //Custom fields --}}
 
                     </div>
                 </div>

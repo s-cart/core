@@ -5,6 +5,7 @@ use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopLanguage;
 use Validator;
 use SCart\Core\Admin\Models\AdminCategory;
+use SCart\Core\Front\Models\ShopCustomField;
 
 class AdminCategoryController extends RootAdminController
 {
@@ -160,6 +161,7 @@ class AdminCategoryController extends RootAdminController
             'category' => [],
             'categories' => (new AdminCategory)->getTreeCategoriesAdmin(),
             'url_action' => sc_route_admin('admin_category.create'),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_category'),
         ];
 
         return view($this->templatePathAdmin.'screen.category')
@@ -178,17 +180,25 @@ class AdminCategoryController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['descriptions'][$langFirst]['title'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-
+        $arrValidation = [
+            'parent'                 => 'required',
+            'sort'                   => 'numeric|min:0',
+            'alias'                  => 'required|unique:"'.AdminCategory::class.'",alias|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
+            'descriptions.*.title'   => 'required|string|max:200',
+            'descriptions.*.keyword' => 'nullable|string|max:200',
+            'descriptions.*.description' => 'nullable|string|max:500',
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_category');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
         $validator = Validator::make(
-            $data,
-            [
-                'parent'                 => 'required',
-                'sort'                   => 'numeric|min:0',
-                'alias'                  => 'required|unique:"'.AdminCategory::class.'",alias|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
-                'descriptions.*.title'   => 'required|string|max:200',
-                'descriptions.*.keyword' => 'nullable|string|max:200',
-                'descriptions.*.description' => 'nullable|string|max:500',
-            ],
+            $data,$arrValidation,
             [
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.category.title')]),
                 'alias.regex' => sc_language_render('admin.category.alias_validate'),
@@ -232,6 +242,9 @@ class AdminCategoryController extends RootAdminController
                 $category->stores()->attach($shopStore);
             }
         }
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $category->id, 'shop_category');
 
         sc_clear_cache('cache_category');
 
@@ -258,6 +271,7 @@ class AdminCategoryController extends RootAdminController
             'category'          => $category,
             'categories'        => (new AdminCategory)->getTreeCategoriesAdmin(),
             'url_action'        => sc_route_admin('admin_category.edit', ['id' => $category['id']]),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_category'),
         ];
         return view($this->templatePathAdmin.'screen.category')
             ->with($data);
@@ -279,17 +293,25 @@ class AdminCategoryController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['descriptions'][$langFirst]['title'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-
-        $validator = Validator::make(
-            $data,
-            [
+        $arrValidation = [
             'parent'                 => 'required',
             'sort'                   => 'numeric|min:0',
             'alias'                  => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100|unique:"'.AdminCategory::class.'",alias,' . $id . '',
             'descriptions.*.title'   => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:500',
-            ],
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_category');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+        $validator = Validator::make(
+            $data,$arrValidation,
             [
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.category.title')]),
                 'alias.regex'                   => sc_language_render('admin.category.alias_validate'),
@@ -334,7 +356,10 @@ class AdminCategoryController extends RootAdminController
                 $category->stores()->attach($shopStore);
             }
         }
-        
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $category->id, 'shop_category');
+
         sc_clear_cache('cache_category');
 
         //

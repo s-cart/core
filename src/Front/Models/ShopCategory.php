@@ -69,6 +69,15 @@ class ShopCategory extends Model
             $category->descriptions()->delete();
             $category->products()->detach();
             $category->stores()->detach();
+
+            //Delete custom field
+            (new ShopCustomFieldDetail)
+            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $category->id)
+            ->where(SC_DB_PREFIX.'shop_custom_field.type', 'shop_category')
+            ->delete();
+
+
         });
         //Uuid
         static::creating(function ($model) {

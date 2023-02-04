@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopLanguage;
+use SCart\Core\Front\Models\ShopCustomField;
 use SCart\Core\Admin\Models\AdminPage;
 use Validator;
 
@@ -155,6 +156,7 @@ class AdminPageController extends RootAdminController
             'languages'         => $this->languages,
             'page'              => $page,
             'url_action'        => sc_route_admin('admin_page.create'),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_page'),
         ];
 
         return view($this->templatePathAdmin.'screen.page')
@@ -172,14 +174,23 @@ class AdminPageController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['descriptions'][$langFirst]['title'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
+        $arrValidation = [
+            'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
+            'descriptions.*.title' => 'required|string|max:200',
+            'descriptions.*.keyword' => 'nullable|string|max:200',
+            'descriptions.*.description' => 'nullable|string|max:500',
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_page');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
         $validator = Validator::make(
-            $data,
-            [
-                'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
-                'descriptions.*.title' => 'required|string|max:200',
-                'descriptions.*.keyword' => 'nullable|string|max:200',
-                'descriptions.*.description' => 'nullable|string|max:500',
-            ],
+            $data,$arrValidation,
             [
                 'alias.regex' => sc_language_render('admin.page.alias_validate'),
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.page.title')]),
@@ -219,6 +230,10 @@ class AdminPageController extends RootAdminController
             $page->stores()->attach($shopStore);
         }
 
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $page->id, 'shop_page');
+
         sc_clear_cache('cache_page');
         return redirect()->route('admin_page.index')->with('success', sc_language_render('action.create_success'));
     }
@@ -241,6 +256,7 @@ class AdminPageController extends RootAdminController
             'languages' => $this->languages,
             'page' => $page,
             'url_action' => sc_route_admin('admin_page.edit', ['id' => $page['id']]),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_page'),
         ];
         return view($this->templatePathAdmin.'screen.page')
             ->with($data);
@@ -261,15 +277,24 @@ class AdminPageController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['descriptions'][$langFirst]['title'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
+        $arrValidation = [
+            'descriptions.*.title' => 'required|string|max:200',
+            'descriptions.*.keyword' => 'nullable|string|max:200',
+            'descriptions.*.description' => 'nullable|string|max:500',
+            'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_page');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
 
         $validator = Validator::make(
-            $data,
-            [
-                'descriptions.*.title' => 'required|string|max:200',
-                'descriptions.*.keyword' => 'nullable|string|max:200',
-                'descriptions.*.description' => 'nullable|string|max:500',
-                'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
-            ],
+            $data,$arrValidation,
             [
                 'alias.regex' => sc_language_render('admin.page.alias_validate'),
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.page.title')]),
@@ -311,6 +336,9 @@ class AdminPageController extends RootAdminController
         if ($shopStore) {
             $page->stores()->attach($shopStore);
         }
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $page->id, 'shop_page');
 
         sc_clear_cache('cache_page');
         return redirect()->route('admin_page.index')->with('success', sc_language_render('action.edit_success'));

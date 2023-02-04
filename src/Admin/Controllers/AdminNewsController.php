@@ -4,6 +4,7 @@ namespace SCart\Core\Admin\Controllers;
 use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopLanguage;
 use SCart\Core\Admin\Models\AdminNews;
+use SCart\Core\Front\Models\ShopCustomField;
 use Validator;
 
 class AdminNewsController extends RootAdminController
@@ -152,6 +153,7 @@ class AdminNewsController extends RootAdminController
             'languages'         => $this->languages,
             'news'              => $news,
             'url_action'        => sc_route_admin('admin_news.create'),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_news'),
         ];
 
         return view($this->templatePathAdmin.'screen.news')
@@ -170,15 +172,23 @@ class AdminNewsController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['descriptions'][$langFirst]['title'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-
-        $validator = Validator::make(
-            $data,
-            [
+        $arrValidation = [
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
             'descriptions.*.title' => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:500',
-            ],
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_news');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+        $validator = Validator::make(
+            $data,$arrValidation,
             [
                 'alias.regex' => sc_language_render('admin.news.alias_validate'),
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.news.title')]),
@@ -220,6 +230,10 @@ class AdminNewsController extends RootAdminController
             $news->stores()->attach($shopStore);
         }
 
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $news->id, 'shop_news');
+
         sc_clear_cache('cache_news');
 
         return redirect()->route('admin_news.index')->with('success', sc_language_render('action.create_success'));
@@ -242,6 +256,7 @@ class AdminNewsController extends RootAdminController
             'languages'         => $this->languages,
             'news'              => $news,
             'url_action'        => sc_route_admin('admin_news.edit', ['id' => $news['id']]),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_news'),
         ];
         return view($this->templatePathAdmin.'screen.news')
             ->with($data);
@@ -262,15 +277,23 @@ class AdminNewsController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['descriptions'][$langFirst]['title'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-
-        $validator = Validator::make(
-            $data,
-            [
+        $arrValidation = [
             'descriptions.*.title' => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:500',
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|string|max:100',
-            ],
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_news');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+        $validator = Validator::make(
+            $data,$arrValidation,
             [
                 'alias.regex' => sc_language_render('admin.news.alias_validate'),
                 'descriptions.*.title.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.news.title')]),
@@ -312,6 +335,9 @@ class AdminNewsController extends RootAdminController
         if ($shopStore) {
             $news->stores()->attach($shopStore);
         }
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $news->id, 'shop_news');
 
         sc_clear_cache('cache_news');
 

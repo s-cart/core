@@ -188,6 +188,15 @@
             </div>
           </div>
 
+        {{-- Custom fields --}}
+        @php
+            $customFields = isset($customFields) ? $customFields : [];
+            $fields = !empty($brand) ? $brand->getCustomFields() : [];
+        @endphp
+        @includeIf($templatePathAdmin.'component.render_form_custom_field', ['customFields' => $customFields, 'fields' => $fields])
+        {{-- //Custom fields --}}
+
+
         </div>
         <!-- /.card-body -->
         @csrf

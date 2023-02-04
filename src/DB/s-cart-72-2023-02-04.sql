@@ -13,6 +13,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Dumping structure for table s-cart.failed_jobs
+DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `uuid` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -31,6 +32,7 @@ DELETE FROM `failed_jobs`;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.jobs
+DROP TABLE IF EXISTS `jobs`;
 CREATE TABLE IF NOT EXISTS `jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `queue` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -49,6 +51,7 @@ DELETE FROM `jobs`;
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.migrations
+DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -65,6 +68,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.personal_access_tokens
+DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -87,6 +91,7 @@ DELETE FROM `personal_access_tokens`;
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_config
+DROP TABLE IF EXISTS `sc_admin_config`;
 CREATE TABLE IF NOT EXISTS `sc_admin_config` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `group` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -247,6 +252,7 @@ INSERT INTO `sc_admin_config` (`id`, `group`, `code`, `key`, `value`, `security`
 /*!40000 ALTER TABLE `sc_admin_config` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_log
+DROP TABLE IF EXISTS `sc_admin_log`;
 CREATE TABLE IF NOT EXISTS `sc_admin_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -267,6 +273,7 @@ DELETE FROM `sc_admin_log`;
 /*!40000 ALTER TABLE `sc_admin_log` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_menu
+DROP TABLE IF EXISTS `sc_admin_menu`;
 CREATE TABLE IF NOT EXISTS `sc_admin_menu` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int(11) NOT NULL DEFAULT 0,
@@ -357,6 +364,7 @@ INSERT INTO `sc_admin_menu` (`id`, `parent_id`, `sort`, `title`, `icon`, `uri`, 
 /*!40000 ALTER TABLE `sc_admin_menu` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_password_resets
+DROP TABLE IF EXISTS `sc_admin_password_resets`;
 CREATE TABLE IF NOT EXISTS `sc_admin_password_resets` (
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -370,6 +378,7 @@ DELETE FROM `sc_admin_password_resets`;
 /*!40000 ALTER TABLE `sc_admin_password_resets` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_permission
+DROP TABLE IF EXISTS `sc_admin_permission`;
 CREATE TABLE IF NOT EXISTS `sc_admin_permission` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -402,6 +411,7 @@ INSERT INTO `sc_admin_permission` (`id`, `name`, `slug`, `http_uri`, `created_at
 /*!40000 ALTER TABLE `sc_admin_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role
+DROP TABLE IF EXISTS `sc_admin_role`;
 CREATE TABLE IF NOT EXISTS `sc_admin_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -426,6 +436,7 @@ INSERT INTO `sc_admin_role` (`id`, `name`, `slug`, `created_at`, `updated_at`) V
 /*!40000 ALTER TABLE `sc_admin_role` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_permission
+DROP TABLE IF EXISTS `sc_admin_role_permission`;
 CREATE TABLE IF NOT EXISTS `sc_admin_role_permission` (
   `role_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL,
@@ -472,6 +483,7 @@ INSERT INTO `sc_admin_role_permission` (`role_id`, `permission_id`, `created_at`
 /*!40000 ALTER TABLE `sc_admin_role_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_role_user
+DROP TABLE IF EXISTS `sc_admin_role_user`;
 CREATE TABLE IF NOT EXISTS `sc_admin_role_user` (
   `role_id` int(11) NOT NULL,
   `user_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -488,6 +500,7 @@ INSERT INTO `sc_admin_role_user` (`role_id`, `user_id`, `created_at`, `updated_a
 /*!40000 ALTER TABLE `sc_admin_role_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_store
+DROP TABLE IF EXISTS `sc_admin_store`;
 CREATE TABLE IF NOT EXISTS `sc_admin_store` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -520,10 +533,11 @@ CREATE TABLE IF NOT EXISTS `sc_admin_store` (
 DELETE FROM `sc_admin_store`;
 /*!40000 ALTER TABLE `sc_admin_store` DISABLE KEYS */;
 INSERT INTO `sc_admin_store` (`id`, `logo`, `icon`, `phone`, `long_phone`, `email`, `time_active`, `address`, `office`, `warehouse`, `template`, `domain`, `partner`, `code`, `language`, `timezone`, `currency`, `status`, `active`, `created_at`, `updated_at`) VALUES
-	('1', 'data/logo/scart-mid.png', NULL, '0123456789', 'Support: 0987654321', 'demo@s-cart.org', '', '123st - abc - xyz', NULL, NULL, 's-cart-light', 'scart.local', '0', 's-cart', 'en', '', 'USD', 1, 1, NULL, NULL);
+	('1', 'data/logo/scart-mid.png', NULL, '0123456789', 'Support: 0987654321', 'admin@gmail.com', '', '123st - abc - xyz', NULL, NULL, 's-cart-light', 'scart.local', '0', 's-cart', 'en', '', 'USD', 1, 1, NULL, NULL);
 /*!40000 ALTER TABLE `sc_admin_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_store_description
+DROP TABLE IF EXISTS `sc_admin_store_description`;
 CREATE TABLE IF NOT EXISTS `sc_admin_store_description` (
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -545,6 +559,7 @@ INSERT INTO `sc_admin_store_description` (`store_id`, `lang`, `title`, `descript
 /*!40000 ALTER TABLE `sc_admin_store_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_template
+DROP TABLE IF EXISTS `sc_admin_template`;
 CREATE TABLE IF NOT EXISTS `sc_admin_template` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -564,6 +579,7 @@ INSERT INTO `sc_admin_template` (`id`, `key`, `name`, `status`, `created_at`, `u
 /*!40000 ALTER TABLE `sc_admin_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user
+DROP TABLE IF EXISTS `sc_admin_user`;
 CREATE TABLE IF NOT EXISTS `sc_admin_user` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -584,10 +600,11 @@ CREATE TABLE IF NOT EXISTS `sc_admin_user` (
 DELETE FROM `sc_admin_user`;
 /*!40000 ALTER TABLE `sc_admin_user` DISABLE KEYS */;
 INSERT INTO `sc_admin_user` (`id`, `username`, `password`, `name`, `email`, `avatar`, `remember_token`, `theme`, `created_at`, `updated_at`) VALUES
-	('1', 'admin', '$2y$10$mKIchWqj3fCoRYpcoynQp./gXFnpT54S86rzJUCjsHZ2wNuzT43Pm', 'Administrator', 'demo@s-cart.org', '/admin/avatar/user.jpg', NULL, NULL, NULL, NULL);
+	('1', 'admin', '$2y$10$tnOlTdZVuoHzSY4yztefRe8nCXIve3LUL7VqEOcjFEFb8kkO/J0w2', 'Administrator', 'admin@gmail.com', '/admin/avatar/user.jpg', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `sc_admin_user` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_admin_user_permission
+DROP TABLE IF EXISTS `sc_admin_user_permission`;
 CREATE TABLE IF NOT EXISTS `sc_admin_user_permission` (
   `user_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `permission_id` int(11) NOT NULL,
@@ -603,6 +620,7 @@ DELETE FROM `sc_admin_user_permission`;
 /*!40000 ALTER TABLE `sc_admin_user_permission` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_api_connection
+DROP TABLE IF EXISTS `sc_api_connection`;
 CREATE TABLE IF NOT EXISTS `sc_api_connection` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -621,10 +639,11 @@ CREATE TABLE IF NOT EXISTS `sc_api_connection` (
 DELETE FROM `sc_api_connection`;
 /*!40000 ALTER TABLE `sc_api_connection` DISABLE KEYS */;
 INSERT INTO `sc_api_connection` (`id`, `description`, `apiconnection`, `apikey`, `expire`, `last_active`, `created_at`, `updated_at`, `status`) VALUES
-	(1, 'Demo api connection', 'appmobile', '980087db-cd16-47f5-b601-5e1392d75067', NULL, NULL, NULL, NULL, 0);
+	(1, 'Demo api connection', 'appmobile', '986302e3-dde8-448e-b850-1bf57934591d', NULL, NULL, NULL, NULL, 0);
 /*!40000 ALTER TABLE `sc_api_connection` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_languages
+DROP TABLE IF EXISTS `sc_languages`;
 CREATE TABLE IF NOT EXISTS `sc_languages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -638,9 +657,9 @@ CREATE TABLE IF NOT EXISTS `sc_languages` (
   KEY `sc_languages_code_index` (`code`),
   KEY `sc_languages_position_index` (`position`),
   KEY `sc_languages_location_index` (`location`)
-) ENGINE=InnoDB AUTO_INCREMENT=2702 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2718 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_languages: ~2,701 rows (approximately)
+-- Dumping data for table s-cart.sc_languages: ~2,717 rows (approximately)
 DELETE FROM `sc_languages`;
 /*!40000 ALTER TABLE `sc_languages` DISABLE KEYS */;
 INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`, `created_at`, `updated_at`) VALUES
@@ -2977,7 +2996,7 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`, `creat
 	(2331, 'admin.template.file_format', 'File format', 'admin.template', 'en', NULL, NULL),
 	(2332, 'admin.template.choose_file', 'Choose File', 'admin.template', 'en', NULL, NULL),
 	(2333, 'admin.template.import_submit', 'Import', 'admin.template', 'en', NULL, NULL),
-	(2334, 'admin.template.import_note', 'File <span style="color:red">.zip</span>, max size is <span style="color:red">50MB</span>', 'admin.template', 'en', NULL, NULL),
+	(2334, 'admin.template.import_note', 'File <span style="color:red">.zip</span>', 'admin.template', 'en', NULL, NULL),
 	(2335, 'admin.template.error_unzip', 'Error while unzip', 'admin.template', 'en', NULL, NULL),
 	(2336, 'admin.template.error_upload', 'Error while uploading file', 'admin.template', 'en', NULL, NULL),
 	(2337, 'admin.template.error_check_config', 'Cannot find config file', 'admin.template', 'en', NULL, NULL),
@@ -3022,7 +3041,7 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`, `creat
 	(2376, 'admin.template.file_format', 'File mẫu', 'admin.template', 'vi', NULL, NULL),
 	(2377, 'admin.template.choose_file', 'Chọn file', 'admin.template', 'vi', NULL, NULL),
 	(2378, 'admin.template.import_submit', 'Import', 'admin.template', 'vi', NULL, NULL),
-	(2379, 'admin.template.import_note', 'Là file <span style="color:red">.zip</span>, dung lượng tối đa <span style="color:red">50MB</span>', 'admin.template', 'vi', NULL, NULL),
+	(2379, 'admin.template.import_note', 'Là file <span style="color:red">.zip</span>', 'admin.template', 'vi', NULL, NULL),
 	(2380, 'admin.template.error_unzip', 'Lỗi trong khi unzip', 'admin.template', 'vi', NULL, NULL),
 	(2381, 'admin.template.error_upload', 'Lỗi trong khi upload file', 'admin.template', 'vi', NULL, NULL),
 	(2382, 'admin.template.error_check_config', 'Không tìm thấy hoặc không thể đọc file config', 'admin.template', 'vi', NULL, NULL),
@@ -3106,7 +3125,7 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`, `creat
 	(2460, 'admin.plugin.choose_file', 'Chọn file', 'admin.plugin', 'vi', NULL, NULL),
 	(2461, 'admin.plugin.import_submit', 'Import', 'admin.plugin', 'vi', NULL, NULL),
 	(2462, 'admin.plugin.import_data', 'Import :data', 'admin.plugin', 'vi', NULL, NULL),
-	(2463, 'admin.plugin.import_note', 'Là file <span style="color:red">.zip</span>, dung lượng tối đa <span style="color:red">50MB</span>', 'admin.plugin', 'vi', NULL, NULL),
+	(2463, 'admin.plugin.import_note', 'Là file <span style="color:red">.zip</span>', 'admin.plugin', 'vi', NULL, NULL),
 	(2464, 'admin.plugin.error_unzip', 'Lỗi trong khi unzip', 'admin.plugin', 'vi', NULL, NULL),
 	(2465, 'admin.plugin.error_upload', 'Lỗi trong khi upload file', 'admin.plugin', 'vi', NULL, NULL),
 	(2466, 'admin.plugin.error_check_config', 'Không tìm thấy hoặc không thể đọc file config', 'admin.plugin', 'vi', NULL, NULL),
@@ -3174,7 +3193,7 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`, `creat
 	(2528, 'admin.plugin.choose_file', 'Choose File', 'admin.plugin', 'en', NULL, NULL),
 	(2529, 'admin.plugin.import_submit', 'Import', 'admin.plugin', 'en', NULL, NULL),
 	(2530, 'admin.plugin.import_data', 'Import :data', 'admin.plugin', 'en', NULL, NULL),
-	(2531, 'admin.plugin.import_note', 'File <span style="color:red">.zip</span>, max size is <span style="color:red">50MB</span>', 'admin.plugin', 'en', NULL, NULL),
+	(2531, 'admin.plugin.import_note', 'File <span style="color:red">.zip</span>', 'admin.plugin', 'en', NULL, NULL),
 	(2532, 'admin.plugin.error_unzip', 'Error while unzip', 'admin.plugin', 'en', NULL, NULL),
 	(2533, 'admin.plugin.error_upload', 'Error while uploading file', 'admin.plugin', 'en', NULL, NULL),
 	(2534, 'admin.plugin.error_check_config', 'Cannot find config file', 'admin.plugin', 'en', NULL, NULL),
@@ -3335,19 +3354,36 @@ INSERT INTO `sc_languages` (`id`, `code`, `text`, `position`, `location`, `creat
 	(2689, 'admin.password_forgot', 'Quên mật khẩu', 'admin', 'vi', NULL, NULL),
 	(2690, 'admin.login', 'Log in to the system', 'admin', 'en', NULL, NULL),
 	(2691, 'admin.login', 'Đăng nhập vào hệ thống', 'admin', 'vi', NULL, NULL),
-	(2692, 'common.created_at', 'Tạo lúc', 'common', 'vi', NULL, NULL),
-	(2693, 'common.created_at', 'Created at', 'common', 'en', NULL, NULL),
-	(2694, 'common.updated_at', 'Cập nhật lúc', 'common', 'vi', NULL, NULL),
-	(2695, 'common.updated_at', 'Updated at', 'common', 'en', NULL, NULL),
-	(2696, 'common.from', 'Từ', 'common', 'vi', NULL, NULL),
-	(2697, 'common.from', 'From', 'common', 'en', NULL, NULL),
-	(2698, 'common.to', 'Đến', 'common', 'vi', NULL, NULL),
-	(2699, 'common.to', 'To', 'common', 'en', NULL, NULL),
-	(2700, 'plugin.plugin_action.plugin_exist', 'Plugin này đã tồn tại rồi', 'plugin', 'vi', NULL, NULL),
-	(2701, 'plugin.plugin_action.plugin_exist', 'This plugin already exists', 'plugin', 'en', NULL, NULL);
+	(2692, 'admin.field_name.shop_customer', 'Customer', 'admin.field_name', 'en', NULL, NULL),
+	(2693, 'admin.field_name.shop_customer', 'Khách hàng', 'admin.field_name', 'vi', NULL, NULL),
+	(2694, 'admin.field_name.shop_product', 'Product', 'admin.field_name', 'en', NULL, NULL),
+	(2695, 'admin.field_name.shop_product', 'Sản phẩm', 'admin.field_name', 'vi', NULL, NULL),
+	(2696, 'admin.field_name.shop_banner', 'Banner', 'admin.field_name', 'en', NULL, NULL),
+	(2697, 'admin.field_name.shop_banner', 'Banner', 'admin.field_name', 'vi', NULL, NULL),
+	(2698, 'admin.field_name.shop_brand', 'Brand', 'admin.field_name', 'en', NULL, NULL),
+	(2699, 'admin.field_name.shop_brand', 'Nhãn hiệu', 'admin.field_name', 'vi', NULL, NULL),
+	(2700, 'admin.field_name.shop_supplier', 'Supplier', 'admin.field_name', 'en', NULL, NULL),
+	(2701, 'admin.field_name.shop_supplier', 'Nhà cung cấp', 'admin.field_name', 'vi', NULL, NULL),
+	(2702, 'admin.field_name.shop_category', 'Category', 'admin.field_name', 'en', NULL, NULL),
+	(2703, 'admin.field_name.shop_category', 'Danh mục', 'admin.field_name', 'vi', NULL, NULL),
+	(2704, 'admin.field_name.shop_news', 'News', 'admin.field_name', 'en', NULL, NULL),
+	(2705, 'admin.field_name.shop_news', 'Tin tức', 'admin.field_name', 'vi', NULL, NULL),
+	(2706, 'admin.field_name.shop_page', 'Page', 'admin.field_name', 'en', NULL, NULL),
+	(2707, 'admin.field_name.shop_page', 'Trang', 'admin.field_name', 'vi', NULL, NULL),
+	(2708, 'common.created_at', 'Tạo lúc', 'common', 'vi', NULL, NULL),
+	(2709, 'common.created_at', 'Created at', 'common', 'en', NULL, NULL),
+	(2710, 'common.updated_at', 'Cập nhật lúc', 'common', 'vi', NULL, NULL),
+	(2711, 'common.updated_at', 'Updated at', 'common', 'en', NULL, NULL),
+	(2712, 'common.from', 'Từ', 'common', 'vi', NULL, NULL),
+	(2713, 'common.from', 'From', 'common', 'en', NULL, NULL),
+	(2714, 'common.to', 'Đến', 'common', 'vi', NULL, NULL),
+	(2715, 'common.to', 'To', 'common', 'en', NULL, NULL),
+	(2716, 'plugin.plugin_action.plugin_exist', 'Plugin này đã tồn tại rồi', 'plugin', 'vi', NULL, NULL),
+	(2717, 'plugin.plugin_action.plugin_exist', 'This plugin already exists', 'plugin', 'en', NULL, NULL);
 /*!40000 ALTER TABLE `sc_languages` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_product_review
+DROP TABLE IF EXISTS `sc_product_review`;
 CREATE TABLE IF NOT EXISTS `sc_product_review` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3361,15 +3397,13 @@ CREATE TABLE IF NOT EXISTS `sc_product_review` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_product_review: ~2 rows (approximately)
+-- Dumping data for table s-cart.sc_product_review: ~0 rows (approximately)
 DELETE FROM `sc_product_review`;
 /*!40000 ALTER TABLE `sc_product_review` DISABLE KEYS */;
-INSERT INTO `sc_product_review` (`id`, `product_id`, `customer_id`, `name`, `point`, `comment`, `status`, `created_at`, `updated_at`) VALUES
-	('9800587d-d91b-4ded-91a4-28f64c4433c1', '98003dd9-2a58-4c0b-83f8-3e14a3a31cc4', '98005032-8ab2-456d-99b0-04fc4e9e9b0e', 'LAnh Le', 4, '1511656\r&lt;br&gt;?', 1, '2022-12-17 17:22:00', '2022-12-17 17:22:00'),
-	('980065db-1077-4ace-a2cd-4fcfebb3b3f5', '98003dd9-2939-41e6-8913-ba5507c812c7', '98005032-8ab2-456d-99b0-04fc4e9e9b0e', 'LAnh Le', 3, 'dfsdfsdfsdf', 1, '2022-12-17 17:59:22', '2022-12-17 17:59:22');
 /*!40000 ALTER TABLE `sc_product_review` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_attribute_group
+DROP TABLE IF EXISTS `sc_shop_attribute_group`;
 CREATE TABLE IF NOT EXISTS `sc_shop_attribute_group` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3390,6 +3424,7 @@ INSERT INTO `sc_shop_attribute_group` (`id`, `name`, `status`, `sort`, `type`, `
 /*!40000 ALTER TABLE `sc_shop_attribute_group` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner
+DROP TABLE IF EXISTS `sc_shop_banner`;
 CREATE TABLE IF NOT EXISTS `sc_shop_banner` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3411,17 +3446,18 @@ CREATE TABLE IF NOT EXISTS `sc_shop_banner` (
 DELETE FROM `sc_shop_banner`;
 /*!40000 ALTER TABLE `sc_shop_banner` DISABLE KEYS */;
 INSERT INTO `sc_shop_banner` (`id`, `title`, `image`, `url`, `target`, `html`, `status`, `sort`, `click`, `type`, `created_at`, `updated_at`) VALUES
-	('980087dc-4d3c-4777-9aea-7cfb2d01878a', 'Banner home 1 (s-cart-light)', '/data/banner/banner-home-1.jpg', NULL, '_self', '', 1, 0, 0, 'banner', '2022-12-17 19:34:27', '2022-12-17 19:34:27'),
-	('980087dc-514a-472f-9ca5-88784e42cbb5', 'Banner home 2 (s-cart-light)', '/data/banner/banner-home-2.jpg', NULL, '_self', '', 1, 0, 0, 'banner', '2022-12-17 19:34:27', '2022-12-17 19:34:27'),
-	('980087dc-5323-4a72-9299-2d89a36f6938', 'Banner breadcrumb (s-cart-light)', '/data/banner/breadcrumb.jpg', NULL, '_self', '', 1, 0, 0, 'breadcrumb', '2022-12-17 19:34:27', '2022-12-17 19:34:27'),
-	('980087dc-5576-4bea-928b-e60c3512e1e6', 'Banner store (s-cart-light)', '/data/banner/banner-store.jpg', NULL, '_self', '', 1, 0, 0, 'banner-store', '2022-12-17 19:34:27', '2022-12-17 19:34:27'),
-	('980087dd-f3a0-4e26-92f7-ba6eade0ccc5', 'Banner home 1 (s-cart-light)', '/data/banner/banner-home-1.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
-	('980087dd-f3aa-4157-a845-3b8ebf21a399', 'Banner home 2 (s-cart-light)', '/data/banner/banner-home-2.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
-	('980087dd-f3af-4995-8aa3-4d1583aabfc1', 'Banner breadcrumb (s-cart-light)', '/data/banner/breadcrumb.jpg', NULL, '_self', '', 1, 0, 0, 'breadcrumb', NULL, NULL),
-	('980087dd-f3b4-4787-9463-c5d9e01d7ed7', 'Banner store (s-cart-light)', '/data/banner/banner-store.jpg', NULL, '_self', '', 1, 0, 0, 'banner-store', NULL, NULL);
+	('986302e4-0a92-4443-926c-a66a4683ebe2', 'Banner home 1 (s-cart-light)', '/data/banner/banner-home-1.jpg', NULL, '_self', '', 1, 0, 0, 'banner', '2023-02-04 18:29:36', '2023-02-04 18:29:36'),
+	('986302e4-1572-4f41-ac4b-c2eb1eb8d11c', 'Banner home 2 (s-cart-light)', '/data/banner/banner-home-2.jpg', NULL, '_self', '', 1, 0, 0, 'banner', '2023-02-04 18:29:36', '2023-02-04 18:29:36'),
+	('986302e4-309e-4dbd-9459-3143435d72e8', 'Banner breadcrumb (s-cart-light)', '/data/banner/breadcrumb.jpg', NULL, '_self', '', 1, 0, 0, 'breadcrumb', '2023-02-04 18:29:36', '2023-02-04 18:29:36'),
+	('986302e4-37ba-4997-b853-3abc70d3844b', 'Banner store (s-cart-light)', '/data/banner/banner-store.jpg', NULL, '_self', '', 1, 0, 0, 'banner-store', '2023-02-04 18:29:36', '2023-02-04 18:29:36'),
+	('986302e5-652f-42b3-b83d-10480bcc828b', 'Banner home 1 (s-cart-light)', '/data/banner/banner-home-1.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
+	('986302e5-6538-4d71-9f34-02b00a87da5e', 'Banner home 2 (s-cart-light)', '/data/banner/banner-home-2.jpg', NULL, '_self', '<h1 class="swiper-title-1" data-caption-animate="fadeScale" data-caption-delay="100">Top-notch Furniture</h1><p class="biggest text-white-70" data-caption-animate="fadeScale" data-caption-delay="200">Sofa Store provides the best furniture and accessories for homes and offices.</p><div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="300"> <span class="button button-zachem-tak-delat button-white button-zakaria"> Shop now</span> </div>', 1, 0, 0, 'banner', NULL, NULL),
+	('986302e5-653d-403b-b284-c3fb1143eca1', 'Banner breadcrumb (s-cart-light)', '/data/banner/breadcrumb.jpg', NULL, '_self', '', 1, 0, 0, 'breadcrumb', NULL, NULL),
+	('986302e5-6541-4130-b7c9-2c75f6bb6c71', 'Banner store (s-cart-light)', '/data/banner/banner-store.jpg', NULL, '_self', '', 1, 0, 0, 'banner-store', NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_banner` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner_store
+DROP TABLE IF EXISTS `sc_shop_banner_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_banner_store` (
   `banner_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3432,17 +3468,18 @@ CREATE TABLE IF NOT EXISTS `sc_shop_banner_store` (
 DELETE FROM `sc_shop_banner_store`;
 /*!40000 ALTER TABLE `sc_shop_banner_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_banner_store` (`banner_id`, `store_id`) VALUES
-	('980087dc-4d3c-4777-9aea-7cfb2d01878a', '1'),
-	('980087dc-514a-472f-9ca5-88784e42cbb5', '1'),
-	('980087dc-5323-4a72-9299-2d89a36f6938', '1'),
-	('980087dc-5576-4bea-928b-e60c3512e1e6', '1'),
-	('980087dd-f3a0-4e26-92f7-ba6eade0ccc5', '1'),
-	('980087dd-f3aa-4157-a845-3b8ebf21a399', '1'),
-	('980087dd-f3af-4995-8aa3-4d1583aabfc1', '1'),
-	('980087dd-f3b4-4787-9463-c5d9e01d7ed7', '1');
+	('986302e4-0a92-4443-926c-a66a4683ebe2', '1'),
+	('986302e4-1572-4f41-ac4b-c2eb1eb8d11c', '1'),
+	('986302e4-309e-4dbd-9459-3143435d72e8', '1'),
+	('986302e4-37ba-4997-b853-3abc70d3844b', '1'),
+	('986302e5-652f-42b3-b83d-10480bcc828b', '1'),
+	('986302e5-6538-4d71-9f34-02b00a87da5e', '1'),
+	('986302e5-653d-403b-b284-c3fb1143eca1', '1'),
+	('986302e5-6541-4130-b7c9-2c75f6bb6c71', '1');
 /*!40000 ALTER TABLE `sc_shop_banner_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_banner_type
+DROP TABLE IF EXISTS `sc_shop_banner_type`;
 CREATE TABLE IF NOT EXISTS `sc_shop_banner_type` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3467,6 +3504,7 @@ INSERT INTO `sc_shop_banner_type` (`id`, `code`, `name`, `created_at`, `updated_
 /*!40000 ALTER TABLE `sc_shop_banner_type` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_brand
+DROP TABLE IF EXISTS `sc_shop_brand`;
 CREATE TABLE IF NOT EXISTS `sc_shop_brand` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3485,18 +3523,19 @@ CREATE TABLE IF NOT EXISTS `sc_shop_brand` (
 DELETE FROM `sc_shop_brand`;
 /*!40000 ALTER TABLE `sc_shop_brand` DISABLE KEYS */;
 INSERT INTO `sc_shop_brand` (`id`, `name`, `alias`, `image`, `url`, `status`, `sort`, `created_at`, `updated_at`) VALUES
-	('980087dd-f084-4714-a4df-7088037b952b', 'DaNang', 'danang', '/data/brand/acer.png', NULL, 1, 0, NULL, NULL),
-	('980087dd-f08e-4c1f-a122-29cb3594e70e', 'SaiGon', 'saigon', '/data/brand/assus.png', NULL, 1, 0, NULL, NULL),
-	('980087dd-f093-4fca-8c8b-6f69b09c88a0', 'HaNoi', 'hanoi', '/data/brand/casio.png', NULL, 1, 0, NULL, NULL),
-	('980087dd-f099-45ae-ba20-4bb1f4be816f', 'BenTre', 'bentre', '/data/brand/dell.png', NULL, 1, 0, NULL, NULL),
-	('980087dd-f09e-4766-9c5e-926113f9dd15', 'NgheAn', 'nghean', '/data/brand/microsoft.png', NULL, 1, 0, NULL, NULL),
-	('980087dd-f0a3-47f8-8ede-099775cf36e0', 'LongAn', 'longan', '/data/brand/nokia.png', NULL, 1, 0, NULL, NULL),
-	('980087dd-f0a8-423b-b741-784fdf442895', 'CaMau', 'camau', '/data/brand/panasonic.png', NULL, 1, 0, NULL, NULL),
-	('980087dd-f0ac-4641-9ed1-a6a24bb389e9', 'HaGiang', 'hagiang', '/data/brand/sharp.png', NULL, 1, 0, NULL, NULL),
-	('980087dd-f0b6-448b-8ae5-8261faa6abfb', 'ThanhHoa', 'thanhhoa', '/data/brand/vaio.png', NULL, 1, 0, NULL, NULL);
+	('986302e5-62b5-42f5-9c83-86bcdc0ff3d4', 'DaNang', 'danang', '/data/brand/acer.png', NULL, 1, 0, NULL, NULL),
+	('986302e5-62be-428b-b36c-d442a2d98d43', 'SaiGon', 'saigon', '/data/brand/assus.png', NULL, 1, 0, NULL, NULL),
+	('986302e5-62c3-4c31-8528-534069b0a76e', 'HaNoi', 'hanoi', '/data/brand/casio.png', NULL, 1, 0, NULL, NULL),
+	('986302e5-62c7-42fe-b8f3-544b29333f67', 'BenTre', 'bentre', '/data/brand/dell.png', NULL, 1, 0, NULL, NULL),
+	('986302e5-62cb-43f6-b3f2-35080b44aca9', 'NgheAn', 'nghean', '/data/brand/microsoft.png', NULL, 1, 0, NULL, NULL),
+	('986302e5-62d0-4d45-aede-1a1f84255ddc', 'LongAn', 'longan', '/data/brand/nokia.png', NULL, 1, 0, NULL, NULL),
+	('986302e5-62d4-4d78-bc77-6b2e5802b414', 'CaMau', 'camau', '/data/brand/panasonic.png', NULL, 1, 0, NULL, NULL),
+	('986302e5-62d8-4f8f-928c-0db7bb2b7916', 'HaGiang', 'hagiang', '/data/brand/sharp.png', NULL, 1, 0, NULL, NULL),
+	('986302e5-62e0-4131-b9fb-b8ae143c84f9', 'ThanhHoa', 'thanhhoa', '/data/brand/vaio.png', NULL, 1, 0, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_brand` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_brand_store
+DROP TABLE IF EXISTS `sc_shop_brand_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_brand_store` (
   `brand_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3507,18 +3546,19 @@ CREATE TABLE IF NOT EXISTS `sc_shop_brand_store` (
 DELETE FROM `sc_shop_brand_store`;
 /*!40000 ALTER TABLE `sc_shop_brand_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_brand_store` (`brand_id`, `store_id`) VALUES
-	('980087dd-f084-4714-a4df-7088037b952b', '1'),
-	('980087dd-f08e-4c1f-a122-29cb3594e70e', '1'),
-	('980087dd-f093-4fca-8c8b-6f69b09c88a0', '1'),
-	('980087dd-f099-45ae-ba20-4bb1f4be816f', '1'),
-	('980087dd-f09e-4766-9c5e-926113f9dd15', '1'),
-	('980087dd-f0a3-47f8-8ede-099775cf36e0', '1'),
-	('980087dd-f0a8-423b-b741-784fdf442895', '1'),
-	('980087dd-f0ac-4641-9ed1-a6a24bb389e9', '1'),
-	('980087dd-f0b6-448b-8ae5-8261faa6abfb', '1');
+	('986302e5-62b5-42f5-9c83-86bcdc0ff3d4', '1'),
+	('986302e5-62be-428b-b36c-d442a2d98d43', '1'),
+	('986302e5-62c3-4c31-8528-534069b0a76e', '1'),
+	('986302e5-62c7-42fe-b8f3-544b29333f67', '1'),
+	('986302e5-62cb-43f6-b3f2-35080b44aca9', '1'),
+	('986302e5-62d0-4d45-aede-1a1f84255ddc', '1'),
+	('986302e5-62d4-4d78-bc77-6b2e5802b414', '1'),
+	('986302e5-62d8-4f8f-928c-0db7bb2b7916', '1'),
+	('986302e5-62e0-4131-b9fb-b8ae143c84f9', '1');
 /*!40000 ALTER TABLE `sc_shop_brand_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category
+DROP TABLE IF EXISTS `sc_shop_category`;
 CREATE TABLE IF NOT EXISTS `sc_shop_category` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -3537,36 +3577,37 @@ CREATE TABLE IF NOT EXISTS `sc_shop_category` (
 DELETE FROM `sc_shop_category`;
 /*!40000 ALTER TABLE `sc_shop_category` DISABLE KEYS */;
 INSERT INTO `sc_shop_category` (`id`, `image`, `alias`, `parent`, `top`, `status`, `sort`, `created_at`, `updated_at`) VALUES
-	('980087dd-e728-4200-ad37-64d9a8068235', '/data/category/laptop1.png', 'am-thuc', '0', 1, 1, 0, NULL, NULL),
-	('980087dd-e733-480a-82b2-f1b790c98fb3', '/data/category/headphone1.png', 'du-lich', '0', 1, 1, 1, NULL, NULL),
-	('980087dd-e739-40fe-a890-e4b1e2a3d69c', '/data/category/phone1.png', 'my-nghe', '0', 1, 1, 2, NULL, NULL),
-	('980087dd-e73e-4dfd-9c41-d774f1557dc3', '/data/category/camera1.png', 'van-hoa', '0', 1, 1, 3, NULL, NULL),
-	('980087dd-e743-46ba-b144-f7e624d2ebf6', '/data/category/wifi1.png', 'the-thao', '0', 1, 1, 4, NULL, NULL),
-	('980087dd-e747-4b85-9de9-c3f28960cb64', '/data/category/iot1.png', 'cong-nghe', '0', 1, 1, 5, NULL, NULL),
-	('980087dd-e74b-4bdb-aa3e-62722bba104e', '/data/category/usb1.png', 'ky-thuat', '0', 1, 1, 6, NULL, NULL),
-	('980087dd-e750-4938-b25a-64375e21bc6a', '/data/category/service1.png', 'dich-vu', '0', 1, 1, 7, NULL, NULL),
-	('980087dd-e754-4fe0-9bc5-6c334561436c', '/data/category/speaker1.png', 'banh-my-sai-gon', '980087dd-e743-46ba-b144-f7e624d2ebf6', 0, 1, 0, NULL, NULL),
-	('980087dd-e758-4b96-9ce9-99e3f72e5869', '/data/category/laptop6.png', 'gom-bat-trang', '980087dd-e73e-4dfd-9c41-d774f1557dc3', 0, 1, 0, NULL, NULL),
-	('980087dd-e75c-489b-b73d-e24b3f6cc78b', '/data/category/cpu1.png', 'dan-ca-quan-ho', '980087dd-e747-4b85-9de9-c3f28960cb64', 0, 1, 0, NULL, NULL),
-	('980087dd-e760-4eb8-92c0-f7e3ba7f6df5', '/data/category/cpu2.png', 'don-ca-tai-tu', '980087dd-e747-4b85-9de9-c3f28960cb64', 0, 1, 0, NULL, NULL),
-	('980087dd-e764-4d78-880c-da6020d8291d', '/data/category/blueetooth2.png', 'nem-chua', '980087dd-e739-40fe-a890-e4b1e2a3d69c', 1, 1, 7, NULL, NULL),
-	('980087dd-e768-4594-b002-f188f31f881d', '/data/category/wifi2.png', 'toi-ly-son', '980087dd-e743-46ba-b144-f7e624d2ebf6', 1, 1, 20, NULL, NULL),
-	('980087dd-e76d-4f6b-981f-fe2192c5892b', '/data/category/headphone3.png', 'phong-nha-kebang', '980087dd-e733-480a-82b2-f1b790c98fb3', 0, 1, 0, NULL, NULL),
-	('980087dd-e771-4465-83d7-ef2f3b1f4b8e', '/data/category/laptop2.png', 'pho-nam-dinh', '980087dd-e728-4200-ad37-64d9a8068235', 0, 1, 0, NULL, NULL),
-	('980087dd-e775-452d-b76d-d82ca47814f3', '/data/category/laptop3.png', 'com-lang-vong', '980087dd-e728-4200-ad37-64d9a8068235', 0, 1, 0, NULL, NULL),
-	('980087dd-e779-4037-b8e9-e4bb2e9325f3', '/data/category/laptop4.png', 'bun-cha-hanoi', '980087dd-e728-4200-ad37-64d9a8068235', 0, 1, 0, NULL, NULL),
-	('980087dd-e77d-4f39-914a-a0e0db6e6694', '/data/category/laptop5.png', 'com-tam-an-giang', '980087dd-e747-4b85-9de9-c3f28960cb64', 0, 1, 0, NULL, NULL),
-	('980087dd-e781-4aa3-bf87-76fbc5b248f5', '/data/category/headphone2.png', 'vinh-ha-long', '980087dd-e733-480a-82b2-f1b790c98fb3', 0, 1, 0, NULL, NULL),
-	('980087dd-e785-454f-b433-dab6807db543', '/data/category/camera1.png', 'lua-ha-dong', '980087dd-e73e-4dfd-9c41-d774f1557dc3', 0, 1, 0, NULL, NULL),
-	('980087dd-e78a-478e-9219-1dc8020b5315', '/data/category/camera2.png', 'non-quai-thao', '980087dd-e73e-4dfd-9c41-d774f1557dc3', 0, 1, 0, NULL, NULL),
-	('980087dd-e78e-4fa6-b7f0-43ff4e86531d', '/data/category/monitor2.png', 'tranh-dong-ho', '980087dd-e739-40fe-a890-e4b1e2a3d69c', 0, 1, 0, NULL, NULL),
-	('980087dd-e793-473a-b84c-1fb489cbb8cc', '/data/category/monitor1.png', 'trai-cay-nam-bo', '980087dd-e739-40fe-a890-e4b1e2a3d69c', 0, 1, 0, NULL, NULL),
-	('980087dd-e797-484e-9e84-bff6a316ae82', '/data/category/phone2.png', 'chieu-coi-nga-son', '980087dd-e739-40fe-a890-e4b1e2a3d69c', 0, 1, 0, NULL, NULL),
-	('980087dd-e79b-46e1-91cf-644ef9b20a09', '/data/category/server1.png', 'nhac-co-truyen', '980087dd-e733-480a-82b2-f1b790c98fb3', 0, 1, 0, NULL, NULL),
-	('980087dd-e7a0-4334-9870-194b6d6b0f6d', '/data/category/print1.png', 'con-dao', '980087dd-e733-480a-82b2-f1b790c98fb3', 1, 1, 10, NULL, NULL);
+	('986302e5-5aa2-4a0a-b4e5-56d7e71a4cb5', '/data/category/laptop1.png', 'am-thuc', '0', 1, 1, 0, NULL, NULL),
+	('986302e5-5aab-46ad-aa9d-505667dcc74a', '/data/category/headphone1.png', 'du-lich', '0', 1, 1, 1, NULL, NULL),
+	('986302e5-5ab0-4857-be77-01994d3053d2', '/data/category/phone1.png', 'my-nghe', '0', 1, 1, 2, NULL, NULL),
+	('986302e5-5ab4-4318-a88c-ad8892ca63fb', '/data/category/camera1.png', 'van-hoa', '0', 1, 1, 3, NULL, NULL),
+	('986302e5-5ab8-4cf4-af43-666b7316f605', '/data/category/wifi1.png', 'the-thao', '0', 1, 1, 4, NULL, NULL),
+	('986302e5-5abd-4e77-acfa-d05e271f7a17', '/data/category/iot1.png', 'cong-nghe', '0', 1, 1, 5, NULL, NULL),
+	('986302e5-5ac1-4f05-af60-6774474fdad9', '/data/category/usb1.png', 'ky-thuat', '0', 1, 1, 6, NULL, NULL),
+	('986302e5-5ac5-4382-8212-f617ed95ee77', '/data/category/service1.png', 'dich-vu', '0', 1, 1, 7, NULL, NULL),
+	('986302e5-5ac9-4ee5-9462-e3024e53b5d0', '/data/category/speaker1.png', 'banh-my-sai-gon', '986302e5-5ab8-4cf4-af43-666b7316f605', 0, 1, 0, NULL, NULL),
+	('986302e5-5acd-45c5-9a52-70ab473be266', '/data/category/laptop6.png', 'gom-bat-trang', '986302e5-5ab4-4318-a88c-ad8892ca63fb', 0, 1, 0, NULL, NULL),
+	('986302e5-5ad1-48d6-9e17-c4609e9307a7', '/data/category/cpu1.png', 'dan-ca-quan-ho', '986302e5-5abd-4e77-acfa-d05e271f7a17', 0, 1, 0, NULL, NULL),
+	('986302e5-5ad5-435e-a8e5-6def9bd9ce49', '/data/category/cpu2.png', 'don-ca-tai-tu', '986302e5-5abd-4e77-acfa-d05e271f7a17', 0, 1, 0, NULL, NULL),
+	('986302e5-5ad9-42e4-bb7c-54bd55e6d7bf', '/data/category/blueetooth2.png', 'nem-chua', '986302e5-5ab0-4857-be77-01994d3053d2', 1, 1, 7, NULL, NULL),
+	('986302e5-5add-4411-a2b8-7133fb7bceb6', '/data/category/wifi2.png', 'toi-ly-son', '986302e5-5ab8-4cf4-af43-666b7316f605', 1, 1, 20, NULL, NULL),
+	('986302e5-5ae1-46ce-8f36-ecce5de2ad79', '/data/category/headphone3.png', 'phong-nha-kebang', '986302e5-5aab-46ad-aa9d-505667dcc74a', 0, 1, 0, NULL, NULL),
+	('986302e5-5ae5-4fdf-9ea6-daf1d32000b3', '/data/category/laptop2.png', 'pho-nam-dinh', '986302e5-5aa2-4a0a-b4e5-56d7e71a4cb5', 0, 1, 0, NULL, NULL),
+	('986302e5-5ae9-47f4-a490-9650c8bc98ae', '/data/category/laptop3.png', 'com-lang-vong', '986302e5-5aa2-4a0a-b4e5-56d7e71a4cb5', 0, 1, 0, NULL, NULL),
+	('986302e5-5aed-4b2d-b550-151cb9102a5e', '/data/category/laptop4.png', 'bun-cha-hanoi', '986302e5-5aa2-4a0a-b4e5-56d7e71a4cb5', 0, 1, 0, NULL, NULL),
+	('986302e5-5af1-4d6c-b34e-02598808cc6c', '/data/category/laptop5.png', 'com-tam-an-giang', '986302e5-5abd-4e77-acfa-d05e271f7a17', 0, 1, 0, NULL, NULL),
+	('986302e5-5af5-4abf-849a-bcfac31b97fa', '/data/category/headphone2.png', 'vinh-ha-long', '986302e5-5aab-46ad-aa9d-505667dcc74a', 0, 1, 0, NULL, NULL),
+	('986302e5-5af9-4767-90a5-a1a7b6f489ef', '/data/category/camera1.png', 'lua-ha-dong', '986302e5-5ab4-4318-a88c-ad8892ca63fb', 0, 1, 0, NULL, NULL),
+	('986302e5-5afd-4657-a464-c3dd2ca299f9', '/data/category/camera2.png', 'non-quai-thao', '986302e5-5ab4-4318-a88c-ad8892ca63fb', 0, 1, 0, NULL, NULL),
+	('986302e5-5b01-4039-9bfb-8ed7e56d9fcf', '/data/category/monitor2.png', 'tranh-dong-ho', '986302e5-5ab0-4857-be77-01994d3053d2', 0, 1, 0, NULL, NULL),
+	('986302e5-5b05-4baf-a8b6-a0889f0b383d', '/data/category/monitor1.png', 'trai-cay-nam-bo', '986302e5-5ab0-4857-be77-01994d3053d2', 0, 1, 0, NULL, NULL),
+	('986302e5-5b09-4fbd-8cb9-50953803f123', '/data/category/phone2.png', 'chieu-coi-nga-son', '986302e5-5ab0-4857-be77-01994d3053d2', 0, 1, 0, NULL, NULL),
+	('986302e5-5b0d-4816-b4e0-daca9e9a0e6e', '/data/category/server1.png', 'nhac-co-truyen', '986302e5-5aab-46ad-aa9d-505667dcc74a', 0, 1, 0, NULL, NULL),
+	('986302e5-5b11-45c2-99bc-e16501051ad1', '/data/category/print1.png', 'con-dao', '986302e5-5aab-46ad-aa9d-505667dcc74a', 1, 1, 10, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category_description
+DROP TABLE IF EXISTS `sc_shop_category_description`;
 CREATE TABLE IF NOT EXISTS `sc_shop_category_description` (
   `category_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3581,63 +3622,64 @@ CREATE TABLE IF NOT EXISTS `sc_shop_category_description` (
 DELETE FROM `sc_shop_category_description`;
 /*!40000 ALTER TABLE `sc_shop_category_description` DISABLE KEYS */;
 INSERT INTO `sc_shop_category_description` (`category_id`, `lang`, `title`, `keyword`, `description`) VALUES
-	('980087dd-e728-4200-ad37-64d9a8068235', 'en', 'Am Thuc', NULL, NULL),
-	('980087dd-e728-4200-ad37-64d9a8068235', 'vi', 'Am Thuc', NULL, NULL),
-	('980087dd-e733-480a-82b2-f1b790c98fb3', 'en', 'Du Lich', NULL, NULL),
-	('980087dd-e733-480a-82b2-f1b790c98fb3', 'vi', 'Du Lich', NULL, NULL),
-	('980087dd-e739-40fe-a890-e4b1e2a3d69c', 'en', 'My Nghe', NULL, NULL),
-	('980087dd-e739-40fe-a890-e4b1e2a3d69c', 'vi', 'My Nghe', NULL, NULL),
-	('980087dd-e73e-4dfd-9c41-d774f1557dc3', 'en', 'Van Hoa', NULL, NULL),
-	('980087dd-e73e-4dfd-9c41-d774f1557dc3', 'vi', 'Van Hoa', NULL, NULL),
-	('980087dd-e743-46ba-b144-f7e624d2ebf6', 'en', 'The Thao', NULL, NULL),
-	('980087dd-e743-46ba-b144-f7e624d2ebf6', 'vi', 'The Thao', NULL, NULL),
-	('980087dd-e747-4b85-9de9-c3f28960cb64', 'en', 'Cong Nghe', NULL, NULL),
-	('980087dd-e747-4b85-9de9-c3f28960cb64', 'vi', 'Cong Nghe', NULL, NULL),
-	('980087dd-e74b-4bdb-aa3e-62722bba104e', 'en', 'Ky Thuat', NULL, NULL),
-	('980087dd-e74b-4bdb-aa3e-62722bba104e', 'vi', 'Ky Thuat', NULL, NULL),
-	('980087dd-e750-4938-b25a-64375e21bc6a', 'en', 'Dich Vu', NULL, NULL),
-	('980087dd-e750-4938-b25a-64375e21bc6a', 'vi', 'Dich Vu', NULL, NULL),
-	('980087dd-e754-4fe0-9bc5-6c334561436c', 'en', 'Banh My Sai Gon', NULL, NULL),
-	('980087dd-e754-4fe0-9bc5-6c334561436c', 'vi', 'Banh My Sai Gon', NULL, NULL),
-	('980087dd-e758-4b96-9ce9-99e3f72e5869', 'en', 'Gom Bat Trang', NULL, NULL),
-	('980087dd-e758-4b96-9ce9-99e3f72e5869', 'vi', 'Gom Bat Trang', NULL, NULL),
-	('980087dd-e75c-489b-b73d-e24b3f6cc78b', 'en', 'Dan Ca Quan Ho', NULL, NULL),
-	('980087dd-e75c-489b-b73d-e24b3f6cc78b', 'vi', 'Dan Ca Quan Ho', NULL, NULL),
-	('980087dd-e760-4eb8-92c0-f7e3ba7f6df5', 'en', 'Don Ca Tai Tu', NULL, NULL),
-	('980087dd-e760-4eb8-92c0-f7e3ba7f6df5', 'vi', 'Don Ca Tai Tu', NULL, NULL),
-	('980087dd-e764-4d78-880c-da6020d8291d', 'en', 'Nem Chua', NULL, NULL),
-	('980087dd-e764-4d78-880c-da6020d8291d', 'vi', 'Nem Chua', NULL, NULL),
-	('980087dd-e768-4594-b002-f188f31f881d', 'en', 'Toi Ly Son', NULL, NULL),
-	('980087dd-e768-4594-b002-f188f31f881d', 'vi', 'Toi Ly Son', NULL, NULL),
-	('980087dd-e76d-4f6b-981f-fe2192c5892b', 'en', 'Phong Nha Kebang', NULL, NULL),
-	('980087dd-e76d-4f6b-981f-fe2192c5892b', 'vi', 'Phong Nha Kebang', NULL, NULL),
-	('980087dd-e771-4465-83d7-ef2f3b1f4b8e', 'en', 'Pho Nam Dinh', NULL, NULL),
-	('980087dd-e771-4465-83d7-ef2f3b1f4b8e', 'vi', 'Pho Nam Dinh', NULL, NULL),
-	('980087dd-e775-452d-b76d-d82ca47814f3', 'en', 'Com Lang Vong', NULL, NULL),
-	('980087dd-e775-452d-b76d-d82ca47814f3', 'vi', 'Com Lang Vong', NULL, NULL),
-	('980087dd-e779-4037-b8e9-e4bb2e9325f3', 'en', 'Bun Cha Hanoi', NULL, NULL),
-	('980087dd-e779-4037-b8e9-e4bb2e9325f3', 'vi', 'Bun Cha Hanoi', NULL, NULL),
-	('980087dd-e77d-4f39-914a-a0e0db6e6694', 'en', 'Com Tam An Giang', NULL, NULL),
-	('980087dd-e77d-4f39-914a-a0e0db6e6694', 'vi', 'Com Tam An Giang', NULL, NULL),
-	('980087dd-e781-4aa3-bf87-76fbc5b248f5', 'en', 'Vinh Ha Long', NULL, NULL),
-	('980087dd-e781-4aa3-bf87-76fbc5b248f5', 'vi', 'Vinh Ha Long', NULL, NULL),
-	('980087dd-e785-454f-b433-dab6807db543', 'en', 'Lua Ha Dong', NULL, NULL),
-	('980087dd-e785-454f-b433-dab6807db543', 'vi', 'Lua Ha Dong', NULL, NULL),
-	('980087dd-e78a-478e-9219-1dc8020b5315', 'en', 'Non Quai Thao', NULL, NULL),
-	('980087dd-e78a-478e-9219-1dc8020b5315', 'vi', 'Non Quai Thao', NULL, NULL),
-	('980087dd-e78e-4fa6-b7f0-43ff4e86531d', 'en', 'Tranh Dong Ho', NULL, NULL),
-	('980087dd-e78e-4fa6-b7f0-43ff4e86531d', 'vi', 'Tranh Dong Ho', NULL, NULL),
-	('980087dd-e793-473a-b84c-1fb489cbb8cc', 'en', 'Trai Cay Nam Bo', NULL, NULL),
-	('980087dd-e793-473a-b84c-1fb489cbb8cc', 'vi', 'Trai Cay Nam Bo', NULL, NULL),
-	('980087dd-e797-484e-9e84-bff6a316ae82', 'en', 'Chieu Coi Nga Son', NULL, NULL),
-	('980087dd-e797-484e-9e84-bff6a316ae82', 'vi', 'Chieu Coi Nga Son', NULL, NULL),
-	('980087dd-e79b-46e1-91cf-644ef9b20a09', 'en', 'Nhac Co Truyen', NULL, NULL),
-	('980087dd-e79b-46e1-91cf-644ef9b20a09', 'vi', 'Nhac Co Truyen', NULL, NULL),
-	('980087dd-e7a0-4334-9870-194b6d6b0f6d', 'en', 'Con Dao', NULL, NULL),
-	('980087dd-e7a0-4334-9870-194b6d6b0f6d', 'vi', 'Con Dao', NULL, NULL);
+	('986302e5-5aa2-4a0a-b4e5-56d7e71a4cb5', 'en', 'Am Thuc', NULL, NULL),
+	('986302e5-5aa2-4a0a-b4e5-56d7e71a4cb5', 'vi', 'Am Thuc', NULL, NULL),
+	('986302e5-5aab-46ad-aa9d-505667dcc74a', 'en', 'Du Lich', NULL, NULL),
+	('986302e5-5aab-46ad-aa9d-505667dcc74a', 'vi', 'Du Lich', NULL, NULL),
+	('986302e5-5ab0-4857-be77-01994d3053d2', 'en', 'My Nghe', NULL, NULL),
+	('986302e5-5ab0-4857-be77-01994d3053d2', 'vi', 'My Nghe', NULL, NULL),
+	('986302e5-5ab4-4318-a88c-ad8892ca63fb', 'en', 'Van Hoa', NULL, NULL),
+	('986302e5-5ab4-4318-a88c-ad8892ca63fb', 'vi', 'Van Hoa', NULL, NULL),
+	('986302e5-5ab8-4cf4-af43-666b7316f605', 'en', 'The Thao', NULL, NULL),
+	('986302e5-5ab8-4cf4-af43-666b7316f605', 'vi', 'The Thao', NULL, NULL),
+	('986302e5-5abd-4e77-acfa-d05e271f7a17', 'en', 'Cong Nghe', NULL, NULL),
+	('986302e5-5abd-4e77-acfa-d05e271f7a17', 'vi', 'Cong Nghe', NULL, NULL),
+	('986302e5-5ac1-4f05-af60-6774474fdad9', 'en', 'Ky Thuat', NULL, NULL),
+	('986302e5-5ac1-4f05-af60-6774474fdad9', 'vi', 'Ky Thuat', NULL, NULL),
+	('986302e5-5ac5-4382-8212-f617ed95ee77', 'en', 'Dich Vu', NULL, NULL),
+	('986302e5-5ac5-4382-8212-f617ed95ee77', 'vi', 'Dich Vu', NULL, NULL),
+	('986302e5-5ac9-4ee5-9462-e3024e53b5d0', 'en', 'Banh My Sai Gon', NULL, NULL),
+	('986302e5-5ac9-4ee5-9462-e3024e53b5d0', 'vi', 'Banh My Sai Gon', NULL, NULL),
+	('986302e5-5acd-45c5-9a52-70ab473be266', 'en', 'Gom Bat Trang', NULL, NULL),
+	('986302e5-5acd-45c5-9a52-70ab473be266', 'vi', 'Gom Bat Trang', NULL, NULL),
+	('986302e5-5ad1-48d6-9e17-c4609e9307a7', 'en', 'Dan Ca Quan Ho', NULL, NULL),
+	('986302e5-5ad1-48d6-9e17-c4609e9307a7', 'vi', 'Dan Ca Quan Ho', NULL, NULL),
+	('986302e5-5ad5-435e-a8e5-6def9bd9ce49', 'en', 'Don Ca Tai Tu', NULL, NULL),
+	('986302e5-5ad5-435e-a8e5-6def9bd9ce49', 'vi', 'Don Ca Tai Tu', NULL, NULL),
+	('986302e5-5ad9-42e4-bb7c-54bd55e6d7bf', 'en', 'Nem Chua', NULL, NULL),
+	('986302e5-5ad9-42e4-bb7c-54bd55e6d7bf', 'vi', 'Nem Chua', NULL, NULL),
+	('986302e5-5add-4411-a2b8-7133fb7bceb6', 'en', 'Toi Ly Son', NULL, NULL),
+	('986302e5-5add-4411-a2b8-7133fb7bceb6', 'vi', 'Toi Ly Son', NULL, NULL),
+	('986302e5-5ae1-46ce-8f36-ecce5de2ad79', 'en', 'Phong Nha Kebang', NULL, NULL),
+	('986302e5-5ae1-46ce-8f36-ecce5de2ad79', 'vi', 'Phong Nha Kebang', NULL, NULL),
+	('986302e5-5ae5-4fdf-9ea6-daf1d32000b3', 'en', 'Pho Nam Dinh', NULL, NULL),
+	('986302e5-5ae5-4fdf-9ea6-daf1d32000b3', 'vi', 'Pho Nam Dinh', NULL, NULL),
+	('986302e5-5ae9-47f4-a490-9650c8bc98ae', 'en', 'Com Lang Vong', NULL, NULL),
+	('986302e5-5ae9-47f4-a490-9650c8bc98ae', 'vi', 'Com Lang Vong', NULL, NULL),
+	('986302e5-5aed-4b2d-b550-151cb9102a5e', 'en', 'Bun Cha Hanoi', NULL, NULL),
+	('986302e5-5aed-4b2d-b550-151cb9102a5e', 'vi', 'Bun Cha Hanoi', NULL, NULL),
+	('986302e5-5af1-4d6c-b34e-02598808cc6c', 'en', 'Com Tam An Giang', NULL, NULL),
+	('986302e5-5af1-4d6c-b34e-02598808cc6c', 'vi', 'Com Tam An Giang', NULL, NULL),
+	('986302e5-5af5-4abf-849a-bcfac31b97fa', 'en', 'Vinh Ha Long', NULL, NULL),
+	('986302e5-5af5-4abf-849a-bcfac31b97fa', 'vi', 'Vinh Ha Long', NULL, NULL),
+	('986302e5-5af9-4767-90a5-a1a7b6f489ef', 'en', 'Lua Ha Dong', NULL, NULL),
+	('986302e5-5af9-4767-90a5-a1a7b6f489ef', 'vi', 'Lua Ha Dong', NULL, NULL),
+	('986302e5-5afd-4657-a464-c3dd2ca299f9', 'en', 'Non Quai Thao', NULL, NULL),
+	('986302e5-5afd-4657-a464-c3dd2ca299f9', 'vi', 'Non Quai Thao', NULL, NULL),
+	('986302e5-5b01-4039-9bfb-8ed7e56d9fcf', 'en', 'Tranh Dong Ho', NULL, NULL),
+	('986302e5-5b01-4039-9bfb-8ed7e56d9fcf', 'vi', 'Tranh Dong Ho', NULL, NULL),
+	('986302e5-5b05-4baf-a8b6-a0889f0b383d', 'en', 'Trai Cay Nam Bo', NULL, NULL),
+	('986302e5-5b05-4baf-a8b6-a0889f0b383d', 'vi', 'Trai Cay Nam Bo', NULL, NULL),
+	('986302e5-5b09-4fbd-8cb9-50953803f123', 'en', 'Chieu Coi Nga Son', NULL, NULL),
+	('986302e5-5b09-4fbd-8cb9-50953803f123', 'vi', 'Chieu Coi Nga Son', NULL, NULL),
+	('986302e5-5b0d-4816-b4e0-daca9e9a0e6e', 'en', 'Nhac Co Truyen', NULL, NULL),
+	('986302e5-5b0d-4816-b4e0-daca9e9a0e6e', 'vi', 'Nhac Co Truyen', NULL, NULL),
+	('986302e5-5b11-45c2-99bc-e16501051ad1', 'en', 'Con Dao', NULL, NULL),
+	('986302e5-5b11-45c2-99bc-e16501051ad1', 'vi', 'Con Dao', NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_category_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_category_store
+DROP TABLE IF EXISTS `sc_shop_category_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_category_store` (
   `category_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3648,36 +3690,37 @@ CREATE TABLE IF NOT EXISTS `sc_shop_category_store` (
 DELETE FROM `sc_shop_category_store`;
 /*!40000 ALTER TABLE `sc_shop_category_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_category_store` (`category_id`, `store_id`) VALUES
-	('980087dd-e728-4200-ad37-64d9a8068235', '1'),
-	('980087dd-e733-480a-82b2-f1b790c98fb3', '1'),
-	('980087dd-e739-40fe-a890-e4b1e2a3d69c', '1'),
-	('980087dd-e73e-4dfd-9c41-d774f1557dc3', '1'),
-	('980087dd-e743-46ba-b144-f7e624d2ebf6', '1'),
-	('980087dd-e747-4b85-9de9-c3f28960cb64', '1'),
-	('980087dd-e74b-4bdb-aa3e-62722bba104e', '1'),
-	('980087dd-e750-4938-b25a-64375e21bc6a', '1'),
-	('980087dd-e754-4fe0-9bc5-6c334561436c', '1'),
-	('980087dd-e758-4b96-9ce9-99e3f72e5869', '1'),
-	('980087dd-e75c-489b-b73d-e24b3f6cc78b', '1'),
-	('980087dd-e760-4eb8-92c0-f7e3ba7f6df5', '1'),
-	('980087dd-e764-4d78-880c-da6020d8291d', '1'),
-	('980087dd-e768-4594-b002-f188f31f881d', '1'),
-	('980087dd-e76d-4f6b-981f-fe2192c5892b', '1'),
-	('980087dd-e771-4465-83d7-ef2f3b1f4b8e', '1'),
-	('980087dd-e775-452d-b76d-d82ca47814f3', '1'),
-	('980087dd-e779-4037-b8e9-e4bb2e9325f3', '1'),
-	('980087dd-e77d-4f39-914a-a0e0db6e6694', '1'),
-	('980087dd-e781-4aa3-bf87-76fbc5b248f5', '1'),
-	('980087dd-e785-454f-b433-dab6807db543', '1'),
-	('980087dd-e78a-478e-9219-1dc8020b5315', '1'),
-	('980087dd-e78e-4fa6-b7f0-43ff4e86531d', '1'),
-	('980087dd-e793-473a-b84c-1fb489cbb8cc', '1'),
-	('980087dd-e797-484e-9e84-bff6a316ae82', '1'),
-	('980087dd-e79b-46e1-91cf-644ef9b20a09', '1'),
-	('980087dd-e7a0-4334-9870-194b6d6b0f6d', '1');
+	('986302e5-5aa2-4a0a-b4e5-56d7e71a4cb5', '1'),
+	('986302e5-5aab-46ad-aa9d-505667dcc74a', '1'),
+	('986302e5-5ab0-4857-be77-01994d3053d2', '1'),
+	('986302e5-5ab4-4318-a88c-ad8892ca63fb', '1'),
+	('986302e5-5ab8-4cf4-af43-666b7316f605', '1'),
+	('986302e5-5abd-4e77-acfa-d05e271f7a17', '1'),
+	('986302e5-5ac1-4f05-af60-6774474fdad9', '1'),
+	('986302e5-5ac5-4382-8212-f617ed95ee77', '1'),
+	('986302e5-5ac9-4ee5-9462-e3024e53b5d0', '1'),
+	('986302e5-5acd-45c5-9a52-70ab473be266', '1'),
+	('986302e5-5ad1-48d6-9e17-c4609e9307a7', '1'),
+	('986302e5-5ad5-435e-a8e5-6def9bd9ce49', '1'),
+	('986302e5-5ad9-42e4-bb7c-54bd55e6d7bf', '1'),
+	('986302e5-5add-4411-a2b8-7133fb7bceb6', '1'),
+	('986302e5-5ae1-46ce-8f36-ecce5de2ad79', '1'),
+	('986302e5-5ae5-4fdf-9ea6-daf1d32000b3', '1'),
+	('986302e5-5ae9-47f4-a490-9650c8bc98ae', '1'),
+	('986302e5-5aed-4b2d-b550-151cb9102a5e', '1'),
+	('986302e5-5af1-4d6c-b34e-02598808cc6c', '1'),
+	('986302e5-5af5-4abf-849a-bcfac31b97fa', '1'),
+	('986302e5-5af9-4767-90a5-a1a7b6f489ef', '1'),
+	('986302e5-5afd-4657-a464-c3dd2ca299f9', '1'),
+	('986302e5-5b01-4039-9bfb-8ed7e56d9fcf', '1'),
+	('986302e5-5b05-4baf-a8b6-a0889f0b383d', '1'),
+	('986302e5-5b09-4fbd-8cb9-50953803f123', '1'),
+	('986302e5-5b0d-4816-b4e0-daca9e9a0e6e', '1'),
+	('986302e5-5b11-45c2-99bc-e16501051ad1', '1');
 /*!40000 ALTER TABLE `sc_shop_category_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_country
+DROP TABLE IF EXISTS `sc_shop_country`;
 CREATE TABLE IF NOT EXISTS `sc_shop_country` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3938,6 +3981,7 @@ INSERT INTO `sc_shop_country` (`id`, `code`, `name`) VALUES
 /*!40000 ALTER TABLE `sc_shop_country` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_currency
+DROP TABLE IF EXISTS `sc_shop_currency`;
 CREATE TABLE IF NOT EXISTS `sc_shop_currency` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3964,6 +4008,7 @@ INSERT INTO `sc_shop_currency` (`id`, `name`, `code`, `symbol`, `exchange_rate`,
 /*!40000 ALTER TABLE `sc_shop_currency` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_customer
+DROP TABLE IF EXISTS `sc_shop_customer`;
 CREATE TABLE IF NOT EXISTS `sc_shop_customer` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `first_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4003,6 +4048,7 @@ DELETE FROM `sc_shop_customer`;
 /*!40000 ALTER TABLE `sc_shop_customer` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_customer_address
+DROP TABLE IF EXISTS `sc_shop_customer_address`;
 CREATE TABLE IF NOT EXISTS `sc_shop_customer_address` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `customer_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4028,9 +4074,10 @@ DELETE FROM `sc_shop_customer_address`;
 /*!40000 ALTER TABLE `sc_shop_customer_address` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_custom_field
+DROP TABLE IF EXISTS `sc_shop_custom_field`;
 CREATE TABLE IF NOT EXISTS `sc_shop_custom_field` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'product, customer',
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'shop_product, shop_customer,...',
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `required` int(11) NOT NULL DEFAULT 0,
@@ -4050,6 +4097,7 @@ DELETE FROM `sc_shop_custom_field`;
 /*!40000 ALTER TABLE `sc_shop_custom_field` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_custom_field_detail
+DROP TABLE IF EXISTS `sc_shop_custom_field_detail`;
 CREATE TABLE IF NOT EXISTS `sc_shop_custom_field_detail` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `custom_field_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4068,6 +4116,7 @@ DELETE FROM `sc_shop_custom_field_detail`;
 /*!40000 ALTER TABLE `sc_shop_custom_field_detail` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_discount
+DROP TABLE IF EXISTS `sc_shop_discount`;
 CREATE TABLE IF NOT EXISTS `sc_shop_discount` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4088,11 +4137,10 @@ CREATE TABLE IF NOT EXISTS `sc_shop_discount` (
 -- Dumping data for table s-cart.sc_shop_discount: ~0 rows (approximately)
 DELETE FROM `sc_shop_discount`;
 /*!40000 ALTER TABLE `sc_shop_discount` DISABLE KEYS */;
-INSERT INTO `sc_shop_discount` (`id`, `code`, `reward`, `type`, `data`, `limit`, `used`, `login`, `status`, `expires_at`, `created_at`, `updated_at`) VALUES
-	('97f74dc2-561f-44f1-ad4a-2658464c3980', 'abc', 10.00, 'percent', 'hfh', 19999, 0, 0, 1, NULL, '2022-12-13 05:29:32', '2022-12-13 05:29:32');
 /*!40000 ALTER TABLE `sc_shop_discount` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_discount_customer
+DROP TABLE IF EXISTS `sc_shop_discount_customer`;
 CREATE TABLE IF NOT EXISTS `sc_shop_discount_customer` (
   `customer_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `discount_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4110,6 +4158,7 @@ DELETE FROM `sc_shop_discount_customer`;
 /*!40000 ALTER TABLE `sc_shop_discount_customer` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_discount_store
+DROP TABLE IF EXISTS `sc_shop_discount_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_discount_store` (
   `discount_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4119,11 +4168,10 @@ CREATE TABLE IF NOT EXISTS `sc_shop_discount_store` (
 -- Dumping data for table s-cart.sc_shop_discount_store: ~0 rows (approximately)
 DELETE FROM `sc_shop_discount_store`;
 /*!40000 ALTER TABLE `sc_shop_discount_store` DISABLE KEYS */;
-INSERT INTO `sc_shop_discount_store` (`discount_id`, `store_id`) VALUES
-	('97f74dc2-561f-44f1-ad4a-2658464c3980', '1');
 /*!40000 ALTER TABLE `sc_shop_discount_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_email_template
+DROP TABLE IF EXISTS `sc_shop_email_template`;
 CREATE TABLE IF NOT EXISTS `sc_shop_email_template` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4141,15 +4189,16 @@ CREATE TABLE IF NOT EXISTS `sc_shop_email_template` (
 DELETE FROM `sc_shop_email_template`;
 /*!40000 ALTER TABLE `sc_shop_email_template` DISABLE KEYS */;
 INSERT INTO `sc_shop_email_template` (`id`, `name`, `group`, `text`, `store_id`, `status`, `created_at`, `updated_at`) VALUES
-	('980087dc-3c3c-4a4e-821e-3312412b3445', 'Reset password', 'forgot_password', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n<tbody>\r\n    <tr>\r\n    <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <tbody>\r\n                <tr>\r\n                <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                    <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                        <tbody>\r\n                            <tr>\r\n                            <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                                <a href="{{$reset_link}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$reset_button}}</a>\r\n                            </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </td>\r\n    </tr>\r\n    </tbody>\r\n    </table>\r\n    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n    {{$note_sendmail}}\r\n    </p>\r\n    <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n    <tbody>\r\n    <tr>\r\n        <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>', '1', 1, NULL, NULL),
-	('980087dc-3c45-47ff-8f5a-e39be245de8c', 'Customer verification', 'customer_verify', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n    <tbody>\r\n    <tr>\r\n        <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                <tbody>\r\n                <tr>\r\n                    <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                        <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                            <tbody>\r\n                            <tr>\r\n                                <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                                    <a href="{{$url_verify}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$button}}</a>\r\n                                </td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </td>\r\n                </tr>\r\n                </tbody>\r\n            </table>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n    </table>\r\n    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n    {{$note_sendmail}}\r\n    </p>\r\n    <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n    <tbody>\r\n    <tr>\r\n        <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>', '1', 1, NULL, NULL),
-	('980087dc-3c4a-48e1-beaa-4229e27e0ab7', 'Welcome new customer', 'welcome_customer', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:center">{{$title}}</h1>\r\n<p style="text-align:center;">Welcome to my site!</p>', '1', 1, NULL, NULL),
-	('980087dc-3c4e-4a6b-94a7-669be1a6326c', 'Send form contact to admin', 'contact_to_admin', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Name</b>: {{$name}}<br>\r\n      <b>Email</b>: {{$email}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Content:<br>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="0">\r\n<tr>\r\n   <td>{{$content}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL),
-	('980087dc-3c52-42e0-a947-3ed9aef194b2', 'New order to admin', 'order_success_to_admin', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Email</b>: {{$email}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n   ===================================<br>\r\n</p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n   <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n   <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Discount</td>\r\n   <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Other Fee</td>\r\n   <td colspan="2" align="right">{{$otherFee}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Total</td>\r\n   <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL),
-	('980087dc-3c57-4d7a-85aa-6c205bb0b0e1', 'New order to customr', 'order_success_to_customer', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n   ===================================<br>\r\n</p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n   <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n   <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Discount</td>\r\n   <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Total</td>\r\n   <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL);
+	('986302e3-f148-4d50-91e0-24f60780d19e', 'Reset password', 'forgot_password', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n<tbody>\r\n    <tr>\r\n    <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <tbody>\r\n                <tr>\r\n                <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                    <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                        <tbody>\r\n                            <tr>\r\n                            <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                                <a href="{{$reset_link}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$reset_button}}</a>\r\n                            </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </td>\r\n    </tr>\r\n    </tbody>\r\n    </table>\r\n    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n    {{$note_sendmail}}\r\n    </p>\r\n    <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n    <tbody>\r\n    <tr>\r\n        <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>', '1', 1, NULL, NULL),
+	('986302e3-f15f-4849-86af-318cb85e44e1', 'Customer verification', 'customer_verify', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">{{$title}}</h1>\r\n<p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$reason_sendmail}}</p>\r\n<table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;margin:30px auto;padding:0;text-align:center;width:100%">\r\n    <tbody>\r\n    <tr>\r\n        <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                <tbody>\r\n                <tr>\r\n                    <td align="center" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                        <table border="0" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                            <tbody>\r\n                            <tr>\r\n                                <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n                                    <a href="{{$url_verify}}" class="button button-primary" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-radius:3px;color:#fff;display:inline-block;text-decoration:none;background-color:#3097d1;border-top:10px solid #3097d1;border-right:18px solid #3097d1;border-bottom:10px solid #3097d1;border-left:18px solid #3097d1" target="_blank">{{$button}}</a>\r\n                                </td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </td>\r\n                </tr>\r\n                </tbody>\r\n            </table>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n    </table>\r\n    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">\r\n    {{$note_sendmail}}\r\n    </p>\r\n    <table class="subcopy" width="100%" cellpadding="0" cellspacing="0" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;border-top:1px solid #edeff2;margin-top:25px;padding-top:25px">\r\n    <tbody>\r\n    <tr>\r\n        <td style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box">\r\n            <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;line-height:1.5em;margin-top:0;text-align:left;font-size:12px">{{$note_access_link}}</p>\r\n        </td>\r\n    </tr>\r\n    </tbody>\r\n</table>', '1', 1, NULL, NULL),
+	('986302e3-f16f-4e7b-a517-d042d3fb1fea', 'Welcome new customer', 'welcome_customer', '\r\n<h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:center">{{$title}}</h1>\r\n<p style="text-align:center;">Welcome to my site!</p>', '1', 1, NULL, NULL),
+	('986302e3-f17e-40ab-9708-77bd746aff15', 'Send form contact to admin', 'contact_to_admin', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Name</b>: {{$name}}<br>\r\n      <b>Email</b>: {{$email}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Content:<br>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="0">\r\n<tr>\r\n   <td>{{$content}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL),
+	('986302e3-f18c-46ad-810b-33996ce80509', 'New order to admin', 'order_success_to_admin', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Email</b>: {{$email}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n   ===================================<br>\r\n</p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n   <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n   <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Discount</td>\r\n   <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Other Fee</td>\r\n   <td colspan="2" align="right">{{$otherFee}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Total</td>\r\n   <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL),
+	('986302e3-f199-445f-987b-2afe75ad8e70', 'New order to customr', 'order_success_to_customer', '\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0">\r\n<tr>\r\n   <td>\r\n      <b>Order ID</b>: {{$orderID}}<br>\r\n      <b>Customer name</b>: {{$toname}}<br>\r\n      <b>Address</b>: {{$address}}<br>\r\n      <b>Phone</b>: {{$phone}}<br>\r\n      <b>Order note</b>: {{$comment}}\r\n   </td>\r\n</tr>\r\n</table>\r\n<hr>\r\n<p style="text-align: center;">Order detail:<br>\r\n   ===================================<br>\r\n</p>\r\n<table class="inner-body" align="center" cellpadding="0" cellspacing="0" border="1">\r\n{{$orderDetail}}\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Sub total</td>\r\n   <td colspan="2" align="right">{{$subtotal}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Shipping fee</td>\r\n   <td colspan="2" align="right">{{$shipping}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Discount</td>\r\n   <td colspan="2" align="right">{{$discount}}</td>\r\n</tr>\r\n<tr>\r\n   <td colspan="2"></td>\r\n   <td colspan="2" style="font-weight: bold;">Total</td>\r\n   <td colspan="2" align="right">{{$total}}</td>\r\n</tr>\r\n</table>', '1', 1, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_email_template` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_language
+DROP TABLE IF EXISTS `sc_shop_language`;
 CREATE TABLE IF NOT EXISTS `sc_shop_language` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4173,6 +4222,7 @@ INSERT INTO `sc_shop_language` (`id`, `name`, `code`, `icon`, `status`, `rtl`, `
 /*!40000 ALTER TABLE `sc_shop_language` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_layout_page
+DROP TABLE IF EXISTS `sc_shop_layout_page`;
 CREATE TABLE IF NOT EXISTS `sc_shop_layout_page` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4208,6 +4258,7 @@ INSERT INTO `sc_shop_layout_page` (`id`, `key`, `name`, `created_at`, `updated_a
 /*!40000 ALTER TABLE `sc_shop_layout_page` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_layout_position
+DROP TABLE IF EXISTS `sc_shop_layout_position`;
 CREATE TABLE IF NOT EXISTS `sc_shop_layout_position` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4231,6 +4282,7 @@ INSERT INTO `sc_shop_layout_position` (`id`, `key`, `name`, `created_at`, `updat
 /*!40000 ALTER TABLE `sc_shop_layout_position` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_length
+DROP TABLE IF EXISTS `sc_shop_length`;
 CREATE TABLE IF NOT EXISTS `sc_shop_length` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4252,6 +4304,7 @@ INSERT INTO `sc_shop_length` (`id`, `name`, `description`, `created_at`, `update
 /*!40000 ALTER TABLE `sc_shop_length` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_link
+DROP TABLE IF EXISTS `sc_shop_link`;
 CREATE TABLE IF NOT EXISTS `sc_shop_link` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4276,16 +4329,17 @@ INSERT INTO `sc_shop_link` (`id`, `name`, `url`, `target`, `group`, `module`, `t
 	('2', 'S-Cart', '#collection', '_self', 'menu', NULL, 'collection', NULL, 1, 60, NULL, NULL),
 	('3', 'About us', 'https://s-cart.org/en/about.html', '_self', 'menu', NULL, NULL, '2', 1, 10, NULL, NULL),
 	('4', 'Github', 'https://github.com/s-cart/s-cart', '_self', 'menu', NULL, NULL, '2', 1, 20, NULL, NULL),
-	('980087dc-3dd1-4d41-9470-887bb3a44d82', 'front.home', 'route::home', '_self', 'menu', '', NULL, NULL, 1, 10, NULL, NULL),
-	('980087dc-3dd9-4339-979d-7eea97a1e7a4', 'front.shop', 'route::shop', '_self', 'menu', '', NULL, NULL, 1, 20, NULL, NULL),
-	('980087dc-3ddd-4853-a294-9a67c8310a1f', 'front.blog', 'route::news', '_self', 'menu', '', NULL, NULL, 1, 30, NULL, NULL),
-	('980087dc-3de2-405c-867e-8c3b9fab3f74', 'front.contact', 'route::contact', '_self', 'menu', '', NULL, NULL, 1, 40, NULL, NULL),
-	('980087dc-3de6-4e06-8691-339781574746', 'front.my_profile', 'route::login', '_self', 'footer', '', NULL, NULL, 1, 60, NULL, NULL),
-	('980087dc-3deb-42f7-b8df-60daec5f2f6a', 'front.compare_page', 'route::compare', '_self', 'footer', '', NULL, NULL, 1, 70, NULL, NULL),
-	('980087dc-3def-4aa6-b88b-509d2bba7c3a', 'front.wishlist_page', 'route::wishlist', '_self', 'footer', '', NULL, NULL, 1, 80, NULL, NULL);
+	('986302e3-f33c-4100-a138-1bbf9a42c3d7', 'front.home', 'route::home', '_self', 'menu', '', NULL, NULL, 1, 10, NULL, NULL),
+	('986302e3-f34a-46a5-899f-abdecca44f9c', 'front.shop', 'route::shop', '_self', 'menu', '', NULL, NULL, 1, 20, NULL, NULL),
+	('986302e3-f354-4db4-b71d-e85563c1c3d9', 'front.blog', 'route::news', '_self', 'menu', '', NULL, NULL, 1, 30, NULL, NULL),
+	('986302e3-f360-4338-9ee4-b6279caf4f08', 'front.contact', 'route::contact', '_self', 'menu', '', NULL, NULL, 1, 40, NULL, NULL),
+	('986302e3-f36b-421c-b136-8e8cca918cfc', 'front.my_profile', 'route::login', '_self', 'footer', '', NULL, NULL, 1, 60, NULL, NULL),
+	('986302e3-f375-457a-93b2-dd9cd5395b91', 'front.compare_page', 'route::compare', '_self', 'footer', '', NULL, NULL, 1, 70, NULL, NULL),
+	('986302e3-f37f-4bfa-994b-1c6ee7014e40', 'front.wishlist_page', 'route::wishlist', '_self', 'footer', '', NULL, NULL, 1, 80, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_link` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_link_group
+DROP TABLE IF EXISTS `sc_shop_link_group`;
 CREATE TABLE IF NOT EXISTS `sc_shop_link_group` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4310,6 +4364,7 @@ INSERT INTO `sc_shop_link_group` (`id`, `code`, `name`, `created_at`, `updated_a
 /*!40000 ALTER TABLE `sc_shop_link_group` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_link_store
+DROP TABLE IF EXISTS `sc_shop_link_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_link_store` (
   `link_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4324,16 +4379,17 @@ INSERT INTO `sc_shop_link_store` (`link_id`, `store_id`) VALUES
 	('2', '1'),
 	('3', '1'),
 	('4', '1'),
-	('980087dc-3dd1-4d41-9470-887bb3a44d82', '1'),
-	('980087dc-3dd9-4339-979d-7eea97a1e7a4', '1'),
-	('980087dc-3ddd-4853-a294-9a67c8310a1f', '1'),
-	('980087dc-3de2-405c-867e-8c3b9fab3f74', '1'),
-	('980087dc-3de6-4e06-8691-339781574746', '1'),
-	('980087dc-3deb-42f7-b8df-60daec5f2f6a', '1'),
-	('980087dc-3def-4aa6-b88b-509d2bba7c3a', '1');
+	('986302e3-f33c-4100-a138-1bbf9a42c3d7', '1'),
+	('986302e3-f34a-46a5-899f-abdecca44f9c', '1'),
+	('986302e3-f354-4db4-b71d-e85563c1c3d9', '1'),
+	('986302e3-f360-4338-9ee4-b6279caf4f08', '1'),
+	('986302e3-f36b-421c-b136-8e8cca918cfc', '1'),
+	('986302e3-f375-457a-93b2-dd9cd5395b91', '1'),
+	('986302e3-f37f-4bfa-994b-1c6ee7014e40', '1');
 /*!40000 ALTER TABLE `sc_shop_link_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news
+DROP TABLE IF EXISTS `sc_shop_news`;
 CREATE TABLE IF NOT EXISTS `sc_shop_news` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4350,15 +4406,16 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news` (
 DELETE FROM `sc_shop_news`;
 /*!40000 ALTER TABLE `sc_shop_news` DISABLE KEYS */;
 INSERT INTO `sc_shop_news` (`id`, `image`, `alias`, `sort`, `status`, `created_at`, `updated_at`) VALUES
-	('980087dd-e04d-4859-9f78-d6bf3bfe6f89', '/data/content/blog-1.jpg', 'demo-scart-blog-1', 0, 1, '2022-12-17 19:34:28', NULL),
-	('980087dd-e189-48db-a900-84add6126a71', '/data/content/blog-2.jpg', 'demo-scart-blog-2', 0, 1, '2022-12-17 19:34:28', NULL),
-	('980087dd-e193-45bb-888e-9d935aa13979', '/data/content/blog-3.jpg', 'demo-scart-blog-3', 0, 1, '2022-12-17 19:34:28', NULL),
-	('980087dd-e197-4229-a06b-72cce758fbe7', '/data/content/blog-4.jpg', 'demo-scart-blog-4', 0, 1, '2022-12-17 19:34:28', NULL),
-	('980087dd-e19c-4e4f-9c35-fc7875b7364f', '/data/content/blog-5.jpg', 'demo-scart-blog-5', 0, 1, '2022-12-17 19:34:28', NULL),
-	('980087dd-e1a0-47ec-9768-36ea78c85adb', '/data/content/blog-6.jpg', 'demo-scart-blog-6', 0, 1, '2022-12-17 19:34:28', NULL);
+	('986302e5-5599-4369-a7b2-deffd1ac4f53', '/data/content/blog-1.jpg', 'demo-scart-blog-1', 0, 1, '2023-02-04 18:29:37', NULL),
+	('986302e5-56c2-4fcf-820a-377c1b281a88', '/data/content/blog-2.jpg', 'demo-scart-blog-2', 0, 1, '2023-02-04 18:29:37', NULL),
+	('986302e5-56cb-4bd3-a6ca-813664b9d549', '/data/content/blog-3.jpg', 'demo-scart-blog-3', 0, 1, '2023-02-04 18:29:37', NULL),
+	('986302e5-56d0-4472-bf69-c387e02edc23', '/data/content/blog-4.jpg', 'demo-scart-blog-4', 0, 1, '2023-02-04 18:29:37', NULL),
+	('986302e5-56d5-42f7-95d6-3f1e39ae20e2', '/data/content/blog-5.jpg', 'demo-scart-blog-5', 0, 1, '2023-02-04 18:29:37', NULL),
+	('986302e5-56da-45e7-bb34-a2eea8ba6bcc', '/data/content/blog-6.jpg', 'demo-scart-blog-6', 0, 1, '2023-02-04 18:29:37', NULL);
 /*!40000 ALTER TABLE `sc_shop_news` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_description
+DROP TABLE IF EXISTS `sc_shop_news_description`;
 CREATE TABLE IF NOT EXISTS `sc_shop_news_description` (
   `news_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4373,21 +4430,22 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news_description` (
 DELETE FROM `sc_shop_news_description`;
 /*!40000 ALTER TABLE `sc_shop_news_description` DISABLE KEYS */;
 INSERT INTO `sc_shop_news_description` (`news_id`, `lang`, `title`, `keyword`, `description`, `content`) VALUES
-	('980087dd-e04d-4859-9f78-d6bf3bfe6f89', 'en', 'Easy Polo Black Edition 1', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e04d-4859-9f78-d6bf3bfe6f89', 'vi', 'Easy Polo Black Edition 1', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e189-48db-a900-84add6126a71', 'en', 'Easy Polo Black Edition 2', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e189-48db-a900-84add6126a71', 'vi', 'Easy Polo Black Edition 2', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e193-45bb-888e-9d935aa13979', 'en', 'Easy Polo Black Edition 3', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e193-45bb-888e-9d935aa13979', 'vi', 'Easy Polo Black Edition 3', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e197-4229-a06b-72cce758fbe7', 'en', 'Easy Polo Black Edition 4', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e197-4229-a06b-72cce758fbe7', 'vi', 'Easy Polo Black Edition 4', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e19c-4e4f-9c35-fc7875b7364f', 'en', 'Easy Polo Black Edition 5', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e19c-4e4f-9c35-fc7875b7364f', 'vi', 'Easy Polo Black Edition 5', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e1a0-47ec-9768-36ea78c85adb', 'en', 'Easy Polo Black Edition 6', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-e1a0-47ec-9768-36ea78c85adb', 'vi', 'Easy Polo Black Edition 6', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
+	('986302e5-5599-4369-a7b2-deffd1ac4f53', 'en', 'Easy Polo Black Edition 1', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-5599-4369-a7b2-deffd1ac4f53', 'vi', 'Easy Polo Black Edition 1', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56c2-4fcf-820a-377c1b281a88', 'en', 'Easy Polo Black Edition 2', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56c2-4fcf-820a-377c1b281a88', 'vi', 'Easy Polo Black Edition 2', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56cb-4bd3-a6ca-813664b9d549', 'en', 'Easy Polo Black Edition 3', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56cb-4bd3-a6ca-813664b9d549', 'vi', 'Easy Polo Black Edition 3', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56d0-4472-bf69-c387e02edc23', 'en', 'Easy Polo Black Edition 4', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56d0-4472-bf69-c387e02edc23', 'vi', 'Easy Polo Black Edition 4', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56d5-42f7-95d6-3f1e39ae20e2', 'en', 'Easy Polo Black Edition 5', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56d5-42f7-95d6-3f1e39ae20e2', 'vi', 'Easy Polo Black Edition 5', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56da-45e7-bb34-a2eea8ba6bcc', 'en', 'Easy Polo Black Edition 6', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-56da-45e7-bb34-a2eea8ba6bcc', 'vi', 'Easy Polo Black Edition 6', NULL, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
 /*!40000 ALTER TABLE `sc_shop_news_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_news_store
+DROP TABLE IF EXISTS `sc_shop_news_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_news_store` (
   `news_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4398,15 +4456,16 @@ CREATE TABLE IF NOT EXISTS `sc_shop_news_store` (
 DELETE FROM `sc_shop_news_store`;
 /*!40000 ALTER TABLE `sc_shop_news_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_news_store` (`news_id`, `store_id`) VALUES
-	('980087dd-e04d-4859-9f78-d6bf3bfe6f89', '1'),
-	('980087dd-e189-48db-a900-84add6126a71', '1'),
-	('980087dd-e193-45bb-888e-9d935aa13979', '1'),
-	('980087dd-e197-4229-a06b-72cce758fbe7', '1'),
-	('980087dd-e19c-4e4f-9c35-fc7875b7364f', '1'),
-	('980087dd-e1a0-47ec-9768-36ea78c85adb', '1');
+	('986302e5-5599-4369-a7b2-deffd1ac4f53', '1'),
+	('986302e5-56c2-4fcf-820a-377c1b281a88', '1'),
+	('986302e5-56cb-4bd3-a6ca-813664b9d549', '1'),
+	('986302e5-56d0-4472-bf69-c387e02edc23', '1'),
+	('986302e5-56d5-42f7-95d6-3f1e39ae20e2', '1'),
+	('986302e5-56da-45e7-bb34-a2eea8ba6bcc', '1');
 /*!40000 ALTER TABLE `sc_shop_news_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order
+DROP TABLE IF EXISTS `sc_shop_order`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `customer_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4458,6 +4517,7 @@ DELETE FROM `sc_shop_order`;
 /*!40000 ALTER TABLE `sc_shop_order` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order_detail
+DROP TABLE IF EXISTS `sc_shop_order_detail`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order_detail` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `order_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4483,6 +4543,7 @@ DELETE FROM `sc_shop_order_detail`;
 /*!40000 ALTER TABLE `sc_shop_order_detail` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order_history
+DROP TABLE IF EXISTS `sc_shop_order_history`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order_history` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `order_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4500,6 +4561,7 @@ DELETE FROM `sc_shop_order_history`;
 /*!40000 ALTER TABLE `sc_shop_order_history` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order_status
+DROP TABLE IF EXISTS `sc_shop_order_status`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order_status` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4521,6 +4583,7 @@ INSERT INTO `sc_shop_order_status` (`id`, `name`, `created_at`, `updated_at`) VA
 /*!40000 ALTER TABLE `sc_shop_order_status` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_order_total
+DROP TABLE IF EXISTS `sc_shop_order_total`;
 CREATE TABLE IF NOT EXISTS `sc_shop_order_total` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `order_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4541,6 +4604,7 @@ DELETE FROM `sc_shop_order_total`;
 /*!40000 ALTER TABLE `sc_shop_order_total` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_page
+DROP TABLE IF EXISTS `sc_shop_page`;
 CREATE TABLE IF NOT EXISTS `sc_shop_page` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4560,6 +4624,7 @@ INSERT INTO `sc_shop_page` (`id`, `image`, `alias`, `status`, `created_at`, `upd
 /*!40000 ALTER TABLE `sc_shop_page` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_page_description
+DROP TABLE IF EXISTS `sc_shop_page_description`;
 CREATE TABLE IF NOT EXISTS `sc_shop_page_description` (
   `page_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4580,6 +4645,7 @@ INSERT INTO `sc_shop_page_description` (`page_id`, `lang`, `title`, `keyword`, `
 /*!40000 ALTER TABLE `sc_shop_page_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_page_store
+DROP TABLE IF EXISTS `sc_shop_page_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_page_store` (
   `page_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4594,6 +4660,7 @@ INSERT INTO `sc_shop_page_store` (`page_id`, `store_id`) VALUES
 /*!40000 ALTER TABLE `sc_shop_page_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_password_resets
+DROP TABLE IF EXISTS `sc_shop_password_resets`;
 CREATE TABLE IF NOT EXISTS `sc_shop_password_resets` (
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4607,6 +4674,7 @@ DELETE FROM `sc_shop_password_resets`;
 /*!40000 ALTER TABLE `sc_shop_password_resets` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_payment_status
+DROP TABLE IF EXISTS `sc_shop_payment_status`;
 CREATE TABLE IF NOT EXISTS `sc_shop_payment_status` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4626,6 +4694,7 @@ INSERT INTO `sc_shop_payment_status` (`id`, `name`, `created_at`, `updated_at`) 
 /*!40000 ALTER TABLE `sc_shop_payment_status` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product
+DROP TABLE IF EXISTS `sc_shop_product`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sku` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4676,45 +4745,46 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product` (
 DELETE FROM `sc_shop_product`;
 /*!40000 ALTER TABLE `sc_shop_product` DISABLE KEYS */;
 INSERT INTO `sc_shop_product` (`id`, `sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `image`, `brand_id`, `supplier_id`, `price`, `cost`, `stock`, `sold`, `minimum`, `weight_class`, `weight`, `length_class`, `length`, `width`, `height`, `kind`, `property`, `tax_id`, `status`, `approve`, `sort`, `view`, `alias`, `date_lastview`, `date_available`, `created_at`, `updated_at`) VALUES
-	('980087dd-f50b-456a-a623-532ad7532291', 'PHO-BO-NAM-DNH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-1.png', '980087dd-f084-4714-a4df-7088037b952b', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'pho-bo-nam-dnh', NULL, NULL, NULL, NULL),
-	('980087dd-f514-4cb7-b8a1-16fa347b50a0', 'NEM-NUONG-THANH-HOA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-2.png', '980087dd-f0b1-430c-9101-2291105af95d', '980087dd-ef2c-4303-927e-f638eeab28dd', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nem-nuong-thanh-hoa', NULL, NULL, NULL, NULL),
-	('980087dd-f519-4ce9-aa66-0b0c45b3ab28', 'BANH-GAI-TU-TRU', NULL, NULL, NULL, NULL, NULL, '/data/product/product-3.png', '980087dd-f099-45ae-ba20-4bb1f4be816f', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'banh-gai-tu-tru', NULL, NULL, NULL, NULL),
-	('980087dd-f51e-4b1a-9d10-1655723648a7', 'BUN-HUE-GIA-TRUYEN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-4.png', '980087dd-f0b1-430c-9101-2291105af95d', '980087dd-ef2c-4303-927e-f638eeab28dd', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'bun-hue-gia-truyen', NULL, NULL, NULL, NULL),
-	('980087dd-f523-4282-9e2c-1718dbb31b5d', 'BANH-TRANG-TRON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-5.png', '980087dd-f0b1-430c-9101-2291105af95d', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'banh-trang-tron', NULL, NULL, NULL, NULL),
-	('980087dd-f528-40de-8782-9ff6671574ab', 'MUOI-TAY-NINH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-6.png', '980087dd-f093-4fca-8c8b-6f69b09c88a0', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'muoi-tay-ninh', NULL, NULL, NULL, NULL),
-	('980087dd-f52d-4c1d-8bf1-9ec5c1cbc969', 'NHAN-LONG-HUNG-YEN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-7.png', '980087dd-f084-4714-a4df-7088037b952b', '980087dd-ef2c-4303-927e-f638eeab28dd', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nhan-long-hung-yen', NULL, NULL, NULL, NULL),
-	('980087dd-f531-4509-be64-71c42e380b9f', 'SAU-RIENG-DAK-LAK', NULL, NULL, NULL, NULL, NULL, '/data/product/product-8.png', '980087dd-f099-45ae-ba20-4bb1f4be816f', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'sau-rieng-dak-lak', NULL, NULL, NULL, NULL),
-	('980087dd-f536-48de-8107-175e8ae8bfb7', 'BIA-LON-SAIGON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-9.png', '980087dd-f09e-4766-9c5e-926113f9dd15', '980087dd-ef2c-4303-927e-f638eeab28dd', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'bia-lon-saigon', NULL, NULL, NULL, NULL),
-	('980087dd-f53b-4911-b07a-8fc013a4b8e5', 'BIA-TUOI-HANOI', NULL, NULL, NULL, NULL, NULL, '/data/product/product-10.png', '980087dd-f09e-4766-9c5e-926113f9dd15', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'bia-tuoi-hanoi', NULL, NULL, NULL, NULL),
-	('980087dd-f53f-495b-b015-3e00cbabd8f7', 'NUOC-MAM-PHAN-THIET', NULL, NULL, NULL, NULL, NULL, '/data/product/product-11.png', '980087dd-f093-4fca-8c8b-6f69b09c88a0', '980087dd-ef2c-4303-927e-f638eeab28dd', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nuoc-mam-phan-thiet', NULL, NULL, NULL, NULL),
-	('980087dd-f54e-47a1-85fe-cca85346477e', 'BANH-MY-CHA-CA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-12.png', '980087dd-f093-4fca-8c8b-6f69b09c88a0', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'banh-my-cha-ca', NULL, NULL, NULL, NULL),
-	('980087dd-f555-4255-a7af-a369cd8d3a00', 'HU-TIEU-NAM-VANG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-13.png', '980087dd-f0a3-47f8-8ede-099775cf36e0', '980087dd-ef2c-4303-927e-f638eeab28dd', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'hu-tieu-nam-vang', NULL, NULL, NULL, NULL),
-	('980087dd-f55c-4ef0-9d21-1a4e82cc2580', 'CANH-CHUA-CA-LOC', NULL, NULL, NULL, NULL, NULL, '/data/product/product-14.png', '980087dd-f0b1-430c-9101-2291105af95d', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'canh-chua-ca-loc', NULL, NULL, NULL, NULL),
-	('980087dd-f561-4208-90f4-8d7117c9a188', 'CHOM-CHOM-NHAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-15.png', '980087dd-f093-4fca-8c8b-6f69b09c88a0', '980087dd-ef2c-4303-927e-f638eeab28dd', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'chom-chom-nhan', NULL, NULL, NULL, NULL),
-	('980087dd-f567-432d-ab5c-749b79dda310', 'CAM-VINH-LOAI-I', NULL, NULL, NULL, NULL, NULL, '/data/product/product-16.png', '980087dd-f099-45ae-ba20-4bb1f4be816f', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cam-vinh-loai-i', NULL, NULL, NULL, NULL),
-	('980087dd-f56c-487a-aec1-583e0647864e', 'KEO-DUA-BEN-TRE', NULL, NULL, NULL, NULL, NULL, '/data/product/product-17.png', '980087dd-f084-4714-a4df-7088037b952b', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'keo-dua-ben-tre', NULL, NULL, NULL, NULL),
-	('980087dd-f571-4175-b60e-24c3f761f213', 'NON-LA-VIETNAM', NULL, NULL, NULL, NULL, NULL, '/data/product/product-18.png', '980087dd-f0a8-423b-b741-784fdf442895', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'non-la-vietnam', NULL, NULL, NULL, NULL),
-	('980087dd-f575-4480-8318-e236eff5a8b7', 'AO-DAI-VIETNAM', NULL, NULL, NULL, NULL, NULL, '/data/product/product-19.png', '980087dd-f0b1-430c-9101-2291105af95d', '980087dd-ef2c-4303-927e-f638eeab28dd', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'ao-dai-vietnam', NULL, NULL, NULL, NULL),
-	('980087dd-f57a-4ffa-a676-ef2bd9998e4d', 'XOAI-CAT-HOA-LOC', NULL, NULL, NULL, NULL, NULL, '/data/product/product-20.png', '980087dd-f08e-4c1f-a122-29cb3594e70e', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'xoai-cat-hoa-loc', NULL, NULL, NULL, NULL),
-	('980087dd-f57f-4c74-815f-a7425db0ed39', 'COM-NIU-SAI-GON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-21.png', '980087dd-f0a3-47f8-8ede-099775cf36e0', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'com-niu-sai-gon', NULL, NULL, NULL, NULL),
-	('980087dd-f584-42fa-842c-26d37d4231af', 'COM-TAM-AN-GIANG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-22.png', '980087dd-f084-4714-a4df-7088037b952b', '980087dd-ef2c-4303-927e-f638eeab28dd', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'com-tam-an-giang', NULL, NULL, NULL, NULL),
-	('980087dd-f589-4c78-8784-822c067d32b6', 'VAI-THIEU-LUC-NGAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-23.png', '980087dd-f0a3-47f8-8ede-099775cf36e0', '980087dd-ef2c-4303-927e-f638eeab28dd', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'vai-thieu-luc-ngan', NULL, NULL, NULL, NULL),
-	('980087dd-f58d-4681-954e-821ab7d527b2', 'NEM-CHUA-THANH-HOA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-24.png', '980087dd-f08e-4c1f-a122-29cb3594e70e', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nem-chua-thanh-hoa', NULL, NULL, NULL, NULL),
-	('980087dd-f591-4861-8340-7daad103c8e2', 'CHA-CA-NHA-TRANG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-25.png', '980087dd-f0b1-430c-9101-2291105af95d', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cha-ca-nha-trang', NULL, NULL, NULL, NULL),
-	('980087dd-f595-49da-9b66-420eb936a943', 'CHA-CA-THAC-LAC', NULL, NULL, NULL, NULL, NULL, '/data/product/product-26.png', '980087dd-f0b1-430c-9101-2291105af95d', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cha-ca-thac-lac', NULL, NULL, NULL, NULL),
-	('980087dd-f59d-43bd-b9bc-7d35a431bdea', 'HOA-DAO-NHAT-TAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-27.png', '980087dd-f0b1-430c-9101-2291105af95d', '980087dd-ef2c-4303-927e-f638eeab28dd', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'hoa-dao-nhat-tan', NULL, NULL, NULL, NULL),
-	('980087dd-f5a3-4e28-95fe-dafc994022da', 'CAY-TO-BAY-MON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-28.png', '980087dd-f0a3-47f8-8ede-099775cf36e0', '980087dd-ef2c-4303-927e-f638eeab28dd', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cay-to-bay-mon', NULL, NULL, NULL, NULL),
-	('980087dd-f5a8-4133-9d20-f201b68e5531', 'MY-CAY-7-CAP-DO', NULL, NULL, NULL, NULL, NULL, '/data/product/product-29.png', '980087dd-f09e-4766-9c5e-926113f9dd15', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'my-cay-7-cap-do', NULL, NULL, NULL, NULL),
-	('980087dd-f5af-4102-a993-d59f157e91b8', 'COM-CHIEN-HAI-SAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-30.png', '980087dd-f0ac-4641-9ed1-a6a24bb389e9', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'com-chien-hai-san', NULL, NULL, NULL, NULL),
-	('980087dd-f5b4-443b-9dcf-cbb0b34fec76', 'CHAO-LONG-TIET-CANH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-31.png', '980087dd-f08e-4c1f-a122-29cb3594e70e', '980087dd-ef2c-4303-927e-f638eeab28dd', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'chao-long-tiet-canh', NULL, NULL, NULL, NULL),
-	('980087dd-f5b9-47f2-9bfe-41d4232f3230', 'THIT-TRAU-GAC-BEP', NULL, NULL, NULL, NULL, NULL, '/data/product/product-32.png', '980087dd-f099-45ae-ba20-4bb1f4be816f', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'thit-trau-gac-bep', NULL, NULL, NULL, NULL),
-	('980087dd-f5be-45ca-8138-51b0d4f9f3a6', 'CU-DO-HA-TINH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-33.png', '980087dd-f093-4fca-8c8b-6f69b09c88a0', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'cu-do-ha-tinh', NULL, NULL, NULL, NULL),
-	('980087dd-f5c2-49fb-9ba8-7ca07cc4ed7a', 'BANH-DAU-XANH-HUNG-YEN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-34.png', '980087dd-f08e-4c1f-a122-29cb3594e70e', '980087dd-ef22-42e0-9784-4b2e8ffdcac0', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'banh-dau-xanh-hung-yen', NULL, NULL, NULL, NULL),
-	('980087dd-f5c7-474e-a61b-326d83707254', 'CAM-SANH-MONG-NUOC', NULL, NULL, NULL, NULL, NULL, '/data/product/product-35.png', '980087dd-f0ac-4641-9ed1-a6a24bb389e9', '980087dd-ef2c-4303-927e-f638eeab28dd', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cam-sanh-mong-nuoc', NULL, NULL, NULL, NULL),
-	('980087dd-f5cc-4ed8-a1e7-293e4bd63a23', 'THANH-LONG-RUOT-DO', NULL, NULL, NULL, NULL, NULL, '/data/product/product-36.png', '980087dd-f0ac-4641-9ed1-a6a24bb389e9', '980087dd-ef2c-4303-927e-f638eeab28dd', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'thanh-long-ruot-do', NULL, NULL, NULL, NULL);
+	('986302e5-6772-45e4-bacc-778951018db7', 'PHO-BO-NAM-DNH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-1.png', '986302e5-62be-428b-b36c-d442a2d98d43', '986302e5-60f8-426c-a223-16b8d7cb3df5', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'pho-bo-nam-dnh', NULL, NULL, NULL, NULL),
+	('986302e5-677a-4481-b064-a9845110815a', 'NEM-NUONG-THANH-HOA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-2.png', '986302e5-62be-428b-b36c-d442a2d98d43', '986302e5-6101-4457-9956-18133055b214', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nem-nuong-thanh-hoa', NULL, NULL, NULL, NULL),
+	('986302e5-677f-472d-99a1-4b4fd86f7025', 'BANH-GAI-TU-TRU', NULL, NULL, NULL, NULL, NULL, '/data/product/product-3.png', '986302e5-62d8-4f8f-928c-0db7bb2b7916', '986302e5-60f8-426c-a223-16b8d7cb3df5', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'banh-gai-tu-tru', NULL, NULL, NULL, NULL),
+	('986302e5-6783-4393-bea6-2c1c44d894df', 'BUN-HUE-GIA-TRUYEN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-4.png', '986302e5-62b5-42f5-9c83-86bcdc0ff3d4', '986302e5-6101-4457-9956-18133055b214', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'bun-hue-gia-truyen', NULL, NULL, NULL, NULL),
+	('986302e5-6787-4441-91c8-16401c1198bd', 'BANH-TRANG-TRON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-5.png', '986302e5-62be-428b-b36c-d442a2d98d43', '986302e5-6101-4457-9956-18133055b214', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'banh-trang-tron', NULL, NULL, NULL, NULL),
+	('986302e5-678b-4ebf-8e92-ef0907399f19', 'MUOI-TAY-NINH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-6.png', '986302e5-62dc-4594-8c86-afb7ba2858a9', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'muoi-tay-ninh', NULL, NULL, NULL, NULL),
+	('986302e5-678f-4868-adbe-8081cd6e06cc', 'NHAN-LONG-HUNG-YEN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-7.png', '986302e5-62cb-43f6-b3f2-35080b44aca9', '986302e5-60f8-426c-a223-16b8d7cb3df5', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nhan-long-hung-yen', NULL, NULL, NULL, NULL),
+	('986302e5-6793-4bdb-a769-da532068b602', 'SAU-RIENG-DAK-LAK', NULL, NULL, NULL, NULL, NULL, '/data/product/product-8.png', '986302e5-62be-428b-b36c-d442a2d98d43', '986302e5-6101-4457-9956-18133055b214', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'sau-rieng-dak-lak', NULL, NULL, NULL, NULL),
+	('986302e5-6797-45a9-a30f-36e0d814fbcc', 'BIA-LON-SAIGON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-9.png', '986302e5-62c3-4c31-8528-534069b0a76e', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'bia-lon-saigon', NULL, NULL, NULL, NULL),
+	('986302e5-679c-496e-b298-b151ab3169dd', 'BIA-TUOI-HANOI', NULL, NULL, NULL, NULL, NULL, '/data/product/product-10.png', '986302e5-62d8-4f8f-928c-0db7bb2b7916', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'bia-tuoi-hanoi', NULL, NULL, NULL, NULL),
+	('986302e5-679f-46fb-82f2-a15a11709749', 'NUOC-MAM-PHAN-THIET', NULL, NULL, NULL, NULL, NULL, '/data/product/product-11.png', '986302e5-62c3-4c31-8528-534069b0a76e', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nuoc-mam-phan-thiet', NULL, NULL, NULL, NULL),
+	('986302e5-67a3-47e4-9f4c-49bc84e655b1', 'BANH-MY-CHA-CA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-12.png', '986302e5-62d4-4d78-bc77-6b2e5802b414', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'banh-my-cha-ca', NULL, NULL, NULL, NULL),
+	('986302e5-67a7-4e5c-8705-5e92ccbbfa81', 'HU-TIEU-NAM-VANG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-13.png', '986302e5-62c3-4c31-8528-534069b0a76e', '986302e5-60f8-426c-a223-16b8d7cb3df5', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'hu-tieu-nam-vang', NULL, NULL, NULL, NULL),
+	('986302e5-67ab-40c7-8762-c3b5ff84c0b0', 'CANH-CHUA-CA-LOC', NULL, NULL, NULL, NULL, NULL, '/data/product/product-14.png', '986302e5-62d0-4d45-aede-1a1f84255ddc', '986302e5-60f8-426c-a223-16b8d7cb3df5', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'canh-chua-ca-loc', NULL, NULL, NULL, NULL),
+	('986302e5-67af-44e2-8952-cd448d403280', 'CHOM-CHOM-NHAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-15.png', '986302e5-62d4-4d78-bc77-6b2e5802b414', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'chom-chom-nhan', NULL, NULL, NULL, NULL),
+	('986302e5-67b3-44f0-8e48-261318733ec2', 'CAM-VINH-LOAI-I', NULL, NULL, NULL, NULL, NULL, '/data/product/product-16.png', '986302e5-62d8-4f8f-928c-0db7bb2b7916', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cam-vinh-loai-i', NULL, NULL, NULL, NULL),
+	('986302e5-67b7-466b-bc71-9fe6533359e3', 'KEO-DUA-BEN-TRE', NULL, NULL, NULL, NULL, NULL, '/data/product/product-17.png', '986302e5-62cb-43f6-b3f2-35080b44aca9', '986302e5-60f8-426c-a223-16b8d7cb3df5', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'keo-dua-ben-tre', NULL, NULL, NULL, NULL),
+	('986302e5-67bb-44bd-be7e-404bc9b32161', 'NON-LA-VIETNAM', NULL, NULL, NULL, NULL, NULL, '/data/product/product-18.png', '986302e5-62c7-42fe-b8f3-544b29333f67', '986302e5-60f8-426c-a223-16b8d7cb3df5', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'non-la-vietnam', NULL, NULL, NULL, NULL),
+	('986302e5-67bf-40d8-b377-f8b877aa6bb9', 'AO-DAI-VIETNAM', NULL, NULL, NULL, NULL, NULL, '/data/product/product-19.png', '986302e5-62dc-4594-8c86-afb7ba2858a9', '986302e5-6101-4457-9956-18133055b214', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'ao-dai-vietnam', NULL, NULL, NULL, NULL),
+	('986302e5-67c3-4c7a-af8b-aa06f01d46ca', 'XOAI-CAT-HOA-LOC', NULL, NULL, NULL, NULL, NULL, '/data/product/product-20.png', '986302e5-62be-428b-b36c-d442a2d98d43', '986302e5-60f8-426c-a223-16b8d7cb3df5', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'xoai-cat-hoa-loc', NULL, NULL, NULL, NULL),
+	('986302e5-67c7-4a93-87e4-cd8191050cd2', 'COM-NIU-SAI-GON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-21.png', '986302e5-62d8-4f8f-928c-0db7bb2b7916', '986302e5-6101-4457-9956-18133055b214', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'com-niu-sai-gon', NULL, NULL, NULL, NULL),
+	('986302e5-67cb-4f7c-a5ca-b46137326952', 'COM-TAM-AN-GIANG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-22.png', '986302e5-62d8-4f8f-928c-0db7bb2b7916', '986302e5-60f8-426c-a223-16b8d7cb3df5', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'com-tam-an-giang', NULL, NULL, NULL, NULL),
+	('986302e5-67cf-459c-b6cb-a666514a429f', 'VAI-THIEU-LUC-NGAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-23.png', '986302e5-62d4-4d78-bc77-6b2e5802b414', '986302e5-60f8-426c-a223-16b8d7cb3df5', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'vai-thieu-luc-ngan', NULL, NULL, NULL, NULL),
+	('986302e5-67d3-4e5c-99fb-ec43b8e4375f', 'NEM-CHUA-THANH-HOA', NULL, NULL, NULL, NULL, NULL, '/data/product/product-24.png', '986302e5-62d4-4d78-bc77-6b2e5802b414', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'nem-chua-thanh-hoa', NULL, NULL, NULL, NULL),
+	('986302e5-67d7-4076-8647-cba3cf77d712', 'CHA-CA-NHA-TRANG', NULL, NULL, NULL, NULL, NULL, '/data/product/product-25.png', '986302e5-62b5-42f5-9c83-86bcdc0ff3d4', '986302e5-60f8-426c-a223-16b8d7cb3df5', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cha-ca-nha-trang', NULL, NULL, NULL, NULL),
+	('986302e5-67db-47cb-933b-b02d5e3a64f5', 'CHA-CA-THAC-LAC', NULL, NULL, NULL, NULL, NULL, '/data/product/product-26.png', '986302e5-62dc-4594-8c86-afb7ba2858a9', '986302e5-6101-4457-9956-18133055b214', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cha-ca-thac-lac', NULL, NULL, NULL, NULL),
+	('986302e5-67df-4fd9-843c-956e631825e2', 'HOA-DAO-NHAT-TAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-27.png', '986302e5-62c3-4c31-8528-534069b0a76e', '986302e5-60f8-426c-a223-16b8d7cb3df5', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'hoa-dao-nhat-tan', NULL, NULL, NULL, NULL),
+	('986302e5-67e3-406b-a8a1-640f83865bcd', 'CAY-TO-BAY-MON', NULL, NULL, NULL, NULL, NULL, '/data/product/product-28.png', '986302e5-62b5-42f5-9c83-86bcdc0ff3d4', '986302e5-6101-4457-9956-18133055b214', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cay-to-bay-mon', NULL, NULL, NULL, NULL),
+	('986302e5-67e7-4bfa-b0c1-8731c6a8fff8', 'MY-CAY-7-CAP-DO', NULL, NULL, NULL, NULL, NULL, '/data/product/product-29.png', '986302e5-62b5-42f5-9c83-86bcdc0ff3d4', '986302e5-6101-4457-9956-18133055b214', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'my-cay-7-cap-do', NULL, NULL, NULL, NULL),
+	('986302e5-67eb-40de-99ea-80cc7d815655', 'COM-CHIEN-HAI-SAN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-30.png', '986302e5-62d8-4f8f-928c-0db7bb2b7916', '986302e5-6101-4457-9956-18133055b214', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'com-chien-hai-san', NULL, NULL, NULL, NULL),
+	('986302e5-67ef-4ad3-8b70-1b93f98cb64c', 'CHAO-LONG-TIET-CANH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-31.png', '986302e5-62b5-42f5-9c83-86bcdc0ff3d4', '986302e5-6101-4457-9956-18133055b214', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'chao-long-tiet-canh', NULL, NULL, NULL, NULL),
+	('986302e5-67f3-40df-b882-3b36daac116e', 'THIT-TRAU-GAC-BEP', NULL, NULL, NULL, NULL, NULL, '/data/product/product-32.png', '986302e5-62be-428b-b36c-d442a2d98d43', '986302e5-60f8-426c-a223-16b8d7cb3df5', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'thit-trau-gac-bep', NULL, NULL, NULL, NULL),
+	('986302e5-67f7-4281-ae48-8a833ef8c0f5', 'CU-DO-HA-TINH', NULL, NULL, NULL, NULL, NULL, '/data/product/product-33.png', '986302e5-62c7-42fe-b8f3-544b29333f67', '986302e5-60f8-426c-a223-16b8d7cb3df5', 100.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 1, 'physical', 'auto', 1, 1, 0, 0, 'cu-do-ha-tinh', NULL, NULL, NULL, NULL),
+	('986302e5-67fc-4104-bb38-57edc6f41c72', 'BANH-DAU-XANH-HUNG-YEN', NULL, NULL, NULL, NULL, NULL, '/data/product/product-34.png', '986302e5-62c7-42fe-b8f3-544b29333f67', '986302e5-60f8-426c-a223-16b8d7cb3df5', 80.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 2, 'physical', 'auto', 1, 1, 0, 0, 'banh-dau-xanh-hung-yen', NULL, NULL, NULL, NULL),
+	('986302e5-67ff-449a-8c82-7941d6c355ac', 'CAM-SANH-MONG-NUOC', NULL, NULL, NULL, NULL, NULL, '/data/product/product-35.png', '986302e5-62b5-42f5-9c83-86bcdc0ff3d4', '986302e5-60f8-426c-a223-16b8d7cb3df5', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'cam-sanh-mong-nuoc', NULL, NULL, NULL, NULL),
+	('986302e5-6803-4510-bc70-9eee93fe74cf', 'THANH-LONG-RUOT-DO', NULL, NULL, NULL, NULL, NULL, '/data/product/product-36.png', '986302e5-62d8-4f8f-928c-0db7bb2b7916', '986302e5-60f8-426c-a223-16b8d7cb3df5', 60.00, 0.00, 100, 0, 0, NULL, 0.00, NULL, 0.00, 0.00, 0.00, 0, 'physical', 'auto', 1, 1, 0, 0, 'thanh-long-ruot-do', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_product` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_attribute
+DROP TABLE IF EXISTS `sc_shop_product_attribute`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_attribute` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4731,17 +4801,18 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_attribute` (
 DELETE FROM `sc_shop_product_attribute`;
 /*!40000 ALTER TABLE `sc_shop_product_attribute` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_attribute` (`id`, `name`, `attribute_group_id`, `product_id`, `add_price`, `sort`, `status`) VALUES
-	(1, 'Blue', 1, '980087dd-f5cc-4ed8-a1e7-293e4bd63a23', 5.00, 0, 1),
-	(2, 'White', 1, '980087dd-f5cc-4ed8-a1e7-293e4bd63a23', 0.00, 0, 1),
-	(3, 'S', 2, '980087dd-f5cc-4ed8-a1e7-293e4bd63a23', 2.00, 0, 1),
-	(4, 'XL', 2, '980087dd-f5cc-4ed8-a1e7-293e4bd63a23', 3.00, 0, 1),
-	(5, 'Blue', 1, '980087dd-f54e-47a1-85fe-cca85346477e', 10.00, 0, 1),
-	(6, 'Red', 1, '980087dd-f54e-47a1-85fe-cca85346477e', 0.00, 0, 1),
-	(7, 'S', 2, '980087dd-f54e-47a1-85fe-cca85346477e', 0.00, 0, 1),
-	(8, 'M', 2, '980087dd-f54e-47a1-85fe-cca85346477e', 0.00, 0, 1);
+	(1, 'Blue', 1, '986302e5-6803-4510-bc70-9eee93fe74cf', 5.00, 0, 1),
+	(2, 'White', 1, '986302e5-6803-4510-bc70-9eee93fe74cf', 0.00, 0, 1),
+	(3, 'S', 2, '986302e5-6803-4510-bc70-9eee93fe74cf', 2.00, 0, 1),
+	(4, 'XL', 2, '986302e5-6803-4510-bc70-9eee93fe74cf', 3.00, 0, 1),
+	(5, 'Blue', 1, '986302e5-67a3-47e4-9f4c-49bc84e655b1', 10.00, 0, 1),
+	(6, 'Red', 1, '986302e5-67a3-47e4-9f4c-49bc84e655b1', 0.00, 0, 1),
+	(7, 'S', 2, '986302e5-67a3-47e4-9f4c-49bc84e655b1', 0.00, 0, 1),
+	(8, 'M', 2, '986302e5-67a3-47e4-9f4c-49bc84e655b1', 0.00, 0, 1);
 /*!40000 ALTER TABLE `sc_shop_product_attribute` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_build
+DROP TABLE IF EXISTS `sc_shop_product_build`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_build` (
   `build_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4753,17 +4824,18 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_build` (
 DELETE FROM `sc_shop_product_build`;
 /*!40000 ALTER TABLE `sc_shop_product_build` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_build` (`build_id`, `product_id`, `quantity`) VALUES
-	('980087dd-f523-4282-9e2c-1718dbb31b5d', '980087dd-f519-4ce9-aa66-0b0c45b3ab28', 1),
-	('980087dd-f523-4282-9e2c-1718dbb31b5d', '980087dd-f52d-4c1d-8bf1-9ec5c1cbc969', 2),
-	('980087dd-f53b-4911-b07a-8fc013a4b8e5', '980087dd-f555-4255-a7af-a369cd8d3a00', 1),
-	('980087dd-f53b-4911-b07a-8fc013a4b8e5', '980087dd-f56c-487a-aec1-583e0647864e', 2),
-	('980087dd-f561-4208-90f4-8d7117c9a188', '980087dd-f55c-4ef0-9d21-1a4e82cc2580', 2),
-	('980087dd-f561-4208-90f4-8d7117c9a188', '980087dd-f567-432d-ab5c-749b79dda310', 1),
-	('980087dd-f5be-45ca-8138-51b0d4f9f3a6', '980087dd-f519-4ce9-aa66-0b0c45b3ab28', 2),
-	('980087dd-f5be-45ca-8138-51b0d4f9f3a6', '980087dd-f555-4255-a7af-a369cd8d3a00', 2);
+	('986302e5-6787-4441-91c8-16401c1198bd', '986302e5-677f-472d-99a1-4b4fd86f7025', 1),
+	('986302e5-6787-4441-91c8-16401c1198bd', '986302e5-678f-4868-adbe-8081cd6e06cc', 2),
+	('986302e5-679c-496e-b298-b151ab3169dd', '986302e5-67a7-4e5c-8705-5e92ccbbfa81', 1),
+	('986302e5-679c-496e-b298-b151ab3169dd', '986302e5-67b7-466b-bc71-9fe6533359e3', 2),
+	('986302e5-67af-44e2-8952-cd448d403280', '986302e5-67ab-40c7-8762-c3b5ff84c0b0', 2),
+	('986302e5-67af-44e2-8952-cd448d403280', '986302e5-67b3-44f0-8e48-261318733ec2', 1),
+	('986302e5-67f7-4281-ae48-8a833ef8c0f5', '986302e5-677f-472d-99a1-4b4fd86f7025', 2),
+	('986302e5-67f7-4281-ae48-8a833ef8c0f5', '986302e5-67a7-4e5c-8705-5e92ccbbfa81', 2);
 /*!40000 ALTER TABLE `sc_shop_product_build` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_category
+DROP TABLE IF EXISTS `sc_shop_product_category`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_category` (
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `category_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4774,47 +4846,48 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_category` (
 DELETE FROM `sc_shop_product_category`;
 /*!40000 ALTER TABLE `sc_shop_product_category` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_category` (`product_id`, `category_id`) VALUES
-	('980087dd-f50b-456a-a623-532ad7532291', '980087dd-e747-4b85-9de9-c3f28960cb64'),
-	('980087dd-f50b-456a-a623-532ad7532291', '980087dd-e758-4b96-9ce9-99e3f72e5869'),
-	('980087dd-f50b-456a-a623-532ad7532291', '980087dd-e764-4d78-880c-da6020d8291d'),
-	('980087dd-f514-4cb7-b8a1-16fa347b50a0', '980087dd-e764-4d78-880c-da6020d8291d'),
-	('980087dd-f519-4ce9-aa66-0b0c45b3ab28', '980087dd-e75c-489b-b73d-e24b3f6cc78b'),
-	('980087dd-f51e-4b1a-9d10-1655723648a7', '980087dd-e775-452d-b76d-d82ca47814f3'),
-	('980087dd-f523-4282-9e2c-1718dbb31b5d', '980087dd-e75c-489b-b73d-e24b3f6cc78b'),
-	('980087dd-f528-40de-8782-9ff6671574ab', '980087dd-e75c-489b-b73d-e24b3f6cc78b'),
-	('980087dd-f52d-4c1d-8bf1-9ec5c1cbc969', '980087dd-e760-4eb8-92c0-f7e3ba7f6df5'),
-	('980087dd-f531-4509-be64-71c42e380b9f', '980087dd-e758-4b96-9ce9-99e3f72e5869'),
-	('980087dd-f536-48de-8107-175e8ae8bfb7', '980087dd-e747-4b85-9de9-c3f28960cb64'),
-	('980087dd-f53b-4911-b07a-8fc013a4b8e5', '980087dd-e75c-489b-b73d-e24b3f6cc78b'),
-	('980087dd-f53f-495b-b015-3e00cbabd8f7', '980087dd-e758-4b96-9ce9-99e3f72e5869'),
-	('980087dd-f54e-47a1-85fe-cca85346477e', '980087dd-e754-4fe0-9bc5-6c334561436c'),
-	('980087dd-f555-4255-a7af-a369cd8d3a00', '980087dd-e743-46ba-b144-f7e624d2ebf6'),
-	('980087dd-f55c-4ef0-9d21-1a4e82cc2580', '980087dd-e75c-489b-b73d-e24b3f6cc78b'),
-	('980087dd-f561-4208-90f4-8d7117c9a188', '980087dd-e747-4b85-9de9-c3f28960cb64'),
-	('980087dd-f567-432d-ab5c-749b79dda310', '980087dd-e743-46ba-b144-f7e624d2ebf6'),
-	('980087dd-f56c-487a-aec1-583e0647864e', '980087dd-e754-4fe0-9bc5-6c334561436c'),
-	('980087dd-f571-4175-b60e-24c3f761f213', '980087dd-e77d-4f39-914a-a0e0db6e6694'),
-	('980087dd-f575-4480-8318-e236eff5a8b7', '980087dd-e747-4b85-9de9-c3f28960cb64'),
-	('980087dd-f57a-4ffa-a676-ef2bd9998e4d', '980087dd-e75c-489b-b73d-e24b3f6cc78b'),
-	('980087dd-f57f-4c74-815f-a7425db0ed39', '980087dd-e758-4b96-9ce9-99e3f72e5869'),
-	('980087dd-f584-42fa-842c-26d37d4231af', '980087dd-e785-454f-b433-dab6807db543'),
-	('980087dd-f589-4c78-8784-822c067d32b6', '980087dd-e760-4eb8-92c0-f7e3ba7f6df5'),
-	('980087dd-f58d-4681-954e-821ab7d527b2', '980087dd-e754-4fe0-9bc5-6c334561436c'),
-	('980087dd-f591-4861-8340-7daad103c8e2', '980087dd-e7a0-4334-9870-194b6d6b0f6d'),
-	('980087dd-f595-49da-9b66-420eb936a943', '980087dd-e771-4465-83d7-ef2f3b1f4b8e'),
-	('980087dd-f59d-43bd-b9bc-7d35a431bdea', '980087dd-e76d-4f6b-981f-fe2192c5892b'),
-	('980087dd-f5a3-4e28-95fe-dafc994022da', '980087dd-e76d-4f6b-981f-fe2192c5892b'),
-	('980087dd-f5a8-4133-9d20-f201b68e5531', '980087dd-e764-4d78-880c-da6020d8291d'),
-	('980087dd-f5af-4102-a993-d59f157e91b8', '980087dd-e771-4465-83d7-ef2f3b1f4b8e'),
-	('980087dd-f5b4-443b-9dcf-cbb0b34fec76', '980087dd-e75c-489b-b73d-e24b3f6cc78b'),
-	('980087dd-f5b9-47f2-9bfe-41d4232f3230', '980087dd-e771-4465-83d7-ef2f3b1f4b8e'),
-	('980087dd-f5be-45ca-8138-51b0d4f9f3a6', '980087dd-e781-4aa3-bf87-76fbc5b248f5'),
-	('980087dd-f5c2-49fb-9ba8-7ca07cc4ed7a', '980087dd-e77d-4f39-914a-a0e0db6e6694'),
-	('980087dd-f5c7-474e-a61b-326d83707254', '980087dd-e771-4465-83d7-ef2f3b1f4b8e'),
-	('980087dd-f5cc-4ed8-a1e7-293e4bd63a23', '980087dd-e771-4465-83d7-ef2f3b1f4b8e');
+	('986302e5-6772-45e4-bacc-778951018db7', '986302e5-5abd-4e77-acfa-d05e271f7a17'),
+	('986302e5-6772-45e4-bacc-778951018db7', '986302e5-5acd-45c5-9a52-70ab473be266'),
+	('986302e5-6772-45e4-bacc-778951018db7', '986302e5-5ad9-42e4-bb7c-54bd55e6d7bf'),
+	('986302e5-677a-4481-b064-a9845110815a', '986302e5-5ad9-42e4-bb7c-54bd55e6d7bf'),
+	('986302e5-677f-472d-99a1-4b4fd86f7025', '986302e5-5ad1-48d6-9e17-c4609e9307a7'),
+	('986302e5-6783-4393-bea6-2c1c44d894df', '986302e5-5ae9-47f4-a490-9650c8bc98ae'),
+	('986302e5-6787-4441-91c8-16401c1198bd', '986302e5-5ad1-48d6-9e17-c4609e9307a7'),
+	('986302e5-678b-4ebf-8e92-ef0907399f19', '986302e5-5ad1-48d6-9e17-c4609e9307a7'),
+	('986302e5-678f-4868-adbe-8081cd6e06cc', '986302e5-5ad5-435e-a8e5-6def9bd9ce49'),
+	('986302e5-6793-4bdb-a769-da532068b602', '986302e5-5acd-45c5-9a52-70ab473be266'),
+	('986302e5-6797-45a9-a30f-36e0d814fbcc', '986302e5-5abd-4e77-acfa-d05e271f7a17'),
+	('986302e5-679c-496e-b298-b151ab3169dd', '986302e5-5ad1-48d6-9e17-c4609e9307a7'),
+	('986302e5-679f-46fb-82f2-a15a11709749', '986302e5-5acd-45c5-9a52-70ab473be266'),
+	('986302e5-67a3-47e4-9f4c-49bc84e655b1', '986302e5-5ac9-4ee5-9462-e3024e53b5d0'),
+	('986302e5-67a7-4e5c-8705-5e92ccbbfa81', '986302e5-5ab8-4cf4-af43-666b7316f605'),
+	('986302e5-67ab-40c7-8762-c3b5ff84c0b0', '986302e5-5ad1-48d6-9e17-c4609e9307a7'),
+	('986302e5-67af-44e2-8952-cd448d403280', '986302e5-5abd-4e77-acfa-d05e271f7a17'),
+	('986302e5-67b3-44f0-8e48-261318733ec2', '986302e5-5ab8-4cf4-af43-666b7316f605'),
+	('986302e5-67b7-466b-bc71-9fe6533359e3', '986302e5-5ac9-4ee5-9462-e3024e53b5d0'),
+	('986302e5-67bb-44bd-be7e-404bc9b32161', '986302e5-5af1-4d6c-b34e-02598808cc6c'),
+	('986302e5-67bf-40d8-b377-f8b877aa6bb9', '986302e5-5abd-4e77-acfa-d05e271f7a17'),
+	('986302e5-67c3-4c7a-af8b-aa06f01d46ca', '986302e5-5ad1-48d6-9e17-c4609e9307a7'),
+	('986302e5-67c7-4a93-87e4-cd8191050cd2', '986302e5-5acd-45c5-9a52-70ab473be266'),
+	('986302e5-67cb-4f7c-a5ca-b46137326952', '986302e5-5af9-4767-90a5-a1a7b6f489ef'),
+	('986302e5-67cf-459c-b6cb-a666514a429f', '986302e5-5ad5-435e-a8e5-6def9bd9ce49'),
+	('986302e5-67d3-4e5c-99fb-ec43b8e4375f', '986302e5-5ac9-4ee5-9462-e3024e53b5d0'),
+	('986302e5-67d7-4076-8647-cba3cf77d712', '986302e5-5b11-45c2-99bc-e16501051ad1'),
+	('986302e5-67db-47cb-933b-b02d5e3a64f5', '986302e5-5ae5-4fdf-9ea6-daf1d32000b3'),
+	('986302e5-67df-4fd9-843c-956e631825e2', '986302e5-5ae1-46ce-8f36-ecce5de2ad79'),
+	('986302e5-67e3-406b-a8a1-640f83865bcd', '986302e5-5ae1-46ce-8f36-ecce5de2ad79'),
+	('986302e5-67e7-4bfa-b0c1-8731c6a8fff8', '986302e5-5ad9-42e4-bb7c-54bd55e6d7bf'),
+	('986302e5-67eb-40de-99ea-80cc7d815655', '986302e5-5ae5-4fdf-9ea6-daf1d32000b3'),
+	('986302e5-67ef-4ad3-8b70-1b93f98cb64c', '986302e5-5ad1-48d6-9e17-c4609e9307a7'),
+	('986302e5-67f3-40df-b882-3b36daac116e', '986302e5-5ae5-4fdf-9ea6-daf1d32000b3'),
+	('986302e5-67f7-4281-ae48-8a833ef8c0f5', '986302e5-5af5-4abf-849a-bcfac31b97fa'),
+	('986302e5-67fc-4104-bb38-57edc6f41c72', '986302e5-5af1-4d6c-b34e-02598808cc6c'),
+	('986302e5-67ff-449a-8c82-7941d6c355ac', '986302e5-5ae5-4fdf-9ea6-daf1d32000b3'),
+	('986302e5-6803-4510-bc70-9eee93fe74cf', '986302e5-5ae5-4fdf-9ea6-daf1d32000b3');
 /*!40000 ALTER TABLE `sc_shop_product_category` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_description
+DROP TABLE IF EXISTS `sc_shop_product_description`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_description` (
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4830,81 +4903,82 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_description` (
 DELETE FROM `sc_shop_product_description`;
 /*!40000 ALTER TABLE `sc_shop_product_description` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_description` (`product_id`, `lang`, `name`, `keyword`, `description`, `content`) VALUES
-	('980087dd-f50b-456a-a623-532ad7532291', 'en', 'Pho Bo Nam Dnh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f50b-456a-a623-532ad7532291', 'vi', 'Pho Bo Nam Dnh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f514-4cb7-b8a1-16fa347b50a0', 'en', 'Nem Nuong Thanh Hoa', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f514-4cb7-b8a1-16fa347b50a0', 'vi', 'Nem Nuong Thanh Hoa', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f519-4ce9-aa66-0b0c45b3ab28', 'en', 'Banh Gai Tu Tru', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f519-4ce9-aa66-0b0c45b3ab28', 'vi', 'Banh Gai Tu Tru', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f51e-4b1a-9d10-1655723648a7', 'en', 'Bun Hue Gia Truyen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f51e-4b1a-9d10-1655723648a7', 'vi', 'Bun Hue Gia Truyen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f523-4282-9e2c-1718dbb31b5d', 'en', 'Banh Trang Tron', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f523-4282-9e2c-1718dbb31b5d', 'vi', 'Banh Trang Tron', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f528-40de-8782-9ff6671574ab', 'en', 'Muoi Tay Ninh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f528-40de-8782-9ff6671574ab', 'vi', 'Muoi Tay Ninh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f52d-4c1d-8bf1-9ec5c1cbc969', 'en', 'Nhan Long Hung Yen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f52d-4c1d-8bf1-9ec5c1cbc969', 'vi', 'Nhan Long Hung Yen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f531-4509-be64-71c42e380b9f', 'en', 'Sau Rieng Dak Lak', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f531-4509-be64-71c42e380b9f', 'vi', 'Sau Rieng Dak Lak', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f536-48de-8107-175e8ae8bfb7', 'en', 'Bia Lon Saigon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f536-48de-8107-175e8ae8bfb7', 'vi', 'Bia Lon Saigon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f53b-4911-b07a-8fc013a4b8e5', 'en', 'Bia Tuoi Hanoi', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f53b-4911-b07a-8fc013a4b8e5', 'vi', 'Bia Tuoi Hanoi', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f53f-495b-b015-3e00cbabd8f7', 'en', 'Nuoc Mam Phan Thiet', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f53f-495b-b015-3e00cbabd8f7', 'vi', 'Nuoc Mam Phan Thiet', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f54e-47a1-85fe-cca85346477e', 'en', 'Banh My Cha Ca', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f54e-47a1-85fe-cca85346477e', 'vi', 'Banh My Cha Ca', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f555-4255-a7af-a369cd8d3a00', 'en', 'Hu Tieu Nam Vang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f555-4255-a7af-a369cd8d3a00', 'vi', 'Hu Tieu Nam Vang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f55c-4ef0-9d21-1a4e82cc2580', 'en', 'Canh Chua Ca Loc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f55c-4ef0-9d21-1a4e82cc2580', 'vi', 'Canh Chua Ca Loc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f561-4208-90f4-8d7117c9a188', 'en', 'Chom Chom Nhan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f561-4208-90f4-8d7117c9a188', 'vi', 'Chom Chom Nhan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f567-432d-ab5c-749b79dda310', 'en', 'Cam Vinh Loai I', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f567-432d-ab5c-749b79dda310', 'vi', 'Cam Vinh Loai I', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f56c-487a-aec1-583e0647864e', 'en', 'Keo Dua Ben Tre', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f56c-487a-aec1-583e0647864e', 'vi', 'Keo Dua Ben Tre', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f571-4175-b60e-24c3f761f213', 'en', 'Non La Vietnam', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f571-4175-b60e-24c3f761f213', 'vi', 'Non La Vietnam', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f575-4480-8318-e236eff5a8b7', 'en', 'Ao Dai Vietnam', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f575-4480-8318-e236eff5a8b7', 'vi', 'Ao Dai Vietnam', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f57a-4ffa-a676-ef2bd9998e4d', 'en', 'Xoai Cat Hoa Loc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f57a-4ffa-a676-ef2bd9998e4d', 'vi', 'Xoai Cat Hoa Loc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f57f-4c74-815f-a7425db0ed39', 'en', 'Com Niu Sai Gon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f57f-4c74-815f-a7425db0ed39', 'vi', 'Com Niu Sai Gon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f584-42fa-842c-26d37d4231af', 'en', 'Com Tam An Giang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f584-42fa-842c-26d37d4231af', 'vi', 'Com Tam An Giang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f589-4c78-8784-822c067d32b6', 'en', 'Vai Thieu Luc Ngan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f589-4c78-8784-822c067d32b6', 'vi', 'Vai Thieu Luc Ngan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f58d-4681-954e-821ab7d527b2', 'en', 'Nem Chua Thanh Hoa', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f58d-4681-954e-821ab7d527b2', 'vi', 'Nem Chua Thanh Hoa', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f591-4861-8340-7daad103c8e2', 'en', 'Cha Ca Nha Trang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f591-4861-8340-7daad103c8e2', 'vi', 'Cha Ca Nha Trang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f595-49da-9b66-420eb936a943', 'en', 'Cha Ca Thac Lac', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f595-49da-9b66-420eb936a943', 'vi', 'Cha Ca Thac Lac', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f59d-43bd-b9bc-7d35a431bdea', 'en', 'Hoa Dao Nhat Tan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f59d-43bd-b9bc-7d35a431bdea', 'vi', 'Hoa Dao Nhat Tan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5a3-4e28-95fe-dafc994022da', 'en', 'Cay To Bay Mon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5a3-4e28-95fe-dafc994022da', 'vi', 'Cay To Bay Mon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5a8-4133-9d20-f201b68e5531', 'en', 'My Cay 7 Cap Do', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5a8-4133-9d20-f201b68e5531', 'vi', 'My Cay 7 Cap Do', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5af-4102-a993-d59f157e91b8', 'en', 'Com Chien Hai San', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5af-4102-a993-d59f157e91b8', 'vi', 'Com Chien Hai San', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5b4-443b-9dcf-cbb0b34fec76', 'en', 'Chao Long Tiet Canh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5b4-443b-9dcf-cbb0b34fec76', 'vi', 'Chao Long Tiet Canh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5b9-47f2-9bfe-41d4232f3230', 'en', 'Thit Trau Gac Bep', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5b9-47f2-9bfe-41d4232f3230', 'vi', 'Thit Trau Gac Bep', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5be-45ca-8138-51b0d4f9f3a6', 'en', 'Cu Do Ha Tinh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5be-45ca-8138-51b0d4f9f3a6', 'vi', 'Cu Do Ha Tinh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5c2-49fb-9ba8-7ca07cc4ed7a', 'en', 'Banh Dau Xanh Hung Yen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5c2-49fb-9ba8-7ca07cc4ed7a', 'vi', 'Banh Dau Xanh Hung Yen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5c7-474e-a61b-326d83707254', 'en', 'Cam Sanh Mong Nuoc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5c7-474e-a61b-326d83707254', 'vi', 'Cam Sanh Mong Nuoc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5cc-4ed8-a1e7-293e4bd63a23', 'en', 'Thanh Long Ruot Do', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
-	('980087dd-f5cc-4ed8-a1e7-293e4bd63a23', 'vi', 'Thanh Long Ruot Do', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
+	('986302e5-6772-45e4-bacc-778951018db7', 'en', 'Pho Bo Nam Dnh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6772-45e4-bacc-778951018db7', 'vi', 'Pho Bo Nam Dnh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-677a-4481-b064-a9845110815a', 'en', 'Nem Nuong Thanh Hoa', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-677a-4481-b064-a9845110815a', 'vi', 'Nem Nuong Thanh Hoa', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-677f-472d-99a1-4b4fd86f7025', 'en', 'Banh Gai Tu Tru', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-677f-472d-99a1-4b4fd86f7025', 'vi', 'Banh Gai Tu Tru', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6783-4393-bea6-2c1c44d894df', 'en', 'Bun Hue Gia Truyen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6783-4393-bea6-2c1c44d894df', 'vi', 'Bun Hue Gia Truyen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6787-4441-91c8-16401c1198bd', 'en', 'Banh Trang Tron', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6787-4441-91c8-16401c1198bd', 'vi', 'Banh Trang Tron', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-678b-4ebf-8e92-ef0907399f19', 'en', 'Muoi Tay Ninh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-678b-4ebf-8e92-ef0907399f19', 'vi', 'Muoi Tay Ninh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-678f-4868-adbe-8081cd6e06cc', 'en', 'Nhan Long Hung Yen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-678f-4868-adbe-8081cd6e06cc', 'vi', 'Nhan Long Hung Yen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6793-4bdb-a769-da532068b602', 'en', 'Sau Rieng Dak Lak', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6793-4bdb-a769-da532068b602', 'vi', 'Sau Rieng Dak Lak', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6797-45a9-a30f-36e0d814fbcc', 'en', 'Bia Lon Saigon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6797-45a9-a30f-36e0d814fbcc', 'vi', 'Bia Lon Saigon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-679c-496e-b298-b151ab3169dd', 'en', 'Bia Tuoi Hanoi', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-679c-496e-b298-b151ab3169dd', 'vi', 'Bia Tuoi Hanoi', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-679f-46fb-82f2-a15a11709749', 'en', 'Nuoc Mam Phan Thiet', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-679f-46fb-82f2-a15a11709749', 'vi', 'Nuoc Mam Phan Thiet', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67a3-47e4-9f4c-49bc84e655b1', 'en', 'Banh My Cha Ca', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67a3-47e4-9f4c-49bc84e655b1', 'vi', 'Banh My Cha Ca', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67a7-4e5c-8705-5e92ccbbfa81', 'en', 'Hu Tieu Nam Vang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67a7-4e5c-8705-5e92ccbbfa81', 'vi', 'Hu Tieu Nam Vang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67ab-40c7-8762-c3b5ff84c0b0', 'en', 'Canh Chua Ca Loc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67ab-40c7-8762-c3b5ff84c0b0', 'vi', 'Canh Chua Ca Loc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67af-44e2-8952-cd448d403280', 'en', 'Chom Chom Nhan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67af-44e2-8952-cd448d403280', 'vi', 'Chom Chom Nhan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67b3-44f0-8e48-261318733ec2', 'en', 'Cam Vinh Loai I', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67b3-44f0-8e48-261318733ec2', 'vi', 'Cam Vinh Loai I', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67b7-466b-bc71-9fe6533359e3', 'en', 'Keo Dua Ben Tre', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67b7-466b-bc71-9fe6533359e3', 'vi', 'Keo Dua Ben Tre', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67bb-44bd-be7e-404bc9b32161', 'en', 'Non La Vietnam', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67bb-44bd-be7e-404bc9b32161', 'vi', 'Non La Vietnam', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67bf-40d8-b377-f8b877aa6bb9', 'en', 'Ao Dai Vietnam', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67bf-40d8-b377-f8b877aa6bb9', 'vi', 'Ao Dai Vietnam', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67c3-4c7a-af8b-aa06f01d46ca', 'en', 'Xoai Cat Hoa Loc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67c3-4c7a-af8b-aa06f01d46ca', 'vi', 'Xoai Cat Hoa Loc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67c7-4a93-87e4-cd8191050cd2', 'en', 'Com Niu Sai Gon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67c7-4a93-87e4-cd8191050cd2', 'vi', 'Com Niu Sai Gon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67cb-4f7c-a5ca-b46137326952', 'en', 'Com Tam An Giang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67cb-4f7c-a5ca-b46137326952', 'vi', 'Com Tam An Giang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67cf-459c-b6cb-a666514a429f', 'en', 'Vai Thieu Luc Ngan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67cf-459c-b6cb-a666514a429f', 'vi', 'Vai Thieu Luc Ngan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67d3-4e5c-99fb-ec43b8e4375f', 'en', 'Nem Chua Thanh Hoa', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67d3-4e5c-99fb-ec43b8e4375f', 'vi', 'Nem Chua Thanh Hoa', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67d7-4076-8647-cba3cf77d712', 'en', 'Cha Ca Nha Trang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67d7-4076-8647-cba3cf77d712', 'vi', 'Cha Ca Nha Trang', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67db-47cb-933b-b02d5e3a64f5', 'en', 'Cha Ca Thac Lac', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67db-47cb-933b-b02d5e3a64f5', 'vi', 'Cha Ca Thac Lac', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67df-4fd9-843c-956e631825e2', 'en', 'Hoa Dao Nhat Tan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67df-4fd9-843c-956e631825e2', 'vi', 'Hoa Dao Nhat Tan', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67e3-406b-a8a1-640f83865bcd', 'en', 'Cay To Bay Mon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67e3-406b-a8a1-640f83865bcd', 'vi', 'Cay To Bay Mon', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67e7-4bfa-b0c1-8731c6a8fff8', 'en', 'My Cay 7 Cap Do', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67e7-4bfa-b0c1-8731c6a8fff8', 'vi', 'My Cay 7 Cap Do', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67eb-40de-99ea-80cc7d815655', 'en', 'Com Chien Hai San', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67eb-40de-99ea-80cc7d815655', 'vi', 'Com Chien Hai San', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67ef-4ad3-8b70-1b93f98cb64c', 'en', 'Chao Long Tiet Canh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67ef-4ad3-8b70-1b93f98cb64c', 'vi', 'Chao Long Tiet Canh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67f3-40df-b882-3b36daac116e', 'en', 'Thit Trau Gac Bep', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67f3-40df-b882-3b36daac116e', 'vi', 'Thit Trau Gac Bep', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67f7-4281-ae48-8a833ef8c0f5', 'en', 'Cu Do Ha Tinh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67f7-4281-ae48-8a833ef8c0f5', 'vi', 'Cu Do Ha Tinh', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67fc-4104-bb38-57edc6f41c72', 'en', 'Banh Dau Xanh Hung Yen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67fc-4104-bb38-57edc6f41c72', 'vi', 'Banh Dau Xanh Hung Yen', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67ff-449a-8c82-7941d6c355ac', 'en', 'Cam Sanh Mong Nuoc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-67ff-449a-8c82-7941d6c355ac', 'vi', 'Cam Sanh Mong Nuoc', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6803-4510-bc70-9eee93fe74cf', 'en', 'Thanh Long Ruot Do', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'),
+	('986302e5-6803-4510-bc70-9eee93fe74cf', 'vi', 'Thanh Long Ruot Do', NULL, '- 27-inch (diagonal) Retina 5K display\r\n        - 3.1GHz 6-core 10th-generation Intel Core i5\r\n        - AMD Radeon Pro 5300 graphics', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>\r\n                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>');
 /*!40000 ALTER TABLE `sc_shop_product_description` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_download
+DROP TABLE IF EXISTS `sc_shop_product_download`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_download` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4918,6 +4992,7 @@ DELETE FROM `sc_shop_product_download`;
 /*!40000 ALTER TABLE `sc_shop_product_download` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_flash
+DROP TABLE IF EXISTS `sc_shop_product_flash`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_flash` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4928,15 +5003,15 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_flash` (
   UNIQUE KEY `sc_shop_product_flash_product_id_unique` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table s-cart.sc_shop_product_flash: ~2 rows (approximately)
+-- Dumping data for table s-cart.sc_shop_product_flash: ~0 rows (approximately)
 DELETE FROM `sc_shop_product_flash`;
 /*!40000 ALTER TABLE `sc_shop_product_flash` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_flash` (`id`, `product_id`, `stock`, `sold`, `sort`) VALUES
-	('98005d47-f8dc-4f2c-8120-62597881e4b5', '98003dd9-2939-41e6-8913-ba5507c812c7', 100, 0, 0),
-	('98005d89-24b2-4720-a0b7-2a151253b1f0', '98003dd9-2a37-402f-b48f-3c3ccc915235', 99, 0, 0);
+	('980cabb3-f046-4caf-979b-4cdd22456bae', '980c9f18-50d1-47cd-9a64-16285c691310', 1212, 0, 1212);
 /*!40000 ALTER TABLE `sc_shop_product_flash` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_group
+DROP TABLE IF EXISTS `sc_shop_product_group`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_group` (
   `group_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4947,17 +5022,18 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_group` (
 DELETE FROM `sc_shop_product_group`;
 /*!40000 ALTER TABLE `sc_shop_product_group` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_group` (`group_id`, `product_id`) VALUES
-	('980087dd-f51e-4b1a-9d10-1655723648a7', '980087dd-f514-4cb7-b8a1-16fa347b50a0'),
-	('980087dd-f51e-4b1a-9d10-1655723648a7', '980087dd-f528-40de-8782-9ff6671574ab'),
-	('980087dd-f55c-4ef0-9d21-1a4e82cc2580', '980087dd-f514-4cb7-b8a1-16fa347b50a0'),
-	('980087dd-f55c-4ef0-9d21-1a4e82cc2580', '980087dd-f54e-47a1-85fe-cca85346477e'),
-	('980087dd-f575-4480-8318-e236eff5a8b7', '980087dd-f53f-495b-b015-3e00cbabd8f7'),
-	('980087dd-f575-4480-8318-e236eff5a8b7', '980087dd-f57f-4c74-815f-a7425db0ed39'),
-	('980087dd-f5c2-49fb-9ba8-7ca07cc4ed7a', '980087dd-f519-4ce9-aa66-0b0c45b3ab28'),
-	('980087dd-f5c2-49fb-9ba8-7ca07cc4ed7a', '980087dd-f52d-4c1d-8bf1-9ec5c1cbc969');
+	('986302e5-6783-4393-bea6-2c1c44d894df', '986302e5-677a-4481-b064-a9845110815a'),
+	('986302e5-6783-4393-bea6-2c1c44d894df', '986302e5-678b-4ebf-8e92-ef0907399f19'),
+	('986302e5-67ab-40c7-8762-c3b5ff84c0b0', '986302e5-677a-4481-b064-a9845110815a'),
+	('986302e5-67ab-40c7-8762-c3b5ff84c0b0', '986302e5-67a3-47e4-9f4c-49bc84e655b1'),
+	('986302e5-67bf-40d8-b377-f8b877aa6bb9', '986302e5-679f-46fb-82f2-a15a11709749'),
+	('986302e5-67bf-40d8-b377-f8b877aa6bb9', '986302e5-67c7-4a93-87e4-cd8191050cd2'),
+	('986302e5-67fc-4104-bb38-57edc6f41c72', '986302e5-677f-472d-99a1-4b4fd86f7025'),
+	('986302e5-67fc-4104-bb38-57edc6f41c72', '986302e5-678f-4868-adbe-8081cd6e06cc');
 /*!40000 ALTER TABLE `sc_shop_product_group` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_image
+DROP TABLE IF EXISTS `sc_shop_product_image`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_image` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4970,33 +5046,34 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_image` (
 DELETE FROM `sc_shop_product_image`;
 /*!40000 ALTER TABLE `sc_shop_product_image` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_image` (`id`, `image`, `product_id`) VALUES
-	('980087dd-f5d1-41c0-869f-b1f68c51d235', '/data/product/product-2.png', '980087dd-f50b-456a-a623-532ad7532291'),
-	('980087dd-f5d5-42ba-ba18-c9f7a19647d4', '/data/product/product-11.png', '980087dd-f50b-456a-a623-532ad7532291'),
-	('980087dd-f5da-484c-a093-6d83124e0940', '/data/product/product-8.png', '980087dd-f53f-495b-b015-3e00cbabd8f7'),
-	('980087dd-f5de-4728-b706-941b872d53cc', '/data/product/product-6.png', '980087dd-f514-4cb7-b8a1-16fa347b50a0'),
-	('980087dd-f5e2-4722-9315-fcc5ac9f6017', '/data/product/product-13.png', '980087dd-f53f-495b-b015-3e00cbabd8f7'),
-	('980087dd-f5e5-4e82-b79c-29a44d285b89', '/data/product/product-12.png', '980087dd-f523-4282-9e2c-1718dbb31b5d'),
-	('980087dd-f5e9-4e61-914f-6b7372712735', '/data/product/product-17.png', '980087dd-f523-4282-9e2c-1718dbb31b5d'),
-	('980087dd-f5ee-46dc-87b0-f4efa488bfd0', '/data/product/product-11.png', '980087dd-f514-4cb7-b8a1-16fa347b50a0'),
-	('980087dd-f5f2-4bc1-be6d-5b2464677b5c', '/data/product/product-5.png', '980087dd-f514-4cb7-b8a1-16fa347b50a0'),
-	('980087dd-f5f6-45da-ae08-121bdc77707f', '/data/product/product-12.png', '980087dd-f536-48de-8107-175e8ae8bfb7'),
-	('980087dd-f5fa-4e4c-a8ed-09bccfceb604', '/data/product/product-15.png', '980087dd-f531-4509-be64-71c42e380b9f'),
-	('980087dd-f5fe-4edb-9ebd-1336424b1e1e', '/data/product/product-19.png', '980087dd-f52d-4c1d-8bf1-9ec5c1cbc969'),
-	('980087dd-f602-46d3-8d9c-08aa74f88d47', '/data/product/product-12.png', '980087dd-f52d-4c1d-8bf1-9ec5c1cbc969'),
-	('980087dd-f606-4528-b67e-4568510efe1a', '/data/product/product-1.png', '980087dd-f523-4282-9e2c-1718dbb31b5d'),
-	('980087dd-f60b-4fc4-bfcb-67a188ffbc6f', '/data/product/product-12.png', '980087dd-f51e-4b1a-9d10-1655723648a7'),
-	('980087dd-f610-4beb-b9b9-d9c542c17ed4', '/data/product/product-7.png', '980087dd-f561-4208-90f4-8d7117c9a188'),
-	('980087dd-f614-4ed7-8dae-07983c0d991a', '/data/product/product-12.png', '980087dd-f561-4208-90f4-8d7117c9a188'),
-	('980087dd-f618-44d1-bb78-1dad3ba0cd0d', '/data/product/product-16.png', '980087dd-f56c-487a-aec1-583e0647864e'),
-	('980087dd-f61c-41c3-a890-d1f10a418ad3', '/data/product/product-6.png', '980087dd-f56c-487a-aec1-583e0647864e'),
-	('980087dd-f620-4f76-b3f2-f33032051169', '/data/product/product-12.png', '980087dd-f56c-487a-aec1-583e0647864e'),
-	('980087dd-f624-47a6-995b-316fa5a8d4f4', '/data/product/product-18.png', '980087dd-f584-42fa-842c-26d37d4231af'),
-	('980087dd-f628-4486-9bf4-bb842e880951', '/data/product/product-19.png', '980087dd-f584-42fa-842c-26d37d4231af'),
-	('980087dd-f62c-4392-9f99-bb70ef8d18e4', '/data/product/product-24.png', '980087dd-f58d-4681-954e-821ab7d527b2'),
-	('980087dd-f630-481c-b9b3-3107fd317590', '/data/product/product-22.png', '980087dd-f58d-4681-954e-821ab7d527b2');
+	('986302e5-6808-45f8-b60a-7ba3010c3b1d', '/data/product/product-2.png', '986302e5-6772-45e4-bacc-778951018db7'),
+	('986302e5-680c-4be2-8217-504ad8789661', '/data/product/product-11.png', '986302e5-6772-45e4-bacc-778951018db7'),
+	('986302e5-680f-4ba8-a4b2-1fb7954a6104', '/data/product/product-8.png', '986302e5-679f-46fb-82f2-a15a11709749'),
+	('986302e5-6814-4b27-8869-a821538550e8', '/data/product/product-6.png', '986302e5-677a-4481-b064-a9845110815a'),
+	('986302e5-681d-4606-9d80-df382cbc5ebb', '/data/product/product-13.png', '986302e5-679f-46fb-82f2-a15a11709749'),
+	('986302e5-6823-4a9c-af69-29da08042be0', '/data/product/product-12.png', '986302e5-6787-4441-91c8-16401c1198bd'),
+	('986302e5-6831-445b-8f37-7d436f8d533b', '/data/product/product-17.png', '986302e5-6787-4441-91c8-16401c1198bd'),
+	('986302e5-6838-456b-9c6a-c8437fc55525', '/data/product/product-11.png', '986302e5-677a-4481-b064-a9845110815a'),
+	('986302e5-6840-4430-9d49-bd5750653971', '/data/product/product-5.png', '986302e5-677a-4481-b064-a9845110815a'),
+	('986302e5-6849-418e-9b4c-447e8d7020c6', '/data/product/product-12.png', '986302e5-6797-45a9-a30f-36e0d814fbcc'),
+	('986302e5-684f-4b51-9783-06e8941f8b90', '/data/product/product-15.png', '986302e5-6793-4bdb-a769-da532068b602'),
+	('986302e5-6855-4471-8a0c-62117f50099b', '/data/product/product-19.png', '986302e5-678f-4868-adbe-8081cd6e06cc'),
+	('986302e5-685a-4487-a516-878d799a05b7', '/data/product/product-12.png', '986302e5-678f-4868-adbe-8081cd6e06cc'),
+	('986302e5-6862-40ab-849c-243bf416fd26', '/data/product/product-1.png', '986302e5-6787-4441-91c8-16401c1198bd'),
+	('986302e5-6868-488d-804d-42a45582cd8b', '/data/product/product-12.png', '986302e5-6783-4393-bea6-2c1c44d894df'),
+	('986302e5-686e-4553-9554-48dccf501485', '/data/product/product-7.png', '986302e5-67af-44e2-8952-cd448d403280'),
+	('986302e5-6873-4556-9dc1-64edfb0f7462', '/data/product/product-12.png', '986302e5-67af-44e2-8952-cd448d403280'),
+	('986302e5-6878-44fc-9b72-245797b0d966', '/data/product/product-16.png', '986302e5-67b7-466b-bc71-9fe6533359e3'),
+	('986302e5-6882-45bf-9b39-9a930d94b321', '/data/product/product-6.png', '986302e5-67b7-466b-bc71-9fe6533359e3'),
+	('986302e5-6887-4dfc-a965-82d27e2eca3f', '/data/product/product-12.png', '986302e5-67b7-466b-bc71-9fe6533359e3'),
+	('986302e5-688b-4109-b0d2-9f762282cf83', '/data/product/product-18.png', '986302e5-67cb-4f7c-a5ca-b46137326952'),
+	('986302e5-688f-4a3c-b570-dc47dd5fc35b', '/data/product/product-19.png', '986302e5-67cb-4f7c-a5ca-b46137326952'),
+	('986302e5-6893-4d0a-87a6-ecf102ea577c', '/data/product/product-24.png', '986302e5-67d3-4e5c-99fb-ec43b8e4375f'),
+	('986302e5-6897-4d44-be43-2bd9ccd2e764', '/data/product/product-22.png', '986302e5-67d3-4e5c-99fb-ec43b8e4375f');
 /*!40000 ALTER TABLE `sc_shop_product_image` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_promotion
+DROP TABLE IF EXISTS `sc_shop_product_promotion`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_promotion` (
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price_promotion` decimal(15,2) NOT NULL,
@@ -5012,23 +5089,24 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_promotion` (
 DELETE FROM `sc_shop_product_promotion`;
 /*!40000 ALTER TABLE `sc_shop_product_promotion` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_promotion` (`product_id`, `price_promotion`, `date_start`, `date_end`, `status_promotion`, `created_at`, `updated_at`) VALUES
-	('980087dd-f50b-456a-a623-532ad7532291', 50.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f514-4cb7-b8a1-16fa347b50a0', 30.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f528-40de-8782-9ff6671574ab', 50.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f531-4509-be64-71c42e380b9f', 40.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f54e-47a1-85fe-cca85346477e', 50.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f567-432d-ab5c-749b79dda310', 30.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f571-4175-b60e-24c3f761f213', 60.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f584-42fa-842c-26d37d4231af', 50.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f595-49da-9b66-420eb936a943', 60.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f5a3-4e28-95fe-dafc994022da', 50.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f5af-4102-a993-d59f157e91b8', 60.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f5b4-443b-9dcf-cbb0b34fec76', 50.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f5c7-474e-a61b-326d83707254', 60.00, NULL, NULL, 1, NULL, NULL),
-	('980087dd-f5cc-4ed8-a1e7-293e4bd63a23', 50.00, NULL, NULL, 1, NULL, NULL);
+	('986302e5-6772-45e4-bacc-778951018db7', 50.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-677a-4481-b064-a9845110815a', 30.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-678b-4ebf-8e92-ef0907399f19', 50.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-6793-4bdb-a769-da532068b602', 40.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67a3-47e4-9f4c-49bc84e655b1', 50.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67b3-44f0-8e48-261318733ec2', 30.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67bb-44bd-be7e-404bc9b32161', 60.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67cb-4f7c-a5ca-b46137326952', 50.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67db-47cb-933b-b02d5e3a64f5', 60.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67e3-406b-a8a1-640f83865bcd', 50.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67eb-40de-99ea-80cc7d815655', 60.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67ef-4ad3-8b70-1b93f98cb64c', 50.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-67ff-449a-8c82-7941d6c355ac', 60.00, NULL, NULL, 1, NULL, NULL),
+	('986302e5-6803-4510-bc70-9eee93fe74cf', 50.00, NULL, NULL, 1, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_product_promotion` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_property
+DROP TABLE IF EXISTS `sc_shop_product_property`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_property` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5048,6 +5126,7 @@ INSERT INTO `sc_shop_product_property` (`id`, `code`, `name`, `created_at`, `upd
 /*!40000 ALTER TABLE `sc_shop_product_property` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_product_store
+DROP TABLE IF EXISTS `sc_shop_product_store`;
 CREATE TABLE IF NOT EXISTS `sc_shop_product_store` (
   `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5058,45 +5137,46 @@ CREATE TABLE IF NOT EXISTS `sc_shop_product_store` (
 DELETE FROM `sc_shop_product_store`;
 /*!40000 ALTER TABLE `sc_shop_product_store` DISABLE KEYS */;
 INSERT INTO `sc_shop_product_store` (`product_id`, `store_id`) VALUES
-	('980087dd-f50b-456a-a623-532ad7532291', '1'),
-	('980087dd-f514-4cb7-b8a1-16fa347b50a0', '1'),
-	('980087dd-f519-4ce9-aa66-0b0c45b3ab28', '1'),
-	('980087dd-f51e-4b1a-9d10-1655723648a7', '1'),
-	('980087dd-f523-4282-9e2c-1718dbb31b5d', '1'),
-	('980087dd-f528-40de-8782-9ff6671574ab', '1'),
-	('980087dd-f52d-4c1d-8bf1-9ec5c1cbc969', '1'),
-	('980087dd-f531-4509-be64-71c42e380b9f', '1'),
-	('980087dd-f536-48de-8107-175e8ae8bfb7', '1'),
-	('980087dd-f53b-4911-b07a-8fc013a4b8e5', '1'),
-	('980087dd-f53f-495b-b015-3e00cbabd8f7', '1'),
-	('980087dd-f54e-47a1-85fe-cca85346477e', '1'),
-	('980087dd-f555-4255-a7af-a369cd8d3a00', '1'),
-	('980087dd-f55c-4ef0-9d21-1a4e82cc2580', '1'),
-	('980087dd-f561-4208-90f4-8d7117c9a188', '1'),
-	('980087dd-f567-432d-ab5c-749b79dda310', '1'),
-	('980087dd-f56c-487a-aec1-583e0647864e', '1'),
-	('980087dd-f571-4175-b60e-24c3f761f213', '1'),
-	('980087dd-f575-4480-8318-e236eff5a8b7', '1'),
-	('980087dd-f57a-4ffa-a676-ef2bd9998e4d', '1'),
-	('980087dd-f57f-4c74-815f-a7425db0ed39', '1'),
-	('980087dd-f584-42fa-842c-26d37d4231af', '1'),
-	('980087dd-f589-4c78-8784-822c067d32b6', '1'),
-	('980087dd-f58d-4681-954e-821ab7d527b2', '1'),
-	('980087dd-f591-4861-8340-7daad103c8e2', '1'),
-	('980087dd-f595-49da-9b66-420eb936a943', '1'),
-	('980087dd-f59d-43bd-b9bc-7d35a431bdea', '1'),
-	('980087dd-f5a3-4e28-95fe-dafc994022da', '1'),
-	('980087dd-f5a8-4133-9d20-f201b68e5531', '1'),
-	('980087dd-f5af-4102-a993-d59f157e91b8', '1'),
-	('980087dd-f5b4-443b-9dcf-cbb0b34fec76', '1'),
-	('980087dd-f5b9-47f2-9bfe-41d4232f3230', '1'),
-	('980087dd-f5be-45ca-8138-51b0d4f9f3a6', '1'),
-	('980087dd-f5c2-49fb-9ba8-7ca07cc4ed7a', '1'),
-	('980087dd-f5c7-474e-a61b-326d83707254', '1'),
-	('980087dd-f5cc-4ed8-a1e7-293e4bd63a23', '1');
+	('986302e5-6772-45e4-bacc-778951018db7', '1'),
+	('986302e5-677a-4481-b064-a9845110815a', '1'),
+	('986302e5-677f-472d-99a1-4b4fd86f7025', '1'),
+	('986302e5-6783-4393-bea6-2c1c44d894df', '1'),
+	('986302e5-6787-4441-91c8-16401c1198bd', '1'),
+	('986302e5-678b-4ebf-8e92-ef0907399f19', '1'),
+	('986302e5-678f-4868-adbe-8081cd6e06cc', '1'),
+	('986302e5-6793-4bdb-a769-da532068b602', '1'),
+	('986302e5-6797-45a9-a30f-36e0d814fbcc', '1'),
+	('986302e5-679c-496e-b298-b151ab3169dd', '1'),
+	('986302e5-679f-46fb-82f2-a15a11709749', '1'),
+	('986302e5-67a3-47e4-9f4c-49bc84e655b1', '1'),
+	('986302e5-67a7-4e5c-8705-5e92ccbbfa81', '1'),
+	('986302e5-67ab-40c7-8762-c3b5ff84c0b0', '1'),
+	('986302e5-67af-44e2-8952-cd448d403280', '1'),
+	('986302e5-67b3-44f0-8e48-261318733ec2', '1'),
+	('986302e5-67b7-466b-bc71-9fe6533359e3', '1'),
+	('986302e5-67bb-44bd-be7e-404bc9b32161', '1'),
+	('986302e5-67bf-40d8-b377-f8b877aa6bb9', '1'),
+	('986302e5-67c3-4c7a-af8b-aa06f01d46ca', '1'),
+	('986302e5-67c7-4a93-87e4-cd8191050cd2', '1'),
+	('986302e5-67cb-4f7c-a5ca-b46137326952', '1'),
+	('986302e5-67cf-459c-b6cb-a666514a429f', '1'),
+	('986302e5-67d3-4e5c-99fb-ec43b8e4375f', '1'),
+	('986302e5-67d7-4076-8647-cba3cf77d712', '1'),
+	('986302e5-67db-47cb-933b-b02d5e3a64f5', '1'),
+	('986302e5-67df-4fd9-843c-956e631825e2', '1'),
+	('986302e5-67e3-406b-a8a1-640f83865bcd', '1'),
+	('986302e5-67e7-4bfa-b0c1-8731c6a8fff8', '1'),
+	('986302e5-67eb-40de-99ea-80cc7d815655', '1'),
+	('986302e5-67ef-4ad3-8b70-1b93f98cb64c', '1'),
+	('986302e5-67f3-40df-b882-3b36daac116e', '1'),
+	('986302e5-67f7-4281-ae48-8a833ef8c0f5', '1'),
+	('986302e5-67fc-4104-bb38-57edc6f41c72', '1'),
+	('986302e5-67ff-449a-8c82-7941d6c355ac', '1'),
+	('986302e5-6803-4510-bc70-9eee93fe74cf', '1');
 /*!40000 ALTER TABLE `sc_shop_product_store` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_sessions
+DROP TABLE IF EXISTS `sc_shop_sessions`;
 CREATE TABLE IF NOT EXISTS `sc_shop_sessions` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `customer_id` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -5115,6 +5195,7 @@ DELETE FROM `sc_shop_sessions`;
 /*!40000 ALTER TABLE `sc_shop_sessions` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_shipping_standard
+DROP TABLE IF EXISTS `sc_shop_shipping_standard`;
 CREATE TABLE IF NOT EXISTS `sc_shop_shipping_standard` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `fee` decimal(15,2) NOT NULL,
@@ -5132,6 +5213,7 @@ INSERT INTO `sc_shop_shipping_standard` (`id`, `fee`, `shipping_free`, `created_
 /*!40000 ALTER TABLE `sc_shop_shipping_standard` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_shipping_status
+DROP TABLE IF EXISTS `sc_shop_shipping_status`;
 CREATE TABLE IF NOT EXISTS `sc_shop_shipping_status` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5150,6 +5232,7 @@ INSERT INTO `sc_shop_shipping_status` (`id`, `name`, `created_at`, `updated_at`)
 /*!40000 ALTER TABLE `sc_shop_shipping_status` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_shoppingcart
+DROP TABLE IF EXISTS `sc_shop_shoppingcart`;
 CREATE TABLE IF NOT EXISTS `sc_shop_shoppingcart` (
   `identifier` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `instance` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5167,6 +5250,7 @@ DELETE FROM `sc_shop_shoppingcart`;
 /*!40000 ALTER TABLE `sc_shop_shoppingcart` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_store_block
+DROP TABLE IF EXISTS `sc_shop_store_block`;
 CREATE TABLE IF NOT EXISTS `sc_shop_store_block` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5189,17 +5273,18 @@ CREATE TABLE IF NOT EXISTS `sc_shop_store_block` (
 DELETE FROM `sc_shop_store_block`;
 /*!40000 ALTER TABLE `sc_shop_store_block` DISABLE KEYS */;
 INSERT INTO `sc_shop_store_block` (`id`, `name`, `position`, `page`, `type`, `text`, `status`, `sort`, `store_id`, `template`, `created_at`, `updated_at`) VALUES
-	('980087dc-4532-4152-b1f3-f6e31cc37a50', 'Banner top (s-cart-light)', 'banner_top', 'home', 'view', 'banner_image', 1, 10, '1', 's-cart-light', NULL, NULL),
-	('980087dc-454b-4b7c-a346-4bbe51a05c70', 'New product (s-cart-light)', 'top', 'home', 'view', 'product_new', 1, 20, '1', 's-cart-light', NULL, NULL),
-	('980087dc-455a-4118-996a-937e74ef879e', 'Top news (s-cart-light)', 'bottom', 'home', 'view', 'top_news', 1, 10, '1', 's-cart-light', NULL, NULL),
-	('980087dc-4568-45ce-bab4-39d62c1ce763', 'Category store left (s-cart-light)', 'left', 'shop_home,vendor_home,vendor_product_list', 'view', 'category_store_left', 1, 10, '1', 's-cart-light', NULL, NULL),
-	('980087dc-4575-4b53-b3b5-3f77b14996ff', 'Category left (s-cart-light)', 'left', 'shop_product_list,shop_home', 'view', 'category_left', 1, 20, '1', 's-cart-light', NULL, NULL),
-	('980087dc-4582-4005-ac61-73ea86de4a0b', 'Brand left (s-cart-light)', 'left', 'shop_product_list,shop_home', 'view', 'brand_left', 1, 30, '1', 's-cart-light', NULL, NULL),
-	('980087dc-458e-4430-9d8a-838e421c8648', 'Product last view (s-cart-light)', 'left', '*', 'view', 'product_lastview_left', 1, 40, '1', 's-cart-light', NULL, NULL),
-	('980087dc-459c-426e-af62-39a569f387bf', 'Product special (s-cart-light)', 'left', '*', 'view', 'product_special_left', 1, 30, '1', 's-cart-light', NULL, NULL);
+	('986302e3-f5bd-4f30-bc9c-b161136b86b5', 'Banner top (s-cart-light)', 'banner_top', 'home', 'view', 'banner_image', 1, 10, '1', 's-cart-light', NULL, NULL),
+	('986302e3-f5ff-46cc-b9da-2c750d26d849', 'New product (s-cart-light)', 'top', 'home', 'view', 'product_new', 1, 20, '1', 's-cart-light', NULL, NULL),
+	('986302e3-f62b-4b6e-be12-5392ce0a879b', 'Top news (s-cart-light)', 'bottom', 'home', 'view', 'top_news', 1, 10, '1', 's-cart-light', NULL, NULL),
+	('986302e3-f67a-4e2d-a452-ec02769d4a7a', 'Category store left (s-cart-light)', 'left', 'shop_home,vendor_home,vendor_product_list', 'view', 'category_store_left', 1, 10, '1', 's-cart-light', NULL, NULL),
+	('986302e3-f6a4-447c-9a80-f0475d5e3a5d', 'Category left (s-cart-light)', 'left', 'shop_product_list,shop_home', 'view', 'category_left', 1, 20, '1', 's-cart-light', NULL, NULL),
+	('986302e3-f6cd-4fdd-a4f3-0c6897bb8d50', 'Brand left (s-cart-light)', 'left', 'shop_product_list,shop_home', 'view', 'brand_left', 1, 30, '1', 's-cart-light', NULL, NULL),
+	('986302e3-f6fe-4a78-a076-1c650fafba15', 'Product last view (s-cart-light)', 'left', '*', 'view', 'product_lastview_left', 1, 40, '1', 's-cart-light', NULL, NULL),
+	('986302e3-f737-4c67-b81c-7f35397f04be', 'Product special (s-cart-light)', 'left', '*', 'view', 'product_special_left', 1, 30, '1', 's-cart-light', NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_store_block` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_store_css
+DROP TABLE IF EXISTS `sc_shop_store_css`;
 CREATE TABLE IF NOT EXISTS `sc_shop_store_css` (
   `css` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5217,6 +5302,7 @@ INSERT INTO `sc_shop_store_css` (`css`, `store_id`, `template`, `created_at`, `u
 /*!40000 ALTER TABLE `sc_shop_store_css` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_subscribe
+DROP TABLE IF EXISTS `sc_shop_subscribe`;
 CREATE TABLE IF NOT EXISTS `sc_shop_subscribe` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5237,6 +5323,7 @@ DELETE FROM `sc_shop_subscribe`;
 /*!40000 ALTER TABLE `sc_shop_subscribe` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_supplier
+DROP TABLE IF EXISTS `sc_shop_supplier`;
 CREATE TABLE IF NOT EXISTS `sc_shop_supplier` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5260,11 +5347,12 @@ CREATE TABLE IF NOT EXISTS `sc_shop_supplier` (
 DELETE FROM `sc_shop_supplier`;
 /*!40000 ALTER TABLE `sc_shop_supplier` DISABLE KEYS */;
 INSERT INTO `sc_shop_supplier` (`id`, `name`, `alias`, `email`, `phone`, `image`, `address`, `url`, `status`, `store_id`, `sort`, `created_at`, `updated_at`) VALUES
-	('980087dd-ef22-42e0-9784-4b2e8ffdcac0', 'Supplier ABC', 'supplier-abc', 'abc@gmail.com', '0123456789', '/data/supplier/supplier.jpg', NULL, NULL, 1, '1', 0, NULL, NULL),
-	('980087dd-ef2c-4303-927e-f638eeab28dd', 'Supplier XYZ', 'supplier-xyz', 'xyz@gmail.com', '0987654321', '/data/supplier/supplier.jpg', NULL, NULL, 1, '1', 0, NULL, NULL);
+	('986302e5-60f8-426c-a223-16b8d7cb3df5', 'Supplier ABC', 'supplier-abc', 'abc@gmail.com', '0123456789', '/data/supplier/supplier.jpg', NULL, NULL, 1, '1', 0, NULL, NULL),
+	('986302e5-6101-4457-9956-18133055b214', 'Supplier XYZ', 'supplier-xyz', 'xyz@gmail.com', '0987654321', '/data/supplier/supplier.jpg', NULL, NULL, 1, '1', 0, NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_supplier` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_tax
+DROP TABLE IF EXISTS `sc_shop_tax`;
 CREATE TABLE IF NOT EXISTS `sc_shop_tax` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5282,6 +5370,7 @@ INSERT INTO `sc_shop_tax` (`id`, `name`, `value`, `created_at`, `updated_at`) VA
 /*!40000 ALTER TABLE `sc_shop_tax` ENABLE KEYS */;
 
 -- Dumping structure for table s-cart.sc_shop_weight
+DROP TABLE IF EXISTS `sc_shop_weight`;
 CREATE TABLE IF NOT EXISTS `sc_shop_weight` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5301,125 +5390,6 @@ INSERT INTO `sc_shop_weight` (`id`, `name`, `description`, `created_at`, `update
 	(3, 'lb', 'Pound ', NULL, NULL),
 	(4, 'oz', 'Ounce ', NULL, NULL);
 /*!40000 ALTER TABLE `sc_shop_weight` ENABLE KEYS */;
-
--- Dumping structure for table s-cart.vendor_category
-CREATE TABLE IF NOT EXISTS `vendor_category` (
-  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `alias` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `sort` int(11) NOT NULL DEFAULT 0,
-  `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `vendor_category_alias_index` (`alias`),
-  KEY `vendor_category_store_id_index` (`store_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table s-cart.vendor_category: ~0 rows (approximately)
-DELETE FROM `vendor_category`;
-/*!40000 ALTER TABLE `vendor_category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendor_category` ENABLE KEYS */;
-
--- Dumping structure for table s-cart.vendor_category_description
-CREATE TABLE IF NOT EXISTS `vendor_category_description` (
-  `vendor_category_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keyword` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  UNIQUE KEY `vendor_category_description_vendor_category_id_lang_unique` (`vendor_category_id`,`lang`),
-  KEY `vendor_category_description_lang_index` (`lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table s-cart.vendor_category_description: ~0 rows (approximately)
-DELETE FROM `vendor_category_description`;
-/*!40000 ALTER TABLE `vendor_category_description` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendor_category_description` ENABLE KEYS */;
-
--- Dumping structure for table s-cart.vendor_money_process
-CREATE TABLE IF NOT EXISTS `vendor_money_process` (
-  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `comment` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `total_sum` int(11) NOT NULL DEFAULT 0,
-  `order_count` int(11) NOT NULL DEFAULT 0,
-  `amount` int(11) NOT NULL DEFAULT 0,
-  `commission_rate` int(11) NOT NULL DEFAULT 0,
-  `currency` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_process` date NOT NULL,
-  `status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'processing' COMMENT 'processing,pending,canceled,done',
-  `date_pay` date DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `vendor_money_process_store_id_index` (`store_id`),
-  KEY `vendor_money_process_currency_index` (`currency`),
-  KEY `vendor_money_process_date_process_index` (`date_process`),
-  KEY `vendor_money_process_status_index` (`status`),
-  KEY `vendor_money_process_date_pay_index` (`date_pay`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table s-cart.vendor_money_process: ~0 rows (approximately)
-DELETE FROM `vendor_money_process`;
-/*!40000 ALTER TABLE `vendor_money_process` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendor_money_process` ENABLE KEYS */;
-
--- Dumping structure for table s-cart.vendor_password_resets
-CREATE TABLE IF NOT EXISTS `vendor_password_resets` (
-  `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` datetime NOT NULL,
-  KEY `vendor_password_resets_email_index` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table s-cart.vendor_password_resets: ~0 rows (approximately)
-DELETE FROM `vendor_password_resets`;
-/*!40000 ALTER TABLE `vendor_password_resets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendor_password_resets` ENABLE KEYS */;
-
--- Dumping structure for table s-cart.vendor_product_category
-CREATE TABLE IF NOT EXISTS `vendor_product_category` (
-  `vendor_category_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  UNIQUE KEY `vendor_product_category_vendor_category_id_product_id_unique` (`vendor_category_id`,`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table s-cart.vendor_product_category: ~0 rows (approximately)
-DELETE FROM `vendor_product_category`;
-/*!40000 ALTER TABLE `vendor_product_category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendor_product_category` ENABLE KEYS */;
-
--- Dumping structure for table s-cart.vendor_user
-CREATE TABLE IF NOT EXISTS `vendor_user` (
-  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `first_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postcode` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address1` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address2` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address3` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT 'VN',
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 1,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `vendor_user_store_id_index` (`store_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Dumping data for table s-cart.vendor_user: ~0 rows (approximately)
-DELETE FROM `vendor_user`;
-/*!40000 ALTER TABLE `vendor_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendor_user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

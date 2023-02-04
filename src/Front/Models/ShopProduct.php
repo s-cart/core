@@ -272,7 +272,7 @@ class ShopProduct extends Model
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
                 ->select('code', 'name', 'text')
                 ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $product->id)
-                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
+                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'shop_product')
                 ->delete();
             }
         );
@@ -922,43 +922,5 @@ class ShopProduct extends Model
                 ]
             )->render();
         }
-    }
-
-    /**
-     * Get all custom fields
-     *
-     * @return void
-     */
-    public function getCustomFields()
-    {
-        $data =  (new ShopCustomFieldDetail)
-            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-            ->select('code', 'name', 'text')
-            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
-            ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
-            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1')
-            ->get()
-            ->keyBy('code');
-        return $data;
-    }
-
-    /**
-     * Get custom field
-     *
-     * @return void
-     */
-    public function getCustomField($code = null)
-    {
-        $data =  (new ShopCustomFieldDetail)
-            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-            ->select('code', 'name', 'text')
-            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
-            ->where(SC_DB_PREFIX.'shop_custom_field.type', 'product')
-            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1');
-        if ($code) {
-            $data = $data->where(SC_DB_PREFIX.'shop_custom_field.code', $code);
-        }
-        $data = $data->first();
-        return $data;
     }
 }

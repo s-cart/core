@@ -144,7 +144,7 @@ class AdminCustomerController extends RootAdminController
             'countries'         => (new ShopCountry)->getCodeAll(),
             'customer'          => [],
             'url_action'        => sc_route_admin('admin_customer.create'),
-            'customFields'         => (new ShopCustomField)->getCustomField($type = 'customer'),
+            'customFields'         => (new ShopCustomField)->getCustomField($type = 'shop_customer'),
 
         ];
 
@@ -200,7 +200,7 @@ class AdminCustomerController extends RootAdminController
             'countries' => (new ShopCountry)->getCodeAll(),
             'addresses' => $customer->addresses,
             'url_action' => sc_route_admin('admin_customer.edit', ['id' => $customer['id']]),
-            'customFields'         => (new ShopCustomField)->getCustomField($type = 'customer'),
+            'customFields'         => (new ShopCustomField)->getCustomField($type = 'shop_customer'),
         ];
         return view($this->templatePathAdmin.'screen.customer_edit')
             ->with($data);

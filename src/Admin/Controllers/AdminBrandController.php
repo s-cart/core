@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopBrand;
+use SCart\Core\Front\Models\ShopCustomField;
 use Validator;
 
 class AdminBrandController extends RootAdminController
@@ -25,6 +26,7 @@ class AdminBrandController extends RootAdminController
             'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_brand.create'),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_brand'),
         ];
 
         $listTh = [
@@ -102,14 +104,24 @@ class AdminBrandController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['name'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-
-        $validator = Validator::make($data, [
-            'name' => 'required|string|max:100',
+        $arrValidation = [
+            'name'  => 'required|string|max:100',
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|unique:"'.ShopBrand::class.'",alias|string|max:100',
             'image' => 'required',
-            'sort' => 'numeric|min:0',
-            'url' => 'url|nullable',
-        ], [
+            'sort'  => 'numeric|min:0',
+            'url'   => 'url|nullable',
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_brand');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+
+        $validator = Validator::make($data, $arrValidation, [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.brand.name')]),
             'alias.regex' => sc_language_render('admin.brand.alias_validate'),
         ]);
@@ -128,13 +140,17 @@ class AdminBrandController extends RootAdminController
             'status' => (!empty($data['status']) ? 1 : 0),
         ];
         $dataCreate = sc_clean($dataCreate, [], true);
-        $obj = ShopBrand::create($dataCreate);
+        $brand = ShopBrand::create($dataCreate);
 
         $shopStore        = $data['shop_store'] ?? [session('adminStoreId')];
-        $obj->stores()->detach();
+        $brand->stores()->detach();
         if ($shopStore) {
-            $obj->stores()->attach($shopStore);
+            $brand->stores()->attach($shopStore);
         }
+
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $brand->id, 'shop_brand');
 
         return redirect()->route('admin_brand.index')->with('success', sc_language_render('action.create_success'));
     }
@@ -162,6 +178,7 @@ class AdminBrandController extends RootAdminController
         'url_action' => sc_route_admin('admin_brand.edit', ['id' => $brand['id']]),
         'brand' => $brand,
         'id' => $id,
+        'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_brand'),
     ];
 
         $listTh = [
@@ -211,13 +228,22 @@ class AdminBrandController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['name'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-
-        $validator = Validator::make($data, [
-            'name' => 'required|string|max:100',
+        $arrValidation = [
+            'name'  => 'required|string|max:100',
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|unique:"'.ShopBrand::class.'",alias,' . $brand->id . ',id|string|max:100',
             'image' => 'required',
-            'sort' => 'numeric|min:0',
-        ], [
+            'sort'  => 'numeric|min:0',
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_brand');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+        $validator = Validator::make($data, $arrValidation, [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.brand.name')]),
             'alias.regex' => sc_language_render('admin.brand.alias_validate'),
         ]);
@@ -246,6 +272,10 @@ class AdminBrandController extends RootAdminController
         if ($shopStore) {
             $brand->stores()->attach($shopStore);
         }
+
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $brand->id, 'shop_brand');
 
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }

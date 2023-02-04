@@ -141,7 +141,7 @@ class RegisterController extends RootFrontController
                 'countries'   => ShopCountry::getCodeAll(),
                 'layout_page' => 'shop_auth',
                 'viewCaptcha' => $viewCaptcha,
-                'customFields'=> (new ShopCustomField)->getCustomField($type = 'customer'),
+                'customFields'=> (new ShopCustomField)->getCustomField($type = 'shop_customer'),
                 'breadcrumbs' => [
                     ['url'    => '', 'title' => sc_language_render('customer.title_register')],
                 ],

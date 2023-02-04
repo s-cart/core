@@ -194,4 +194,55 @@ trait ModelTrait
             return $this;
         }
     }
+    
+    /**
+     * Get all custom fields
+     *
+     * @return void
+     */
+    public function getCustomFields()
+    {
+        $typeTmp = explode(SC_DB_PREFIX, $this->getTable());
+        $type = $typeTmp[1] ?? null;
+        $data =  (new \SCart\Core\Front\Models\ShopCustomFieldDetail)
+            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+            ->select('code', 'name', 'text')
+            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
+            ->where(SC_DB_PREFIX.'shop_custom_field.type', $type)
+            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1')
+            ->get()
+            ->keyBy('code');
+        return $data;
+    }
+
+    /**
+     * Get custom field
+     *
+     * @return void
+     */
+    public function getCustomField($code = null)
+    {
+        $typeTmp = explode(SC_DB_PREFIX, $this->getTable());
+        $type = $typeTmp[1] ?? null;
+        $data =  (new \SCart\Core\Front\Models\ShopCustomFieldDetail)
+            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
+            ->select('code', 'name', 'text')
+            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
+            ->where(SC_DB_PREFIX.'shop_custom_field.type', $type)
+            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1');
+        if ($code) {
+            $data = $data->where(SC_DB_PREFIX.'shop_custom_field.code', $code);
+        }
+        $data = $data->first();
+        return $data;
+    }
+
+    /*
+    Get custom fields via attribute
+    $item->custom_fields
+     */
+    public function getCustomFieldsAttribute()
+    {
+        return $this->getCustomFields();
+    }
 }

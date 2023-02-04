@@ -147,7 +147,7 @@
                                         <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                         </div>
-                                        <input type="number" style="width: 100px;" min = 0 id="sort" name="sort" value="{{ old()?old('sort'):$banner['sort']??0 }}" class="form-control sort" placeholder="" />
+                                        <input type="number" style="width: 100px;" min = 0 id="sort" name="sort" value="{{ old('sort',$banner['sort']??0) }}" class="form-control sort" placeholder="" />
                                     </div>
                                         @if ($errors->has('sort'))
                                             <span class="form-text">
@@ -207,6 +207,16 @@
                                     <input class="checkbox" type="checkbox" name="status"  {{ old('status',(empty($banner['status'])?0:1))?'checked':''}}>
                                 </div>
                             </div>
+
+
+                {{-- Custom fields --}}
+                @php
+                    $customFields = isset($customFields) ? $customFields : [];
+                    $fields = !empty($banner) ? $banner->getCustomFields() : [];
+                @endphp
+                @includeIf($templatePathAdmin.'component.render_form_custom_field', ['customFields' => $customFields, 'fields' => $fields])
+                {{-- //Custom fields --}}
+
 
                     <!-- /.card-body -->
 

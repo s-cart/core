@@ -7,6 +7,7 @@ use Validator;
 
 class AdminCustomFieldController extends RootAdminController
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -44,7 +45,7 @@ class AdminCustomFieldController extends RootAdminController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataTr[$row['id']] = [
-                'type' => $row['type'],
+                'type' => $this->fieldTypes()[$row['type']] ?? $row['type'],
                 'code' => $row['code'],
                 'name' => $row['name'],
                 'required' => $row['required'],
@@ -65,6 +66,8 @@ class AdminCustomFieldController extends RootAdminController
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
 
         $data['layout'] = 'index';
+        $data['fieldTypes'] = $this->fieldTypes();
+        $data['selectTypes'] = $this->selectTypes();
         return view($this->templatePathAdmin.'screen.custom_field')
             ->with($data);
     }
@@ -146,7 +149,7 @@ class AdminCustomFieldController extends RootAdminController
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataTr[$row['id']] = [
-                'type' => $row['type'],
+                'type' => $this->fieldTypes()[$row['type']] ?? $row['type'],
                 'code' => $row['code'],
                 'name' => $row['name'],
                 'required' => $row['required'],
@@ -165,7 +168,8 @@ class AdminCustomFieldController extends RootAdminController
         $data['dataTr'] = $dataTr;
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
-
+        $data['fieldTypes'] = $this->fieldTypes();
+        $data['selectTypes'] = $this->selectTypes();
         $data['layout'] = 'edit';
         return view($this->templatePathAdmin.'screen.custom_field')
             ->with($data);
@@ -222,5 +226,43 @@ class AdminCustomFieldController extends RootAdminController
             ShopCustomField::destroy($arrID);
             return response()->json(['error' => 0, 'msg' => '']);
         }
+    }
+
+    /**
+     * List field support custom
+     *
+     * @return  [type]  [return description]
+     */
+    public function fieldTypes() {
+            return     [
+            'shop_customer' => sc_language_render('admin.field_name.shop_customer'),
+            'shop_product'  => sc_language_render('admin.field_name.shop_product'),
+            'shop_banner'   => sc_language_render('admin.field_name.shop_banner'),
+            'shop_brand'    => sc_language_render('admin.field_name.shop_brand'),
+            'shop_supplier' => sc_language_render('admin.field_name.shop_supplier'),
+            'shop_category' => sc_language_render('admin.field_name.shop_category'),
+            'shop_news'     => sc_language_render('admin.field_name.shop_news'),
+            'shop_page'     => sc_language_render('admin.field_name.shop_page'),
+            ];
+    }
+
+    public function selectTypes() {
+        return [
+            'text'     => 'Text', 
+            'number'   => 'Number', 
+            'date'     => 'Date', 
+            'month'    => 'Month', 
+            'week'     => 'Week', 
+            'time'     => 'Time', 
+            'color'    => 'Color', 
+            'email'    => 'Email', 
+            'password' => 'Password', 
+            'url'      => 'Url', 
+            'range'    => 'Range', 
+            'textarea' => 'Textarea', 
+            'select'   => 'Select', 
+            'radio'    => 'Radio', 
+            'checkbox' => 'Check box',
+        ];
     }
 }

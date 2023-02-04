@@ -252,6 +252,15 @@
                             </div>
                         </div>
 
+                        {{-- Custom fields --}}
+                        @php
+                            $customFields = isset($customFields) ? $customFields : [];
+                            $fields = !empty($news) ? $news->getCustomFields() : [];
+                        @endphp
+                        @includeIf($templatePathAdmin.'component.render_form_custom_field', ['customFields' => $customFields, 'fields' => $fields])
+                        {{-- //Custom fields --}}
+
+
                 </div>
 
 

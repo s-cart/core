@@ -244,7 +244,7 @@ if (!function_exists('sc_customer_data_insert_mapping') && !in_array('sc_custome
         }
 
         //Custom fields
-        $customFields = (new ShopCustomField)->getCustomField($type = 'customer');
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_customer');
         if ($customFields) {
             foreach ($customFields as $field) {
                 if ($field->required) {
@@ -456,7 +456,7 @@ if (!function_exists('sc_customer_data_edit_mapping') && !in_array('sc_customer_
         ];
 
         //Custom fields
-        $customFields = (new ShopCustomField)->getCustomField($type = 'customer');
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_customer');
         if ($customFields) {
             foreach ($customFields as $field) {
                 if ($field->required) {

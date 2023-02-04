@@ -3,6 +3,7 @@ namespace SCart\Core\Admin\Controllers;
 
 use SCart\Core\Admin\Controllers\RootAdminController;
 use SCart\Core\Front\Models\ShopSupplier;
+use SCart\Core\Front\Models\ShopCustomField;
 use Validator;
 
 class AdminSupplierController extends RootAdminController
@@ -26,6 +27,7 @@ class AdminSupplierController extends RootAdminController
             'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_supplier.create'),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_supplier'),
         ];
 
         $listTh = [
@@ -75,15 +77,24 @@ class AdminSupplierController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['name'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-
-        $validator = Validator::make($data, [
+        $arrValidation = [
             'image' => 'required',
             'sort' => 'numeric|min:0',
             'name' => 'required|string|max:100',
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|unique:"'.ShopSupplier::class.'",alias|string|max:100',
             'url' => 'url|nullable',
             'email' => 'email|nullable',
-        ], [
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_supplier');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+        $validator = Validator::make($data, $arrValidation, [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.supplier.name')]),
             'alias.regex' => sc_language_render('admin.supplier.alias_validate'),
         ]);
@@ -105,7 +116,11 @@ class AdminSupplierController extends RootAdminController
             'sort' => (int) $data['sort'],
         ];
         $dataCreate = sc_clean($dataCreate, [], true);
-        $obj = ShopSupplier::create($dataCreate);
+        $supplier = ShopSupplier::create($dataCreate);
+
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $supplier->id, 'shop_supplier');
 
         return redirect()->route('admin_supplier.index')->with('success', sc_language_render('action.create_success'));
     }
@@ -133,6 +148,7 @@ class AdminSupplierController extends RootAdminController
         'url_action' => sc_route_admin('admin_supplier.edit', ['id' => $supplier['id']]),
         'supplier' => $supplier,
         'id' => $id,
+        'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_supplier'),
     ];
 
         $listTh = [
@@ -173,7 +189,7 @@ class AdminSupplierController extends RootAdminController
     }
 
     /**
-     * update status
+     * update supplier
      */
     public function postEdit($id)
     {
@@ -183,15 +199,24 @@ class AdminSupplierController extends RootAdminController
         $data['alias'] = !empty($data['alias'])?$data['alias']:$data['name'];
         $data['alias'] = sc_word_format_url($data['alias']);
         $data['alias'] = sc_word_limit($data['alias'], 100);
-
-        $validator = Validator::make($data, [
+        $arrValidation = [
             'image' => 'required',
             'sort' => 'numeric|min:0',
             'name' => 'required|string|max:100',
             'alias' => 'required|regex:/(^([0-9A-Za-z\-_]+)$)/|unique:"'.ShopSupplier::class.'",alias,' . $supplier->id . ',id|string|max:100',
             'url' => 'url|nullable',
             'email' => 'email|nullable',
-        ], [
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_supplier');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+        $validator = Validator::make($data, $arrValidation, [
             'name.required' => sc_language_render('validation.required', ['attribute' => sc_language_render('admin.supplier.name')]),
             'alias.regex' => sc_language_render('admin.supplier.alias_validate'),
         ]);
@@ -216,6 +241,10 @@ class AdminSupplierController extends RootAdminController
         ];
         $dataUpdate = sc_clean($dataUpdate, [], true);
         $supplier->update($dataUpdate);
+
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $supplier->id, 'shop_supplier');
 
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));
     }

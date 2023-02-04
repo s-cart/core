@@ -73,11 +73,12 @@ class ShopCustomer extends Authenticatable
         // before delete() method call this
         static::deleting(
             function ($customer) {
-            //Delete custom field
+                
+                //Delete custom field
                 (new ShopCustomFieldDetail)
                 ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
                 ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $customer->id)
-                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
+                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'shop_customer')
                 ->delete();
             }
         );
@@ -107,7 +108,7 @@ class ShopCustomer extends Authenticatable
         $user->update($dataClean);
 
         //Insert custom fields
-        ShopCustomer::updateCustomField($fields, $user->id);
+        sc_update_custom_field($fields, $user->id, 'shop_customer');
 
         return $user;
     }
@@ -131,7 +132,7 @@ class ShopCustomer extends Authenticatable
         $user->save();
 
         //Insert custom fields
-        ShopCustomer::updateCustomField($fields, $user->id);
+        sc_update_custom_field($fields, $user->id, 'shop_customer');
         
         // Process event customer created
         sc_event_customer_created($user);
@@ -189,77 +190,5 @@ class ShopCustomer extends Authenticatable
             return sc_customer_sendmail_verify($this->email, $this->id);
         }
         return false;
-    }
-
-    /**
-     * Get all custom fields
-     *
-     * @return void
-     */
-    public function getCustomFields()
-    {
-        $data =  (new ShopCustomFieldDetail)
-            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-            ->select('code', 'name', 'text')
-            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
-            ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
-            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1')
-            ->get()
-            ->keyBy('code');
-        return $data;
-    }
-
-    /**
-     * Get custom field
-     *
-     * @return void
-     */
-    public function getCustomField($code = null)
-    {
-        $data =  (new ShopCustomFieldDetail)
-            ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-            ->select('code', 'name', 'text')
-            ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $this->id)
-            ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
-            ->where(SC_DB_PREFIX.'shop_custom_field.status', '1');
-        if ($code) {
-            $data = $data->where(SC_DB_PREFIX.'shop_custom_field.code', $code);
-        }
-        $data = $data->first();
-        return $data;
-    }
-
-    /**
-     * Update custom field
-     *
-     * @param   array  $fields  [$fields description]
-     * @param   [type] $cId     [$cId description]
-     *
-     * @return  []              [return description]
-     */
-    public static function updateCustomField(array $fields = [], $cId) {
-        if (!empty($fields)) {
-            (new ShopCustomFieldDetail)
-                ->join(SC_DB_PREFIX.'shop_custom_field', SC_DB_PREFIX.'shop_custom_field.id', SC_DB_PREFIX.'shop_custom_field_detail.custom_field_id')
-                ->where(SC_DB_PREFIX.'shop_custom_field_detail.rel_id', $cId)
-                ->where(SC_DB_PREFIX.'shop_custom_field.type', 'customer')
-                ->delete();
-
-            $dataField = [];
-            foreach ($fields as $key => $value) {
-                $field = (new ShopCustomField)->where('code', $key)->where('type', 'customer')->first();
-                if ($field) {
-                    $dataField[] = sc_clean([
-                        'id' => sc_uuid(),
-                        'custom_field_id' => $field->id,
-                        'rel_id' => $cId,
-                        'text' => trim($value),
-                    ], [], true);
-                }
-            }
-            if ($dataField) {
-                (new ShopCustomFieldDetail)->insert($dataField);
-            }
-        }
     }
 }

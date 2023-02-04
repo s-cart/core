@@ -730,7 +730,7 @@ class PrepareTablesShop extends Migration
             SC_DB_PREFIX.'shop_custom_field',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                $table->string('type', 50)->index()->comment('product, customer');
+                $table->string('type', 50)->index()->comment('shop_product, shop_customer,...');
                 $table->string('code', 100)->index();
                 $table->string('name', 255);
                 $table->integer('required')->default(0);

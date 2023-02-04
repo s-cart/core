@@ -65,7 +65,7 @@
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <select class="form-control input-sm" style="width: 100%;" name="type">
-                @foreach (['customer' => 'Customer', 'product' => 'Product'] as $key => $name)
+                @foreach ($fieldTypes as $key => $name)
                 <option value="{{ $key }}" {{ (old('type', ($customField['type'] ?? '')) == $key) ? 'selected':'' }}>{{ $name }}
                 </option>
                 @endforeach
@@ -87,7 +87,7 @@
             <div class="col-sm-10 ">
               <div class="input-group mb-3">
                 <select class="form-control input-sm" style="width: 100%;" name="option">
-                @foreach (['input' => 'Input', 'radio' => 'Radio', 'select' => 'Select'] as $key => $name)
+                @foreach ($selectTypes as $key => $name)
                 <option value="{{ $key }}" {{ (old('option', ($customField['option'] ?? '')) == $key) ? 'selected':'' }}>{{ $name }}
                 </option>
                 @endforeach

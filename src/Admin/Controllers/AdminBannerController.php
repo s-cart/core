@@ -5,6 +5,7 @@ use SCart\Core\Admin\Controllers\RootAdminController;
 use Validator;
 use SCart\Core\Admin\Models\AdminBanner;
 use SCart\Core\Front\Models\ShopBannerType;
+use SCart\Core\Front\Models\ShopCustomField;
 
 class AdminBannerController extends RootAdminController
 {
@@ -157,14 +158,15 @@ class AdminBannerController extends RootAdminController
     public function create()
     {
         $data = [
-            'title' => sc_language_render('admin.banner.add_new'),
-            'subTitle' => '',
+            'title'             => sc_language_render('admin.banner.add_new'),
+            'subTitle'          => '',
             'title_description' => '',
-            'icon' => 'fa fa-plus',
-            'banner' => [],
-            'arrTarget' => $this->arrTarget,
-            'dataType' => $this->dataType,
-            'url_action' => sc_route_admin('admin_banner.create'),
+            'icon'              => 'fa fa-plus',
+            'banner'            => [],
+            'arrTarget'         => $this->arrTarget,
+            'dataType'          => $this->dataType,
+            'url_action'        => sc_route_admin('admin_banner.create'),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_banner'),
         ];
         return view($this->templatePathAdmin.'screen.banner')
             ->with($data);
@@ -178,10 +180,19 @@ class AdminBannerController extends RootAdminController
     {
         $data = request()->all();
         $dataOrigin = request()->all();
-        $validator = Validator::make($dataOrigin, [
+        $arrValidation = [
             'sort' => 'numeric|min:0',
-            'email' => 'email|nullable',
-        ]);
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_banner');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+        $validator = Validator::make($dataOrigin, $arrValidation);
 
         if ($validator->fails()) {
             return redirect()->back()
@@ -206,7 +217,12 @@ class AdminBannerController extends RootAdminController
         if ($shopStore) {
             $banner->stores()->attach($shopStore);
         }
-        return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.create_success'));
+
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $banner->id, 'shop_banner');
+
+        return redirect()->route('admin_shop_.index')->with('success', sc_language_render('action.create_success'));
     }
 
     /**
@@ -229,6 +245,7 @@ class AdminBannerController extends RootAdminController
             'dataType'          => $this->dataType,
             'banner'            => $banner,
             'url_action'        => sc_route_admin('admin_banner.edit', ['id' => $banner['id']]),
+            'customFields'      => (new ShopCustomField)->getCustomField($type = 'shop_banner'),
         ];
         return view($this->templatePathAdmin.'screen.banner')
             ->with($data);
@@ -246,10 +263,20 @@ class AdminBannerController extends RootAdminController
 
         $data = request()->all();
         $dataOrigin = request()->all();
-        $validator = Validator::make($dataOrigin, [
+        $arrValidation = [
             'sort' => 'numeric|min:0',
-            'email' => 'email|nullable',
-        ]);
+        ];
+        //Custom fields
+        $customFields = (new ShopCustomField)->getCustomField($type = 'shop_banner');
+        if ($customFields) {
+            foreach ($customFields as $field) {
+                if ($field->required) {
+                    $arrValidation['fields.'.$field->code] = 'required';
+                }
+            }
+        }
+
+        $validator = Validator::make($dataOrigin, $arrValidation);
 
         if ($validator->fails()) {
             return redirect()->back()
@@ -275,6 +302,10 @@ class AdminBannerController extends RootAdminController
         if ($shopStore) {
             $banner->stores()->attach($shopStore);
         }
+
+        //Insert custom fields
+        $fields = $data['fields'] ?? null;
+        sc_update_custom_field($fields, $banner->id, 'shop_banner');
 
         return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.edit_success'));
     }
