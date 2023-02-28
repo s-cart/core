@@ -19,6 +19,18 @@ use SCart\Core\Commands\Make;
 use SCart\Core\Commands\Infomation;
 use SCart\Core\Commands\ClearCart;
 use SCart\Core\Commands\Update;
+use SCart\Core\Admin\Models\AdminProduct;
+use SCart\Core\Front\Middleware\Localization;
+use SCart\Core\Front\Middleware\EmailIsVerified;
+use SCart\Core\Front\Middleware\Currency;
+use SCart\Core\Api\Middleware\ApiConnection;
+use SCart\Core\Api\Middleware\ForceJsonResponse;
+use SCart\Core\Front\Middleware\CheckDomain;
+use SCart\Core\Admin\Middleware\Authenticate;
+use SCart\Core\Admin\Middleware\LogOperation;
+use SCart\Core\Admin\Middleware\PermissionMiddleware;
+use SCart\Core\Admin\Middleware\AdminStoreId;
+use SCart\Core\Admin\Middleware\AdminTheme;
 use Laravel\Sanctum\Sanctum;
 use SCart\Core\Front\Models\PersonalAccessToken;
 
@@ -291,18 +303,18 @@ class ScartServiceProvider extends ServiceProvider
      * @var array
      */
     protected $routeMiddleware = [
-        'localization'     => Front\Middleware\Localization::class,
-        'email.verify'     => Front\Middleware\EmailIsVerified::class,
-        'currency'         => Front\Middleware\Currency::class,
-        'api.connection'   => Api\Middleware\ApiConnection::class,
-        'checkdomain'      => Front\Middleware\CheckDomain::class,
-        'json.response'    => Api\Middleware\ForceJsonResponse::class,
+        'localization'     => Localization::class,
+        'email.verify'     => EmailIsVerified::class,
+        'currency'         => Currency::class,
+        'api.connection'   => ApiConnection::class,
+        'checkdomain'      => CheckDomain::class,
+        'json.response'    => ForceJsonResponse::class,
         //Admin
-        'admin.auth'       => Admin\Middleware\Authenticate::class,
-        'admin.log'        => Admin\Middleware\LogOperation::class,
-        'admin.permission' => Admin\Middleware\PermissionMiddleware::class,
-        'admin.storeId'    => Admin\Middleware\AdminStoreId::class,
-        'admin.theme'      => Admin\Middleware\AdminTheme::class,
+        'admin.auth'       => Authenticate::class,
+        'admin.log'        => LogOperation::class,
+        'admin.permission' => PermissionMiddleware::class,
+        'admin.storeId'    => AdminStoreId::class,
+        'admin.theme'      => AdminTheme::class,
         //Sanctum
         'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
         'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
@@ -350,13 +362,13 @@ class ScartServiceProvider extends ServiceProvider
     {
         Validator::extend('product_sku_unique', function ($attribute, $value, $parameters, $validator) {
             $productId = $parameters[0] ?? '';
-            return (new Admin\Models\AdminProduct)
+            return (new AdminProduct)
                 ->checkProductValidationAdmin('sku', $value, $productId, session('adminStoreId'));
         });
 
         Validator::extend('product_alias_unique', function ($attribute, $value, $parameters, $validator) {
             $productId = $parameters[0] ?? '';
-            return (new Admin\Models\AdminProduct)
+            return (new AdminProduct)
                 ->checkProductValidationAdmin('alias', $value, $productId, session('adminStoreId'));
         });
     }
