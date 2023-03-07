@@ -89,7 +89,7 @@ class DashboardController extends RootAdminController
                 $date = date("Y-m", strtotime(date('Y-m-01') . " -$i months"));
                 $arrCountOrder[] =  [
                     'name' => '('.$date.')',
-                    'y' => $totalCountMonth[$date] ?? 0,
+                    'y' => (int)($totalCountMonth[$date] ?? 0),
                     'sliced' => true,
                     'selected' => ($i == 0) ? true : false,
                 ];
@@ -115,8 +115,8 @@ class DashboardController extends RootAdminController
         $amountInMonth  = [];
         foreach ($rangDays as $i => $day) {
             $date = $day->format('m-d');
-            $orderInMonth[$date] = $totalsInMonth[$date]['total_order'] ?? '';
-            $amountInMonth[$date] = ($totalsInMonth[$date]['total_amount'] ?? 0);
+            $orderInMonth[$date] = (float)($totalsInMonth[$date]['total_order'] ?? '');
+            $amountInMonth[$date] = (float)($totalsInMonth[$date]['total_amount'] ?? 0);
         }
         $data['orderInMonth'] = $orderInMonth;
         $data['amountInMonth'] = $amountInMonth;
@@ -129,7 +129,7 @@ class DashboardController extends RootAdminController
         $dataInYear = [];
         for ($i = 12; $i >= 0; $i--) {
             $date = date("Y-m", strtotime(date('Y-m-01') . " -$i months"));
-            $dataInYear[$date] = $totalMonth[$date] ?? 0;
+            $dataInYear[$date] = (float)($totalMonth[$date] ?? 0);
         }
         $data['dataInYear'] = $dataInYear;
         //End order in 12 months
