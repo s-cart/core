@@ -119,7 +119,7 @@ class AdminSupplierController extends RootAdminController
         $supplier = ShopSupplier::create($dataCreate);
 
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $supplier->id, 'shop_supplier');
 
         return redirect()->route('admin_supplier.index')->with('success', sc_language_render('action.create_success'));
@@ -243,7 +243,7 @@ class AdminSupplierController extends RootAdminController
         $supplier->update($dataUpdate);
 
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $supplier->id, 'shop_supplier');
 
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));

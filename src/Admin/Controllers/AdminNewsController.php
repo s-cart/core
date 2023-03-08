@@ -231,7 +231,7 @@ class AdminNewsController extends RootAdminController
         }
 
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $news->id, 'shop_news');
 
         sc_clear_cache('cache_news');
@@ -336,7 +336,7 @@ class AdminNewsController extends RootAdminController
             $news->stores()->attach($shopStore);
         }
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $news->id, 'shop_news');
 
         sc_clear_cache('cache_news');

@@ -231,7 +231,7 @@ class AdminPageController extends RootAdminController
         }
 
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $page->id, 'shop_page');
 
         sc_clear_cache('cache_page');
@@ -337,7 +337,7 @@ class AdminPageController extends RootAdminController
             $page->stores()->attach($shopStore);
         }
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $page->id, 'shop_page');
 
         sc_clear_cache('cache_page');

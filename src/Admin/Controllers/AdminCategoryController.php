@@ -243,7 +243,7 @@ class AdminCategoryController extends RootAdminController
             }
         }
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $category->id, 'shop_category');
 
         sc_clear_cache('cache_category');
@@ -357,7 +357,7 @@ class AdminCategoryController extends RootAdminController
             }
         }
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $category->id, 'shop_category');
 
         sc_clear_cache('cache_category');
