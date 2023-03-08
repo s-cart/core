@@ -222,7 +222,7 @@ class AdminBannerController extends RootAdminController
         $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $banner->id, 'shop_banner');
 
-        return redirect()->route('admin_shop_.index')->with('success', sc_language_render('action.create_success'));
+        return redirect()->route('admin_banner.index')->with('success', sc_language_render('action.create_success'));
     }
 
     /**
