@@ -149,7 +149,7 @@ class AdminBrandController extends RootAdminController
         }
 
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $brand->id, 'shop_brand');
 
         return redirect()->route('admin_brand.index')->with('success', sc_language_render('action.create_success'));
@@ -274,7 +274,7 @@ class AdminBrandController extends RootAdminController
         }
 
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $brand->id, 'shop_brand');
 
         return redirect()->back()->with('success', sc_language_render('action.edit_success'));

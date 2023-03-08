@@ -615,7 +615,7 @@ class AdminProductController extends RootAdminController
         }
 
         //Insert custom fields
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $product->id, 'shop_product');
 
         //Insert description
@@ -876,7 +876,7 @@ class AdminProductController extends RootAdminController
         }
 
         //Update custom field
-        $fields = $data['fields'] ?? null;
+        $fields = $data['fields'] ?? [];
         sc_update_custom_field($fields, $product->id, 'shop_product');
 
 
