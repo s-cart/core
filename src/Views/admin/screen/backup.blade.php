@@ -23,16 +23,16 @@
                       @foreach ($tableInfo as $table)
                       <tr>
                         <td class="checkbox icheck">
-                            <input type="checkbox"  class="column-select-item table-process" data-id="{{ $table->table_name }}" checked/>
+                            <input type="checkbox"  class="column-select-item table-process" data-id="{{ $table->TABLE_NAME }}" checked/>
                         </td>
                         <td>
-                          {{ $table->table_name }}
+                          {{ $table->TABLE_NAME }}
                         </td>
                         <td>
-                          {{ $table->table_rows }}
+                          {{ $table->TABLE_ROWS }}
                         </td>
                         <td>
-                          {{ number_format($table->data_length/1048576, 4) }}MB
+                          {{ number_format($table->DATA_LENGTH/1048576, 4) }}MB
                         </td>
                       </tr>
                     @endforeach
