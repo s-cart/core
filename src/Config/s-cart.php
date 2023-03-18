@@ -1,7 +1,7 @@
 <?php
 return [
     'core'             => '8.0',
-    'core-sub-version' => '8.0-beta',
+    'core-sub-version' => '8.0.0',
     'homepage'         => 'https://s-cart.org',
     'name'             => 'S-Cart',
     'github'           => 'https://github.com/s-cart/s-cart',
