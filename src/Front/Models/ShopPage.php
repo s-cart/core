@@ -181,7 +181,7 @@ class ShopPage extends Model
             });
         }
 
-        $query = $query->where($this->getTable() .'status', 1);
+        $query = $query->where($this->getTable() .'.status', 1);
 
         /**
         Note: sc_moreWhere will remove in the next version
