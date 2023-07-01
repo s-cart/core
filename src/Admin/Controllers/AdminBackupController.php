@@ -16,7 +16,7 @@ class AdminBackupController extends RootAdminController
     {
         $tableInfo = DB::connection(SC_CONNECTION)
             ->table('INFORMATION_SCHEMA.TABLES')
-            ->select(['table_name', 'table_rows', 'data_length'])
+            ->select(['TABLE_NAME', 'TABLE_ROWS', 'DATA_LENGTH'])
             ->where('TABLE_SCHEMA', config('database.connections.'.SC_CONNECTION.'.database'))
             ->where('table_type', 'BASE TABLE')
             ->get()
