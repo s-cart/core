@@ -10,6 +10,7 @@ trait ModelTrait
     protected $sc_limit = 'all'; // all or interger
     protected $sc_paginate = 0; // 0: dont paginate,
     protected $sc_sort = [];
+    protected $sc_moreWhere = []; // more where
     protected $sc_moreQuery = []; // more query
     protected $sc_random = 0; // 0: no random, 1: random
     protected $sc_keyword = ''; // search search product
