@@ -141,73 +141,101 @@ trait DataDefaultSeederTrait
 
     public function dataMenu() {
         $dataMenu = [
-            ['id' => 1,'parent_id' => 6,'sort' => 1,'title' => 'admin.menu_titles.order_manager','icon' => 'fas fa-cart-arrow-down','uri' => '','key' => 'ORDER_MANAGER','type' => 0],
-            ['id' => 2,'parent_id' => 6,'sort' => 2,'title' => 'admin.menu_titles.catalog_mamager','icon' => 'fas fa-folder-open','uri' => '','key' => 'CATALOG_MANAGER','type' => 0],
-            ['id' => 3,'parent_id' => 25,'sort' => 3,'title' => 'admin.menu_titles.customer_manager','icon' => 'fas fa-users','uri' => '','key' => 'CUSTOMER_MANAGER','type' => 0],
-            ['id' => 4,'parent_id' => 8,'sort' => 201,'title' => 'admin.menu_titles.template_layout','icon' => 'fab fa-windows','uri' => '','key' => 'TEMPLATE','type' => 0],
-            ['id' => 5,'parent_id' => 9,'sort' => 2,'title' => 'admin.menu_titles.admin_global','icon' => 'fab fa-whmcs','uri' => '','key' => 'CONFIG_SYSTEM','type' => 0],
-            ['id' => 6,'parent_id' => 0,'sort' => 10,'title' => 'admin.menu_titles.ADMIN_SHOP','icon' => 'fab fa-shopify','uri' => '','key' => 'ADMIN_SHOP','type' => 0],
-            ['id' => 7,'parent_id' => 0,'sort' => 100,'title' => 'admin.menu_titles.ADMIN_CONTENT','icon' => 'fas fa-file-signature','uri' => '','key' => 'ADMIN_CONTENT','type' => 0],
-            ['id' => 8,'parent_id' => 0,'sort' => 300,'title' => 'admin.menu_titles.ADMIN_EXTENSION','icon' => 'fas fa-th','uri' => '','key' => 'ADMIN_EXTENSION','type' => 0],
             ['id' => 9,'parent_id' => 0,'sort' => 400,'title' => 'admin.menu_titles.ADMIN_SYSTEM','icon' => 'fas fa-cogs','uri' => '','key' => 'ADMIN_SYSTEM','type' => 0],
-            ['id' => 10,'parent_id' => 7,'sort' => 102,'title' => 'admin.menu_titles.page_manager','icon' => 'fas fa-clone','uri' => 'admin::page','key' => null,'type' => 0],
-            ['id' => 11,'parent_id' => 27,'sort' => 2,'title' => 'admin.menu_titles.shipping_status','icon' => 'fas fa-truck','uri' => 'admin::shipping_status','key' => null,'type' => 0],
-            ['id' => 12,'parent_id' => 1,'sort' => 3,'title' => 'admin.menu_titles.order','icon' => 'fas fa-shopping-cart','uri' => 'admin::order','key' => null,'type' => 0],
-            ['id' => 13,'parent_id' => 27,'sort' => 1,'title' => 'admin.menu_titles.order_status','icon' => 'fas fa-asterisk','uri' => 'admin::order_status','key' => null,'type' => 0],
-            ['id' => 14,'parent_id' => 27,'sort' => 3,'title' => 'admin.menu_titles.payment_status','icon' => 'fas fa-recycle','uri' => 'admin::payment_status','key' => null,'type' => 0],
-            ['id' => 15,'parent_id' => 2,'sort' => 0,'title' => 'admin.menu_titles.product','icon' => 'far fa-file-image','uri' => 'admin::product','key' => null,'type' => 0],
-            ['id' => 16,'parent_id' => 2,'sort' => 0,'title' => 'admin.menu_titles.category','icon' => 'fas fa-folder-open','uri' => 'admin::category','key' => null,'type' => 0],
-            ['id' => 17,'parent_id' => 27,'sort' => 4,'title' => 'admin.menu_titles.supplier','icon' => 'fas fa-user-secret','uri' => 'admin::supplier','key' => null,'type' => 0],
-            ['id' => 18,'parent_id' => 27,'sort' => 5,'title' => 'admin.menu_titles.brand','icon' => 'fas fa-university','uri' => 'admin::brand','key' => null,'type' => 0],
-            ['id' => 19,'parent_id' => 27,'sort' => 8,'title' => 'admin.menu_titles.attribute_group','icon' => 'fas fa-bars','uri' => 'admin::attribute_group','key' => null,'type' => 0],
-            ['id' => 20,'parent_id' => 3,'sort' => 0,'title' => 'admin.menu_titles.customer','icon' => 'fas fa-user','uri' => 'admin::customer','key' => null,'type' => 0],
-            ['id' => 21,'parent_id' => 3,'sort' => 0,'title' => 'admin.menu_titles.subscribe','icon' => 'fas fa-user-circle','uri' => 'admin::subscribe','key' => null,'type' => 0],
-            ['id' => 22,'parent_id' => 67,'sort' => 1,'title' => 'admin.menu_titles.block_content','icon' => 'far fa-newspaper','uri' => 'admin::store_block','key' => null,'type' => 0],
-            ['id' => 23,'parent_id' => 67,'sort' => 2,'title' => 'admin.menu_titles.block_link','icon' => 'fab fa-chrome','uri' => 'admin::store_link','key' => null,'type' => 0],
-            ['id' => 24,'parent_id' => 4,'sort' => 0,'title' => 'admin.menu_titles.template','icon' => 'fas fa-columns','uri' => 'admin::template','key' => null,'type' => 0],
+            ['id' => 7,'parent_id' => 0,'sort' => 100,'title' => 'admin.menu_titles.ADMIN_CONTENT','icon' => 'fas fa-file-signature','uri' => '','key' => 'ADMIN_CONTENT','type' => 0],
             ['id' => 25,'parent_id' => 0,'sort' => 200,'title' => 'admin.menu_titles.ADMIN_MARKETING','icon' => 'fas fa-sort-amount-up','uri' => '','key' => 'MARKETING','type' => 0],
-            ['id' => 26,'parent_id' => 65,'sort' => 1,'title' => 'admin.menu_titles.store_info','icon' => 'fas fa-h-square','uri' => 'admin::store_info','key' => null,'type' => 0],
-            ['id' => 27,'parent_id' => 9,'sort' => 3,'title' => 'admin.menu_titles.setting_system','icon' => 'fas fa-tools','uri' => '','key' => 'SETTING_SYSTEM','type' => 0],
+            ['id' => 65,'parent_id' => 0,'sort' => 250,'title' => 'admin.menu_titles.ADMIN_SHOP_SETTING','icon' => 'fas fa-store-alt','uri' => '','key' => 'ADMIN_SHOP_SETTING','type' => 0],
+            ['id' => 8,'parent_id' => 0,'sort' => 300,'title' => 'admin.menu_titles.ADMIN_EXTENSION','icon' => 'fas fa-th','uri' => '','key' => 'ADMIN_EXTENSION','type' => 0],
+            ['id' => 3,'parent_id' => 25,'sort' => 3,'title' => 'admin.menu_titles.customer_manager','icon' => 'fas fa-users','uri' => '','key' => 'CUSTOMER_MANAGER','type' => 0],
+
+            //System
+            ['id' => 5,'parent_id' => 9,'sort' => 2,'title' => 'admin.menu_titles.admin_global','icon' => 'fab fa-whmcs','uri' => '','key' => 'CONFIG_SYSTEM','type' => 0],
             ['id' => 28,'parent_id' => 9,'sort' => 4,'title' => 'admin.menu_titles.error_log','icon' => 'far fa-clone','uri' => '','key' => '','type' => 0],
-            ['id' => 29,'parent_id' => 25,'sort' => 0,'title' => 'admin.menu_titles.email_template','icon' => 'fas fa-bars','uri' => 'admin::email_template','key' => null,'type' => 0],
             ['id' => 30,'parent_id' => 9,'sort' => 5,'title' => 'admin.menu_titles.localisation','icon' => 'fa fa-map-signs','uri' => '','key' => null,'type' => 0],
+            ['id' => 38,'parent_id' => 9,'sort' => 1,'title' => 'admin.menu_titles.user_permission','icon' => 'fas fa-users-cog','uri' => '','key' => 'ADMIN','type' => 0],
+            ['id' => 70,'parent_id' => 9,'sort' => 6,'title' => 'admin.menu_titles.security','icon' => 'fab fa-shirtsinbulk','uri' => '','key' => 'ADMIN_SECURITY','type' => 0],
+
+            ['id' => 34,'parent_id' => 5,'sort' => 5,'title' => 'admin.menu_titles.backup_restore','icon' => 'fas fa-save','uri' => 'admin::backup','key' => null,'type' => 0],
+            ['id' => 49,'parent_id' => 5,'sort' => 0,'title' => 'admin.menu_titles.menu','icon' => 'fas fa-bars','uri' => 'admin::menu','key' => null,'type' => 0],
+            ['id' => 58,'parent_id' => 5,'sort' => 5,'title' => 'admin.menu_titles.cache_manager','icon' => 'fab fa-tripadvisor','uri' => 'admin::cache_config','key' => null,'type' => 0],
+
+            ['id' => 36,'parent_id' => 28,'sort' => 2,'title' => 'admin.menu_titles.webhook','icon' => 'fab fa-diaspora','uri' => 'admin::config/webhook','key' => null,'type' => 0],
+            ['id' => 50,'parent_id' => 28,'sort' => 0,'title' => 'admin.menu_titles.operation_log','icon' => 'fas fa-history','uri' => 'admin::log','key' => null,'type' => 0],
+
+            ['id' => 46,'parent_id' => 38,'sort' => 0,'title' => 'admin.menu_titles.users','icon' => 'fas fa-users','uri' => 'admin::user','key' => null,'type' => 0],
+            ['id' => 47,'parent_id' => 38,'sort' => 0,'title' => 'admin.menu_titles.roles','icon' => 'fas fa-user-tag','uri' => 'admin::role','key' => null,'type' => 0],
+            ['id' => 48,'parent_id' => 38,'sort' => 0,'title' => 'admin.menu_titles.permission','icon' => 'fas fa-ban','uri' => 'admin::permission','key' => null,'type' => 0],
+
             ['id' => 31,'parent_id' => 30,'sort' => 1,'title' => 'admin.menu_titles.language','icon' => 'fas fa-language','uri' => 'admin::language','key' => null,'type' => 0],
             ['id' => 32,'parent_id' => 30,'sort' => 3,'title' => 'admin.menu_titles.currency','icon' => 'far fa-money-bill-alt','uri' => 'admin::currency','key' => null,'type' => 0],
+            ['id' => 69,'parent_id' => 30,'sort' => 2,'title' => 'admin.menu_titles.language_manager','icon' => 'fa fa-universal-access','uri' => 'admin::language_manager','key' => null,'type' => 0],
+
+            //Cms
+            ['id' => 10,'parent_id' => 7,'sort' => 102,'title' => 'admin.menu_titles.page_manager','icon' => 'fas fa-clone','uri' => 'admin::page','key' => null,'type' => 0],
             ['id' => 33,'parent_id' => 7,'sort' => 101,'title' => 'admin.menu_titles.banner','icon' => 'fas fa-image','uri' => 'admin::banner','key' => null,'type' => 0],
-            ['id' => 34,'parent_id' => 5,'sort' => 5,'title' => 'admin.menu_titles.backup_restore','icon' => 'fas fa-save','uri' => 'admin::backup','key' => null,'type' => 0],
+            ['id' => 52,'parent_id' => 7,'sort' => 103,'title' => 'admin.menu_titles.news','icon' => 'far fa-file-powerpoint','uri' => 'admin::news','key' => null,'type' => 0],
+
+            //Setting
+            ['id' => 26,'parent_id' => 65,'sort' => 1,'title' => 'admin.menu_titles.store_info','icon' => 'fas fa-h-square','uri' => 'admin::store_info','key' => null,'type' => 0],
+            ['id' => 57,'parent_id' => 65,'sort' => 2,'title' => 'admin.menu_titles.store_config','icon' => 'fas fa-cog','uri' => 'admin::store_config','key' => null,'type' => 0],
+            ['id' => 60,'parent_id' => 65,'sort' => 3,'title' => 'admin.menu_titles.store_maintain','icon' => 'fas fa-wrench','uri' => 'admin::store_maintain','key' => null,'type' => 0],
+            ['id' => 67,'parent_id' => 65,'sort' => 5,'title' => 'admin.menu_titles.layout','icon' => 'far fa-object-group','uri' => '','key' => null,'type' => 0],
+            ['id' => 22,'parent_id' => 67,'sort' => 1,'title' => 'admin.menu_titles.block_content','icon' => 'far fa-newspaper','uri' => 'admin::store_block','key' => null,'type' => 0],
+            ['id' => 23,'parent_id' => 67,'sort' => 2,'title' => 'admin.menu_titles.block_link','icon' => 'fab fa-chrome','uri' => 'admin::store_link','key' => null,'type' => 0],
+            ['id' => 44,'parent_id' => 67,'sort' => 3,'title' => 'admin.menu_titles.css','icon' => 'far fa-file-code','uri' => 'admin::store_css','key' => null,'type' => 0],
+
+            //Marketing
+            ['id' => 29,'parent_id' => 25,'sort' => 0,'title' => 'admin.menu_titles.email_template','icon' => 'fas fa-bars','uri' => 'admin::email_template','key' => null,'type' => 0],
+            ['id' => 45,'parent_id' => 25,'sort' => 4,'title' => 'admin.menu_titles.seo_manager','icon' => 'fab fa-battle-net','uri' => '','key' => 'SEO_MANAGER','type' => 0],
+            ['id' => 51,'parent_id' => 45,'sort' => 0,'title' => 'admin.menu_titles.seo_config','icon' => 'fas fa-bars','uri' => 'admin::seo/config','key' => null,'type' => 0],
+
+            //Extension
+            ['id' => 4,'parent_id' => 8,'sort' => 201,'title' => 'admin.menu_titles.template_layout','icon' => 'fab fa-windows','uri' => '','key' => 'TEMPLATE','type' => 0],
             ['id' => 35,'parent_id' => 8,'sort' => 202,'title' => 'admin.menu_titles.plugin','icon' => 'fas fa-puzzle-piece','uri' => '','key' => 'PLUGIN','type' => 0],
-            ['id' => 36,'parent_id' => 28,'sort' => 2,'title' => 'admin.menu_titles.webhook','icon' => 'fab fa-diaspora','uri' => 'admin::config/webhook','key' => null,'type' => 0],
+            ['id' => 42,'parent_id' => 35,'sort' => 100,'title' => 's-cart::admin.menu_titles.plugin_other','icon' => 'far fa-circle','uri' => 'admin::plugin/other','key' => null,'type' => 0],
+            ['id' => 43,'parent_id' => 35,'sort' => 4,'title' => 's-cart::admin.menu_titles.plugin_cms','icon' => 'fab fa-modx','uri' => 'admin::plugin/cms','key' => null,'type' => 0],
+            ['id' => 24,'parent_id' => 4,'sort' => 0,'title' => 'admin.menu_titles.template','icon' => 'fas fa-columns','uri' => 'admin::template','key' => null,'type' => 0],
+
+            //Customer
+            ['id' => 21,'parent_id' => 3,'sort' => 0,'title' => 'admin.menu_titles.subscribe','icon' => 'fas fa-user-circle','uri' => 'admin::subscribe','key' => null,'type' => 0],
+
+        ];
+
+        // If use ecommerce
+        if (config('s-cart.ecommerce_mode', 1)) {
+            $dataMenu = array_merge($dataMenu, $this->dataMenuShop());
+        }
+        return $dataMenu;
+    }
+
+    public function dataMenuShop() {
+        $dataMenu = [
+            ['id' => 6,'parent_id' => 0,'sort' => 10,'title' => 'admin.menu_titles.ADMIN_SHOP','icon' => 'fab fa-shopify','uri' => '','key' => 'ADMIN_SHOP','type' => 0],
+            ['id' => 1,'parent_id' => 6,'sort' => 1,'title' => 'admin.menu_titles.order_manager','icon' => 'fas fa-cart-arrow-down','uri' => '','key' => 'ORDER_MANAGER','type' => 0],
+            ['id' => 2,'parent_id' => 6,'sort' => 2,'title' => 'admin.menu_titles.catalog_mamager','icon' => 'fas fa-folder-open','uri' => '','key' => 'CATALOG_MANAGER','type' => 0],
+            ['id' => 12,'parent_id' => 1,'sort' => 3,'title' => 'admin.menu_titles.order','icon' => 'fas fa-shopping-cart','uri' => 'admin::order','key' => null,'type' => 0],
+            ['id' => 15,'parent_id' => 2,'sort' => 0,'title' => 'admin.menu_titles.product','icon' => 'far fa-file-image','uri' => 'admin::product','key' => null,'type' => 0],
+            ['id' => 16,'parent_id' => 2,'sort' => 0,'title' => 'admin.menu_titles.category','icon' => 'fas fa-folder-open','uri' => 'admin::category','key' => null,'type' => 0],
+            ['id' => 20,'parent_id' => 3,'sort' => 0,'title' => 'admin.menu_titles.customer','icon' => 'fas fa-user','uri' => 'admin::customer','key' => null,'type' => 0],
             ['id' => 37,'parent_id' => 25,'sort' => 5,'title' => 'admin.menu_titles.report_manager','icon' => 'fas fa-chart-pie','uri' => '','key' => 'REPORT_MANAGER','type' => 0],
-            ['id' => 38,'parent_id' => 9,'sort' => 1,'title' => 'admin.menu_titles.user_permission','icon' => 'fas fa-users-cog','uri' => '','key' => 'ADMIN','type' => 0],
             ['id' => 39,'parent_id' => 35,'sort' => 0,'title' => 's-cart::admin.menu_titles.plugin_payment','icon' => 'far fa-money-bill-alt','uri' => 'admin::plugin/payment','key' => null,'type' => 0],
             ['id' => 40,'parent_id' => 35,'sort' => 1,'title' => 's-cart::admin.menu_titles.plugin_shipping','icon' => 'fas fa-ambulance','uri' => 'admin::plugin/shipping','key' => null,'type' => 0],
             ['id' => 41,'parent_id' => 35,'sort' => 2,'title' => 's-cart::admin.menu_titles.plugin_total','icon' => 'fas fa-atom','uri' => 'admin::plugin/total','key' => null,'type' => 0],
             ['id' => 53,'parent_id' => 35,'sort' => 3,'title' => 's-cart::admin.menu_titles.plugin_fee','icon' => 'fas fa-box','uri' => 'admin::plugin/fee','key' => null,'type' => 0],
-            ['id' => 42,'parent_id' => 35,'sort' => 100,'title' => 's-cart::admin.menu_titles.plugin_other','icon' => 'far fa-circle','uri' => 'admin::plugin/other','key' => null,'type' => 0],
-            ['id' => 43,'parent_id' => 35,'sort' => 4,'title' => 's-cart::admin.menu_titles.plugin_cms','icon' => 'fab fa-modx','uri' => 'admin::plugin/cms','key' => null,'type' => 0],
-            ['id' => 44,'parent_id' => 67,'sort' => 3,'title' => 'admin.menu_titles.css','icon' => 'far fa-file-code','uri' => 'admin::store_css','key' => null,'type' => 0],
-            ['id' => 45,'parent_id' => 25,'sort' => 4,'title' => 'admin.menu_titles.seo_manager','icon' => 'fab fa-battle-net','uri' => '','key' => 'SEO_MANAGER','type' => 0],
-            ['id' => 46,'parent_id' => 38,'sort' => 0,'title' => 'admin.menu_titles.users','icon' => 'fas fa-users','uri' => 'admin::user','key' => null,'type' => 0],
-            ['id' => 47,'parent_id' => 38,'sort' => 0,'title' => 'admin.menu_titles.roles','icon' => 'fas fa-user-tag','uri' => 'admin::role','key' => null,'type' => 0],
-            ['id' => 48,'parent_id' => 38,'sort' => 0,'title' => 'admin.menu_titles.permission','icon' => 'fas fa-ban','uri' => 'admin::permission','key' => null,'type' => 0],
-            ['id' => 49,'parent_id' => 5,'sort' => 0,'title' => 'admin.menu_titles.menu','icon' => 'fas fa-bars','uri' => 'admin::menu','key' => null,'type' => 0],
-            ['id' => 50,'parent_id' => 28,'sort' => 0,'title' => 'admin.menu_titles.operation_log','icon' => 'fas fa-history','uri' => 'admin::log','key' => null,'type' => 0],
-            ['id' => 51,'parent_id' => 45,'sort' => 0,'title' => 'admin.menu_titles.seo_config','icon' => 'fas fa-bars','uri' => 'admin::seo/config','key' => null,'type' => 0],
-            ['id' => 52,'parent_id' => 7,'sort' => 103,'title' => 'admin.menu_titles.news','icon' => 'far fa-file-powerpoint','uri' => 'admin::news','key' => null,'type' => 0],
             ['id' => 54,'parent_id' => 37,'sort' => 0,'title' => 'admin.menu_titles.report_product','icon' => 'fas fa-bars','uri' => 'admin::report/product','key' => null,'type' => 0],
-            ['id' => 57,'parent_id' => 65,'sort' => 2,'title' => 'admin.menu_titles.store_config','icon' => 'fas fa-cog','uri' => 'admin::store_config','key' => null,'type' => 0],
-            ['id' => 58,'parent_id' => 5,'sort' => 5,'title' => 'admin.menu_titles.cache_manager','icon' => 'fab fa-tripadvisor','uri' => 'admin::cache_config','key' => null,'type' => 0],
-            ['id' => 59,'parent_id' => 9,'sort' => 7,'title' => 'admin.menu_titles.api_manager','icon' => 'fas fa-plug','uri' => '','key' => 'API_MANAGER','type' => 0],
-            ['id' => 60,'parent_id' => 65,'sort' => 3,'title' => 'admin.menu_titles.store_maintain','icon' => 'fas fa-wrench','uri' => 'admin::store_maintain','key' => null,'type' => 0],
+            ['id' => 27,'parent_id' => 9,'sort' => 3,'title' => 'admin.menu_titles.setting_system','icon' => 'fas fa-tools','uri' => '','key' => 'SETTING_SYSTEM','type' => 0],
+            ['id' => 11,'parent_id' => 27,'sort' => 2,'title' => 'admin.menu_titles.shipping_status','icon' => 'fas fa-truck','uri' => 'admin::shipping_status','key' => null,'type' => 0],
+            ['id' => 13,'parent_id' => 27,'sort' => 1,'title' => 'admin.menu_titles.order_status','icon' => 'fas fa-asterisk','uri' => 'admin::order_status','key' => null,'type' => 0],
+            ['id' => 14,'parent_id' => 27,'sort' => 3,'title' => 'admin.menu_titles.payment_status','icon' => 'fas fa-recycle','uri' => 'admin::payment_status','key' => null,'type' => 0],
+            ['id' => 17,'parent_id' => 27,'sort' => 4,'title' => 'admin.menu_titles.supplier','icon' => 'fas fa-user-secret','uri' => 'admin::supplier','key' => null,'type' => 0],
+            ['id' => 18,'parent_id' => 27,'sort' => 5,'title' => 'admin.menu_titles.brand','icon' => 'fas fa-university','uri' => 'admin::brand','key' => null,'type' => 0],
+            ['id' => 19,'parent_id' => 27,'sort' => 8,'title' => 'admin.menu_titles.attribute_group','icon' => 'fas fa-bars','uri' => 'admin::attribute_group','key' => null,'type' => 0],
             ['id' => 61,'parent_id' => 27,'sort' => 9,'title' => 'admin.menu_titles.tax','icon' => 'far fa-calendar-minus','uri' => 'admin::tax','key' => null,'type' => 0],
             ['id' => 62,'parent_id' => 27,'sort' => 6,'title' => 'admin.menu_titles.weight','icon' => 'fas fa-balance-scale','uri' => 'admin::weight_unit','key' => null,'type' => 0],
             ['id' => 63,'parent_id' => 27,'sort' => 7,'title' => 'admin.menu_titles.length','icon' => 'fas fa-minus','uri' => 'admin::length_unit','key' => null,'type' => 0],
-            ['id' => 65,'parent_id' => 0,'sort' => 250,'title' => 'admin.menu_titles.ADMIN_SHOP_SETTING','icon' => 'fas fa-store-alt','uri' => '','key' => 'ADMIN_SHOP_SETTING','type' => 0],
-            ['id' => 66,'parent_id' => 59,'sort' => 1,'title' => 'admin.menu_titles.api_config','icon' => 'fas fa fa-cog','uri' => 'admin::api_connection','key' => null,'type' => 0],
-            ['id' => 67,'parent_id' => 65,'sort' => 5,'title' => 'admin.menu_titles.layout','icon' => 'far fa-object-group','uri' => '','key' => null,'type' => 0],
             ['id' => 68,'parent_id' => 27,'sort' => 5,'title' => 'admin.menu_titles.custom_field','icon' => 'fa fa-american-sign-language-interpreting','uri' => 'admin::custom_field','key' => null,'type' => 0],
-            ['id' => 69,'parent_id' => 30,'sort' => 2,'title' => 'admin.menu_titles.language_manager','icon' => 'fa fa-universal-access','uri' => 'admin::language_manager','key' => null,'type' => 0],
-            ['id' => 70,'parent_id' => 9,'sort' => 6,'title' => 'admin.menu_titles.security','icon' => 'fab fa-shirtsinbulk','uri' => '','key' => 'ADMIN_SECURITY','type' => 0],
+            ['id' => 59,'parent_id' => 9,'sort' => 7,'title' => 'admin.menu_titles.api_manager','icon' => 'fas fa-plug','uri' => '','key' => 'API_MANAGER','type' => 0],
+            ['id' => 66,'parent_id' => 59,'sort' => 1,'title' => 'admin.menu_titles.api_config','icon' => 'fas fa fa-cog','uri' => 'admin::api_connection','key' => null,'type' => 0],
         ];
         return $dataMenu;
     }
@@ -557,54 +585,26 @@ trait DataDefaultSeederTrait
 
     public function updateDataVersion() {
         //Ony use updated v7.1 -> v7.2
-
-        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'shop_link_group')) {
-            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create(
-                SC_DB_PREFIX.'shop_link_group',
-                function (\Illuminate\Database\Schema\Blueprint $table) {
-                    $table->increments('id');
-                    $table->string('code', 100)->unique();
-                    $table->string('name', 255);
-                    $table->timestamps();
-
-                }
-            );
-        }
-
-        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable('personal_access_tokens')) {
-            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create('personal_access_tokens', 
-                function (\Illuminate\Database\Schema\Blueprint $table) {
-                    $table->id();
-                    $table->uuidMorphs('tokenable');
-                    $table->string('name');
-                    $table->string('token', 64)->unique();
-                    $table->text('abilities')->nullable();
-                    $table->timestamp('last_used_at')->nullable();
-                    $table->timestamp('expires_at')->nullable();
-                    $table->timestamps();
-            });
-        }
-
-        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'admin_password_resets')) {
-            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create(
-                SC_DB_PREFIX.'admin_password_resets',
-                function (\Illuminate\Database\Schema\Blueprint $table) {
-                    $table->string('email', 150);
-                    $table->string('token', 255);
-                    $table->timestamp('created_at', $precision = 0);
-                    $table->index('email');
-                }
-            );
-        }
-
-        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'shop_link', 'type') 
-        AND !\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'shop_link', 'collection_id')) {
-            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'shop_link',
-                function (\Illuminate\Database\Schema\Blueprint $table) {
-                $table->string('type', 100)->nullable()->comment("Distinguish between Link and Collection. \nValue collection|null");
-                $table->string('collection_id', 100)->nullable()->comment("Collection\'s ID");
-            });
-        }
+        // if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'admin_password_resets')) {
+        //     \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create(
+        //         SC_DB_PREFIX.'admin_password_resets',
+        //         function (\Illuminate\Database\Schema\Blueprint $table) {
+        //             $table->string('email', 150);
+        //             $table->string('token', 255);
+        //             $table->timestamp('created_at', $precision = 0);
+        //             $table->index('email');
+        //         }
+        //     );
+        // }
+        
+        // if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'shop_link', 'type') 
+        // AND !\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'shop_link', 'collection_id')) {
+        //     \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'shop_link',
+        //         function (\Illuminate\Database\Schema\Blueprint $table) {
+        //         $table->string('type', 100)->nullable()->comment("Distinguish between Link and Collection. \nValue collection|null");
+        //         $table->string('collection_id', 100)->nullable()->comment("Collection\'s ID");
+        //     });
+        // }
         //End update
     }
 

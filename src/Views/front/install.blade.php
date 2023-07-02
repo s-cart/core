@@ -102,7 +102,7 @@
     </ul>
 @endif
     </div>
-    <div id="signupbox"  class="mainbox col-md-5  col-sm-8">
+    <div id="signupbox"  class="mainbox col-md-6  col-sm-8">
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h1>{{ $title }}</h1>
@@ -195,13 +195,19 @@
                         <div id="div_admin_email" class="form-group info-install required">
                             <label for="admin_email"  required class="control-label col-md-4  requiredField"> {{ trans('install.admin_email') }} </label>
                             <div class="controls col-md-8">
-                                <input class="input-md  textInput form-control" id="admin_email"  name="admin_email" placeholder="{{ trans('install.admin_email') }}" style="margin-bottom: 10px" type="email" />
+                                <input class="input-md  textInput form-control" value="admin@example.com" id="admin_email"  name="admin_email" placeholder="{{ trans('install.admin_email') }}" style="margin-bottom: 10px" type="email" />
                             </div>
                         </div>
                         <div class="form-group info-install required">
                             <div class="controls col-md-offset-4 col-md-8 ">
                                 <input class="input-md" id="exclude_sample" name="exclude_sample"  style="margin-bottom: 10px" type="checkbox" />
                                          {!! trans('install.exclude_sample') !!}
+                            </div>
+                        </div>
+                        <div class="form-group info-install required">
+                            <div class="controls col-md-offset-4 col-md-8 ">
+                                <input class="input-md" id="only_cms" name="only_cms"  style="margin-bottom: 10px" type="checkbox" />
+                                         {!! trans('install.only_cms') !!}
                             </div>
                         </div>
                         <div class="form-group info-install required">
@@ -255,6 +261,7 @@ $('#submit-install').click(function(event) {
                     database_prefix:$('#database_prefix').val(),
                     admin_email:$('#admin_email').val(),
                     exclude_sample:($('#exclude_sample').is(':checked') ? 1 :0),
+                    only_cms:($('#only_cms').is(':checked') ? 1 :0),
                     admin_url:$('#admin_url').val(),
                     website_title:$('#website_title').val(),
                     database_password:$('#database_password').val(),

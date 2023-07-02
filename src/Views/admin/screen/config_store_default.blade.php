@@ -3,22 +3,22 @@
       <div class="card card-primary card-outline card-outline-tabs">
         <div class="card-header p-0 border-bottom-0">
           <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
+            @if ((admin()->user()->isAdministrator() ||  admin()->user()->isViewAll()) && config('s-cart.ecommerce_mode'))
             <li class="nav-item">
               <a class="nav-link active" id="tab-store-order-tab" data-toggle="pill" href="#tab-store-order" role="tab" aria-controls="tab-store-order" aria-selected="false">{{ sc_language_render('store.admin.config_order') }}</a>
             </li>
             @endif
-            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
+            @if ((admin()->user()->isAdministrator() ||  admin()->user()->isViewAll()) && config('s-cart.ecommerce_mode'))
             <li class="nav-item">
               <a class="nav-link" id="tab-store-customer-tab" data-toggle="pill" href="#tab-store-customer" role="tab" aria-controls="tab-store-customer" aria-selected="false">{{ sc_language_render('store.admin.config_customer') }}</a>
             </li>
             @endif
-            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
+            @if ((admin()->user()->isAdministrator() ||  admin()->user()->isViewAll()) && config('s-cart.ecommerce_mode'))
             <li class="nav-item">
               <a class="nav-link" id="tab-store-product-tab" data-toggle="pill" href="#tab-store-product" role="tab" aria-controls="tab-store-product" aria-selected="false">{{ sc_language_render('store.admin.config_product') }}</a>
             </li>
             @endif
-            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
+            @if ((admin()->user()->isAdministrator() ||  admin()->user()->isViewAll()) && config('s-cart.ecommerce_mode'))
             <li class="nav-item">
               <a class="nav-link" id="tab-store-email-tab" data-toggle="pill" href="#tab-store-email" role="tab" aria-controls="tab-store-email" aria-selected="false">{{ sc_language_render('store.admin.config_email') }}</a>
             </li>
@@ -33,7 +33,7 @@
               <a class="nav-link" id="tab-store-display-tab" data-toggle="pill" href="#tab-store-display" role="tab" aria-controls="tab-store-display" aria-selected="false">{{ sc_language_render('store.admin.config_display') }}</a>
             </li>
 
-            @if (count($configLayout))
+            @if (count($configLayout) && config('s-cart.ecommerce_mode'))
             <li class="nav-item">
               <a class="nav-link" id="tab-store-layout-tab" data-toggle="pill" href="#tab-store-layout" role="tab" aria-controls="tab-store-layout" aria-selected="false">{{ sc_language_render('store.admin.config_layout') }}</a>
             </li>
@@ -50,7 +50,7 @@
         <div class="card-body">
           <div class="tab-content" id="custom-tabs-four-tabContent">
             {{-- Tab order --}}
-            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
+            @if ((admin()->user()->isAdministrator() ||  admin()->user()->isViewAll()) && config('s-cart.ecommerce_mode'))
             <div class="tab-pane fade  fade active show" id="tab-store-order" role="tabpanel" aria-labelledby="store-order">
               @include($templatePathAdmin.'screen.config_store.config_order')
             </div>
@@ -58,7 +58,7 @@
             {{-- //End tab order --}}
 
             {{-- Tab customer --}}
-            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
+            @if ((admin()->user()->isAdministrator() ||  admin()->user()->isViewAll()) && config('s-cart.ecommerce_mode'))
             <div class="tab-pane fade" id="tab-store-customer" role="tabpanel" aria-labelledby="tab-store-customer-tab">
               @include($templatePathAdmin.'screen.config_store.config_customer')
             </div>
@@ -66,14 +66,14 @@
             {{-- //Tab customer --}}
 
             {{-- Tab product --}}
-            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
+            @if ((admin()->user()->isAdministrator() ||  admin()->user()->isViewAll()) && config('s-cart.ecommerce_mode'))
             <div class="tab-pane fade" id="tab-store-product" role="tabpanel" aria-labelledby="tab-store-product-tab">
               @include($templatePathAdmin.'screen.config_store.config_product')
             </div>
             @endif
             
             {{-- //Tab product --}}
-            @if (admin()->user()->isAdministrator() ||  admin()->user()->isViewAll())
+            @if ((admin()->user()->isAdministrator() ||  admin()->user()->isViewAll()) && config('s-cart.ecommerce_mode'))
             {{-- Tab email config --}}
             <div class="tab-pane fade" id="tab-store-email" role="tabpanel" aria-labelledby="tab-store-email-tab">
               @include($templatePathAdmin.'screen.config_store.config_mail')
@@ -93,7 +93,7 @@
             </div>
             {{-- // captcha config --}}
 
-            @if (count($configLayout))
+            @if (count($configLayout) && config('s-cart.ecommerce_mode'))
             {{-- Tab layout config --}}
             <div class="tab-pane fade" id="tab-store-layout" role="tabpanel" aria-labelledby="tab-store-layout-tab">
               @include($templatePathAdmin.'screen.config_store.config_layout')

@@ -48,6 +48,10 @@ if (request()->method() == 'POST' && request()->ajax()) {
             $getEnv = str_replace('sc_admin', $admin_url, $getEnv);
             $getEnv = str_replace('Asia/ho_chi_minh', $timezone_default, $getEnv);
 
+            if (request('only_cms')) {
+                $getEnv = str_replace('SC_ECOMMERCE_MODE=1', 'SC_ECOMMERCE_MODE=0', $getEnv);
+            }
+
             $env = fopen(base_path() . "/.env", "w") or die(json_encode(['error' => 1, 'msg' => trans('install.env.error_open')]));
             fwrite($env, $getEnv);
             fclose($env);
@@ -64,6 +68,7 @@ if (request()->method() == 'POST' && request()->ajax()) {
             'admin_email' => request('admin_email'),
             'admin_url' => $admin_url,
             'exclude_sample' => request('exclude_sample'),
+            'only_cms' => request('only_cms'),
             'website_title' => request('website_title'),
         ];
             echo json_encode(['error' => 0, 'msg' => trans('install.env.process_sucess'), 'infoInstall' => $infoInstall]);
@@ -92,7 +97,8 @@ if (request()->method() == 'POST' && request()->ajax()) {
         case 'step2-2':
             session(['infoInstall'=> request('infoInstall')]);
             try {
-                Artisan::call('migrate --path=/database/migrations/00_00_00_step2_create_tables_shop.php');
+                Artisan::call('migrate --path=/database/migrations/00_00_00_step2.1_create_tables_cms.php');
+                Artisan::call('migrate --path=/database/migrations/00_00_00_step2.2_create_tables_shop.php');
             } catch(\Throwable $e) {
                 echo json_encode([
                     'error' => '1',
@@ -165,10 +171,19 @@ if (request()->method() == 'POST' && request()->ajax()) {
                         try {
                             Artisan::call('db:seed', 
                                 [
-                                    '--class' => 'DataSampleSeeder',
+                                    '--class' => 'DataSampleCmsSeeder',
                                     '--force' => true
                                 ]
                             );
+                            if (!(request('infoInstall')['only_cms'] ?? 0)) {
+
+                                Artisan::call('db:seed', 
+                                [
+                                    '--class' => 'DataSampleShopSeeder',
+                                    '--force' => true
+                                    ]
+                                );
+                            }
                         } catch(\Throwable $e) {
                             echo json_encode([
                                 'error' => '1',

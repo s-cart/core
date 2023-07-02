@@ -5,7 +5,7 @@
   <div class="card-body table-responsive">
    <table class="table table-hover box-body text-wrap table-bordered">
      <tbody>
-
+      @if (config('s-cart.ecommerce_mode'))
       <tr>
         <td>{{ sc_language_render('admin.env.SUFFIX_URL') }}</td>
         <td><a href="#" class="updateInfo editable editable-click" data-name="SUFFIX_URL" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.SUFFIX_URL') }}" data-value="{{ sc_config('SUFFIX_URL', $storeId) }}" data-original-title="" title=""></a></td>
@@ -37,26 +37,6 @@
       </tr>
 
       <tr>
-        <td>{{ sc_language_render('admin.env.PREFIX_SEARCH') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_SEARCH" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_SEARCH') }}" data-value="{{ sc_config('PREFIX_SEARCH', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
-      </tr>
-
-      <tr>
-        <td>{{ sc_language_render('admin.env.PREFIX_CONTACT') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CONTACT" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CONTACT') }}" data-value="{{ sc_config('PREFIX_CONTACT', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
-      </tr>
-
-      <tr>
-        <td>{{ sc_language_render('admin.env.PREFIX_ABOUT') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_ABOUT" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_ABOUT') }}" data-value="{{ sc_config('PREFIX_ABOUT', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
-      </tr>
-
-      <tr>
-        <td>{{ sc_language_render('admin.env.PREFIX_NEWS') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_NEWS" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_NEWS') }}" data-value="{{ sc_config('PREFIX_NEWS', $storeId) }}" data-original-title="" title=""></a>/name-of-blog-news{{ sc_config('SUFFIX_URL', $storeId) }}</td>
-      </tr>
-
-      <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_MEMBER') }}</td>
         <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_MEMBER" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_MEMBER') }}" data-value="{{ sc_config('PREFIX_MEMBER', $storeId) }}" data-original-title="" title=""></a>/page-name-member{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr>         
@@ -74,11 +54,6 @@
       <tr>
         <td>{{ sc_language_render('admin.env.PREFIX_MEMBER_CHANGE_INFO') }}</td>
         <td>{{ url('/') }}/{{ sc_config('PREFIX_MEMBER', $storeId) }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_MEMBER_CHANGE_INFO" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_MEMBER_CHANGE_INFO') }}" data-value="{{ sc_config('PREFIX_MEMBER_CHANGE_INFO', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
-      </tr>
-
-      <tr>
-        <td>{{ sc_language_render('admin.env.PREFIX_CMS_CATEGORY') }}</td>
-        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CMS_CATEGORY" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CMS_CATEGORY') }}" data-value="{{ sc_config('PREFIX_CMS_CATEGORY', $storeId) }}" data-original-title="" title=""></a>/name-of-cms-categoyr</td>
       </tr>
 
       <tr>
@@ -105,6 +80,33 @@
         <td>{{ sc_language_render('admin.env.PREFIX_ORDER_SUCCESS') }}</td>
         <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_ORDER_SUCCESS" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_ORDER_SUCCESS') }}" data-value="{{ sc_config('PREFIX_ORDER_SUCCESS', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
       </tr> 
+
+      @endif
+
+      <tr>
+        <td>{{ sc_language_render('admin.env.PREFIX_SEARCH') }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_SEARCH" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_SEARCH') }}" data-value="{{ sc_config('PREFIX_SEARCH', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+      </tr>
+
+      <tr>
+        <td>{{ sc_language_render('admin.env.PREFIX_CONTACT') }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CONTACT" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CONTACT') }}" data-value="{{ sc_config('PREFIX_CONTACT', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+      </tr>
+
+      <tr>
+        <td>{{ sc_language_render('admin.env.PREFIX_ABOUT') }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_ABOUT" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_ABOUT') }}" data-value="{{ sc_config('PREFIX_ABOUT', $storeId) }}" data-original-title="" title=""></a>{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+      </tr>
+
+      <tr>
+        <td>{{ sc_language_render('admin.env.PREFIX_NEWS') }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_NEWS" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_NEWS') }}" data-value="{{ sc_config('PREFIX_NEWS', $storeId) }}" data-original-title="" title=""></a>/name-of-blog-news{{ sc_config('SUFFIX_URL', $storeId) }}</td>
+      </tr>
+
+      <tr>
+        <td>{{ sc_language_render('admin.env.PREFIX_CMS_CATEGORY') }}</td>
+        <td>{{ url('/') }}/<a href="#" class="editable-required editable editable-click" data-name="PREFIX_CMS_CATEGORY" data-type="text" data-pk="" data-source="" data-url="{{ $urlUpdateConfig }}" data-title="{{ sc_language_render('admin.env.PREFIX_CMS_CATEGORY') }}" data-value="{{ sc_config('PREFIX_CMS_CATEGORY', $storeId) }}" data-original-title="" title=""></a>/name-of-cms-categoyr</td>
+      </tr>
 
      </tbody>
    </table>
