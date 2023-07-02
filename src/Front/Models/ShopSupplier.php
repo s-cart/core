@@ -101,16 +101,6 @@ class ShopSupplier extends Model
         $query = $this->where('status', 1)
         ->where('store_id', config('app.storeId'));
 
-        /**
-        Note: sc_moreWhere will remove in the next version
-         */
-        if (count($this->sc_moreWhere)) {
-            foreach ($this->sc_moreWhere as $key => $where) {
-                if (count($where)) {
-                    $query = $query->where($where[0], $where[1], $where[2]);
-                }
-            }
-        }
         $query = $this->processMoreQuery($query);
         
 

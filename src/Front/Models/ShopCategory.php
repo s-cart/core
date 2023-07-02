@@ -247,16 +247,6 @@ class ShopCategory extends Model
             $query = $query->where($this->getTable().'.top', $this->sc_top);
         }
 
-        /**
-        Note: sc_moreWhere will remove in the next version
-         */
-        if (count($this->sc_moreWhere)) {
-            foreach ($this->sc_moreWhere as $key => $where) {
-                if (count($where)) {
-                    $query = $query->where($where[0], $where[1], $where[2]);
-                }
-            }
-        }
         $query = $this->processMoreQuery($query);
         
 

@@ -797,16 +797,7 @@ class ShopProduct extends Model
         if (count($this->sc_supplier)) {
             $query = $query->whereIn($this->getTable().'.supplier_id', $this->sc_supplier);
         }
-        /**
-        Note: sc_moreWhere will remove in the next version
-         */
-        if (count($this->sc_moreWhere)) {
-            foreach ($this->sc_moreWhere as $key => $where) {
-                if (count($where)) {
-                    $query = $query->where($where[0], $where[1], $where[2]);
-                }
-            }
-        }
+
         $query = $this->processMoreQuery($query);
         
 

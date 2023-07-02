@@ -214,17 +214,7 @@ class ShopBanner extends Model
         if ($this->sc_type !== 'all') {
             $query = $query->where('type', $this->sc_type);
         }
-        
-        /**
-        Note: sc_moreWhere will remove in the next version
-         */
-        if (count($this->sc_moreWhere)) {
-            foreach ($this->sc_moreWhere as $key => $where) {
-                if (count($where)) {
-                    $query = $query->where($where[0], $where[1], $where[2]);
-                }
-            }
-        }
+
         $query = $this->processMoreQuery($query);
 
         if ($this->sc_random) {

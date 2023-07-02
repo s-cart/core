@@ -10,7 +10,6 @@ trait ModelTrait
     protected $sc_limit = 'all'; // all or interger
     protected $sc_paginate = 0; // 0: dont paginate,
     protected $sc_sort = [];
-    protected $sc_moreWhere = []; // more where
     protected $sc_moreQuery = []; // more query
     protected $sc_random = 0; // 0: no random, 1: random
     protected $sc_keyword = ''; // search search product
@@ -39,29 +38,6 @@ trait ModelTrait
     {
         if (is_array($sort)) {
             $this->sc_sort[] = $sort;
-        }
-        return $this;
-    }
-
-    /**
-     * Add more where
-     * @param   [array]  $moreWhere
-     * NOTE: Will remove in the next versions
-     */
-    public function setMoreWhere(array $moreWhere)
-    {
-        if (is_array($moreWhere)) {
-            $where = [];
-            if (count($moreWhere) == 2) {
-                $where[0] = $moreWhere[0];
-                $where[1] = '=';
-                $where[2] = $moreWhere[1];
-            } elseif (count($moreWhere) == 3) {
-                $where = $moreWhere;
-            }
-            if (count($where) == 3) {
-                $this->sc_moreWhere[] = $where;
-            }
         }
         return $this;
     }
