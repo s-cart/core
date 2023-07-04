@@ -21,7 +21,6 @@ class AdminEmailTemplateController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_email_template.delete'),
             'removeList'    => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
-            'buttonSort'    => 0, // 1 - Enable button sort
             'css'           => '',
             'js'            => '',
         ];
@@ -65,7 +64,6 @@ class AdminEmailTemplateController extends RootAdminController
                            <i class="fa fa-plus" title="'.sc_language_render('action.add').'"></i>
                            </a>';
         //=menuRight
-        $data['urlSort'] = sc_route_admin('admin_email_template.index', request()->except(['_token', '_pjax', 'sort_order']));
 
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);

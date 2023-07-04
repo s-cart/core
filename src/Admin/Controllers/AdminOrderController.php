@@ -52,7 +52,6 @@ class AdminOrderController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_order.delete'),
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
-            'buttonSort'    => 1, // 1 - Enable button sort
             'css'           => '',
             'js'            => '',
         ];
@@ -166,8 +165,6 @@ class AdminOrderController extends RootAdminController
         foreach ($arrSort as $key => $sort) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $sort . '</option>';
         }
-        $data['optionSort'] = $optionSort;
-        $data['urlSort'] = sc_route_admin('admin_order.index', request()->except(['_token', '_pjax', 'sort_order']));
         //=menuSort
 
         //menuSearch
@@ -178,23 +175,36 @@ class AdminOrderController extends RootAdminController
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_order.index') . '" id="button_search">
                     <div class="input-group float-left">
-                        <div class="col-md-3">
+
+                        <div style="width:130px">
+                            <div class="form-group">
+                                <label>'.sc_language_render('action.sort').':</label>
+                                <div class="input-group">
+                                    <select class="form-control rounded-0 select2" name="sort_order" id="sort_order">
+                                    '.$optionSort.'
+                                    </select>
+                                </div>
+                            </div>
+                        </div> &nbsp;
+
+
+                        <div style="width:130px">
                             <div class="form-group">
                                 <label>'.sc_language_render('action.from').':</label>
                                 <div class="input-group">
                                 <input type="text" name="from_to" id="from_to" class="form-control input-sm date_time rounded-0" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" /> 
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
+                        </div> &nbsp;
+                        <div style="width:130px">
                             <div class="form-group">
                                 <label>'.sc_language_render('action.to').':</label>
                                 <div class="input-group">
                                 <input type="text" name="end_to" id="end_to" class="form-control input-sm date_time rounded-0" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" /> 
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
+                        </div> &nbsp;
+                        <div style="width:150px">
                             <div class="form-group">
                                 <label>'.sc_language_render('order.admin.status').':</label>
                                 <div class="input-group">
@@ -204,8 +214,8 @@ class AdminOrderController extends RootAdminController
                                 </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
+                        </div> &nbsp;
+                        <div style="width:150px">
                             <div class="form-group">
                                 <label>'.sc_language_render('order.admin.search_email').':</label>
                                 <div class="input-group">

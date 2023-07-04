@@ -21,7 +21,6 @@ class AdminLogController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_log.delete'),
             'removeList' => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
-            'buttonSort' => 1, // 1 - Enable button sort
             'css' => '',
             'js' => '',
         ];
@@ -44,6 +43,7 @@ class AdminLogController extends RootAdminController
             'action' => sc_language_render('action.title'),
         ];
 
+        $keyword     = sc_clean(request('keyword') ?? '');
         $sort_order = sc_clean(request('sort_order') ?? 'id_desc');
         $arrSort = [
             'id__desc' => sc_language_render('filter_sort.id_desc'),
@@ -61,7 +61,12 @@ class AdminLogController extends RootAdminController
 
         ];
         $obj = new AdminLog;
-
+        if ($keyword) {
+            $obj = $obj->where(function ($query) use($keyword){
+                $query->where('ip', $keyword)
+                      ->orWhere('path', $keyword);
+            });
+        }
         if ($sort_order && array_key_exists($sort_order, $arrSort)) {
             $field = explode('__', $sort_order)[0];
             $sort_field = explode('__', $sort_order)[1];
@@ -98,9 +103,22 @@ class AdminLogController extends RootAdminController
         foreach ($arrSort as $key => $status) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $status . '</option>';
         }
-        $data['optionSort'] = $optionSort;
-        $data['urlSort'] = sc_route_admin('admin_log.index', request()->except(['_token', '_pjax', 'sort_order']));
         //=menuSort
+
+        //topMenuRight
+        $data['topMenuRight'][] ='
+                <form action="' . sc_route_admin('admin_log.index') . '" id="button_search">
+                <div class="input-group input-group float-left">
+                    <select class="form-control rounded-0 select2" name="sort_order" id="sort_order">
+                    '.$optionSort.'
+                    </select> &nbsp;
+                    <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="Search: IP,Path,Name" value="' . $keyword . '">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                </form>';
+        //=topMenuRight
 
         return view($this->templatePathAdmin.'screen.list')
             ->with($data);

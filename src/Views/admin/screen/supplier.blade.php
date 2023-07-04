@@ -295,13 +295,6 @@
         $.pjax.defaults.timeout = 2000; // time in milliseconds
       }
     });
-
-    @if ($buttonSort)
-      $('#button_sort').click(function(event) {
-        var url = '{{ $urlSort??'' }}?sort_shipping='+$('#shipping_sort option:selected').val();
-        $.pjax({url: url, container: '#pjax-container'})
-      });
-    @endif
     
   </script>
     {{-- //End pjax --}}

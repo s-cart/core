@@ -23,7 +23,6 @@ class AdminSupplierController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_supplier.delete'),
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
-            'buttonSort' => 0, // 1 - Enable button sort
             'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_supplier.create'),
@@ -142,7 +141,6 @@ class AdminSupplierController extends RootAdminController
         'urlDeleteItem' => sc_route_admin('admin_supplier.delete'),
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
-        'buttonSort' => 0, // 1 - Enable button sort
         'css' => '',
         'js' => '',
         'url_action' => sc_route_admin('admin_supplier.edit', ['id' => $supplier['id']]),

@@ -27,7 +27,6 @@ class AdminCategoryController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_category.delete'),
             'removeList'    => 1, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
-            'buttonSort'    => 1, // 1 - Enable button sort
             'css'           => '',
             'js'            => '',
         ];
@@ -125,15 +124,15 @@ class AdminCategoryController extends RootAdminController
         foreach ($arrSort as $key => $sort) {
             $optionSort .= '<option  ' . (($sort_order == $key) ? "selected" : "") . ' value="' . $key . '">' . $sort . '</option>';
         }
-
-        $data['urlSort'] = sc_route_admin('admin_category.index', request()->except(['_token', '_pjax', 'sort_order']));
-        $data['optionSort'] = $optionSort;
         //=menuSort
 
         //menuSearch
         $data['topMenuRight'][] = '
                 <form action="' . sc_route_admin('admin_category.index') . '" id="button_search">
                 <div class="input-group input-group" style="width: 350px;">
+                    <select class="form-control rounded-0 select2" name="sort_order" id="sort_order">
+                    '.$optionSort.'
+                    </select> &nbsp;
                     <input type="text" name="keyword" class="form-control rounded-0 float-right" placeholder="' . sc_language_render('search.placeholder') . '" value="' . $keyword . '">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>

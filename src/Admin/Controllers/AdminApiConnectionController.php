@@ -21,7 +21,6 @@ class AdminApiConnectionController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_api_connection.delete'),
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
-            'buttonSort' => 0, // 1 - Enable button sort
             'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_api_connection.create'),
@@ -66,9 +65,6 @@ class AdminApiConnectionController extends RootAdminController
         $data['pagination'] = $dataTmp->appends(request()->except(['_token', '_pjax']))->links($this->templatePathAdmin.'component.pagination');
         $data['resultItems'] = sc_language_render('admin.result_item', ['item_from' => $dataTmp->firstItem(), 'item_to' => $dataTmp->lastItem(), 'total' =>  $dataTmp->total()]);
     
-        $optionSort = '';
-        $data['urlSort'] = sc_route_admin('admin_api_connection.index', request()->except(['_token', '_pjax', 'sort_order']));
-        $data['optionSort'] = $optionSort;
         return view($this->templatePathAdmin.'screen.api_connection')
             ->with($data);
     }

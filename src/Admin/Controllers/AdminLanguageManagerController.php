@@ -46,7 +46,6 @@ class AdminLanguageManagerController extends RootAdminController
             'icon' => 'fa fa-indent',
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
-            'buttonSort' => 0, // 1 - Enable button sort
             'css' => '',
             'js' => '',
             'layout' => 'index',

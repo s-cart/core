@@ -27,7 +27,6 @@ class AdminAttributeGroupController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_attribute_group.delete'),
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
-            'buttonSort' => 0, // 1 - Enable button sort
             'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_attribute_group.create'),
@@ -115,7 +114,6 @@ class AdminAttributeGroupController extends RootAdminController
         'urlDeleteItem' => sc_route_admin('admin_attribute_group.delete'),
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
-        'buttonSort' => 0, // 1 - Enable button sort
         'css' => '',
         'js' => '',
         'url_action' => sc_route_admin('admin_attribute_group.edit', ['id' => $attribute_group['id']]),

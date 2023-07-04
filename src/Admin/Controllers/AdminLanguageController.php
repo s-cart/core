@@ -22,7 +22,6 @@ class AdminLanguageController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_language.delete'),
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 0, // 1 - Enable button refresh
-            'buttonSort' => 0, // 1 - Enable button sort
             'css' => '',
             'js' => '',
             'url_action' => sc_route_admin('admin_language.create'),
@@ -121,7 +120,6 @@ class AdminLanguageController extends RootAdminController
         'urlDeleteItem' => sc_route_admin('admin_language.delete'),
         'removeList' => 0, // 1 - Enable function delete list item
         'buttonRefresh' => 0, // 1 - Enable button refresh
-        'buttonSort' => 0, // 1 - Enable button sort
         'css' => '',
         'js' => '',
         'url_action' => sc_route_admin('admin_language.edit', ['id' => $language['id']]),

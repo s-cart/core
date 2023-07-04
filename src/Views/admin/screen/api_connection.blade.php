@@ -158,7 +158,7 @@
           </div>
     
           <div class="box-body table-responsive">
-            <section id="pjax-container" class="table-list">
+            <section class="table-list">
                 <div class="card-body table-responsivep-0" >
                   <table class="table table-hover box-body text-wrap table-bordered">
                       <thead>

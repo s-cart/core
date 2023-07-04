@@ -149,12 +149,6 @@
       }
     });
 
-    @if ($buttonSort)
-      $('#button_sort').click(function(event) {
-        var url = '{{ $urlSort??'' }}?sort_order='+$('#order_sort option:selected').val();
-        $.pjax({url: url, container: '#pjax-container'})
-      });
-    @endif
 
   </script>
     {{-- //End pjax --}}

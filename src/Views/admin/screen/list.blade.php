@@ -81,21 +81,6 @@
             </div>
           @endif
 
-          @if (!empty($buttonSort))
-          <div class="menu-left">
-            <div class="input-group float-right ml-1" style="width: 350px;">
-              <div class="btn-group">
-                <select class="form-control rounded-0 float-right" id="order_sort">
-                {!! $optionSort??'' !!}
-                </select>
-              </div>
-              <div class="input-group-append">
-                  <button id="button_sort" type="submit" class="btn btn-primary"><i class="fas fa-sort-amount-down-alt"></i></button>
-              </div>
-            </div>
-          </div>
-          @endif
-
           @if (!empty($menuLeft) && count($menuLeft))
             @foreach ($menuLeft as $item)
                 <div class="menu-left">
@@ -120,10 +105,6 @@
 
       <!-- /.card-header -->
       <div class="card-body p-0" id="pjax-container">
-        @php
-            $urlSort = $urlSort ?? '';
-        @endphp
-        <div id="url-sort" data-urlsort="{!! strpos($urlSort, "?")?$urlSort."&":$urlSort."?" !!}"  style="display: none;"></div>
         <div class="table-responsive">
         <table class="table table-hover box-body text-wrap table-bordered">
           <thead>
@@ -229,13 +210,6 @@
         $.pjax.defaults.timeout = 2000; // time in milliseconds
       }
     });
-
-    @if ($buttonSort)
-      $('#button_sort').click(function(event) {
-        var url = $('#url-sort').data('urlsort')+'sort_order='+$('#order_sort option:selected').val();
-        $.pjax({url: url, container: '#pjax-container'})
-      });
-    @endif
 
   </script>
     {{-- //End pjax --}}

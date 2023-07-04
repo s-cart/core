@@ -36,7 +36,6 @@ class AdminStoreLinkController extends RootAdminController
             'urlDeleteItem' => sc_route_admin('admin_store_link.delete'),
             'removeList' => 0, // 1 - Enable function delete list item
             'buttonRefresh' => 1, // 1 - Enable button refresh
-            'buttonSort' => 0, // 1 - Enable button sort
             'css' => '',
             'js' => '',
         ];
