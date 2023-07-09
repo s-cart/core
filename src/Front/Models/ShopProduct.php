@@ -804,7 +804,7 @@ class ShopProduct extends Model
         if ($this->sc_random) {
             $query = $query->inRandomOrder();
         } else {
-            $ckeckSort = false;
+            $checkSort = false;
             $ckeckId = false;
             if (is_array($this->sc_sort) && count($this->sc_sort)) {
                 foreach ($this->sc_sort as  $rowSort) {
@@ -812,7 +812,7 @@ class ShopProduct extends Model
                         if ($rowSort[0] == 'sort') {
                             //Process sort with sort value
                             $query = $query->orderBy($this->getTable().'.sort', $rowSort[1]);
-                            $ckeckSort = true;
+                            $checkSort = true;
                         } elseif ($rowSort[0] == 'id') {
                             //Process sort with product id
                             $query = $query->orderBy($this->getTable().'.id', $rowSort[1]);
@@ -824,7 +824,7 @@ class ShopProduct extends Model
                 }
             }
             //Use field "sort" if haven't above
-            if (!$ckeckSort) {
+            if (empty($checkSort)) {
                 $query = $query->orderBy($this->getTable().'.sort', 'asc');
             }
             //Default, will sort id
