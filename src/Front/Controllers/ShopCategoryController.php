@@ -172,6 +172,7 @@ class ShopCategoryController extends RootFrontController
                     'description' => $category->description,
                     'keyword'     => $category->keyword,
                     'products'    => $products,
+                    'category'    => $category,
                     'subCategory' => $subCategory,
                     'layout_page' => 'shop_product_list',
                     'og_image'    => sc_file($category->getImage()),
