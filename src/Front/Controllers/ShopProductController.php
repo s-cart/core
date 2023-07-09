@@ -111,7 +111,7 @@ class ShopProductController extends RootFrontController
             $arrlastView = empty(\Cookie::get('productsLastView')) ? array() : json_decode(\Cookie::get('productsLastView'), true);
             $arrlastView[$product->id] = sc_time_now();
             arsort($arrlastView);
-            \Cookie::queue('productsLastView', json_encode($arrlastView), (86400 * 30));
+            \Cookie::queue('productsLastView', json_encode($arrlastView), (86400 * config('cart.expire.lastview')));
             //End product last view
 
             $categories = $product->categories->keyBy('id')->toArray();
