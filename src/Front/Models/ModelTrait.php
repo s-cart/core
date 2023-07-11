@@ -43,17 +43,36 @@ trait ModelTrait
         return $this;
     }
 
+
+    /**
+     * Add more where
+     * @param   [array]  $moreWhere
+     * NOTE: Will remove in the next versions
+     */
+    public function setMoreWhere(array $moreWhere)
+    {
+        if (is_array($moreWhere)) {
+            return $this->setMoreQuery(['where' => $moreWhere]);
+        }
+        return $this;
+    }
+
+
+
     /**
      * [setMoreQuery description]
      *
-     * @param   string|array  $moreQuery  [$moreQuery description]
-     *
+     * @param  array  $moreQuery  [$moreQuery description]
+     * EX: 
+     * -- setMoreQuery(['where' => ['columnA','>',12]]) 
+     * -- setMoreQuery(['orderBy' => ['columnA','asc']])
+     * 
      * @return  [type]              [return description]
      */
 
-    public function setMoreQuery($moreQuery)
+    public function setMoreQuery(array $moreQuery)
     {
-        if (is_string($moreQuery) || is_array($moreQuery)) {
+        if (is_array($moreQuery)) {
             $this->sc_moreQuery[] = $moreQuery;
         }
         return $this;
@@ -69,9 +88,6 @@ trait ModelTrait
     public function processMoreQuery($query) {
         if (count($this->sc_moreQuery)) {
             foreach ($this->sc_moreQuery as $key => $where) {
-                if (is_string($where)) {
-                    $query = $query->whereRaw($where);
-                }
                 if (is_array($where) && count($where) == 1) {
                     foreach ($where as $ope => $obj) {
                         if (!is_numeric($ope) && is_array($obj)) {
