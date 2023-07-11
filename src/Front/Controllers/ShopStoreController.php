@@ -77,30 +77,68 @@ class ShopStoreController extends RootFrontController
      */
     private function _search()
     {
+        $searchMode = config('s-cart.search_mode');
         $filter_sort = sc_request('filter_sort','','string');
         $keyword = sc_request('keyword','','string');
         
-        $products = $this->processProductList();
+        if (strtoupper($searchMode) === 'PRODUCT') {
+            $products = $this->processProductList();
+            $view = $this->templatePath . '.screen.shop_product_list';
 
+            if (view()->exists($this->templatePath . '.screen.shop_search')) {
+                $view = $this->templatePath . '.screen.shop_search';
+            }
+            sc_check_view($view);
+            return view(
+                $view,
+                array(
+                    'title'       => sc_language_render('action.search') . ': ' . $keyword,
+                    'products'    => $products,
+                    'layout_page' => 'shop_search',
+                    'filter_sort' => $filter_sort,
+                    'breadcrumbs' => [
+                        ['url'    => '', 'title' => sc_language_render('action.search')],
+                    ],
+                )
+            );
 
-        $view = $this->templatePath . '.screen.shop_product_list';
+        } else {
 
-        if (view()->exists($this->templatePath . '.screen.shop_search')) {
-            $view = $this->templatePath . '.screen.shop_search';
+            $view = $this->templatePath . '.screen.shop_item_list';
+            if (strtoupper($searchMode) === 'CMS' && sc_config('Content') && class_exists('\App\Plugins\Cms\Content\Models\CmsContent')) {
+                $itemsList = (new \App\Plugins\Cms\Content\Models\CmsContent)
+                ->setLimit(sc_config('news_list'))
+                ->setKeyword($keyword)
+                ->setPaginate()
+                ->getData();
+            } else {
+                //Default use NEWS
+                $itemsList = (new \SCart\Core\Front\Models\ShopNews)
+                ->setLimit(sc_config('news_list'))
+                ->setKeyword($keyword)
+                ->setPaginate()
+                ->getData();
+            }
+            if (view()->exists($this->templatePath . '.screen.cms_search')) {
+                $view = $this->templatePath . '.screen.cms_search';
+            }
+    
+            sc_check_view($view);
+    
+            return view(
+                $view,
+                array(
+                    'title'       => sc_language_render('action.search') . ': ' . $keyword,
+                    'itemsList'       => $itemsList,
+                    'layout_page' => 'shop_search',
+                    'breadcrumbs' => [
+                        ['url'    => '', 'title' => sc_language_render('action.search')],
+                    ],
+                )
+            );
         }
-        sc_check_view($view);
-        return view(
-            $view,
-            array(
-                'title'       => sc_language_render('action.search') . ': ' . $keyword,
-                'products'    => $products,
-                'layout_page' => 'shop_search',
-                'filter_sort' => $filter_sort,
-                'breadcrumbs' => [
-                    ['url'    => '', 'title' => sc_language_render('action.search')],
-                ],
-            )
-        );
+        
+
     }
 
     /**

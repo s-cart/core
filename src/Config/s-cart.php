@@ -10,4 +10,5 @@ return [
     'email'            => 'lanhktc@gmail.com',
     'api_link'         => env('SC_API_LINK', 'https://api.s-cart.org/v3'),
     'ecommerce_mode'   => env('SC_ECOMMERCE_MODE', 1),
+    'search_mode'      => env('SC_SEARCH_MODE', 'PRODUCT'), //PRODUCT,NEWS,CMS
 ];

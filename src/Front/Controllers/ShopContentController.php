@@ -57,7 +57,42 @@ class ShopContentController extends RootFrontController
      */
     private function _search()
     {
-        return ;
+        $searchMode = config('s-cart.search_mode');
+        $keyword = sc_request('keyword','','string');
+
+        $view = $this->templatePath . '.screen.shop_item_list';
+
+        if (strtoupper($searchMode) === 'CMS' && sc_config('Content') && class_exists('\App\Plugins\Cms\Content\Models\CmsContent')) {
+            $itemsList = (new \App\Plugins\Cms\Content\Models\CmsContent)
+            ->setLimit(sc_config('news_list'))
+            ->setKeyword($keyword)
+            ->setPaginate()
+            ->getData();
+        } else {
+            //Default use NEWS
+            $itemsList = (new ShopNews)
+            ->setLimit(sc_config('news_list'))
+            ->setKeyword($keyword)
+            ->setPaginate()
+            ->getData();
+        }
+        if (view()->exists($this->templatePath . '.screen.cms_search')) {
+            $view = $this->templatePath . '.screen.cms_search';
+        }
+
+        sc_check_view($view);
+
+        return view(
+            $view,
+            array(
+                'title'       => sc_language_render('action.search') . ': ' . $keyword,
+                'itemsList'       => $itemsList,
+                'layout_page' => 'shop_search',
+                'breadcrumbs' => [
+                    ['url'    => '', 'title' => sc_language_render('action.search')],
+                ],
+            )
+        );
     }
 
     /**
