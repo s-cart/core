@@ -153,7 +153,7 @@ class AdminTemplateController extends RootAdminController
         $validator = \Validator::make(
             $data,
             [
-                'file'   => 'required|mimetypes:application/zip|max:51200',
+                'file'   => 'required|mimetypes:application/zip|max:'.min($maxSizeConfig = sc_getMaximumFileUploadSize($unit = 'K'), 51200),
             ]
         );
 
