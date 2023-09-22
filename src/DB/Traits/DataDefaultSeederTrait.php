@@ -159,8 +159,9 @@ trait DataDefaultSeederTrait
             ['id' => 49,'parent_id' => 5,'sort' => 0,'title' => 'admin.menu_titles.menu','icon' => 'fas fa-bars','uri' => 'admin::menu','key' => null,'type' => 0],
             ['id' => 58,'parent_id' => 5,'sort' => 5,'title' => 'admin.menu_titles.cache_manager','icon' => 'fab fa-tripadvisor','uri' => 'admin::cache_config','key' => null,'type' => 0],
 
-            ['id' => 36,'parent_id' => 28,'sort' => 2,'title' => 'admin.menu_titles.webhook','icon' => 'fab fa-diaspora','uri' => 'admin::config/webhook','key' => null,'type' => 0],
-            ['id' => 50,'parent_id' => 28,'sort' => 0,'title' => 'admin.menu_titles.operation_log','icon' => 'fas fa-history','uri' => 'admin::log','key' => null,'type' => 0],
+            ['id' => 36,'parent_id' => 70,'sort' => 2,'title' => 'admin.menu_titles.webhook','icon' => 'fab fa-diaspora','uri' => 'admin::config/webhook','key' => null,'type' => 0],
+            ['id' => 50,'parent_id' => 70,'sort' => 0,'title' => 'admin.menu_titles.operation_log','icon' => 'fas fa-history','uri' => 'admin::log','key' => null,'type' => 0],
+            ['id' => 55,'parent_id' => 70,'sort' => 3,'title' => 'admin.menu_titles.password_policy','icon' => 'fa fa-unlock','uri' => 'admin::password_policy','key' => null,'type' => 0],
 
             ['id' => 46,'parent_id' => 38,'sort' => 0,'title' => 'admin.menu_titles.users','icon' => 'fas fa-users','uri' => 'admin::user','key' => null,'type' => 0],
             ['id' => 47,'parent_id' => 38,'sort' => 0,'title' => 'admin.menu_titles.roles','icon' => 'fas fa-user-tag','uri' => 'admin::role','key' => null,'type' => 0],
@@ -175,7 +176,7 @@ trait DataDefaultSeederTrait
             ['id' => 33,'parent_id' => 7,'sort' => 101,'title' => 'admin.menu_titles.banner','icon' => 'fas fa-image','uri' => 'admin::banner','key' => null,'type' => 0],
             ['id' => 52,'parent_id' => 7,'sort' => 103,'title' => 'admin.menu_titles.news','icon' => 'far fa-file-powerpoint','uri' => 'admin::news','key' => null,'type' => 0],
 
-            //Setting
+            //Setting store
             ['id' => 26,'parent_id' => 65,'sort' => 1,'title' => 'admin.menu_titles.store_info','icon' => 'fas fa-h-square','uri' => 'admin::store_info','key' => null,'type' => 0],
             ['id' => 57,'parent_id' => 65,'sort' => 2,'title' => 'admin.menu_titles.store_config','icon' => 'fas fa-cog','uri' => 'admin::store_config','key' => null,'type' => 0],
             ['id' => 60,'parent_id' => 65,'sort' => 3,'title' => 'admin.menu_titles.store_maintain','icon' => 'fas fa-wrench','uri' => 'admin::store_maintain','key' => null,'type' => 0],
@@ -223,12 +224,12 @@ trait DataDefaultSeederTrait
             ['id' => 41,'parent_id' => 35,'sort' => 2,'title' => 's-cart::admin.menu_titles.plugin_total','icon' => 'fas fa-atom','uri' => 'admin::plugin/total','key' => null,'type' => 0],
             ['id' => 53,'parent_id' => 35,'sort' => 3,'title' => 's-cart::admin.menu_titles.plugin_fee','icon' => 'fas fa-box','uri' => 'admin::plugin/fee','key' => null,'type' => 0],
             ['id' => 54,'parent_id' => 37,'sort' => 0,'title' => 'admin.menu_titles.report_product','icon' => 'fas fa-bars','uri' => 'admin::report/product','key' => null,'type' => 0],
-            ['id' => 27,'parent_id' => 9,'sort' => 3,'title' => 'admin.menu_titles.setting_system','icon' => 'fas fa-tools','uri' => '','key' => 'SETTING_SYSTEM','type' => 0],
+            ['id' => 27,'parent_id' => 65,'sort' => 4,'title' => 'admin.menu_titles.setting_system','icon' => 'fas fa-tools','uri' => '','key' => 'SETTING_SYSTEM','type' => 0],
             ['id' => 11,'parent_id' => 27,'sort' => 2,'title' => 'admin.menu_titles.shipping_status','icon' => 'fas fa-truck','uri' => 'admin::shipping_status','key' => null,'type' => 0],
             ['id' => 13,'parent_id' => 27,'sort' => 1,'title' => 'admin.menu_titles.order_status','icon' => 'fas fa-asterisk','uri' => 'admin::order_status','key' => null,'type' => 0],
             ['id' => 14,'parent_id' => 27,'sort' => 3,'title' => 'admin.menu_titles.payment_status','icon' => 'fas fa-recycle','uri' => 'admin::payment_status','key' => null,'type' => 0],
-            ['id' => 17,'parent_id' => 27,'sort' => 4,'title' => 'admin.menu_titles.supplier','icon' => 'fas fa-user-secret','uri' => 'admin::supplier','key' => null,'type' => 0],
-            ['id' => 18,'parent_id' => 27,'sort' => 5,'title' => 'admin.menu_titles.brand','icon' => 'fas fa-university','uri' => 'admin::brand','key' => null,'type' => 0],
+            ['id' => 17,'parent_id' => 2,'sort' => 4,'title' => 'admin.menu_titles.supplier','icon' => 'fas fa-user-secret','uri' => 'admin::supplier','key' => null,'type' => 0],
+            ['id' => 18,'parent_id' => 2,'sort' => 5,'title' => 'admin.menu_titles.brand','icon' => 'fas fa-university','uri' => 'admin::brand','key' => null,'type' => 0],
             ['id' => 19,'parent_id' => 27,'sort' => 8,'title' => 'admin.menu_titles.attribute_group','icon' => 'fas fa-bars','uri' => 'admin::attribute_group','key' => null,'type' => 0],
             ['id' => 61,'parent_id' => 27,'sort' => 9,'title' => 'admin.menu_titles.tax','icon' => 'far fa-calendar-minus','uri' => 'admin::tax','key' => null,'type' => 0],
             ['id' => 62,'parent_id' => 27,'sort' => 6,'title' => 'admin.menu_titles.weight','icon' => 'fas fa-balance-scale','uri' => 'admin::weight_unit','key' => null,'type' => 0],
@@ -349,6 +350,12 @@ trait DataDefaultSeederTrait
             ['group' => 'global','code' => 'cache','key' => 'cache_page','value' => '0','sort' => '8','detail' => 'admin.cache.cache_page','store_id' => 0],
             ['group' => 'global','code' => 'cache','key' => 'cache_country','value' => '0','sort' => '10','detail' => 'admin.cache.cache_country','store_id' => 0],
             ['group' => 'global','code' => 'env_mail','key' => 'smtp_mode','value' => '','sort' => '0','detail' => 'email.smtp_mode','store_id' => 0],
+            ['group' => 'global','code' => 'password_policy','key' => 'customer_password_min','value' => '6','sort' => '0','detail' => 'password_policy.customer.min','store_id' => 0],
+            ['group' => 'global','code' => 'password_policy','key' => 'customer_password_max','value' => '16','sort' => '0','detail' => 'password_policy.customer.max','store_id' => 0],
+            ['group' => 'global','code' => 'password_policy','key' => 'customer_password_letter','value' => '0','sort' => '1','detail' => 'password_policy.customer.letter','store_id' => 0],
+            ['group' => 'global','code' => 'password_policy','key' => 'customer_password_mixedcase','value' => '0','sort' => '2','detail' => 'password_policy.customer.mixedcase','store_id' => 0],
+            ['group' => 'global','code' => 'password_policy','key' => 'customer_password_number','value' => '0','sort' => '3','detail' => 'password_policy.customer.number','store_id' => 0],
+            ['group' => 'global','code' => 'password_policy','key' => 'customer_password_symbol','value' => '0','sort' => '4','detail' => 'password_policy.customer.symbol','store_id' => 0],
         ];
         return $dataAdminConfig;
     }
@@ -584,7 +591,13 @@ trait DataDefaultSeederTrait
 
 
     public function updateDataVersion() {
-        //Ony use updated v7.1 -> v7.2
+        //Ony use updated v8.0 -> v8.1
+        //--Update memne admin
+        \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->where('id','27')->update(['parent_id' => 65]);
+        \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->whereIn('id',['17','18'])->update(['parent_id' => 2]);
+        \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->whereIn('id',['36','50'])->update(['parent_id' => 70]);
+
+        //
         // if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'admin_password_resets')) {
         //     \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create(
         //         SC_DB_PREFIX.'admin_password_resets',

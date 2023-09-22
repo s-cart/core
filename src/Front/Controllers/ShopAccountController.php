@@ -133,12 +133,18 @@ class ShopAccountController extends RootFrontController
             'password.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.password')]),
             'password.confirmed' => sc_language_render('validation.confirmed', ['attribute'=> sc_language_render('customer.password')]),
             'password_old.required' => sc_language_render('validation.required', ['attribute'=> sc_language_render('customer.password_old')]),
+            'password.min' => sc_language_render('validation.password.min', ['attribute'=> sc_language_render('customer.password')]),
+            'password.max' => sc_language_render('validation.password.max', ['attribute'=> sc_language_render('customer.password')]),
+            'password.letters' => sc_language_render('validation.password.letters', ['attribute'=> sc_language_render('customer.password')]),
+            'password.mixed' => sc_language_render('validation.password.mixed', ['attribute'=> sc_language_render('customer.password')]),
+            'password.numbers' => sc_language_render('validation.password.numbers', ['attribute'=> sc_language_render('customer.password')]),
+            'password.symbols' => sc_language_render('validation.password.symbols', ['attribute'=> sc_language_render('customer.password')]),
         ];
         $v = Validator::make(
             $request->all(),
             [
                 'password_old' => 'required',
-                'password' => config('validation.customer.password_confirm', 'required|string|min:6|confirmed'),
+                'password' => sc_customer_validate_password()['password_confirm'],
             ],
             $messages
         );

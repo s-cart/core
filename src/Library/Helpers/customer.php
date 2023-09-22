@@ -236,7 +236,7 @@ if (!function_exists('sc_customer_data_insert_mapping') && !in_array('sc_custome
         $validate = [
             'first_name' => config('validation.customer.first_name', 'required|string|max:100'),
             'email' => config('validation.customer.email', 'required|string|email|max:255').'|unique:"'.ShopCustomer::class.'",email',
-            'password' => config('validation.customer.password_confirm', 'required|confirmed|string|min:6'),
+            'password' => sc_customer_validate_password()['password_confirm'],
         ];
 
         if (isset($dataRaw['status'])) {
@@ -414,7 +414,6 @@ if (!function_exists('sc_customer_data_insert_mapping') && !in_array('sc_custome
             'phone.regex'          => sc_language_render('customer.phone_regex'),
             'password.confirmed'   => sc_language_render('validation.confirmed', ['attribute'=> sc_language_render('customer.password')]),
             'postcode.min'         => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.postcode')]),
-            'password.min'         => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.password')]),
             'country.min'          => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.country')]),
             'first_name.max'       => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.first_name')]),
             'email.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.email')]),
@@ -424,6 +423,12 @@ if (!function_exists('sc_customer_data_insert_mapping') && !in_array('sc_custome
             'last_name.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.last_name')]),
             'birthday.date'        => sc_language_render('validation.date', ['attribute'=> sc_language_render('customer.birthday')]),
             'birthday.date_format' => sc_language_render('validation.date_format', ['attribute'=> sc_language_render('customer.birthday')]),
+            'password.min' => sc_language_render('validation.password.min', ['attribute'=> sc_language_render('customer.password')]),
+            'password.max' => sc_language_render('validation.password.max', ['attribute'=> sc_language_render('customer.password')]),
+            'password.letters' => sc_language_render('validation.password.letters', ['attribute'=> sc_language_render('customer.password')]),
+            'password.mixed' => sc_language_render('validation.password.mixed', ['attribute'=> sc_language_render('customer.password')]),
+            'password.numbers' => sc_language_render('validation.password.numbers', ['attribute'=> sc_language_render('customer.password')]),
+            'password.symbols' => sc_language_render('validation.password.symbols', ['attribute'=> sc_language_render('customer.password')]),
         ];
         $dataMap = [
             'validate' => $validate,
@@ -452,7 +457,7 @@ if (!function_exists('sc_customer_data_edit_mapping') && !in_array('sc_customer_
         }
         $validate = [
             'first_name' => config('validation.customer.first_name', 'required|string|max:100'),
-            'password' => config('validation.customer.password_null', 'nullable|string|min:6'),
+            'password' => sc_customer_validate_password()['password_nullable'],
         ];
 
         //Custom fields
@@ -628,7 +633,6 @@ if (!function_exists('sc_customer_data_edit_mapping') && !in_array('sc_customer_
             'phone.regex'          => sc_language_render('customer.phone_regex'),
             'password.confirmed'   => sc_language_render('validation.confirmed', ['attribute'=> sc_language_render('customer.password')]),
             'postcode.min'         => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.postcode')]),
-            'password.min'         => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.password')]),
             'country.min'          => sc_language_render('validation.min', ['attribute'=> sc_language_render('customer.country')]),
             'first_name.max'       => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.first_name')]),
             'email.max'            => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.email')]),
@@ -638,6 +642,12 @@ if (!function_exists('sc_customer_data_edit_mapping') && !in_array('sc_customer_
             'last_name.max'        => sc_language_render('validation.max', ['attribute'=> sc_language_render('customer.last_name')]),
             'birthday.date'        => sc_language_render('validation.date', ['attribute'=> sc_language_render('customer.birthday')]),
             'birthday.date_format' => sc_language_render('validation.date_format', ['attribute'=> sc_language_render('customer.birthday')]),
+            'password.min' => sc_language_render('validation.password.min', ['attribute'=> sc_language_render('customer.password')]),
+            'password.max' => sc_language_render('validation.password.max', ['attribute'=> sc_language_render('customer.password')]),
+            'password.letters' => sc_language_render('validation.password.letters', ['attribute'=> sc_language_render('customer.password')]),
+            'password.mixedCase' => sc_language_render('validation.password.mixedCase', ['attribute'=> sc_language_render('customer.password')]),
+            'password.numbers' => sc_language_render('validation.password.numbers', ['attribute'=> sc_language_render('customer.password')]),
+            'password.symbols' => sc_language_render('validation.password.symbols', ['attribute'=> sc_language_render('customer.password')]),
         ];
         $dataMap = [
             'validate' => $validate,
@@ -669,5 +679,36 @@ if (!function_exists('sc_customer_created_by_admin') && !in_array('sc_customer_c
     function sc_customer_created_by_admin(ShopCustomer $user, array $dataMap)
     {
         //
+    }
+}
+
+/**
+ * Process validate password
+ */
+if (!function_exists('sc_customer_validate_password') && !in_array('sc_customer_validate_password', config('helper_except', []))) {
+    function sc_customer_validate_password()
+    {
+        $passwordValidate = \Illuminate\Validation\Rules\Password::min(sc_config('customer_password_min', null, 6));
+        if (sc_config('customer_password_letter')) {
+            // Require at least one letter...
+            $passwordValidate = $passwordValidate->letters();
+        }
+        if (sc_config('customer_password_mixedcase')) {
+            // Require at least one uppercase and one lowercase letter...
+            $passwordValidate = $passwordValidate->mixedCase();
+        }
+        if (sc_config('customer_password_number')) {
+            // Require at least one number...
+            $passwordValidate = $passwordValidate->numbers();
+        }
+        if (sc_config('customer_password_symbol')) {
+            // Require at least one symbol...
+            $passwordValidate = $passwordValidate->symbols();
+        }
+        return [
+            'password'          => ['required','string', $passwordValidate, 'max: '.sc_config('customer_password_max', null, 16)],
+            'password_confirm'  => ['required','string', $passwordValidate, 'max: '.sc_config('customer_password_max', null, 16), 'confirmed'],
+            'password_nullable' => ['nullable','string', $passwordValidate, 'max: '.sc_config('customer_password_max', null, 16)],
+        ];
     }
 }
