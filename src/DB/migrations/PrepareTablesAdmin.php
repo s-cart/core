@@ -119,6 +119,7 @@ class PrepareTablesAdmin extends Migration
             $table->uuid('id')->primary();
             $table->string('logo', 255)->nullable();
             $table->string('icon', 255)->nullable();
+            $table->string('og_image', 255)->nullable()->default('images/org.jpg');
             $table->string('phone', 20)->nullable();
             $table->string('long_phone', 100)->nullable();
             $table->string('email', 150)->nullable();

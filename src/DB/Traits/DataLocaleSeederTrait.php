@@ -546,6 +546,8 @@ trait DataLocaleSeederTrait
             ['code' => 'store.logo','text' => 'Logo','position' => 'store','location' => 'en'],
             ['code' => 'store.icon','text' => 'Icon','position' => 'store','location' => 'vi'],
             ['code' => 'store.icon','text' => 'Icon','position' => 'store','location' => 'en'],
+            ['code' => 'store.og_image','text' => 'Image org','position' => 'store','location' => 'vi'],
+            ['code' => 'store.og_image','text' => 'Image org','position' => 'store','location' => 'en'],
             ['code' => 'store.all_stores','text' => 'All stores','position' => 'store','location' => 'vi'],
             ['code' => 'store.all_stores','text' => 'Tất cả cửa hàng','position' => 'store','location' => 'en'],
             ['code' => 'store.maintenance','text' => 'Bảo trì','position' => 'store','location' => 'vi'],

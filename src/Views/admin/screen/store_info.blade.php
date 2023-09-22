@@ -66,6 +66,19 @@
                       </td>
                     </tr>
 
+                    <tr>
+                      <td>{{ sc_language_render('store.og_image') }}</td>
+                      <td>
+                          <div class="input-group">
+                              <input type="hidden" id="og_image" name="og_image" value="{{ $store->og_image }}" class="form-control input-sm og_image" placeholder=""  />
+                          </div>
+                          <div id="preview_og_image" class="img_holder">{!! sc_image_render($store->og_image,'100px', '', 'og_image') !!}</div>
+                            <a data-input="og_image" data-preview="preview_og_image" data-type="logo" class="lfm pointer">
+                              <i class="fa fa-image"></i> {{sc_language_render('product.admin.choose_image')}}
+                            </a>
+                      </td>
+                    </tr>
+
               
                     <tr>
                       <td><i class="fas fa-phone-alt"></i> {{ sc_language_render('store.phone') }}</td>
@@ -261,7 +274,7 @@ $(document).ready(function() {
 
 <script>
 //Logo
-  $('.logo, .icon').change(function() {
+  $('.logo, .icon, .og_image').change(function() {
         $.ajax({
         url: '{{ sc_route_admin('admin_store.update') }}',
         type: 'POST',

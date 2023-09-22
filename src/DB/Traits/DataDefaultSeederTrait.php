@@ -353,7 +353,7 @@ trait DataDefaultSeederTrait
             ['group' => 'global','code' => 'password_policy','key' => 'customer_password_min','value' => '6','sort' => '0','detail' => 'password_policy.customer.min','store_id' => 0],
             ['group' => 'global','code' => 'password_policy','key' => 'customer_password_max','value' => '16','sort' => '0','detail' => 'password_policy.customer.max','store_id' => 0],
             ['group' => 'global','code' => 'password_policy','key' => 'customer_password_letter','value' => '0','sort' => '1','detail' => 'password_policy.customer.letter','store_id' => 0],
-            ['group' => 'global','code' => 'password_policy','key' => 'customer_password_mixedcase','value' => '0','sort' => '2','detail' => 'password_policy.customer.mixedcase','store_id' => 0],
+            ['group' => 'global','code' => 'password_policy','key' => 'customer_password_mixedcase','value' => '0','sort' => '2','detail' => 'password_policy.customer.mixed','store_id' => 0],
             ['group' => 'global','code' => 'password_policy','key' => 'customer_password_number','value' => '0','sort' => '3','detail' => 'password_policy.customer.number','store_id' => 0],
             ['group' => 'global','code' => 'password_policy','key' => 'customer_password_symbol','value' => '0','sort' => '4','detail' => 'password_policy.customer.symbol','store_id' => 0],
         ];
@@ -596,28 +596,14 @@ trait DataDefaultSeederTrait
         \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->where('id','27')->update(['parent_id' => 65]);
         \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->whereIn('id',['17','18'])->update(['parent_id' => 2]);
         \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->whereIn('id',['36','50'])->update(['parent_id' => 70]);
-
-        //
-        // if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasTable(SC_DB_PREFIX.'admin_password_resets')) {
-        //     \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->create(
-        //         SC_DB_PREFIX.'admin_password_resets',
-        //         function (\Illuminate\Database\Schema\Blueprint $table) {
-        //             $table->string('email', 150);
-        //             $table->string('token', 255);
-        //             $table->timestamp('created_at', $precision = 0);
-        //             $table->index('email');
-        //         }
-        //     );
-        // }
         
-        // if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'shop_link', 'type') 
-        // AND !\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'shop_link', 'collection_id')) {
-        //     \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'shop_link',
-        //         function (\Illuminate\Database\Schema\Blueprint $table) {
-        //         $table->string('type', 100)->nullable()->comment("Distinguish between Link and Collection. \nValue collection|null");
-        //         $table->string('collection_id', 100)->nullable()->comment("Collection\'s ID");
-        //     });
-        // }
+        // Add column
+        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'admin_store', 'og_image')) {
+            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_store',
+                function (\Illuminate\Database\Schema\Blueprint $table) {
+                $table->string('og_image', 255)->nullable()->default('images/org.jpg');
+            });
+        }
         //End update
     }
 
