@@ -383,7 +383,7 @@
                                 @endif
                             </div>
                         </div>
-                        {{-- //select brand --}}   
+                        {{-- //select supplier --}}   
 @endif
 
 

@@ -379,7 +379,7 @@
 @endif
 
 @if (sc_config_admin('product_supplier') && ($product->kind == SC_PRODUCT_SINGLE || $product->kind == SC_PRODUCT_BUILD))
-                        {{-- Brand --}}
+                        {{-- supplier --}}
                         <div class="form-group row kind kind0 kind1 {{ $errors->has('supplier_id') ? ' text-red' : '' }}">
                             <label for="supplier_id" class="col-sm-2 col-form-label">{{ sc_language_render('product.supplier') }}</label>
                             <div class="col-sm-8">
@@ -406,7 +406,7 @@
                                 @endif
                             </div>
                         </div>
-                        {{-- //Brand --}}
+                        {{-- //supplier --}}
 @endif
 
 @if (sc_config_admin('product_cost'))
