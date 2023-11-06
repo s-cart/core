@@ -18,7 +18,9 @@ class PrepareTablesCms extends Migration
         //Drop table if exist
         $this->down();
 
-        Schema::create(
+        $schema = Schema::connection(SC_CONNECTION);
+
+        $schema->create(
             SC_DB_PREFIX.'shop_language',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -32,7 +34,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_banner',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -48,7 +50,7 @@ class PrepareTablesCms extends Migration
                 $table->timestamps();
             }
         );
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_banner_type',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -60,7 +62,7 @@ class PrepareTablesCms extends Migration
         );
 
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_store_block',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -77,7 +79,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_layout_page',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -87,7 +89,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_layout_position',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -97,7 +99,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_link',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -114,7 +116,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_link_group',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -125,7 +127,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_page',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -136,7 +138,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_page_description',
             function (Blueprint $table) {
                 $table->uuid('page_id');
@@ -148,7 +150,7 @@ class PrepareTablesCms extends Migration
                 $table->unique(['page_id', 'lang']);
             }
         );
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_subscribe',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -161,7 +163,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_country',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -170,7 +172,7 @@ class PrepareTablesCms extends Migration
             }
         );
         
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_news',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -182,7 +184,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_news_description',
             function (Blueprint $table) {
                 $table->uuid('news_id');
@@ -195,7 +197,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_store_css',
             function (Blueprint $table) {
                 $table->mediumText('css');
@@ -208,7 +210,7 @@ class PrepareTablesCms extends Migration
 
         //Multi store
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_banner_store',
             function (Blueprint $table) {
                 $table->uuid('banner_id');
@@ -217,7 +219,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_news_store',
             function (Blueprint $table) {
                 $table->uuid('news_id');
@@ -226,7 +228,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_page_store',
             function (Blueprint $table) {
                 $table->uuid('page_id');
@@ -235,7 +237,7 @@ class PrepareTablesCms extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_link_store',
             function (Blueprint $table) {
                 $table->uuid('link_id');
@@ -253,25 +255,27 @@ class PrepareTablesCms extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_language');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_banner');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_banner_type');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_store_block');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_layout_page');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_layout_position');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_link');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_link_group');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_page');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_page_description');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_country');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_news');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_subscribe');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_news_description');
+        $schema = Schema::connection(SC_CONNECTION);
+
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_language');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_banner');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_banner_type');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_store_block');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_layout_page');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_layout_position');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_link');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_link_group');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_page');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_page_description');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_country');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_news');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_subscribe');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_news_description');
         //Multi store
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_store_css');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_banner_store');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_news_store');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_page_store');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_link_store');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_store_css');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_banner_store');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_news_store');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_page_store');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_link_store');
     }
 }

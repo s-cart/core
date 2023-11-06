@@ -3,6 +3,8 @@
 namespace SCart\Core\DB\Traits;
 use Illuminate\Support\Str;
 use DB;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 trait DataDefaultSeederTrait
 {
@@ -591,20 +593,22 @@ trait DataDefaultSeederTrait
 
 
     public function updateDataVersion() {
+
+        $db = DB::connection(SC_CONNECTION);
+        $schema = Schema::connection(SC_CONNECTION);
         //Ony use updated v8.0 -> v8.1
-        //--Update memne admin
-        \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->where('id','27')->update(['parent_id' => 65]);
-        \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->whereIn('id',['17','18'])->update(['parent_id' => 2]);
-        \DB::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_menu')->whereIn('id',['36','50'])->update(['parent_id' => 70]);
+        //--Update menu admin
+        $db->table(SC_DB_PREFIX.'admin_menu')->where('id','27')->update(['parent_id' => 65]);
+        $db->table(SC_DB_PREFIX.'admin_menu')->whereIn('id',['17','18'])->update(['parent_id' => 2]);
+        $db->table(SC_DB_PREFIX.'admin_menu')->whereIn('id',['36','50'])->update(['parent_id' => 70]);
         
         // Add column
-        if (!\Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->hasColumn(SC_DB_PREFIX.'admin_store', 'og_image')) {
-            \Illuminate\Support\Facades\Schema::connection(SC_CONNECTION)->table(SC_DB_PREFIX.'admin_store',
-                function (\Illuminate\Database\Schema\Blueprint $table) {
+        if (!$schema->hasColumn(SC_DB_PREFIX.'admin_store', 'og_image')) {
+            $schema->table(SC_DB_PREFIX.'admin_store',
+                function (Blueprint $table) {
                 $table->string('og_image', 255)->nullable()->default('images/org.jpg');
             });
         }
-        //End update
     }
 
 }

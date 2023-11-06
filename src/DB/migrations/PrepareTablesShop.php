@@ -17,8 +17,9 @@ class PrepareTablesShop extends Migration
     {
         //Drop table if exist
         $this->down();
+        $schema = Schema::connection(SC_CONNECTION);
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_email_template',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -31,7 +32,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_shipping_standard',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -41,7 +42,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_brand',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -55,7 +56,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_category',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -69,7 +70,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_category_description',
             function (Blueprint $table) {
                 $table->uuid('category_id');
@@ -81,7 +82,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_currency',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -98,7 +99,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_order',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -141,7 +142,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_order_detail',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -161,7 +162,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_order_history',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -174,7 +175,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_order_status',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -183,7 +184,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_order_total',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -197,7 +198,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_payment_status',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -206,7 +207,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -244,7 +245,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_description',
             function (Blueprint $table) {
                 $table->uuid('product_id');
@@ -257,7 +258,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_image',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -266,7 +267,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_build',
             function (Blueprint $table) {
                 $table->uuid('build_id');
@@ -276,7 +277,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_group',
             function (Blueprint $table) {
                 $table->uuid('group_id');
@@ -285,7 +286,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_category',
             function (Blueprint $table) {
                 $table->uuid('product_id');
@@ -294,7 +295,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_attribute_group',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -306,7 +307,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_attribute',
             function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -320,7 +321,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_property',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -330,7 +331,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_shipping_status',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -339,7 +340,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_shoppingcart',
             function (Blueprint $table) {
                 $table->string('identifier', 100);
@@ -351,7 +352,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_customer',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -384,7 +385,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_customer_address',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -404,7 +405,7 @@ class PrepareTablesShop extends Migration
         );
 
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_supplier',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -421,7 +422,7 @@ class PrepareTablesShop extends Migration
                 $table->timestamps();
             }
         );
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'api_connection',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -435,7 +436,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_tax',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -445,7 +446,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_weight',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -455,7 +456,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_length',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -465,7 +466,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             'jobs',
             function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -478,7 +479,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             'failed_jobs',
             function (Blueprint $table) {
                 $table->bigIncrements('id');
@@ -491,7 +492,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_promotion',
             function (Blueprint $table) {
                 $table->uuid('product_id')->primary();
@@ -503,7 +504,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_download',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -512,7 +513,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_custom_field',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -527,7 +528,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_custom_field_detail',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
@@ -538,7 +539,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'languages',
             function (Blueprint $table) {
                 $table->increments('id');
@@ -552,7 +553,7 @@ class PrepareTablesShop extends Migration
         );
 
         //Multi store
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_product_store',
             function (Blueprint $table) {
                 $table->uuid('product_id');
@@ -561,7 +562,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_category_store',
             function (Blueprint $table) {
                 $table->uuid('category_id');
@@ -570,7 +571,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_brand_store',
             function (Blueprint $table) {
                 $table->uuid('brand_id');
@@ -580,7 +581,7 @@ class PrepareTablesShop extends Migration
         );
         
         //Sanctum
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
+        $schema->create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
             $table->uuidMorphs('tokenable');
             $table->string('name');
@@ -591,7 +592,7 @@ class PrepareTablesShop extends Migration
             $table->timestamps();
         });
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_sessions',
             function ($table) {
                 $table->string('id', 100)->unique();
@@ -604,7 +605,7 @@ class PrepareTablesShop extends Migration
             }
         );
 
-        Schema::create(
+        $schema->create(
             SC_DB_PREFIX.'shop_password_resets',
             function (Blueprint $table) {
                 $table->string('email', 150);
@@ -622,59 +623,59 @@ class PrepareTablesShop extends Migration
      */
     public function down()
     {
+        $schema = Schema::connection(SC_CONNECTION);
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_email_template');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_shipping_standard');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_api');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_api_process');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_brand');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_category');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_category_description');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_currency');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_order');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_order_detail');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_order_history');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_order_status');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_order_total');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_payment_status');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_description');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_image');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_build');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_attribute');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_property');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_attribute_group');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_group');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_category');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_shipping_status');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_shoppingcart');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_promotion');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_customer');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_supplier');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_customer_address');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_password_resets');
 
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_email_template');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_shipping_standard');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_api');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_api_process');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_brand');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_category');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_category_description');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_currency');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_order');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_order_detail');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_order_history');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_order_status');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_order_total');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_payment_status');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_description');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_image');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_build');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_attribute');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_property');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_attribute_group');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_group');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_category');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_shipping_status');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_shoppingcart');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_promotion');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_customer');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_supplier');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_customer_address');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_password_resets');
-
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_sessions');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_tax');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_weight');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_length');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_download');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_sessions');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_tax');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_weight');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_length');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_download');
         //Api connection
-        Schema::dropIfExists(SC_DB_PREFIX.'api_connection');
+        $schema->dropIfExists(SC_DB_PREFIX.'api_connection');
         //Job
-        Schema::dropIfExists('jobs');
-        Schema::dropIfExists('failed_jobs');
+        $schema->dropIfExists('jobs');
+        $schema->dropIfExists('failed_jobs');
         //Custom field
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_custom_field');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_custom_field_detail');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_custom_field');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_custom_field_detail');
         //Languages
-        Schema::dropIfExists(SC_DB_PREFIX.'languages');
+        $schema->dropIfExists(SC_DB_PREFIX.'languages');
         //Multi store
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_product_store');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_category_store');
-        Schema::dropIfExists(SC_DB_PREFIX.'shop_brand_store');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_product_store');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_category_store');
+        $schema->dropIfExists(SC_DB_PREFIX.'shop_brand_store');
 
         //Sanctum
-        Schema::dropIfExists('personal_access_tokens');
+        $schema->dropIfExists('personal_access_tokens');
     }
 }
