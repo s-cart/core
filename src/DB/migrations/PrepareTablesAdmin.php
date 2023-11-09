@@ -62,6 +62,7 @@ class PrepareTablesAdmin extends Migration
             $table->integer('role_id');
             $table->uuid('user_id');
             $table->index(['role_id', 'user_id']);
+            $table->primary(['role_id', 'user_id']);
             $table->timestamps();
         });
 
