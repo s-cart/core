@@ -317,4 +317,16 @@
 .form-inline label {
   display: inherit !important; 
 }
+.notice-read {
+  color: #b5b9cb !important;
+  font-style: italic;
+  font-size: 12px;
+}
+.notice-time {
+  font-size: 12px !important;
+  display: block;
+}
+.notice {
+  font-size: 14px;
+}
 </style>

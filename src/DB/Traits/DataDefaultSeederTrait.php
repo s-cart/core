@@ -609,6 +609,21 @@ trait DataDefaultSeederTrait
                 $table->string('og_image', 255)->nullable()->default('images/org.jpg');
             });
         }
+
+        //Notice
+        if (!$schema->hasTable(SC_DB_PREFIX.'admin_notice')) {
+            $schema->create(SC_DB_PREFIX . 'admin_notice', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('type')->index()->comment('order, customer, admin,...');
+                $table->string('type_id', 36)->index()->nullable();
+                $table->integer('status', 0)->default(0)->index();
+                $table->string('admin_id', 36)->index();
+                $table->string('url', 100);
+                $table->text('content');
+                $table->timestamps();
+            });
+        }
+        //==End notice
     }
 
 }

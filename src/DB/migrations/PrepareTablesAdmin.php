@@ -160,6 +160,19 @@ class PrepareTablesAdmin extends Migration
                 $table->index('email');
             }
         );
+
+        //Notice
+        $schema->create(SC_DB_PREFIX . 'admin_notice', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('type')->index()->comment('order, customer, admin,...');
+            $table->string('type_id', 36)->index()->nullable();
+            $table->integer('status', 0)->default(0)->index();
+            $table->string('admin_id', 36)->index();
+            $table->text('content');
+            $table->timestamps();
+        });
+        //==End notice
+
     }
 
     /**
@@ -184,5 +197,8 @@ class PrepareTablesAdmin extends Migration
         $schema->dropIfExists(SC_DB_PREFIX . 'admin_store');
         $schema->dropIfExists(SC_DB_PREFIX . 'admin_store_description');
         $schema->dropIfExists(SC_DB_PREFIX . 'admin_password_resets');
+        //Notice
+        $schema->dropIfExists(SC_DB_PREFIX . 'admin_notice');
+        //==End notice
     }
 }

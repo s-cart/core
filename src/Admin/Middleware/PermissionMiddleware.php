@@ -35,6 +35,11 @@ class PermissionMiddleware
             return $next($request);
         }
 
+        // Allow notice
+        if (Str::startsWith($request->route()->getName(), 'admin_notice.')) {
+            return $next($request);
+        }
+
         //Check middware in route
         if ($this->checkRoutePermission($request)) {
             return $next($request);

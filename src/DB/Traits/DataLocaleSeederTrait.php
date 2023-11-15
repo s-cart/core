@@ -3025,6 +3025,20 @@ trait DataLocaleSeederTrait
             ['code' => 'validation.password.numbers','text' => ':attribute yêu cầu ít nhất một số','position' => 'validation','location' => 'vi'],
             ['code' => 'validation.password.symbols','text' => ':attribute require at least one symbol: @,#,...','position' => 'validation','location' => 'en'],
             ['code' => 'validation.password.symbols','text' => ':attribute yêu cầu ít nhất một biểu tượng: @,#,...','position' => 'validation','location' => 'vi'],
+            ['code' => 'admin_notice.customer.new','text' => 'There are new customer.','position' => 'admin_notice','location' => 'en'],
+            ['code' => 'admin_notice.customer.new','text' => 'Có khách hàng mới','position' => 'admin_notice','location' => 'vi'],
+            ['code' => 'admin_notice.order.new','text' => 'There are new order.','position' => 'admin_notice','location' => 'en'],
+            ['code' => 'admin_notice.order.new','text' => 'Có đơn hàng mới.','position' => 'admin_notice','location' => 'vi'],
+            ['code' => 'admin_notice.order.success','text' => 'New order completed.','position' => 'admin_notice','location' => 'en'],
+            ['code' => 'admin_notice.order.success','text' => 'Có đơn hàng mới hoàn thành.','position' => 'admin_notice','location' => 'vi'],
+            ['code' => 'admin_notice.order.update_status','text' => 'New order changes status.','position' => 'admin_notice','location' => 'en'],
+            ['code' => 'admin_notice.order.update_status','text' => 'Đơn hàng mới thay đổi trạng thái.','position' => 'admin_notice','location' => 'vi'],
+            ['code' => 'admin_notice.mark_read','text' => 'Mark all as read','position' => 'admin_notice','location' => 'en'],
+            ['code' => 'admin_notice.mark_read','text' => 'Đánh dấu đã đọc','position' => 'admin_notice','location' => 'vi'],
+            ['code' => 'admin_notice.title','text' => 'List notices','position' => 'admin_notice','location' => 'en'],
+            ['code' => 'admin_notice.title','text' => 'Danh sách các thông báo','position' => 'admin_notice','location' => 'vi'],
+            ['code' => 'admin_notice.empty','text' => 'No notifications','position' => 'admin_notice','location' => 'en'],
+            ['code' => 'admin_notice.empty','text' => 'Không có thông báo','position' => 'admin_notice','location' => 'vi'],
         ];
         return $dataLang;
     }

@@ -43,11 +43,16 @@ class Update extends Command
                     '--force' => true
                 ]
             );
-            $this->info('Update done');
+            $this->info('- Update database done!');
         } catch (Throwable $e) {
             sc_report($e->getMessage());
             echo  json_encode(['error' => 1, 'msg' => $e->getMessage()]);
             exit();
         }
+        $this->info('---------------------');
+        $this->info('Front version: '.config('s-cart.version'));
+        $this->info('Front sub-version: '.config('s-cart.sub-version'));
+        $this->info('Core: '.config('s-cart.core'));
+        $this->info('Core sub-version: '.config('s-cart.core-sub-version'));
     }
 }

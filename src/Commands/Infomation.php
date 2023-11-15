@@ -32,8 +32,8 @@ class Infomation extends Command
     {
         $this->info(config('s-cart.name').' - '.config('s-cart.title'));
         $this->info(config('s-cart.auth').' <'.config('s-cart.email').'>');
-        $this->info('Version: '.config('s-cart.version'));
-        $this->info('Sub-version: '.config('s-cart.sub-version'));
+        $this->info('Front version: '.config('s-cart.version'));
+        $this->info('Front sub-version: '.config('s-cart.sub-version'));
         $this->info('Core: '.config('s-cart.core'));
         $this->info('Core sub-version: '.config('s-cart.core-sub-version'));
         $this->info('Type: '.config('s-cart.type'));
