@@ -3029,7 +3029,7 @@ trait DataLocaleSeederTrait
             ['code' => 'admin_notice.customer.new','text' => 'Có khách hàng mới','position' => 'admin_notice','location' => 'vi'],
             ['code' => 'admin_notice.order.new','text' => 'There are new order.','position' => 'admin_notice','location' => 'en'],
             ['code' => 'admin_notice.order.new','text' => 'Có đơn hàng mới.','position' => 'admin_notice','location' => 'vi'],
-            ['code' => 'admin_notice.order.success','text' => 'New order completed.','position' => 'admin_notice','location' => 'en'],
+            ['code' => 'admin_notice.order.success','text' => 'New order success.','position' => 'admin_notice','location' => 'en'],
             ['code' => 'admin_notice.order.success','text' => 'Có đơn hàng mới hoàn thành.','position' => 'admin_notice','location' => 'vi'],
             ['code' => 'admin_notice.order.update_status','text' => 'New order changes status.','position' => 'admin_notice','location' => 'en'],
             ['code' => 'admin_notice.order.update_status','text' => 'Đơn hàng mới thay đổi trạng thái.','position' => 'admin_notice','location' => 'vi'],

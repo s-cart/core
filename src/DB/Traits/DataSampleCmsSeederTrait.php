@@ -33,19 +33,32 @@ trait DataSampleCmsSeederTrait
         $db->table(SC_DB_PREFIX.'shop_banner_store')->insert($dataBannerStore);
     }
 
+    public function titleNews() {
+        return [
+                    '1' => 'cau-vang',
+                    '2' => 'vinh-ha-long',
+                    '3' => 'hang-son-doong',
+                    '4' => 'trang-an',
+                    '5' => 'ruong-bac-thang-ha-giang',
+                    '6' => 'thi-tran-sapa',
+                ];
+    }
     public function arrayIdNews() {
+
         $ids = [];
-        for ($i=1; $i <= 6; $i++) {
-            $ids[$i] = (string)Str::orderedUuid();
+        $titleNews = $this->titleNews();
+        foreach ($titleNews as $key => $alias) {
+            $ids[$key] = (string)Str::orderedUuid();
         }
         return $ids;
     }
 
     public function dataNews($ids) {
         $dataNews = [];
+        $titleNews = $this->titleNews();
         foreach ($ids as $key => $id) {
             $dataNews[] = [
-                'id' => $id, 'alias' => 'demo-scart-blog-'.$key, 'image' => '/data/content/blog-'.$key.'.jpg', 'status' => 1, 'created_at' => date('Y-m-d H:i:s')
+                'id' => $id, 'alias' => $titleNews[$key], 'image' => '/data/content/blog-'.$key.'.jpg', 'status' => 1, 'created_at' => date('Y-m-d H:i:s')
             ];
         }
         return $dataNews;
@@ -53,13 +66,14 @@ trait DataSampleCmsSeederTrait
 
     public function dataNewsDescription($ids) {
         $dataNewsDescription = [];
+        $titleNews = $this->titleNews();
         foreach ($ids as $key => $id) {
             $dataNewsDescription[] = [
-                'news_id' => $id, 'lang' => 'en', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','title' => 'Easy Polo Black Edition '.$key, 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
+                'news_id' => $id, 'lang' => 'en', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','title' => Str::title(str_replace('-', ' ', $titleNews[$key])), 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
             ];
             $dataNewsDescription[] = [
-                'news_id' => $id, 'lang' => 'vi', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','title' => 'Easy Polo Black Edition '.$key, 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
+                'news_id' => $id, 'lang' => 'vi', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','title' => Str::title(str_replace('-', ' ', $titleNews[$key])), 'content' =>  '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<img alt="" src="/data/product/product-10.png" style="width: 150px; float: right; margin: 10px;" /></p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>'
             ];
         }
