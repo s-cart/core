@@ -301,7 +301,7 @@ trait DataLocaleSeederTrait
             ['code' => 'action.create_success','text' => 'Tạo mới thành công','position' => 'action','location' => 'vi'],
             ['code' => 'action.create_success','text' => 'Create success','position' => 'action','location' => 'en'],
             ['code' => 'action.edit_success','text' => 'Edit success','position' => 'action','location' => 'en'],
-            ['code' => 'action.edit_success','text' => 'Tạo mới thành công','position' => 'action','location' => 'vi'],
+            ['code' => 'action.edit_success','text' => 'Chỉnh sửa thành công','position' => 'action','location' => 'vi'],
             ['code' => 'action.update_success','text' => 'Update success','position' => 'action','location' => 'en'],
             ['code' => 'action.update_success','text' => 'Cập nhật thành công','position' => 'action','location' => 'vi'],
             ['code' => 'action.add_success','text' => 'Add new success','position' => 'action','location' => 'en'],
