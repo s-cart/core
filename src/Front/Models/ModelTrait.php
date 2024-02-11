@@ -68,13 +68,13 @@ trait ModelTrait
      *
      * @return  [type]          [return description]
      */
-    public function processMoreQuery($query) {
+    protected function processMoreQuery($query) {
         if (count($this->sc_moreQuery)) {
-            foreach ($this->sc_moreQuery as $key => $where) {
-                if (is_array($where) && count($where) == 1) {
-                    foreach ($where as $ope => $obj) {
-                        if (!is_numeric($ope) && is_array($obj)) {
-                            $query = $query->{$ope}(...$obj);
+            foreach ($this->sc_moreQuery as $objQuery) {
+                if (is_array($objQuery) && count($objQuery) == 1) {
+                    foreach ($objQuery as $queryType => $obj) {
+                        if (!is_numeric($queryType) && is_array($obj)) {
+                            $query = $query->{$queryType}(...$obj);
                         }
                     }
                 }
