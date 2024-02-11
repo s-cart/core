@@ -33,10 +33,16 @@ trait ModelTrait
     /**
      * Set value sort
      * @param   [array]  $sort ['field', 'asc|desc']
+     * Support format ['field' => 'asc|desc']
      */
     public function setSort(array $sort)
     {
         if (is_array($sort)) {
+            if (count($sort) == 1) {
+                foreach ($sort as $kS => $vS) {
+                    $sort = [$kS, $vS];
+                }
+            }
             $this->sc_sort[] = $sort;
         }
         return $this;
