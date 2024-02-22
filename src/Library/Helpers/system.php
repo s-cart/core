@@ -355,6 +355,9 @@ if (!function_exists('sc_generate_id') && !in_array('sc_generate_id', config('he
             case 'shop_order':
                 return 'O-'.sc_token(5).'-'.sc_token(5);
                 break;
+            case 'admin_user':
+                return 'AU-'.sc_token(5).'-'.sc_token(5);
+                break;
             
             default:
                 return sc_uuid();

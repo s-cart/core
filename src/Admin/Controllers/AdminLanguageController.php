@@ -193,7 +193,7 @@ class AdminLanguageController extends RootAdminController
             'name' => $data['name'],
             'code' => $data['code'],
             'rtl' => empty($data['rtl']) ? 0 : 1,
-            'sort' => $data['sort'],
+            'sort' => (int)$data['sort'],
         ];
         //Check status before change
         $check = ShopLanguage::where('status', 1)->where('code', '<>', $data['code'])->count();

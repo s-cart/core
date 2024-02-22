@@ -85,8 +85,8 @@ class AdminUser extends Authenticatable
      */
     public static function createUser($dataInsert)
     {
-        $dataUpdate = sc_clean($dataInsert);
-        return self::create($dataUpdate);
+        $dataInsert = sc_clean($dataInsert);
+        return self::create($dataInsert);
     }
 
     /**

@@ -202,7 +202,7 @@ class AdminNewsController extends RootAdminController
 
         $dataCreate = [
             'image'    => $data['image'],
-            'sort'     => $data['sort'],
+            'sort'     => (int)$data['sort'],
             'alias'    => $data['alias'],
             'status'   => !empty($data['status']) ? 1 : 0,
         ];
@@ -309,7 +309,7 @@ class AdminNewsController extends RootAdminController
         $dataUpdate = [
             'image' => $data['image'],
             'alias' => $data['alias'],
-            'sort' => $data['sort'],
+            'sort' => (int)$data['sort'],
             'status' => !empty($data['status']) ? 1 : 0,
         ];
         $dataUpdate = sc_clean($dataUpdate, [], true);

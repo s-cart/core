@@ -194,7 +194,7 @@ class AdminStoreLinkController extends RootAdminController
             'group'    => $data['group'],
             'collection_id'  => $data['collection_id'],
             'type'     => '', // link single
-            'sort'     => $data['sort'],
+            'sort'     => (int)$data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
         ];
         $dataCreate = sc_clean($dataCreate, [], true);
@@ -233,7 +233,7 @@ class AdminStoreLinkController extends RootAdminController
             'type'     => 'collection',
             'target'   => 'blank',
             'group'    => $data['group'],
-            'sort'     => $data['sort'],
+            'sort'     => (int)$data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
         ];
         $dataCreate = sc_clean($dataCreate, [], true);
@@ -309,7 +309,7 @@ class AdminStoreLinkController extends RootAdminController
         $dataUpdate = [
             'name'     => $data['name'],
             'group'    => $data['group'],
-            'sort'     => $data['sort'],
+            'sort'     => (int)$data['sort'],
             'status'   => empty($data['status']) ? 0 : 1,
         ];
 

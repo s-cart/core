@@ -327,7 +327,7 @@ class AdminCategoryController extends RootAdminController
             'image'    => $data['image'],
             'alias'    => $data['alias'],
             'parent'   => $data['parent'],
-            'sort'     => $data['sort'],
+            'sort'     => (int)$data['sort'],
             'top'      => empty($data['top']) ? 0 : 1,
             'status'   => empty($data['status']) ? 0 : 1,
         ];
