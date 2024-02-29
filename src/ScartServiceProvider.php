@@ -73,17 +73,6 @@ class ScartServiceProvider extends ServiceProvider
 
         if (!file_exists(public_path('install.php')) && file_exists(base_path('.env'))) {
 
-            //Load helper from vendor
-            try {
-                foreach (glob(app_path() . '/Library/Helpers/*.php') as $filename) {
-                    require_once $filename;
-                }
-            } catch (\Throwable $e) {
-                $msg = '#SC002::Message: ' .$e->getMessage().' - Line: '.$e->getLine().' - File: '.$e->getFile();
-                sc_report($msg);
-                echo $msg;
-                exit;
-            }
             //Check connection
             try {
                 DB::connection(SC_CONNECTION)->getPdo();
