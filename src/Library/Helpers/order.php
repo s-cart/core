@@ -5,7 +5,7 @@ use SCart\Core\Front\Models\ShopCountry;
  * Function process after order success
  */
 if (!function_exists('sc_order_process_after_success') && !in_array('sc_order_process_after_success', config('helper_except', []))) {
-    function sc_order_process_after_success(string $orderID = null):array
+    function sc_order_process_after_success(string $orderID = ""):array
     {
         $templatePath = 'templates.' . sc_store('template');
         if ((sc_config('order_success_to_admin') || sc_config('order_success_to_customer')) && sc_config('email_action_mode')) {

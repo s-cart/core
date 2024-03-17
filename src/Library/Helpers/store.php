@@ -15,7 +15,7 @@ if (!function_exists('sc_get_list_code_store') && !in_array('sc_get_list_code_st
  * Get domain from code
  */
 if (!function_exists('sc_get_domain_from_code') && !in_array('sc_get_domain_from_code', config('helper_except', []))) {
-    function sc_get_domain_from_code(string $code = null):string
+    function sc_get_domain_from_code(string $code = ""):string
     {
         $domainList = \SCart\Core\Admin\Models\AdminStore::getStoreDomainByCode();
         if (!empty($domainList[$code])) {
@@ -284,7 +284,7 @@ if (!function_exists('sc_process_domain_store') && !in_array('sc_process_domain_
      *
      * @return  [string]         [$domain]
      */
-    function sc_process_domain_store(string $domain = null)
+    function sc_process_domain_store(string $domain = "")
     {
         $domain = str_replace(['http://', 'https://'], '', $domain);
         $domain = Str::lower($domain);
@@ -340,7 +340,7 @@ if (!function_exists('sc_link_vendor') && !in_array('sc_link_vendor', config('he
      *
      * @return
      */
-        function sc_link_vendor(string $code = null)
+        function sc_link_vendor(string $code = "")
         {
             $link = sc_route('home');
             if (sc_config_global('MultiVendorPro')) {

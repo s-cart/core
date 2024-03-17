@@ -55,7 +55,7 @@ if (!function_exists('sc_notice_add')) {
      * Get list id admin can get notice
      */
     if (!function_exists('sc_admin_notice_get_admin')) {
-        function sc_admin_notice_get_admin(string $type = null)
+        function sc_admin_notice_get_admin(string $type = "")
         {
             if (function_exists('sc_admin_notice_pro_get_admin')) {
                 return sc_admin_notice_pro_get_admin($type);

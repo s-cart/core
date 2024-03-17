@@ -269,7 +269,7 @@ if (!function_exists('sc_unzip') && !in_array('sc_unzip', config('helper_except'
  * Process path file
  */
 if (!function_exists('sc_file') && !in_array('sc_file', config('helper_except', []))) {
-    function sc_file(string $pathFile = null, bool $security = null):string
+    function sc_file(string $pathFile = "", bool $security = null):string
     {
         return asset($pathFile, $security);
     }
