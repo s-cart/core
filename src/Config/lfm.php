@@ -287,6 +287,12 @@ return [
     // setting it to false show `error-file-exist` error and stop upload
     'over_write_on_duplicate'  => env('SC_UPLOAD_OVER_WRITE_DUPLICATE', false),
 
+    // mimetypes of executables to prevent from uploading
+    'disallowed_mimetypes' => ['text/x-php', 'text/html', 'text/plain'],
+
+    // extensions of executables to prevent from uploading
+    'disallowed_extensions' => ['php', 'html'],
+
     // Item Columns
     'item_columns' => ['name', 'url', 'time', 'icon', 'is_file', 'is_image', 'thumb_url'],
 
