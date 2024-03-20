@@ -187,7 +187,6 @@ class ScartServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Sanctum::ignoreMigrations();
         
         if (file_exists(__DIR__.'/Library/Const.php')) {
             require_once(__DIR__.'/Library/Const.php');
