@@ -252,7 +252,8 @@ if (!function_exists('sc_time_now') && !in_array('sc_time_now', config('helper_e
     /**
      * Return object carbon
      */
-    function sc_time_now($timezone = "")
+    function sc_time_now($timezone = null)
+
     {
         return (new \Carbon\Carbon)->now($timezone);
     }
