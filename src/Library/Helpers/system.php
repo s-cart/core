@@ -23,32 +23,22 @@ if (!function_exists('sc_config') && !in_array('sc_config', config('helper_excep
      * Get value config from table sc_config
      * Default value is only used if the config key does not exist (including null values)
      *
-     * @param   [string|array|null]  $key      [$key description]
+     * @param   [string|array]  $key      [$key description]
      * @param   [int|null]  $storeId  [$storeId description]
      * @param   [string|null]  $default  [$default description]
      *
      * @return  [type]            [return description]
      */
-    function sc_config($key = null, $storeId = null, $default = null)
+    function sc_config($key = "", $storeId = null, $default = null)
     {
         $storeId = ($storeId === null) ? config('app.storeId') : $storeId;
-        //Update config
-        if (is_array($key)) {
-            if (count($key) == 1) {
-                foreach ($key as $k => $v) {
-                    return AdminConfig::where('store_id', $storeId)
-                        ->where('key', $k)
-                        ->update(['value' => $v]);
-                }
-            } else {
-                return false;
-            }
+        if (!is_string($key)) {
+            return;
         }
-        //End update
 
         $allConfig = AdminConfig::getAllConfigOfStore($storeId);
 
-        if ($key === null) {
+        if ($key === "") {
             return $allConfig;
         }
         return array_key_exists($key, $allConfig) ? $allConfig[$key] : 
@@ -67,7 +57,7 @@ if (!function_exists('sc_config_admin') && !in_array('sc_config_admin', config('
      *
      * @return  [type]      [return description]
      */
-    function sc_config_admin($key = null, $default = null)
+    function sc_config_admin($key = "", $default = null)
     {
         return sc_config($key, session('adminStoreId'), $default);
     }
@@ -84,29 +74,18 @@ if (!function_exists('sc_config_global') && !in_array('sc_config_global', config
      *
      * @return  [type]          [return description]
      */
-    function sc_config_global($key = null, $default = null)
+    function sc_config_global($key = "", $default = null)
     {
-        //Update config
-        if (is_array($key)) {
-            if (count($key) == 1) {
-                foreach ($key as $k => $v) {
-                    return AdminConfig::where('store_id', SC_ID_GLOBAL)
-                        ->where('key', $k)
-                        ->update(['value' => $v]);
-                }
-            } else {
-                return false;
-            }
+        if (!is_string($key)) {
+            return;
         }
-        //End update
-        
         $allConfig = [];
         try {
             $allConfig = AdminConfig::getAllGlobal();
         } catch (\Throwable $e) {
             //
         }
-        if ($key === null) {
+        if ($key === "") {
             return $allConfig;
         }
         if (!array_key_exists($key, $allConfig)) {
@@ -363,5 +342,88 @@ if (!function_exists('sc_generate_id') && !in_array('sc_generate_id', config('he
                 return sc_uuid();
                 break;
         }
+    }
+}
+
+
+if (!function_exists('sc_config_update') && !in_array('sc_config_update', config('helper_except', []))) {
+
+    /**
+     * Update key config
+     *
+     * @param   array  $dataUpdate  [$dataUpdate description]
+     * @param   [type] $storeId     [$storeId description]
+     *
+     * @return  [type]              [return description]
+     */
+    function sc_config_update($dataUpdate = null, $storeId = null)
+    {
+        $storeId = ($storeId === null) ? config('app.storeId') : $storeId;
+        //Update config
+        if (is_array($dataUpdate)) {
+            if (count($dataUpdate) == 1) {
+                foreach ($dataUpdate as $k => $v) {
+                    return AdminConfig::where('store_id', $storeId)
+                        ->where('key', $k)
+                        ->update(['value' => $v]);
+                }
+            } else {
+                return false;
+            }
+        }
+        //End update
+    }
+}
+
+if (!function_exists('sc_config_exist') && !in_array('sc_config_exist', config('helper_except', []))) {
+
+    /**
+     * Check key config exist
+     *
+     * @param   [type]  $key      [$key description]
+     * @param   [type]  $storeId  [$storeId description]
+     *
+     * @return  [type]            [return description]
+     */
+    function sc_config_exist($key = "", $storeId = null)
+    {
+        if(!is_string($key)) {
+            return false;
+        }
+        $storeId = ($storeId === null) ? config('app.storeId') : $storeId;
+        $checkConfig = AdminConfig::where('store_id', $storeId)->where('key', $key)->first();
+        if ($checkConfig) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+if (!function_exists('sc_config_global_update') && !in_array('sc_config_global_update', config('helper_except', []))) {
+    /**
+     * [sc_config_global_update description]
+     *
+     * @param   [type]  $arrayData  [$arrayData description]
+     *
+     * @return  []                  [return description]
+     */
+    function sc_config_global_update($arrayData = [])
+    {
+        //Update config
+        if (is_array($arrayData)) {
+            if (count($arrayData) == 1) {
+                foreach ($arrayData as $k => $v) {
+                    return AdminConfig::where('store_id', SC_ID_GLOBAL)
+                        ->where('key', $k)
+                        ->update(['value' => $v]);
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return;
+        }
+        //End update
     }
 }

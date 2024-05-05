@@ -2,7 +2,7 @@
 /**
  * Route front
  */
-if(sc_config('Plugin_Key')) {
+if(sc_config_exist('Plugin_Key')) {
 Route::group(
     [
         'prefix'    => 'plugin/PluginUrlKey',
@@ -17,6 +17,7 @@ Route::group(
 /**
  * Route admin
  */
+if(sc_config_exist('Plugin_Key', SC_ID_ROOT)) {
 Route::group(
     [
         'prefix' => SC_ADMIN_PREFIX.'/PluginUrlKey',
@@ -28,3 +29,4 @@ Route::group(
         ->name('admin_PluginUrlKey.index');
     }
 );
+}
