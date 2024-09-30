@@ -108,7 +108,7 @@ class ShopCartController extends RootFrontController
             $qtyUpdate = (int)$data['qty-'.$row->rowId];
             Cart::update($row->rowId, $qtyUpdate);
             
-            $newQty = ($arrCheckQty[$row->row] ?? 0) + ($data['qty-'.$row->id] ?? 0);
+            $newQty = ($arrCheckQty[$row->id] ?? 0) + ($data['qty-'.$row->rowId] ?? 0);
             $arrCheckQty[$row->id] = $newQty;
         }
         $arrProductMinimum = ShopProduct::whereIn('id', array_keys($arrCheckQty))->pluck('minimum', 'id')->all();
