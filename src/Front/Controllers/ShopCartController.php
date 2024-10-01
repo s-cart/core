@@ -429,7 +429,7 @@ class ShopCartController extends RootFrontController
         if (
             !session('shippingAddress')
         ) {
-            return redirect(sc_route('cart'));
+            return redirect(sc_route('cart'))->with(['error' => 'shippingAddress empty!']);
         }
         $shippingAddress = session('shippingAddress');
 
@@ -439,7 +439,7 @@ class ShopCartController extends RootFrontController
             $shippingMethodData = null;
         } else {
             if (!session('shippingMethod')) {
-                return redirect(sc_route('cart'));
+                return redirect(sc_route('cart'))->with(['error' => 'shippingMethod empty!']);
             }
             $shippingMethod = session('shippingMethod');
             $classShippingMethod = sc_get_class_plugin_config('Shipping', $shippingMethod);
@@ -451,7 +451,7 @@ class ShopCartController extends RootFrontController
             $paymentMethodData = null;
         } else {
             if (!session('paymentMethod')) {
-                return redirect(sc_route('cart'));
+                return redirect(sc_route('cart'))->with(['error' => 'paymentMethod empty!']);
             }
             $paymentMethod = session('paymentMethod');
             $classPaymentMethod = sc_get_class_plugin_config('Payment', $paymentMethod);
@@ -521,7 +521,7 @@ class ShopCartController extends RootFrontController
 
         $data = request()->all();
         if (!$data) {
-            return redirect(sc_route('cart'));
+            return redirect(sc_route('cart'))->with(['error' => 'Data empty!']);
         } else {
             $dataTotal       = session('dataTotal') ?? [];
             $shippingAddress = session('shippingAddress') ?? [];
@@ -730,7 +730,7 @@ class ShopCartController extends RootFrontController
     public function addToCartAjax(Request $request)
     {
         if (!$request->ajax()) {
-            return redirect(sc_route('cart'));
+            return redirect(sc_route('cart'))->with(['error' => 'Method not allow!']);
         }
         $data     = request()->all();
         $instance = $data['instance'] ?? 'default';
@@ -837,7 +837,7 @@ class ShopCartController extends RootFrontController
     public function updateToCart(Request $request)
     {
         if (!$request->ajax()) {
-            return redirect(sc_route('cart'));
+            return redirect(sc_route('cart'))->with(['error' => 'Method not allow!']);
         }
         $data    = request()->all();
         $id      = $data['id'] ?? '';
