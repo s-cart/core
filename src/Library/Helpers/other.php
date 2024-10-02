@@ -8,7 +8,7 @@ use Illuminate\Support\Arr;
 String to Url
  */
 if (!function_exists('sc_word_format_url') && !in_array('sc_word_format_url', config('helper_except', []))) {
-    function sc_word_format_url(string $str = ""):string
+    function sc_word_format_url($str = ""):string
     {
         $unicode = array(
             'a' => 'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',
@@ -43,7 +43,7 @@ if (!function_exists('sc_url_render') && !in_array('sc_url_render', config('help
     /*
     url render
      */
-    function sc_url_render(string $string = ""):string
+    function sc_url_render($string = ""):string
     {
         $arrCheckRoute = explode('route::', $string);
         $arrCheckUrl = explode('admin::', $string);
@@ -79,8 +79,11 @@ if (!function_exists('sc_html_render') && !in_array('sc_html_render', config('he
     /*
     Html render
      */
-    function sc_html_render(string $string = ""):string
+    function sc_html_render($string = ""):string
     {
+        if(!is_string($string)) {
+            return $string;
+        }
         $string = htmlspecialchars_decode($string);
         return $string;
     }
@@ -90,8 +93,11 @@ if (!function_exists('sc_word_format_class') && !in_array('sc_word_format_class'
     /*
     Format class name
      */
-    function sc_word_format_class(string $word = ""):string
+    function sc_word_format_class($word = ""):string
     {
+        if(!is_string($word)) {
+            return $word;
+        }
         $word = Str::camel($word);
         $word = ucfirst($word);
         return $word;
@@ -102,7 +108,7 @@ if (!function_exists('sc_word_limit') && !in_array('sc_word_limit', config('help
     /*
     Truncates words
      */
-    function sc_word_limit(string $word = "", int $limit = 20, string $arg = ''):string
+    function sc_word_limit($word = "", int $limit = 20, string $arg = ''):string
     {
         $word = Str::limit($word, $limit, $arg);
         return $word;
@@ -124,7 +130,7 @@ if (!function_exists('sc_report') && !in_array('sc_report', config('helper_excep
     /*
     Handle report
      */
-    function sc_report(string $msg = "", array $ext = [])
+    function sc_report($msg = "", array $ext = [])
     {
         $msg = sc_time_now(config('app.timezone')).' ('.config('app.timezone').'):'.PHP_EOL.$msg.PHP_EOL;
         if (!in_array('slack', $ext)) {
@@ -165,7 +171,7 @@ if (!function_exists('sc_push_include_view') && !in_array('sc_push_include_view'
      * @param   [string]  $pathView
      *
      */
-    function sc_push_include_view(string $position = "", string $pathView = "")
+    function sc_push_include_view($position = "", string $pathView = "")
     {
         $includePathView = config('sc_include_view.'.$position, []);
         $includePathView[] = $pathView;
